@@ -3,6 +3,7 @@ package edu.ontology.sac;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,9 +33,13 @@ import uk.ac.manchester.cs.owl.owlapi.OWLLiteralImplDouble;
 
 public class MyReasonerV3 {
 
-    static final String fileName = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\PrototypeV3.owl";
-    static final String fileNameCopy = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\PrototypeV3Copy.owl";
-    static final String fileNameInf = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\PrototypeV3CopyInf.owl";
+    private static final String fileEnding = ".owl";
+    private static final String orginalFileName = "PrototypeV3" + fileEnding;
+
+    private String orginalFilePath = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\"
+            + orginalFileName;
+    private String copyedFilePath;
+    private String inferdFilePath;
 
     private OWLOntologyManager manager;
     private OWLOntology ontology;
@@ -44,24 +49,35 @@ public class MyReasonerV3 {
     private List<OWLAxiom> generatedAxioms = new ArrayList<>();
 
     MyReasonerV3() throws RuntimeException {
-        try {
-            File orginalFile = new File(fileName);
-            if (!orginalFile.exists()) {
-                throw new RuntimeException("Ontology file not found!");
+        if (!new File(orginalFilePath).exists()) {
+            orginalFilePath = Paths.get("").toAbsolutePath().toFile().getAbsolutePath() + "\\"
+                    + orginalFileName;
+            if (!new File(orginalFilePath).exists()) {
+                throw new RuntimeException("Could not find ontology file: " + orginalFilePath);
             }
-            File workingFile = new File(fileNameCopy);
-            Files.copy(orginalFile, workingFile);
+        }
+        copyedFilePath = orginalFilePath.substring(0, orginalFilePath.length() - fileEnding.length()) + "Copy"
+                + ".owl";
+        inferdFilePath = orginalFilePath.substring(0, orginalFilePath.length() - fileEnding.length())
+                + "CopyInf" + ".owl";
 
-            manager = OWLManager.createOWLOntologyManager();
+        File workingFile = new File(copyedFilePath);
+        try {
+            Files.copy(new File(orginalFilePath), workingFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Could not copyed owl file!");
+        }
+        manager = OWLManager.createOWLOntologyManager();
+        try {
             ontology = manager.loadOntologyFromOntologyDocument(workingFile);
-            dataFac = manager.getOWLDataFactory();
-
-            reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
-            System.out.println("Read Ontology isConsistent: " + reasoner.isConsistent());
-        } catch (IOException | OWLOntologyCreationException e) {
+        } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
             throw new RuntimeException("Loading the ontology failed");
         }
+        dataFac = manager.getOWLDataFactory();
+        reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
+        System.out.println("Read Ontology isConsistent: " + reasoner.isConsistent());
     }
 
     public List<Result> startReasoning(Requirements requirements) {
@@ -185,7 +201,7 @@ public class MyReasonerV3 {
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
         System.out.println("Reasoned ontology isConsistent: " + reasoner.isConsistent());
         OWLOntology inferOnto = reasoner.getRootOntology();
-        try (FileOutputStream out = new FileOutputStream(new File(fileNameInf))) {
+        try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             manager.saveOntology(inferOnto, out);
         }
     }
