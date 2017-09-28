@@ -1,10 +1,10 @@
 package edu.ontology.sac.model;
 
-public class Engine {
+public class GearBox {
     public String name;
 
     @Override
     public String toString() {
-        return "Engine [name=" + name + "]";
+        return "GearBox [name=" + name + "]";
     }
 }

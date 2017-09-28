@@ -1,8 +1,8 @@
 package edu.ontology.sac.model;
 
 public class Result {
-    public Engine engine = new Engine();
-    public Gear gear = new Gear();
+    public Motor motor = new Motor();
+    public GearBox gearBox = new GearBox();
 
     public double maximalTorque;
     public double maximalRotationSpeed;
@@ -10,7 +10,7 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result [engine=" + engine + ", gear=" + gear + ", maximalTorque=" + maximalTorque
+        return "Result [motor=" + motor + ", gearBox=" + gearBox + ", maximalTorque=" + maximalTorque
                 + ", maximalRotationSpeed=" + maximalRotationSpeed + ", weight=" + weight + "]";
     }
 }

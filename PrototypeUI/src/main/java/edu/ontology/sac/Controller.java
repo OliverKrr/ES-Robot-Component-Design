@@ -30,19 +30,22 @@ public class Controller {
 
     public void parseRequirements() {
         currentRequirements = new Requirements();
-        currentRequirements.maximalRotationSpeed = new Unit(parseDouble(gui.minimumSpeedMIN, 0),
-                parseDouble(gui.minimumSpeedMAX, Double.MAX_VALUE));
         currentRequirements.maximalTorque = new Unit(parseDouble(gui.minimumTorqueMIN, 0),
                 parseDouble(gui.minimumTorqueMAX, Double.MAX_VALUE));
+        currentRequirements.maximalRotationSpeed = new Unit(parseDouble(gui.minimumSpeedMIN, 0),
+                parseDouble(gui.minimumSpeedMAX, Double.MAX_VALUE));
         currentRequirements.weight = new Unit(parseDouble(gui.weightMin, 0),
                 parseDouble(gui.weightMax, Double.MAX_VALUE));
+
+        currentRequirements.maximalRotationSpeed.min /= 6;
+        currentRequirements.maximalRotationSpeed.max /= 6;
     }
 
     public void reason() {
         if (GUI.isTest) {
             currentRequirements = new Requirements();
-            currentRequirements.maximalRotationSpeed = new Unit(0, Double.MAX_VALUE);
             currentRequirements.maximalTorque = new Unit(0, Double.MAX_VALUE);
+            currentRequirements.maximalRotationSpeed = new Unit(0, Double.MAX_VALUE);
             currentRequirements.weight = new Unit(0, Double.MAX_VALUE);
         }
         lastResults = reasoner.startReasoning(currentRequirements);
@@ -69,11 +72,11 @@ public class Controller {
         addTreeItem(gui.tree, "Number of results: " + lastResults.size());
         for (Result result : lastResults) {
             TreeItem resItem = addTreeItem(gui.tree,
-                    "Engine: " + result.engine.name + " & Gear: " + result.gear.name);
+                    "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
             addTreeItem(resItem, "Maximal Torque M_max:         " + result.maximalTorque
                     + getSpaces(result.maximalTorque) + "Nm");
-            addTreeItem(resItem, "Maximal Rotation Speed n_max: " + result.maximalRotationSpeed
-                    + getSpaces(result.maximalRotationSpeed) + "min^-1");
+            addTreeItem(resItem, "Maximal Rotation Speed n_max: " + result.maximalRotationSpeed * 6
+                    + getSpaces(result.maximalRotationSpeed * 6) + "°/s");
             addTreeItem(resItem,
                     "Weight m:                     " + result.weight + getSpaces(result.weight) + "kg");
             resItem.setExpanded(true);

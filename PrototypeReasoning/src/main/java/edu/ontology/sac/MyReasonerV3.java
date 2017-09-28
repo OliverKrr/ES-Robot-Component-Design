@@ -13,6 +13,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
+import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -104,10 +105,10 @@ public class MyReasonerV3 {
             addAxiom(dataFac.getOWLClassAssertionAxiom(robo, roboInd));
         });
 
-        reasoner.subClasses(Vocabulary.CLASS_CSD_2A, true).forEach(gear -> {
-            OWLNamedIndividual gearInd = dataFac
-                    .getOWLNamedIndividual(create(gear.getIRI().getShortForm() + "Ind"));
-            addAxiom(dataFac.getOWLClassAssertionAxiom(gear, gearInd));
+        reasoner.subClasses(Vocabulary.CLASS_CSD_2A, true).forEach(gearBox -> {
+            OWLNamedIndividual gearBoxInd = dataFac
+                    .getOWLNamedIndividual(create(gearBox.getIRI().getShortForm() + "Ind"));
+            addAxiom(dataFac.getOWLClassAssertionAxiom(gearBox, gearBoxInd));
         });
     }
 
@@ -116,79 +117,67 @@ public class MyReasonerV3 {
         OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(create("requirementsInd"));
         addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_REQUIREMENTS, requirementsInd));
 
-        OWLDataPropertyAssertionAxiom maximalTorqueReqMin = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASMAXIMALTORQUEREQMIN, requirementsInd, dataFac.getOWLLiteral(
-                        String.valueOf(requirements.maximalTorque.min), OWL2Datatype.XSD_DECIMAL));
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
+                requirements.maximalTorque.min);
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM,
+                requirements.maximalTorque.max);
+
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM,
+                requirements.maximalRotationSpeed.min);
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM,
+                requirements.maximalRotationSpeed.max);
+
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG,
+                requirements.weight.min);
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
+                requirements.weight.max);
+    }
+
+    private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
+        OWLDataPropertyAssertionAxiom maximalTorqueReqMin = dataFac.getOWLDataPropertyAssertionAxiom(property,
+                requirementsInd, dataFac.getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
         addAxiom(maximalTorqueReqMin);
-
-        OWLDataPropertyAssertionAxiom maximalTorqueReqMax = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASMAXIMALTORQUEREQMAX, requirementsInd, dataFac.getOWLLiteral(
-                        String.valueOf(requirements.maximalTorque.max), OWL2Datatype.XSD_DECIMAL));
-        addAxiom(maximalTorqueReqMax);
-
-        OWLDataPropertyAssertionAxiom rotationSpeedMin = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASMAXIMALROTATIONSPEEDREQMIN, requirementsInd,
-                dataFac.getOWLLiteral(String.valueOf(requirements.maximalRotationSpeed.min),
-                        OWL2Datatype.XSD_DECIMAL));
-        addAxiom(rotationSpeedMin);
-
-        OWLDataPropertyAssertionAxiom rotationSpeedMax = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASMAXIMALROTATIONSPEEDREQMAX, requirementsInd,
-                dataFac.getOWLLiteral(String.valueOf(requirements.maximalRotationSpeed.max),
-                        OWL2Datatype.XSD_DECIMAL));
-        addAxiom(rotationSpeedMax);
-
-        OWLDataPropertyAssertionAxiom weightMin = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG, requirementsInd,
-                dataFac.getOWLLiteral(String.valueOf(requirements.weight.min), OWL2Datatype.XSD_DECIMAL));
-        addAxiom(weightMin);
-
-        OWLDataPropertyAssertionAxiom weightMax = dataFac.getOWLDataPropertyAssertionAxiom(
-                Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG, requirementsInd,
-                dataFac.getOWLLiteral(String.valueOf(requirements.weight.max), OWL2Datatype.XSD_DECIMAL));
-        addAxiom(weightMax);
     }
 
     private List<Result> reason() {
         List<Result> results = new ArrayList<>();
 
-        reasoner.instances(Vocabulary.CLASS_SATISFIEDENGINE).forEach(engine -> {
-            // System.out.println("CLASS_SATISFIEDENGINE: " + engine);
-            reasoner.instances(Vocabulary.CLASS_SATISFIEDGEAR).forEach(gear -> {
-                // System.out.println("CLASS_SATISFIEDGEAR: " + gear);
+        reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTOR).forEach(motor -> {
+            reasoner.instances(Vocabulary.CLASS_SATISFIEDGEARBOX).forEach(gearBox -> {
 
                 OWLNamedIndividual matchInd = dataFac.getOWLNamedIndividual(create("Match"
-                        + engine.getIRI().getShortForm() + "With" + gear.getIRI().getShortForm() + "Ind"));
-                addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_ENGINEGEARMATCH, matchInd));
+                        + motor.getIRI().getShortForm() + "With" + gearBox.getIRI().getShortForm() + "Ind"));
+                addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_MOTORGEARBOXMATCH, matchInd));
 
                 addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF,
-                        matchInd, engine));
+                        matchInd, motor));
                 addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF,
-                        matchInd, gear));
+                        matchInd, gearBox));
             });
         });
         reasoner.flush();
-        reasoner.instances(Vocabulary.CLASS_SATISFIEDENGINEGEARMATCH).forEach(en -> {
+        reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
             reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF)
                     .forEach(obProp -> reasoner.types(obProp).forEach(clas -> {
-                        if (clas.equals(Vocabulary.CLASS_ENGINE)) {
-                            result.engine.name = obProp.getIRI().getShortForm();
-                            result.engine.name = result.engine.name.substring(0,
-                                    result.engine.name.length() - 3);
-                        } else if (clas.equals(Vocabulary.CLASS_GEAR)) {
-                            result.gear.name = obProp.getIRI().getShortForm();
-                            result.gear.name = result.gear.name.substring(0, result.gear.name.length() - 3);
+                        if (clas.equals(Vocabulary.CLASS_MOTOR)) {
+                            result.motor.name = obProp.getIRI().getShortForm();
+                            result.motor.name = result.motor.name.substring(0,
+                                    result.motor.name.length() - 3);
+                        } else if (clas.equals(Vocabulary.CLASS_GEARBOX)) {
+                            result.gearBox.name = obProp.getIRI().getShortForm();
+                            result.gearBox.name = result.gearBox.name.substring(0,
+                                    result.gearBox.name.length() - 3);
                         }
                     }));
             result.weight = reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG)
                     .findAny().orElse(new OWLLiteralImplDouble(-1)).parseDouble();
             result.maximalTorque = reasoner
-                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALTORQUERES).findAny()
+                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
                     .orElse(new OWLLiteralImplDouble(-1)).parseDouble();
             result.maximalRotationSpeed = reasoner
-                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALROTATIONSPEEDRES).findAny()
-                    .orElse(new OWLLiteralImplDouble(-1)).parseDouble();
+                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
+                    .findAny().orElse(new OWLLiteralImplDouble(-1)).parseDouble();
             results.add(result);
         });
 

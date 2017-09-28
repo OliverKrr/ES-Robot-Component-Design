@@ -14,6 +14,7 @@ import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -117,7 +118,7 @@ public class GUI {
      */
     protected void createContents() {
         shell = new Shell();
-        shell.setSize(895, 431);
+        shell.setSize(901, 407);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setLayout(null);
 
@@ -129,7 +130,7 @@ public class GUI {
         formToolkit.adapt(lblNewLabel, true, true);
 
         TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
-        tabFolder.setBounds(96, 5, 768, 346);
+        tabFolder.setBounds(96, 10, 779, 348);
         formToolkit.adapt(tabFolder);
         formToolkit.paintBordersFor(tabFolder);
 
@@ -146,7 +147,7 @@ public class GUI {
 
         Label lblMinimumTorque = new Label(composite, SWT.NONE);
         lblMinimumTorque.setBounds(10, 10, 182, 23);
-        lblMinimumTorque.setText("Maximal Torque M_max:");
+        lblMinimumTorque.setText("Peak Torque M_max:");
         formToolkit.adapt(lblMinimumTorque, true, true);
         lblMinimumTorque.setForeground(Configs.getKitGreen70(shell.getDisplay()));
         lblMinimumTorque.addDisposeListener(new DisposeListener() {
@@ -158,7 +159,7 @@ public class GUI {
 
         Label lblMinimumSpeed = new Label(composite, SWT.NONE);
         lblMinimumSpeed.setBounds(10, 46, 182, 23);
-        lblMinimumSpeed.setText("Maximal Rotation Speed n_max:");
+        lblMinimumSpeed.setText("Maximal Speed n_max:");
         formToolkit.adapt(lblMinimumSpeed, true, true);
         lblMinimumSpeed.setForeground(Configs.getKitGreen70(shell.getDisplay()));
         lblMinimumSpeed.addDisposeListener(new DisposeListener() {
@@ -176,7 +177,7 @@ public class GUI {
         Label lblMm = new Label(composite, SWT.NONE);
         lblMm.setBounds(244, 49, 44, 23);
         formToolkit.adapt(lblMm, true, true);
-        lblMm.setText("min^-1");
+        lblMm.setText("°/s");
 
         Label lblNm = new Label(composite, SWT.NONE);
         lblNm.setText("Nm");
@@ -189,11 +190,12 @@ public class GUI {
         formToolkit.adapt(minimumTorqueMIN, true, true);
 
         Label lblMin = new Label(composite, SWT.NONE);
-        lblMin.setText("min^-1");
+        lblMin.setText("°/s");
         lblMin.setBounds(340, 49, 44, 23);
         formToolkit.adapt(lblMin, true, true);
 
         minimumSpeedMAX = new Text(composite, SWT.BORDER);
+        minimumSpeedMAX.setEnabled(false);
         minimumSpeedMAX.setMessage("max");
         minimumSpeedMAX.setBounds(294, 46, 40, 23);
         formToolkit.adapt(minimumSpeedMAX, true, true);
@@ -204,6 +206,7 @@ public class GUI {
         formToolkit.adapt(lblNm_1, true, true);
 
         minimumTorqueMAX = new Text(composite, SWT.BORDER);
+        minimumTorqueMAX.setEnabled(false);
         minimumTorqueMAX.setMessage("max");
         minimumTorqueMAX.setBounds(294, 10, 40, 23);
         formToolkit.adapt(minimumTorqueMAX, true, true);
@@ -221,6 +224,7 @@ public class GUI {
         });
 
         weightMin = new Text(composite, SWT.BORDER);
+        weightMin.setEnabled(false);
         weightMin.setMessage("min");
         weightMin.setBounds(198, 82, 40, 23);
         formToolkit.adapt(weightMin, true, true);
@@ -240,6 +244,33 @@ public class GUI {
         lblKg_1.setBounds(340, 85, 44, 23);
         formToolkit.adapt(lblKg_1, true, true);
 
+        Button btnEnableFields = new Button(composite, SWT.CHECK);
+        btnEnableFields.setBounds(307, 294, 93, 16);
+        formToolkit.adapt(btnEnableFields, true, true);
+        btnEnableFields.setText("Enable fields");
+        btnEnableFields.addSelectionListener(new SelectionListener() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                if (btnEnableFields.getSelection()) {
+                    btnEnableFields.setText("Disable fields");
+                    weightMin.setEnabled(true);
+                    minimumSpeedMAX.setEnabled(true);
+                    minimumTorqueMAX.setEnabled(true);
+                } else {
+                    btnEnableFields.setText("Enable fields");
+                    weightMin.setEnabled(false);
+                    minimumSpeedMAX.setEnabled(false);
+                    minimumTorqueMAX.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void widgetDefaultSelected(SelectionEvent event) {
+                // nothing to do
+            }
+        });
+
         Label label_4 = new Label(sashForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(label_4, true, true);
 
@@ -248,7 +279,7 @@ public class GUI {
         formToolkit.paintBordersFor(composite2);
 
         Label maximalRotationSpeedDescription = new Label(composite2, SWT.NONE);
-        maximalRotationSpeedDescription.setText("Maximal Rotation\r\n\tSpeed n_max:");
+        maximalRotationSpeedDescription.setText("Maximal Speed n_max:");
         maximalRotationSpeedDescription.setBounds(10, 161, 137, 34);
         formToolkit.adapt(maximalRotationSpeedDescription, true, true);
         maximalRotationSpeedDescription.setForeground(Configs.getKitGreen70(shell.getDisplay()));
@@ -260,7 +291,7 @@ public class GUI {
         });
 
         Label lblMaxMinimumTorque = new Label(composite2, SWT.NONE);
-        lblMaxMinimumTorque.setText("Maximal Torque M_max:");
+        lblMaxMinimumTorque.setText("Peak Torque M_max:");
         lblMaxMinimumTorque.setBounds(10, 98, 137, 34);
         formToolkit.adapt(lblMaxMinimumTorque, true, true);
         lblMaxMinimumTorque.setForeground(Configs.getKitGreen70(shell.getDisplay()));
@@ -268,21 +299,21 @@ public class GUI {
         StyledText styledText = new StyledText(composite2, SWT.BORDER);
         styledText.setText("TODO Description");
         styledText.setEditable(false);
-        styledText.setBounds(153, 161, 171, 57);
+        styledText.setBounds(153, 161, 191, 57);
         formToolkit.adapt(styledText);
         formToolkit.paintBordersFor(styledText);
 
         StyledText maximalTorqueDescription = new StyledText(composite2, SWT.BORDER);
         maximalTorqueDescription.setText("TODO Description");
         maximalTorqueDescription.setEditable(false);
-        maximalTorqueDescription.setBounds(153, 98, 171, 57);
+        maximalTorqueDescription.setBounds(153, 98, 191, 57);
         formToolkit.adapt(maximalTorqueDescription);
         formToolkit.paintBordersFor(maximalTorqueDescription);
 
         StyledText styledText_1 = new StyledText(composite2, SWT.BORDER);
         styledText_1.setText("TODO Description");
         styledText_1.setEditable(false);
-        styledText_1.setBounds(153, 224, 171, 57);
+        styledText_1.setBounds(153, 224, 191, 57);
         formToolkit.adapt(styledText_1);
         formToolkit.paintBordersFor(styledText_1);
 
@@ -299,9 +330,9 @@ public class GUI {
         });
 
         StyledText styledText_2 = new StyledText(composite2, SWT.BORDER);
-        styledText_2.setText("Input needed min and max\r\nvalues. If no entered, defaults\r\nare taken.");
+        styledText_2.setText("Input needed min and max values.\r\nIf no entered, defaults are taken.");
         styledText_2.setEditable(false);
-        styledText_2.setBounds(153, 10, 171, 57);
+        styledText_2.setBounds(153, 10, 191, 57);
         formToolkit.adapt(styledText_2);
         formToolkit.paintBordersFor(styledText_2);
 
