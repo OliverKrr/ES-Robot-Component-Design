@@ -29,6 +29,7 @@ public class Controller {
     }
 
     public void parseRequirements() {
+        gui.tree.removeAll();
         currentRequirements = new Requirements();
         currentRequirements.maximalTorque = new Unit(parseDouble(gui.minimumTorqueMIN, 0),
                 parseDouble(gui.minimumTorqueMAX, Double.MAX_VALUE));
@@ -43,6 +44,7 @@ public class Controller {
 
     public void reason() {
         if (GUI.isTest) {
+            gui.tree.removeAll();
             currentRequirements = new Requirements();
             currentRequirements.maximalTorque = new Unit(0, Double.MAX_VALUE);
             currentRequirements.maximalRotationSpeed = new Unit(0, Double.MAX_VALUE);
@@ -68,7 +70,6 @@ public class Controller {
     }
 
     public void setResults() {
-        gui.tree.removeAll();
         addTreeItem(gui.tree, "Number of results: " + lastResults.size());
         for (Result result : lastResults) {
             TreeItem resItem = addTreeItem(gui.tree,
