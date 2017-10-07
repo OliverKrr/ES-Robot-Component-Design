@@ -4,9 +4,9 @@ public class Result {
     public Motor motor = new Motor();
     public GearBox gearBox = new GearBox();
 
-    public double maximalTorque;
-    public double maximalRotationSpeed;
-    public double weight;
+    public double maximalTorque = -1;
+    public double maximalRotationSpeed = -1;
+    public double weight = -1;
 
     @Override
     public String toString() {

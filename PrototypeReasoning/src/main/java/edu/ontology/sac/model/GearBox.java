@@ -1,7 +1,7 @@
 package edu.ontology.sac.model;
 
 public class GearBox {
-    public String name;
+    public String name = "";
 
     @Override
     public String toString() {

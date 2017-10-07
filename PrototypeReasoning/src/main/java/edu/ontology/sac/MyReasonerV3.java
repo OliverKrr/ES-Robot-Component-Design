@@ -30,12 +30,11 @@ import edu.ontology.sac.generated.Vocabulary;
 import edu.ontology.sac.model.Requirements;
 import edu.ontology.sac.model.Result;
 import openllet.owlapi.PelletReasoner;
-import uk.ac.manchester.cs.owl.owlapi.OWLLiteralImplDouble;
 
 public class MyReasonerV3 {
 
     private static final String fileEnding = ".owl";
-    private static final String orginalFileName = "PrototypeV3" + fileEnding;
+    private static final String orginalFileName = "PrototypeV4" + fileEnding;
 
     private String orginalFilePath = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\"
             + orginalFileName;
@@ -48,6 +47,7 @@ public class MyReasonerV3 {
     private OWLReasoner reasoner;
 
     private List<OWLAxiom> generatedAxioms = new ArrayList<>();
+    private boolean isReasoningPrepared = false;
 
     MyReasonerV3() throws RuntimeException {
         if (!new File(orginalFilePath).exists()) {
@@ -81,12 +81,25 @@ public class MyReasonerV3 {
         System.out.println("Read Ontology isConsistent: " + reasoner.isConsistent());
     }
 
+    public void prepareReasoning() {
+        if (isReasoningPrepared) {
+            return;
+        }
+        ontology.removeAxioms(generatedAxioms);
+        generatedAxioms.clear();
+        createBasicIndividuals();
+        reasoner.flush();
+        isReasoningPrepared = true;
+    }
+
     public List<Result> startReasoning(Requirements requirements) {
+        long startTime = System.currentTimeMillis();
         try {
-            ontology.removeAxioms(generatedAxioms);
-            generatedAxioms.clear();
+            if (!isReasoningPrepared) {
+                prepareReasoning();
+            }
+            isReasoningPrepared = false;
             addRequirements(requirements);
-            createBasicIndividuals();
             reasoner.flush();
             return reason();
         } finally {
@@ -95,6 +108,7 @@ public class MyReasonerV3 {
             } catch (OWLOntologyStorageException | IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
@@ -149,35 +163,27 @@ public class MyReasonerV3 {
                         + motor.getIRI().getShortForm() + "With" + gearBox.getIRI().getShortForm() + "Ind"));
                 addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_MOTORGEARBOXMATCH, matchInd));
 
-                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF,
-                        matchInd, motor));
-                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF,
-                        matchInd, gearBox));
+                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(
+                        Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR, matchInd, motor));
+                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(
+                        Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX, matchInd, gearBox));
             });
         });
         reasoner.flush();
         reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
-            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOF)
-                    .forEach(obProp -> reasoner.types(obProp).forEach(clas -> {
-                        if (clas.equals(Vocabulary.CLASS_MOTOR)) {
-                            result.motor.name = obProp.getIRI().getShortForm();
-                            result.motor.name = result.motor.name.substring(0,
-                                    result.motor.name.length() - 3);
-                        } else if (clas.equals(Vocabulary.CLASS_GEARBOX)) {
-                            result.gearBox.name = obProp.getIRI().getShortForm();
-                            result.gearBox.name = result.gearBox.name.substring(0,
-                                    result.gearBox.name.length() - 3);
-                        }
-                    }));
-            result.weight = reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG)
-                    .findAny().orElse(new OWLLiteralImplDouble(-1)).parseDouble();
-            result.maximalTorque = reasoner
-                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
-                    .orElse(new OWLLiteralImplDouble(-1)).parseDouble();
-            result.maximalRotationSpeed = reasoner
-                    .dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
-                    .findAny().orElse(new OWLLiteralImplDouble(-1)).parseDouble();
+            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR).findAny()
+                    .ifPresent(obProp -> result.motor.name = obProp.getIRI().getShortForm().substring(0,
+                            obProp.getIRI().getShortForm().length() - 3));
+            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX).findAny()
+                    .ifPresent(obProp -> result.gearBox.name = obProp.getIRI().getShortForm().substring(0,
+                            obProp.getIRI().getShortForm().length() - 3));
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
+                    .ifPresent(obProp -> result.weight = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
+                    .ifPresent(obProp -> result.maximalTorque = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
+                    .findAny().ifPresent(obProp -> result.maximalRotationSpeed = obProp.parseDouble());
             results.add(result);
         });
 
