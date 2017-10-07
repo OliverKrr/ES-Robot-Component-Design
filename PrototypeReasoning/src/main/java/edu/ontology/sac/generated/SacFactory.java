@@ -1,5 +1,8 @@
 package edu.ontology.sac.generated;
 
+import edu.ontology.sac.generated.impl.*;
+
+
 import java.util.Collection;
 
 import org.protege.owl.codegeneration.CodeGenerationFactory;
@@ -8,89 +11,10 @@ import org.protege.owl.codegeneration.impl.FactoryHelper;
 import org.protege.owl.codegeneration.impl.ProtegeJavaMapping;
 import org.protege.owl.codegeneration.inference.CodeGenerationInference;
 import org.protege.owl.codegeneration.inference.SimpleInference;
+
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-
-import edu.ontology.sac.generated.impl.DefaultBrushlessDcMotor;
-import edu.ontology.sac.generated.impl.DefaultCPL_25_160_2A;
-import edu.ontology.sac.generated.impl.DefaultCPL_2A;
-import edu.ontology.sac.generated.impl.DefaultCSD_14_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_14_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_17_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_17_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_20_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_20_160_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_20_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_25_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_25_160_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_25_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_2A;
-import edu.ontology.sac.generated.impl.DefaultCSD_32_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_32_160_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_32_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_40_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_40_160_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_40_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_50_100_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_50_160_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSD_50_50_2A_BB;
-import edu.ontology.sac.generated.impl.DefaultCSG_2A;
-import edu.ontology.sac.generated.impl.DefaultDevice;
-import edu.ontology.sac.generated.impl.DefaultElectricMotor;
-import edu.ontology.sac.generated.impl.DefaultEpicyclicGearing;
-import edu.ontology.sac.generated.impl.DefaultGearBox;
-import edu.ontology.sac.generated.impl.DefaultGearBoxProperties;
-import edu.ontology.sac.generated.impl.DefaultGearRatio;
-import edu.ontology.sac.generated.impl.DefaultHarmonicDrive;
-import edu.ontology.sac.generated.impl.DefaultHarmonicDriveComponentSets2A;
-import edu.ontology.sac.generated.impl.DefaultHarmonicDriveUnits;
-import edu.ontology.sac.generated.impl.DefaultILM115x25;
-import edu.ontology.sac.generated.impl.DefaultILM115x50;
-import edu.ontology.sac.generated.impl.DefaultILM25x04;
-import edu.ontology.sac.generated.impl.DefaultILM25x08;
-import edu.ontology.sac.generated.impl.DefaultILM38x06;
-import edu.ontology.sac.generated.impl.DefaultILM38x12;
-import edu.ontology.sac.generated.impl.DefaultILM50x08;
-import edu.ontology.sac.generated.impl.DefaultILM50x14;
-import edu.ontology.sac.generated.impl.DefaultILM70x10;
-import edu.ontology.sac.generated.impl.DefaultILM70x18;
-import edu.ontology.sac.generated.impl.DefaultILM85x04;
-import edu.ontology.sac.generated.impl.DefaultILM85x13;
-import edu.ontology.sac.generated.impl.DefaultILM85x23;
-import edu.ontology.sac.generated.impl.DefaultILM85x26;
-import edu.ontology.sac.generated.impl.DefaultInnerDiameter;
-import edu.ontology.sac.generated.impl.DefaultInput;
-import edu.ontology.sac.generated.impl.DefaultInputOutput;
-import edu.ontology.sac.generated.impl.DefaultLength;
-import edu.ontology.sac.generated.impl.DefaultMaxEfficiency;
-import edu.ontology.sac.generated.impl.DefaultMaxInputSpeedGrease;
-import edu.ontology.sac.generated.impl.DefaultMaxNominalTorque;
-import edu.ontology.sac.generated.impl.DefaultMotor;
-import edu.ontology.sac.generated.impl.DefaultMotorGearBoxMatch;
-import edu.ontology.sac.generated.impl.DefaultMotorProperties;
-import edu.ontology.sac.generated.impl.DefaultNominalPowerSupply;
-import edu.ontology.sac.generated.impl.DefaultNominalRotationSpeed;
-import edu.ontology.sac.generated.impl.DefaultNominalTorque;
-import edu.ontology.sac.generated.impl.DefaultOuterDiameter;
-import edu.ontology.sac.generated.impl.DefaultOutput;
-import edu.ontology.sac.generated.impl.DefaultPowerLoose;
-import edu.ontology.sac.generated.impl.DefaultPowerSupply;
-import edu.ontology.sac.generated.impl.DefaultProperty;
-import edu.ontology.sac.generated.impl.DefaultRepeatedPeakTorque;
-import edu.ontology.sac.generated.impl.DefaultRequirements;
-import edu.ontology.sac.generated.impl.DefaultRoboDriveServoKibILM;
-import edu.ontology.sac.generated.impl.DefaultRotationSpeed;
-import edu.ontology.sac.generated.impl.DefaultSatisfied;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedGearBox;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedMotor;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedMotorGearBoxMatch;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedPeakTorque;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedRotationSpeed;
-import edu.ontology.sac.generated.impl.DefaultSatisfiedWeight;
-import edu.ontology.sac.generated.impl.DefaultSize;
-import edu.ontology.sac.generated.impl.DefaultTorque;
-import edu.ontology.sac.generated.impl.DefaultWeight;
 
 /**
  * A class that serves as the entry point to the generated code providing access
@@ -98,7 +22,7 @@ import edu.ontology.sac.generated.impl.DefaultWeight;
  * 
  * Generated by Protege (http://protege.stanford.edu).<br>
  * Source Class: SacFactory<br>
- * @version generated on Thu Sep 28 19:13:35 CEST 2017 by Oliver
+ * @version generated on Sat Oct 07 11:11:09 CEST 2017 by Oliver
  */
 public class SacFactory implements CodeGenerationFactory {
     private OWLOntology ontology;
@@ -150,11 +74,42 @@ public class SacFactory implements CodeGenerationFactory {
     }
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#BrushlessDcMotor
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Basic
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#BrushlessDcMotor", BrushlessDcMotor.class, DefaultBrushlessDcMotor.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Basic", Basic.class, DefaultBasic.class);
+    }
+
+    /**
+     * Creates an instance of type Basic.  Modifies the underlying ontology.
+     */
+    public Basic createBasic(String name) {
+		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_BASIC, DefaultBasic.class);
+    }
+
+    /**
+     * Gets an instance of type Basic with the given name.  Does not modify the underlying ontology.
+     * @param name the name of the OWL named individual to be retrieved.
+     */
+    public Basic getBasic(String name) {
+		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_BASIC, DefaultBasic.class);
+    }
+
+    /**
+     * Gets all instances of Basic from the ontology.
+     */
+    public Collection<? extends Basic> getAllBasicInstances() {
+		return delegate.getWrappedIndividuals(Vocabulary.CLASS_BASIC, DefaultBasic.class);
+    }
+
+
+    /* ***************************************************
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#BrushlessDcMotor
+     */
+
+    {
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#BrushlessDcMotor", BrushlessDcMotor.class, DefaultBrushlessDcMotor.class);
     }
 
     /**
@@ -181,11 +136,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CPL_25_160_2A
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CPL_25_160_2A
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CPL_25_160_2A", CPL_25_160_2A.class, DefaultCPL_25_160_2A.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CPL_25_160_2A", CPL_25_160_2A.class, DefaultCPL_25_160_2A.class);
     }
 
     /**
@@ -212,11 +167,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CPL_2A
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CPL_2A
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CPL_2A", CPL_2A.class, DefaultCPL_2A.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CPL_2A", CPL_2A.class, DefaultCPL_2A.class);
     }
 
     /**
@@ -243,11 +198,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_14_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_14_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_14_100_2A_BB", CSD_14_100_2A_BB.class, DefaultCSD_14_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_14_100_2A_BB", CSD_14_100_2A_BB.class, DefaultCSD_14_100_2A_BB.class);
     }
 
     /**
@@ -274,11 +229,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_14_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_14_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_14_50_2A_BB", CSD_14_50_2A_BB.class, DefaultCSD_14_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_14_50_2A_BB", CSD_14_50_2A_BB.class, DefaultCSD_14_50_2A_BB.class);
     }
 
     /**
@@ -305,11 +260,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_17_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_17_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_17_100_2A_BB", CSD_17_100_2A_BB.class, DefaultCSD_17_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_17_100_2A_BB", CSD_17_100_2A_BB.class, DefaultCSD_17_100_2A_BB.class);
     }
 
     /**
@@ -336,11 +291,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_17_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_17_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_17_50_2A_BB", CSD_17_50_2A_BB.class, DefaultCSD_17_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_17_50_2A_BB", CSD_17_50_2A_BB.class, DefaultCSD_17_50_2A_BB.class);
     }
 
     /**
@@ -367,11 +322,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_100_2A_BB", CSD_20_100_2A_BB.class, DefaultCSD_20_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_100_2A_BB", CSD_20_100_2A_BB.class, DefaultCSD_20_100_2A_BB.class);
     }
 
     /**
@@ -398,11 +353,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_160_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_160_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_160_2A_BB", CSD_20_160_2A_BB.class, DefaultCSD_20_160_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_160_2A_BB", CSD_20_160_2A_BB.class, DefaultCSD_20_160_2A_BB.class);
     }
 
     /**
@@ -429,11 +384,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_20_50_2A_BB", CSD_20_50_2A_BB.class, DefaultCSD_20_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_20_50_2A_BB", CSD_20_50_2A_BB.class, DefaultCSD_20_50_2A_BB.class);
     }
 
     /**
@@ -460,11 +415,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_100_2A_BB", CSD_25_100_2A_BB.class, DefaultCSD_25_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_100_2A_BB", CSD_25_100_2A_BB.class, DefaultCSD_25_100_2A_BB.class);
     }
 
     /**
@@ -491,11 +446,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_160_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_160_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_160_2A_BB", CSD_25_160_2A_BB.class, DefaultCSD_25_160_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_160_2A_BB", CSD_25_160_2A_BB.class, DefaultCSD_25_160_2A_BB.class);
     }
 
     /**
@@ -522,11 +477,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_25_50_2A_BB", CSD_25_50_2A_BB.class, DefaultCSD_25_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_25_50_2A_BB", CSD_25_50_2A_BB.class, DefaultCSD_25_50_2A_BB.class);
     }
 
     /**
@@ -553,11 +508,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_2A
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_2A
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_2A", CSD_2A.class, DefaultCSD_2A.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_2A", CSD_2A.class, DefaultCSD_2A.class);
     }
 
     /**
@@ -584,11 +539,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_100_2A_BB", CSD_32_100_2A_BB.class, DefaultCSD_32_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_100_2A_BB", CSD_32_100_2A_BB.class, DefaultCSD_32_100_2A_BB.class);
     }
 
     /**
@@ -615,11 +570,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_160_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_160_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_160_2A_BB", CSD_32_160_2A_BB.class, DefaultCSD_32_160_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_160_2A_BB", CSD_32_160_2A_BB.class, DefaultCSD_32_160_2A_BB.class);
     }
 
     /**
@@ -646,11 +601,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_32_50_2A_BB", CSD_32_50_2A_BB.class, DefaultCSD_32_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_32_50_2A_BB", CSD_32_50_2A_BB.class, DefaultCSD_32_50_2A_BB.class);
     }
 
     /**
@@ -677,11 +632,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_100_2A_BB", CSD_40_100_2A_BB.class, DefaultCSD_40_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_100_2A_BB", CSD_40_100_2A_BB.class, DefaultCSD_40_100_2A_BB.class);
     }
 
     /**
@@ -708,11 +663,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_160_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_160_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_160_2A_BB", CSD_40_160_2A_BB.class, DefaultCSD_40_160_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_160_2A_BB", CSD_40_160_2A_BB.class, DefaultCSD_40_160_2A_BB.class);
     }
 
     /**
@@ -739,11 +694,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_40_50_2A_BB", CSD_40_50_2A_BB.class, DefaultCSD_40_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_40_50_2A_BB", CSD_40_50_2A_BB.class, DefaultCSD_40_50_2A_BB.class);
     }
 
     /**
@@ -770,11 +725,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_100_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_100_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_100_2A_BB", CSD_50_100_2A_BB.class, DefaultCSD_50_100_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_100_2A_BB", CSD_50_100_2A_BB.class, DefaultCSD_50_100_2A_BB.class);
     }
 
     /**
@@ -801,11 +756,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_160_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_160_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_160_2A_BB", CSD_50_160_2A_BB.class, DefaultCSD_50_160_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_160_2A_BB", CSD_50_160_2A_BB.class, DefaultCSD_50_160_2A_BB.class);
     }
 
     /**
@@ -832,11 +787,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_50_2A_BB
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_50_2A_BB
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSD_50_50_2A_BB", CSD_50_50_2A_BB.class, DefaultCSD_50_50_2A_BB.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSD_50_50_2A_BB", CSD_50_50_2A_BB.class, DefaultCSD_50_50_2A_BB.class);
     }
 
     /**
@@ -863,11 +818,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSG_2A
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSG_2A
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#CSG_2A", CSG_2A.class, DefaultCSG_2A.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#CSG_2A", CSG_2A.class, DefaultCSG_2A.class);
     }
 
     /**
@@ -894,11 +849,42 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Device
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Combined
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Device", Device.class, DefaultDevice.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Combined", Combined.class, DefaultCombined.class);
+    }
+
+    /**
+     * Creates an instance of type Combined.  Modifies the underlying ontology.
+     */
+    public Combined createCombined(String name) {
+		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_COMBINED, DefaultCombined.class);
+    }
+
+    /**
+     * Gets an instance of type Combined with the given name.  Does not modify the underlying ontology.
+     * @param name the name of the OWL named individual to be retrieved.
+     */
+    public Combined getCombined(String name) {
+		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_COMBINED, DefaultCombined.class);
+    }
+
+    /**
+     * Gets all instances of Combined from the ontology.
+     */
+    public Collection<? extends Combined> getAllCombinedInstances() {
+		return delegate.getWrappedIndividuals(Vocabulary.CLASS_COMBINED, DefaultCombined.class);
+    }
+
+
+    /* ***************************************************
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Device
+     */
+
+    {
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Device", Device.class, DefaultDevice.class);
     }
 
     /**
@@ -925,11 +911,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ElectricMotor
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ElectricMotor
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ElectricMotor", ElectricMotor.class, DefaultElectricMotor.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ElectricMotor", ElectricMotor.class, DefaultElectricMotor.class);
     }
 
     /**
@@ -956,11 +942,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#EpicyclicGearing
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#EpicyclicGearing
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#EpicyclicGearing", EpicyclicGearing.class, DefaultEpicyclicGearing.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#EpicyclicGearing", EpicyclicGearing.class, DefaultEpicyclicGearing.class);
     }
 
     /**
@@ -987,11 +973,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearBox
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearBox
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearBox", GearBox.class, DefaultGearBox.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearBox", GearBox.class, DefaultGearBox.class);
     }
 
     /**
@@ -1018,11 +1004,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearBoxProperties
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearBoxProperties
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearBoxProperties", GearBoxProperties.class, DefaultGearBoxProperties.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearBoxProperties", GearBoxProperties.class, DefaultGearBoxProperties.class);
     }
 
     /**
@@ -1049,11 +1035,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearRatio
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearRatio
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#GearRatio", GearRatio.class, DefaultGearRatio.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#GearRatio", GearRatio.class, DefaultGearRatio.class);
     }
 
     /**
@@ -1080,11 +1066,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDrive
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDrive
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDrive", HarmonicDrive.class, DefaultHarmonicDrive.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDrive", HarmonicDrive.class, DefaultHarmonicDrive.class);
     }
 
     /**
@@ -1111,11 +1097,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDriveComponentSets2A
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDriveComponentSets2A
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDriveComponentSets2A", HarmonicDriveComponentSets2A.class, DefaultHarmonicDriveComponentSets2A.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDriveComponentSets2A", HarmonicDriveComponentSets2A.class, DefaultHarmonicDriveComponentSets2A.class);
     }
 
     /**
@@ -1142,11 +1128,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDriveUnits
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDriveUnits
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#HarmonicDriveUnits", HarmonicDriveUnits.class, DefaultHarmonicDriveUnits.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#HarmonicDriveUnits", HarmonicDriveUnits.class, DefaultHarmonicDriveUnits.class);
     }
 
     /**
@@ -1173,11 +1159,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM115x25
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM115x25
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM115x25", ILM115x25.class, DefaultILM115x25.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM115x25", ILM115x25.class, DefaultILM115x25.class);
     }
 
     /**
@@ -1204,11 +1190,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM115x50
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM115x50
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM115x50", ILM115x50.class, DefaultILM115x50.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM115x50", ILM115x50.class, DefaultILM115x50.class);
     }
 
     /**
@@ -1235,11 +1221,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM25x04
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM25x04
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM25x04", ILM25x04.class, DefaultILM25x04.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM25x04", ILM25x04.class, DefaultILM25x04.class);
     }
 
     /**
@@ -1266,11 +1252,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM25x08
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM25x08
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM25x08", ILM25x08.class, DefaultILM25x08.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM25x08", ILM25x08.class, DefaultILM25x08.class);
     }
 
     /**
@@ -1297,11 +1283,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM38x06
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM38x06
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM38x06", ILM38x06.class, DefaultILM38x06.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM38x06", ILM38x06.class, DefaultILM38x06.class);
     }
 
     /**
@@ -1328,11 +1314,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM38x12
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM38x12
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM38x12", ILM38x12.class, DefaultILM38x12.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM38x12", ILM38x12.class, DefaultILM38x12.class);
     }
 
     /**
@@ -1359,11 +1345,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM50x08
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM50x08
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM50x08", ILM50x08.class, DefaultILM50x08.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM50x08", ILM50x08.class, DefaultILM50x08.class);
     }
 
     /**
@@ -1390,11 +1376,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM50x14
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM50x14
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM50x14", ILM50x14.class, DefaultILM50x14.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM50x14", ILM50x14.class, DefaultILM50x14.class);
     }
 
     /**
@@ -1421,11 +1407,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM70x10
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM70x10
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM70x10", ILM70x10.class, DefaultILM70x10.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM70x10", ILM70x10.class, DefaultILM70x10.class);
     }
 
     /**
@@ -1452,11 +1438,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM70x18
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM70x18
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM70x18", ILM70x18.class, DefaultILM70x18.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM70x18", ILM70x18.class, DefaultILM70x18.class);
     }
 
     /**
@@ -1483,11 +1469,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x04
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x04
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x04", ILM85x04.class, DefaultILM85x04.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x04", ILM85x04.class, DefaultILM85x04.class);
     }
 
     /**
@@ -1514,11 +1500,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x13
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x13
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x13", ILM85x13.class, DefaultILM85x13.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x13", ILM85x13.class, DefaultILM85x13.class);
     }
 
     /**
@@ -1545,11 +1531,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x23
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x23
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x23", ILM85x23.class, DefaultILM85x23.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x23", ILM85x23.class, DefaultILM85x23.class);
     }
 
     /**
@@ -1576,11 +1562,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x26
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x26
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#ILM85x26", ILM85x26.class, DefaultILM85x26.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#ILM85x26", ILM85x26.class, DefaultILM85x26.class);
     }
 
     /**
@@ -1607,11 +1593,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#InnerDiameter
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#InnerDiameter
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#InnerDiameter", InnerDiameter.class, DefaultInnerDiameter.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#InnerDiameter", InnerDiameter.class, DefaultInnerDiameter.class);
     }
 
     /**
@@ -1638,73 +1624,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Input
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Length
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Input", Input.class, DefaultInput.class);
-    }
-
-    /**
-     * Creates an instance of type Input.  Modifies the underlying ontology.
-     */
-    public Input createInput(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_INPUT, DefaultInput.class);
-    }
-
-    /**
-     * Gets an instance of type Input with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public Input getInput(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_INPUT, DefaultInput.class);
-    }
-
-    /**
-     * Gets all instances of Input from the ontology.
-     */
-    public Collection<? extends Input> getAllInputInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_INPUT, DefaultInput.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#InputOutput
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#InputOutput", InputOutput.class, DefaultInputOutput.class);
-    }
-
-    /**
-     * Creates an instance of type InputOutput.  Modifies the underlying ontology.
-     */
-    public InputOutput createInputOutput(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_INPUTOUTPUT, DefaultInputOutput.class);
-    }
-
-    /**
-     * Gets an instance of type InputOutput with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public InputOutput getInputOutput(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_INPUTOUTPUT, DefaultInputOutput.class);
-    }
-
-    /**
-     * Gets all instances of InputOutput from the ontology.
-     */
-    public Collection<? extends InputOutput> getAllInputOutputInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_INPUTOUTPUT, DefaultInputOutput.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Length
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Length", Length.class, DefaultLength.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Length", Length.class, DefaultLength.class);
     }
 
     /**
@@ -1731,11 +1655,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxEfficiency
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxEfficiency
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxEfficiency", MaxEfficiency.class, DefaultMaxEfficiency.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxEfficiency", MaxEfficiency.class, DefaultMaxEfficiency.class);
     }
 
     /**
@@ -1762,11 +1686,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxInputSpeedGrease
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxInputSpeedGrease
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxInputSpeedGrease", MaxInputSpeedGrease.class, DefaultMaxInputSpeedGrease.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxInputSpeedGrease", MaxInputSpeedGrease.class, DefaultMaxInputSpeedGrease.class);
     }
 
     /**
@@ -1793,11 +1717,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxNominalTorque
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxNominalTorque
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MaxNominalTorque", MaxNominalTorque.class, DefaultMaxNominalTorque.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MaxNominalTorque", MaxNominalTorque.class, DefaultMaxNominalTorque.class);
     }
 
     /**
@@ -1824,11 +1748,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Motor
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Motor
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Motor", Motor.class, DefaultMotor.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Motor", Motor.class, DefaultMotor.class);
     }
 
     /**
@@ -1855,11 +1779,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MotorGearBoxMatch
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MotorGearBoxMatch
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MotorGearBoxMatch", MotorGearBoxMatch.class, DefaultMotorGearBoxMatch.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MotorGearBoxMatch", MotorGearBoxMatch.class, DefaultMotorGearBoxMatch.class);
     }
 
     /**
@@ -1886,11 +1810,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MotorProperties
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MotorProperties
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#MotorProperties", MotorProperties.class, DefaultMotorProperties.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#MotorProperties", MotorProperties.class, DefaultMotorProperties.class);
     }
 
     /**
@@ -1917,11 +1841,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalPowerSupply
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalPowerSupply
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalPowerSupply", NominalPowerSupply.class, DefaultNominalPowerSupply.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalPowerSupply", NominalPowerSupply.class, DefaultNominalPowerSupply.class);
     }
 
     /**
@@ -1948,11 +1872,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalRotationSpeed
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalRotationSpeed
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalRotationSpeed", NominalRotationSpeed.class, DefaultNominalRotationSpeed.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalRotationSpeed", NominalRotationSpeed.class, DefaultNominalRotationSpeed.class);
     }
 
     /**
@@ -1979,11 +1903,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalTorque
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalTorque
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#NominalTorque", NominalTorque.class, DefaultNominalTorque.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#NominalTorque", NominalTorque.class, DefaultNominalTorque.class);
     }
 
     /**
@@ -2010,11 +1934,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#OuterDiameter
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#OuterDiameter
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#OuterDiameter", OuterDiameter.class, DefaultOuterDiameter.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#OuterDiameter", OuterDiameter.class, DefaultOuterDiameter.class);
     }
 
     /**
@@ -2041,104 +1965,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Output
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Property
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Output", Output.class, DefaultOutput.class);
-    }
-
-    /**
-     * Creates an instance of type Output.  Modifies the underlying ontology.
-     */
-    public Output createOutput(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_OUTPUT, DefaultOutput.class);
-    }
-
-    /**
-     * Gets an instance of type Output with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public Output getOutput(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_OUTPUT, DefaultOutput.class);
-    }
-
-    /**
-     * Gets all instances of Output from the ontology.
-     */
-    public Collection<? extends Output> getAllOutputInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_OUTPUT, DefaultOutput.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#PowerLoose
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#PowerLoose", PowerLoose.class, DefaultPowerLoose.class);
-    }
-
-    /**
-     * Creates an instance of type PowerLoose.  Modifies the underlying ontology.
-     */
-    public PowerLoose createPowerLoose(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_POWERLOOSE, DefaultPowerLoose.class);
-    }
-
-    /**
-     * Gets an instance of type PowerLoose with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public PowerLoose getPowerLoose(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_POWERLOOSE, DefaultPowerLoose.class);
-    }
-
-    /**
-     * Gets all instances of PowerLoose from the ontology.
-     */
-    public Collection<? extends PowerLoose> getAllPowerLooseInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_POWERLOOSE, DefaultPowerLoose.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#PowerSupply
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#PowerSupply", PowerSupply.class, DefaultPowerSupply.class);
-    }
-
-    /**
-     * Creates an instance of type PowerSupply.  Modifies the underlying ontology.
-     */
-    public PowerSupply createPowerSupply(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_POWERSUPPLY, DefaultPowerSupply.class);
-    }
-
-    /**
-     * Gets an instance of type PowerSupply with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public PowerSupply getPowerSupply(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_POWERSUPPLY, DefaultPowerSupply.class);
-    }
-
-    /**
-     * Gets all instances of PowerSupply from the ontology.
-     */
-    public Collection<? extends PowerSupply> getAllPowerSupplyInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_POWERSUPPLY, DefaultPowerSupply.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Property
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Property", Property.class, DefaultProperty.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Property", Property.class, DefaultProperty.class);
     }
 
     /**
@@ -2165,11 +1996,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RepeatedPeakTorque
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#RepeatedPeakTorque
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RepeatedPeakTorque", RepeatedPeakTorque.class, DefaultRepeatedPeakTorque.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#RepeatedPeakTorque", RepeatedPeakTorque.class, DefaultRepeatedPeakTorque.class);
     }
 
     /**
@@ -2196,11 +2027,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Requirements
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Requirements
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Requirements", Requirements.class, DefaultRequirements.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Requirements", Requirements.class, DefaultRequirements.class);
     }
 
     /**
@@ -2227,11 +2058,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RoboDriveServoKibILM
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#RoboDriveServoKibILM
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RoboDriveServoKibILM", RoboDriveServoKibILM.class, DefaultRoboDriveServoKibILM.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#RoboDriveServoKibILM", RoboDriveServoKibILM.class, DefaultRoboDriveServoKibILM.class);
     }
 
     /**
@@ -2258,73 +2089,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RotationSpeed
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedGearBox
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#RotationSpeed", RotationSpeed.class, DefaultRotationSpeed.class);
-    }
-
-    /**
-     * Creates an instance of type RotationSpeed.  Modifies the underlying ontology.
-     */
-    public RotationSpeed createRotationSpeed(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_ROTATIONSPEED, DefaultRotationSpeed.class);
-    }
-
-    /**
-     * Gets an instance of type RotationSpeed with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public RotationSpeed getRotationSpeed(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_ROTATIONSPEED, DefaultRotationSpeed.class);
-    }
-
-    /**
-     * Gets all instances of RotationSpeed from the ontology.
-     */
-    public Collection<? extends RotationSpeed> getAllRotationSpeedInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_ROTATIONSPEED, DefaultRotationSpeed.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Satisfied
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Satisfied", Satisfied.class, DefaultSatisfied.class);
-    }
-
-    /**
-     * Creates an instance of type Satisfied.  Modifies the underlying ontology.
-     */
-    public Satisfied createSatisfied(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_SATISFIED, DefaultSatisfied.class);
-    }
-
-    /**
-     * Gets an instance of type Satisfied with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public Satisfied getSatisfied(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_SATISFIED, DefaultSatisfied.class);
-    }
-
-    /**
-     * Gets all instances of Satisfied from the ontology.
-     */
-    public Collection<? extends Satisfied> getAllSatisfiedInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_SATISFIED, DefaultSatisfied.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedGearBox
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedGearBox", SatisfiedGearBox.class, DefaultSatisfiedGearBox.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedGearBox", SatisfiedGearBox.class, DefaultSatisfiedGearBox.class);
     }
 
     /**
@@ -2351,11 +2120,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedMotor
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedMotor
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedMotor", SatisfiedMotor.class, DefaultSatisfiedMotor.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedMotor", SatisfiedMotor.class, DefaultSatisfiedMotor.class);
     }
 
     /**
@@ -2382,11 +2151,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedMotorGearBoxMatch
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedMotorGearBoxMatch
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedMotorGearBoxMatch", SatisfiedMotorGearBoxMatch.class, DefaultSatisfiedMotorGearBoxMatch.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedMotorGearBoxMatch", SatisfiedMotorGearBoxMatch.class, DefaultSatisfiedMotorGearBoxMatch.class);
     }
 
     /**
@@ -2413,11 +2182,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedPeakTorque
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedPeakTorque
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedPeakTorque", SatisfiedPeakTorque.class, DefaultSatisfiedPeakTorque.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedPeakTorque", SatisfiedPeakTorque.class, DefaultSatisfiedPeakTorque.class);
     }
 
     /**
@@ -2444,11 +2213,42 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedRotationSpeed
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedRequirements
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedRotationSpeed", SatisfiedRotationSpeed.class, DefaultSatisfiedRotationSpeed.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedRequirements", SatisfiedRequirements.class, DefaultSatisfiedRequirements.class);
+    }
+
+    /**
+     * Creates an instance of type SatisfiedRequirements.  Modifies the underlying ontology.
+     */
+    public SatisfiedRequirements createSatisfiedRequirements(String name) {
+		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_SATISFIEDREQUIREMENTS, DefaultSatisfiedRequirements.class);
+    }
+
+    /**
+     * Gets an instance of type SatisfiedRequirements with the given name.  Does not modify the underlying ontology.
+     * @param name the name of the OWL named individual to be retrieved.
+     */
+    public SatisfiedRequirements getSatisfiedRequirements(String name) {
+		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_SATISFIEDREQUIREMENTS, DefaultSatisfiedRequirements.class);
+    }
+
+    /**
+     * Gets all instances of SatisfiedRequirements from the ontology.
+     */
+    public Collection<? extends SatisfiedRequirements> getAllSatisfiedRequirementsInstances() {
+		return delegate.getWrappedIndividuals(Vocabulary.CLASS_SATISFIEDREQUIREMENTS, DefaultSatisfiedRequirements.class);
+    }
+
+
+    /* ***************************************************
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedRotationSpeed
+     */
+
+    {
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedRotationSpeed", SatisfiedRotationSpeed.class, DefaultSatisfiedRotationSpeed.class);
     }
 
     /**
@@ -2475,11 +2275,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedWeight
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedWeight
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#SatisfiedWeight", SatisfiedWeight.class, DefaultSatisfiedWeight.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#SatisfiedWeight", SatisfiedWeight.class, DefaultSatisfiedWeight.class);
     }
 
     /**
@@ -2506,11 +2306,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Size
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Size
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Size", Size.class, DefaultSize.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Size", Size.class, DefaultSize.class);
     }
 
     /**
@@ -2537,42 +2337,11 @@ public class SacFactory implements CodeGenerationFactory {
 
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Torque
+     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Weight
      */
 
     {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Torque", Torque.class, DefaultTorque.class);
-    }
-
-    /**
-     * Creates an instance of type Torque.  Modifies the underlying ontology.
-     */
-    public Torque createTorque(String name) {
-		return delegate.createWrappedIndividual(name, Vocabulary.CLASS_TORQUE, DefaultTorque.class);
-    }
-
-    /**
-     * Gets an instance of type Torque with the given name.  Does not modify the underlying ontology.
-     * @param name the name of the OWL named individual to be retrieved.
-     */
-    public Torque getTorque(String name) {
-		return delegate.getWrappedIndividual(name, Vocabulary.CLASS_TORQUE, DefaultTorque.class);
-    }
-
-    /**
-     * Gets all instances of Torque from the ontology.
-     */
-    public Collection<? extends Torque> getAllTorqueInstances() {
-		return delegate.getWrappedIndividuals(Vocabulary.CLASS_TORQUE, DefaultTorque.class);
-    }
-
-
-    /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Weight
-     */
-
-    {
-        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV3#Weight", Weight.class, DefaultWeight.class);
+        javaMapping.add("http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4#Weight", Weight.class, DefaultWeight.class);
     }
 
     /**
