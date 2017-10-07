@@ -26,29 +26,34 @@ public class Controller {
     Controller(GUI gui) {
         this.gui = gui;
         reasoner = new MyReasonerV3();
+        reset();
+        initialStartForCaching();
+    }
+
+    public void reset() {
+        reasoner.prepareReasoning();
+    }
+
+    private void initialStartForCaching() {
+        reasoner.startReasoning(new Requirements());
     }
 
     public void parseRequirements() {
         gui.tree.removeAll();
         currentRequirements = new Requirements();
-        currentRequirements.maximalTorque = new Unit(parseDouble(gui.minimumTorqueMIN, 0),
-                parseDouble(gui.minimumTorqueMAX, Double.MAX_VALUE));
-        currentRequirements.maximalRotationSpeed = new Unit(parseDouble(gui.minimumSpeedMIN, 0),
-                parseDouble(gui.minimumSpeedMAX, Double.MAX_VALUE));
-        currentRequirements.weight = new Unit(parseDouble(gui.weightMin, 0),
-                parseDouble(gui.weightMax, Double.MAX_VALUE));
+        currentRequirements.maximalTorque = parseDoubles(gui.minimumTorqueMIN, gui.minimumTorqueMAX);
+        currentRequirements.maximalRotationSpeed = parseDoubles(gui.minimumSpeedMIN, gui.minimumSpeedMAX);
+        currentRequirements.weight = parseDoubles(gui.weightMin, gui.weightMax);
 
+        // convert from rpm to °/s
         currentRequirements.maximalRotationSpeed.min /= 6;
         currentRequirements.maximalRotationSpeed.max /= 6;
     }
 
     public void reason() {
         if (GUI.isTest) {
-            gui.tree.removeAll();
+            reset();
             currentRequirements = new Requirements();
-            currentRequirements.maximalTorque = new Unit(0, Double.MAX_VALUE);
-            currentRequirements.maximalRotationSpeed = new Unit(0, Double.MAX_VALUE);
-            currentRequirements.weight = new Unit(0, Double.MAX_VALUE);
         }
         lastResults = reasoner.startReasoning(currentRequirements);
         if (!GUI.isTest) {
@@ -56,17 +61,25 @@ public class Controller {
         }
     }
 
-    private double parseDouble(Text toParse, double defaultValue) {
-        if (toParse.getText().isEmpty()) {
-            return defaultValue;
+    private Unit parseDoubles(Text minValue, Text maxValue) {
+        Unit unit = new Unit();
+        if (!minValue.getText().isEmpty()) {
+            try {
+                unit.min = Double.parseDouble(minValue.getText());
+            } catch (NumberFormatException e) {
+                System.err.println("Could not parse to double: " + minValue.getText()
+                        + ". Default value be taken: " + unit.min);
+            }
         }
-        try {
-            return Double.parseDouble(toParse.getText());
-        } catch (NumberFormatException e) {
-            System.err.println("Could not parse to double: " + toParse.getText()
-                    + ". Default value be taken: " + defaultValue);
-            return defaultValue;
+        if (!maxValue.getText().isEmpty()) {
+            try {
+                unit.max = Double.parseDouble(maxValue.getText());
+            } catch (NumberFormatException e) {
+                System.err.println("Could not parse to double: " + maxValue.getText()
+                        + ". Default value be taken: " + unit.max);
+            }
         }
+        return unit;
     }
 
     public void setResults() {
@@ -76,6 +89,7 @@ public class Controller {
                     "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
             addTreeItem(resItem, "Maximal Torque M_max:         " + result.maximalTorque
                     + getSpaces(result.maximalTorque) + "Nm");
+            // convert from °/s to rpm
             addTreeItem(resItem, "Maximal Rotation Speed n_max: " + result.maximalRotationSpeed * 6
                     + getSpaces(result.maximalRotationSpeed * 6) + "°/s");
             addTreeItem(resItem,

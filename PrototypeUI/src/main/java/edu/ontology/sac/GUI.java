@@ -13,10 +13,12 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -85,6 +87,7 @@ public class GUI {
         }
         Display display = Display.getDefault();
         createContents();
+        startOnSecondScreenIfPossible();
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
@@ -96,6 +99,18 @@ public class GUI {
                 display.sleep();
             }
         }
+    }
+
+    private void startOnSecondScreenIfPossible() {
+        Monitor[] monitors = shell.getDisplay().getMonitors();
+        if (monitors.length < 2) {
+            return;
+        }
+        Rectangle monitorRect = monitors[1].getBounds();
+        Rectangle shellRect = shell.getBounds();
+        int x = monitorRect.x + (monitorRect.width - shellRect.width) / 2;
+        int y = monitorRect.y + (monitorRect.height - shellRect.height) / 2;
+        shell.setLocation(x, y);
     }
 
     private void shutdown() throws InterruptedException, ExecutionException {
@@ -326,9 +341,7 @@ public class GUI {
             public void widgetSelected(SelectionEvent event) {
                 if (tabFolder.getSelectionIndex() == 1) {
                     try {
-                        if (isControllerCreation.get()) {
-                            controllerFuture.get();
-                        }
+                        controllerFuture.get();
                     } catch (InterruptedException | ExecutionException e) {
                         e.printStackTrace();
                         return;
@@ -338,6 +351,7 @@ public class GUI {
                 } else {
                     if (!isControllerCreation.get()) {
                         controllerFuture.cancel(true);
+                        controllerFuture = pool.submit(() -> controller.reset());
                     }
                 }
             }

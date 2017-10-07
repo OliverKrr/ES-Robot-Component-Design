@@ -66,6 +66,7 @@
       <artifactId>osgi</artifactId>
       <version>3.12.0.v20170512-1932</version>
     </dependency>
+    <!-- TODO: try other version without x86_64, like https://mvnrepository.com/artifact/org.eclipse/swt/3.3.0-v3346 -->
     <dependency>
       <groupId>org.eclipse.swt.win32.win32</groupId>
       <artifactId>x86_64</artifactId>
