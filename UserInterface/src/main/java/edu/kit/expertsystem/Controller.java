@@ -18,14 +18,14 @@ public class Controller {
 
     private static final int MAXIMAL_NEEDED_SPACES = 6;
     private GUI gui;
-    private MyReasonerV3 reasoner;
+    private MainReasoner reasoner;
 
     private Requirements currentRequirements;
     private List<Result> lastResults;
 
     Controller(GUI gui) {
         this.gui = gui;
-        reasoner = new MyReasonerV3();
+        reasoner = new MainReasoner();
         reset();
         initialStartForCaching();
     }

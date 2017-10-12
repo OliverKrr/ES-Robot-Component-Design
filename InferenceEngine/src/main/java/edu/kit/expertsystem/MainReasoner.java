@@ -31,7 +31,7 @@ import edu.kit.expertsystem.model.Requirements;
 import edu.kit.expertsystem.model.Result;
 import openllet.owlapi.PelletReasoner;
 
-public class MyReasonerV3 {
+public class MainReasoner {
 
     private static final String fileEnding = ".owl";
     private static final String orginalFileName = "PrototypeV4" + fileEnding;
@@ -49,7 +49,7 @@ public class MyReasonerV3 {
     private List<OWLAxiom> generatedAxioms = new ArrayList<>();
     private boolean isReasoningPrepared = false;
 
-    MyReasonerV3() throws RuntimeException {
+    MainReasoner() throws RuntimeException {
         if (!new File(orginalFilePath).exists()) {
             orginalFilePath = Paths.get("").toAbsolutePath().toFile().getAbsolutePath() + "\\"
                     + orginalFileName;
