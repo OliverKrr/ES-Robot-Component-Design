@@ -14,5 +14,6 @@
 	<modules>
 	    <module>UserInterface</module>
 	    <module>InferenceEngine</module>
+      <module>KnowledgeBase</module>
   </modules>
 </project>

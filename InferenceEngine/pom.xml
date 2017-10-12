@@ -34,13 +34,6 @@
 			<version>2.6.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
-		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>1.10</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

@@ -23,7 +23,11 @@
 			<groupId>edu.kit.expertsystem</groupId>
 			<artifactId>SAC-InferenceEngine</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>edu.kit.expertsystem</groupId>
+			<artifactId>SAC-KnowledgeBase</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
     
     <dependency>
