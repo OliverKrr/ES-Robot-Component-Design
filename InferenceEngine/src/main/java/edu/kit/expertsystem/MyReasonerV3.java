@@ -1,4 +1,4 @@
-package edu.ontology.sac;
+package edu.kit.expertsystem;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,9 +26,9 @@ import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import com.google.common.io.Files;
 
-import edu.ontology.sac.generated.Vocabulary;
-import edu.ontology.sac.model.Requirements;
-import edu.ontology.sac.model.Result;
+import edu.kit.expertsystem.generated.Vocabulary;
+import edu.kit.expertsystem.model.Requirements;
+import edu.kit.expertsystem.model.Result;
 import openllet.owlapi.PelletReasoner;
 
 public class MyReasonerV3 {

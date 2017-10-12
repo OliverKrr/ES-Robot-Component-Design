@@ -1,4 +1,4 @@
-package edu.ontology.sac;
+package edu.kit.expertsystem;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;

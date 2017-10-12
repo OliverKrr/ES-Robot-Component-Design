@@ -1,4 +1,4 @@
-package edu.ontology.sac.model;
+package edu.kit.expertsystem.model;
 
 public class Result {
     public Motor motor = new Motor();

@@ -1,4 +1,5 @@
-// package edu.ontology.sac;
+package edu.kit.expertsystem;
+// package edu.kit.expertsystem;
 //
 // import java.io.File;
 // import java.io.FileNotFoundException;
@@ -19,9 +20,9 @@
 //
 // import com.google.common.io.Files;
 //
-// import edu.ontology.sac.generated.ILM50x08;
-// import edu.ontology.sac.generated.SacFactory;
-// import edu.ontology.sac.generated.Vocabulary;
+// import edu.kit.expertsystem.generated.ILM50x08;
+// import edu.kit.expertsystem.generated.SacFactory;
+// import edu.kit.expertsystem.generated.Vocabulary;
 // import openllet.owlapi.PelletReasoner;
 //
 // public class Main {

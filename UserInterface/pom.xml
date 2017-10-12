@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>edu.ontology.sac</groupId>
-		<artifactId>SacParentPom</artifactId>
+		<groupId>edu.kit.expertsystem</groupId>
+		<artifactId>SAC</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>SacGUI</artifactId>
+	<artifactId>SAC-UserInterface</artifactId>
 	
 	<repositories>
 		<repository>
@@ -20,8 +20,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>edu.ontology.sac</groupId>
-			<artifactId>SacOntology</artifactId>
+			<groupId>edu.kit.expertsystem</groupId>
+			<artifactId>SAC-InferenceEngine</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
@@ -133,7 +133,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>edu.ontology.sac.GUI</mainClass>
+							<mainClass>edu.kit.expertsystem.GUI</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

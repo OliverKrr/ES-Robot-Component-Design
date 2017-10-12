@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>edu.ontology.sac</groupId>
-		<artifactId>SacParentPom</artifactId>
+		<groupId>edu.kit.expertsystem</groupId>
+		<artifactId>SAC</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>SacOntology</artifactId>
+	<artifactId>SAC-InferenceEngine</artifactId>
 
 	<dependencies>
 		<dependency>
@@ -27,17 +27,12 @@
 			<artifactId>owlapi-distribution</artifactId>
 			<version>5.1.1</version>
 		</dependency>
-		<!-- <dependency> <groupId>org.apache.jena</groupId> <artifactId>apache-jena-libs</artifactId> 
-			<type>pom</type> <version>3.4.0</version> </dependency> -->
 
 		<dependency>
 			<groupId>com.github.galigator.openllet</groupId>
 			<artifactId>openllet-owlapi</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.github.galigator.openllet</groupId> <artifactId>openllet-jena</artifactId> 
-			<version>2.6.1</version> </dependency> -->
-
 
 		<!-- https://mvnrepository.com/artifact/commons-configuration/commons-configuration -->
 		<dependency>

@@ -1,4 +1,4 @@
-package edu.ontology.sac;
+package edu.kit.expertsystem;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
