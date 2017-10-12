@@ -2,6 +2,8 @@ package edu.kit.expertsystem;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -17,6 +19,9 @@ import edu.kit.expertsystem.model.Unit;
 public class Controller {
 
     private static final int MAXIMAL_NEEDED_SPACES = 6;
+
+    private static final Logger logger = LogManager.getLogger(Controller.class);
+
     private GUI gui;
     private MainReasoner reasoner;
 
@@ -67,7 +72,7 @@ public class Controller {
             try {
                 unit.min = Double.parseDouble(minValue.getText());
             } catch (NumberFormatException e) {
-                System.err.println("Could not parse to double: " + minValue.getText()
+                logger.error("Could not parse to double: " + minValue.getText()
                         + ". Default value be taken: " + unit.min);
             }
         }
@@ -75,7 +80,7 @@ public class Controller {
             try {
                 unit.max = Double.parseDouble(maxValue.getText());
             } catch (NumberFormatException e) {
-                System.err.println("Could not parse to double: " + maxValue.getText()
+                logger.error("Could not parse to double: " + maxValue.getText()
                         + ". Default value be taken: " + unit.max);
             }
         }

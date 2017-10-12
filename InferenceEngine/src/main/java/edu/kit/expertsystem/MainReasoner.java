@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
@@ -37,6 +39,8 @@ public class MainReasoner {
     private static final String fileEnding = ".owl";
     private static final String orginalFileName = "SAC_Domain_Ontology" + fileEnding;
 
+    private static final Logger logger = LogManager.getLogger(MainReasoner.class);
+
     private String inferdFilePath;
 
     private OWLOntologyManager manager;
@@ -59,7 +63,7 @@ public class MainReasoner {
 
         dataFac = manager.getOWLDataFactory();
         reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
-        System.out.println("Read Ontology isConsistent: " + reasoner.isConsistent());
+        logger.info("Read Ontology isConsistent: " + reasoner.isConsistent());
     }
 
     private InputStream readOntology() throws IOException {
@@ -104,7 +108,7 @@ public class MainReasoner {
             } catch (OWLOntologyStorageException | IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+            logger.info("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
@@ -123,7 +127,7 @@ public class MainReasoner {
     }
 
     private void addRequirements(Requirements requirements) {
-        System.out.println(requirements);
+        logger.info(requirements);
         OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(create("requirementsInd"));
         addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_REQUIREMENTS, requirementsInd));
 
@@ -184,13 +188,13 @@ public class MainReasoner {
         });
 
         Collections.sort(results, Comparator.comparingDouble(result -> result.weight));
-        results.forEach(r -> System.out.println(r));
-        System.out.println("Number of results: " + results.size());
+        results.forEach(r -> logger.info(r));
+        logger.info("Number of results: " + results.size());
         return results;
     }
 
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
-        System.out.println("Reasoned ontology isConsistent: " + reasoner.isConsistent());
+        logger.info("Reasoned ontology isConsistent: " + reasoner.isConsistent());
         OWLOntology inferOnto = reasoner.getRootOntology();
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             manager.saveOntology(inferOnto, out);

@@ -6,6 +6,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
@@ -28,6 +30,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class GUI {
+
+    private static final Logger logger = LogManager.getLogger(GUI.class);
 
     public static boolean isTest = false;
 
@@ -73,6 +77,7 @@ public class GUI {
                 controller.reason();
             }
             isControllerCreation.set(false);
+            logger.info("Controller creation fininshed.");
         });
     }
 
@@ -104,6 +109,7 @@ public class GUI {
     private void startOnSecondScreenIfPossible() {
         Monitor[] monitors = shell.getDisplay().getMonitors();
         if (monitors.length < 2) {
+            logger.info("Do not startOnSecondScreen.");
             return;
         }
         Rectangle monitorRect = monitors[1].getBounds();
@@ -111,6 +117,7 @@ public class GUI {
         int x = monitorRect.x + (monitorRect.width - shellRect.width) / 2;
         int y = monitorRect.y + (monitorRect.height - shellRect.height) / 2;
         shell.setLocation(x, y);
+        logger.info("StartOnSecondScreen.");
     }
 
     private void shutdown() throws InterruptedException, ExecutionException {
