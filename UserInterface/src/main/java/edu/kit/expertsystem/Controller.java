@@ -55,36 +55,30 @@ public class Controller {
         currentRequirements.maximalRotationSpeed.max /= 6;
     }
 
-    public void reason() {
-        if (GUI.isTest) {
-            reset();
-            currentRequirements = new Requirements();
-        }
-        lastResults = reasoner.startReasoning(currentRequirements);
-        if (!GUI.isTest) {
-            gui.notifySolutionIsReady();
-        }
-    }
-
     private Unit parseDoubles(Text minValue, Text maxValue) {
         Unit unit = new Unit();
         if (!minValue.getText().isEmpty()) {
             try {
                 unit.min = Double.parseDouble(minValue.getText());
             } catch (NumberFormatException e) {
-                logger.error("Could not parse to double: " + minValue.getText()
-                        + ". Default value be taken: " + unit.min);
+                logger.error("Could not parse to double: " + minValue.getText() + ". Default value be taken: "
+                        + unit.min);
             }
         }
         if (!maxValue.getText().isEmpty()) {
             try {
                 unit.max = Double.parseDouble(maxValue.getText());
             } catch (NumberFormatException e) {
-                logger.error("Could not parse to double: " + maxValue.getText()
-                        + ". Default value be taken: " + unit.max);
+                logger.error("Could not parse to double: " + maxValue.getText() + ". Default value be taken: "
+                        + unit.max);
             }
         }
         return unit;
+    }
+
+    public void reason() {
+        lastResults = reasoner.startReasoning(currentRequirements);
+        gui.notifySolutionIsReady();
     }
 
     public void setResults() {
@@ -110,7 +104,7 @@ public class Controller {
         resItem.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(gui.shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
         return resItem;
@@ -119,11 +113,11 @@ public class Controller {
     private TreeItem addTreeItem(Tree parent, String text) {
         TreeItem resItem = new TreeItem(parent, SWT.NONE);
         resItem.setText(text);
-        resItem.setForeground(Configs.getKitGreen100(gui.shell.getDisplay()));
+        resItem.setForeground(Configs.KIT_GREEN_100);
         resItem.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(gui.shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
         return resItem;

@@ -33,8 +33,6 @@ public class GUI {
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
 
-    public static boolean isTest = false;
-
     public Text minimumSpeedMIN;
     public Text minimumTorqueMIN;
     public Text minimumSpeedMAX;
@@ -43,8 +41,9 @@ public class GUI {
     public Text weightMax;
     public Tree tree;
 
-    public Shell shell;
-    private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+    private Shell shell;
+    private static final Display display = Display.getDefault();
+    private final FormToolkit formToolkit = new FormToolkit(display);
 
     private final ExecutorService pool;
     private Future<?> controllerFuture;
@@ -61,6 +60,7 @@ public class GUI {
      */
     public static void main(String[] args) {
         try {
+            Configs.initConfig(display);
             GUI window = new GUI();
             window.open();
             window.shutdown();
@@ -73,9 +73,6 @@ public class GUI {
         pool = Executors.newSingleThreadExecutor();
         controllerFuture = pool.submit(() -> {
             controller = new Controller(this);
-            if (isTest) {
-                controller.reason();
-            }
             isControllerCreation.set(false);
             logger.info("Controller creation fininshed.");
         });
@@ -87,10 +84,6 @@ public class GUI {
      * @wbp.parser.entryPoint
      */
     public void open() {
-        if (isTest) {
-            return;
-        }
-        Display display = Display.getDefault();
         createContents();
         startOnSecondScreenIfPossible();
         shell.open();
@@ -107,7 +100,7 @@ public class GUI {
     }
 
     private void startOnSecondScreenIfPossible() {
-        Monitor[] monitors = shell.getDisplay().getMonitors();
+        Monitor[] monitors = display.getMonitors();
         if (monitors.length < 2) {
             logger.info("Do not startOnSecondScreen.");
             return;
@@ -120,12 +113,8 @@ public class GUI {
         logger.info("StartOnSecondScreen.");
     }
 
-    private void shutdown() throws InterruptedException, ExecutionException {
-        if (isTest && isControllerCreation.get()) {
-            controllerFuture.get();
-        } else {
-            controllerFuture.cancel(true);
-        }
+    private void shutdown() {
+        controllerFuture.cancel(true);
         pool.shutdown();
     }
 
@@ -169,11 +158,11 @@ public class GUI {
         lblMinimumTorque.setBounds(10, 10, 182, 23);
         lblMinimumTorque.setText("Peak Torque M_max:");
         formToolkit.adapt(lblMinimumTorque, true, true);
-        lblMinimumTorque.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblMinimumTorque.setForeground(Configs.KIT_GREEN_70);
         lblMinimumTorque.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
 
@@ -181,11 +170,11 @@ public class GUI {
         lblMinimumSpeed.setBounds(10, 46, 182, 23);
         lblMinimumSpeed.setText("Maximal Speed n_max:");
         formToolkit.adapt(lblMinimumSpeed, true, true);
-        lblMinimumSpeed.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblMinimumSpeed.setForeground(Configs.KIT_GREEN_70);
         lblMinimumSpeed.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
 
@@ -235,11 +224,11 @@ public class GUI {
         lblWeightM.setText("Weight m:");
         lblWeightM.setBounds(10, 82, 182, 23);
         formToolkit.adapt(lblWeightM, true, true);
-        lblWeightM.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblWeightM.setForeground(Configs.KIT_GREEN_70);
         lblWeightM.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
 
@@ -301,11 +290,11 @@ public class GUI {
         lblMinmax.setText("min/max:");
         lblMinmax.setBounds(10, 10, 137, 34);
         formToolkit.adapt(lblMinmax, true, true);
-        lblMinmax.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblMinmax.setForeground(Configs.KIT_GREEN_70);
         lblMinmax.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
         StyledText styledText_2 = new StyledText(composite2, SWT.BORDER);
@@ -375,11 +364,11 @@ public class GUI {
         maximalRotationSpeedDescription.setText("Maximal Speed n_max:");
         maximalRotationSpeedDescription.setBounds(10, 161, 137, 34);
         formToolkit.adapt(maximalRotationSpeedDescription, true, true);
-        maximalRotationSpeedDescription.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        maximalRotationSpeedDescription.setForeground(Configs.KIT_GREEN_70);
         maximalRotationSpeedDescription.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
 
@@ -387,11 +376,11 @@ public class GUI {
         lblMaxMinimumTorque.setText("Peak Torque M_max:");
         lblMaxMinimumTorque.setBounds(10, 98, 137, 34);
         formToolkit.adapt(lblMaxMinimumTorque, true, true);
-        lblMaxMinimumTorque.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblMaxMinimumTorque.setForeground(Configs.KIT_GREEN_70);
         lblMaxMinimumTorque.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
 
@@ -420,11 +409,11 @@ public class GUI {
         lblWeightM_1.setText("Weight m:");
         lblWeightM_1.setBounds(10, 224, 137, 34);
         formToolkit.adapt(lblWeightM_1, true, true);
-        lblWeightM_1.setForeground(Configs.getKitGreen70(shell.getDisplay()));
+        lblWeightM_1.setForeground(Configs.KIT_GREEN_70);
         lblWeightM_1.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {
-                Configs.getKitGreen70(shell.getDisplay()).dispose();
+                Configs.KIT_GREEN_70.dispose();
             }
         });
     }
