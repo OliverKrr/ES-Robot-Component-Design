@@ -1,8 +1,11 @@
 package edu.kit.expertsystem;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +27,6 @@ import org.semanticweb.owlapi.reasoner.BufferingMode;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
-import com.google.common.io.Files;
-
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.model.Requirements;
 import edu.kit.expertsystem.model.Result;
@@ -34,11 +35,8 @@ import openllet.owlapi.PelletReasoner;
 public class MainReasoner {
 
     private static final String fileEnding = ".owl";
-    private static final String orginalFileName = "PrototypeV4" + fileEnding;
+    private static final String orginalFileName = "SAC_Domain_Ontology" + fileEnding;
 
-    private String orginalFilePath = "C:\\Users\\Oliver\\Dropbox\\Uni\\Informatik_Master\\2. Semester\\Praxis der Forschung\\Projektplan\\"
-            + orginalFileName;
-    private String copyedFilePath;
     private String inferdFilePath;
 
     private OWLOntologyManager manager;
@@ -50,35 +48,33 @@ public class MainReasoner {
     private boolean isReasoningPrepared = false;
 
     MainReasoner() throws RuntimeException {
-        if (!new File(orginalFilePath).exists()) {
-            orginalFilePath = Paths.get("").toAbsolutePath().toFile().getAbsolutePath() + "\\"
-                    + orginalFileName;
-            if (!new File(orginalFilePath).exists()) {
-                throw new RuntimeException("Could not find ontology file: " + orginalFilePath);
-            }
-        }
-        copyedFilePath = orginalFilePath.substring(0, orginalFilePath.length() - fileEnding.length()) + "Copy"
-                + ".owl";
-        inferdFilePath = orginalFilePath.substring(0, orginalFilePath.length() - fileEnding.length())
-                + "CopyInf" + ".owl";
-
-        File workingFile = new File(copyedFilePath);
-        try {
-            Files.copy(new File(orginalFilePath), workingFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Could not copyed owl file!");
-        }
         manager = OWLManager.createOWLOntologyManager();
-        try {
-            ontology = manager.loadOntologyFromOntologyDocument(workingFile);
-        } catch (OWLOntologyCreationException e) {
+
+        try (InputStream ontoStream = readOntology()) {
+            ontology = manager.loadOntologyFromOntologyDocument(ontoStream);
+        } catch (OWLOntologyCreationException | IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Loading the ontology failed");
         }
+
         dataFac = manager.getOWLDataFactory();
         reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
         System.out.println("Read Ontology isConsistent: " + reasoner.isConsistent());
+    }
+
+    private InputStream readOntology() throws IOException {
+        String localPath = Paths.get("").toAbsolutePath() + "/" + orginalFileName;
+        inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
+                + fileEnding;
+        try {
+            return new FileInputStream(localPath);
+        } catch (FileNotFoundException e) {
+            // try (InputStream ontoStream = getClass().getResourceAsStream("/" +
+            // orginalFileName)) {
+            // Files.copy(ontoStream, new File(localPath).toPath());
+            // }
+            return getClass().getResourceAsStream("/" + orginalFileName);
+        }
     }
 
     public void prepareReasoning() {
