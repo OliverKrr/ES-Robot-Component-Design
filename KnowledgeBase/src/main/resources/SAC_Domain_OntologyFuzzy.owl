@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
      xml:base="http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4">
     <Prefix name="" IRI="http://www.semanticweb.org/oliver/ontologies/sac/prototypeV4"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
@@ -13,358 +23,361 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedMotorGearBoxMatch"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_40_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Motor"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearRatio50"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_20"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_50_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM85x23"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_32"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM115x25"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#OuterDiameter"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearBox"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Combined"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_17_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearRatio160"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_20_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#HarmonicDrive"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedRotationSpeed"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM25x04"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#RepeatedPeakTorque"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Basic"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasMaximalSpeedRes_n_max_unit_rpm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#NominalRotationSpeed"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM38x12"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MaxEfficiency"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_40_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasPower_P_unit_W"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CPL_2A"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDimensionInnerDiameter_d_unit_mm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MotorProperties"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedWeight"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Weight"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasWeight_m_unit_kg"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_50"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ElectricMotor"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isComposedOfMotor"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM70x10"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasSpeed_n_unit_rpm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Property"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#EpicyclicGearing"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#HarmonicDriveUnits"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_25_160_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isComposedOfGearBox"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasVoltage_U_unit_V"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_14_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedGearBox"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isComposedOf"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSG_2A"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM38x06"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_17"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDimensionOuterDiameter_D_unit_mm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_32_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasCurrent_I_unit_A"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#NominalTorque"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_40"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#InnerDiameter"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Device"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearRatios"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_20_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_50_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearRatio100"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MaxNominalTorque"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearRatio"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasMaxEfficiency_unit_percent"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM25x08"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_25_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM85x04"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM50x14"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#RoboDriveServoKibILM"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MotorPropertyValues"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearBoxProperties"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM70x18"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CPL_25_160_2A"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM115x50"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDimension_unit_mm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#HarmonicDriveComponentSets2A"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#NominalPowerSupply"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MaxInputSpeedGrease"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_2A"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_32_160_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDimensionLength_L_unit_mm"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasTorque_M_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM85x13"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_17_100_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MotorGearBoxMatch"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_14"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_14_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Requirements"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasGearBoxRation_i"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedMotor"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#GearBoxPropertyValues"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_25_50_2A_BB"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasValue"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Size"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM50x08"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasPeakTorqueRes_M_max_unit_Nm"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ILM85x26"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Gear_CSD_2A_Sizes"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SatisfiedRequirements"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CSD_40_160_2A_BB"/>
     </Declaration>
     <Declaration>
         <Class IRI="#BrushlessDcMotor"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#CSD_50_160_2A_BB"/>
+        <Class IRI="#CPL_25_160_2A"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Gear_CSD_2A_Size_25"/>
+        <Class IRI="#CPL_2A"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#SatisfiedPeakTorque"/>
+        <Class IRI="#CSD_14_100_2A_BB"/>
     </Declaration>
     <Declaration>
-        <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+        <Class IRI="#CSD_14_50_2A_BB"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
+        <Class IRI="#CSD_17_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_17_50_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_20_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_20_160_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_20_50_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_25_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_25_160_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_25_50_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_2A"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_32_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_32_160_2A_BB"/>
     </Declaration>
     <Declaration>
         <Class IRI="#CSD_32_50_2A_BB"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#CSD_40_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_40_160_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_40_50_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_50_100_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_50_160_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSD_50_50_2A_BB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CSG_2A"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Combined"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Device"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ElectricMotor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EpicyclicGearing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearBox"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearBoxProperties"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearBoxPropertyValues"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearRatio"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearRatio100"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearRatio160"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearRatio50"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#GearRatios"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_14"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_17"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_20"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_25"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_32"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_40"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Size_50"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Gear_CSD_2A_Sizes"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HarmonicDrive"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HarmonicDriveComponentSets2A"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HarmonicDriveUnits"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM115x25"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM115x50"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM25x04"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM25x08"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM38x06"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM38x12"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM50x08"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM50x14"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM70x10"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM70x18"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM85x04"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM85x13"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM85x23"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ILM85x26"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InnerDiameter"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Length"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MaxEfficiency"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MaxInputSpeedGrease"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MaxNominalTorque"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Motor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MotorGearBoxMatch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MotorProperties"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MotorPropertyValues"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NominalPowerSupply"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NominalRotationSpeed"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NominalTorque"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OuterDiameter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Property"/>
     </Declaration>
     <Declaration>
         <Class IRI="#PropertyValues"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#CSD_20_160_2A_BB"/>
+        <Class IRI="#RepeatedPeakTorque"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Requirements"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoboDriveServoKibILM"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedGearBox"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedMotor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedMotorGearBoxMatch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedPeakTorque"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedRequirements"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedRotationSpeed"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SatisfiedWeight"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Size"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Weight"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isComposedOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isComposedOfGearBox"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isComposedOfMotor"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasCurrent_I_unit_A"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDimensionInnerDiameter_d_unit_mm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDimensionLength_L_unit_mm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDimensionOuterDiameter_D_unit_mm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDimension_unit_mm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasGearBoxRation_i"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaxEfficiency_unit_percent"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMaximalSpeedRes_n_max_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPeakTorqueRes_M_max_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPower_P_unit_W"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSpeed_n_unit_rpm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasTorque_M_unit_Nm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasVoltage_U_unit_V"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasWeight_m_unit_kg"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    </Declaration>
+    <Declaration>
+        <Datatype IRI="#NotImportant"/>
     </Declaration>
     <EquivalentClasses>
         <Class IRI="#GearBoxProperties"/>
@@ -442,7 +455,7 @@
         <Class IRI="#CSD_14_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">19</Literal>
+            <Literal datatypeIRI="&xsd;decimal">19</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -461,7 +474,7 @@
         <Class IRI="#CSD_14_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">12</Literal>
+            <Literal datatypeIRI="&xsd;decimal">12</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -480,7 +493,7 @@
         <Class IRI="#CSD_17_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">37</Literal>
+            <Literal datatypeIRI="&xsd;decimal">37</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -499,7 +512,7 @@
         <Class IRI="#CSD_17_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">23</Literal>
+            <Literal datatypeIRI="&xsd;decimal">23</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -518,7 +531,7 @@
         <Class IRI="#CSD_20_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">57</Literal>
+            <Literal datatypeIRI="&xsd;decimal">57</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -537,7 +550,7 @@
         <Class IRI="#CSD_20_160_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">64</Literal>
+            <Literal datatypeIRI="&xsd;decimal">64</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -556,7 +569,7 @@
         <Class IRI="#CSD_20_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">39</Literal>
+            <Literal datatypeIRI="&xsd;decimal">39</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -575,7 +588,7 @@
         <Class IRI="#CSD_25_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">110</Literal>
+            <Literal datatypeIRI="&xsd;decimal">110</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -594,7 +607,7 @@
         <Class IRI="#CSD_25_160_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">123</Literal>
+            <Literal datatypeIRI="&xsd;decimal">123</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -613,7 +626,7 @@
         <Class IRI="#CSD_25_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">69</Literal>
+            <Literal datatypeIRI="&xsd;decimal">69</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -636,7 +649,7 @@
         <Class IRI="#CSD_32_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">233</Literal>
+            <Literal datatypeIRI="&xsd;decimal">233</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -655,7 +668,7 @@
         <Class IRI="#CSD_32_160_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">261</Literal>
+            <Literal datatypeIRI="&xsd;decimal">261</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -674,7 +687,7 @@
         <Class IRI="#CSD_32_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">151</Literal>
+            <Literal datatypeIRI="&xsd;decimal">151</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -693,7 +706,7 @@
         <Class IRI="#CSD_40_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">398</Literal>
+            <Literal datatypeIRI="&xsd;decimal">398</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -712,7 +725,7 @@
         <Class IRI="#CSD_40_160_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">453</Literal>
+            <Literal datatypeIRI="&xsd;decimal">453</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -731,7 +744,7 @@
         <Class IRI="#CSD_40_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">281</Literal>
+            <Literal datatypeIRI="&xsd;decimal">281</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -750,7 +763,7 @@
         <Class IRI="#CSD_50_100_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">686</Literal>
+            <Literal datatypeIRI="&xsd;decimal">686</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -769,7 +782,7 @@
         <Class IRI="#CSD_50_160_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">823</Literal>
+            <Literal datatypeIRI="&xsd;decimal">823</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -788,7 +801,7 @@
         <Class IRI="#CSD_50_50_2A_BB"/>
         <DataHasValue>
             <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">500</Literal>
+            <Literal datatypeIRI="&xsd;decimal">500</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -838,7 +851,7 @@
         <Class IRI="#GearRatio100"/>
         <DataHasValue>
             <DataProperty IRI="#hasGearBoxRation_i"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">100.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">100.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -849,7 +862,7 @@
         <Class IRI="#GearRatio160"/>
         <DataHasValue>
             <DataProperty IRI="#hasGearBoxRation_i"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">160.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -860,7 +873,7 @@
         <Class IRI="#GearRatio50"/>
         <DataHasValue>
             <DataProperty IRI="#hasGearBoxRation_i"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">50.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">50.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -875,14 +888,14 @@
         <Class IRI="#Gear_CSD_2A_Size_14"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8500.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">8500.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_14"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.06</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.06</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -893,14 +906,14 @@
         <Class IRI="#Gear_CSD_2A_Size_17"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">7300.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">7300.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_17"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.1</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.1</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -911,14 +924,14 @@
         <Class IRI="#Gear_CSD_2A_Size_20"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">6500.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">6500.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_20"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.13</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.13</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -929,14 +942,14 @@
         <Class IRI="#Gear_CSD_2A_Size_25"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5600.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">5600.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_25"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.24</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.24</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -947,14 +960,14 @@
         <Class IRI="#Gear_CSD_2A_Size_32"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4800.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">4800.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_32"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.51</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.51</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -965,14 +978,14 @@
         <Class IRI="#Gear_CSD_2A_Size_40"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4000.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">4000.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_40"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.92</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.92</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -983,14 +996,14 @@
         <Class IRI="#Gear_CSD_2A_Size_50"/>
         <DataHasValue>
             <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3500.0</Literal>
+            <Literal datatypeIRI="&xsd;decimal">3500.0</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Gear_CSD_2A_Size_50"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.9</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1.9</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1017,21 +1030,21 @@
         <Class IRI="#ILM115x25"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1300</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1300</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM115x25"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5.4</Literal>
+            <Literal datatypeIRI="&xsd;decimal">5.4</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM115x25"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.2</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1.2</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1042,21 +1055,21 @@
         <Class IRI="#ILM115x50"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">650</Literal>
+            <Literal datatypeIRI="&xsd;decimal">650</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM115x50"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">11.2</Literal>
+            <Literal datatypeIRI="&xsd;decimal">11.2</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM115x50"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2.17</Literal>
+            <Literal datatypeIRI="&xsd;decimal">2.17</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1067,21 +1080,21 @@
         <Class IRI="#ILM25x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">24000</Literal>
+            <Literal datatypeIRI="&xsd;decimal">24000</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM25x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.024</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.024</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM25x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.016</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.016</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1092,21 +1105,21 @@
         <Class IRI="#ILM25x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">12000</Literal>
+            <Literal datatypeIRI="&xsd;decimal">12000</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM25x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.048</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.048</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM25x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.029</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.029</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1117,21 +1130,21 @@
         <Class IRI="#ILM38x06"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">9000</Literal>
+            <Literal datatypeIRI="&xsd;decimal">9000</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM38x06"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.1</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.1</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM38x06"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.052</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.052</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1142,21 +1155,21 @@
         <Class IRI="#ILM38x12"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">8000</Literal>
+            <Literal datatypeIRI="&xsd;decimal">8000</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM38x12"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.2</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.2</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM38x12"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.086</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.086</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1167,21 +1180,21 @@
         <Class IRI="#ILM50x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5500</Literal>
+            <Literal datatypeIRI="&xsd;decimal">5500</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM50x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.27</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.27</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM50x08"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.086</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.086</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1192,21 +1205,21 @@
         <Class IRI="#ILM50x14"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3500</Literal>
+            <Literal datatypeIRI="&xsd;decimal">3500</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM50x14"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.5</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.5</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM50x14"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.135</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.135</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1217,21 +1230,21 @@
         <Class IRI="#ILM70x10"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">3500</Literal>
+            <Literal datatypeIRI="&xsd;decimal">3500</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM70x10"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.74</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.74</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM70x10"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.230</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.230</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1242,21 +1255,21 @@
         <Class IRI="#ILM70x18"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2100</Literal>
+            <Literal datatypeIRI="&xsd;decimal">2100</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM70x18"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.25</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1.25</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM70x18"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.34</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.34</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1267,21 +1280,21 @@
         <Class IRI="#ILM85x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">9000</Literal>
+            <Literal datatypeIRI="&xsd;decimal">9000</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.43</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.43</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x04"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.2</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.2</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1292,21 +1305,21 @@
         <Class IRI="#ILM85x13"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2900</Literal>
+            <Literal datatypeIRI="&xsd;decimal">2900</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x13"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.43</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1.43</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x13"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.37</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.37</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1317,21 +1330,21 @@
         <Class IRI="#ILM85x23"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1700</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1700</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x23"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2.3</Literal>
+            <Literal datatypeIRI="&xsd;decimal">2.3</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x23"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.55</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.55</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1342,21 +1355,21 @@
         <Class IRI="#ILM85x26"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1500</Literal>
+            <Literal datatypeIRI="&xsd;decimal">1500</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x26"/>
         <DataHasValue>
             <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2.6</Literal>
+            <Literal datatypeIRI="&xsd;decimal">2.6</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ILM85x26"/>
         <DataHasValue>
             <DataProperty IRI="#hasWeight_m_unit_kg"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.59</Literal>
+            <Literal datatypeIRI="&xsd;decimal">0.59</Literal>
         </DataHasValue>
     </SubClassOf>
     <SubClassOf>
@@ -1906,459 +1919,241 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyMaximalSpeedGearBoxRule</Literal>
+            <Literal datatypeIRI="&xsd;string">SatisfyMaximalSpeedGearBoxRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
                 <Class IRI="#GearBox"/>
                 <Variable IRI="#g"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
             </ClassAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasGearBoxRation_i"/>
                 <Variable IRI="#g"/>
                 <Variable IRI="#i"/>
             </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#n_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
-                <Variable IRI="#n_res_min"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">650</Literal>
-                <Variable IRI="#i"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_res_min"/>
-                <Variable IRI="#n_req_max"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#n_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
-                <Variable IRI="#n_res_max"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">24000</Literal>
-                <Variable IRI="#i"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#n_res_max"/>
-                <Variable IRI="#n_req_min"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#n_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
-                <Variable IRI="#n_max_res"/>
-                <Variable IRI="#n_max"/>
-                <Variable IRI="#i"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_res_min"/>
-                <Variable IRI="#n_max_res"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_req_min"/>
-                <Variable IRI="#n_max_res"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedRotationSpeed"/>
-                <Variable IRI="#g"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyPeakTorqueGearBoxRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#GearBox"/>
-                <Variable IRI="#g"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasGearBoxRation_i"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#i"/>
-            </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
-                <Variable IRI="#M_res_min"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.024</Literal>
-                <Variable IRI="#i"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_res_min"/>
-                <Variable IRI="#M_req_max"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
-                <Variable IRI="#M_res_max"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">11.2</Literal>
-                <Variable IRI="#i"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#M_res_max"/>
-                <Variable IRI="#M_req_min"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#M_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_res_min"/>
-                <Variable IRI="#M_max"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_req_min"/>
-                <Variable IRI="#M_max"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedPeakTorque"/>
-                <Variable IRI="#g"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyWeightGearBoxRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#GearBox"/>
-                <Variable IRI="#g"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeight_m_unit_kg"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#m_g"/>
-            </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#m_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
-                <Variable IRI="#m_res_min"/>
-                <Variable IRI="#m_g"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.016</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#m_res_min"/>
-                <Variable IRI="#m_req_max"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
-                <Variable IRI="#m_res_max"/>
-                <Variable IRI="#m_g"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">2.17</Literal>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#m_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#m_res_max"/>
-                <Variable IRI="#m_req_min"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedWeight"/>
-                <Variable IRI="#g"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyMaximalSpeedMotorRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#Motor"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
-                <Variable IRI="#m"/>
-                <Variable IRI="#n_motor"/>
-            </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#n_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
-                <Variable IRI="#n_res_min"/>
-                <Variable IRI="#n_motor"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_res_min"/>
-                <Variable IRI="#n_req_max"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#n_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
-                <Variable IRI="#n_res_max"/>
-                <Variable IRI="#n_motor"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">50</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#n_res_max"/>
-                <Variable IRI="#n_req_min"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedRotationSpeed"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyPeakTorqueMotorRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#Motor"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
-                <Variable IRI="#m"/>
-                <Variable IRI="#M_n"/>
-            </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
-                <Variable IRI="#M_res_min"/>
-                <Variable IRI="#M_n"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">50</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_res_min"/>
-                <Variable IRI="#M_req_max"/>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
-                <Variable IRI="#M_res_max"/>
-                <Variable IRI="#M_n"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">160</Literal>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#M_res_max"/>
-                <Variable IRI="#M_req_min"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedPeakTorque"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyWeightMotorRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#Motor"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeight_m_unit_kg"/>
-                <Variable IRI="#m"/>
-                <Variable IRI="#m_m"/>
-            </DataPropertyAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#m_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
-                <Variable IRI="#m_res_min"/>
-                <Variable IRI="#m_m"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.06</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#m_res_min"/>
-                <Variable IRI="#m_req_max"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#m_req_min"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
-                <Variable IRI="#m_res_max"/>
-                <Variable IRI="#m_m"/>
-                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.9</Literal>
-            </BuiltInAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
-                <Variable IRI="#m_res_max"/>
-                <Variable IRI="#m_req_min"/>
-            </BuiltInAtom>
-        </Body>
-        <Head>
-            <ClassAtom>
-                <Class IRI="#SatisfiedWeight"/>
-                <Variable IRI="#m"/>
-            </ClassAtom>
-        </Head>
-    </DLSafeRule>
-    <DLSafeRule>
-        <Annotation>
-            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
-        </Annotation>
-        <Annotation>
-            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyMaximalSpeedMatchRule</Literal>
-        </Annotation>
-        <Body>
-            <ClassAtom>
-                <Class IRI="#MotorGearBoxMatch"/>
-                <Variable IRI="#ma"/>
-            </ClassAtom>
-            <ObjectPropertyAtom>
-                <ObjectProperty IRI="#isComposedOfGearBox"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#g"/>
-            </ObjectPropertyAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
                 <Variable IRI="#g"/>
                 <Variable IRI="#n_max"/>
             </DataPropertyAtom>
             <DataPropertyAtom>
-                <DataProperty IRI="#hasGearBoxRation_i"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#i"/>
+                <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#n_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#n_req_min"/>
             </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
                 <Variable IRI="#n_max_res"/>
                 <Variable IRI="#n_max"/>
                 <Variable IRI="#i"/>
             </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasMaximalSpeedRes_n_max_unit_rpm"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#n_res"/>
-            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
+                <Variable IRI="#n_res_max"/>
+                <Literal datatypeIRI="&xsd;decimal">24000</Literal>
+                <Variable IRI="#i"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
+                <Variable IRI="#n_res_min"/>
+                <Literal datatypeIRI="&xsd;decimal">650</Literal>
+                <Variable IRI="#i"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#n_res_max"/>
+                <Variable IRI="#n_req_min"/>
+            </BuiltInAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_res"/>
+                <Variable IRI="#n_req_min"/>
                 <Variable IRI="#n_max_res"/>
             </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#n_res_min"/>
+                <Variable IRI="#n_max_res"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#n_res_min"/>
+                <Variable IRI="#n_req_max"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedRotationSpeed"/>
+                <Variable IRI="#g"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyPeakTorqueGearBoxRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#GearBox"/>
+                <Variable IRI="#g"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasGearBoxRation_i"/>
+                <Variable IRI="#g"/>
+                <Variable IRI="#i"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_min"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
+                <Variable IRI="#g"/>
+                <Variable IRI="#M_max"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#M_res_max"/>
+                <Variable IRI="#M_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_req_min"/>
+                <Variable IRI="#M_max"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_res_min"/>
+                <Variable IRI="#M_max"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_res_min"/>
+                <Variable IRI="#M_req_max"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
+                <Variable IRI="#M_res_max"/>
+                <Literal datatypeIRI="&xsd;decimal">11.2</Literal>
+                <Variable IRI="#i"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
+                <Variable IRI="#M_res_min"/>
+                <Literal datatypeIRI="&xsd;decimal">0.024</Literal>
+                <Variable IRI="#i"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedPeakTorque"/>
+                <Variable IRI="#g"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyWeightGearBoxRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#GearBox"/>
+                <Variable IRI="#g"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#m_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#m_req_min"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeight_m_unit_kg"/>
+                <Variable IRI="#g"/>
+                <Variable IRI="#m_g"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
+                <Variable IRI="#m_res_max"/>
+                <Variable IRI="#m_g"/>
+                <Literal datatypeIRI="&xsd;decimal">2.17</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
+                <Variable IRI="#m_res_min"/>
+                <Variable IRI="#m_g"/>
+                <Literal datatypeIRI="&xsd;decimal">0.016</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#m_res_max"/>
+                <Variable IRI="#m_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#m_res_min"/>
+                <Variable IRI="#m_req_max"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedWeight"/>
+                <Variable IRI="#g"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyMaximalSpeedMotorRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#Motor"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
             <ClassAtom>
                 <Class IRI="#Requirements"/>
                 <Variable IRI="#r"/>
@@ -2368,18 +2163,236 @@
                 <Variable IRI="#r"/>
                 <Variable IRI="#n_req_max"/>
             </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#n_res"/>
-                <Variable IRI="#n_req_max"/>
-            </BuiltInAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
                 <Variable IRI="#r"/>
                 <Variable IRI="#n_req_min"/>
             </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#n_motor"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
+                <Variable IRI="#n_res_max"/>
+                <Variable IRI="#n_motor"/>
+                <Literal datatypeIRI="&xsd;decimal">50</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
+                <Variable IRI="#n_res_min"/>
+                <Variable IRI="#n_motor"/>
+                <Literal datatypeIRI="&xsd;decimal">160</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#n_res_max"/>
+                <Variable IRI="#n_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#n_res_min"/>
+                <Variable IRI="#n_req_max"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedRotationSpeed"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyPeakTorqueMotorRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#Motor"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#M_n"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_min"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#M_res_max"/>
+                <Variable IRI="#M_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_res_min"/>
+                <Variable IRI="#M_req_max"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
+                <Variable IRI="#M_res_max"/>
+                <Variable IRI="#M_n"/>
+                <Literal datatypeIRI="&xsd;decimal">160</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
+                <Variable IRI="#M_res_min"/>
+                <Variable IRI="#M_n"/>
+                <Literal datatypeIRI="&xsd;decimal">50</Literal>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedPeakTorque"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyWeightMotorRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#Motor"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
+            </ClassAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeightReqMax_m_unit_kg"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#m_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#m_req_min"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeight_m_unit_kg"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#m_m"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
+                <Variable IRI="#m_res_max"/>
+                <Variable IRI="#m_m"/>
+                <Literal datatypeIRI="&xsd;decimal">1.9</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
+                <Variable IRI="#m_res_min"/>
+                <Variable IRI="#m_m"/>
+                <Literal datatypeIRI="&xsd;decimal">0.06</Literal>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
+                <Variable IRI="#m_res_max"/>
+                <Variable IRI="#m_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#m_res_min"/>
+                <Variable IRI="#m_req_max"/>
+            </BuiltInAtom>
+        </Body>
+        <Head>
+            <ClassAtom>
+                <Class IRI="#SatisfiedWeight"/>
+                <Variable IRI="#m"/>
+            </ClassAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&xsd;string"></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal datatypeIRI="&xsd;string">SatisfyMaximalSpeedMatchRule</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#MotorGearBoxMatch"/>
+                <Variable IRI="#ma"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
+            </ClassAtom>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#isComposedOfGearBox"/>
+                <Variable IRI="#ma"/>
+                <Variable IRI="#g"/>
+            </ObjectPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasGearBoxRation_i"/>
+                <Variable IRI="#g"/>
+                <Variable IRI="#i"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"/>
+                <Variable IRI="#g"/>
+                <Variable IRI="#n_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#n_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#n_req_min"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMaximalSpeedRes_n_max_unit_rpm"/>
+                <Variable IRI="#ma"/>
+                <Variable IRI="#n_res"/>
+            </DataPropertyAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
+                <Variable IRI="#n_max_res"/>
+                <Variable IRI="#n_max"/>
+                <Variable IRI="#i"/>
+            </BuiltInAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
                 <Variable IRI="#n_res"/>
                 <Variable IRI="#n_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#n_res"/>
+                <Variable IRI="#n_max_res"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#n_res"/>
+                <Variable IRI="#n_req_max"/>
             </BuiltInAtom>
         </Body>
         <Head>
@@ -2392,20 +2405,24 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyPeakTorqueMatchRule</Literal>
+            <Literal datatypeIRI="&xsd;string">SatisfyPeakTorqueMatchRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
                 <Class IRI="#MotorGearBoxMatch"/>
                 <Variable IRI="#ma"/>
+            </ClassAtom>
+            <ClassAtom>
+                <Class IRI="#Requirements"/>
+                <Variable IRI="#r"/>
             </ClassAtom>
             <ObjectPropertyAtom>
                 <ObjectProperty IRI="#isComposedOfGearBox"/>
@@ -2413,40 +2430,36 @@
                 <Variable IRI="#g"/>
             </ObjectPropertyAtom>
             <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
-                <Variable IRI="#g"/>
-                <Variable IRI="#M_max"/>
+                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_max"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
+                <Variable IRI="#r"/>
+                <Variable IRI="#M_req_min"/>
             </DataPropertyAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasPeakTorqueRes_M_max_unit_Nm"/>
                 <Variable IRI="#ma"/>
                 <Variable IRI="#M_res"/>
             </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_res"/>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasPeakTorque_M_max_unit_Nm"/>
+                <Variable IRI="#g"/>
                 <Variable IRI="#M_max"/>
-            </BuiltInAtom>
-            <ClassAtom>
-                <Class IRI="#Requirements"/>
-                <Variable IRI="#r"/>
-            </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMax_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_max"/>
-            </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#M_res"/>
-                <Variable IRI="#M_req_max"/>
-            </BuiltInAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasPeakTorqueReqMin_M_max_unit_Nm"/>
-                <Variable IRI="#r"/>
-                <Variable IRI="#M_req_min"/>
             </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
                 <Variable IRI="#M_res"/>
                 <Variable IRI="#M_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_res"/>
+                <Variable IRI="#M_max"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#M_res"/>
+                <Variable IRI="#M_req_max"/>
             </BuiltInAtom>
         </Body>
         <Head>
@@ -2459,26 +2472,21 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">SatisfyWeightMatchRule</Literal>
+            <Literal datatypeIRI="&xsd;string">SatisfyWeightMatchRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
                 <Class IRI="#MotorGearBoxMatch"/>
                 <Variable IRI="#ma"/>
             </ClassAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeight_m_unit_kg"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#m_ges"/>
-            </DataPropertyAtom>
             <ClassAtom>
                 <Class IRI="#Requirements"/>
                 <Variable IRI="#r"/>
@@ -2488,18 +2496,23 @@
                 <Variable IRI="#r"/>
                 <Variable IRI="#m_req_max"/>
             </DataPropertyAtom>
-            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
-                <Variable IRI="#m_ges"/>
-                <Variable IRI="#m_req_max"/>
-            </BuiltInAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasWeightReqMin_m_unit_kg"/>
                 <Variable IRI="#r"/>
                 <Variable IRI="#m_req_min"/>
             </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeight_m_unit_kg"/>
+                <Variable IRI="#ma"/>
+                <Variable IRI="#m_ges"/>
+            </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#greaterThanOrEqual">
                 <Variable IRI="#m_ges"/>
                 <Variable IRI="#m_req_min"/>
+            </BuiltInAtom>
+            <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#lessThanOrEqual">
+                <Variable IRI="#m_ges"/>
+                <Variable IRI="#m_req_max"/>
             </BuiltInAtom>
         </Body>
         <Head>
@@ -2512,15 +2525,15 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">CalcMaximalSpeedMatchRule</Literal>
+            <Literal datatypeIRI="&xsd;string">CalcMaximalSpeedMatchRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
@@ -2528,24 +2541,24 @@
                 <Variable IRI="#ma"/>
             </ClassAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty IRI="#isComposedOfMotor"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#m"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
                 <ObjectProperty IRI="#isComposedOfGearBox"/>
                 <Variable IRI="#ma"/>
                 <Variable IRI="#g"/>
             </ObjectPropertyAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#isComposedOfMotor"/>
+                <Variable IRI="#ma"/>
                 <Variable IRI="#m"/>
-                <Variable IRI="#n_motor"/>
-            </DataPropertyAtom>
+            </ObjectPropertyAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasGearBoxRation_i"/>
                 <Variable IRI="#g"/>
                 <Variable IRI="#i"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasNominalRotationSpeed_n_max_unit_rpm"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#n_motor"/>
             </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#divide">
                 <Variable IRI="#n_res"/>
@@ -2564,15 +2577,15 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">CalcPeakTorqueMatchRule</Literal>
+            <Literal datatypeIRI="&xsd;string">CalcPeakTorqueMatchRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
@@ -2580,24 +2593,24 @@
                 <Variable IRI="#ma"/>
             </ClassAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty IRI="#isComposedOfMotor"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#m"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
                 <ObjectProperty IRI="#isComposedOfGearBox"/>
                 <Variable IRI="#ma"/>
                 <Variable IRI="#g"/>
             </ObjectPropertyAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#isComposedOfMotor"/>
+                <Variable IRI="#ma"/>
                 <Variable IRI="#m"/>
-                <Variable IRI="#M_n"/>
-            </DataPropertyAtom>
+            </ObjectPropertyAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasGearBoxRation_i"/>
                 <Variable IRI="#g"/>
                 <Variable IRI="#i"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasNominalTorque_M_n_unit_Nm"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#M_n"/>
             </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#multiply">
                 <Variable IRI="#M_res"/>
@@ -2616,15 +2629,15 @@
     <DLSafeRule>
         <Annotation>
             <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+            <Literal datatypeIRI="&xsd;boolean">true</Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string"></Literal>
+            <Literal datatypeIRI="&xsd;string"></Literal>
         </Annotation>
         <Annotation>
             <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">CalcWeightMatchRule</Literal>
+            <Literal datatypeIRI="&xsd;string">CalcWeightMatchRule</Literal>
         </Annotation>
         <Body>
             <ClassAtom>
@@ -2632,24 +2645,24 @@
                 <Variable IRI="#ma"/>
             </ClassAtom>
             <ObjectPropertyAtom>
-                <ObjectProperty IRI="#isComposedOfMotor"/>
-                <Variable IRI="#ma"/>
-                <Variable IRI="#m"/>
-            </ObjectPropertyAtom>
-            <ObjectPropertyAtom>
                 <ObjectProperty IRI="#isComposedOfGearBox"/>
                 <Variable IRI="#ma"/>
                 <Variable IRI="#g"/>
             </ObjectPropertyAtom>
-            <DataPropertyAtom>
-                <DataProperty IRI="#hasWeight_m_unit_kg"/>
+            <ObjectPropertyAtom>
+                <ObjectProperty IRI="#isComposedOfMotor"/>
+                <Variable IRI="#ma"/>
                 <Variable IRI="#m"/>
-                <Variable IRI="#m_m"/>
-            </DataPropertyAtom>
+            </ObjectPropertyAtom>
             <DataPropertyAtom>
                 <DataProperty IRI="#hasWeight_m_unit_kg"/>
                 <Variable IRI="#g"/>
                 <Variable IRI="#m_g"/>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasWeight_m_unit_kg"/>
+                <Variable IRI="#m"/>
+                <Variable IRI="#m_m"/>
             </DataPropertyAtom>
             <BuiltInAtom IRI="http://www.w3.org/2003/11/swrlb#add">
                 <Variable IRI="#m_ges"/>
@@ -2669,5 +2682,5 @@
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
 
