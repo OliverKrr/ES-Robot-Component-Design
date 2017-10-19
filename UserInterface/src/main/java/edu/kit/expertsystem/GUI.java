@@ -13,6 +13,7 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
@@ -22,8 +23,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -51,6 +50,12 @@ public class GUI {
     private Controller controller;
 
     private AtomicBoolean isSolutionReady = new AtomicBoolean(false);
+
+    private SashForm requirementsForm;
+
+    private SashForm solutionForm;
+
+    private StyledText errorText;
 
     /**
      * Launch the application.
@@ -85,7 +90,7 @@ public class GUI {
      */
     public void open() {
         createContents();
-        startOnSecondScreenIfPossible();
+        // startOnSecondScreenIfPossible();
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
@@ -99,6 +104,7 @@ public class GUI {
         }
     }
 
+    @SuppressWarnings("unused")
     private void startOnSecondScreenIfPossible() {
         Monitor[] monitors = display.getMonitors();
         if (monitors.length < 2) {
@@ -128,34 +134,104 @@ public class GUI {
      */
     protected void createContents() {
         shell = new Shell();
-        shell.setSize(901, 407);
+        shell.setSize(895, 511);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setLayout(null);
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
 
+        errorText = new StyledText(shell, SWT.BORDER);
+        errorText.setBounds(96, 389, 779, 83);
+        errorText.setEditable(false);
+        formToolkit.adapt(errorText);
+        formToolkit.paintBordersFor(errorText);
+
         Label lblNewLabel = new Label(shell, SWT.NONE);
-        lblNewLabel.setBounds(4, 5, 86, 39);
+        lblNewLabel.setBounds(5, 10, 86, 39);
         lblNewLabel.setImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo_resized.png"));
         formToolkit.adapt(lblNewLabel, true, true);
 
-        TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
-        tabFolder.setBounds(96, 10, 779, 348);
-        formToolkit.adapt(tabFolder);
-        formToolkit.paintBordersFor(tabFolder);
+        Button btnSolution = new Button(shell, SWT.NONE);
+        Button btnRequirements = new Button(shell, SWT.NONE);
+        btnRequirements.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
+        btnRequirements.addSelectionListener(new SelectionAdapter() {
 
-        TabItem tbtmRequirements = new TabItem(tabFolder, SWT.NONE);
-        tbtmRequirements.setText("Requirements");
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                btnRequirements.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
+                btnSolution.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+                btnRequirements.setBackground(Configs.KIT_GREY_50);
+                btnSolution.setBackground(Configs.KIT_GREY_15);
+                requirementsForm.setVisible(true);
+                solutionForm.setVisible(false);
 
-        SashForm sashForm = new SashForm(tabFolder, SWT.NONE);
-        tbtmRequirements.setControl(sashForm);
-        formToolkit.paintBordersFor(sashForm);
+                if (!isControllerCreation.get()) {
+                    controllerFuture.cancel(true);
+                    controllerFuture = pool.submit(() -> controller.reset());
+                }
 
-        Composite composite = new Composite(sashForm, SWT.NONE);
+            }
+        });
+        btnRequirements.setBounds(96, 10, 120, 25);
+        formToolkit.adapt(btnRequirements, true, true);
+        btnRequirements.setText("Requirements");
+        btnRequirements.setBackground(Configs.KIT_GREY_50);
+        btnRequirements.addDisposeListener(new DisposeListener() {
+            @Override
+            public void widgetDisposed(DisposeEvent e) {
+                Configs.KIT_GREY_50.dispose();
+            }
+        });
+
+        btnSolution.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+        btnSolution.addSelectionListener(new SelectionAdapter() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                btnRequirements.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+                btnSolution.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
+                btnRequirements.setBackground(Configs.KIT_GREY_15);
+                btnSolution.setBackground(Configs.KIT_GREY_50);
+                requirementsForm.setVisible(false);
+                solutionForm.setVisible(true);
+
+                try {
+                    controllerFuture.get();
+                } catch (InterruptedException | ExecutionException e) {
+                    errorText.setText(e.getMessage());
+                    return;
+                }
+                controller.parseRequirements();
+                controllerFuture = pool.submit(() -> controller.reason());
+            }
+        });
+        btnSolution.setText("Solution");
+        btnSolution.setBounds(212, 10, 120, 25);
+        formToolkit.adapt(btnSolution, true, true);
+        btnSolution.setBackground(Configs.KIT_GREY_15);
+        btnSolution.addDisposeListener(new DisposeListener() {
+            @Override
+            public void widgetDisposed(DisposeEvent e) {
+                Configs.KIT_GREY_15.dispose();
+            }
+        });
+
+        createRequirementsForm();
+        createSolutionPage();
+        solutionForm.setVisible(false);
+    }
+
+    private void createRequirementsForm() {
+        requirementsForm = new SashForm(shell, SWT.NONE);
+        requirementsForm.setBounds(96, 35, 779, 348);
+        formToolkit.adapt(requirementsForm);
+        formToolkit.paintBordersFor(requirementsForm);
+
+        Composite composite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(composite);
         formToolkit.paintBordersFor(composite);
 
         Label lblMinimumTorque = new Label(composite, SWT.NONE);
-        lblMinimumTorque.setBounds(10, 10, 182, 23);
+        lblMinimumTorque.setBounds(10, 36, 182, 23);
         lblMinimumTorque.setText("Peak Torque M_max:");
         formToolkit.adapt(lblMinimumTorque, true, true);
         lblMinimumTorque.setForeground(Configs.KIT_GREEN_70);
@@ -167,7 +243,7 @@ public class GUI {
         });
 
         Label lblMinimumSpeed = new Label(composite, SWT.NONE);
-        lblMinimumSpeed.setBounds(10, 46, 182, 23);
+        lblMinimumSpeed.setBounds(10, 72, 182, 23);
         lblMinimumSpeed.setText("Maximal Speed n_max:");
         formToolkit.adapt(lblMinimumSpeed, true, true);
         lblMinimumSpeed.setForeground(Configs.KIT_GREEN_70);
@@ -179,50 +255,50 @@ public class GUI {
         });
 
         minimumSpeedMIN = new Text(composite, SWT.BORDER);
-        minimumSpeedMIN.setBounds(198, 46, 40, 23);
+        minimumSpeedMIN.setBounds(198, 72, 40, 23);
         minimumSpeedMIN.setMessage("min");
         formToolkit.adapt(minimumSpeedMIN, true, true);
 
         Label lblMm = new Label(composite, SWT.NONE);
-        lblMm.setBounds(244, 49, 44, 23);
+        lblMm.setBounds(244, 75, 44, 23);
         formToolkit.adapt(lblMm, true, true);
         lblMm.setText("°/s");
 
         Label lblNm = new Label(composite, SWT.NONE);
         lblNm.setText("Nm");
-        lblNm.setBounds(244, 13, 44, 23);
+        lblNm.setBounds(244, 39, 44, 23);
         formToolkit.adapt(lblNm, true, true);
 
         minimumTorqueMIN = new Text(composite, SWT.BORDER);
         minimumTorqueMIN.setMessage("min");
-        minimumTorqueMIN.setBounds(198, 10, 40, 23);
+        minimumTorqueMIN.setBounds(198, 36, 40, 23);
         formToolkit.adapt(minimumTorqueMIN, true, true);
 
         Label lblMin = new Label(composite, SWT.NONE);
         lblMin.setText("°/s");
-        lblMin.setBounds(340, 49, 44, 23);
+        lblMin.setBounds(340, 75, 44, 23);
         formToolkit.adapt(lblMin, true, true);
 
         minimumSpeedMAX = new Text(composite, SWT.BORDER);
         minimumSpeedMAX.setEnabled(false);
         minimumSpeedMAX.setMessage("max");
-        minimumSpeedMAX.setBounds(294, 46, 40, 23);
+        minimumSpeedMAX.setBounds(294, 72, 40, 23);
         formToolkit.adapt(minimumSpeedMAX, true, true);
 
         Label lblNm_1 = new Label(composite, SWT.NONE);
         lblNm_1.setText("Nm");
-        lblNm_1.setBounds(340, 13, 44, 23);
+        lblNm_1.setBounds(340, 39, 44, 23);
         formToolkit.adapt(lblNm_1, true, true);
 
         minimumTorqueMAX = new Text(composite, SWT.BORDER);
         minimumTorqueMAX.setEnabled(false);
         minimumTorqueMAX.setMessage("max");
-        minimumTorqueMAX.setBounds(294, 10, 40, 23);
+        minimumTorqueMAX.setBounds(294, 36, 40, 23);
         formToolkit.adapt(minimumTorqueMAX, true, true);
 
         Label lblWeightM = new Label(composite, SWT.NONE);
         lblWeightM.setText("Weight m:");
-        lblWeightM.setBounds(10, 82, 182, 23);
+        lblWeightM.setBounds(10, 108, 182, 23);
         formToolkit.adapt(lblWeightM, true, true);
         lblWeightM.setForeground(Configs.KIT_GREEN_70);
         lblWeightM.addDisposeListener(new DisposeListener() {
@@ -235,22 +311,22 @@ public class GUI {
         weightMin = new Text(composite, SWT.BORDER);
         weightMin.setEnabled(false);
         weightMin.setMessage("min");
-        weightMin.setBounds(198, 82, 40, 23);
+        weightMin.setBounds(198, 108, 40, 23);
         formToolkit.adapt(weightMin, true, true);
 
         Label lblKg = new Label(composite, SWT.NONE);
         lblKg.setText("kg");
-        lblKg.setBounds(244, 85, 44, 23);
+        lblKg.setBounds(244, 111, 44, 23);
         formToolkit.adapt(lblKg, true, true);
 
         weightMax = new Text(composite, SWT.BORDER);
         weightMax.setMessage("max");
-        weightMax.setBounds(294, 82, 40, 23);
+        weightMax.setBounds(294, 108, 40, 23);
         formToolkit.adapt(weightMax, true, true);
 
         Label lblKg_1 = new Label(composite, SWT.NONE);
         lblKg_1.setText("kg");
-        lblKg_1.setBounds(340, 85, 44, 23);
+        lblKg_1.setBounds(340, 111, 44, 23);
         formToolkit.adapt(lblKg_1, true, true);
 
         Button btnEnableFields = new Button(composite, SWT.CHECK);
@@ -280,10 +356,10 @@ public class GUI {
             }
         });
 
-        Label label_4 = new Label(sashForm, SWT.SEPARATOR | SWT.VERTICAL);
+        Label label_4 = new Label(requirementsForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(label_4, true, true);
 
-        Composite composite2 = new Composite(sashForm, SWT.NONE);
+        Composite composite2 = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(composite2);
         formToolkit.paintBordersFor(composite2);
         Label lblMinmax = new Label(composite2, SWT.NONE);
@@ -304,16 +380,16 @@ public class GUI {
         formToolkit.adapt(styledText_2);
         formToolkit.paintBordersFor(styledText_2);
         createCommonDescriptions(composite2);
-        sashForm.setWeights(new int[] { 339, 1, 291 });
+        requirementsForm.setWeights(new int[] { 339, 1, 291 });
+    }
 
-        TabItem tbtmSolution = new TabItem(tabFolder, SWT.NONE);
-        tbtmSolution.setText("Solution");
+    private void createSolutionPage() {
+        solutionForm = new SashForm(shell, SWT.NONE);
+        solutionForm.setBounds(96, 35, 779, 348);
+        formToolkit.adapt(solutionForm);
+        formToolkit.paintBordersFor(solutionForm);
 
-        SashForm sashForm_1 = new SashForm(tabFolder, SWT.NONE);
-        tbtmSolution.setControl(sashForm_1);
-        formToolkit.paintBordersFor(sashForm_1);
-
-        Composite composite_1 = new Composite(sashForm_1, SWT.NONE);
+        Composite composite_1 = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(composite_1);
         formToolkit.paintBordersFor(composite_1);
 
@@ -322,41 +398,14 @@ public class GUI {
         formToolkit.adapt(tree);
         formToolkit.paintBordersFor(tree);
 
-        Label label_11 = new Label(sashForm_1, SWT.SEPARATOR);
+        Label label_11 = new Label(solutionForm, SWT.SEPARATOR);
         formToolkit.adapt(label_11, true, true);
 
-        Composite composite_2 = new Composite(sashForm_1, SWT.NONE);
+        Composite composite_2 = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(composite_2);
         formToolkit.paintBordersFor(composite_2);
         createCommonDescriptions(composite_2);
-        sashForm_1.setWeights(new int[] { 339, 1, 291 });
-
-        tabFolder.addSelectionListener(new SelectionListener() {
-
-            @Override
-            public void widgetSelected(SelectionEvent event) {
-                if (tabFolder.getSelectionIndex() == 1) {
-                    try {
-                        controllerFuture.get();
-                    } catch (InterruptedException | ExecutionException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    controller.parseRequirements();
-                    controllerFuture = pool.submit(() -> controller.reason());
-                } else {
-                    if (!isControllerCreation.get()) {
-                        controllerFuture.cancel(true);
-                        controllerFuture = pool.submit(() -> controller.reset());
-                    }
-                }
-            }
-
-            @Override
-            public void widgetDefaultSelected(SelectionEvent event) {
-                // nothing to do
-            }
-        });
+        solutionForm.setWeights(new int[] { 339, 1, 291 });
     }
 
     private void createCommonDescriptions(Composite composite) {
