@@ -77,6 +77,7 @@ public class GUI {
         pool = Executors.newSingleThreadExecutor();
         controllerFuture = pool.submit(() -> {
             controller = new Controller(this);
+            controller.initialize();
             isControllerCreation.set(false);
             logger.info("Controller creation fininshed.");
         });

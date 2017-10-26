@@ -44,38 +44,37 @@ public class MainReasoner {
     private String inferdFilePath;
 
     private OWLOntologyManager manager;
-    private OWLOntology ontology;
     private OWLDataFactory dataFac;
+    private OWLOntology ontology;
     private OWLReasoner reasoner;
 
     private MyOWLHelper helper;
     private ReasoningTree reasoningTree;
     private boolean isReasoningPrepared = false;
 
-    MainReasoner() throws RuntimeException {
+    MainReasoner() {
         manager = OWLManager.createOWLOntologyManager();
-
-        OWLOntology basicOntology;
-        try (InputStream ontoStream = readOntology(domainFileName, false)) {
-            basicOntology = manager.loadOntologyFromOntologyDocument(ontoStream);
-        } catch (OWLOntologyCreationException | IOException e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException("Loading the ontology failed");
-        }
-
-        try (InputStream ontoStream = readOntology(reasoningFileName, true)) {
-            ontology = manager.loadOntologyFromOntologyDocument(ontoStream);
-        } catch (OWLOntologyCreationException | IOException e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException("Loading the ontology failed");
-        }
-
-        ontology.addAxioms(basicOntology.axioms());
         dataFac = manager.getOWLDataFactory();
+    }
+
+    public void initialize() {
+        OWLOntology basicOntology = loadOntology(domainFileName, false);
+        ontology = loadOntology(reasoningFileName, true);
+        ontology.addAxioms(basicOntology.axioms());
+
         reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
-        helper = new MyOWLHelper(manager, ontology);
-        reasoningTree = new ReasoningTree(ontology, dataFac, reasoner, helper);
         logger.info("Read Ontology isConsistent: " + reasoner.isConsistent());
+        helper = new MyOWLHelper(manager, ontology);
+        reasoningTree = new ReasoningTree(dataFac, ontology, reasoner, helper);
+    }
+
+    private OWLOntology loadOntology(String fileName, boolean setInferdFilePath) {
+        try (InputStream ontoStream = readOntology(fileName, setInferdFilePath)) {
+            return manager.loadOntologyFromOntologyDocument(ontoStream);
+        } catch (OWLOntologyCreationException | IOException e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException("Loading the ontology failed");
+        }
     }
 
     private InputStream readOntology(String fileName, boolean setInferdFilePath) throws IOException {

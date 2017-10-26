@@ -21,18 +21,18 @@ public class ReasoningTree {
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
-    private OWLOntology ontology;
     private OWLDataFactory dataFac;
+    private OWLOntology ontology;
     private OWLReasoner reasoner;
     private MyOWLHelper helper;
 
     private Set<OWLClass> appliedClasses = new HashSet<>();
     private boolean hasSomethingChanged;
 
-    public ReasoningTree(OWLOntology ontology, OWLDataFactory dataFac, OWLReasoner reasoner,
+    public ReasoningTree(OWLDataFactory dataFac, OWLOntology ontology, OWLReasoner reasoner,
             MyOWLHelper helper) {
-        this.ontology = ontology;
         this.dataFac = dataFac;
+        this.ontology = ontology;
         this.reasoner = reasoner;
         this.helper = helper;
     }

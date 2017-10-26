@@ -31,6 +31,10 @@ public class Controller {
     Controller(GUI gui) {
         this.gui = gui;
         reasoner = new MainReasoner();
+    }
+
+    public void initialize() {
+        reasoner.initialize();
         reset();
         initialStartForCaching();
     }
