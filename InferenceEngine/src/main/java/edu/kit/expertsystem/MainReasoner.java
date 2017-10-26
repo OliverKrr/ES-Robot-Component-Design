@@ -161,8 +161,7 @@ public class MainReasoner {
     }
 
     private List<Result> reason() {
-        // TODO testen mit SACunit
-        reasoningTree.makeReasoning(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH);
+        reasoningTree.makeReasoning(Vocabulary.CLASS_MOTORGEARBOXMATCH);
         return makeResults();
     }
 
@@ -184,7 +183,7 @@ public class MainReasoner {
         });
 
         Collections.sort(results, Comparator.comparingDouble(result -> result.weight));
-        results.forEach(r -> logger.info(r));
+        // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         return results;
     }

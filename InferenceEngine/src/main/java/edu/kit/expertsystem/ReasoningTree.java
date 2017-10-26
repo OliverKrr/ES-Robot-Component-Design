@@ -39,9 +39,6 @@ public class ReasoningTree {
     }
 
     public void makeReasoning(OWLClass classToReason) {
-        // TODO test Satesfied... nicht in ReasoningTree und dann subClasses(true weg)
-        // (in zwei Schritten testen)
-        // TODO evtl auch zusätzliche Klasse wie "MatchesToCreate"
         currentClassToReason = classToReason;
         appliedClasses.clear();
 
@@ -59,7 +56,6 @@ public class ReasoningTree {
         if (appliedClasses.contains(treeClass) || appliedClasses.contains(currentClassToReason)) {
             return;
         }
-        logger.info("Current treeClass: " + treeClass.getIRI().getShortForm());
 
         List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
         int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
@@ -70,31 +66,22 @@ public class ReasoningTree {
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClasses.add(treeClass);
             hasSomethingChanged = true;
-        } else {
-            logger.info("Not enough children: " + treeClass.getIRI().getShortForm());
         }
     }
 
     private List<ChildInstancesForPermutation> getChildrenForPermutation(OWLClass treeClass) {
         List<ChildInstancesForPermutation> childrenForPermutation = new ArrayList<>();
-        ontology.subClassAxiomsForSubClass(treeClass).forEach(axiom -> {
-            axiom.componentsWithoutAnnotations().forEach(component -> {
-                if (component instanceof OWLQuantifiedObjectRestriction) {
-                    OWLQuantifiedObjectRestriction objectPropertyAxiom = (OWLQuantifiedObjectRestriction) component;
-                    ontology.objectSubPropertyAxiomsForSubProperty(objectPropertyAxiom.getProperty())
-                            .forEach(propSupers -> {
-                                if (Vocabulary.OBJECT_PROPERTY_HASCHILD
-                                        .equals(propSupers.getSuperProperty())) {
-                                    childrenForPermutation
-                                            .add(new ChildInstancesForPermutation(
-                                                    reasoner.instances(objectPropertyAxiom.getFiller())
-                                                            .collect(Collectors.toList()),
-                                                    objectPropertyAxiom.getProperty()));
-                                }
-                            });
-                }
-            });
-        });
+        ontology.subClassAxiomsForSubClass(treeClass).forEach(axiom -> axiom.componentsWithoutAnnotations()
+                .filter(component -> component instanceof OWLQuantifiedObjectRestriction)
+                .forEach(component -> ontology
+                        .objectSubPropertyAxiomsForSubProperty(
+                                ((OWLQuantifiedObjectRestriction) component).getProperty())
+                        .filter(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
+                                .equals(propSupers.getSuperProperty()))
+                        .forEach(propSupers -> childrenForPermutation.add(new ChildInstancesForPermutation(
+                                reasoner.instances(((OWLQuantifiedObjectRestriction) component).getFiller())
+                                        .collect(Collectors.toList()),
+                                ((OWLQuantifiedObjectRestriction) component).getProperty())))));
         return childrenForPermutation;
     }
 
