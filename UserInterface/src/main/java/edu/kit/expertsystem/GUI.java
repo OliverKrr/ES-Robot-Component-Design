@@ -68,9 +68,8 @@ public class GUI {
             Configs.initConfig(display);
             GUI window = new GUI();
             window.open();
-            window.shutdown();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -90,6 +89,12 @@ public class GUI {
      */
     public void open() {
         createContents();
+        shell.addDisposeListener(new DisposeListener() {
+            @Override
+            public void widgetDisposed(DisposeEvent arg0) {
+                shutdown();
+            }
+        });
         // startOnSecondScreenIfPossible();
         shell.open();
         shell.layout();
@@ -121,7 +126,7 @@ public class GUI {
 
     private void shutdown() {
         controllerFuture.cancel(true);
-        pool.shutdown();
+        pool.shutdownNow();
     }
 
     public void notifySolutionIsReady() {
@@ -197,7 +202,8 @@ public class GUI {
                 try {
                     controllerFuture.get();
                 } catch (InterruptedException | ExecutionException e) {
-                    errorText.setText(e.getMessage());
+                    logger.error(e.getMessage(), e);
+                    errorText.setText(e.getLocalizedMessage());
                     return;
                 }
                 controller.parseRequirements();

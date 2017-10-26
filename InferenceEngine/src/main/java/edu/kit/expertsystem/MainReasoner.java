@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
@@ -37,7 +36,8 @@ import openllet.owlapi.PelletReasoner;
 public class MainReasoner {
 
     private static final String fileEnding = ".owl";
-    private static final String orginalFileName = "SAC_Domain_Ontology" + fileEnding;
+    private static final String domainFileName = "SAC_Domain_Ontology" + fileEnding;
+    private static final String reasoningFileName = "SAC_Reasoning_Ontology" + fileEnding;
 
     private static final Logger logger = LogManager.getLogger(MainReasoner.class);
 
@@ -48,36 +48,46 @@ public class MainReasoner {
     private OWLDataFactory dataFac;
     private OWLReasoner reasoner;
 
-    private List<OWLAxiom> generatedAxioms = new ArrayList<>();
+    private MyOWLHelper helper;
+    private ReasoningTree reasoningTree;
     private boolean isReasoningPrepared = false;
 
     MainReasoner() throws RuntimeException {
         manager = OWLManager.createOWLOntologyManager();
 
-        try (InputStream ontoStream = readOntology()) {
-            ontology = manager.loadOntologyFromOntologyDocument(ontoStream);
+        OWLOntology basicOntology;
+        try (InputStream ontoStream = readOntology(domainFileName, false)) {
+            basicOntology = manager.loadOntologyFromOntologyDocument(ontoStream);
         } catch (OWLOntologyCreationException | IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
             throw new RuntimeException("Loading the ontology failed");
         }
 
+        try (InputStream ontoStream = readOntology(reasoningFileName, true)) {
+            ontology = manager.loadOntologyFromOntologyDocument(ontoStream);
+        } catch (OWLOntologyCreationException | IOException e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException("Loading the ontology failed");
+        }
+
+        ontology.addAxioms(basicOntology.axioms());
         dataFac = manager.getOWLDataFactory();
         reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
+        helper = new MyOWLHelper(manager, ontology);
+        reasoningTree = new ReasoningTree(ontology, dataFac, reasoner, helper);
         logger.info("Read Ontology isConsistent: " + reasoner.isConsistent());
     }
 
-    private InputStream readOntology() throws IOException {
-        String localPath = Paths.get("").toAbsolutePath() + "/" + orginalFileName;
-        inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
-                + fileEnding;
+    private InputStream readOntology(String fileName, boolean setInferdFilePath) throws IOException {
+        String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
+        if (setInferdFilePath) {
+            inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
+                    + fileEnding;
+        }
         try {
             return new FileInputStream(localPath);
         } catch (FileNotFoundException e) {
-            // try (InputStream ontoStream = getClass().getResourceAsStream("/" +
-            // orginalFileName)) {
-            // Files.copy(ontoStream, new File(localPath).toPath());
-            // }
-            return getClass().getResourceAsStream("/" + orginalFileName);
+            return getClass().getResourceAsStream("/" + fileName);
         }
     }
 
@@ -85,8 +95,7 @@ public class MainReasoner {
         if (isReasoningPrepared) {
             return;
         }
-        ontology.removeAxioms(generatedAxioms);
-        generatedAxioms.clear();
+        helper.clearGeneratedAxioms();
         createBasicIndividuals();
         reasoner.flush();
         isReasoningPrepared = true;
@@ -106,30 +115,29 @@ public class MainReasoner {
             try {
                 saveReasonedOntology();
             } catch (OWLOntologyStorageException | IOException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
             }
             logger.info("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
     private void createBasicIndividuals() {
-        reasoner.subClasses(Vocabulary.CLASS_ROBODRIVESERVOKIBILM, true).forEach(robo -> {
-            OWLNamedIndividual roboInd = dataFac
-                    .getOWLNamedIndividual(create(robo.getIRI().getShortForm() + "Ind"));
-            addAxiom(dataFac.getOWLClassAssertionAxiom(robo, roboInd));
-        });
-
-        reasoner.subClasses(Vocabulary.CLASS_CSD_2A, true).forEach(gearBox -> {
-            OWLNamedIndividual gearBoxInd = dataFac
-                    .getOWLNamedIndividual(create(gearBox.getIRI().getShortForm() + "Ind"));
-            addAxiom(dataFac.getOWLClassAssertionAxiom(gearBox, gearBoxInd));
-        });
+        reasoner.subClasses(Vocabulary.CLASS_INDIVIDUALSTOCREATE, true)
+                .forEach(toCreateParent -> reasoner.subClasses(toCreateParent, true).forEach(toCreate -> {
+                    String name = toCreate.getIRI().getShortForm() + "Ind";
+                    OWLNamedIndividual ind = dataFac.getOWLNamedIndividual(helper.create(name));
+                    helper.addAxiom(dataFac.getOWLClassAssertionAxiom(toCreate, ind));
+                }));
     }
 
     private void addRequirements(Requirements requirements) {
         logger.info(requirements);
-        OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(create("requirementsInd"));
-        addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_REQUIREMENTS, requirementsInd));
+        OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(helper.create("requirementsInd"));
+        // TODO fix with multiple Vocalbs
+        helper.addAxiom(dataFac.getOWLClassAssertionAxiom(
+                dataFac.getOWLClass(IRI
+                        .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Requirements")),
+                requirementsInd));
 
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
                 requirements.maximalTorque.min);
@@ -148,36 +156,27 @@ public class MainReasoner {
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
-        OWLDataPropertyAssertionAxiom maximalTorqueReqMin = dataFac.getOWLDataPropertyAssertionAxiom(property,
+        OWLDataPropertyAssertionAxiom reqAxiom = dataFac.getOWLDataPropertyAssertionAxiom(property,
                 requirementsInd, dataFac.getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
-        addAxiom(maximalTorqueReqMin);
+        helper.addAxiom(reqAxiom);
     }
 
     private List<Result> reason() {
+        reasoningTree.makeReasoning();
+        return makeResults();
+    }
+
+    private List<Result> makeResults() {
+        // TODO CLASS_SACUNIT wieder hinzufügen und das hier hin übergeben
         List<Result> results = new ArrayList<>();
-
-        reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTOR).forEach(motor -> {
-            reasoner.instances(Vocabulary.CLASS_SATISFIEDGEARBOX).forEach(gearBox -> {
-
-                OWLNamedIndividual matchInd = dataFac.getOWLNamedIndividual(create("Match"
-                        + motor.getIRI().getShortForm() + "With" + gearBox.getIRI().getShortForm() + "Ind"));
-                addAxiom(dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_MOTORGEARBOXMATCH, matchInd));
-
-                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(
-                        Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR, matchInd, motor));
-                addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(
-                        Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX, matchInd, gearBox));
-            });
-        });
-        reasoner.flush();
+        // TODO CLASS_SATISFIEDMOTORGEARBOXMATCH übergeben und Objekte dynamisch
+        // aufbauen
         reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
-            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR).findAny()
-                    .ifPresent(obProp -> result.motor.name = obProp.getIRI().getShortForm().substring(0,
-                            obProp.getIRI().getShortForm().length() - 3));
-            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX).findAny()
-                    .ifPresent(obProp -> result.gearBox.name = obProp.getIRI().getShortForm().substring(0,
-                            obProp.getIRI().getShortForm().length() - 3));
+            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASMOTOR).findAny()
+                    .ifPresent(obProp -> result.motor.name = helper.getNameOfOWLNamedIndividual(obProp));
+            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASGEARBOX).findAny()
+                    .ifPresent(obProp -> result.gearBox.name = helper.getNameOfOWLNamedIndividual(obProp));
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
                     .ifPresent(obProp -> result.weight = obProp.parseDouble());
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
@@ -200,15 +199,4 @@ public class MainReasoner {
             manager.saveOntology(inferOnto, out);
         }
     }
-
-    private IRI create(String name) {
-        return IRI.create("#" + name);
-    }
-
-    private OWLAxiom addAxiom(OWLAxiom axiomToAdd) {
-        generatedAxioms.add(axiomToAdd);
-        manager.addAxiom(ontology, axiomToAdd);
-        return axiomToAdd;
-    }
-
 }
