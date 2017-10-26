@@ -26,6 +26,7 @@ public class ReasoningTree {
     private OWLReasoner reasoner;
     private MyOWLHelper helper;
 
+    private OWLClass currentClassToReason;
     private Set<OWLClass> appliedClasses = new HashSet<>();
     private boolean hasSomethingChanged;
 
@@ -37,10 +38,11 @@ public class ReasoningTree {
         this.helper = helper;
     }
 
-    public void makeReasoning() {
+    public void makeReasoning(OWLClass classToReason) {
         // TODO test Satesfied... nicht in ReasoningTree und dann subClasses(true weg)
         // (in zwei Schritten testen)
         // TODO evtl auch zusätzliche Klasse wie "MatchesToCreate"
+        currentClassToReason = classToReason;
         appliedClasses.clear();
 
         do {
@@ -50,11 +52,11 @@ public class ReasoningTree {
             if (hasSomethingChanged) {
                 reasoner.flush();
             }
-        } while (hasSomethingChanged);
+        } while (hasSomethingChanged && !appliedClasses.contains(currentClassToReason));
     }
 
     private void handleTreeItem(OWLClass treeClass) {
-        if (appliedClasses.contains(treeClass)) {
+        if (appliedClasses.contains(treeClass) || appliedClasses.contains(currentClassToReason)) {
             return;
         }
         logger.info("Current treeClass: " + treeClass.getIRI().getShortForm());

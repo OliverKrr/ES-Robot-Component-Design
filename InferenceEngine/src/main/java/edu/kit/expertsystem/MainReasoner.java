@@ -161,15 +161,13 @@ public class MainReasoner {
     }
 
     private List<Result> reason() {
-        reasoningTree.makeReasoning();
+        // TODO testen mit SACunit
+        reasoningTree.makeReasoning(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH);
         return makeResults();
     }
 
     private List<Result> makeResults() {
-        // TODO CLASS_SACUNIT wieder hinzufügen und das hier hin übergeben
         List<Result> results = new ArrayList<>();
-        // TODO CLASS_SATISFIEDMOTORGEARBOXMATCH übergeben und Objekte dynamisch
-        // aufbauen
         reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
             reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASMOTOR).findAny()

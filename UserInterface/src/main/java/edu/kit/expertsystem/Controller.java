@@ -32,7 +32,7 @@ public class Controller {
         this.gui = gui;
         reasoner = new MainReasoner();
     }
-
+    
     public void initialize() {
         reasoner.initialize();
         reset();
