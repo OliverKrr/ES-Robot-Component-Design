@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -120,12 +118,6 @@ public class Controller {
         TreeItem resItem = new TreeItem(parent, SWT.NONE);
         resItem.setText(text);
         resItem.setForeground(Configs.KIT_GREEN_70);
-        resItem.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREEN_70.dispose();
-            }
-        });
         return resItem;
     }
 

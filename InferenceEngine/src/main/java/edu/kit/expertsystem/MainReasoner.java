@@ -138,20 +138,30 @@ public class MainReasoner {
                         .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Requirements")),
                 requirementsInd));
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG,
                 requirements.get(0).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
                 requirements.get(0).max);
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM,
                 requirements.get(1).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM,
                 requirements.get(1).max);
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM,
                 requirements.get(2).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM,
                 requirements.get(2).max);
+
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
+                requirements.get(3).min);
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM,
+                requirements.get(3).max);
+
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM,
+                requirements.get(4).min);
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM,
+                requirements.get(4).max);
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
@@ -176,17 +186,21 @@ public class MainReasoner {
 
             result.requirements = copyRequirements(requirements);
 
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
-                    .ifPresent(obProp -> result.requirements.get(0).result = obProp.parseDouble());
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
-                    .findAny().ifPresent(obProp -> result.requirements.get(1).result = obProp.parseDouble());
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
-                    .ifPresent(obProp -> result.requirements.get(2).result = obProp.parseDouble());
+                    .ifPresent(obProp -> result.requirements.get(0).result = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM).findAny()
+                    .ifPresent(obProp -> result.requirements.get(1).result = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM)
+                    .findAny().ifPresent(obProp -> result.requirements.get(2).result = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
+                    .ifPresent(obProp -> result.requirements.get(3).result = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
+                    .findAny().ifPresent(obProp -> result.requirements.get(4).result = obProp.parseDouble());
 
             results.add(result);
         });
 
-        Collections.sort(results, Comparator.comparingDouble(result -> result.requirements.get(2).result));
+        Collections.sort(results, Comparator.comparingDouble(result -> result.requirements.get(0).result));
         // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         return results;
@@ -211,6 +225,33 @@ public class MainReasoner {
     public List<Requirement> getRequirements() {
         List<Requirement> requirements = new ArrayList<>();
 
+        Requirement weight = new Requirement();
+        weight.displayName = "Weight m:";
+        weight.category = "Common";
+        weight.description = "The total weight of the SAC unit.";
+        weight.unit = "kg";
+        weight.enableMin = false;
+        weight.enableMax = true;
+        requirements.add(weight);
+
+        Requirement lenght = new Requirement();
+        lenght.displayName = "Length L:";
+        lenght.category = "Dimensions";
+        lenght.description = "The total length of the SAC unit.";
+        lenght.unit = "mm";
+        lenght.enableMin = false;
+        lenght.enableMax = true;
+        requirements.add(lenght);
+
+        Requirement diameter = new Requirement();
+        diameter.displayName = "Diameter D:";
+        diameter.category = "Dimensions";
+        diameter.description = "The total outer diameter of the SAC unit.";
+        diameter.unit = "mm";
+        diameter.enableMin = false;
+        diameter.enableMax = true;
+        requirements.add(diameter);
+
         Requirement maximalTorque = new Requirement();
         maximalTorque.displayName = "Peak Torque M_max:";
         maximalTorque.category = "Performance";
@@ -230,15 +271,6 @@ public class MainReasoner {
         maximalRotationSpeed.enableMin = true;
         maximalRotationSpeed.enableMax = false;
         requirements.add(maximalRotationSpeed);
-
-        Requirement weight = new Requirement();
-        weight.displayName = "Weight m:";
-        weight.category = "Common";
-        weight.description = "The total weight of the motor and the gear box.";
-        weight.unit = "kg";
-        weight.enableMin = false;
-        weight.enableMax = true;
-        requirements.add(weight);
 
         return requirements;
     }

@@ -1,7 +1,7 @@
 package edu.kit.expertsystem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,7 +38,7 @@ public class RequirementsCategory {
     }
 
     public void createContents(List<RequirementWrapper> requirements, int[] weights) {
-        Map<String, List<RequirementWrapper>> reqPerCategory = new HashMap<>();
+        Map<String, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
 
         for (RequirementWrapper req : requirements) {
             if (reqPerCategory.containsKey(req.requirement.category)) {
