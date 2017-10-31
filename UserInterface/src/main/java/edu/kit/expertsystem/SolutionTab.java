@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -19,11 +20,11 @@ public class SolutionTab {
 
     private SashForm solutionForm;
 
-    public SolutionTab(Shell shell, FormToolkit formToolkit) {
+    public SolutionTab(Shell shell, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
 
         solutionForm = new SashForm(shell, SWT.NONE);
-        solutionForm.setBounds(96, 35, 779, 348);
+        solutionForm.setBounds(sizeOfForm);
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
     }
@@ -48,10 +49,8 @@ public class SolutionTab {
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
             descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
-                    requirements.get(i).requirement.description, i);
+                    requirements.get(i).requirement.description, i + 1);
         }
-
-        solutionForm.setWeights(new int[] { 339, 1, 291 });
     }
 
     public SashForm getSolutionForm() {

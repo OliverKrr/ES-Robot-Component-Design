@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -20,11 +21,11 @@ public class RequirementsTab {
 
     private SashForm requirementsForm;
 
-    public RequirementsTab(Shell shell, FormToolkit formToolkit) {
+    public RequirementsTab(Shell shell, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
 
         requirementsForm = new SashForm(shell, SWT.NONE);
-        requirementsForm.setBounds(96, 35, 779, 348);
+        requirementsForm.setBounds(sizeOfForm);
         formToolkit.adapt(requirementsForm);
         formToolkit.paintBordersFor(requirementsForm);
     }
@@ -74,8 +75,6 @@ public class RequirementsTab {
             descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
                     requirements.get(i).requirement.description, i + 1);
         }
-
-        requirementsForm.setWeights(new int[] { 339, 1, 291 });
     }
 
     public SashForm getRequirementsForm() {

@@ -1,5 +1,7 @@
 package edu.kit.expertsystem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,6 +27,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import edu.kit.expertsystem.controller.Controller;
+import edu.kit.expertsystem.controller.NavigationItem;
 
 public class GUI {
 
@@ -132,13 +135,13 @@ public class GUI {
      */
     protected void createContents() {
         shell = new Shell();
-        shell.setSize(895, 511);
+        shell.setSize(1000, 600);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setLayout(null);
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
 
         errorText = new StyledText(shell, SWT.BORDER);
-        errorText.setBounds(96, 389, 779, 83);
+        errorText.setBounds(100, 389, 779, 83);
         errorText.setEditable(false);
         formToolkit.adapt(errorText);
         formToolkit.paintBordersFor(errorText);
@@ -148,58 +151,50 @@ public class GUI {
         kitLogo.setImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo_resized.png"));
         formToolkit.adapt(kitLogo, true, true);
 
-        requirementsTab = new RequirementsTab(shell, formToolkit);
-        solutionTab = new SolutionTab(shell, formToolkit);
+        Rectangle sizeOfForms = new Rectangle(100, 35, 779, 348);
+        requirementsTab = new RequirementsTab(shell, formToolkit, sizeOfForms);
+        solutionTab = new SolutionTab(shell, formToolkit, sizeOfForms);
 
         Button defaultNavItem = createNavigationBar();
 
         requirementsTab.createContents(controller.getRequirementsWrapper());
+        int[] weights = new int[] { 339, 1, 291 };
+        requirementsTab.getRequirementsForm().setWeights(weights);
         solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
+        solutionTab.getSolutionForm().setWeights(weights);
 
         defaultNavItem.notifyListeners(SWT.Selection, new Event());
     }
 
     private Button createNavigationBar() {
-        Button btnSolution = new Button(shell, SWT.NONE);
-        Button btnRequirements = new Button(shell, SWT.NONE);
+        List<NavigationItem> mainBar = new ArrayList<>();
 
-        btnRequirements.addSelectionListener(new SelectionAdapter() {
+        NavigationItem reqItem = new NavigationItem();
+        reqItem.name = "Requirements";
+        reqItem.compositeToHandle = requirementsTab.getRequirementsForm();
+        mainBar.add(reqItem);
+
+        NavigationItem solutionItem = new NavigationItem();
+        solutionItem.name = "Solution";
+        solutionItem.compositeToHandle = solutionTab.getSolutionForm();
+        mainBar.add(solutionItem);
+
+        NavigationBarHelper navHelper = new NavigationBarHelper(formToolkit, shell);
+        navHelper.createHorizontalNavBar(mainBar, 0);
+
+        mainBar.get(0).item.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
-                btnRequirements.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
-                btnSolution.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
-                btnRequirements.setBackground(Configs.KIT_GREY_50);
-                btnSolution.setBackground(Configs.KIT_GREY_15);
-                requirementsTab.getRequirementsForm().setVisible(true);
-                solutionTab.getSolutionForm().setVisible(false);
-
                 controllerFuture.cancel(true);
                 controllerFuture = pool.submit(() -> controller.reset());
             }
         });
-        btnRequirements.setBounds(96, 10, 120, 25);
-        formToolkit.adapt(btnRequirements, true, true);
-        btnRequirements.setText("Requirements");
-        btnRequirements.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREY_15.dispose();
-                Configs.KIT_GREY_50.dispose();
-            }
-        });
 
-        btnSolution.addSelectionListener(new SelectionAdapter() {
+        mainBar.get(1).item.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
-                btnRequirements.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
-                btnSolution.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
-                btnRequirements.setBackground(Configs.KIT_GREY_15);
-                btnSolution.setBackground(Configs.KIT_GREY_50);
-                requirementsTab.getRequirementsForm().setVisible(false);
-                solutionTab.getSolutionForm().setVisible(true);
-
                 try {
                     controllerFuture.get();
                 } catch (InterruptedException | ExecutionException e) {
@@ -211,17 +206,8 @@ public class GUI {
                 controllerFuture = pool.submit(() -> controller.reason());
             }
         });
-        btnSolution.setText("Solution");
-        btnSolution.setBounds(212, 10, 120, 25);
-        formToolkit.adapt(btnSolution, true, true);
-        btnSolution.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREY_15.dispose();
-                Configs.KIT_GREY_50.dispose();
-            }
-        });
-        return btnRequirements;
+
+        return mainBar.get(0).item;
     }
 
 }

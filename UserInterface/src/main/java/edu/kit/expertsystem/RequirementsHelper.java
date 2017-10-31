@@ -12,11 +12,11 @@ import edu.kit.expertsystem.controller.RequirementWrapper;
 
 public class RequirementsHelper {
 
-    private static final int height = 23;
-
     private static final int displayNameWidth = 182;
     private static final int minMaxWidth = 40;
     private static final int unitWidth = 44;
+
+    private static final int height = 23;
 
     private static final int displayNameX = 10;
     private static final int minX = 198;

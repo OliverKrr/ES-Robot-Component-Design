@@ -10,16 +10,16 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 public class DescriptionHelper {
 
-    private static final int labelWidth = 137;
-    private static final int labelHeight = 34;
-    private static final int descriptionWidth = 191;
-    private static final int descriptionHeight = 57;
+    private static final int labelWidth = 80;
+    private static final int descriptionWidth = 250;
+
+    private static final int height = 60;
 
     private static final int labelX = 10;
-    private static final int descriptionX = 153;
+    private static final int descriptionX = labelX + labelWidth + 5;
 
-    private static final int basisY = 161;
-    private static final int offsetY = 63;
+    private static final int basisY = 10;
+    private static final int offsetY = height + 5;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
@@ -32,9 +32,9 @@ public class DescriptionHelper {
     public void createDescription(String labelText, String descriptionText, int rowNumber) {
         int y = basisY + offsetY * rowNumber;
 
-        Label label = new Label(composite, SWT.NONE);
+        Label label = new Label(composite, SWT.WRAP);
         label.setText(labelText);
-        label.setBounds(labelX, y, labelWidth, labelHeight);
+        label.setBounds(labelX, y, labelWidth, height);
         formToolkit.adapt(label, false, false);
         label.setForeground(Configs.KIT_GREEN_70);
         label.addDisposeListener(new DisposeListener() {
@@ -47,7 +47,7 @@ public class DescriptionHelper {
         StyledText description = new StyledText(composite, SWT.BORDER | SWT.WRAP);
         description.setText(descriptionText);
         description.setEditable(false);
-        description.setBounds(descriptionX, y, descriptionWidth, descriptionHeight);
+        description.setBounds(descriptionX, y, descriptionWidth, height);
         formToolkit.adapt(description);
         formToolkit.paintBordersFor(description);
     }
