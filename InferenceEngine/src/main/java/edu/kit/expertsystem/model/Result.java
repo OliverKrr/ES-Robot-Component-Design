@@ -1,16 +1,15 @@
 package edu.kit.expertsystem.model;
 
+import java.util.List;
+
 public class Result {
     public Motor motor = new Motor();
     public GearBox gearBox = new GearBox();
 
-    public double maximalTorque = -1;
-    public double maximalRotationSpeed = -1;
-    public double weight = -1;
+    public List<Requirement> requirements;
 
     @Override
     public String toString() {
-        return "Result [motor=" + motor + ", gearBox=" + gearBox + ", maximalTorque=" + maximalTorque
-                + ", maximalRotationSpeed=" + maximalRotationSpeed + ", weight=" + weight + "]";
+        return "Result [motor=" + motor + ", gearBox=" + gearBox + ", requirements=" + requirements + "]";
     }
 }

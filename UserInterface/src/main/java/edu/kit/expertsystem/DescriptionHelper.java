@@ -11,11 +11,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 public class DescriptionHelper {
 
     private static final int labelWidth = 80;
-    private static final int descriptionWidth = 250;
+    private static final int descriptionWidth = 255;
 
     private static final int height = 60;
 
-    private static final int labelX = 10;
+    private static final int labelX = 5;
     private static final int descriptionX = labelX + labelWidth + 5;
 
     private static final int basisY = 10;

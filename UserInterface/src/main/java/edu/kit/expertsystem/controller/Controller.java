@@ -51,6 +51,7 @@ public class Controller {
         for (RequirementWrapper req : requirementsWrapper) {
             req.requirement.min = 0;
             req.requirement.max = Double.MAX_VALUE;
+            req.requirement.result = -1;
         }
         reasoner.prepareReasoning();
     }
@@ -71,13 +72,11 @@ public class Controller {
         resultWrapper.tree.removeAll();
 
         for (RequirementWrapper req : requirementsWrapper) {
-            req.requirement.min = parseDouble(req.minValue, req.requirement.min);
-            req.requirement.max = parseDouble(req.maxValue, req.requirement.max);
+            req.requirement.min = parseDouble(req.minValue, req.requirement.min)
+                    / req.requirement.scaleFromOntologyToUI;
+            req.requirement.max = parseDouble(req.maxValue, req.requirement.max)
+                    / req.requirement.scaleFromOntologyToUI;
         }
-
-        // convert from rpm to °/s
-        requirementsWrapper.get(1).requirement.min /= 6;
-        requirementsWrapper.get(1).requirement.max /= 6;
     }
 
     private double parseDouble(Text textToParse, double defaultValue) {
@@ -102,12 +101,10 @@ public class Controller {
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree,
                     "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
-            addTreeItem(resItem,
-                    "Maximal Torque M_max: " + result.maximalTorque + getSpaces(result.maximalTorque) + "Nm");
-            // convert from °/s to rpm
-            addTreeItem(resItem, "Maximal Rotation Speed n_max: " + result.maximalRotationSpeed * 6
-                    + getSpaces(result.maximalRotationSpeed * 6) + "°/s");
-            addTreeItem(resItem, "Weight m: " + result.weight + getSpaces(result.weight) + "kg");
+            for (Requirement req : result.requirements) {
+                double resultValue = req.result * req.scaleFromOntologyToUI;
+                addTreeItem(resItem, req.displayName + " " + resultValue + getSpaces(resultValue) + req.unit);
+            }
             resItem.setExpanded(true);
         }
     }
@@ -116,19 +113,13 @@ public class Controller {
         TreeItem resItem = new TreeItem(parent, SWT.NONE);
         resItem.setText(text);
         resItem.setFont(SWTResourceManager.getFont("Courier New", 9, SWT.NORMAL));
-        resItem.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREEN_70.dispose();
-            }
-        });
         return resItem;
     }
 
     private TreeItem addTreeItem(Tree parent, String text) {
         TreeItem resItem = new TreeItem(parent, SWT.NONE);
         resItem.setText(text);
-        resItem.setForeground(Configs.KIT_GREEN_100);
+        resItem.setForeground(Configs.KIT_GREEN_70);
         resItem.addDisposeListener(new DisposeListener() {
             @Override
             public void widgetDisposed(DisposeEvent e) {

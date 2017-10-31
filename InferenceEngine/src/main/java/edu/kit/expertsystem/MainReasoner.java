@@ -109,7 +109,7 @@ public class MainReasoner {
             isReasoningPrepared = false;
             addRequirements(requirements);
             reasoner.flush();
-            return reason();
+            return reason(requirements);
         } finally {
             try {
                 saveReasonedOntology();
@@ -160,12 +160,12 @@ public class MainReasoner {
         helper.addAxiom(reqAxiom);
     }
 
-    private List<Result> reason() {
+    private List<Result> reason(List<Requirement> requirements) {
         reasoningTree.makeReasoning(Vocabulary.CLASS_MOTORGEARBOXMATCH);
-        return makeResults();
+        return makeResults(requirements);
     }
 
-    private List<Result> makeResults() {
+    private List<Result> makeResults(List<Requirement> requirements) {
         List<Result> results = new ArrayList<>();
         reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
@@ -173,19 +173,31 @@ public class MainReasoner {
                     .ifPresent(obProp -> result.motor.name = helper.getNameOfOWLNamedIndividual(obProp));
             reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASGEARBOX).findAny()
                     .ifPresent(obProp -> result.gearBox.name = helper.getNameOfOWLNamedIndividual(obProp));
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
-                    .ifPresent(obProp -> result.weight = obProp.parseDouble());
+
+            result.requirements = copyRequirements(requirements);
+
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
-                    .ifPresent(obProp -> result.maximalTorque = obProp.parseDouble());
+                    .ifPresent(obProp -> result.requirements.get(0).result = obProp.parseDouble());
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
-                    .findAny().ifPresent(obProp -> result.maximalRotationSpeed = obProp.parseDouble());
+                    .findAny().ifPresent(obProp -> result.requirements.get(1).result = obProp.parseDouble());
+            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
+                    .ifPresent(obProp -> result.requirements.get(2).result = obProp.parseDouble());
+
             results.add(result);
         });
 
-        Collections.sort(results, Comparator.comparingDouble(result -> result.weight));
+        Collections.sort(results, Comparator.comparingDouble(result -> result.requirements.get(2).result));
         // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         return results;
+    }
+
+    private List<Requirement> copyRequirements(List<Requirement> requirements) {
+        List<Requirement> copyReqs = new ArrayList<>(requirements.size());
+        for (Requirement req : requirements) {
+            copyReqs.add(new Requirement(req));
+        }
+        return copyReqs;
     }
 
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
@@ -213,6 +225,8 @@ public class MainReasoner {
         maximalRotationSpeed.category = "Performance";
         maximalRotationSpeed.description = "Maximal output speed at nominal voltage.";
         maximalRotationSpeed.unit = "°/s";
+        // convert from rpm to °/s
+        maximalRotationSpeed.scaleFromOntologyToUI = 6.0;
         maximalRotationSpeed.enableMin = true;
         maximalRotationSpeed.enableMax = false;
         requirements.add(maximalRotationSpeed);
