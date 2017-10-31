@@ -29,7 +29,7 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
-import edu.kit.expertsystem.model.Requirements;
+import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
 import openllet.owlapi.PelletReasoner;
 
@@ -52,7 +52,7 @@ public class MainReasoner {
     private ReasoningTree reasoningTree;
     private boolean isReasoningPrepared = false;
 
-    MainReasoner() {
+    public MainReasoner() {
         manager = OWLManager.createOWLOntologyManager();
         dataFac = manager.getOWLDataFactory();
     }
@@ -100,7 +100,7 @@ public class MainReasoner {
         isReasoningPrepared = true;
     }
 
-    public List<Result> startReasoning(Requirements requirements) {
+    public List<Result> startReasoning(List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
         try {
             if (!isReasoningPrepared) {
@@ -129,7 +129,7 @@ public class MainReasoner {
                 }));
     }
 
-    private void addRequirements(Requirements requirements) {
+    private void addRequirements(List<Requirement> requirements) {
         logger.info(requirements);
         OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(helper.create("requirementsInd"));
         // TODO fix with multiple Vocalbs
@@ -139,19 +139,19 @@ public class MainReasoner {
                 requirementsInd));
 
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
-                requirements.maximalTorque.min);
+                requirements.get(0).min);
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM,
-                requirements.maximalTorque.max);
+                requirements.get(0).max);
 
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM,
-                requirements.maximalRotationSpeed.min);
+                requirements.get(1).min);
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM,
-                requirements.maximalRotationSpeed.max);
+                requirements.get(1).max);
 
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG,
-                requirements.weight.min);
+                requirements.get(2).min);
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
-                requirements.weight.max);
+                requirements.get(2).max);
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
@@ -194,5 +194,35 @@ public class MainReasoner {
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             manager.saveOntology(inferOnto, out);
         }
+    }
+
+    public List<Requirement> getRequirements() {
+        List<Requirement> requirements = new ArrayList<>();
+
+        Requirement maximalTorque = new Requirement();
+        maximalTorque.displayName = "Peak Torque M_max:";
+        maximalTorque.description = "Repeated peak torque without damaging the units.";
+        maximalTorque.unit = "Nm";
+        maximalTorque.enableMin = true;
+        maximalTorque.enableMax = false;
+        requirements.add(maximalTorque);
+
+        Requirement maximalRotationSpeed = new Requirement();
+        maximalRotationSpeed.displayName = "Maximal Speed n_max:";
+        maximalRotationSpeed.description = "Maximal output speed at nominal voltage.";
+        maximalRotationSpeed.unit = "°/s";
+        maximalRotationSpeed.enableMin = true;
+        maximalRotationSpeed.enableMax = false;
+        requirements.add(maximalRotationSpeed);
+
+        Requirement weight = new Requirement();
+        weight.displayName = "Weight m:";
+        weight.description = "The total weight of the motor and the gear box.";
+        weight.unit = "kg";
+        weight.enableMin = false;
+        weight.enableMax = true;
+        requirements.add(weight);
+
+        return requirements;
     }
 }

@@ -1,0 +1,158 @@
+package edu.kit.expertsystem.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import edu.kit.expertsystem.Configs;
+import edu.kit.expertsystem.GUI;
+import edu.kit.expertsystem.MainReasoner;
+import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.Result;
+
+public class Controller {
+
+    private static final int MAXIMAL_NEEDED_SPACES = 6;
+
+    private static final Logger logger = LogManager.getLogger(Controller.class);
+
+    private GUI gui;
+    private MainReasoner reasoner;
+
+    private List<RequirementWrapper> requirementsWrapper;
+    private ResultWrapper resultWrapper;
+
+    public Controller(GUI gui) {
+        this.gui = gui;
+        reasoner = new MainReasoner();
+    }
+
+    public void initialize() {
+        reasoner.initialize();
+
+        List<Requirement> requirements = reasoner.getRequirements();
+        requirementsWrapper = new ArrayList<>(requirements.size());
+        for (Requirement req : requirements) {
+            requirementsWrapper.add(new RequirementWrapper(req));
+        }
+        resultWrapper = new ResultWrapper();
+    }
+
+    public void reset() {
+        for (RequirementWrapper req : requirementsWrapper) {
+            req.requirement.min = 0;
+            req.requirement.max = Double.MAX_VALUE;
+        }
+        reasoner.prepareReasoning();
+    }
+
+    public void initialStartForCaching() {
+        reasoner.startReasoning(parseToRequirements());
+    }
+
+    private List<Requirement> parseToRequirements() {
+        List<Requirement> requirements = new ArrayList<>(requirementsWrapper.size());
+        for (RequirementWrapper req : requirementsWrapper) {
+            requirements.add(req.requirement);
+        }
+        return requirements;
+    }
+
+    public void parseRequirements() {
+        resultWrapper.tree.removeAll();
+
+        for (RequirementWrapper req : requirementsWrapper) {
+            req.requirement.min = parseDouble(req.minValue, req.requirement.min);
+            req.requirement.max = parseDouble(req.maxValue, req.requirement.max);
+        }
+
+        // convert from rpm to °/s
+        requirementsWrapper.get(1).requirement.min /= 6;
+        requirementsWrapper.get(1).requirement.max /= 6;
+    }
+
+    private double parseDouble(Text textToParse, double defaultValue) {
+        if (!textToParse.getText().isEmpty()) {
+            try {
+                return Double.parseDouble(textToParse.getText());
+            } catch (NumberFormatException e) {
+                logger.error("Could not parse <" + textToParse.getText() + "> to double. Default value <"
+                        + defaultValue + "> will be taken!");
+            }
+        }
+        return defaultValue;
+    }
+
+    public void reason() {
+        resultWrapper.results = reasoner.startReasoning(parseToRequirements());
+        gui.notifySolutionIsReady();
+    }
+
+    public void setResults() {
+        addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
+        for (Result result : resultWrapper.results) {
+            TreeItem resItem = addTreeItem(resultWrapper.tree,
+                    "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
+            addTreeItem(resItem,
+                    "Maximal Torque M_max: " + result.maximalTorque + getSpaces(result.maximalTorque) + "Nm");
+            // convert from °/s to rpm
+            addTreeItem(resItem, "Maximal Rotation Speed n_max: " + result.maximalRotationSpeed * 6
+                    + getSpaces(result.maximalRotationSpeed * 6) + "°/s");
+            addTreeItem(resItem, "Weight m: " + result.weight + getSpaces(result.weight) + "kg");
+            resItem.setExpanded(true);
+        }
+    }
+
+    private TreeItem addTreeItem(TreeItem parent, String text) {
+        TreeItem resItem = new TreeItem(parent, SWT.NONE);
+        resItem.setText(text);
+        resItem.setFont(SWTResourceManager.getFont("Courier New", 9, SWT.NORMAL));
+        resItem.addDisposeListener(new DisposeListener() {
+            @Override
+            public void widgetDisposed(DisposeEvent e) {
+                Configs.KIT_GREEN_70.dispose();
+            }
+        });
+        return resItem;
+    }
+
+    private TreeItem addTreeItem(Tree parent, String text) {
+        TreeItem resItem = new TreeItem(parent, SWT.NONE);
+        resItem.setText(text);
+        resItem.setForeground(Configs.KIT_GREEN_100);
+        resItem.addDisposeListener(new DisposeListener() {
+            @Override
+            public void widgetDisposed(DisposeEvent e) {
+                Configs.KIT_GREEN_70.dispose();
+            }
+        });
+        return resItem;
+    }
+
+    private String getSpaces(double value) {
+        String ret = "";
+        String str = String.valueOf(value);
+        for (int i = str.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {
+            ret += " ";
+        }
+        return ret;
+    }
+
+    public List<RequirementWrapper> getRequirementsWrapper() {
+        return requirementsWrapper;
+    }
+
+    public ResultWrapper getResultWrapper() {
+        return resultWrapper;
+    }
+
+}

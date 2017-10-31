@@ -5,17 +5,17 @@ import org.eclipse.swt.widgets.Display;
 
 public class Configs {
 
-    public static Color KIT_GREEN_100 = null;
-    public static Color KIT_GREEN_70 = null;
-    public static Color KIT_GREEN_50 = null;
-    public static Color KIT_GREEN_30 = null;
-    public static Color KIT_GREEN_15 = null;
+    public static Color KIT_GREEN_100;
+    public static Color KIT_GREEN_70;
+    public static Color KIT_GREEN_50;
+    public static Color KIT_GREEN_30;
+    public static Color KIT_GREEN_15;
 
-    public static Color KIT_GREY_100 = null;
-    public static Color KIT_GREY_70 = null;
-    public static Color KIT_GREY_50 = null;
-    public static Color KIT_GREY_30 = null;
-    public static Color KIT_GREY_15 = null;
+    public static Color KIT_GREY_100;
+    public static Color KIT_GREY_70;
+    public static Color KIT_GREY_50;
+    public static Color KIT_GREY_30;
+    public static Color KIT_GREY_15;
 
     public static void initConfig(Display display) {
         KIT_GREEN_100 = new Color(display, 0, 150, 130);
