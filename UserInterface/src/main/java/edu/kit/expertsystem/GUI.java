@@ -16,6 +16,9 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
@@ -31,13 +34,21 @@ import edu.kit.expertsystem.controller.NavigationItem;
 
 public class GUI {
 
+    private static final Point sizeOfShell = new Point(1000, 600);
+
+    public static final int contentX = 120;
+    public static final int navBarY = 10;
+
+    public static final int contentWidth = 779;
+    public static final Rectangle contentRec = new Rectangle(contentX, 35, contentWidth, 348);
+
     private static final Logger logger = LogManager.getLogger(GUI.class);
 
     private Shell shell;
     private static final Display display = Display.getDefault();
     private final FormToolkit formToolkit = new FormToolkit(display);
 
-    private RequirementsTab requirementsTab;
+    private RequirementsCategory requirementsCategory;
     private SolutionTab solutionTab;
 
     private final ExecutorService pool;
@@ -135,35 +146,35 @@ public class GUI {
      */
     protected void createContents() {
         shell = new Shell();
-        shell.setSize(1000, 600);
+        shell.setSize(sizeOfShell);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setLayout(null);
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
 
         errorText = new StyledText(shell, SWT.BORDER);
-        errorText.setBounds(100, 389, 779, 83);
+        errorText.setBounds(contentX, 389, contentWidth, 83);
         errorText.setEditable(false);
         formToolkit.adapt(errorText);
         formToolkit.paintBordersFor(errorText);
 
-        Label kitLogo = new Label(shell, SWT.NONE);
-        kitLogo.setBounds(5, 10, 86, 39);
-        kitLogo.setImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo_resized.png"));
-        formToolkit.adapt(kitLogo, true, true);
-
-        Rectangle sizeOfForms = new Rectangle(100, 35, 779, 348);
-        requirementsTab = new RequirementsTab(shell, formToolkit, sizeOfForms);
-        solutionTab = new SolutionTab(shell, formToolkit, sizeOfForms);
+        requirementsCategory = new RequirementsCategory(shell, formToolkit);
+        solutionTab = new SolutionTab(shell, formToolkit);
 
         Button defaultNavItem = createNavigationBar();
 
-        requirementsTab.createContents(controller.getRequirementsWrapper());
         int[] weights = new int[] { 339, 1, 291 };
-        requirementsTab.getRequirementsForm().setWeights(weights);
+        requirementsCategory.createContents(controller.getRequirementsWrapper(), weights);
         solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
         solutionTab.getSolutionForm().setWeights(weights);
 
         defaultNavItem.notifyListeners(SWT.Selection, new Event());
+
+        Label kitLogo = new Label(shell, SWT.CENTER);
+        int height = (int) Math.round(39.0 / 86.0 * requirementsCategory.getReqNavBarSize().x);
+        kitLogo.setBounds(5, navBarY, requirementsCategory.getReqNavBarSize().x, height);
+        kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo.png"),
+                requirementsCategory.getReqNavBarSize().x, height));
+        formToolkit.adapt(kitLogo, false, false);
     }
 
     private Button createNavigationBar() {
@@ -171,7 +182,7 @@ public class GUI {
 
         NavigationItem reqItem = new NavigationItem();
         reqItem.name = "Requirements";
-        reqItem.compositeToHandle = requirementsTab.getRequirementsForm();
+        reqItem.compositeToHandle = requirementsCategory.getRequirementsOverallForm();
         mainBar.add(reqItem);
 
         NavigationItem solutionItem = new NavigationItem();
@@ -210,4 +221,14 @@ public class GUI {
         return mainBar.get(0).item;
     }
 
+    private Image resizeImage(Image image, int width, int height) {
+        Image scaled = new Image(display, width, height);
+        GC gc = new GC(scaled);
+        gc.setAntialias(SWT.ON);
+        gc.setInterpolation(SWT.HIGH);
+        gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, width, height);
+        gc.dispose();
+        image.dispose();
+        return scaled;
+    }
 }

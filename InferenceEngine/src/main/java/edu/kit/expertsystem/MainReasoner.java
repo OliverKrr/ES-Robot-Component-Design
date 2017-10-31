@@ -201,6 +201,7 @@ public class MainReasoner {
 
         Requirement maximalTorque = new Requirement();
         maximalTorque.displayName = "Peak Torque M_max:";
+        maximalTorque.category = "Performance";
         maximalTorque.description = "Repeated peak torque without damaging the units.";
         maximalTorque.unit = "Nm";
         maximalTorque.enableMin = true;
@@ -209,6 +210,7 @@ public class MainReasoner {
 
         Requirement maximalRotationSpeed = new Requirement();
         maximalRotationSpeed.displayName = "Maximal Speed n_max:";
+        maximalRotationSpeed.category = "Performance";
         maximalRotationSpeed.description = "Maximal output speed at nominal voltage.";
         maximalRotationSpeed.unit = "°/s";
         maximalRotationSpeed.enableMin = true;
@@ -217,6 +219,7 @@ public class MainReasoner {
 
         Requirement weight = new Requirement();
         weight.displayName = "Weight m:";
+        weight.category = "Common";
         weight.description = "The total weight of the motor and the gear box.";
         weight.unit = "kg";
         weight.enableMin = false;

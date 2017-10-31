@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -20,11 +18,11 @@ public class SolutionTab {
 
     private SashForm solutionForm;
 
-    public SolutionTab(Shell shell, FormToolkit formToolkit, Rectangle sizeOfForm) {
+    public SolutionTab(Composite parent, FormToolkit formToolkit) {
         this.formToolkit = formToolkit;
 
-        solutionForm = new SashForm(shell, SWT.NONE);
-        solutionForm.setBounds(sizeOfForm);
+        solutionForm = new SashForm(parent, SWT.NONE);
+        solutionForm.setBounds(GUI.contentRec);
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
     }

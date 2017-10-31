@@ -10,7 +10,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
@@ -21,10 +20,10 @@ public class RequirementsTab {
 
     private SashForm requirementsForm;
 
-    public RequirementsTab(Shell shell, FormToolkit formToolkit, Rectangle sizeOfForm) {
+    public RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
 
-        requirementsForm = new SashForm(shell, SWT.NONE);
+        requirementsForm = new SashForm(parent, SWT.NONE);
         requirementsForm.setBounds(sizeOfForm);
         formToolkit.adapt(requirementsForm);
         formToolkit.paintBordersFor(requirementsForm);

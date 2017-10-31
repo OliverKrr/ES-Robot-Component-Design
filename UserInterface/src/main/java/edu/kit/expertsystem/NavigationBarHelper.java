@@ -21,11 +21,11 @@ public class NavigationBarHelper {
     private static final int navItemWidthOffset = 20;
     private static final int navItemHeightOffset = 5;
 
-    private static final int horizontalX = 100;
-    private static final int horizontalY = 10;
+    private static final int horizontalX = GUI.contentX;
+    private static final int horizontalY = GUI.navBarY;
 
-    private static final int verticalX = 0;
-    private static final int verticalBasisY = 0;
+    private static final int verticalX = 5;
+    private static final int verticalBasisY = 70;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
@@ -35,15 +35,15 @@ public class NavigationBarHelper {
         this.composite = composite;
     }
 
-    public void createHorizontalNavBar(List<NavigationItem> navItems, int level) {
-        createNavBar(navItems, level, true);
+    public Point createHorizontalNavBar(List<NavigationItem> navItems, int level) {
+        return createNavBar(navItems, level, true);
     }
 
-    public void createVerticalNavBar(List<NavigationItem> navItems, int level) {
-        createNavBar(navItems, level, false);
+    public Point createVerticalNavBar(List<NavigationItem> navItems, int level) {
+        return createNavBar(navItems, level, false);
     }
 
-    private void createNavBar(List<NavigationItem> navItems, int level, boolean isHorizontal) {
+    private Point createNavBar(List<NavigationItem> navItems, int level, boolean isHorizontal) {
         int maxWidth = 0;
         int maxHeight = 0;
 
@@ -58,12 +58,13 @@ public class NavigationBarHelper {
             maxHeight = Math.max(maxHeight, size.y);
         }
 
+        int navItemWidth = maxWidth + navItemWidthOffset;
+        int navItemHeight = maxHeight + navItemHeightOffset;
+
         for (int i = 0; i < navItems.size(); i++) {
             NavigationItem item = navItems.get(i);
             item.item.setText(item.name);
 
-            int navItemWidth = maxWidth + navItemWidthOffset;
-            int navItemHeight = maxHeight + navItemHeightOffset;
             if (isHorizontal) {
                 item.item.setBounds(horizontalX + i * navItemWidth, horizontalY + level * navItemHeight,
                         navItemWidth, navItemHeight);
@@ -98,6 +99,7 @@ public class NavigationBarHelper {
                 }
             });
         }
+        return new Point(navItemWidth, navItemHeight);
     }
 
 }
