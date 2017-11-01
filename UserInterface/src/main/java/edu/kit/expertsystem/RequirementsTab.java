@@ -34,31 +34,38 @@ public class RequirementsTab {
         Composite leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
+        boolean isAnyFieldDisabled = false;
         RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
         for (int i = 0; i < requirements.size(); i++) {
+            isAnyFieldDisabled |= !requirements.get(i).requirement.enableMin
+                    || !requirements.get(i).requirement.enableMax;
             requirementsHelper.createRequirement(requirements.get(i), i);
         }
 
-        Button btnEnableFields = new Button(leftComposite, SWT.CHECK);
-        btnEnableFields.setBounds(307, 294, 93, 16);
-        formToolkit.adapt(btnEnableFields, true, true);
-        btnEnableFields.setText("Enable fields");
-        btnEnableFields.addSelectionListener(new SelectionListener() {
+        if (isAnyFieldDisabled) {
+            Button btnEnableFields = new Button(leftComposite, SWT.CHECK);
+            btnEnableFields.setBounds(326, 327, 93, 16);
+            formToolkit.adapt(btnEnableFields, true, true);
+            btnEnableFields.setText("Enable fields");
+            btnEnableFields.addSelectionListener(new SelectionListener() {
 
-            @Override
-            public void widgetSelected(SelectionEvent event) {
-                btnEnableFields.setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
-                for (RequirementWrapper req : requirements) {
-                    req.minValue.setEnabled(req.requirement.enableMin || !req.minValue.isEnabled());
-                    req.maxValue.setEnabled(req.requirement.enableMax || !req.maxValue.isEnabled());
+                @Override
+                public void widgetSelected(SelectionEvent event) {
+                    btnEnableFields
+                            .setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
+                    for (RequirementWrapper req : requirements) {
+                        req.minValue.setEnabled(req.requirement.enableMin || !req.minValue.isEnabled());
+                        req.maxValue.setEnabled(req.requirement.enableMax || !req.maxValue.isEnabled());
+                    }
                 }
-            }
 
-            @Override
-            public void widgetDefaultSelected(SelectionEvent event) {
-                // nothing to do
-            }
-        });
+                @Override
+                public void widgetDefaultSelected(SelectionEvent event) {
+                    // nothing to do
+                }
+            });
+        }
+
 
         Label separator = new Label(requirementsForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(separator, false, false);

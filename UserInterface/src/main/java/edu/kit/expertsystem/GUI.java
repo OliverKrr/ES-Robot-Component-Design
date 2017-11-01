@@ -151,7 +151,7 @@ public class GUI {
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
 
-        errorText = new StyledText(shell, SWT.BORDER);
+        errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP);
         errorText.setBounds(contentX, 389, contentWidth, 83);
         errorText.setEditable(false);
         formToolkit.adapt(errorText);
