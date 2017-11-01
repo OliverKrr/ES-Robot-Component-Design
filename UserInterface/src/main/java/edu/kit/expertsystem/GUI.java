@@ -134,6 +134,7 @@ public class GUI {
     private void shutdown() {
         controllerFuture.cancel(true);
         pool.shutdownNow();
+        Configs.disposeConfig();
     }
 
     public void notifySolutionIsReady() {
@@ -148,7 +149,6 @@ public class GUI {
         shell = new Shell();
         shell.setSize(sizeOfShell);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
-        shell.setLayout(null);
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
 
         errorText = new StyledText(shell, SWT.BORDER);

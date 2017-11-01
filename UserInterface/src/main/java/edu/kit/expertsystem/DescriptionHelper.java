@@ -2,8 +2,6 @@ package edu.kit.expertsystem;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -40,12 +38,6 @@ public class DescriptionHelper {
         label.setBounds(labelX, y, labelWidth, height);
         formToolkit.adapt(label, false, false);
         label.setForeground(Configs.KIT_GREEN_70);
-        label.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREEN_70.dispose();
-            }
-        });
 
         StyledText description = new StyledText(composite, SWT.BORDER | SWT.WRAP);
         description.setText(descriptionText);

@@ -1,8 +1,6 @@
 package edu.kit.expertsystem;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -45,12 +43,6 @@ public class RequirementsHelper {
         displayName.setText(requirementWrapper.requirement.displayName);
         formToolkit.adapt(displayName, false, false);
         displayName.setForeground(Configs.KIT_GREEN_70);
-        displayName.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent e) {
-                Configs.KIT_GREEN_70.dispose();
-            }
-        });
 
         requirementWrapper.minValue = new Text(composite, SWT.BORDER);
         requirementWrapper.minValue.setEnabled(requirementWrapper.requirement.enableMin);

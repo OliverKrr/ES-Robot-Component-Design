@@ -30,4 +30,18 @@ public class Configs {
         KIT_GREY_30 = new Color(display, 179, 179, 179);
         KIT_GREY_15 = new Color(display, 217, 217, 217);
     }
+
+    public static void disposeConfig() {
+        KIT_GREEN_100.dispose();
+        KIT_GREEN_70.dispose();
+        KIT_GREEN_50.dispose();
+        KIT_GREEN_30.dispose();
+        KIT_GREEN_15.dispose();
+
+        KIT_GREY_100.dispose();
+        KIT_GREY_70.dispose();
+        KIT_GREY_50.dispose();
+        KIT_GREY_30.dispose();
+        KIT_GREY_15.dispose();
+    }
 }

@@ -3,8 +3,6 @@ package edu.kit.expertsystem;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
@@ -91,13 +89,6 @@ public class NavigationBarHelper {
                 }
             });
             formToolkit.adapt(item.item, true, true);
-            item.item.addDisposeListener(new DisposeListener() {
-                @Override
-                public void widgetDisposed(DisposeEvent e) {
-                    Configs.KIT_GREY_15.dispose();
-                    Configs.KIT_GREY_30.dispose();
-                }
-            });
         }
         return new Point(navItemWidth, navItemHeight);
     }
