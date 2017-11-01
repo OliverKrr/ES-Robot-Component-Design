@@ -39,6 +39,8 @@ public class MainReasoner {
     private static final String domainFileName = "SAC_Domain_Ontology" + fileEnding;
     private static final String reasoningFileName = "SAC_Reasoning_Ontology" + fileEnding;
 
+    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src\\main\\resources\\";
+
     private static final Logger logger = LogManager.getLogger(MainReasoner.class);
 
     private String inferdFilePath;
@@ -78,15 +80,23 @@ public class MainReasoner {
     }
 
     private InputStream readOntology(String fileName, boolean setInferdFilePath) throws IOException {
-        String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
+        String path = myPath + fileName;
         if (setInferdFilePath) {
-            inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
-                    + fileEnding;
+            inferdFilePath = path.substring(0, path.length() - fileEnding.length()) + "Inf" + fileEnding;
         }
         try {
-            return new FileInputStream(localPath);
-        } catch (FileNotFoundException e) {
-            return getClass().getResourceAsStream("/" + fileName);
+            return new FileInputStream(path);
+        } catch (FileNotFoundException e1) {
+            String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
+            if (setInferdFilePath) {
+                inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
+                        + fileEnding;
+            }
+            try {
+                return new FileInputStream(localPath);
+            } catch (FileNotFoundException e2) {
+                return getClass().getResourceAsStream("/" + fileName);
+            }
         }
     }
 
@@ -143,14 +153,14 @@ public class MainReasoner {
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
                 requirements.get(0).max);
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTHREQMIN_L_UNIT_MM,
                 requirements.get(1).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTHREQMAX_L_UNIT_MM,
                 requirements.get(1).max);
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM,
                 requirements.get(2).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM,
+        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM,
                 requirements.get(2).max);
 
         addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
