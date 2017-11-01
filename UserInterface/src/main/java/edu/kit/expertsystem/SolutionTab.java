@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Tree;
@@ -30,25 +31,29 @@ public class SolutionTab {
     public void createContents(ResultWrapper resultWrapper, List<RequirementWrapper> requirements) {
         Composite leftComposite = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
-        formToolkit.paintBordersFor(leftComposite);
 
         resultWrapper.tree = new Tree(leftComposite, SWT.NONE);
         resultWrapper.tree.setBounds(10, 10, 385, 298);
         formToolkit.adapt(resultWrapper.tree);
-        formToolkit.paintBordersFor(resultWrapper.tree);
 
         Label separator = new Label(solutionForm, SWT.SEPARATOR | SWT.VERTICAL);
-        formToolkit.adapt(separator, true, true);
+        formToolkit.adapt(separator, false, false);
 
-        Composite rightComposite = new Composite(solutionForm, SWT.NONE);
+        ScrolledComposite rightScrolledComposite = new ScrolledComposite(solutionForm, SWT.V_SCROLL);
+        rightScrolledComposite.setExpandVertical(true);
+        rightScrolledComposite.setExpandHorizontal(true);
+        formToolkit.adapt(rightScrolledComposite);
+
+        Composite rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
         formToolkit.adapt(rightComposite);
-        formToolkit.paintBordersFor(rightComposite);
+        rightScrolledComposite.setContent(rightComposite);
 
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
             descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
                     requirements.get(i).requirement.description, i + 1);
         }
+        rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
     }
 
     public SashForm getSolutionForm() {

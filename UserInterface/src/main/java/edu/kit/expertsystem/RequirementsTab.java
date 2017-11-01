@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
@@ -32,7 +33,6 @@ public class RequirementsTab {
     public void createContents(List<RequirementWrapper> requirements) {
         Composite leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
-        formToolkit.paintBordersFor(leftComposite);
 
         RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
         for (int i = 0; i < requirements.size(); i++) {
@@ -61,11 +61,16 @@ public class RequirementsTab {
         });
 
         Label separator = new Label(requirementsForm, SWT.SEPARATOR | SWT.VERTICAL);
-        formToolkit.adapt(separator, true, true);
+        formToolkit.adapt(separator, false, false);
 
-        Composite rightComposite = new Composite(requirementsForm, SWT.NONE);
+        ScrolledComposite rightScrolledComposite = new ScrolledComposite(requirementsForm, SWT.V_SCROLL);
+        rightScrolledComposite.setExpandVertical(true);
+        rightScrolledComposite.setExpandHorizontal(true);
+        formToolkit.adapt(rightScrolledComposite);
+
+        Composite rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
         formToolkit.adapt(rightComposite);
-        formToolkit.paintBordersFor(rightComposite);
+        rightScrolledComposite.setContent(rightComposite);
 
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         descriptionHelper.createDescription("min/max:",
@@ -74,6 +79,7 @@ public class RequirementsTab {
             descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
                     requirements.get(i).requirement.description, i + 1);
         }
+        rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
     }
 
     public SashForm getRequirementsForm() {

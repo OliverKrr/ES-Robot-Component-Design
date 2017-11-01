@@ -11,7 +11,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 public class DescriptionHelper {
 
     private static final int labelWidth = 80;
-    private static final int descriptionWidth = 255;
+    private static final int descriptionWidth = 248;
 
     private static final int height = 60;
 
@@ -24,6 +24,8 @@ public class DescriptionHelper {
     private final FormToolkit formToolkit;
     private final Composite composite;
 
+    private int maxYEnd;
+
     public DescriptionHelper(FormToolkit formToolkit, Composite composite) {
         this.formToolkit = formToolkit;
         this.composite = composite;
@@ -31,6 +33,7 @@ public class DescriptionHelper {
 
     public void createDescription(String labelText, String descriptionText, int rowNumber) {
         int y = basisY + offsetY * rowNumber;
+        maxYEnd = Math.max(maxYEnd, y + height);
 
         Label label = new Label(composite, SWT.WRAP);
         label.setText(labelText);
@@ -50,6 +53,10 @@ public class DescriptionHelper {
         description.setBounds(descriptionX, y, descriptionWidth, height);
         formToolkit.adapt(description);
         formToolkit.paintBordersFor(description);
+    }
+
+    public int getMaxYEnd() {
+        return maxYEnd;
     }
 
 }
