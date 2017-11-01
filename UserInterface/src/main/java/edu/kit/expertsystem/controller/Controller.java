@@ -99,9 +99,17 @@ public class Controller {
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree,
                     "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
+
+            double maxNumberOfChars = 0;
+            for (Requirement req : result.requirements) {
+                maxNumberOfChars = Math.max(maxNumberOfChars, req.displayName.length());
+            }
+
             for (Requirement req : result.requirements) {
                 double resultValue = req.result * req.scaleFromOntologyToUI;
-                addTreeItem(resItem, req.displayName + " " + resultValue + getSpaces(resultValue) + req.unit);
+                addTreeItem(resItem,
+                        req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + " "
+                                + resultValue + getSpacesForResultValue(resultValue) + req.unit);
             }
             resItem.setExpanded(true);
         }
@@ -121,7 +129,15 @@ public class Controller {
         return resItem;
     }
 
-    private String getSpaces(double value) {
+    private String getSpacesForDisplayName(String currentDisplayName, double maxNumberOfChars) {
+        String ret = "";
+        for (int i = currentDisplayName.length(); i <= maxNumberOfChars; ++i) {
+            ret += " ";
+        }
+        return ret;
+    }
+
+    private String getSpacesForResultValue(double value) {
         String ret = "";
         String str = String.valueOf(value);
         for (int i = str.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {

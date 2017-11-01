@@ -19,6 +19,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -43,7 +44,7 @@ public class MainReasoner {
 
     private static final Logger logger = LogManager.getLogger(MainReasoner.class);
 
-    private String inferdFilePath;
+    private String inferdFilePath = null;
 
     private OWLOntologyManager manager;
     private OWLDataFactory dataFac;
@@ -197,15 +198,15 @@ public class MainReasoner {
             result.requirements = copyRequirements(requirements);
 
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
-                    .ifPresent(obProp -> result.requirements.get(0).result = obProp.parseDouble());
+                    .ifPresent(obProp -> result.requirements.get(0).result = parseValue(obProp));
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM).findAny()
-                    .ifPresent(obProp -> result.requirements.get(1).result = obProp.parseDouble());
+                    .ifPresent(obProp -> result.requirements.get(1).result = parseValue(obProp));
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM)
-                    .findAny().ifPresent(obProp -> result.requirements.get(2).result = obProp.parseDouble());
+                    .findAny().ifPresent(obProp -> result.requirements.get(2).result = parseValue(obProp));
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
-                    .ifPresent(obProp -> result.requirements.get(3).result = obProp.parseDouble());
+                    .ifPresent(obProp -> result.requirements.get(3).result = parseValue(obProp));
             reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
-                    .findAny().ifPresent(obProp -> result.requirements.get(4).result = obProp.parseDouble());
+                    .findAny().ifPresent(obProp -> result.requirements.get(4).result = parseValue(obProp));
 
             results.add(result);
         });
@@ -224,8 +225,18 @@ public class MainReasoner {
         return copyReqs;
     }
 
+    private double parseValue(OWLLiteral obProp) {
+        if (obProp.isInteger()) {
+            return obProp.parseInteger();
+        }
+        return obProp.parseDouble();
+    }
+
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
         logger.info("Reasoned ontology isConsistent: " + reasoner.isConsistent());
+        if (inferdFilePath == null) {
+            return;
+        }
         OWLOntology inferOnto = reasoner.getRootOntology();
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             manager.saveOntology(inferOnto, out);
