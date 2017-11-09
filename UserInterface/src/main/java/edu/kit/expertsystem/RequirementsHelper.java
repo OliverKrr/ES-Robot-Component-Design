@@ -63,10 +63,12 @@ public class RequirementsHelper {
         requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.minValue, true, true);
 
-        Label unitForMin = new Label(composite, SWT.NONE);
-        unitForMin.setText(requirementWrapper.requirement.unit);
-        unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
-        formToolkit.adapt(unitForMin, false, false);
+        if (requirementWrapper.requirement.unit != null) {
+            Label unitForMin = new Label(composite, SWT.NONE);
+            unitForMin.setText(requirementWrapper.requirement.unit);
+            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
+            formToolkit.adapt(unitForMin, false, false);
+        }
 
         requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
         requirementWrapper.maxValue
@@ -75,10 +77,12 @@ public class RequirementsHelper {
         requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.maxValue, true, true);
 
-        Label unitForMax = new Label(composite, SWT.NONE);
-        unitForMax.setText(requirementWrapper.requirement.unit);
-        unitForMax.setBounds(unitForMaxX, y2, unitWidth, height);
-        formToolkit.adapt(unitForMax, false, false);
+        if (requirementWrapper.requirement.unit != null) {
+            Label unitForMax = new Label(composite, SWT.NONE);
+            unitForMax.setText(requirementWrapper.requirement.unit);
+            unitForMax.setBounds(unitForMaxX, y2, unitWidth, height);
+            formToolkit.adapt(unitForMax, false, false);
+        }
     }
 
 }

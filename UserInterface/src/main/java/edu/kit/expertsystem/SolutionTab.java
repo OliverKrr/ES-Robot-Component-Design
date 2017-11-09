@@ -48,10 +48,13 @@ public class SolutionTab {
         formToolkit.adapt(rightComposite);
         rightScrolledComposite.setContent(rightComposite);
 
+        int rowNumber = 0;
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
-            descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
-                    requirements.get(i).requirement.description, i + 1);
+            if (requirements.get(i).requirement.description != null) {
+                descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
+                        requirements.get(i).requirement.description, rowNumber++);
+            }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
     }

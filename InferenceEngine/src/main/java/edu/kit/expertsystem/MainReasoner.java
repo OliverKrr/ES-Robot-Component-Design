@@ -190,7 +190,7 @@ public class MainReasoner {
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
-                    reasoner.dataPropertyValues(en, getOWLDataProperty(textFieldReq.resultIRI)).findAny()
+                    reasoner.dataPropertyValues(en, getOWLDataProperty(req.resultIRI)).findAny()
                             .ifPresent(obProp -> textFieldReq.result = parseValue(obProp));
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
