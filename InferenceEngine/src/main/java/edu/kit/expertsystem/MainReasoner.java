@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -200,9 +202,16 @@ public class MainReasoner {
             results.add(result);
         });
 
-        // TODO sort?
-        // Collections.sort(results, Comparator.comparingDouble(result ->
-        // result.requirements.get(0).result));
+        try {
+            Collections.sort(results,
+                    Comparator.comparingDouble(result -> result.requirements.stream()
+                            .filter(req -> Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG.getIRI()
+                                    .getIRIString().equals(req.resultIRI))
+                            .findAny().map(req -> ((TextFieldMinMaxRequirement) req).result).get()));
+        } catch (NoSuchElementException e) {
+            logger.warn("Cannot sort, because weight is not available.");
+        }
+
         // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         return results;
