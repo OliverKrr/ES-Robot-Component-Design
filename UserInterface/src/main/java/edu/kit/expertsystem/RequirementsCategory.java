@@ -15,6 +15,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.NavigationItem;
 import edu.kit.expertsystem.controller.RequirementWrapper;
+import edu.kit.expertsystem.model.Category;
 
 public class RequirementsCategory {
 
@@ -38,7 +39,7 @@ public class RequirementsCategory {
     }
 
     public void createContents(List<RequirementWrapper> requirements, int[] weights) {
-        Map<String, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
+        Map<Category, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
 
         for (RequirementWrapper req : requirements) {
             if (reqPerCategory.containsKey(req.requirement.category)) {
@@ -50,13 +51,13 @@ public class RequirementsCategory {
             }
         }
 
-        for (Entry<String, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
+        for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
             tab.createContents(reqsPerCat.getValue());
             tab.getRequirementsForm().setWeights(weights);
 
             NavigationItem item = new NavigationItem();
-            item.name = reqsPerCat.getKey();
+            item.name = reqsPerCat.getKey().displayName;
             item.compositeToHandle = tab.getRequirementsForm();
             reqNavItems.add(item);
         }

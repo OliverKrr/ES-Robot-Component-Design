@@ -16,6 +16,7 @@ import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.MainReasoner;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
+import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 
 public class Controller {
 
@@ -40,16 +41,25 @@ public class Controller {
         List<Requirement> requirements = reasoner.getRequirements();
         requirementsWrapper = new ArrayList<>(requirements.size());
         for (Requirement req : requirements) {
-            requirementsWrapper.add(new RequirementWrapper(req));
+            if (req instanceof TextFieldMinMaxRequirement) {
+                requirementsWrapper.add(new TextFieldMinMaxRequirementWrapper(req));
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + req.getClass());
+            }
         }
         resultWrapper = new ResultWrapper();
     }
 
     public void reset() {
         for (RequirementWrapper req : requirementsWrapper) {
-            req.requirement.min = 0;
-            req.requirement.max = Double.MAX_VALUE;
-            req.requirement.result = -1;
+            if (req instanceof TextFieldMinMaxRequirementWrapper) {
+                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
+                textFieldReq.min = 0;
+                textFieldReq.max = Double.MAX_VALUE;
+                textFieldReq.result = -1;
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + req.getClass());
+            }
         }
         reasoner.prepareReasoning();
     }
@@ -70,10 +80,15 @@ public class Controller {
         resultWrapper.tree.removeAll();
 
         for (RequirementWrapper req : requirementsWrapper) {
-            req.requirement.min = parseDouble(req.minValue, req.requirement.min)
-                    / req.requirement.scaleFromOntologyToUI;
-            req.requirement.max = parseDouble(req.maxValue, req.requirement.max)
-                    / req.requirement.scaleFromOntologyToUI;
+            if (req instanceof TextFieldMinMaxRequirementWrapper) {
+                TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
+                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
+
+                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.min) / textFieldReq.scaleFromOntologyToUI;
+                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.max) / textFieldReq.scaleFromOntologyToUI;
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + req.getClass());
+            }
         }
     }
 
@@ -106,7 +121,13 @@ public class Controller {
             }
 
             for (Requirement req : result.requirements) {
-                double resultValue = req.result * req.scaleFromOntologyToUI;
+                double resultValue = -1;
+                if (req instanceof TextFieldMinMaxRequirement) {
+                    TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
+                    resultValue = textFieldReq.result * textFieldReq.scaleFromOntologyToUI;
+                } else {
+                    throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                }
                 addTreeItem(resItem,
                         req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + " "
                                 + resultValue + getSpacesForResultValue(resultValue) + req.unit);

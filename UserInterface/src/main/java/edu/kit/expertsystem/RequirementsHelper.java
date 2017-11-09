@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
+import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 
 public class RequirementsHelper {
 
@@ -35,6 +37,16 @@ public class RequirementsHelper {
     }
 
     public void createRequirement(RequirementWrapper requirementWrapper, int rowNumber) {
+        if (requirementWrapper instanceof TextFieldMinMaxRequirementWrapper) {
+            createTextFieldMinMaxRequirement((TextFieldMinMaxRequirementWrapper) requirementWrapper,
+                    rowNumber);
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + requirementWrapper.getClass());
+        }
+    }
+
+    private void createTextFieldMinMaxRequirement(TextFieldMinMaxRequirementWrapper requirementWrapper,
+            int rowNumber) {
         int y1 = basisY1 + offsetY * rowNumber;
         int y2 = basisY2 + offsetY * rowNumber;
 
@@ -45,7 +57,8 @@ public class RequirementsHelper {
         displayName.setForeground(Configs.KIT_GREEN_70);
 
         requirementWrapper.minValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.minValue.setEnabled(requirementWrapper.requirement.enableMin);
+        requirementWrapper.minValue
+                .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMin);
         requirementWrapper.minValue.setMessage("min");
         requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.minValue, true, true);
@@ -56,7 +69,8 @@ public class RequirementsHelper {
         formToolkit.adapt(unitForMin, false, false);
 
         requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.maxValue.setEnabled(requirementWrapper.requirement.enableMax);
+        requirementWrapper.maxValue
+                .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMax);
         requirementWrapper.maxValue.setMessage("max");
         requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.maxValue, true, true);

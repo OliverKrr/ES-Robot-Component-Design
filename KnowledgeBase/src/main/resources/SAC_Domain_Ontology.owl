@@ -10,6 +10,8 @@
     <owl:Ontology rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic"/>
     
 
+    
+
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -76,6 +78,10 @@
     
 
 
+   
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm">
@@ -85,21 +91,7 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMax_L_unit_mm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMax_L_unit_mm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMin_L_unit_mm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMin_L_unit_mm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
+   
     
 
 
@@ -112,22 +104,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMax_D_unit_mm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMax_D_unit_mm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMin_D_unit_mm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMin_D_unit_mm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
 
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm -->
@@ -145,6 +121,10 @@
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
     </owl:DatatypeProperty>
+    
+
+
+   
     
 
 
@@ -183,22 +163,6 @@
     </owl:DatatypeProperty>
     
 
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMax_n_max_unit_rpm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMax_n_max_unit_rpm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSpeed_n_unit_rpm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMin_n_max_unit_rpm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMin_n_max_unit_rpm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSpeed_n_unit_rpm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
     
 
 
@@ -220,23 +184,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMax_M_max_unit_Nm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMax_M_max_unit_Nm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasTorque_M_unit_Nm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMin_M_max_unit_Nm -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMin_M_max_unit_Nm">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasTorque_M_unit_Nm"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorque_M_max_unit_Nm -->
 
@@ -254,6 +201,9 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
     </owl:DatatypeProperty>
     
+
+
+   
 
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A -->
@@ -283,6 +233,10 @@
     
 
 
+   
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue">
@@ -300,22 +254,7 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMax_m_unit_kg -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMax_m_unit_kg">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMin_m_unit_kg -->
-
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMin_m_unit_kg">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-    </owl:DatatypeProperty>
-    
 
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg -->
@@ -1032,6 +971,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDriveComponentSets2A"/>
     </owl:Class>
     
+    
 
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CurrentCircuitsNo -->
@@ -1059,10 +999,14 @@
     </owl:Class>
     
 
+    
+
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
+    
+
     
 
 
@@ -2380,70 +2324,7 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Requirements -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Requirements">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMax_L_unit_mm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthReqMin_L_unit_mm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMax_D_unit_mm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterReqMin_D_unit_mm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMax_n_max_unit_rpm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaximalSpeedReqMin_n_max_unit_rpm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMax_M_max_unit_Nm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorqueReqMin_M_max_unit_Nm"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMax_m_unit_kg"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeightReqMin_m_unit_kg"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
+   
     
 
 
@@ -3191,6 +3072,10 @@
     
 
 
+   
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Weight -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Weight">
@@ -3280,6 +3165,7 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_50_2A_BB"/>
         </owl:members>
     </rdf:Description>
+   
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">

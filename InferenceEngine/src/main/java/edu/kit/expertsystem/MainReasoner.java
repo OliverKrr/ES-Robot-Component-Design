@@ -9,18 +9,19 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -30,8 +31,10 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
+import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
+import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import openllet.owlapi.PelletReasoner;
 
 public class MainReasoner {
@@ -142,37 +145,23 @@ public class MainReasoner {
 
     private void addRequirements(List<Requirement> requirements) {
         logger.info(requirements);
-        OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(helper.create("requirementsInd"));
-        // TODO fix with multiple Vocalbs
-        helper.addAxiom(dataFac.getOWLClassAssertionAxiom(
-                dataFac.getOWLClass(IRI
-                        .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Requirements")),
-                requirementsInd));
+        OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(helper.create("currentRequs"));
+        helper.addAxiom(
+                dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS, requirementsInd));
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG,
-                requirements.get(0).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG,
-                requirements.get(0).max);
+        for (Requirement req : requirements) {
+            if (req instanceof TextFieldMinMaxRequirement) {
+                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
+                addRequirement(requirementsInd, getOWLDataProperty(textFieldReq.minIRI), textFieldReq.min);
+                addRequirement(requirementsInd, getOWLDataProperty(textFieldReq.maxIRI), textFieldReq.max);
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + req.getClass());
+            }
+        }
+    }
 
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTHREQMIN_L_UNIT_MM,
-                requirements.get(1).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTHREQMAX_L_UNIT_MM,
-                requirements.get(1).max);
-
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM,
-                requirements.get(2).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM,
-                requirements.get(2).max);
-
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM,
-                requirements.get(3).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM,
-                requirements.get(3).max);
-
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM,
-                requirements.get(4).min);
-        addRequirement(requirementsInd, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM,
-                requirements.get(4).max);
+    private OWLDataProperty getOWLDataProperty(String iri) {
+        return dataFac.getOWLDataProperty(IRI.create(iri));
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
@@ -190,6 +179,7 @@ public class MainReasoner {
         List<Result> results = new ArrayList<>();
         reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
             Result result = new Result();
+            // TODO hier alle hasChild
             reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASMOTOR).findAny()
                     .ifPresent(obProp -> result.motor.name = helper.getNameOfOWLNamedIndividual(obProp));
             reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASGEARBOX).findAny()
@@ -197,21 +187,22 @@ public class MainReasoner {
 
             result.requirements = copyRequirements(requirements);
 
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG).findAny()
-                    .ifPresent(obProp -> result.requirements.get(0).result = parseValue(obProp));
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM).findAny()
-                    .ifPresent(obProp -> result.requirements.get(1).result = parseValue(obProp));
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM)
-                    .findAny().ifPresent(obProp -> result.requirements.get(2).result = parseValue(obProp));
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM).findAny()
-                    .ifPresent(obProp -> result.requirements.get(3).result = parseValue(obProp));
-            reasoner.dataPropertyValues(en, Vocabulary.DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM)
-                    .findAny().ifPresent(obProp -> result.requirements.get(4).result = parseValue(obProp));
+            for (Requirement req : result.requirements) {
+                if (req instanceof TextFieldMinMaxRequirement) {
+                    TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
+                    reasoner.dataPropertyValues(en, getOWLDataProperty(textFieldReq.resultIRI)).findAny()
+                            .ifPresent(obProp -> textFieldReq.result = parseValue(obProp));
+                } else {
+                    throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                }
+            }
 
             results.add(result);
         });
 
-        Collections.sort(results, Comparator.comparingDouble(result -> result.requirements.get(0).result));
+        // TODO sort?
+        // Collections.sort(results, Comparator.comparingDouble(result ->
+        // result.requirements.get(0).result));
         // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         return results;
@@ -220,7 +211,11 @@ public class MainReasoner {
     private List<Requirement> copyRequirements(List<Requirement> requirements) {
         List<Requirement> copyReqs = new ArrayList<>(requirements.size());
         for (Requirement req : requirements) {
-            copyReqs.add(new Requirement(req));
+            if (req instanceof TextFieldMinMaxRequirement) {
+                copyReqs.add(new TextFieldMinMaxRequirement((TextFieldMinMaxRequirement) req));
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + req.getClass());
+            }
         }
         return copyReqs;
     }
@@ -244,55 +239,72 @@ public class MainReasoner {
     }
 
     public List<Requirement> getRequirements() {
+        // TODO make methods for componentsToBuild, UI element to choose and get that
+        // here
+        OWLClass componentToBuild = Vocabulary.CLASS_MOTORGEARBOXMATCH;
         List<Requirement> requirements = new ArrayList<>();
 
-        Requirement weight = new Requirement();
-        weight.displayName = "Weight m:";
-        weight.category = "Common";
-        weight.description = "The total weight of the SAC unit.";
-        weight.unit = "kg";
-        weight.enableMin = false;
-        weight.enableMax = true;
-        requirements.add(weight);
+        ontology.subClassAxiomsForSubClass(componentToBuild)
+                .forEach(axiom -> axiom.componentsWithoutAnnotations()
+                        .filter(component -> component instanceof OWLObjectHasValue
+                                && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
+                                        .equals(((OWLObjectHasValue) component).getProperty()))
+                        .forEach(component -> requirements.add(parseRequirement(
+                                ((OWLObjectHasValue) component).getFiller().asOWLNamedIndividual()))));
 
-        Requirement lenght = new Requirement();
-        lenght.displayName = "Length L:";
-        lenght.category = "Dimensions";
-        lenght.description = "The total length of the SAC unit.";
-        lenght.unit = "mm";
-        lenght.enableMin = false;
-        lenght.enableMax = true;
-        requirements.add(lenght);
-
-        Requirement diameter = new Requirement();
-        diameter.displayName = "Diameter D:";
-        diameter.category = "Dimensions";
-        diameter.description = "The total outer diameter of the SAC unit.";
-        diameter.unit = "mm";
-        diameter.enableMin = false;
-        diameter.enableMax = true;
-        requirements.add(diameter);
-
-        Requirement maximalTorque = new Requirement();
-        maximalTorque.displayName = "Peak Torque M_max:";
-        maximalTorque.category = "Performance";
-        maximalTorque.description = "Repeated peak torque without damaging the units.";
-        maximalTorque.unit = "Nm";
-        maximalTorque.enableMin = true;
-        maximalTorque.enableMax = false;
-        requirements.add(maximalTorque);
-
-        Requirement maximalRotationSpeed = new Requirement();
-        maximalRotationSpeed.displayName = "Maximal Speed n_max:";
-        maximalRotationSpeed.category = "Performance";
-        maximalRotationSpeed.description = "Maximal output speed at nominal voltage.";
-        maximalRotationSpeed.unit = "°/s";
-        // convert from rpm to °/s
-        maximalRotationSpeed.scaleFromOntologyToUI = 6.0;
-        maximalRotationSpeed.enableMin = true;
-        maximalRotationSpeed.enableMax = false;
-        requirements.add(maximalRotationSpeed);
-
+        Collections.sort(requirements, (req1, req2) -> String.CASE_INSENSITIVE_ORDER
+                .compare(req1.category.displayName, req2.category.displayName));
         return requirements;
     }
+
+    private Requirement parseRequirement(OWLNamedIndividual owlIndividual) {
+        return reasoner.types(owlIndividual, true).map(type -> {
+            if (Vocabulary.CLASS_TEXTFIELDMINMAXREQUIREMENT.equals(type)) {
+                TextFieldMinMaxRequirement textReq = new TextFieldMinMaxRequirement();
+                parseCommonRequirement(textReq, owlIndividual);
+
+                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX)
+                        .findAny().ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
+                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
+                        .findAny().ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
+                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
+                        .findAny().ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValue(obProp));
+
+                ontology.dataPropertyAssertionAxioms(owlIndividual)
+                        .forEach(prop -> prop.componentsWithoutAnnotations()
+                                .filter(component -> component instanceof OWLDataProperty)
+                                .forEach(component -> ((OWLDataProperty) component)
+                                        .dataPropertiesInSignature()
+                                        .forEach(comp -> reasoner.superDataProperties(comp).forEach(sup -> {
+                                            if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(sup)) {
+                                                textReq.minIRI = comp.getIRI().getIRIString();
+                                            } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX.equals(sup)) {
+                                                textReq.maxIRI = comp.getIRI().getIRIString();
+                                            } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(sup)) {
+                                                textReq.resultIRI = comp.getIRI().getIRIString();
+                                            }
+                                        }))));
+
+                return textReq;
+            } else {
+                throw new RuntimeException("Requirement type unknown: " + type);
+            }
+        }).findAny().get();
+    }
+
+    private void parseCommonRequirement(Requirement req, OWLNamedIndividual owlIndividual) {
+        req.category = new Category();
+        reasoner.objectPropertyValues(owlIndividual, Vocabulary.OBJECT_PROPERTY_HASCATEGORY).forEach(cate -> {
+            reasoner.dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
+                    .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
+        });
+
+        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
+                .ifPresent(obProp -> req.displayName = obProp.getLiteral());
+        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDESCRIPTION).findAny()
+                .ifPresent(obProp -> req.description = obProp.getLiteral());
+        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASUNIT).findAny()
+                .ifPresent(obProp -> req.unit = obProp.getLiteral());
+    }
+
 }

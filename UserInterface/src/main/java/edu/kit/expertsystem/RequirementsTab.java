@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
+import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 
 public class RequirementsTab {
 
@@ -37,8 +39,13 @@ public class RequirementsTab {
         boolean isAnyFieldDisabled = false;
         RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
         for (int i = 0; i < requirements.size(); i++) {
-            isAnyFieldDisabled |= !requirements.get(i).requirement.enableMin
-                    || !requirements.get(i).requirement.enableMax;
+            if (requirements.get(i) instanceof TextFieldMinMaxRequirementWrapper) {
+                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) requirements
+                        .get(i).requirement;
+                isAnyFieldDisabled |= !textFieldReq.enableMin || !textFieldReq.enableMax;
+            } else {
+                throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
+            }
             requirementsHelper.createRequirement(requirements.get(i), i);
         }
 
@@ -54,8 +61,14 @@ public class RequirementsTab {
                     btnEnableFields
                             .setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
                     for (RequirementWrapper req : requirements) {
-                        req.minValue.setEnabled(req.requirement.enableMin || !req.minValue.isEnabled());
-                        req.maxValue.setEnabled(req.requirement.enableMax || !req.maxValue.isEnabled());
+                        if (req instanceof TextFieldMinMaxRequirementWrapper) {
+                            TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
+                            TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
+                            textFieldReqWrapper.minValue.setEnabled(textFieldReq.enableMin || !textFieldReqWrapper.minValue.isEnabled());
+                            textFieldReqWrapper.maxValue.setEnabled(textFieldReq.enableMax || !textFieldReqWrapper.maxValue.isEnabled());
+                        } else {
+                            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                        }
                     }
                 }
 
@@ -65,7 +78,6 @@ public class RequirementsTab {
                 }
             });
         }
-
 
         Label separator = new Label(requirementsForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(separator, false, false);
