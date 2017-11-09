@@ -191,7 +191,7 @@ public class MainReasoner {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
                     reasoner.dataPropertyValues(en, getOWLDataProperty(req.resultIRI)).findAny()
-                            .ifPresent(obProp -> textFieldReq.result = parseValue(obProp));
+                            .ifPresent(obProp -> textFieldReq.result = parseValueToDouble(obProp));
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -220,11 +220,18 @@ public class MainReasoner {
         return copyReqs;
     }
 
-    private double parseValue(OWLLiteral obProp) {
+    private double parseValueToDouble(OWLLiteral obProp) {
         if (obProp.isInteger()) {
             return obProp.parseInteger();
         }
         return obProp.parseDouble();
+    }
+
+    private int parseValueToInteger(OWLLiteral obProp) {
+        if (obProp.isInteger()) {
+            return obProp.parseInteger();
+        }
+        return Math.round(obProp.parseFloat());
     }
 
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
@@ -252,8 +259,13 @@ public class MainReasoner {
                         .forEach(component -> requirements.add(parseRequirement(
                                 ((OWLObjectHasValue) component).getFiller().asOWLNamedIndividual()))));
 
-        Collections.sort(requirements, (req1, req2) -> String.CASE_INSENSITIVE_ORDER
-                .compare(req1.category.displayName, req2.category.displayName));
+        Collections.sort(requirements, (req1, req2) -> {
+            int sortCat = req1.category.orderPosition - req2.category.orderPosition;
+            if (sortCat == 0) {
+                return req1.orderPosition - req2.orderPosition;
+            }
+            return sortCat;
+        });
         return requirements;
     }
 
@@ -268,7 +280,8 @@ public class MainReasoner {
                 reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
                         .findAny().ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
                 reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
-                        .findAny().ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValue(obProp));
+                        .findAny()
+                        .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
 
                 ontology.dataPropertyAssertionAxioms(owlIndividual)
                         .forEach(prop -> prop.componentsWithoutAnnotations()
@@ -297,6 +310,8 @@ public class MainReasoner {
         reasoner.objectPropertyValues(owlIndividual, Vocabulary.OBJECT_PROPERTY_HASCATEGORY).forEach(cate -> {
             reasoner.dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
                     .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
+            reasoner.dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
+                    .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
         });
 
         reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
@@ -305,6 +320,8 @@ public class MainReasoner {
                 .ifPresent(obProp -> req.description = obProp.getLiteral());
         reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASUNIT).findAny()
                 .ifPresent(obProp -> req.unit = obProp.getLiteral());
+        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
+                .ifPresent(obProp -> req.orderPosition = parseValueToInteger(obProp));
     }
 
 }

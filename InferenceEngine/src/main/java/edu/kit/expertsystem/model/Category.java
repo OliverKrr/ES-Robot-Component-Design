@@ -3,12 +3,14 @@ package edu.kit.expertsystem.model;
 public class Category {
 
     public String displayName;
+    public int orderPosition;
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
+        result = prime * result + orderPosition;
         return result;
     }
 
@@ -31,12 +33,15 @@ public class Category {
         } else if (!displayName.equals(other.displayName)) {
             return false;
         }
+        if (orderPosition != other.orderPosition) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Category [displayName=" + displayName + "]";
+        return "Category [displayName=" + displayName + ", orderPosition=" + orderPosition + "]";
     }
 
 }

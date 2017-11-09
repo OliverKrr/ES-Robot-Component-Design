@@ -6,6 +6,7 @@ public class Requirement {
     public String description;
     public String unit;
     public Category category;
+    public int orderPosition;
 
     public String resultIRI;
 
@@ -18,11 +19,13 @@ public class Requirement {
         unit = other.unit;
         category = other.category;
         resultIRI = other.resultIRI;
+        orderPosition = other.orderPosition;
     }
 
     @Override
     public String toString() {
         return "Requirement [displayName=" + displayName + ", description=" + description + ", unit=" + unit
-                + ", category=" + category + ", resultIRI=" + resultIRI + "]";
+                + ", category=" + category + ", orderPosition=" + orderPosition + ", resultIRI=" + resultIRI
+                + "]";
     }
 }
