@@ -61,7 +61,8 @@ MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ CurrentRequirements(
 
 
 
-SACunitSatisfyRule:
-SACunit(?sac) -> SatisfiedSACunit(?sac)
+SACunitMotorGearBoxMatchSatisfyRule:
+SACunit(?sac) ^ hasMotorGearBoxMatch(?sac, ?ma) ^ SatisfiedMotorGearBoxMatch(?ma) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g) ^ hasWeight_m_unit_kg(?ma, ?m_ges) -> SatisfiedRotationSpeed(?sac)  ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedLength(?sac) ^  hasDimensionLength_L_unit_mm(?sac, ?L_ges) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_g) ^ SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges)
+
 
 

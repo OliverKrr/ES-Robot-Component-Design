@@ -71,17 +71,17 @@ public class ReasoningTree {
 
     private List<ChildInstancesForPermutation> getChildrenForPermutation(OWLClass treeClass) {
         List<ChildInstancesForPermutation> childrenForPermutation = new ArrayList<>();
-        ontology.subClassAxiomsForSubClass(treeClass).forEach(axiom -> axiom.componentsWithoutAnnotations()
-                .filter(component -> component instanceof OWLQuantifiedObjectRestriction)
-                .forEach(component -> ontology
-                        .objectSubPropertyAxiomsForSubProperty(
-                                ((OWLQuantifiedObjectRestriction) component).getProperty())
-                        .filter(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
-                                .equals(propSupers.getSuperProperty()))
-                        .forEach(propSupers -> childrenForPermutation.add(new ChildInstancesForPermutation(
+        ontology.subClassAxiomsForSubClass(treeClass)
+                .forEach(axiom -> axiom.componentsWithoutAnnotations()
+                        .filter(component -> component instanceof OWLQuantifiedObjectRestriction && ontology
+                                .objectSubPropertyAxiomsForSubProperty(
+                                        ((OWLQuantifiedObjectRestriction) component).getProperty())
+                                .anyMatch(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
+                                        .equals(propSupers.getSuperProperty())))
+                        .forEach(component -> childrenForPermutation.add(new ChildInstancesForPermutation(
                                 reasoner.instances(((OWLQuantifiedObjectRestriction) component).getFiller())
                                         .collect(Collectors.toList()),
-                                ((OWLQuantifiedObjectRestriction) component).getProperty())))));
+                                ((OWLQuantifiedObjectRestriction) component).getProperty()))));
         return childrenForPermutation;
     }
 

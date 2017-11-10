@@ -28,12 +28,14 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
 import org.semanticweb.owlapi.reasoner.BufferingMode;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.model.Category;
+import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
@@ -54,11 +56,13 @@ public class MainReasoner {
     private OWLOntologyManager manager;
     private OWLDataFactory dataFac;
     private OWLOntology ontology;
-    private OWLReasoner reasoner;
+    private PelletReasoner reasoner;
 
     private MyOWLHelper helper;
     private ReasoningTree reasoningTree;
     private boolean isReasoningPrepared = false;
+
+    private List<OWLClass> createdIndividualClasses = new ArrayList<>();
 
     public MainReasoner() {
         manager = OWLManager.createOWLOntologyManager();
@@ -107,13 +111,17 @@ public class MainReasoner {
     }
 
     public void prepareReasoning() {
+        long startTime = System.currentTimeMillis();
         if (isReasoningPrepared) {
             return;
         }
         helper.clearGeneratedAxioms();
-        createBasicIndividuals();
+        createBasicIndividuals(Vocabulary.CLASS_SACUNIT);
         reasoner.flush();
+        reasoner.precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
+        logger.info(
+                "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     public List<Result> startReasoning(List<Requirement> requirements) {
@@ -136,13 +144,24 @@ public class MainReasoner {
         }
     }
 
-    private void createBasicIndividuals() {
-        reasoner.subClasses(Vocabulary.CLASS_INDIVIDUALSTOCREATE, true)
-                .forEach(toCreateParent -> reasoner.subClasses(toCreateParent, true).forEach(toCreate -> {
-                    String name = toCreate.getIRI().getShortForm() + "Ind";
-                    OWLNamedIndividual ind = dataFac.getOWLNamedIndividual(helper.create(name));
-                    helper.addAxiom(dataFac.getOWLClassAssertionAxiom(toCreate, ind));
-                }));
+    private void createBasicIndividuals(OWLClass componentToReasone) {
+        createdIndividualClasses.clear();
+        ontology.subClassAxiomsForSubClass(componentToReasone).forEach(topAxiom -> topAxiom
+                .componentsWithoutAnnotations()
+                .filter(component -> component instanceof OWLQuantifiedObjectRestriction
+                        && Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                .equals(((OWLQuantifiedObjectRestriction) component).getProperty()))
+                .forEach(propComponent -> reasoner
+                        .subClasses(((OWLQuantifiedObjectRestriction) propComponent).getFiller().asOWLClass(),
+                                true)
+                        .forEach(topSubClass -> {
+                            createdIndividualClasses.add(topSubClass);
+                            reasoner.subClasses(topSubClass, true).forEach(toCreate -> {
+                                String name = toCreate.getIRI().getShortForm() + "Ind";
+                                OWLNamedIndividual ind = dataFac.getOWLNamedIndividual(helper.create(name));
+                                helper.addAxiom(dataFac.getOWLClassAssertionAxiom(toCreate, ind));
+                            });
+                        })));
     }
 
     private void addRequirements(List<Requirement> requirements) {
@@ -173,27 +192,48 @@ public class MainReasoner {
     }
 
     private List<Result> reason(List<Requirement> requirements) {
-        reasoningTree.makeReasoning(Vocabulary.CLASS_MOTORGEARBOXMATCH);
-        return makeResults(requirements);
+        reasoningTree.makeReasoning(Vocabulary.CLASS_SACUNIT);
+        return makeResults(Vocabulary.CLASS_SATISFIEDSACUNIT, requirements);
     }
 
-    private List<Result> makeResults(List<Requirement> requirements) {
+    private List<Result> makeResults(OWLClass classToBuildResult, List<Requirement> requirements) {
+        long startTime = System.currentTimeMillis();
         List<Result> results = new ArrayList<>();
-        reasoner.instances(Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH).forEach(en -> {
+        reasoner.instances(classToBuildResult).forEach(resultingComponent -> {
             Result result = new Result();
-            // TODO hier alle hasChild
-            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASMOTOR).findAny()
-                    .ifPresent(obProp -> result.motor.name = helper.getNameOfOWLNamedIndividual(obProp));
-            reasoner.objectPropertyValues(en, Vocabulary.OBJECT_PROPERTY_HASGEARBOX).findAny()
-                    .ifPresent(obProp -> result.gearBox.name = helper.getNameOfOWLNamedIndividual(obProp));
+            result.components = new ArrayList<>();
+
+            List<OWLNamedIndividual> childrendToSearch = new ArrayList<>();
+            childrendToSearch.add(resultingComponent);
+            List<OWLNamedIndividual> createdChildren = new ArrayList<>();
+            do {
+                List<OWLNamedIndividual> childrendToSearchNext = new ArrayList<>();
+                for (OWLNamedIndividual childToSearch : childrendToSearch) {
+                    getChildrenOfTreeItems(childToSearch, childrendToSearchNext, createdChildren);
+                }
+                childrendToSearch = childrendToSearchNext;
+            } while (!childrendToSearch.isEmpty());
+
+            createdChildren.forEach(createdChild -> {
+                Component component = new Component();
+                reasoner.types(createdChild)
+                        .filter(type -> ontology.subClassAxiomsForSuperClass(Vocabulary.CLASS_DEVICE)
+                                .anyMatch(subDevice -> subDevice.getSubClass().equals(type)))
+                        .findAny()
+                        .ifPresent(type -> component.nameOfComponent = type.getIRI().getShortForm());
+                component.nameOfInstance = helper.getNameOfOWLNamedIndividual(createdChild);
+                result.components.add(component);
+            });
+
+            Collections.sort(result.components, (comp1, comp2) -> String.CASE_INSENSITIVE_ORDER.reversed()
+                    .compare(comp1.nameOfComponent, comp2.nameOfComponent));
 
             result.requirements = copyRequirements(requirements);
-
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
-                    reasoner.dataPropertyValues(en, getOWLDataProperty(req.resultIRI)).findAny()
-                            .ifPresent(obProp -> textFieldReq.result = parseValueToDouble(obProp));
+                    reasoner.dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                            .findAny().ifPresent(obProp -> textFieldReq.result = parseValueToDouble(obProp));
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -214,7 +254,22 @@ public class MainReasoner {
 
         // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
+        logger.info(
+                "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return results;
+    }
+
+    private void getChildrenOfTreeItems(OWLNamedIndividual treeIndividual,
+            List<OWLNamedIndividual> childrendToSearchNext, List<OWLNamedIndividual> createdChildren) {
+        reasoner.objectPropertyValues(treeIndividual, Vocabulary.OBJECT_PROPERTY_HASCHILD)
+                .forEach(childIndividual -> {
+                    if (reasoner.types(childIndividual).anyMatch(type -> createdIndividualClasses.stream()
+                            .anyMatch(createdIndi -> createdIndi.equals(type)))) {
+                        createdChildren.add(childIndividual);
+                    } else {
+                        childrendToSearchNext.add(childIndividual);
+                    }
+                });
     }
 
     private List<Requirement> copyRequirements(List<Requirement> requirements) {
@@ -257,16 +312,24 @@ public class MainReasoner {
     public List<Requirement> getRequirements() {
         // TODO make methods for componentsToBuild, UI element to choose and get that
         // here
-        OWLClass componentToBuild = Vocabulary.CLASS_MOTORGEARBOXMATCH;
+        OWLClass componentToBuild = Vocabulary.CLASS_SACUNIT;
         List<Requirement> requirements = new ArrayList<>();
 
-        ontology.subClassAxiomsForSubClass(componentToBuild)
-                .forEach(axiom -> axiom.componentsWithoutAnnotations()
-                        .filter(component -> component instanceof OWLObjectHasValue
-                                && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
-                                        .equals(((OWLObjectHasValue) component).getProperty()))
-                        .forEach(component -> requirements.add(parseRequirement(
-                                ((OWLObjectHasValue) component).getFiller().asOWLNamedIndividual()))));
+        ontology.subClassAxiomsForSubClass(componentToBuild).forEach(topAxiom -> topAxiom
+                .componentsWithoutAnnotations()
+                .filter(component -> component instanceof OWLQuantifiedObjectRestriction
+                        && Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                .equals(((OWLQuantifiedObjectRestriction) component).getProperty()))
+                .forEach(propComponent -> ontology
+                        .subClassAxiomsForSubClass(
+                                ((OWLQuantifiedObjectRestriction) propComponent).getFiller().asOWLClass())
+                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
+                                .filter(component -> component instanceof OWLObjectHasValue
+                                        && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
+                                                .equals(((OWLObjectHasValue) component).getProperty()))
+                                .forEach(component -> requirements
+                                        .add(parseRequirement(((OWLObjectHasValue) component).getFiller()
+                                                .asOWLNamedIndividual()))))));
 
         Collections.sort(requirements, (req1, req2) -> {
             int sortCat = req1.category.orderPosition - req2.category.orderPosition;

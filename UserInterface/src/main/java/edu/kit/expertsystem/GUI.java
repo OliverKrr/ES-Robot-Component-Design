@@ -92,9 +92,7 @@ public class GUI {
     public void open() {
         createContents();
 
-        controllerFuture = pool.submit(() -> {
-            controller.initialStartForCaching();
-        });
+        // controllerFuture = pool.submit(() -> controller.initialStartForCaching());
 
         shell.addDisposeListener(new DisposeListener() {
             @Override
@@ -103,6 +101,7 @@ public class GUI {
             }
         });
         // startOnSecondScreenIfPossible();
+        startOnTopOfScreen();
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
@@ -125,10 +124,18 @@ public class GUI {
         }
         Rectangle monitorRect = monitors[1].getBounds();
         Rectangle shellRect = shell.getBounds();
-        int x = monitorRect.x + (monitorRect.width - shellRect.width) / 2;
-        int y = monitorRect.y + (monitorRect.height - shellRect.height) / 2;
+        int x = monitorRect.x + ((monitorRect.width - shellRect.width) / 2);
+        int y = monitorRect.y + ((monitorRect.height - shellRect.height) / 2);
         shell.setLocation(x, y);
-        logger.info("StartOnSecondScreen.");
+        logger.info("StartOnSecondScreen");
+    }
+
+    private void startOnTopOfScreen() {
+        Rectangle monitorRect = display.getPrimaryMonitor().getBounds();
+        Rectangle shellRect = shell.getBounds();
+        int x = monitorRect.x + ((monitorRect.width - shellRect.width) / 2);
+        shell.setLocation(x, monitorRect.y);
+        logger.info("startOnTopOfScreen");
     }
 
     private void shutdown() {

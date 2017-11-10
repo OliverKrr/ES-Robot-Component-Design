@@ -14,6 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import edu.kit.expertsystem.Configs;
 import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.MainReasoner;
+import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
@@ -84,8 +85,10 @@ public class Controller {
                 TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                 TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
 
-                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.min) / textFieldReq.scaleFromOntologyToUI;
-                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.max) / textFieldReq.scaleFromOntologyToUI;
+                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.min)
+                        / textFieldReq.scaleFromOntologyToUI;
+                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.max)
+                        / textFieldReq.scaleFromOntologyToUI;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -112,8 +115,16 @@ public class Controller {
     public void setResults() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
         for (Result result : resultWrapper.results) {
-            TreeItem resItem = addTreeItem(resultWrapper.tree,
-                    "Motor: " + result.motor.name + " & Gear box: " + result.gearBox.name);
+            String resItemName = "";
+            for (int i = 0; i < result.components.size(); i++) {
+                Component component = result.components.get(i);
+                resItemName += component.nameOfComponent + ": " + component.nameOfInstance;
+                if (i != result.components.size() - 1) {
+                    resItemName += " & ";
+                }
+            }
+
+            TreeItem resItem = addTreeItem(resultWrapper.tree, resItemName);
 
             double maxNumberOfChars = 0;
             for (Requirement req : result.requirements) {
