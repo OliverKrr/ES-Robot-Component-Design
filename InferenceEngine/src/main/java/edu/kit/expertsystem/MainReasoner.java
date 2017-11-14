@@ -12,13 +12,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -26,10 +25,8 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
-import org.semanticweb.owlapi.reasoner.BufferingMode;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
@@ -39,7 +36,8 @@ import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
-import openllet.owlapi.PelletReasoner;
+import openllet.owlapi.OWLGenericTools;
+import openllet.owlapi.OWLManagerGroup;
 
 public class MainReasoner {
 
@@ -53,10 +51,8 @@ public class MainReasoner {
 
     private String inferdFilePath = null;
 
-    private OWLOntologyManager manager;
-    private OWLDataFactory dataFac;
-    private OWLOntology ontology;
-    private PelletReasoner reasoner;
+    private OWLManagerGroup group;
+    private OWLGenericTools genericTool;
 
     private MyOWLHelper helper;
     private ReasoningTree reasoningTree;
@@ -65,24 +61,24 @@ public class MainReasoner {
     private List<OWLClass> createdIndividualClasses = new ArrayList<>();
 
     public MainReasoner() {
-        manager = OWLManager.createOWLOntologyManager();
-        dataFac = manager.getOWLDataFactory();
+        group = new OWLManagerGroup();
     }
 
     public void initialize() {
         OWLOntology basicOntology = loadOntology(domainFileName, false);
-        ontology = loadOntology(reasoningFileName, true);
-        ontology.addAxioms(basicOntology.axioms());
+        OWLOntology ontology = loadOntology(reasoningFileName, true);
+        group.getVolatileManager().addAxioms(ontology, basicOntology.axioms());
 
-        reasoner = new PelletReasoner(ontology, BufferingMode.BUFFERING);
-        logger.info("Read Ontology isConsistent: " + reasoner.isConsistent());
-        helper = new MyOWLHelper(manager, ontology);
-        reasoningTree = new ReasoningTree(dataFac, ontology, reasoner, helper);
+        genericTool = new OWLGenericTools(group, group.getVolatileManager(), ontology);
+
+        logger.info("Read Ontology isConsistent: " + genericTool.getReasoner().isConsistent());
+        helper = new MyOWLHelper(genericTool);
+        reasoningTree = new ReasoningTree(genericTool, helper);
     }
 
     private OWLOntology loadOntology(String fileName, boolean setInferdFilePath) {
         try (InputStream ontoStream = readOntology(fileName, setInferdFilePath)) {
-            return manager.loadOntologyFromOntologyDocument(ontoStream);
+            return group.getVolatileManager().loadOntologyFromOntologyDocument(ontoStream);
         } catch (OWLOntologyCreationException | IOException e) {
             logger.error(e.getMessage(), e);
             throw new RuntimeException("Loading the ontology failed");
@@ -117,8 +113,8 @@ public class MainReasoner {
         }
         helper.clearGeneratedAxioms();
         createBasicIndividuals(Vocabulary.CLASS_SACUNIT);
-        reasoner.flush();
-        reasoner.precomputeInferences(InferenceType.values());
+        helper.flush();
+        genericTool.getReasoner().precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
         logger.info(
                 "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
@@ -132,7 +128,7 @@ public class MainReasoner {
             }
             isReasoningPrepared = false;
             addRequirements(requirements);
-            reasoner.flush();
+            helper.flush();
             return reason(requirements);
         } finally {
             try {
@@ -146,29 +142,28 @@ public class MainReasoner {
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
         createdIndividualClasses.clear();
-        ontology.subClassAxiomsForSubClass(componentToReasone).forEach(topAxiom -> topAxiom
-                .componentsWithoutAnnotations()
-                .filter(component -> component instanceof OWLQuantifiedObjectRestriction
-                        && Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                .equals(((OWLQuantifiedObjectRestriction) component).getProperty()))
-                .forEach(propComponent -> reasoner
-                        .subClasses(((OWLQuantifiedObjectRestriction) propComponent).getFiller().asOWLClass(),
-                                true)
-                        .forEach(topSubClass -> {
+        genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone)
+                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
+                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(
+                        clas -> genericTool.getReasoner().subClasses(clas, true).forEach(topSubClass -> {
                             createdIndividualClasses.add(topSubClass);
-                            reasoner.subClasses(topSubClass, true).forEach(toCreate -> {
+                            genericTool.getReasoner().subClasses(topSubClass, true).forEach(toCreate -> {
                                 String name = toCreate.getIRI().getShortForm() + "Ind";
-                                OWLNamedIndividual ind = dataFac.getOWLNamedIndividual(helper.create(name));
-                                helper.addAxiom(dataFac.getOWLClassAssertionAxiom(toCreate, ind));
+                                OWLNamedIndividual ind = genericTool.getFactory()
+                                        .getOWLNamedIndividual(helper.create(name));
+                                helper.addAxiom(
+                                        genericTool.getFactory().getOWLClassAssertionAxiom(toCreate, ind));
                             });
                         })));
     }
 
     private void addRequirements(List<Requirement> requirements) {
         logger.info(requirements);
-        OWLNamedIndividual requirementsInd = dataFac.getOWLNamedIndividual(helper.create("currentRequs"));
-        helper.addAxiom(
-                dataFac.getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS, requirementsInd));
+        OWLNamedIndividual requirementsInd = genericTool.getFactory()
+                .getOWLNamedIndividual(helper.create("currentRequs"));
+        helper.addAxiom(genericTool.getFactory()
+                .getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS, requirementsInd));
 
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
@@ -182,12 +177,13 @@ public class MainReasoner {
     }
 
     private OWLDataProperty getOWLDataProperty(String iri) {
-        return dataFac.getOWLDataProperty(IRI.create(iri));
+        return genericTool.getFactory().getOWLDataProperty(IRI.create(iri));
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
-        OWLDataPropertyAssertionAxiom reqAxiom = dataFac.getOWLDataPropertyAssertionAxiom(property,
-                requirementsInd, dataFac.getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
+        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(
+                property, requirementsInd,
+                genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
         helper.addAxiom(reqAxiom);
     }
 
@@ -198,8 +194,8 @@ public class MainReasoner {
 
     private List<Result> makeResults(OWLClass classToBuildResult, List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
-        List<Result> results = new ArrayList<>();
-        reasoner.instances(classToBuildResult).forEach(resultingComponent -> {
+        ConcurrentLinkedQueue<Result> results = new ConcurrentLinkedQueue<>();
+        genericTool.getReasoner().instances(classToBuildResult).forEach(resultingComponent -> {
             Result result = new Result();
             result.components = new ArrayList<>();
 
@@ -216,8 +212,9 @@ public class MainReasoner {
 
             createdChildren.forEach(createdChild -> {
                 Component component = new Component();
-                reasoner.types(createdChild)
-                        .filter(type -> ontology.subClassAxiomsForSuperClass(Vocabulary.CLASS_DEVICE)
+                genericTool.getReasoner().types(createdChild)
+                        .filter(type -> genericTool.getOntology()
+                                .subClassAxiomsForSuperClass(Vocabulary.CLASS_DEVICE)
                                 .anyMatch(subDevice -> subDevice.getSubClass().equals(type)))
                         .findAny()
                         .ifPresent(type -> component.nameOfComponent = type.getIRI().getShortForm());
@@ -232,7 +229,8 @@ public class MainReasoner {
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
-                    reasoner.dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    genericTool.getReasoner()
+                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
                             .findAny().ifPresent(obProp -> textFieldReq.result = parseValueToDouble(obProp));
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
@@ -242,8 +240,9 @@ public class MainReasoner {
             results.add(result);
         });
 
+        List<Result> res = new ArrayList<>(results);
         try {
-            Collections.sort(results,
+            Collections.sort(res,
                     Comparator.comparingDouble(result -> result.requirements.stream()
                             .filter(req -> Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG.getIRI()
                                     .getIRIString().equals(req.resultIRI))
@@ -253,18 +252,19 @@ public class MainReasoner {
         }
 
         // results.forEach(r -> logger.info(r));
-        logger.info("Number of results: " + results.size());
+        logger.info("Number of results: " + res.size());
         logger.info(
                 "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
-        return results;
+        return res;
     }
 
     private void getChildrenOfTreeItems(OWLNamedIndividual treeIndividual,
             List<OWLNamedIndividual> childrendToSearchNext, List<OWLNamedIndividual> createdChildren) {
-        reasoner.objectPropertyValues(treeIndividual, Vocabulary.OBJECT_PROPERTY_HASCHILD)
+        genericTool.getReasoner().objectPropertyValues(treeIndividual, Vocabulary.OBJECT_PROPERTY_HASCHILD)
                 .forEach(childIndividual -> {
-                    if (reasoner.types(childIndividual).anyMatch(type -> createdIndividualClasses.stream()
-                            .anyMatch(createdIndi -> createdIndi.equals(type)))) {
+                    if (genericTool.getReasoner().types(childIndividual)
+                            .anyMatch(type -> createdIndividualClasses.stream()
+                                    .anyMatch(createdIndi -> createdIndi.equals(type)))) {
                         createdChildren.add(childIndividual);
                     } else {
                         childrendToSearchNext.add(childIndividual);
@@ -299,13 +299,13 @@ public class MainReasoner {
     }
 
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
-        logger.info("Reasoned ontology isConsistent: " + reasoner.isConsistent());
+        logger.info("Reasoned ontology isConsistent: " + genericTool.getReasoner().isConsistent());
         if (inferdFilePath == null) {
             return;
         }
-        OWLOntology inferOnto = reasoner.getRootOntology();
+        OWLOntology inferOnto = genericTool.getReasoner().getRootOntology();
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
-            manager.saveOntology(inferOnto, out);
+            genericTool.getManager().saveOntology(inferOnto, out);
         }
     }
 
@@ -315,12 +315,12 @@ public class MainReasoner {
         OWLClass componentToBuild = Vocabulary.CLASS_SACUNIT;
         List<Requirement> requirements = new ArrayList<>();
 
-        ontology.subClassAxiomsForSubClass(componentToBuild).forEach(topAxiom -> topAxiom
+        genericTool.getOntology().subClassAxiomsForSubClass(componentToBuild).forEach(topAxiom -> topAxiom
                 .componentsWithoutAnnotations()
                 .filter(component -> component instanceof OWLQuantifiedObjectRestriction
                         && Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
                                 .equals(((OWLQuantifiedObjectRestriction) component).getProperty()))
-                .forEach(propComponent -> ontology
+                .forEach(propComponent -> genericTool.getOntology()
                         .subClassAxiomsForSubClass(
                                 ((OWLQuantifiedObjectRestriction) propComponent).getFiller().asOWLClass())
                         .forEach(axiom -> axiom.componentsWithoutAnnotations()
@@ -342,33 +342,38 @@ public class MainReasoner {
     }
 
     private Requirement parseRequirement(OWLNamedIndividual owlIndividual) {
-        return reasoner.types(owlIndividual, true).map(type -> {
+        return genericTool.getReasoner().types(owlIndividual, true).map(type -> {
             if (Vocabulary.CLASS_TEXTFIELDMINMAXREQUIREMENT.equals(type)) {
                 TextFieldMinMaxRequirement textReq = new TextFieldMinMaxRequirement();
                 parseCommonRequirement(textReq, owlIndividual);
 
-                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX)
+                genericTool.getReasoner()
+                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX)
                         .findAny().ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
-                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
+                genericTool.getReasoner()
+                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
                         .findAny().ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
-                reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
+                genericTool.getReasoner()
+                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
                         .findAny()
                         .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
 
-                ontology.dataPropertyAssertionAxioms(owlIndividual)
+                genericTool.getOntology().dataPropertyAssertionAxioms(owlIndividual)
                         .forEach(prop -> prop.componentsWithoutAnnotations()
                                 .filter(component -> component instanceof OWLDataProperty)
                                 .forEach(component -> ((OWLDataProperty) component)
-                                        .dataPropertiesInSignature()
-                                        .forEach(comp -> reasoner.superDataProperties(comp).forEach(sup -> {
-                                            if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(sup)) {
-                                                textReq.minIRI = comp.getIRI().getIRIString();
-                                            } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX.equals(sup)) {
-                                                textReq.maxIRI = comp.getIRI().getIRIString();
-                                            } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(sup)) {
-                                                textReq.resultIRI = comp.getIRI().getIRIString();
-                                            }
-                                        }))));
+                                        .dataPropertiesInSignature().forEach(comp -> genericTool.getReasoner()
+                                                .superDataProperties(comp).forEach(sup -> {
+                                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(sup)) {
+                                                        textReq.minIRI = comp.getIRI().getIRIString();
+                                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX
+                                                            .equals(sup)) {
+                                                        textReq.maxIRI = comp.getIRI().getIRIString();
+                                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE
+                                                            .equals(sup)) {
+                                                        textReq.resultIRI = comp.getIRI().getIRIString();
+                                                    }
+                                                }))));
 
                 return textReq;
             } else {
@@ -379,21 +384,24 @@ public class MainReasoner {
 
     private void parseCommonRequirement(Requirement req, OWLNamedIndividual owlIndividual) {
         req.category = new Category();
-        reasoner.objectPropertyValues(owlIndividual, Vocabulary.OBJECT_PROPERTY_HASCATEGORY).forEach(cate -> {
-            reasoner.dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
-                    .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
-            reasoner.dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
-                    .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
-        });
+        genericTool.getReasoner().objectPropertyValues(owlIndividual, Vocabulary.OBJECT_PROPERTY_HASCATEGORY)
+                .forEach(cate -> {
+                    genericTool.getReasoner()
+                            .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
+                            .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
+                    genericTool.getReasoner()
+                            .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
+                            .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
+                });
 
-        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
-                .ifPresent(obProp -> req.displayName = obProp.getLiteral());
-        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDESCRIPTION).findAny()
-                .ifPresent(obProp -> req.description = obProp.getLiteral());
-        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASUNIT).findAny()
-                .ifPresent(obProp -> req.unit = obProp.getLiteral());
-        reasoner.dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
-                .ifPresent(obProp -> req.orderPosition = parseValueToInteger(obProp));
+        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)
+                .findAny().ifPresent(obProp -> req.displayName = obProp.getLiteral());
+        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDESCRIPTION)
+                .findAny().ifPresent(obProp -> req.description = obProp.getLiteral());
+        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASUNIT)
+                .findAny().ifPresent(obProp -> req.unit = obProp.getLiteral());
+        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
+                .findAny().ifPresent(obProp -> req.orderPosition = parseValueToInteger(obProp));
     }
 
 }

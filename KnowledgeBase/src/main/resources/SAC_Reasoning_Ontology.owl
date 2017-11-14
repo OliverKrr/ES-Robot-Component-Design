@@ -425,30 +425,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01 -->
-
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
-    </rdf:Description>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA-C -->
-
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA-C">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
-    </rdf:Description>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB -->
-
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
-    </rdf:Description>
-    
-
-
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement">
@@ -670,13 +646,6 @@
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorGearBoxMatch"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearing"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>

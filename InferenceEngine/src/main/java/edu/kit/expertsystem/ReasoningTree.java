@@ -1,40 +1,32 @@
 package edu.kit.expertsystem;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
 
 import edu.kit.expertsystem.generated.Vocabulary;
+import openllet.owlapi.OWLGenericTools;
 
 public class ReasoningTree {
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
-    private OWLDataFactory dataFac;
-    private OWLOntology ontology;
-    private OWLReasoner reasoner;
+    private OWLGenericTools genericTool;
     private MyOWLHelper helper;
 
     private OWLClass currentClassToReason;
-    private Set<OWLClass> appliedClasses = new HashSet<>();
-    private boolean hasSomethingChanged;
+    private ConcurrentSkipListSet<OWLClass> appliedClasses = new ConcurrentSkipListSet<>();
+    private AtomicBoolean hasSomethingChanged = new AtomicBoolean();
 
-    public ReasoningTree(OWLDataFactory dataFac, OWLOntology ontology, OWLReasoner reasoner,
-            MyOWLHelper helper) {
-        this.dataFac = dataFac;
-        this.ontology = ontology;
-        this.reasoner = reasoner;
+    public ReasoningTree(OWLGenericTools genericTool, MyOWLHelper helper) {
+        this.genericTool = genericTool;
         this.helper = helper;
     }
 
@@ -43,13 +35,13 @@ public class ReasoningTree {
         appliedClasses.clear();
 
         do {
-            hasSomethingChanged = false;
-            reasoner.subClasses(Vocabulary.CLASS_REASONINGTREE, true)
+            hasSomethingChanged.set(false);
+            genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true).parallel()
                     .forEach(treeClass -> handleTreeItem(treeClass));
-            if (hasSomethingChanged) {
-                reasoner.flush();
+            if (hasSomethingChanged.get()) {
+                helper.flush();
             }
-        } while (hasSomethingChanged && !appliedClasses.contains(currentClassToReason));
+        } while (hasSomethingChanged.get() && !appliedClasses.contains(currentClassToReason));
     }
 
     private void handleTreeItem(OWLClass treeClass) {
@@ -57,6 +49,11 @@ public class ReasoningTree {
             return;
         }
 
+        // TODO also get forEach hasChild:
+        // map: ObjectProp, IndividualName
+        // prüfe ob irgendwo selbes ObjectProp
+        // falls ja, dann muss auch selbes Individual
+        // sonst keine Permutation möglich
         List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
         int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
 
@@ -65,23 +62,22 @@ public class ReasoningTree {
                     "Add " + numberOfPermutations + " individuals for: " + treeClass.getIRI().getShortForm());
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClasses.add(treeClass);
-            hasSomethingChanged = true;
+            hasSomethingChanged.set(true);
         }
     }
 
     private List<ChildInstancesForPermutation> getChildrenForPermutation(OWLClass treeClass) {
         List<ChildInstancesForPermutation> childrenForPermutation = new ArrayList<>();
-        ontology.subClassAxiomsForSubClass(treeClass)
-                .forEach(axiom -> axiom.componentsWithoutAnnotations()
-                        .filter(component -> component instanceof OWLQuantifiedObjectRestriction && ontology
-                                .objectSubPropertyAxiomsForSubProperty(
-                                        ((OWLQuantifiedObjectRestriction) component).getProperty())
+        genericTool.getOntology().subClassAxiomsForSubClass(treeClass)
+                .filter(axiom -> axiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> genericTool.getOntology().objectSubPropertyAxiomsForSubProperty(ob)
                                 .anyMatch(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
-                                        .equals(propSupers.getSuperProperty())))
-                        .forEach(component -> childrenForPermutation.add(new ChildInstancesForPermutation(
-                                reasoner.instances(((OWLQuantifiedObjectRestriction) component).getFiller())
-                                        .collect(Collectors.toList()),
-                                ((OWLQuantifiedObjectRestriction) component).getProperty()))));
+                                        .equals(propSupers.getSuperProperty()))))
+                .forEach(axiom -> childrenForPermutation.add(new ChildInstancesForPermutation(
+                                        genericTool.getReasoner()
+                                .instances(axiom.getSuperClass().classesInSignature().findAny().get())
+                                                .collect(Collectors.toList()),
+                        axiom.getSuperClass().objectPropertiesInSignature().findAny().get())));
         return childrenForPermutation;
     }
 
@@ -100,13 +96,14 @@ public class ReasoningTree {
 
         for (PermutationOfChildInstances permutation : permutations) {
             String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + "Ind";
-            OWLNamedIndividual parentInd = dataFac.getOWLNamedIndividual(helper.create(parentName));
+            OWLNamedIndividual parentInd = genericTool.getFactory()
+                    .getOWLNamedIndividual(helper.create(parentName));
             // logger.info("\tAdd individual: " + parentInd.getIRI().getShortForm());
 
-            helper.addAxiom(dataFac.getOWLClassAssertionAxiom(treeClass, parentInd));
+            helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd));
             for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
-                helper.addAxiom(dataFac.getOWLObjectPropertyAssertionAxiom(childInd.propertyFromParent,
-                        parentInd, childInd.childIndividual));
+                helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
+                        childInd.propertyFromParent, parentInd, childInd.childIndividual));
             }
         }
     }

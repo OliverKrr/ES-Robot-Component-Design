@@ -1,24 +1,33 @@
 package edu.kit.expertsystem;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.OWLOntologyChange;
+
+import openllet.owlapi.OWLGenericTools;
+import openllet.owlapi.OWLHelper;
+import openllet.owlapi.OpenlletReasoner;
 
 public class MyOWLHelper {
 
-    private OWLOntologyManager manager;
-    private OWLOntology ontology;
+    private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
 
-    private List<OWLAxiom> generatedAxioms = new ArrayList<>();
+    private OWLHelper genericTool;
 
-    public MyOWLHelper(OWLOntologyManager manager, OWLOntology ontology) {
-        this.manager = manager;
-        this.ontology = ontology;
+    private Set<OWLAxiom> generatedAxioms = new HashSet<>();
+    private List<OWLOntologyChange> currentChanges = new ArrayList<>();
+
+    public MyOWLHelper(OWLGenericTools genericTool) {
+        this.genericTool = genericTool;
+        genericTool.getManager().addOntologyChangeListener(changes -> currentChanges.addAll(changes));
     }
 
     public IRI create(String name) {
@@ -27,7 +36,17 @@ public class MyOWLHelper {
 
     public void addAxiom(OWLAxiom axiomToAdd) {
         generatedAxioms.add(axiomToAdd);
-        manager.addAxiom(ontology, axiomToAdd);
+        genericTool.getManager().addAxiom(genericTool.getOntology(), axiomToAdd);
+    }
+
+    public void flush() {
+        boolean processChangesSuccess = ((OpenlletReasoner) genericTool.getReasoner())
+                .processChanges(currentChanges);
+        logger.info("Changes process success: " + processChangesSuccess);
+        if (!processChangesSuccess) {
+            genericTool.getReasoner().flush();
+        }
+        currentChanges.clear();
     }
 
     /**
@@ -41,7 +60,7 @@ public class MyOWLHelper {
     }
 
     public void clearGeneratedAxioms() {
-        ontology.removeAxioms(generatedAxioms);
+        genericTool.getManager().removeAxioms(genericTool.getOntology(), generatedAxioms.stream());
         generatedAxioms.clear();
     }
 
