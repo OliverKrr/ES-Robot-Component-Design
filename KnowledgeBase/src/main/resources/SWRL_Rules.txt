@@ -54,7 +54,7 @@ MotorGearBoxMatch(?ma) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ CurrentRequ
 MotorGearBoxMatchOuterDiameter1CalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:greaterThan(?D_m, ?D_g) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_m)
 MotorGearBoxMatchOuterDiameter2CalcRule:
-MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:greaterThanOrEqual(?D_g, ?D_m) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g)
+MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:lessThanOrEqual(?D_m, ?D_g) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g)
 
 MotorGearBoxMatchOuterDiameterSatisfyRule:
 MotorGearBoxMatch(?ma) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min) -> SatisfiedOuterDiameter(?ma)
@@ -87,15 +87,18 @@ SatisfiedMotorInputBearingMatch(?mibm1) ^ hasMotor(?mibm1, ?m) ^ SatisfiedMotorI
 
 
 
-SACunitLengthInputLinear1CalcRule:
-SatisfiedMotorInputBearingMatch(?mibm1) ^ 
+SACunitLengthInputLinearCalcRule:
+SACunitLengthInputLinear(?saclil) ^ hasMotorInputBearingMatch(?saclil, ?mibm1) ^ hasMotor(?mibm1, ?m) ^ hasInputBearing(?mibm1, ?ib) ^ hasGearBox(?saclil, ?g) ^ MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?ib, ?L_ib) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ swrlb:add(?L_1, ?L_temp1, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, 2) ^ swrlb:add(?L_max1, ?L_floatB, 4) ^ swrlb:add(?L_max2, 5, 3) -> hasDimensionLength1_L_unit_mm(?saclil, ?L_1) ^ hasDimensionLengthMax1_L_unit_mm(?saclil, ?L_max1) ^ hasDimensionLengthMax2_L_unit_mm(?saclil, ?L_max2) ^ SatisfiedSACunitLengthInputLinear(?saclil)
+
+
+SACunitLengthInputLinearEvaluate1Rule:
+SatisfiedSACunitLengthInputLinear(?saclil) ^ hasDimensionLength1_L_unit_mm(?saclil, ?L_1) ^ hasDimensionLengthMax1_L_unit_mm(?saclil, ?L_max1) ^ hasDimensionLengthMax2_L_unit_mm(?saclil, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_1, ?L_max1) -> hasDimensionLength_L_unit_mm(?saclil, ?L_ges)
+
+SACunitLengthInputLinearEvaluate2Rule:
+SatisfiedSACunitLengthInputLinear(?saclil) ^ hasDimensionLength1_L_unit_mm(?saclil, ?L_1) ^ hasDimensionLengthMax1_L_unit_mm(?saclil, ?L_max1) ^ hasDimensionLengthMax2_L_unit_mm(?saclil, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_1, ?L_max2) -> hasDimensionLength_L_unit_mm(?saclil, ?L_ges)
 
 
 
-
-
-SACunitLengthInputLinearCalcRule
-SACunit(?sac) ^ hasMotorGearBoxMatch(?sac, ?ma) ^ hasMotor(?ma, ?m) ^ hasInputBearing(?sac, ?ib) ^ hasDimensionLength_L_unit_mm(?ib, ?L_ib) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ hasGearBox(?ma, ?g) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ swrlb:add(?L_temp2, ?L_temp1, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, 2) ^ swrlb:add(?L_max, ?L_floatB, 4) ^ swrlb:add(?L_ges, ?L_temp2, ?L_max) -> hasDimensionLengthInput_L_unit_mm(?sac, ?L_ges)
 
 
 
