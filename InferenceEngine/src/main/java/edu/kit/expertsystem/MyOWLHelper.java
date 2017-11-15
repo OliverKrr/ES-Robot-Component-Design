@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,10 +41,14 @@ public class MyOWLHelper {
     }
 
     public void flush() {
+        flush(false);
+    }
+
+    public void flush(boolean forceFlush) {
         boolean processChangesSuccess = ((OpenlletReasoner) genericTool.getReasoner())
                 .processChanges(currentChanges);
         logger.info("Changes process success: " + processChangesSuccess);
-        if (!processChangesSuccess) {
+        if (!processChangesSuccess || forceFlush) {
             genericTool.getReasoner().flush();
         }
         currentChanges.clear();
@@ -62,6 +67,18 @@ public class MyOWLHelper {
     public void clearGeneratedAxioms() {
         genericTool.getManager().removeAxioms(genericTool.getOntology(), generatedAxioms.stream());
         generatedAxioms.clear();
+    }
+
+    public void deleteInstance(Stream<OWLNamedIndividual> indisToDelete) {
+        Set<OWLAxiom> axiomsToDelete = new HashSet<>();
+        indisToDelete.forEach(indiToDelete -> generatedAxioms.stream()
+                .filter(axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
+                .forEach(axiom -> axiomsToDelete.add(axiom)));
+        if (!axiomsToDelete.isEmpty()) {
+            genericTool.getManager().removeAxioms(genericTool.getOntology(), axiomsToDelete.stream());
+            generatedAxioms.removeAll(axiomsToDelete);
+            flush(true);
+        }
     }
 
 }

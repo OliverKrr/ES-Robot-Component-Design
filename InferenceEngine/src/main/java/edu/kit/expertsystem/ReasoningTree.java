@@ -41,19 +41,17 @@ public class ReasoningTree {
             if (hasSomethingChanged.get()) {
                 helper.flush();
             }
+            helper.deleteInstance(genericTool.getReasoner().instances(Vocabulary.CLASS_UNSATISFIED));
         } while (hasSomethingChanged.get() && !appliedClasses.contains(currentClassToReason));
     }
 
     private void handleTreeItem(OWLClass treeClass) {
+        // TODO eigentlich nicht hier abbrechen, sondern schauen ob sich Anzahl
+        // Permutationen geändert hat
         if (appliedClasses.contains(treeClass) || appliedClasses.contains(currentClassToReason)) {
             return;
         }
 
-        // TODO also get forEach hasChild:
-        // map: ObjectProp, IndividualName
-        // prüfe ob irgendwo selbes ObjectProp
-        // falls ja, dann muss auch selbes Individual
-        // sonst keine Permutation möglich
         List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
         int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
 
