@@ -117,13 +117,20 @@ public class Controller {
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
 
+            double maxNumberOfChars = 0;
+            for (Component component : result.components) {
+                maxNumberOfChars = Math.max(maxNumberOfChars, component.nameOfComponent.length());
+            }
+
             for (Component component : result.components) {
                 String name = "".equals(component.nameOfComponent) ? component.nameOfInstance
-                        : component.nameOfComponent + ": " + component.nameOfInstance;
+                        : component.nameOfComponent + ":"
+                                + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
+                                + component.nameOfInstance;
                 addTreeItem(resItem, name, true);
             }
 
-            double maxNumberOfChars = 0;
+            maxNumberOfChars = 0;
             for (Requirement req : result.requirements) {
                 maxNumberOfChars = Math.max(maxNumberOfChars, req.displayName.length());
             }
@@ -146,7 +153,7 @@ public class Controller {
     }
 
     private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
-        TreeItem resItem = new TreeItem(parent, SWT.NONE);
+        TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {
             resItem.setForeground(Configs.KIT_GREEN_70);
@@ -156,7 +163,7 @@ public class Controller {
     }
 
     private TreeItem addTreeItem(Tree parent, String text) {
-        TreeItem resItem = new TreeItem(parent, SWT.NONE);
+        TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         resItem.setForeground(Configs.KIT_GREEN_70);
         return resItem;

@@ -70,7 +70,7 @@ MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ CurrentRequirements(
 
 
 MotorGearBoxMatchSatisfyRule:
-MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) -> SatisfiedMotorGearBoxMatch(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g)
+MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) -> SatisfiedMotorGearBoxMatch(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g)
 
 
 
@@ -147,6 +147,10 @@ SACunit(?sac) ^ hasSACunitLength(?sac, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sa
 
 SACunitSatisfyRule:
 SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ SatisfiedLength(?sac) ^ SatisfiedOuterDiameter(?sac) ^ SatisfiedWeight(?sac) -> SatisfiedSACunit(?sac)
+
+
+SACunitIsComposedOfRule:
+SatisfiedSACunit(?sac) ^ hasSACunitLength(?sac, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasMotorGearBoxMatch(?sacli, ?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasGearBoxScrewMatch(?saclo, ?gs) ^ hasScrew(?gs, ?s_gs) ^ SatisfiedMotorInputBearingMatch(?mibm) ^ hasInputBearing(?mibm, ?ib) ^ hasMotor(?mibm, ?m) ^ hasSACunitLengthElectric(?sacl, ?sacle) ^ hasSACunitLengthOutputInnerElectric(?saclo, ?loie) ^ hasOutputBearingScrewMatch(?saclo, ?obs) ^  hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) -> isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxFlexScrew(?s_gs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_gs) ^ isComposedOfInputBearing(?sac, ?ib) ^ isComposedOfLengthElectric(?sac, ?sacle) ^ isComposedOfLengthOutputInnerElectric(?sac, ?loie) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob)
 
 
 

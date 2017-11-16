@@ -199,39 +199,30 @@ public class MainReasoner {
             Result result = new Result();
             result.components = new ArrayList<>();
 
-            // TODO fix duplicated gearbox
-            List<OWLNamedIndividual> childrendToSearch = new ArrayList<>();
-            childrendToSearch.add(resultingComponent);
-            List<OWLNamedIndividual> createdChildren = new ArrayList<>();
-            do {
-                List<OWLNamedIndividual> childrendToSearchNext = new ArrayList<>();
-                for (OWLNamedIndividual childToSearch : childrendToSearch) {
-                    getChildrenOfTreeItems(childToSearch, childrendToSearchNext, createdChildren);
-                }
-                childrendToSearch = childrendToSearchNext;
-            } while (!childrendToSearch.isEmpty());
+            genericTool.getOntology()
+                    .objectSubPropertyAxiomsForSuperProperty(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE)
+                    .forEach(
+                            subOb -> genericTool.getReasoner()
+                                    .objectPropertyValues(resultingComponent,
+                                            subOb.getSubProperty().getNamedProperty())
+                                    .forEach(composedComponent -> {
+                                        Component component = new Component();
 
-            createdChildren.forEach(createdChild -> {
-                Component component = new Component();
-                genericTool.getReasoner().types(createdChild)
-                        .filter(type -> genericTool.getOntology()
-                                .subClassAxiomsForSuperClass(Vocabulary.CLASS_DEVICE)
-                                .anyMatch(subDevice -> subDevice.getSubClass().equals(type)))
-                        .findAny()
-                        .ifPresent(type -> component.nameOfComponent = type.getIRI().getShortForm());
-                component.nameOfInstance = helper.getNameOfOWLNamedIndividual(createdChild);
-                result.components.add(component);
-            });
+                                        component.nameOfComponent = helper.getNameOfComponent(
+                                                subOb.getSubProperty().getNamedProperty());
+                                        component.nameOfInstance = helper
+                                                .getNameOfOWLNamedIndividual(composedComponent);
+                                        genericTool.getReasoner()
+                                                .dataPropertyValues(composedComponent,
+                                                        Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
+                                                .findAny().ifPresent(
+                                                        obProp -> component.orderPosition = parseValueToInteger(
+                                                                obProp));
 
-            // TODO make sorting in ontology explicit like requirements
-            Collections.sort(result.components, (comp1, comp2) -> {
-                if (comp1.nameOfComponent.equals(comp2.nameOfComponent)) {
-                    return String.CASE_INSENSITIVE_ORDER.compare(comp1.nameOfInstance, comp2.nameOfInstance);
-                } else {
-                    return String.CASE_INSENSITIVE_ORDER.reversed().compare(comp1.nameOfComponent,
-                            comp2.nameOfComponent);
-                }
-            });
+                                        result.components.add(component);
+                                    }));
+
+            Collections.sort(result.components, (comp1, comp2) -> comp1.orderPosition - comp2.orderPosition);
 
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
@@ -264,20 +255,6 @@ public class MainReasoner {
         logger.info(
                 "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return res;
-    }
-
-    private void getChildrenOfTreeItems(OWLNamedIndividual treeIndividual,
-            List<OWLNamedIndividual> childrendToSearchNext, List<OWLNamedIndividual> createdChildren) {
-        genericTool.getReasoner().objectPropertyValues(treeIndividual, Vocabulary.OBJECT_PROPERTY_HASCHILD)
-                .forEach(childIndividual -> {
-                    if (genericTool.getReasoner().types(childIndividual)
-                            .anyMatch(type -> createdIndividualClasses.stream()
-                                    .anyMatch(createdIndi -> createdIndi.equals(type)))) {
-                        createdChildren.add(childIndividual);
-                    } else {
-                        childrendToSearchNext.add(childIndividual);
-                    }
-                });
     }
 
     private List<Requirement> copyRequirements(List<Requirement> requirements) {

@@ -75,11 +75,15 @@ public class ReasoningTree {
                         .anyMatch(ob -> genericTool.getOntology().objectSubPropertyAxiomsForSubProperty(ob)
                                 .anyMatch(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
                                         .equals(propSupers.getSuperProperty()))))
-                .forEach(axiom -> childrenForPermutation.add(new ChildInstancesForPermutation(
+                .forEach(
+                        axiom -> childrenForPermutation
+                                .add(new ChildInstancesForPermutation(
                                         genericTool.getReasoner()
-                                .instances(axiom.getSuperClass().classesInSignature().findAny().get())
+                                                .instances(axiom.getSuperClass().classesInSignature()
+                                                        .findAny().get())
                                                 .collect(Collectors.toList()),
-                        axiom.getSuperClass().objectPropertiesInSignature().findAny().get())));
+                                        axiom.getSuperClass().objectPropertiesInSignature().findAny()
+                                                .get())));
         return childrenForPermutation;
     }
 

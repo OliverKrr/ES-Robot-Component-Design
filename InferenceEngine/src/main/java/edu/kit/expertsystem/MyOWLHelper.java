@@ -13,6 +13,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLObjectProperty;
 import org.semanticweb.owlapi.model.OWLOntologyChange;
 
 import edu.kit.expertsystem.generated.Vocabulary;
@@ -65,6 +66,16 @@ public class MyOWLHelper {
      */
     public String getNameOfOWLNamedIndividual(OWLNamedIndividual ind) {
         return ind.getIRI().getShortForm().substring(0, ind.getIRI().getShortForm().length() - 3);
+    }
+
+    /**
+     * Remove "isComposedOf"
+     * 
+     * @param namedProperty
+     * @return
+     */
+    public String getNameOfComponent(OWLObjectProperty prop) {
+        return prop.getIRI().getShortForm().substring(12, prop.getIRI().getShortForm().length());
     }
 
     public void clearGeneratedAxioms() {
