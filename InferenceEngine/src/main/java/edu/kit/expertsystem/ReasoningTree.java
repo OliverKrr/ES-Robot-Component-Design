@@ -36,7 +36,7 @@ public class ReasoningTree {
 
         do {
             hasSomethingChanged.set(false);
-            genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true).parallel()
+            genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true)
                     .forEach(treeClass -> handleTreeItem(treeClass));
             if (hasSomethingChanged.get()) {
                 helper.flush();
@@ -53,6 +53,10 @@ public class ReasoningTree {
         }
 
         List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
+        childrenForPermutation.stream()
+                .forEach(childForPermutation -> logger.info(treeClass.getIRI().getShortForm() + " has "
+                        + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm()
+                        + " with number of children: " + childForPermutation.childInstances.size()));
         int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
 
         if (numberOfPermutations > 0) {
@@ -61,8 +65,6 @@ public class ReasoningTree {
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClasses.add(treeClass);
             hasSomethingChanged.set(true);
-        } else {
-            logger.info("No individuals for: " + treeClass.getIRI().getShortForm());
         }
     }
 

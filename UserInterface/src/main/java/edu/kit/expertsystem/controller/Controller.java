@@ -115,16 +115,13 @@ public class Controller {
     public void setResults() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
         for (Result result : resultWrapper.results) {
-            String resItemName = "";
-            for (int i = 0; i < result.components.size(); i++) {
-                Component component = result.components.get(i);
-                resItemName += component.nameOfComponent + ": " + component.nameOfInstance;
-                if (i != result.components.size() - 1) {
-                    resItemName += " & ";
-                }
-            }
+            TreeItem resItem = addTreeItem(resultWrapper.tree, "");
 
-            TreeItem resItem = addTreeItem(resultWrapper.tree, resItemName);
+            for (Component component : result.components) {
+                String name = "".equals(component.nameOfComponent) ? component.nameOfInstance
+                        : component.nameOfComponent + ": " + component.nameOfInstance;
+                addTreeItem(resItem, name, true);
+            }
 
             double maxNumberOfChars = 0;
             for (Requirement req : result.requirements) {
@@ -141,15 +138,19 @@ public class Controller {
                 }
                 addTreeItem(resItem,
                         req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + " "
-                                + resultValue + getSpacesForResultValue(resultValue) + req.unit);
+                                + resultValue + getSpacesForResultValue(resultValue) + req.unit,
+                        false);
             }
             resItem.setExpanded(true);
         }
     }
 
-    private TreeItem addTreeItem(TreeItem parent, String text) {
+    private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
         TreeItem resItem = new TreeItem(parent, SWT.NONE);
         resItem.setText(text);
+        if (makeGreen) {
+            resItem.setForeground(Configs.KIT_GREEN_70);
+        }
         resItem.setFont(SWTResourceManager.getFont("Courier New", 9, SWT.NORMAL));
         return resItem;
     }

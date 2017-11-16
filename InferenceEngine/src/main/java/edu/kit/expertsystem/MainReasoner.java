@@ -199,6 +199,7 @@ public class MainReasoner {
             Result result = new Result();
             result.components = new ArrayList<>();
 
+            // TODO fix duplicated gearbox
             List<OWLNamedIndividual> childrendToSearch = new ArrayList<>();
             childrendToSearch.add(resultingComponent);
             List<OWLNamedIndividual> createdChildren = new ArrayList<>();
@@ -222,8 +223,15 @@ public class MainReasoner {
                 result.components.add(component);
             });
 
-            Collections.sort(result.components, (comp1, comp2) -> String.CASE_INSENSITIVE_ORDER.reversed()
-                    .compare(comp1.nameOfComponent, comp2.nameOfComponent));
+            // TODO make sorting in ontology explicit like requirements
+            Collections.sort(result.components, (comp1, comp2) -> {
+                if (comp1.nameOfComponent.equals(comp2.nameOfComponent)) {
+                    return String.CASE_INSENSITIVE_ORDER.compare(comp1.nameOfInstance, comp2.nameOfInstance);
+                } else {
+                    return String.CASE_INSENSITIVE_ORDER.reversed().compare(comp1.nameOfComponent,
+                            comp2.nameOfComponent);
+                }
+            });
 
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
@@ -244,7 +252,7 @@ public class MainReasoner {
         try {
             Collections.sort(res,
                     Comparator.comparingDouble(result -> result.requirements.stream()
-                            .filter(req -> Vocabulary.DATA_PROPERTY_HASWEIGHT_M_UNIT_KG.getIRI()
+                            .filter(req -> Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM.getIRI()
                                     .getIRIString().equals(req.resultIRI))
                             .findAny().map(req -> ((TextFieldMinMaxRequirement) req).result).get()));
         } catch (NoSuchElementException e) {
