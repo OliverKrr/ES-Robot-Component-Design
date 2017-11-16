@@ -134,7 +134,7 @@ SACunitLength(?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasSACunitLengthOu
 
 
 SACunitLengthSatisfyRule:
-SACunitLength(?sacl) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_ges) ^ CurrentRequirements(?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min) -> SatisfiedLength(?sacl)
+SACunitLength(?sacl) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_ges) ^ CurrentRequirements(?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min) -> SatisfiedSACunitLength(?sacl)
 
 
 
