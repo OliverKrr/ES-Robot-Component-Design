@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataHasValue;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLLiteral;
@@ -190,6 +191,8 @@ public class MainReasoner {
     private List<Result> reason(List<Requirement> requirements) {
         reasoningTree.makeReasoning(Vocabulary.CLASS_SACUNIT);
         return makeResults(Vocabulary.CLASS_SATISFIEDSACUNIT, requirements);
+        // TODO test with CLASS_SATISFIEDMOTORINPUTBEARINGMATCH
+        // but first implement stuff in ReasoningTree
     }
 
     private List<Result> makeResults(OWLClass classToBuildResult, List<Requirement> requirements) {
@@ -212,13 +215,24 @@ public class MainReasoner {
                                                 subOb.getSubProperty().getNamedProperty());
                                         component.nameOfInstance = helper
                                                 .getNameOfOWLNamedIndividual(composedComponent);
-                                        genericTool.getReasoner()
-                                                .dataPropertyValues(composedComponent,
-                                                        Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
-                                                .findAny().ifPresent(
-                                                        obProp -> component.orderPosition = parseValueToInteger(
-                                                                obProp));
 
+                                        // Because we can infer the same screw for multiple units, we have to
+                                        // find the orderPosition the hard way
+                                        genericTool.getOntology()
+                                                .objectPropertyRangeAxioms(
+                                                        subOb.getSubProperty().getNamedProperty())
+                                                .forEach(range -> genericTool.getOntology()
+                                                        .subClassAxiomsForSubClass(
+                                                                range.getRange().asOWLClass())
+                                                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
+                                                                .filter(comp -> comp instanceof OWLDataHasValue
+                                                                        && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
+                                                                                .equals(((OWLDataHasValue) comp)
+                                                                                        .getProperty()))
+                                                                .findAny().ifPresent(
+                                                                        comp -> component.orderPosition = parseValueToInteger(
+                                                                                ((OWLDataHasValue) comp)
+                                                                                        .getFiller()))));
                                         result.components.add(component);
                                     }));
 
