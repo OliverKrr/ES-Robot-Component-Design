@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -189,15 +188,13 @@ public class MainReasoner {
     }
 
     private List<Result> reason(List<Requirement> requirements) {
-        reasoningTree.makeReasoning(Vocabulary.CLASS_SACUNIT);
+        reasoningTree.makeReasoning();
         return makeResults(Vocabulary.CLASS_SATISFIEDSACUNIT, requirements);
-        // TODO test with CLASS_SATISFIEDMOTORINPUTBEARINGMATCH
-        // but first implement stuff in ReasoningTree
     }
 
     private List<Result> makeResults(OWLClass classToBuildResult, List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
-        ConcurrentLinkedQueue<Result> results = new ConcurrentLinkedQueue<>();
+        List<Result> results = new ArrayList<>();
         genericTool.getReasoner().instances(classToBuildResult).forEach(resultingComponent -> {
             Result result = new Result();
             result.components = new ArrayList<>();
@@ -253,9 +250,8 @@ public class MainReasoner {
             results.add(result);
         });
 
-        List<Result> res = new ArrayList<>(results);
         try {
-            Collections.sort(res,
+            Collections.sort(results,
                     Comparator.comparingDouble(result -> result.requirements.stream()
                             .filter(req -> Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM.getIRI()
                                     .getIRIString().equals(req.resultIRI))
@@ -265,10 +261,10 @@ public class MainReasoner {
         }
 
         // results.forEach(r -> logger.info(r));
-        logger.info("Number of results: " + res.size());
+        logger.info("Number of results: " + results.size());
         logger.info(
                 "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
-        return res;
+        return results;
     }
 
     private List<Requirement> copyRequirements(List<Requirement> requirements) {

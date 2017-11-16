@@ -7,32 +7,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
-import org.semanticweb.owlapi.model.OWLOntologyChange;
 
 import edu.kit.expertsystem.generated.Vocabulary;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLHelper;
-import openllet.owlapi.OpenlletReasoner;
 
 public class MyOWLHelper {
 
-    private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
+    // private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
 
     private OWLHelper genericTool;
 
     private Set<OWLAxiom> generatedAxioms = new HashSet<>();
-    private List<OWLOntologyChange> currentChanges = new ArrayList<>();
 
     public MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
-        genericTool.getManager().addOntologyChangeListener(changes -> currentChanges.addAll(changes));
     }
 
     public IRI create(String name) {
@@ -45,17 +39,7 @@ public class MyOWLHelper {
     }
 
     public void flush() {
-        flush(false);
-    }
-
-    public void flush(boolean forceFlush) {
-        boolean processChangesSuccess = ((OpenlletReasoner) genericTool.getReasoner())
-                .processChanges(currentChanges);
-        logger.info("Changes process success: " + processChangesSuccess);
-        if (!processChangesSuccess || forceFlush) {
-            genericTool.getReasoner().flush();
-        }
-        currentChanges.clear();
+        genericTool.getReasoner().flush();
     }
 
     /**
@@ -83,7 +67,7 @@ public class MyOWLHelper {
         generatedAxioms.clear();
     }
 
-    public void deleteInstance(Stream<OWLClass> subClassesOfUnsatisfied) {
+    public boolean deleteInstance(Stream<OWLClass> subClassesOfUnsatisfied) {
         List<InformationToDelete> informationToDelete = new ArrayList<>();
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
 
@@ -124,7 +108,9 @@ public class MyOWLHelper {
                                         .getFactory().getOWLClassAssertionAxiom(newPart, counterInst)))));
             }
             flush();
+            return true;
         }
+        return false;
     }
 
     private class InformationToDelete {

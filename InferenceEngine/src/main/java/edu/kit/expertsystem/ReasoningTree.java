@@ -1,9 +1,9 @@
 package edu.kit.expertsystem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
@@ -21,50 +21,49 @@ public class ReasoningTree {
     private OWLGenericTools genericTool;
     private MyOWLHelper helper;
 
-    private OWLClass currentClassToReason;
-    private ConcurrentSkipListSet<OWLClass> appliedClasses = new ConcurrentSkipListSet<>();
-    private AtomicBoolean hasSomethingChanged = new AtomicBoolean();
+    private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
+    private boolean hasSomethingChanged;
 
     public ReasoningTree(OWLGenericTools genericTool, MyOWLHelper helper) {
         this.genericTool = genericTool;
         this.helper = helper;
     }
 
-    public void makeReasoning(OWLClass classToReason) {
-        currentClassToReason = classToReason;
-        appliedClasses.clear();
-
+    public void makeReasoning() {
+        appliedClassesToNumberOfPermutations.clear();
         do {
-            hasSomethingChanged.set(false);
+            hasSomethingChanged = false;
             genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true)
                     .forEach(treeClass -> handleTreeItem(treeClass));
-            if (hasSomethingChanged.get()) {
+            if (hasSomethingChanged) {
                 helper.flush();
             }
-            helper.deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED));
-        } while (hasSomethingChanged.get() && !appliedClasses.contains(currentClassToReason));
+            if (helper.deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED))) {
+                hasSomethingChanged = true;
+            }
+        } while (hasSomethingChanged);
     }
 
     private void handleTreeItem(OWLClass treeClass) {
-        // TODO eigentlich nicht hier abbrechen, sondern schauen ob sich Anzahl
-        // Permutationen geändert hat
-        if (appliedClasses.contains(treeClass) || appliedClasses.contains(currentClassToReason)) {
+        List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
+        int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
+
+        if (appliedClassesToNumberOfPermutations.containsKey(treeClass)
+                && appliedClassesToNumberOfPermutations.get(treeClass).compareTo(numberOfPermutations) == 0) {
             return;
         }
 
-        List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
         childrenForPermutation.stream()
                 .forEach(childForPermutation -> logger.info(treeClass.getIRI().getShortForm() + " has "
                         + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm()
                         + " with number of children: " + childForPermutation.childInstances.size()));
-        int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
 
         if (numberOfPermutations > 0) {
             logger.info(
                     "Add " + numberOfPermutations + " individuals for: " + treeClass.getIRI().getShortForm());
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
-            appliedClasses.add(treeClass);
-            hasSomethingChanged.set(true);
+            appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
+            hasSomethingChanged = true;
         }
     }
 
