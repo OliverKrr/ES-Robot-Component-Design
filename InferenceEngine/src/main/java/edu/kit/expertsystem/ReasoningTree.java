@@ -61,6 +61,8 @@ public class ReasoningTree {
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClasses.add(treeClass);
             hasSomethingChanged.set(true);
+        } else {
+            logger.info("No individuals for: " + treeClass.getIRI().getShortForm());
         }
     }
 
