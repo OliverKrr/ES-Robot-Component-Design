@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntologyChange;
 
+import edu.kit.expertsystem.generated.Vocabulary;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLHelper;
 import openllet.owlapi.OpenlletReasoner;
@@ -69,16 +72,53 @@ public class MyOWLHelper {
         generatedAxioms.clear();
     }
 
-    public void deleteInstance(Stream<OWLNamedIndividual> indisToDelete) {
+    public void deleteInstance(Stream<OWLClass> subClassesOfUnsatisfied) {
+        List<InformationToDelete> informationToDelete = new ArrayList<>();
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
-        indisToDelete.forEach(indiToDelete -> generatedAxioms.stream()
-                .filter(axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
-                .forEach(axiom -> axiomsToDelete.add(axiom)));
+
+        subClassesOfUnsatisfied.forEach(subClas -> {
+            int oldSize = axiomsToDelete.size();
+            genericTool.getReasoner().instances(subClas)
+                    .forEach(indiToDelete -> generatedAxioms.stream()
+                            .filter(axiom -> axiom.individualsInSignature()
+                                    .anyMatch(indi -> indi.equals(indiToDelete)))
+                            .forEach(axiom -> axiomsToDelete.add(axiom)));
+
+            if (oldSize != axiomsToDelete.size()) {
+                InformationToDelete infToDelete = new InformationToDelete();
+                genericTool.getOntology().subClassAxiomsForSubClass(subClas).forEach(topAxiom -> {
+                    if (topAxiom.getSuperClass().objectPropertiesInSignature()
+                            .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
+                        topAxiom.getSuperClass().classesInSignature()
+                                .collect(Collectors.toCollection(() -> infToDelete.counterSatisfiedPart));
+                    } else if (topAxiom.getSuperClass().objectPropertiesInSignature()
+                            .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
+                        topAxiom.getSuperClass().classesInSignature()
+                                .collect(Collectors.toCollection(() -> infToDelete.newSatisfiedPart));
+                    }
+                });
+                informationToDelete.add(infToDelete);
+            }
+        });
+
         if (!axiomsToDelete.isEmpty()) {
             genericTool.getManager().removeAxioms(genericTool.getOntology(), axiomsToDelete.stream());
             generatedAxioms.removeAll(axiomsToDelete);
-            flush(true);
+            flush();
+
+            for (InformationToDelete infoDelete : informationToDelete) {
+                infoDelete.counterSatisfiedPart
+                        .forEach(counter -> infoDelete.newSatisfiedPart.forEach(newPart -> genericTool
+                                .getReasoner().instances(counter).forEach(counterInst -> addAxiom(genericTool
+                                        .getFactory().getOWLClassAssertionAxiom(newPart, counterInst)))));
+            }
+            flush();
         }
+    }
+
+    private class InformationToDelete {
+        public List<OWLClass> counterSatisfiedPart = new ArrayList<>();
+        public List<OWLClass> newSatisfiedPart = new ArrayList<>();
     }
 
 }

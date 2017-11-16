@@ -2625,14 +2625,14 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2.5"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2.5 -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5 -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2.5">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762"/>
         <rdfs:subClassOf>
             <owl:Restriction>

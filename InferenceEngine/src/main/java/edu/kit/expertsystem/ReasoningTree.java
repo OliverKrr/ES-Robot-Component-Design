@@ -41,7 +41,7 @@ public class ReasoningTree {
             if (hasSomethingChanged.get()) {
                 helper.flush();
             }
-            helper.deleteInstance(genericTool.getReasoner().instances(Vocabulary.CLASS_UNSATISFIED));
+            helper.deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED));
         } while (hasSomethingChanged.get() && !appliedClasses.contains(currentClassToReason));
     }
 
