@@ -1,14 +1,17 @@
 package edu.kit.expertsystem;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import edu.kit.expertsystem.controller.CheckboxRequirementWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
 
@@ -50,6 +53,8 @@ public class RequirementsHelper {
             createTextFieldMinMaxRequirement((TextFieldMinMaxRequirementWrapper) requirementWrapper);
         } else if (requirementWrapper instanceof TextFieldRequirementWrapper) {
             createTextFieldRequirement((TextFieldRequirementWrapper) requirementWrapper);
+        } else if (requirementWrapper instanceof CheckboxRequirementWrapper) {
+            createCheckboxRequirement((CheckboxRequirementWrapper) requirementWrapper);
         } else {
             throw new RuntimeException("Requirement class unknown: " + requirementWrapper.getClass());
         }
@@ -64,14 +69,14 @@ public class RequirementsHelper {
     }
 
     private void createTextFieldMinMaxRequirement(TextFieldMinMaxRequirementWrapper requirementWrapper) {
+        TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) requirementWrapper.requirement;
+
         requirementWrapper.minValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.minValue
-                .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMin);
+        requirementWrapper.minValue.setEnabled(realReq.enableMin);
         requirementWrapper.minValue.setMessage("min");
         requirementWrapper.minValue.setToolTipText("min");
-        if (((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMin != 0) {
-            requirementWrapper.minValue.setText(
-                    String.valueOf(((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMin));
+        if (realReq.defaultMin != 0) {
+            requirementWrapper.minValue.setText(String.valueOf(realReq.defaultMin));
         }
         requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.minValue, true, true);
@@ -84,13 +89,11 @@ public class RequirementsHelper {
         }
 
         requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.maxValue
-                .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMax);
+        requirementWrapper.maxValue.setEnabled(realReq.enableMax);
         requirementWrapper.maxValue.setMessage("max");
         requirementWrapper.maxValue.setToolTipText("max");
-        if (((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMax != Double.MAX_VALUE) {
-            requirementWrapper.maxValue.setText(
-                    String.valueOf(((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMax));
+        if (realReq.defaultMax != Double.MAX_VALUE) {
+            requirementWrapper.maxValue.setText(String.valueOf(realReq.defaultMax));
         }
         requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.maxValue, true, true);
@@ -104,16 +107,16 @@ public class RequirementsHelper {
     }
 
     private void createTextFieldRequirement(TextFieldRequirementWrapper requirementWrapper) {
-        requirementWrapper.value = new Text(composite, SWT.BORDER);
-        requirementWrapper.value.setEnabled(((TextFieldRequirement) requirementWrapper.requirement).enable);
+        TextFieldRequirement realReq = (TextFieldRequirement) requirementWrapper.requirement;
 
-        String type = ((TextFieldRequirement) requirementWrapper.requirement).requirementType.toString()
-                .toLowerCase();
+        requirementWrapper.value = new Text(composite, SWT.BORDER);
+        requirementWrapper.value.setEnabled(realReq.enable);
+
+        String type = realReq.requirementType.toString().toLowerCase();
         requirementWrapper.value.setMessage(type);
         requirementWrapper.value.setToolTipText(type);
-        if (((TextFieldRequirement) requirementWrapper.requirement).defaultValue != 0) {
-            requirementWrapper.value.setText(
-                    String.valueOf(((TextFieldRequirement) requirementWrapper.requirement).defaultValue));
+        if (realReq.defaultValue != 0) {
+            requirementWrapper.value.setText(String.valueOf(realReq.defaultValue));
         }
         requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.value, true, true);
@@ -126,4 +129,21 @@ public class RequirementsHelper {
         }
     }
 
+    private void createCheckboxRequirement(CheckboxRequirementWrapper requirementWrapper) {
+        CheckboxRequirement realReq = (CheckboxRequirement) requirementWrapper.requirement;
+
+        requirementWrapper.value = new Button(composite, SWT.CHECK);
+        requirementWrapper.value.setEnabled(realReq.enable);
+        requirementWrapper.value.setSelection(realReq.defaultValue);
+        requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
+        formToolkit.adapt(requirementWrapper.value, true, true);
+
+        if (requirementWrapper.requirement.unit != null) {
+            Label unitForMin = new Label(composite, SWT.NONE);
+            unitForMin.setText(requirementWrapper.requirement.unit);
+            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
+            formToolkit.adapt(unitForMin, false, false);
+        }
+
+    }
 }

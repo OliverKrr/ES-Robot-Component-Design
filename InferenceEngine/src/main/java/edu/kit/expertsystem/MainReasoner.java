@@ -31,6 +31,7 @@ import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.model.Category;
+import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.RequirementType;
@@ -168,9 +169,15 @@ public class MainReasoner {
 
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
-                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
-                addRequirement(requirementsInd, getOWLDataProperty(textFieldReq.minIRI), textFieldReq.min);
-                addRequirement(requirementsInd, getOWLDataProperty(textFieldReq.maxIRI), textFieldReq.max);
+                TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
+            } else if (req instanceof TextFieldRequirement) {
+                TextFieldRequirement realReq = (TextFieldRequirement) req;
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
+            } else if (req instanceof CheckboxRequirement) {
+                CheckboxRequirement realReq = (CheckboxRequirement) req;
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -185,6 +192,13 @@ public class MainReasoner {
         OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(
                 property, requirementsInd,
                 genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
+        helper.addAxiom(reqAxiom);
+    }
+
+    private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, boolean value) {
+        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(
+                property, requirementsInd,
+                genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_BOOLEAN));
         helper.addAxiom(reqAxiom);
     }
 
@@ -239,10 +253,17 @@ public class MainReasoner {
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
-                    TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
+                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                     genericTool.getReasoner()
                             .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny().ifPresent(obProp -> textFieldReq.result = parseValueToDouble(obProp));
+                            .findAny().ifPresent(obProp -> realReq.result = parseValueToDouble(obProp));
+                } else if (req instanceof TextFieldRequirement) {
+                    TextFieldRequirement realReq = (TextFieldRequirement) req;
+                    genericTool.getReasoner()
+                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                            .findAny().ifPresent(obProp -> realReq.result = parseValueToDouble(obProp));
+                } else if (req instanceof CheckboxRequirement) {
+                    // currently there is no result for checkboxes, because they are always applied
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -273,6 +294,10 @@ public class MainReasoner {
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
                 copyReqs.add(new TextFieldMinMaxRequirement((TextFieldMinMaxRequirement) req));
+            } else if (req instanceof TextFieldRequirement) {
+                copyReqs.add(new TextFieldRequirement((TextFieldRequirement) req));
+            } else if (req instanceof CheckboxRequirement) {
+                copyReqs.add(new CheckboxRequirement((CheckboxRequirement) req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -389,6 +414,27 @@ public class MainReasoner {
                                     if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
                                         textReq.reqIri = dataProp.getIRI().getIRIString();
                                     } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
+                                    }
+                                })));
+                return textReq;
+            } else if (Vocabulary.CLASS_CHECKBOXREQUIREMENT.equals(type)) {
+                CheckboxRequirement textReq = new CheckboxRequirement();
+                parseCommonRequirement(textReq, reqIndi);
+
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                        .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
+                genericTool.getReasoner()
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE).findAny()
+                        .ifPresent(obProp -> textReq.defaultValue = obProp.parseBoolean());
+
+                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
+                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
+                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
+                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
+                                        textReq.reqIri = dataProp.getIRI().getIRIString();
+                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEEXACT
+                                            .equals(supDataProp)) {
                                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                                     }
                                 })));

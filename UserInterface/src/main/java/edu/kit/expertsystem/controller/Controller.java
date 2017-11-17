@@ -14,6 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import edu.kit.expertsystem.Configs;
 import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.MainReasoner;
+import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
@@ -47,6 +48,8 @@ public class Controller {
                 requirementsWrapper.add(new TextFieldMinMaxRequirementWrapper(req));
             } else if (req instanceof TextFieldRequirement) {
                 requirementsWrapper.add(new TextFieldRequirementWrapper(req));
+            } else if (req instanceof CheckboxRequirement) {
+                requirementsWrapper.add(new CheckboxRequirementWrapper(req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -57,14 +60,17 @@ public class Controller {
     public void reset() {
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {
-                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
-                textFieldReq.min = textFieldReq.defaultMin;
-                textFieldReq.max = textFieldReq.defaultMax;
-                textFieldReq.result = -1;
+                TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
+                realReq.min = realReq.defaultMin;
+                realReq.max = realReq.defaultMax;
+                realReq.result = -1;
             } else if (req instanceof TextFieldRequirementWrapper) {
-                TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
-                textFieldReq.value = textFieldReq.defaultValue;
-                textFieldReq.result = -1;
+                TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
+                realReq.value = realReq.defaultValue;
+                realReq.result = -1;
+            } else if (req instanceof CheckboxRequirementWrapper) {
+                CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
+                realReq.value = realReq.defaultValue;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -89,19 +95,24 @@ public class Controller {
 
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {
-                TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
-                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
+                TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
+                TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
 
-                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.defaultMin)
-                        / textFieldReq.scaleFromOntologyToUI;
-                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.defaultMax)
-                        / textFieldReq.scaleFromOntologyToUI;
+                realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin)
+                        / realReq.scaleFromOntologyToUI;
+                realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax)
+                        / realReq.scaleFromOntologyToUI;
             } else if (req instanceof TextFieldRequirementWrapper) {
-                TextFieldRequirementWrapper textFieldReqWrapper = (TextFieldRequirementWrapper) req;
-                TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
+                TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
+                TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
 
-                textFieldReq.value = parseDouble(textFieldReqWrapper.value, textFieldReq.defaultValue)
-                        / textFieldReq.scaleFromOntologyToUI;
+                realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue)
+                        / realReq.scaleFromOntologyToUI;
+            } else if (req instanceof CheckboxRequirementWrapper) {
+                CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
+                CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
+
+                realReq.value = reqWrapper.value.getSelection();
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -153,11 +164,13 @@ public class Controller {
             for (Requirement req : result.requirements) {
                 double resultValue = -1;
                 if (req instanceof TextFieldMinMaxRequirement) {
-                    TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
-                    resultValue = textFieldReq.result * textFieldReq.scaleFromOntologyToUI;
+                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+                    resultValue = realReq.result * realReq.scaleFromOntologyToUI;
                 } else if (req instanceof TextFieldRequirement) {
-                    TextFieldRequirement textFieldReq = (TextFieldRequirement) req;
-                    resultValue = textFieldReq.result * textFieldReq.scaleFromOntologyToUI;
+                    TextFieldRequirement realReq = (TextFieldRequirement) req;
+                    resultValue = realReq.result * realReq.scaleFromOntologyToUI;
+                } else if (req instanceof CheckboxRequirement) {
+                    // currently there is no result for checkboxes, because they are always applied
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }

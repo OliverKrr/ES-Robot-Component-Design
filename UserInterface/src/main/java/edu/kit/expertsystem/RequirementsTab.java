@@ -13,9 +13,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
+import edu.kit.expertsystem.controller.CheckboxRequirementWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
 
@@ -42,12 +44,14 @@ public class RequirementsTab {
         RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
         for (int i = 0; i < requirements.size(); i++) {
             if (requirements.get(i) instanceof TextFieldMinMaxRequirementWrapper) {
-                TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) requirements
-                        .get(i).requirement;
-                isAnyFieldDisabled |= !textFieldReq.enableMin || !textFieldReq.enableMax;
+                TextFieldMinMaxRequirement req = (TextFieldMinMaxRequirement) requirements.get(i).requirement;
+                isAnyFieldDisabled |= !req.enableMin || !req.enableMax;
             } else if (requirements.get(i) instanceof TextFieldRequirementWrapper) {
-                TextFieldRequirement textFieldReq = (TextFieldRequirement) requirements.get(i).requirement;
-                isAnyFieldDisabled |= !textFieldReq.enable;
+                TextFieldRequirement req = (TextFieldRequirement) requirements.get(i).requirement;
+                isAnyFieldDisabled |= !req.enable;
+            } else if (requirements.get(i) instanceof CheckboxRequirementWrapper) {
+                CheckboxRequirement req = (CheckboxRequirement) requirements.get(i).requirement;
+                isAnyFieldDisabled |= !req.enable;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
             }
@@ -67,17 +71,20 @@ public class RequirementsTab {
                             .setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
                     for (RequirementWrapper req : requirements) {
                         if (req instanceof TextFieldMinMaxRequirementWrapper) {
-                            TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
-                            TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
-                            textFieldReqWrapper.minValue.setEnabled(
-                                    textFieldReq.enableMin || !textFieldReqWrapper.minValue.isEnabled());
-                            textFieldReqWrapper.maxValue.setEnabled(
-                                    textFieldReq.enableMax || !textFieldReqWrapper.maxValue.isEnabled());
+                            TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
+                            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
+                            reqWrapper.minValue
+                                    .setEnabled(realReq.enableMin || !reqWrapper.minValue.isEnabled());
+                            reqWrapper.maxValue
+                                    .setEnabled(realReq.enableMax || !reqWrapper.maxValue.isEnabled());
                         } else if (req instanceof TextFieldRequirementWrapper) {
-                            TextFieldRequirementWrapper textFieldReqWrapper = (TextFieldRequirementWrapper) req;
-                            TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
-                            textFieldReqWrapper.value.setEnabled(
-                                    textFieldReq.enable || !textFieldReqWrapper.value.isEnabled());
+                            TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
+                            TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
+                            reqWrapper.value.setEnabled(realReq.enable || !reqWrapper.value.isEnabled());
+                        } else if (req instanceof CheckboxRequirementWrapper) {
+                            CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
+                            CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
+                            reqWrapper.value.setEnabled(realReq.enable || !reqWrapper.value.isEnabled());
                         } else {
                             throw new RuntimeException("Requirement class unknown: " + req.getClass());
                         }
