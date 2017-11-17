@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
@@ -14,6 +16,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.NavigationItem;
+import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.model.Category;
 
@@ -38,7 +41,8 @@ public class RequirementsCategory {
         formToolkit.adapt(requirementsOverallForm);
     }
 
-    public void createContents(List<RequirementWrapper> requirements, int[] weights) {
+    public void createContents(List<RequirementWrapper> requirements,
+            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int[] weights) {
         Map<Category, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
 
         for (RequirementWrapper req : requirements) {
@@ -53,7 +57,7 @@ public class RequirementsCategory {
 
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
-            tab.createContents(reqsPerCat.getValue());
+            tab.createContents(reqsPerCat.getValue(), requirementDependencyWrappers);
             tab.getRequirementsForm().setWeights(weights);
 
             NavigationItem item = new NavigationItem();
@@ -61,6 +65,24 @@ public class RequirementsCategory {
             item.compositeToHandle = tab.getRequirementsForm();
             reqNavItems.add(item);
         }
+
+        requirementDependencyWrappers.forEach(reqDep -> {
+            reqDep.fromCheckbox.addSelectionListener(new SelectionListener() {
+
+                @Override
+                public void widgetSelected(SelectionEvent event) {
+                    reqDep.toControls.forEach(control -> control.setVisible(
+                            reqDep.requirementDependencyCheckbox.displayOnValue == reqDep.fromCheckbox
+                                    .getSelection()));
+                }
+
+                @Override
+                public void widgetDefaultSelected(SelectionEvent event) {
+                    // nothing to do
+                }
+            });
+            reqDep.fromCheckbox.notifyListeners(SWT.Selection, new Event());
+        });
 
         createReqNavigationBar();
     }

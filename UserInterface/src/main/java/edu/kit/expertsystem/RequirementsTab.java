@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.CheckboxRequirementWrapper;
+import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
@@ -36,7 +37,8 @@ public class RequirementsTab {
         formToolkit.paintBordersFor(requirementsForm);
     }
 
-    public void createContents(List<RequirementWrapper> requirements) {
+    public void createContents(List<RequirementWrapper> requirements,
+            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
         Composite leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
@@ -55,7 +57,7 @@ public class RequirementsTab {
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
             }
-            requirementsHelper.createRequirement(requirements.get(i), i);
+            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers, i);
         }
 
         if (isAnyFieldDisabled) {

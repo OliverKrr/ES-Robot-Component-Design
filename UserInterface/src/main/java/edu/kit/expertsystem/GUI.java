@@ -170,7 +170,8 @@ public class GUI {
         Button defaultNavItem = createNavigationBar();
 
         int[] weights = new int[] { 339, 1, 291 };
-        requirementsCategory.createContents(controller.getRequirementsWrapper(), weights);
+        requirementsCategory.createContents(controller.getRequirementsWrapper(),
+                controller.getRequirementDependencyWrapper(), weights);
         solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
         solutionTab.getSolutionForm().setWeights(weights);
 

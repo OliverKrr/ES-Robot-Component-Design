@@ -34,6 +34,7 @@ import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
 import edu.kit.expertsystem.model.RequirementType;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
@@ -330,6 +331,31 @@ public class MainReasoner {
         }
     }
 
+    public List<RequirementDependencyCheckbox> getRequirementDependencies(List<Requirement> requirements) {
+        List<RequirementDependencyCheckbox> requirementDependencies = new ArrayList<>();
+
+        genericTool.getReasoner().instances(Vocabulary.CLASS_REQUIREMENTDEPENDENCYCHECKBOX).forEach(dep -> {
+            RequirementDependencyCheckbox requirementDependencyCheckbox = new RequirementDependencyCheckbox();
+
+            genericTool.getReasoner()
+                    .objectPropertyValues(dep, Vocabulary.OBJECT_PROPERTY_DEPENDSFROMREQUIREMENT).findAny()
+                    .ifPresent(depFrom -> requirements.stream()
+                            .filter(req -> depFrom.getIRI().getIRIString().equals(req.individualIRI))
+                            .findAny().ifPresent(req -> requirementDependencyCheckbox.from = req));
+            genericTool.getReasoner()
+                    .objectPropertyValues(dep, Vocabulary.OBJECT_PROPERTY_DEPENDSTOREQUIREMENT).findAny()
+                    .ifPresent(depFrom -> requirements.stream()
+                            .filter(req -> depFrom.getIRI().getIRIString().equals(req.individualIRI))
+                            .findAny().ifPresent(req -> requirementDependencyCheckbox.to = req));
+            genericTool.getReasoner().dataPropertyValues(dep, Vocabulary.DATA_PROPERTY_DISPLAYONVALUEBOOLEAN)
+                    .findAny().ifPresent(
+                            literal -> requirementDependencyCheckbox.displayOnValue = literal.parseBoolean());
+
+            requirementDependencies.add(requirementDependencyCheckbox);
+        });
+        return requirementDependencies;
+    }
+
     public List<Requirement> getRequirements() {
         OWLClass componentToBuild = Vocabulary.CLASS_SACUNIT;
         List<Requirement> requirements = new ArrayList<>();
@@ -456,6 +482,8 @@ public class MainReasoner {
                             .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
                             .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
                 });
+
+        req.individualIRI = reqIndi.getIRI().getIRIString();
 
         genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)
                 .findAny().ifPresent(obProp -> req.displayName = obProp.getLiteral());

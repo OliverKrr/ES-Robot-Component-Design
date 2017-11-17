@@ -9,4 +9,10 @@ public class NavigationItem {
     public Composite compositeToHandle;
     public Button item;
 
+    @Override
+    public String toString() {
+        return "NavigationItem [name=" + name + ", compositeToHandle=" + compositeToHandle + ", item=" + item
+                + "]";
+    }
+
 }

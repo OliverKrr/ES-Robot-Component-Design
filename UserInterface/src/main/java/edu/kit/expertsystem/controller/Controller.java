@@ -17,6 +17,7 @@ import edu.kit.expertsystem.MainReasoner;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
@@ -31,6 +32,7 @@ public class Controller {
     private MainReasoner reasoner;
 
     private List<RequirementWrapper> requirementsWrapper;
+    private List<RequirementDependencyCheckboxWrapper> requirementDependencyMappers;
     private ResultWrapper resultWrapper;
 
     public Controller(GUI gui) {
@@ -43,7 +45,7 @@ public class Controller {
 
         List<Requirement> requirements = reasoner.getRequirements();
         requirementsWrapper = new ArrayList<>(requirements.size());
-        for (Requirement req : requirements) {
+        requirements.forEach(req -> {
             if (req instanceof TextFieldMinMaxRequirement) {
                 requirementsWrapper.add(new TextFieldMinMaxRequirementWrapper(req));
             } else if (req instanceof TextFieldRequirement) {
@@ -53,7 +55,17 @@ public class Controller {
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
-        }
+        });
+
+        List<RequirementDependencyCheckbox> requirementDependencies = reasoner
+                .getRequirementDependencies(requirements);
+        requirementDependencyMappers = new ArrayList<>(requirementDependencies.size());
+        requirementDependencies.forEach(reqDep -> {
+            RequirementDependencyCheckboxWrapper wrapper = new RequirementDependencyCheckboxWrapper();
+            wrapper.requirementDependencyCheckbox = reqDep;
+            requirementDependencyMappers.add(wrapper);
+        });
+
         resultWrapper = new ResultWrapper();
     }
 
@@ -219,6 +231,10 @@ public class Controller {
 
     public List<RequirementWrapper> getRequirementsWrapper() {
         return requirementsWrapper;
+    }
+
+    public List<RequirementDependencyCheckboxWrapper> getRequirementDependencyWrapper() {
+        return requirementDependencyMappers;
     }
 
     public ResultWrapper getResultWrapper() {
