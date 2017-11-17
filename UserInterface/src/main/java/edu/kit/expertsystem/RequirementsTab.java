@@ -15,7 +15,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.TextFieldRequirement;
 
 public class RequirementsTab {
 
@@ -43,6 +45,9 @@ public class RequirementsTab {
                 TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) requirements
                         .get(i).requirement;
                 isAnyFieldDisabled |= !textFieldReq.enableMin || !textFieldReq.enableMax;
+            } else if (requirements.get(i) instanceof TextFieldRequirementWrapper) {
+                TextFieldRequirement textFieldReq = (TextFieldRequirement) requirements.get(i).requirement;
+                isAnyFieldDisabled |= !textFieldReq.enable;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
             }
@@ -68,6 +73,11 @@ public class RequirementsTab {
                                     textFieldReq.enableMin || !textFieldReqWrapper.minValue.isEnabled());
                             textFieldReqWrapper.maxValue.setEnabled(
                                     textFieldReq.enableMax || !textFieldReqWrapper.maxValue.isEnabled());
+                        } else if (req instanceof TextFieldRequirementWrapper) {
+                            TextFieldRequirementWrapper textFieldReqWrapper = (TextFieldRequirementWrapper) req;
+                            TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
+                            textFieldReqWrapper.value.setEnabled(
+                                    textFieldReq.enable || !textFieldReqWrapper.value.isEnabled());
                         } else {
                             throw new RuntimeException("Requirement class unknown: " + req.getClass());
                         }
@@ -96,7 +106,8 @@ public class RequirementsTab {
         int rowNumber = 0;
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         descriptionHelper.createDescription("min/max:",
-                "Desired min and max values. If no entered, defaults are taken.", rowNumber++);
+                "Desired min and max values. If no entered, defaults are taken: min=0 and max=infinite.",
+                rowNumber++);
         for (int i = 0; i < requirements.size(); i++) {
             if (requirements.get(i).requirement.description != null) {
                 descriptionHelper.createDescription(requirements.get(i).requirement.displayName,

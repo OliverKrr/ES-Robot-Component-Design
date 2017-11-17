@@ -26,7 +26,6 @@ import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
-import org.semanticweb.owlapi.model.OWLQuantifiedObjectRestriction;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
@@ -34,8 +33,10 @@ import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.RequirementType;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.TextFieldRequirement;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
 
@@ -305,19 +306,14 @@ public class MainReasoner {
     }
 
     public List<Requirement> getRequirements() {
-        // TODO make methods for componentsToBuild, UI element to choose and get that
-        // here
         OWLClass componentToBuild = Vocabulary.CLASS_SACUNIT;
         List<Requirement> requirements = new ArrayList<>();
 
-        genericTool.getOntology().subClassAxiomsForSubClass(componentToBuild).forEach(topAxiom -> topAxiom
-                .componentsWithoutAnnotations()
-                .filter(component -> component instanceof OWLQuantifiedObjectRestriction
-                        && Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                .equals(((OWLQuantifiedObjectRestriction) component).getProperty()))
-                .forEach(propComponent -> genericTool.getOntology()
-                        .subClassAxiomsForSubClass(
-                                ((OWLQuantifiedObjectRestriction) propComponent).getFiller().asOWLClass())
+        genericTool.getOntology().subClassAxiomsForSubClass(componentToBuild)
+                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
+                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
+                        .getOntology().subClassAxiomsForSubClass(clas)
                         .forEach(axiom -> axiom.componentsWithoutAnnotations()
                                 .filter(component -> component instanceof OWLObjectHasValue
                                         && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
@@ -336,40 +332,66 @@ public class MainReasoner {
         return requirements;
     }
 
-    private Requirement parseRequirement(OWLNamedIndividual owlIndividual) {
-        return genericTool.getReasoner().types(owlIndividual, true).map(type -> {
+    private Requirement parseRequirement(OWLNamedIndividual reqIndi) {
+        return genericTool.getReasoner().types(reqIndi, true).map(type -> {
             if (Vocabulary.CLASS_TEXTFIELDMINMAXREQUIREMENT.equals(type)) {
                 TextFieldMinMaxRequirement textReq = new TextFieldMinMaxRequirement();
-                parseCommonRequirement(textReq, owlIndividual);
+                parseCommonRequirement(textReq, reqIndi);
 
                 genericTool.getReasoner()
-                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX)
-                        .findAny().ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX).findAny()
+                        .ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
                 genericTool.getReasoner()
-                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
-                        .findAny().ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN).findAny()
+                        .ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
                 genericTool.getReasoner()
-                        .dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
                         .findAny()
                         .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
+                genericTool.getReasoner()
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMIN).findAny()
+                        .ifPresent(obProp -> textReq.defaultMin = parseValueToDouble(obProp));
+                genericTool.getReasoner()
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMAX).findAny()
+                        .ifPresent(obProp -> textReq.defaultMax = parseValueToDouble(obProp));
 
-                genericTool.getOntology().dataPropertyAssertionAxioms(owlIndividual)
-                        .forEach(prop -> prop.componentsWithoutAnnotations()
-                                .filter(component -> component instanceof OWLDataProperty)
-                                .forEach(component -> ((OWLDataProperty) component)
-                                        .dataPropertiesInSignature().forEach(comp -> genericTool.getReasoner()
-                                                .superDataProperties(comp).forEach(sup -> {
-                                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(sup)) {
-                                                        textReq.minIRI = comp.getIRI().getIRIString();
-                                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX
-                                                            .equals(sup)) {
-                                                        textReq.maxIRI = comp.getIRI().getIRIString();
-                                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE
-                                                            .equals(sup)) {
-                                                        textReq.resultIRI = comp.getIRI().getIRIString();
-                                                    }
-                                                }))));
+                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
+                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
+                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
+                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(supDataProp)) {
+                                        textReq.minIRI = dataProp.getIRI().getIRIString();
+                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX.equals(supDataProp)) {
+                                        textReq.maxIRI = dataProp.getIRI().getIRIString();
+                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
+                                    }
+                                })));
 
+                return textReq;
+            } else if (Vocabulary.CLASS_TEXTFIELDREQUIREMENT.equals(type)) {
+                TextFieldRequirement textReq = new TextFieldRequirement();
+                parseCommonRequirement(textReq, reqIndi);
+                parseRequirementType(textReq, reqIndi);
+
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                        .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
+                genericTool.getReasoner()
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
+                        .findAny()
+                        .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
+                genericTool.getReasoner()
+                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE).findAny()
+                        .ifPresent(obProp -> textReq.defaultValue = parseValueToDouble(obProp));
+
+                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
+                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
+                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
+                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
+                                        textReq.reqIri = dataProp.getIRI().getIRIString();
+                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
+                                    }
+                                })));
                 return textReq;
             } else {
                 throw new RuntimeException("Requirement type unknown: " + type);
@@ -377,9 +399,9 @@ public class MainReasoner {
         }).findAny().get();
     }
 
-    private void parseCommonRequirement(Requirement req, OWLNamedIndividual owlIndividual) {
+    private void parseCommonRequirement(Requirement req, OWLNamedIndividual reqIndi) {
         req.category = new Category();
-        genericTool.getReasoner().objectPropertyValues(owlIndividual, Vocabulary.OBJECT_PROPERTY_HASCATEGORY)
+        genericTool.getReasoner().objectPropertyValues(reqIndi, Vocabulary.OBJECT_PROPERTY_HASCATEGORY)
                 .forEach(cate -> {
                     genericTool.getReasoner()
                             .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
@@ -389,14 +411,27 @@ public class MainReasoner {
                             .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
                 });
 
-        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)
+        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)
                 .findAny().ifPresent(obProp -> req.displayName = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASDESCRIPTION)
+        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDESCRIPTION)
                 .findAny().ifPresent(obProp -> req.description = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASUNIT)
-                .findAny().ifPresent(obProp -> req.unit = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(owlIndividual, Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
+        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASUNIT).findAny()
+                .ifPresent(obProp -> req.unit = obProp.getLiteral());
+        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
                 .findAny().ifPresent(obProp -> req.orderPosition = parseValueToInteger(obProp));
+    }
+
+    private void parseRequirementType(TextFieldRequirement textReq, OWLNamedIndividual reqIndi) {
+        genericTool.getReasoner().objectPropertyValues(reqIndi, Vocabulary.OBJECT_PROPERTY_HASREQUIREMENTTYPE)
+                .forEach(reqType -> genericTool.getReasoner().types(reqType).forEach(typeOfReqType -> {
+                    if (Vocabulary.CLASS_REQUIREMENTTYPEEXACT.equals(typeOfReqType)) {
+                        textReq.requirementType = RequirementType.EXACT;
+                    } else if (Vocabulary.CLASS_REQUIREMENTTYPEMIN.equals(typeOfReqType)) {
+                        textReq.requirementType = RequirementType.MIN;
+                    } else if (Vocabulary.CLASS_REQUIREMENTTYPEMAX.equals(typeOfReqType)) {
+                        textReq.requirementType = RequirementType.MAX;
+                    }
+                }));
     }
 
 }

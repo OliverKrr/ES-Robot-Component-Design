@@ -18,6 +18,7 @@ import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.TextFieldRequirement;
 
 public class Controller {
 
@@ -44,6 +45,8 @@ public class Controller {
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
                 requirementsWrapper.add(new TextFieldMinMaxRequirementWrapper(req));
+            } else if (req instanceof TextFieldRequirement) {
+                requirementsWrapper.add(new TextFieldRequirementWrapper(req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -55,8 +58,12 @@ public class Controller {
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {
                 TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
-                textFieldReq.min = 0;
-                textFieldReq.max = Double.MAX_VALUE;
+                textFieldReq.min = textFieldReq.defaultMin;
+                textFieldReq.max = textFieldReq.defaultMax;
+                textFieldReq.result = -1;
+            } else if (req instanceof TextFieldRequirementWrapper) {
+                TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
+                textFieldReq.value = textFieldReq.defaultValue;
                 textFieldReq.result = -1;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
@@ -85,9 +92,15 @@ public class Controller {
                 TextFieldMinMaxRequirementWrapper textFieldReqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                 TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req.requirement;
 
-                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.min)
+                textFieldReq.min = parseDouble(textFieldReqWrapper.minValue, textFieldReq.defaultMin)
                         / textFieldReq.scaleFromOntologyToUI;
-                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.max)
+                textFieldReq.max = parseDouble(textFieldReqWrapper.maxValue, textFieldReq.defaultMax)
+                        / textFieldReq.scaleFromOntologyToUI;
+            } else if (req instanceof TextFieldRequirementWrapper) {
+                TextFieldRequirementWrapper textFieldReqWrapper = (TextFieldRequirementWrapper) req;
+                TextFieldRequirement textFieldReq = (TextFieldRequirement) req.requirement;
+
+                textFieldReq.value = parseDouble(textFieldReqWrapper.value, textFieldReq.defaultValue)
                         / textFieldReq.scaleFromOntologyToUI;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
@@ -100,8 +113,10 @@ public class Controller {
             try {
                 return Double.parseDouble(textToParse.getText());
             } catch (NumberFormatException e) {
-                logger.error("Could not parse <" + textToParse.getText() + "> to double. Default value <"
-                        + defaultValue + "> will be taken!");
+                String message = "Could not parse <" + textToParse.getText() + "> to double. Default value <"
+                        + defaultValue + "> will be taken!";
+                gui.setErrorText(message);
+                logger.error(message);
             }
         }
         return defaultValue;
@@ -139,6 +154,9 @@ public class Controller {
                 double resultValue = -1;
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement textFieldReq = (TextFieldMinMaxRequirement) req;
+                    resultValue = textFieldReq.result * textFieldReq.scaleFromOntologyToUI;
+                } else if (req instanceof TextFieldRequirement) {
+                    TextFieldRequirement textFieldReq = (TextFieldRequirement) req;
                     resultValue = textFieldReq.result * textFieldReq.scaleFromOntologyToUI;
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());

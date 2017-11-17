@@ -8,7 +8,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.TextFieldRequirement;
 
 public class RequirementsHelper {
 
@@ -31,35 +33,46 @@ public class RequirementsHelper {
     private final FormToolkit formToolkit;
     private final Composite composite;
 
+    private int y1;
+    private int y2;
+
     public RequirementsHelper(FormToolkit formToolkit, Composite composite) {
         this.formToolkit = formToolkit;
         this.composite = composite;
     }
 
     public void createRequirement(RequirementWrapper requirementWrapper, int rowNumber) {
+        y1 = basisY1 + offsetY * rowNumber;
+        y2 = basisY2 + offsetY * rowNumber;
+        createCommonRequirement(requirementWrapper);
+
         if (requirementWrapper instanceof TextFieldMinMaxRequirementWrapper) {
-            createTextFieldMinMaxRequirement((TextFieldMinMaxRequirementWrapper) requirementWrapper,
-                    rowNumber);
+            createTextFieldMinMaxRequirement((TextFieldMinMaxRequirementWrapper) requirementWrapper);
+        } else if (requirementWrapper instanceof TextFieldRequirementWrapper) {
+            createTextFieldRequirement((TextFieldRequirementWrapper) requirementWrapper);
         } else {
             throw new RuntimeException("Requirement class unknown: " + requirementWrapper.getClass());
         }
     }
 
-    private void createTextFieldMinMaxRequirement(TextFieldMinMaxRequirementWrapper requirementWrapper,
-            int rowNumber) {
-        int y1 = basisY1 + offsetY * rowNumber;
-        int y2 = basisY2 + offsetY * rowNumber;
-
+    private void createCommonRequirement(RequirementWrapper requirementWrapper) {
         Label displayName = new Label(composite, SWT.NONE);
         displayName.setBounds(displayNameX, y1, displayNameWidth, height);
         displayName.setText(requirementWrapper.requirement.displayName);
         formToolkit.adapt(displayName, false, false);
         displayName.setForeground(Configs.KIT_GREEN_70);
+    }
 
+    private void createTextFieldMinMaxRequirement(TextFieldMinMaxRequirementWrapper requirementWrapper) {
         requirementWrapper.minValue = new Text(composite, SWT.BORDER);
         requirementWrapper.minValue
                 .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMin);
         requirementWrapper.minValue.setMessage("min");
+        requirementWrapper.minValue.setToolTipText("min");
+        if (((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMin != 0) {
+            requirementWrapper.minValue.setText(
+                    String.valueOf(((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMin));
+        }
         requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.minValue, true, true);
 
@@ -74,6 +87,11 @@ public class RequirementsHelper {
         requirementWrapper.maxValue
                 .setEnabled(((TextFieldMinMaxRequirement) requirementWrapper.requirement).enableMax);
         requirementWrapper.maxValue.setMessage("max");
+        requirementWrapper.maxValue.setToolTipText("max");
+        if (((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMax != Double.MAX_VALUE) {
+            requirementWrapper.maxValue.setText(
+                    String.valueOf(((TextFieldMinMaxRequirement) requirementWrapper.requirement).defaultMax));
+        }
         requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.maxValue, true, true);
 
@@ -82,6 +100,29 @@ public class RequirementsHelper {
             unitForMax.setText(requirementWrapper.requirement.unit);
             unitForMax.setBounds(unitForMaxX, y2, unitWidth, height);
             formToolkit.adapt(unitForMax, false, false);
+        }
+    }
+
+    private void createTextFieldRequirement(TextFieldRequirementWrapper requirementWrapper) {
+        requirementWrapper.value = new Text(composite, SWT.BORDER);
+        requirementWrapper.value.setEnabled(((TextFieldRequirement) requirementWrapper.requirement).enable);
+
+        String type = ((TextFieldRequirement) requirementWrapper.requirement).requirementType.toString()
+                .toLowerCase();
+        requirementWrapper.value.setMessage(type);
+        requirementWrapper.value.setToolTipText(type);
+        if (((TextFieldRequirement) requirementWrapper.requirement).defaultValue != 0) {
+            requirementWrapper.value.setText(
+                    String.valueOf(((TextFieldRequirement) requirementWrapper.requirement).defaultValue));
+        }
+        requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
+        formToolkit.adapt(requirementWrapper.value, true, true);
+
+        if (requirementWrapper.requirement.unit != null) {
+            Label unitForMin = new Label(composite, SWT.NONE);
+            unitForMin.setText(requirementWrapper.requirement.unit);
+            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
+            formToolkit.adapt(unitForMin, false, false);
         }
     }
 

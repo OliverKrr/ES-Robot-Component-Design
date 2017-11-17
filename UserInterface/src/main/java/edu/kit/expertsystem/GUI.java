@@ -36,7 +36,7 @@ public class GUI {
 
     private static final Point sizeOfShell = new Point(1000, 600);
 
-    public static final int contentX = 120;
+    public static final int contentX = 140;
     public static final int navBarY = 10;
 
     public static final int contentWidth = 779;
@@ -237,5 +237,9 @@ public class GUI {
         gc.dispose();
         image.dispose();
         return scaled;
+    }
+
+    public void setErrorText(String message) {
+        errorText.setText(message);
     }
 }

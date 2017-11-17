@@ -9,8 +9,11 @@ public class TextFieldMinMaxRequirement extends Requirement {
     public boolean enableMin = true;
     public boolean enableMax = true;
 
-    public double min = 0;
-    public double max = Double.MAX_VALUE;
+    public double defaultMin = 0;
+    public double defaultMax = Double.MAX_VALUE;
+
+    public double min = defaultMin;
+    public double max = defaultMax;
 
     public double result = -1;
 
@@ -25,6 +28,8 @@ public class TextFieldMinMaxRequirement extends Requirement {
         maxIRI = other.maxIRI;
         enableMin = other.enableMin;
         enableMax = other.enableMax;
+        defaultMin = other.defaultMin;
+        defaultMax = other.defaultMax;
         min = other.min;
         max = other.max;
         result = other.result;
@@ -34,8 +39,8 @@ public class TextFieldMinMaxRequirement extends Requirement {
     public String toString() {
         return "TextFieldMinMaxRequirement [scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", minIRI="
                 + minIRI + ", maxIRI=" + maxIRI + ", enableMin=" + enableMin + ", enableMax=" + enableMax
-                + ", min=" + min + ", max=" + max + ", result=" + result + ", toString()=" + super.toString()
-                + "]";
+                + ", defaultMin=" + defaultMin + ", defaultMax=" + defaultMax + ", min=" + min + ", max="
+                + max + ", result=" + result + ", toString()=" + super.toString() + "]";
     }
 
 }
