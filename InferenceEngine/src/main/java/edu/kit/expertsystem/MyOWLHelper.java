@@ -36,9 +36,12 @@ public class MyOWLHelper {
         return IRI.create("#" + name);
     }
 
-    public void addAxiom(OWLAxiom axiomToAdd) {
-        generatedAxioms.add(axiomToAdd);
+    public boolean addAxiom(OWLAxiom axiomToAdd) {
+        if (!generatedAxioms.add(axiomToAdd)) {
+            return false;
+        }
         genericTool.getManager().addAxiom(genericTool.getOntology(), axiomToAdd);
+        return true;
     }
 
     public void flush() {

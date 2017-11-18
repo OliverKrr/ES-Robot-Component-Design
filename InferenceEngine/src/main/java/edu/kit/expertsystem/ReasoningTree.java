@@ -105,11 +105,13 @@ public class ReasoningTree {
                     .getOWLNamedIndividual(helper.create(parentName));
             // logger.info("\tAdd individual: " + parentInd.getIRI().getShortForm());
 
-            helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd));
-            for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
-                helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
-                        childInd.propertyFromParent, parentInd, childInd.childIndividual));
+            if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
+                for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
+                    helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
+                            childInd.propertyFromParent, parentInd, childInd.childIndividual));
+                }
             }
+
         }
     }
 
