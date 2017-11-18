@@ -20,25 +20,24 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataHasValue;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
-import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectHasValue;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
-import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
 import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
-import edu.kit.expertsystem.model.RequirementType;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
+import edu.kit.expertsystem.model.UnitToReason;
+import openllet.owlapi.OWL;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
 
@@ -59,6 +58,7 @@ public class MainReasoner {
 
     private MyOWLHelper helper;
     private ReasoningTree reasoningTree;
+    private RequirementHelper requirementHelper;
     private boolean isReasoningPrepared = false;
 
     private List<OWLClass> createdIndividualClasses = new ArrayList<>();
@@ -77,6 +77,7 @@ public class MainReasoner {
         logger.info("Read Ontology isConsistent: " + genericTool.getReasoner().isConsistent());
         helper = new MyOWLHelper(genericTool);
         reasoningTree = new ReasoningTree(genericTool, helper);
+        requirementHelper = new RequirementHelper(genericTool, helper);
     }
 
     private OWLOntology loadOntology(String fileName, boolean setInferdFilePath) {
@@ -109,13 +110,10 @@ public class MainReasoner {
         }
     }
 
-    public void prepareReasoning() {
+    public void prepareReasoning(UnitToReason unitToReason) {
         long startTime = System.currentTimeMillis();
-        if (isReasoningPrepared) {
-            return;
-        }
         helper.clearGeneratedAxioms();
-        createBasicIndividuals(Vocabulary.CLASS_SACUNIT);
+        createBasicIndividuals(OWL.Class(unitToReason.iriOfUnit));
         helper.flush();
         genericTool.getReasoner().precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
@@ -123,16 +121,16 @@ public class MainReasoner {
                 "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
-    public List<Result> startReasoning(List<Requirement> requirements) {
+    public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
         try {
             if (!isReasoningPrepared) {
-                prepareReasoning();
+                prepareReasoning(unitToReason);
             }
             isReasoningPrepared = false;
             addRequirements(requirements);
             helper.flush();
-            return reason(requirements);
+            return reason(OWL.Class(unitToReason.iriOfResultUnit), requirements);
         } finally {
             try {
                 saveReasonedOntology();
@@ -203,9 +201,9 @@ public class MainReasoner {
         helper.addAxiom(reqAxiom);
     }
 
-    private List<Result> reason(List<Requirement> requirements) {
+    private List<Result> reason(OWLClass resultingUnit, List<Requirement> requirements) {
         reasoningTree.makeReasoning();
-        return makeResults(Vocabulary.CLASS_SATISFIEDSACUNIT, requirements);
+        return makeResults(resultingUnit, requirements);
     }
 
     private List<Result> makeResults(OWLClass classToBuildResult, List<Requirement> requirements) {
@@ -217,54 +215,35 @@ public class MainReasoner {
 
             genericTool.getOntology()
                     .objectSubPropertyAxiomsForSuperProperty(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE)
-                    .forEach(
-                            subOb -> genericTool.getReasoner()
-                                    .objectPropertyValues(resultingComponent,
-                                            subOb.getSubProperty().getNamedProperty())
-                                    .forEach(composedComponent -> {
-                                        Component component = new Component();
-
-                                        component.nameOfComponent = helper.getNameOfComponent(
-                                                subOb.getSubProperty().getNamedProperty());
-                                        component.nameOfInstance = helper
-                                                .getNameOfOWLNamedIndividual(composedComponent);
-
-                                        // Because we can infer the same screw for multiple units, we have to
-                                        // find the orderPosition the hard way
-                                        genericTool.getOntology()
-                                                .objectPropertyRangeAxioms(
-                                                        subOb.getSubProperty().getNamedProperty())
-                                                .forEach(range -> genericTool.getOntology()
-                                                        .subClassAxiomsForSubClass(
-                                                                range.getRange().asOWLClass())
-                                                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
-                                                                .filter(comp -> comp instanceof OWLDataHasValue
-                                                                        && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
-                                                                                .equals(((OWLDataHasValue) comp)
-                                                                                        .getProperty()))
-                                                                .findAny().ifPresent(
-                                                                        comp -> component.orderPosition = parseValueToInteger(
-                                                                                ((OWLDataHasValue) comp)
-                                                                                        .getFiller()))));
-                                        result.components.add(component);
-                                    }));
-
+                    .forEach(subOb -> genericTool.getReasoner()
+                            .objectPropertyValues(resultingComponent,
+                                    subOb.getSubProperty().getNamedProperty())
+                            .forEach(composedComponent -> result.components
+                                    .add(parseComponent(subOb, composedComponent))));
             Collections.sort(result.components, (comp1, comp2) -> comp1.orderPosition - comp2.orderPosition);
 
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
+                if (req.resultIRI == null) {
+                    continue;
+                }
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                     genericTool.getReasoner()
                             .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny().ifPresent(obProp -> realReq.result = parseValueToDouble(obProp));
+                            .findAny()
+                            .ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
                 } else if (req instanceof TextFieldRequirement) {
                     TextFieldRequirement realReq = (TextFieldRequirement) req;
                     genericTool.getReasoner()
                             .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny().ifPresent(obProp -> realReq.result = parseValueToDouble(obProp));
+                            .findAny()
+                            .ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
                 } else if (req instanceof CheckboxRequirement) {
-                    // currently there is no result for checkboxes, because they are always applied
+                    CheckboxRequirement realReq = (CheckboxRequirement) req;
+                    genericTool.getReasoner()
+                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                            .findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -290,6 +269,26 @@ public class MainReasoner {
         return results;
     }
 
+    private Component parseComponent(OWLSubObjectPropertyOfAxiom subOb,
+            OWLNamedIndividual composedComponent) {
+        Component component = new Component();
+        component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
+        component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
+
+        // Because we can infer the same screw for multiple units, we have to
+        // find the orderPosition the hard way
+        genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty())
+                .forEach(range -> genericTool.getOntology()
+                        .subClassAxiomsForSubClass(range.getRange().asOWLClass())
+                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
+                                .filter(comp -> comp instanceof OWLDataHasValue
+                                        && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
+                                                .equals(((OWLDataHasValue) comp).getProperty()))
+                                .findAny().ifPresent(comp -> component.orderPosition = helper
+                                        .parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
+        return component;
+    }
+
     private List<Requirement> copyRequirements(List<Requirement> requirements) {
         List<Requirement> copyReqs = new ArrayList<>(requirements.size());
         for (Requirement req : requirements) {
@@ -306,20 +305,6 @@ public class MainReasoner {
         return copyReqs;
     }
 
-    private double parseValueToDouble(OWLLiteral obProp) {
-        if (obProp.isInteger()) {
-            return obProp.parseInteger();
-        }
-        return obProp.parseDouble();
-    }
-
-    private int parseValueToInteger(OWLLiteral obProp) {
-        if (obProp.isInteger()) {
-            return obProp.parseInteger();
-        }
-        return Math.round(obProp.parseFloat());
-    }
-
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
         logger.info("Reasoned ontology isConsistent: " + genericTool.getReasoner().isConsistent());
         if (inferdFilePath == null) {
@@ -331,181 +316,30 @@ public class MainReasoner {
         }
     }
 
+    public List<UnitToReason> getUnitsToReason() {
+        List<UnitToReason> units = new ArrayList<>();
+        // TODO getRealList
+        UnitToReason unitToReason = new UnitToReason();
+        unitToReason.displayName = "SacUnit";
+        unitToReason.iriOfUnit = Vocabulary.CLASS_SACUNIT.getIRI().getIRIString();
+        unitToReason.iriOfResultUnit = Vocabulary.CLASS_SATISFIEDSACUNIT.getIRI().getIRIString();
+        units.add(unitToReason);
+
+        UnitToReason unitToReason2 = new UnitToReason();
+        unitToReason2.displayName = "MotorGearBoxMatch";
+        unitToReason2.iriOfUnit = Vocabulary.CLASS_MOTORGEARBOXMATCH.getIRI().getIRIString();
+        unitToReason2.iriOfResultUnit = Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH.getIRI().getIRIString();
+        units.add(unitToReason2);
+
+        return units;
+    }
+
+    public List<Requirement> getRequirements(UnitToReason unitToReason) {
+        return requirementHelper.getRequirements(OWL.Class(unitToReason.iriOfUnit));
+    }
+
     public List<RequirementDependencyCheckbox> getRequirementDependencies(List<Requirement> requirements) {
-        List<RequirementDependencyCheckbox> requirementDependencies = new ArrayList<>();
-
-        genericTool.getReasoner().instances(Vocabulary.CLASS_REQUIREMENTDEPENDENCYCHECKBOX).forEach(dep -> {
-            RequirementDependencyCheckbox requirementDependencyCheckbox = new RequirementDependencyCheckbox();
-
-            genericTool.getReasoner()
-                    .objectPropertyValues(dep, Vocabulary.OBJECT_PROPERTY_DEPENDSFROMREQUIREMENT).findAny()
-                    .ifPresent(depFrom -> requirements.stream()
-                            .filter(req -> depFrom.getIRI().getIRIString().equals(req.individualIRI))
-                            .findAny().ifPresent(req -> requirementDependencyCheckbox.from = req));
-            genericTool.getReasoner()
-                    .objectPropertyValues(dep, Vocabulary.OBJECT_PROPERTY_DEPENDSTOREQUIREMENT).findAny()
-                    .ifPresent(depFrom -> requirements.stream()
-                            .filter(req -> depFrom.getIRI().getIRIString().equals(req.individualIRI))
-                            .findAny().ifPresent(req -> requirementDependencyCheckbox.to = req));
-            genericTool.getReasoner().dataPropertyValues(dep, Vocabulary.DATA_PROPERTY_DISPLAYONVALUEBOOLEAN)
-                    .findAny().ifPresent(
-                            literal -> requirementDependencyCheckbox.displayOnValue = literal.parseBoolean());
-
-            requirementDependencies.add(requirementDependencyCheckbox);
-        });
-        return requirementDependencies;
-    }
-
-    public List<Requirement> getRequirements() {
-        OWLClass componentToBuild = Vocabulary.CLASS_SACUNIT;
-        List<Requirement> requirements = new ArrayList<>();
-
-        genericTool.getOntology().subClassAxiomsForSubClass(componentToBuild)
-                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
-                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
-                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
-                        .getOntology().subClassAxiomsForSubClass(clas)
-                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
-                                .filter(component -> component instanceof OWLObjectHasValue
-                                        && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
-                                                .equals(((OWLObjectHasValue) component).getProperty()))
-                                .forEach(component -> requirements
-                                        .add(parseRequirement(((OWLObjectHasValue) component).getFiller()
-                                                .asOWLNamedIndividual()))))));
-
-        Collections.sort(requirements, (req1, req2) -> {
-            int sortCat = req1.category.orderPosition - req2.category.orderPosition;
-            if (sortCat == 0) {
-                return req1.orderPosition - req2.orderPosition;
-            }
-            return sortCat;
-        });
-        return requirements;
-    }
-
-    private Requirement parseRequirement(OWLNamedIndividual reqIndi) {
-        return genericTool.getReasoner().types(reqIndi, true).map(type -> {
-            if (Vocabulary.CLASS_TEXTFIELDMINMAXREQUIREMENT.equals(type)) {
-                TextFieldMinMaxRequirement textReq = new TextFieldMinMaxRequirement();
-                parseCommonRequirement(textReq, reqIndi);
-
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX).findAny()
-                        .ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN).findAny()
-                        .ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
-                        .findAny()
-                        .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMIN).findAny()
-                        .ifPresent(obProp -> textReq.defaultMin = parseValueToDouble(obProp));
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMAX).findAny()
-                        .ifPresent(obProp -> textReq.defaultMax = parseValueToDouble(obProp));
-
-                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
-                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
-                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
-                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUEMIN.equals(supDataProp)) {
-                                        textReq.minIRI = dataProp.getIRI().getIRIString();
-                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX.equals(supDataProp)) {
-                                        textReq.maxIRI = dataProp.getIRI().getIRIString();
-                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
-                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
-                                    }
-                                })));
-
-                return textReq;
-            } else if (Vocabulary.CLASS_TEXTFIELDREQUIREMENT.equals(type)) {
-                TextFieldRequirement textReq = new TextFieldRequirement();
-                parseCommonRequirement(textReq, reqIndi);
-                parseRequirementType(textReq, reqIndi);
-
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
-                        .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
-                        .findAny()
-                        .ifPresent(obProp -> textReq.scaleFromOntologyToUI = parseValueToDouble(obProp));
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE).findAny()
-                        .ifPresent(obProp -> textReq.defaultValue = parseValueToDouble(obProp));
-
-                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
-                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
-                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
-                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
-                                        textReq.reqIri = dataProp.getIRI().getIRIString();
-                                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
-                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
-                                    }
-                                })));
-                return textReq;
-            } else if (Vocabulary.CLASS_CHECKBOXREQUIREMENT.equals(type)) {
-                CheckboxRequirement textReq = new CheckboxRequirement();
-                parseCommonRequirement(textReq, reqIndi);
-
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
-                        .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
-                genericTool.getReasoner()
-                        .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE).findAny()
-                        .ifPresent(obProp -> textReq.defaultValue = obProp.parseBoolean());
-
-                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(
-                        propAxiom -> propAxiom.dataPropertiesInSignature().forEach(dataProp -> genericTool
-                                .getReasoner().superDataProperties(dataProp).forEach(supDataProp -> {
-                                    if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
-                                        textReq.reqIri = dataProp.getIRI().getIRIString();
-                                    } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEEXACT
-                                            .equals(supDataProp)) {
-                                        textReq.resultIRI = dataProp.getIRI().getIRIString();
-                                    }
-                                })));
-                return textReq;
-            } else {
-                throw new RuntimeException("Requirement type unknown: " + type);
-            }
-        }).findAny().get();
-    }
-
-    private void parseCommonRequirement(Requirement req, OWLNamedIndividual reqIndi) {
-        req.category = new Category();
-        genericTool.getReasoner().objectPropertyValues(reqIndi, Vocabulary.OBJECT_PROPERTY_HASCATEGORY)
-                .forEach(cate -> {
-                    genericTool.getReasoner()
-                            .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
-                            .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
-                    genericTool.getReasoner()
-                            .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
-                            .ifPresent(obProp -> req.category.orderPosition = parseValueToInteger(obProp));
-                });
-
-        req.individualIRI = reqIndi.getIRI().getIRIString();
-
-        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)
-                .findAny().ifPresent(obProp -> req.displayName = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDESCRIPTION)
-                .findAny().ifPresent(obProp -> req.description = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASUNIT).findAny()
-                .ifPresent(obProp -> req.unit = obProp.getLiteral());
-        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASORDERPOSITION)
-                .findAny().ifPresent(obProp -> req.orderPosition = parseValueToInteger(obProp));
-    }
-
-    private void parseRequirementType(TextFieldRequirement textReq, OWLNamedIndividual reqIndi) {
-        genericTool.getReasoner().objectPropertyValues(reqIndi, Vocabulary.OBJECT_PROPERTY_HASREQUIREMENTTYPE)
-                .forEach(reqType -> genericTool.getReasoner().types(reqType).forEach(typeOfReqType -> {
-                    if (Vocabulary.CLASS_REQUIREMENTTYPEEXACT.equals(typeOfReqType)) {
-                        textReq.requirementType = RequirementType.EXACT;
-                    } else if (Vocabulary.CLASS_REQUIREMENTTYPEMIN.equals(typeOfReqType)) {
-                        textReq.requirementType = RequirementType.MIN;
-                    } else if (Vocabulary.CLASS_REQUIREMENTTYPEMAX.equals(typeOfReqType)) {
-                        textReq.requirementType = RequirementType.MAX;
-                    }
-                }));
+        return requirementHelper.getRequirementDependencies(requirements);
     }
 
 }

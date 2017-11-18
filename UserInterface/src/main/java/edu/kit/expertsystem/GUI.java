@@ -15,10 +15,12 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -36,9 +38,8 @@ public class GUI {
     public static final int navBarY = 10;
     public static final int errorTextHeight = 83;
     public static final int errorTextYOffset = 2;
-    private static final int[] firstContentWeights = new int[] { 350, 1, 280 };
-    private Point firstSizeOfShell = new Point(1000, 600);
-    private Rectangle firstRecOfContent;
+    private static final int unitsToReasonComboOffsetWidth = 24;
+    private static final Point firstSizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
 
@@ -55,7 +56,9 @@ public class GUI {
 
     private NavigationBarHelper mainNavBarHelper;
     private List<NavigationItem> mainNavBars = new ArrayList<>();
+    private Combo unitsToReasonCombo;
     private StyledText errorText;
+    private Label kitLogo;
 
     /**
      * Launch the application.
@@ -146,21 +149,45 @@ public class GUI {
     protected void createContents() {
         createShell();
 
-        requirementsCategory = new RequirementsCategory(shell, formToolkit);
-        Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
-        Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
+        unitsToReasonCombo = new Combo(shell, SWT.DROP_DOWN | SWT.READ_ONLY);
+        controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
+        unitsToReasonCombo.addSelectionListener(new SelectionListener() {
 
-        firstRecOfContent = requirementsCategory.createReqContent(
-                controller.getRequirementDependencyWrapper(), firstContentWeights,
-                mainNavBarRec.y + mainNavBarRec.height, firstSizeOfShell);
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                controller.updateUnitToReason(unitsToReasonCombo.getText());
+                if (requirementsCategory != null) {
+                    requirementsCategory.disposeNavItems();
+                    requirementsCategory.getRequirementsOverallForm().dispose();
+                    solutionTab.getSolutionForm().dispose();
+                }
+                requirementsCategory = new RequirementsCategory(shell, formToolkit);
+                Rectangle reqNavBarRec = requirementsCategory
+                        .createNavBars(controller.getRequirementsWrapper());
+                Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
+                unitsToReasonCombo.setSize(0, mainNavBarRec.height);
 
-        solutionTab = new SolutionTab(shell, formToolkit, firstRecOfContent);
-        solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
-        solutionTab.getSolutionForm().setWeights(firstContentWeights);
+                Rectangle recOfContent = requirementsCategory.createReqContent(
+                        controller.getRequirementDependencyWrapper(), mainNavBarRec.y + mainNavBarRec.height,
+                        firstSizeOfShell);
 
-        createErrorText(firstRecOfContent);
-        createKitLogo(reqNavBarRec);
-        addNavigationBarListener();
+                solutionTab = new SolutionTab(shell, formToolkit, recOfContent);
+                solutionTab.createContents(controller.getResultWrapper(),
+                        controller.getRequirementsWrapper());
+
+                createErrorText(recOfContent);
+                createKitLogo(reqNavBarRec);
+                addNavigationBarListener();
+                updateSize();
+            }
+
+            @Override
+            public void widgetDefaultSelected(SelectionEvent event) {
+                // nothing to to
+            }
+        });
+        unitsToReasonCombo.select(0);
+        unitsToReasonCombo.notifyListeners(SWT.Selection, new Event());
 
         shell.addListener(SWT.Resize, new Listener() {
             @Override
@@ -180,6 +207,10 @@ public class GUI {
     }
 
     private Rectangle createNavigationBar(Rectangle reqNavBarRec) {
+        if (!mainNavBars.isEmpty()) {
+            mainNavBars.forEach(navBar -> navBar.item.dispose());
+            mainNavBars.clear();
+        }
         NavigationItem reqItem = new NavigationItem();
         reqItem.name = "Requirements";
         mainNavBars.add(reqItem);
@@ -226,15 +257,18 @@ public class GUI {
     }
 
     private void updateSize() {
-        float newWidthOfContent = 1f * firstRecOfContent.width * shell.getSize().x / firstSizeOfShell.x;
-        float ratioForWeights = 1f * newWidthOfContent / firstRecOfContent.width;
-        int[] newContentWeights = { Math.round(firstContentWeights[0] * ratioForWeights),
-                firstContentWeights[1], Math.round(firstContentWeights[2] / ratioForWeights) };
-        solutionTab.getSolutionForm().setWeights(newContentWeights);
+        solutionTab.getSolutionForm().setWeights(getWeights());
         formToolkit.adapt(solutionTab.getSolutionForm());
 
-        Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), newContentWeights);
+        Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), getWeights());
         solutionTab.updateSize(updatedRec);
+
+        int unitsToReasonComboWidth = getUnitsToReasoneComboWidth();
+        int unitToReasonComboX = updatedRec.x + updatedRec.width - unitsToReasonComboWidth;
+        unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth,
+                unitsToReasonCombo.getSize().y);
+        formToolkit.adapt(unitsToReasonCombo);
+        formToolkit.paintBordersFor(unitsToReasonCombo);
 
         int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
         errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
@@ -242,17 +276,37 @@ public class GUI {
         formToolkit.paintBordersFor(errorText);
     }
 
+    private int[] getWeights() {
+        float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
+        float ratioForWeights = 1f * newWidthOfContent / 835;
+        int[] newContentWeights = { Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights) };
+        return newContentWeights;
+    }
+
+    private int getUnitsToReasoneComboWidth() {
+        int maxWidth = 0;
+        for (String unit : unitsToReasonCombo.getItems()) {
+            GC gc = new GC(unitsToReasonCombo);
+            Point size = gc.textExtent(unit);
+            gc.dispose();
+            maxWidth = Math.max(maxWidth, size.x);
+        }
+        return maxWidth + unitsToReasonComboOffsetWidth;
+    }
+
     private void createErrorText(Rectangle contentRec) {
+        if (errorText != null) {
+            errorText.dispose();
+        }
         errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-        int errorTextY = contentRec.height + contentRec.y + errorTextYOffset;
-        errorText.setBounds(contentRec.x, errorTextY, contentRec.width, errorTextHeight);
         errorText.setEditable(false);
-        formToolkit.adapt(errorText);
-        formToolkit.paintBordersFor(errorText);
     }
 
     private void createKitLogo(Rectangle recToFill) {
-        Label kitLogo = new Label(shell, SWT.CENTER);
+        if (kitLogo != null) {
+            kitLogo.dispose();
+        }
+        kitLogo = new Label(shell, SWT.CENTER);
         int logoHeight = (int) Math.round(39.0 / 86.0 * recToFill.width);
         kitLogo.setBounds(recToFill.x, navBarY, recToFill.width, logoHeight);
         kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo.png"), recToFill.width,
@@ -267,7 +321,6 @@ public class GUI {
         gc.setInterpolation(SWT.HIGH);
         gc.drawImage(image, 0, 0, image.getBounds().width, image.getBounds().height, 0, 0, width, height);
         gc.dispose();
-        image.dispose();
         return scaled;
     }
 

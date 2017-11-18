@@ -59,7 +59,8 @@ public class SolutionTab {
         int rowNumber = 0;
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
-            if (requirements.get(i).requirement.description != null) {
+            if (requirements.get(i).requirement.description != null
+                    && requirements.get(i).requirement.resultIRI != null) {
                 descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
                         requirements.get(i).requirement.description, rowNumber++);
             }

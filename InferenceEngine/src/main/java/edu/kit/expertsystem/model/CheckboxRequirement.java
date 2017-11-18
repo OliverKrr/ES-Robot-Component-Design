@@ -7,6 +7,7 @@ public class CheckboxRequirement extends Requirement {
 
     public boolean defaultValue = true;
     public boolean value = defaultValue;
+    public boolean result = false;
 
     public CheckboxRequirement() {
         super();
@@ -18,6 +19,7 @@ public class CheckboxRequirement extends Requirement {
         enable = other.enable;
         defaultValue = other.defaultValue;
         value = other.value;
+        result = other.result;
     }
 
     @Override
@@ -27,6 +29,7 @@ public class CheckboxRequirement extends Requirement {
         result = prime * result + (defaultValue ? 1231 : 1237);
         result = prime * result + (enable ? 1231 : 1237);
         result = prime * result + ((reqIri == null) ? 0 : reqIri.hashCode());
+        result = prime * result + (this.result ? 1231 : 1237);
         result = prime * result + (value ? 1231 : 1237);
         return result;
     }
@@ -56,6 +59,9 @@ public class CheckboxRequirement extends Requirement {
         } else if (!reqIri.equals(other.reqIri)) {
             return false;
         }
+        if (result != other.result) {
+            return false;
+        }
         if (value != other.value) {
             return false;
         }
@@ -65,7 +71,8 @@ public class CheckboxRequirement extends Requirement {
     @Override
     public String toString() {
         return "CheckboxRequirement [reqIri=" + reqIri + ", enable=" + enable + ", defaultValue="
-                + defaultValue + ", value=" + value + ", toString()=" + super.toString() + "]";
+                + defaultValue + ", value=" + value + ", result=" + result + ", toString()="
+                + super.toString() + "]";
     }
 
 }

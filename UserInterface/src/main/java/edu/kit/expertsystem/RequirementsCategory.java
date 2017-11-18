@@ -64,14 +64,13 @@ public class RequirementsCategory {
     }
 
     public Rectangle createReqContent(
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int[] weights,
-            int contentY, Point sizeOfShell) {
+            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int contentY,
+            Point sizeOfShell) {
         this.contentY = contentY + contentYOffsetStart;
-        initSizes(sizeOfShell, weights);
+        initSizes(sizeOfShell);
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
             tab.createContents(reqsPerCat.getValue(), requirementDependencyWrappers);
-            tab.getRequirementsForm().setWeights(weights);
             reqTabs.add(tab);
 
             reqNavItems.stream().filter(reqNavItem -> reqNavItem.name.equals(reqsPerCat.getKey().displayName))
@@ -82,9 +81,9 @@ public class RequirementsCategory {
         return conentRec;
     }
 
-    private void initSizes(Point sizeOfShell, int[] newContentWeights) {
+    private void initSizes(Point sizeOfShell) {
         requirementsOverallForm = new Composite(parent, SWT.NONE);
-        updateSize(sizeOfShell, newContentWeights);
+        updateSize(sizeOfShell, null);
     }
 
     public Rectangle updateSize(Point sizeOfShell, int[] newContentWeights) {
@@ -127,6 +126,10 @@ public class RequirementsCategory {
             });
             reqDep.fromCheckbox.notifyListeners(SWT.Selection, new Event());
         });
+    }
+
+    public void disposeNavItems() {
+        reqNavItems.forEach(navItem -> navItem.item.dispose());
     }
 
     public Composite getRequirementsOverallForm() {

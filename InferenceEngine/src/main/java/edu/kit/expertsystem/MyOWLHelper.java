@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
 
@@ -60,6 +61,20 @@ public class MyOWLHelper {
      */
     public String getNameOfComponent(OWLObjectProperty prop) {
         return prop.getIRI().getShortForm().substring(12, prop.getIRI().getShortForm().length());
+    }
+
+    public double parseValueToDouble(OWLLiteral obProp) {
+        if (obProp.isInteger()) {
+            return obProp.parseInteger();
+        }
+        return obProp.parseDouble();
+    }
+
+    public int parseValueToInteger(OWLLiteral obProp) {
+        if (obProp.isInteger()) {
+            return obProp.parseInteger();
+        }
+        return Math.round(obProp.parseFloat());
     }
 
     public void clearGeneratedAxioms() {

@@ -2,6 +2,7 @@ package edu.kit.expertsystem.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,6 +22,7 @@ import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
+import edu.kit.expertsystem.model.UnitToReason;
 
 public class Controller {
 
@@ -33,6 +35,8 @@ public class Controller {
 
     private List<RequirementWrapper> requirementsWrapper;
     private List<RequirementDependencyCheckboxWrapper> requirementDependencyMappers;
+    private List<UnitToReason> unitsToReason;
+    private UnitToReason currentUnitToReason;
     private ResultWrapper resultWrapper;
 
     public Controller(GUI gui) {
@@ -42,8 +46,16 @@ public class Controller {
 
     public void initialize() {
         reasoner.initialize();
+        unitsToReason = reasoner.getUnitsToReason();
+        if (unitsToReason.isEmpty()) {
+            throw new RuntimeException("There are no units to reasone in the ontology!");
+        }
+        currentUnitToReason = unitsToReason.get(0);
+        resultWrapper = new ResultWrapper();
+    }
 
-        List<Requirement> requirements = reasoner.getRequirements();
+    private void initRequirements() {
+        List<Requirement> requirements = reasoner.getRequirements(currentUnitToReason);
         requirementsWrapper = new ArrayList<>(requirements.size());
         requirements.forEach(req -> {
             if (req instanceof TextFieldMinMaxRequirement) {
@@ -65,8 +77,6 @@ public class Controller {
             wrapper.requirementDependencyCheckbox = reqDep;
             requirementDependencyMappers.add(wrapper);
         });
-
-        resultWrapper = new ResultWrapper();
     }
 
     public void reset() {
@@ -87,11 +97,7 @@ public class Controller {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
         }
-        reasoner.prepareReasoning();
-    }
-
-    public void initialStartForCaching() {
-        reasoner.startReasoning(parseToRequirements());
+        reasoner.prepareReasoning(currentUnitToReason);
     }
 
     private List<Requirement> parseToRequirements() {
@@ -146,7 +152,7 @@ public class Controller {
     }
 
     public void reason() {
-        resultWrapper.results = reasoner.startReasoning(parseToRequirements());
+        resultWrapper.results = reasoner.startReasoning(currentUnitToReason, parseToRequirements());
         gui.notifySolutionIsReady();
     }
 
@@ -174,21 +180,26 @@ public class Controller {
             }
 
             for (Requirement req : result.requirements) {
-                double resultValue = -1;
+                if (req.resultIRI == null) {
+                    continue;
+                }
+                String resultValue = "";
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    resultValue = realReq.result * realReq.scaleFromOntologyToUI;
+                    resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
                 } else if (req instanceof TextFieldRequirement) {
                     TextFieldRequirement realReq = (TextFieldRequirement) req;
-                    resultValue = realReq.result * realReq.scaleFromOntologyToUI;
+                    resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
                 } else if (req instanceof CheckboxRequirement) {
-                    // currently there is no result for checkboxes, because they are always applied
+                    CheckboxRequirement realReq = (CheckboxRequirement) req;
+                    resultValue = String.valueOf(realReq.result);
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
+                String unit = req.unit == null ? "" : req.unit;
                 addTreeItem(resItem,
                         req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + " "
-                                + resultValue + getSpacesForResultValue(resultValue) + req.unit,
+                                + resultValue + getSpacesForResultValue(resultValue) + unit,
                         false);
             }
             resItem.setExpanded(true);
@@ -220,13 +231,22 @@ public class Controller {
         return ret;
     }
 
-    private String getSpacesForResultValue(double value) {
+    private String getSpacesForResultValue(String value) {
         String ret = "";
-        String str = String.valueOf(value);
-        for (int i = str.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {
+        for (int i = value.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {
             ret += " ";
         }
         return ret;
+    }
+
+    public void updateUnitToReason(String unitToReason) {
+        unitsToReason.stream().filter(unit -> unit.displayName.equals(unitToReason))
+                .forEach(unit -> currentUnitToReason = unit);
+        initRequirements();
+    }
+
+    public Stream<String> getUnitsToReason() {
+        return unitsToReason.stream().map(unit -> unit.displayName);
     }
 
     public List<RequirementWrapper> getRequirementsWrapper() {
