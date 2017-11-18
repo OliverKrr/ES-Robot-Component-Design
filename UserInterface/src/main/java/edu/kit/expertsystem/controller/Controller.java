@@ -93,6 +93,7 @@ public class Controller {
             } else if (req instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
                 realReq.value = realReq.defaultValue;
+                realReq.result = false;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }

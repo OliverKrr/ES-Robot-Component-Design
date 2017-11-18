@@ -987,6 +987,12 @@
                 <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatchProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1245,6 +1251,12 @@
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReasoningTreeProperty"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">100</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>

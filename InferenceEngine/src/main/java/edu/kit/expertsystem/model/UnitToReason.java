@@ -5,6 +5,7 @@ public class UnitToReason {
     public String displayName;
     public String iriOfUnit;
     public String iriOfResultUnit;
+    public int orderPosition;
 
     @Override
     public int hashCode() {
@@ -13,6 +14,7 @@ public class UnitToReason {
         result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
         result = prime * result + ((iriOfResultUnit == null) ? 0 : iriOfResultUnit.hashCode());
         result = prime * result + ((iriOfUnit == null) ? 0 : iriOfUnit.hashCode());
+        result = prime * result + orderPosition;
         return result;
     }
 
@@ -49,13 +51,16 @@ public class UnitToReason {
         } else if (!iriOfUnit.equals(other.iriOfUnit)) {
             return false;
         }
+        if (orderPosition != other.orderPosition) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "UnitsToReason [displayName=" + displayName + ", iriOfUnit=" + iriOfUnit + ", iriOfResultUnit="
-                + iriOfResultUnit + "]";
+        return "UnitToReason [displayName=" + displayName + ", iriOfUnit=" + iriOfUnit + ", iriOfResultUnit="
+                + iriOfResultUnit + ", orderPosition=" + orderPosition + "]";
     }
 
 }

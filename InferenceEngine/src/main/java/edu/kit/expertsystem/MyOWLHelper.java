@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataHasValue;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -131,6 +133,17 @@ public class MyOWLHelper {
     private class InformationToDelete {
         public List<OWLClass> counterSatisfiedPart = new ArrayList<>();
         public List<OWLClass> newSatisfiedPart = new ArrayList<>();
+    }
+
+    public int getOrderPositionForClass(OWLClass clas) {
+        AtomicInteger value = new AtomicInteger(0);
+        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
+                .componentsWithoutAnnotations()
+                .filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
+                        .equals(((OWLDataHasValue) comp).getProperty()))
+                .findAny()
+                .ifPresent(comp -> value.set(parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
+        return value.get();
     }
 
 }

@@ -17,7 +17,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataHasValue;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -274,18 +273,9 @@ public class MainReasoner {
         Component component = new Component();
         component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
         component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
-
-        // Because we can infer the same screw for multiple units, we have to
-        // find the orderPosition the hard way
         genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty())
-                .forEach(range -> genericTool.getOntology()
-                        .subClassAxiomsForSubClass(range.getRange().asOWLClass())
-                        .forEach(axiom -> axiom.componentsWithoutAnnotations()
-                                .filter(comp -> comp instanceof OWLDataHasValue
-                                        && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
-                                                .equals(((OWLDataHasValue) comp).getProperty()))
-                                .findAny().ifPresent(comp -> component.orderPosition = helper
-                                        .parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
+                .forEach(range -> component.orderPosition = helper
+                        .getOrderPositionForClass(range.getRange().asOWLClass()));
         return component;
     }
 
@@ -318,19 +308,36 @@ public class MainReasoner {
 
     public List<UnitToReason> getUnitsToReason() {
         List<UnitToReason> units = new ArrayList<>();
-        // TODO getRealList
-        UnitToReason unitToReason = new UnitToReason();
-        unitToReason.displayName = "SacUnit";
-        unitToReason.iriOfUnit = Vocabulary.CLASS_SACUNIT.getIRI().getIRIString();
-        unitToReason.iriOfResultUnit = Vocabulary.CLASS_SATISFIEDSACUNIT.getIRI().getIRIString();
-        units.add(unitToReason);
+        genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true)
+                .filter(possibleClasToReason -> genericTool.getOntology()
+                        .subClassAxiomsForSubClass(possibleClasToReason)
+                        .anyMatch(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(
+                                ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob))))
+                .forEach(clasToReason -> {
+                    UnitToReason unitToReason = new UnitToReason();
+                    unitToReason.displayName = clasToReason.getIRI().getShortForm();
+                    unitToReason.iriOfUnit = clasToReason.getIRI().getIRIString();
 
-        UnitToReason unitToReason2 = new UnitToReason();
-        unitToReason2.displayName = "MotorGearBoxMatch";
-        unitToReason2.iriOfUnit = Vocabulary.CLASS_MOTORGEARBOXMATCH.getIRI().getIRIString();
-        unitToReason2.iriOfResultUnit = Vocabulary.CLASS_SATISFIEDMOTORGEARBOXMATCH.getIRI().getIRIString();
-        units.add(unitToReason2);
+                    genericTool.getReasoner().subClasses(clasToReason, true).forEach(subClas -> {
+                        if (unitToReason.iriOfResultUnit == null) {
+                            unitToReason.iriOfResultUnit = subClas.getIRI().getIRIString();
+                        } else {
+                            throw new RuntimeException(
+                                    "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
+                                            + unitToReason.iriOfResultUnit + " and "
+                                            + subClas.getIRI().getIRIString());
+                        }
+                    });
+                    if (unitToReason.iriOfResultUnit == null) {
+                        throw new RuntimeException(
+                                "UnitsToReasone are must have one child to identify resultingUnit (satisfied)");
+                    }
+                    unitToReason.orderPosition = helper.getOrderPositionForClass(clasToReason);
 
+                    units.add(unitToReason);
+                });
+
+        Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit1.orderPosition);
         return units;
     }
 
