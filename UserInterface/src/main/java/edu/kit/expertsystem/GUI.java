@@ -230,7 +230,7 @@ public class GUI {
     }
 
     private void createErrorText(Rectangle contentRec) {
-        errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP);
+        errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         int errorTextY = contentRec.height + contentRec.y + errorTextYOffset;
         errorText.setBounds(contentRec.x, errorTextY, contentRec.width, errorTextHeight);
         errorText.setEditable(false);
@@ -259,6 +259,6 @@ public class GUI {
     }
 
     public void setErrorText(String message) {
-        errorText.setText(message);
+        errorText.setText(message + "\n" + errorText.getText());
     }
 }
