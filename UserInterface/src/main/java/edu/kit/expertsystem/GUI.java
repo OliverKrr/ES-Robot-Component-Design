@@ -36,8 +36,9 @@ public class GUI {
     public static final int navBarY = 10;
     public static final int errorTextHeight = 83;
     public static final int errorTextYOffset = 2;
-    private static final int[] contentWeights = new int[] { 339, 1, 291 };
-    private Point sizeOfShell = new Point(1000, 600);
+    private static final int[] firstContentWeights = new int[] { 350, 1, 280 };
+    private Point firstSizeOfShell = new Point(1000, 600);
+    private Rectangle firstRecOfContent;
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
 
@@ -149,36 +150,31 @@ public class GUI {
         Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
         Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
 
-        Rectangle contentRec = requirementsCategory.createReqContent(
-                controller.getRequirementDependencyWrapper(), contentWeights,
-                mainNavBarRec.y + mainNavBarRec.height, sizeOfShell);
+        firstRecOfContent = requirementsCategory.createReqContent(
+                controller.getRequirementDependencyWrapper(), firstContentWeights,
+                mainNavBarRec.y + mainNavBarRec.height, firstSizeOfShell);
 
-        solutionTab = new SolutionTab(shell, formToolkit, contentRec);
+        solutionTab = new SolutionTab(shell, formToolkit, firstRecOfContent);
         solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
-        solutionTab.getSolutionForm().setWeights(contentWeights);
+        solutionTab.getSolutionForm().setWeights(firstContentWeights);
 
-        createErrorText(contentRec);
+        createErrorText(firstRecOfContent);
         createKitLogo(reqNavBarRec);
         addNavigationBarListener();
 
         shell.addListener(SWT.Resize, new Listener() {
             @Override
             public void handleEvent(Event e) {
-                sizeOfShell = shell.getSize();
-                Rectangle updatedRec = requirementsCategory.updateSize(sizeOfShell);
-                solutionTab.updateSize(updatedRec);
-
-                int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
-                errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
-                formToolkit.adapt(errorText);
-                formToolkit.paintBordersFor(errorText);
+                // have to update twice, because one does not update everything
+                updateSize();
+                updateSize();
             }
         });
     }
 
     private void createShell() {
         shell = new Shell();
-        shell.setSize(sizeOfShell);
+        shell.setSize(firstSizeOfShell);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
     }
@@ -227,6 +223,23 @@ public class GUI {
             }
         });
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());
+    }
+
+    private void updateSize() {
+        float newWidthOfContent = 1f * firstRecOfContent.width * shell.getSize().x / firstSizeOfShell.x;
+        float ratioForWeights = 1f * newWidthOfContent / firstRecOfContent.width;
+        int[] newContentWeights = { Math.round(firstContentWeights[0] * ratioForWeights),
+                firstContentWeights[1], Math.round(firstContentWeights[2] / ratioForWeights) };
+        solutionTab.getSolutionForm().setWeights(newContentWeights);
+        formToolkit.adapt(solutionTab.getSolutionForm());
+
+        Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), newContentWeights);
+        solutionTab.updateSize(updatedRec);
+
+        int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
+        errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
+        formToolkit.adapt(errorText);
+        formToolkit.paintBordersFor(errorText);
     }
 
     private void createErrorText(Rectangle contentRec) {

@@ -67,7 +67,7 @@ public class RequirementsCategory {
             List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int[] weights,
             int contentY, Point sizeOfShell) {
         this.contentY = contentY + contentYOffsetStart;
-        initSizes(sizeOfShell);
+        initSizes(sizeOfShell, weights);
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
             tab.createContents(reqsPerCat.getValue(), requirementDependencyWrappers);
@@ -82,12 +82,12 @@ public class RequirementsCategory {
         return conentRec;
     }
 
-    private void initSizes(Point sizeOfShell) {
+    private void initSizes(Point sizeOfShell, int[] newContentWeights) {
         requirementsOverallForm = new Composite(parent, SWT.NONE);
-        updateSize(sizeOfShell);
+        updateSize(sizeOfShell, newContentWeights);
     }
 
-    public Rectangle updateSize(Point sizeOfShell) {
+    public Rectangle updateSize(Point sizeOfShell, int[] newContentWeights) {
         int contentX = navHelper.getLastRectangle().x + navHelper.getLastRectangle().width
                 + contentXOffsetStart;
         int contentWidth = sizeOfShell.x - contentX - contentXOffsetEnd;
@@ -99,6 +99,8 @@ public class RequirementsCategory {
         requirementsOverallForm.setBounds(conentRec);
         formToolkit.adapt(requirementsOverallForm);
         for (RequirementsTab tab : reqTabs) {
+            tab.getRequirementsForm().setWeights(newContentWeights);
+            formToolkit.adapt(tab.getRequirementsForm());
             tab.updateSize(sizeOfTab);
         }
         return conentRec;

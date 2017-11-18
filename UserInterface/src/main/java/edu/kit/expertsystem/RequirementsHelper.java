@@ -81,6 +81,7 @@ public class RequirementsHelper {
     }
 
     private void createCommonRequirement(RequirementWrapper requirementWrapper) {
+        // \t funktioniert hier -> mehr siehe Arbeitsblatt
         Label displayName = new Label(composite, SWT.NONE);
         displayName.setBounds(displayNameX, y1, displayNameWidth, height);
         displayName.setText(requirementWrapper.requirement.displayName);

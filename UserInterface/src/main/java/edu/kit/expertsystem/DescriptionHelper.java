@@ -9,9 +9,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 public class DescriptionHelper {
 
     private static final int labelWidth = 80;
-    private static final int descriptionWidth = 248;
+    private static final int descriptionWidth = 258;
 
-    private static final int height = 60;
+    private static final int height = 55;
 
     private static final int labelX = 5;
     private static final int descriptionX = labelX + labelWidth + 5;
@@ -39,7 +39,7 @@ public class DescriptionHelper {
         formToolkit.adapt(label, false, false);
         label.setForeground(Configs.KIT_GREEN_70);
 
-        StyledText description = new StyledText(composite, SWT.BORDER | SWT.WRAP);
+        StyledText description = new StyledText(composite, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         description.setText(descriptionText);
         description.setEditable(false);
         description.setBounds(descriptionX, y, descriptionWidth, height);
