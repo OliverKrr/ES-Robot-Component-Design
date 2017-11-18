@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Tree;
@@ -15,26 +16,33 @@ import edu.kit.expertsystem.controller.ResultWrapper;
 
 public class SolutionTab {
 
+    private static final int treeOffsetX = 5;
+    private static final int treeOffsetY = 5;
+    private static final int treeOffsetXEnd = 5;
+    private static final int treeOffsetYEnd = 5;
+
     private final FormToolkit formToolkit;
 
     private SashForm solutionForm;
+    private Composite leftComposite;
+    private Tree resultTree;
 
-    public SolutionTab(Composite parent, FormToolkit formToolkit) {
+    public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
         this.formToolkit = formToolkit;
 
         solutionForm = new SashForm(parent, SWT.NONE);
-        solutionForm.setBounds(GUI.contentRec);
+        solutionForm.setBounds(contentRec);
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
     }
 
     public void createContents(ResultWrapper resultWrapper, List<RequirementWrapper> requirements) {
-        Composite leftComposite = new Composite(solutionForm, SWT.NONE);
+        leftComposite = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
-        resultWrapper.tree = new Tree(leftComposite, SWT.NONE);
-        resultWrapper.tree.setBounds(10, 10, 385, 298);
-        formToolkit.adapt(resultWrapper.tree);
+        resultTree = new Tree(leftComposite, SWT.NONE);
+        updateTreeSize();
+        resultWrapper.tree = resultTree;
 
         Label separator = new Label(solutionForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(separator, false, false);
@@ -57,6 +65,20 @@ public class SolutionTab {
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
+    }
+
+    public void updateSize(Rectangle contentRec) {
+        solutionForm.setBounds(contentRec);
+        formToolkit.adapt(solutionForm);
+        formToolkit.paintBordersFor(solutionForm);
+        updateTreeSize();
+    }
+
+    private void updateTreeSize() {
+        int width = leftComposite.getSize().x - treeOffsetX - treeOffsetXEnd;
+        int height = leftComposite.getSize().y - treeOffsetY - treeOffsetYEnd;
+        resultTree.setBounds(treeOffsetX, treeOffsetY, width, height);
+        formToolkit.adapt(resultTree, true, true);
     }
 
     public SashForm getSolutionForm() {

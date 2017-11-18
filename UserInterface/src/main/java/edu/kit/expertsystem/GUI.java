@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,10 +19,10 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -34,13 +33,11 @@ import edu.kit.expertsystem.controller.NavigationItem;
 
 public class GUI {
 
-    private static final Point sizeOfShell = new Point(1000, 600);
-
-    public static final int contentX = 140;
     public static final int navBarY = 10;
-
-    public static final int contentWidth = 779;
-    public static final Rectangle contentRec = new Rectangle(contentX, 35, contentWidth, 348);
+    public static final int errorTextHeight = 83;
+    public static final int errorTextYOffset = 2;
+    private static final int[] contentWeights = new int[] { 339, 1, 291 };
+    private Point sizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
 
@@ -55,8 +52,8 @@ public class GUI {
     private Future<?> controllerFuture;
     private Controller controller;
 
-    private AtomicBoolean isSolutionReady = new AtomicBoolean(false);
-
+    private NavigationBarHelper mainNavBarHelper;
+    private List<NavigationItem> mainNavBars = new ArrayList<>();
     private StyledText errorText;
 
     /**
@@ -92,11 +89,9 @@ public class GUI {
     public void open() {
         createContents();
 
-        // controllerFuture = pool.submit(() -> controller.initialStartForCaching());
-
         shell.addDisposeListener(new DisposeListener() {
             @Override
-            public void widgetDisposed(DisposeEvent arg0) {
+            public void widgetDisposed(DisposeEvent event) {
                 shutdown();
             }
         });
@@ -105,10 +100,6 @@ public class GUI {
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
-            if (isSolutionReady.get()) {
-                controller.setResults();
-                isSolutionReady.set(false);
-            }
             if (!display.readAndDispatch()) {
                 display.sleep();
             }
@@ -145,63 +136,73 @@ public class GUI {
     }
 
     public void notifySolutionIsReady() {
-        isSolutionReady.set(true);
-        shell.dispose();
+        display.asyncExec(() -> controller.setResults());
     }
 
     /**
      * Create contents of the window.
      */
     protected void createContents() {
+        createShell();
+
+        requirementsCategory = new RequirementsCategory(shell, formToolkit);
+        Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
+        Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
+
+        Rectangle contentRec = requirementsCategory.createReqContent(
+                controller.getRequirementDependencyWrapper(), contentWeights,
+                mainNavBarRec.y + mainNavBarRec.height, sizeOfShell);
+
+        solutionTab = new SolutionTab(shell, formToolkit, contentRec);
+        solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
+        solutionTab.getSolutionForm().setWeights(contentWeights);
+
+        createErrorText(contentRec);
+        createKitLogo(reqNavBarRec);
+        addNavigationBarListener();
+
+        shell.addListener(SWT.Resize, new Listener() {
+            @Override
+            public void handleEvent(Event e) {
+                sizeOfShell = shell.getSize();
+                Rectangle updatedRec = requirementsCategory.updateSize(sizeOfShell);
+                solutionTab.updateSize(updatedRec);
+
+                int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
+                errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
+                formToolkit.adapt(errorText);
+                formToolkit.paintBordersFor(errorText);
+            }
+        });
+    }
+
+    private void createShell() {
         shell = new Shell();
         shell.setSize(sizeOfShell);
         shell.setText("KIT Sensor-Actuator-Controller Unit Generator");
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
-
-        errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP);
-        errorText.setBounds(contentX, 389, contentWidth, 83);
-        errorText.setEditable(false);
-        formToolkit.adapt(errorText);
-        formToolkit.paintBordersFor(errorText);
-
-        requirementsCategory = new RequirementsCategory(shell, formToolkit);
-        solutionTab = new SolutionTab(shell, formToolkit);
-
-        Button defaultNavItem = createNavigationBar();
-
-        int[] weights = new int[] { 339, 1, 291 };
-        requirementsCategory.createContents(controller.getRequirementsWrapper(),
-                controller.getRequirementDependencyWrapper(), weights);
-        solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
-        solutionTab.getSolutionForm().setWeights(weights);
-
-        defaultNavItem.notifyListeners(SWT.Selection, new Event());
-
-        Label kitLogo = new Label(shell, SWT.CENTER);
-        int height = (int) Math.round(39.0 / 86.0 * requirementsCategory.getReqNavBarSize().x);
-        kitLogo.setBounds(5, navBarY, requirementsCategory.getReqNavBarSize().x, height);
-        kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo.png"),
-                requirementsCategory.getReqNavBarSize().x, height));
-        formToolkit.adapt(kitLogo, false, false);
     }
 
-    private Button createNavigationBar() {
-        List<NavigationItem> mainBar = new ArrayList<>();
-
+    private Rectangle createNavigationBar(Rectangle reqNavBarRec) {
         NavigationItem reqItem = new NavigationItem();
         reqItem.name = "Requirements";
-        reqItem.compositeToHandle = requirementsCategory.getRequirementsOverallForm();
-        mainBar.add(reqItem);
+        mainNavBars.add(reqItem);
 
         NavigationItem solutionItem = new NavigationItem();
         solutionItem.name = "Solution";
-        solutionItem.compositeToHandle = solutionTab.getSolutionForm();
-        mainBar.add(solutionItem);
+        mainNavBars.add(solutionItem);
 
-        NavigationBarHelper navHelper = new NavigationBarHelper(formToolkit, shell);
-        navHelper.createHorizontalNavBar(mainBar, 0);
+        mainNavBarHelper = new NavigationBarHelper(formToolkit, shell);
+        return mainNavBarHelper.createHorizontalNavBar(mainNavBars, 0,
+                RequirementsCategory.contentXOffsetStart + reqNavBarRec.x + reqNavBarRec.width);
+    }
 
-        mainBar.get(0).item.addSelectionListener(new SelectionAdapter() {
+    private void addNavigationBarListener() {
+        mainNavBars.get(0).compositeToHandle = requirementsCategory.getRequirementsOverallForm();
+        mainNavBars.get(1).compositeToHandle = solutionTab.getSolutionForm();
+        mainNavBarHelper.addListener(mainNavBars);
+
+        mainNavBars.get(0).item.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
@@ -210,7 +211,7 @@ public class GUI {
             }
         });
 
-        mainBar.get(1).item.addSelectionListener(new SelectionAdapter() {
+        mainNavBars.get(1).item.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
@@ -225,8 +226,25 @@ public class GUI {
                 controllerFuture = pool.submit(() -> controller.reason());
             }
         });
+        mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());
+    }
 
-        return mainBar.get(0).item;
+    private void createErrorText(Rectangle contentRec) {
+        errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP);
+        int errorTextY = contentRec.height + contentRec.y + errorTextYOffset;
+        errorText.setBounds(contentRec.x, errorTextY, contentRec.width, errorTextHeight);
+        errorText.setEditable(false);
+        formToolkit.adapt(errorText);
+        formToolkit.paintBordersFor(errorText);
+    }
+
+    private void createKitLogo(Rectangle recToFill) {
+        Label kitLogo = new Label(shell, SWT.CENTER);
+        int logoHeight = (int) Math.round(39.0 / 86.0 * recToFill.width);
+        kitLogo.setBounds(recToFill.x, navBarY, recToFill.width, logoHeight);
+        kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo.png"), recToFill.width,
+                logoHeight));
+        formToolkit.adapt(kitLogo, false, false);
     }
 
     private Image resizeImage(Image image, int width, int height) {

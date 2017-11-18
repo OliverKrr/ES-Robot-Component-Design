@@ -24,9 +24,17 @@ import edu.kit.expertsystem.model.TextFieldRequirement;
 
 public class RequirementsTab {
 
+    private static final int btnEnalbeFieldWidth = 93;
+    private static final int btnEnalbeFieldHeight = 16;
+    private static final int btnEnalbeFieldOffsetXEnd = btnEnalbeFieldWidth;
+    private static final int btnEnalbeFieldOffsetYEnd = btnEnalbeFieldHeight + 7;
+
     private final FormToolkit formToolkit;
 
     private SashForm requirementsForm;
+
+    private Composite leftComposite;
+    private Button btnEnableFields;
 
     public RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
@@ -39,7 +47,7 @@ public class RequirementsTab {
 
     public void createContents(List<RequirementWrapper> requirements,
             List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
-        Composite leftComposite = new Composite(requirementsForm, SWT.NONE);
+        leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
         boolean isAnyFieldDisabled = false;
@@ -61,9 +69,8 @@ public class RequirementsTab {
         }
 
         if (isAnyFieldDisabled) {
-            Button btnEnableFields = new Button(leftComposite, SWT.CHECK);
-            btnEnableFields.setBounds(326, 327, 93, 16);
-            formToolkit.adapt(btnEnableFields, true, true);
+            btnEnableFields = new Button(leftComposite, SWT.CHECK);
+            updateEnableField();
             btnEnableFields.setText("Enable fields");
             btnEnableFields.addSelectionListener(new SelectionListener() {
 
@@ -124,6 +131,22 @@ public class RequirementsTab {
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
+    }
+
+    public void updateSize(Rectangle sizeOfForm) {
+        requirementsForm.setBounds(sizeOfForm);
+        formToolkit.adapt(requirementsForm);
+        formToolkit.paintBordersFor(requirementsForm);
+        updateEnableField();
+    }
+
+    private void updateEnableField() {
+        if (btnEnableFields != null) {
+            int xCord = leftComposite.getSize().x - btnEnalbeFieldOffsetXEnd;
+            int yCord = leftComposite.getSize().y - btnEnalbeFieldOffsetYEnd;
+            btnEnableFields.setBounds(xCord, yCord, btnEnalbeFieldWidth, btnEnalbeFieldHeight);
+            formToolkit.adapt(btnEnableFields, true, true);
+        }
     }
 
     public SashForm getRequirementsForm() {

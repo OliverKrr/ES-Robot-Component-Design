@@ -22,29 +22,31 @@ import edu.kit.expertsystem.model.Category;
 
 public class RequirementsCategory {
 
+    public static final int contentXOffsetStart = 5;
+    private static final int contentXOffsetEnd = 27;
+    private static final int contentYOffsetStart = 2;
+    private static final int contentYOffsetEnd = 48;
+
     private final Composite parent;
     private final FormToolkit formToolkit;
-    private final Rectangle sizeOfTab;
 
     private Composite requirementsOverallForm;
+    private Rectangle sizeOfTab;
+    private Rectangle conentRec;
+    private int contentY;
 
+    private NavigationBarHelper navHelper;
+    private Map<Category, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
+    private List<RequirementsTab> reqTabs = new ArrayList<>();
     private List<NavigationItem> reqNavItems = new ArrayList<>();
-    private Point reqNavBarSize;
 
     public RequirementsCategory(Composite parent, FormToolkit formToolkit) {
         this.parent = parent;
         this.formToolkit = formToolkit;
-        sizeOfTab = new Rectangle(0, 0, GUI.contentRec.width, GUI.contentRec.height);
-
-        requirementsOverallForm = new Composite(parent, SWT.NONE);
-        requirementsOverallForm.setBounds(GUI.contentRec);
-        formToolkit.adapt(requirementsOverallForm);
+        navHelper = new NavigationBarHelper(formToolkit, parent);
     }
 
-    public void createContents(List<RequirementWrapper> requirements,
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int[] weights) {
-        Map<Category, List<RequirementWrapper>> reqPerCategory = new LinkedHashMap<>();
-
+    public Rectangle createNavBars(List<RequirementWrapper> requirements) {
         for (RequirementWrapper req : requirements) {
             if (reqPerCategory.containsKey(req.requirement.category)) {
                 reqPerCategory.get(req.requirement.category).add(req);
@@ -52,19 +54,59 @@ public class RequirementsCategory {
                 List<RequirementWrapper> reqs = new ArrayList<>();
                 reqs.add(req);
                 reqPerCategory.put(req.requirement.category, reqs);
+
+                NavigationItem item = new NavigationItem();
+                item.name = req.requirement.category.displayName;
+                reqNavItems.add(item);
             }
         }
+        return navHelper.createVerticalNavBar(reqNavItems, 0);
+    }
 
+    public Rectangle createReqContent(
+            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int[] weights,
+            int contentY, Point sizeOfShell) {
+        this.contentY = contentY + contentYOffsetStart;
+        initSizes(sizeOfShell);
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
             tab.createContents(reqsPerCat.getValue(), requirementDependencyWrappers);
             tab.getRequirementsForm().setWeights(weights);
+            reqTabs.add(tab);
 
-            NavigationItem item = new NavigationItem();
-            item.name = reqsPerCat.getKey().displayName;
-            item.compositeToHandle = tab.getRequirementsForm();
-            reqNavItems.add(item);
+            reqNavItems.stream().filter(reqNavItem -> reqNavItem.name.equals(reqsPerCat.getKey().displayName))
+                    .forEach(reqNavItem -> reqNavItem.compositeToHandle = tab.getRequirementsForm());
         }
+        navHelper.addListener(reqNavItems);
+        handleDependencies(requirementDependencyWrappers);
+        return conentRec;
+    }
+
+    private void initSizes(Point sizeOfShell) {
+        requirementsOverallForm = new Composite(parent, SWT.NONE);
+        updateSize(sizeOfShell);
+    }
+
+    public Rectangle updateSize(Point sizeOfShell) {
+        int contentX = navHelper.getLastRectangle().x + navHelper.getLastRectangle().width
+                + contentXOffsetStart;
+        int contentWidth = sizeOfShell.x - contentX - contentXOffsetEnd;
+        int contentHeight = sizeOfShell.y - contentY - GUI.errorTextHeight - GUI.errorTextYOffset
+                - contentYOffsetEnd;
+        conentRec = new Rectangle(contentX, contentY, contentWidth, contentHeight);
+        sizeOfTab = new Rectangle(0, 0, conentRec.width, conentRec.height);
+
+        requirementsOverallForm.setBounds(conentRec);
+        formToolkit.adapt(requirementsOverallForm);
+        for (RequirementsTab tab : reqTabs) {
+            tab.updateSize(sizeOfTab);
+        }
+        return conentRec;
+    }
+
+    private void handleDependencies(
+            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
+        reqNavItems.get(0).item.notifyListeners(SWT.Selection, new Event());
 
         requirementDependencyWrappers.forEach(reqDep -> {
             reqDep.fromCheckbox.addSelectionListener(new SelectionListener() {
@@ -83,22 +125,9 @@ public class RequirementsCategory {
             });
             reqDep.fromCheckbox.notifyListeners(SWT.Selection, new Event());
         });
-
-        createReqNavigationBar();
-    }
-
-    private void createReqNavigationBar() {
-        NavigationBarHelper navHelper = new NavigationBarHelper(formToolkit, parent);
-        reqNavBarSize = navHelper.createVerticalNavBar(reqNavItems, 0);
-        reqNavItems.get(0).item.notifyListeners(SWT.Selection, new Event());
     }
 
     public Composite getRequirementsOverallForm() {
         return requirementsOverallForm;
     }
-
-    public Point getReqNavBarSize() {
-        return reqNavBarSize;
-    }
-
 }

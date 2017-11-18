@@ -7,6 +7,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -19,7 +20,6 @@ public class NavigationBarHelper {
     private static final int navItemWidthOffset = 20;
     private static final int navItemHeightOffset = 5;
 
-    private static final int horizontalX = GUI.contentX;
     private static final int horizontalY = GUI.navBarY;
 
     private static final int verticalX = 5;
@@ -28,20 +28,24 @@ public class NavigationBarHelper {
     private final FormToolkit formToolkit;
     private final Composite composite;
 
+    private int horizontalX;
+    private Rectangle lastRectangle;
+
     public NavigationBarHelper(FormToolkit formToolkit, Composite composite) {
         this.formToolkit = formToolkit;
         this.composite = composite;
     }
 
-    public Point createHorizontalNavBar(List<NavigationItem> navItems, int level) {
+    public Rectangle createHorizontalNavBar(List<NavigationItem> navItems, int level, int horizontalX) {
+        this.horizontalX = horizontalX;
         return createNavBar(navItems, level, true);
     }
 
-    public Point createVerticalNavBar(List<NavigationItem> navItems, int level) {
+    public Rectangle createVerticalNavBar(List<NavigationItem> navItems, int level) {
         return createNavBar(navItems, level, false);
     }
 
-    private Point createNavBar(List<NavigationItem> navItems, int level, boolean isHorizontal) {
+    private Rectangle createNavBar(List<NavigationItem> navItems, int level, boolean isHorizontal) {
         int maxWidth = 0;
         int maxHeight = 0;
 
@@ -58,19 +62,27 @@ public class NavigationBarHelper {
 
         int navItemWidth = maxWidth + navItemWidthOffset;
         int navItemHeight = maxHeight + navItemHeightOffset;
+        lastRectangle = new Rectangle(0, 0, navItemWidth, navItemHeight);
 
         for (int i = 0; i < navItems.size(); i++) {
             NavigationItem item = navItems.get(i);
             item.item.setText(item.name);
 
             if (isHorizontal) {
-                item.item.setBounds(horizontalX + i * navItemWidth, horizontalY + level * navItemHeight,
-                        navItemWidth, navItemHeight);
+                lastRectangle.x = horizontalX + i * navItemWidth;
+                lastRectangle.y = horizontalY + level * navItemHeight;
             } else {
-                item.item.setBounds(verticalX + level * navItemWidth, verticalBasisY + i * navItemHeight,
-                        navItemWidth, navItemHeight);
+                lastRectangle.x = verticalX + level * navItemWidth;
+                lastRectangle.y = verticalBasisY + i * navItemHeight;
             }
+            item.item.setBounds(lastRectangle);
+            formToolkit.adapt(item.item, true, true);
+        }
+        return lastRectangle;
+    }
 
+    public void addListener(List<NavigationItem> navItems) {
+        for (NavigationItem item : navItems) {
             item.item.addSelectionListener(new SelectionAdapter() {
 
                 @Override
@@ -88,9 +100,11 @@ public class NavigationBarHelper {
                     }
                 }
             });
-            formToolkit.adapt(item.item, true, true);
         }
-        return new Point(navItemWidth, navItemHeight);
+    }
+
+    public Rectangle getLastRectangle() {
+        return lastRectangle;
     }
 
 }
