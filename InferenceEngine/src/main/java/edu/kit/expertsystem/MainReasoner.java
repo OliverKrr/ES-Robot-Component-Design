@@ -60,13 +60,12 @@ public class MainReasoner {
     private RequirementHelper requirementHelper;
     private boolean isReasoningPrepared = false;
 
-    private List<OWLClass> createdIndividualClasses = new ArrayList<>();
-
     public MainReasoner() {
         group = new OWLManagerGroup();
     }
 
     public void initialize() {
+        long startTime = System.currentTimeMillis();
         OWLOntology basicOntology = loadOntology(domainFileName, false);
         OWLOntology ontology = loadOntology(reasoningFileName, true);
         group.getVolatileManager().addAxioms(ontology, basicOntology.axioms());
@@ -77,6 +76,7 @@ public class MainReasoner {
         helper = new MyOWLHelper(genericTool);
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
+        logger.info("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     private OWLOntology loadOntology(String fileName, boolean setInferdFilePath) {
@@ -120,6 +120,26 @@ public class MainReasoner {
                 "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
+    private void createBasicIndividuals(OWLClass componentToReasone) {
+        genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone)
+                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
+                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
+                        .getReasoner().subClasses(clas, true)
+                        .forEach(topSubClass -> genericTool.getOntology()
+                                .subClassAxiomsForSuperClass(topSubClass)
+                                .filter(topSupAxiom -> topSupAxiom.getSuperClass().classesInSignature()
+                                        .anyMatch(classs -> topSubClass.equals(classs)))
+                                .forEach(topSupAxiom -> {
+                                    OWLClass clasToCreate = topSupAxiom.getSubClass().asOWLClass();
+                                    String name = clasToCreate.getIRI().getShortForm() + "Ind";
+                                    OWLNamedIndividual ind = genericTool.getFactory()
+                                            .getOWLNamedIndividual(helper.create(name));
+                                    helper.addAxiom(genericTool.getFactory()
+                                            .getOWLClassAssertionAxiom(clasToCreate, ind));
+                                }))));
+    }
+
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
         try {
@@ -138,24 +158,6 @@ public class MainReasoner {
             }
             logger.info("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
-    }
-
-    private void createBasicIndividuals(OWLClass componentToReasone) {
-        createdIndividualClasses.clear();
-        genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone)
-                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
-                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
-                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(
-                        clas -> genericTool.getReasoner().subClasses(clas, true).forEach(topSubClass -> {
-                            createdIndividualClasses.add(topSubClass);
-                            genericTool.getReasoner().subClasses(topSubClass, true).forEach(toCreate -> {
-                                String name = toCreate.getIRI().getShortForm() + "Ind";
-                                OWLNamedIndividual ind = genericTool.getFactory()
-                                        .getOWLNamedIndividual(helper.create(name));
-                                helper.addAxiom(
-                                        genericTool.getFactory().getOWLClassAssertionAxiom(toCreate, ind));
-                            });
-                        })));
     }
 
     private void addRequirements(List<Requirement> requirements) {

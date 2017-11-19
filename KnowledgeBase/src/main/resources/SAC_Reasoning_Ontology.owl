@@ -754,6 +754,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasVoltageReq_U_unit_V -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasVoltageReq_U_unit_V">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueExact"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMax_m_unit_kg -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMax_m_unit_kg">
@@ -1012,9 +1021,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorController -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorControllerVariants -->
 
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorController">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorControllerVariants">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
     </rdf:Description>
     
@@ -1711,6 +1720,12 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
                 <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementLength"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2191,6 +2206,17 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputV -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputV">
+        <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"/>
+        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation"/>
+        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV"/>
+        <sac_reasoning:displayOnValueBoolean rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:displayOnValueBoolean>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter">
@@ -2235,6 +2261,22 @@
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Current I:</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A</sac_reasoning:hasUnit>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV">
+        <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"/>
+        <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
+        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd"/>
+        <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">24</sac_reasoning:hasDefaultValue>
+        <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Voltage U:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300</sac_reasoning:hasOrderPosition>
+        <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">V</sac_reasoning:hasUnit>
+        <sac_reasoning:hasVoltageReq_U_unit_V rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasVoltageReq_U_unit_V>
     </owl:NamedIndividual>
     
 
