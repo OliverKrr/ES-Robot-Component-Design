@@ -10,19 +10,7 @@
 	
 	<artifactId>SAC-InferenceEngine</artifactId>
 
-	<dependencies>
-		<dependency>
-			<groupId>edu.stanford.oliverkrr</groupId>
-			<artifactId>code-generation</artifactId>
-			<version>2.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>net.sourceforge.owlapi</groupId>
-					<artifactId>owlapi-osgidistribution</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
+	<dependencies>		
 		<dependency>
 			<groupId>net.sourceforge.owlapi</groupId>
 			<artifactId>owlapi-distribution</artifactId>
