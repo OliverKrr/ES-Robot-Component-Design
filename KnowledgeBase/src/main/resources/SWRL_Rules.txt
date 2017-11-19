@@ -131,7 +131,7 @@ sac_basic:WithAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncode
 
 
 GearBoxScrewMatchSatisfyRule:
-GearBoxScrewMatch(?gs) ^ hasGearBox(?gs, ?g) ^ hasScrew(?gs, ?s) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) -> SatisfiedGearBoxScrewMatch(?gs)
+GearBoxScrewMatch(?gs) ^ hasGearBox(?gs, ?g) ^ hasScrew(?gs, ?s) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) -> SatisfiedGearBoxScrewMatch(?gs)
 
 
 OutputBearingScrewMatchSatisfyRule:

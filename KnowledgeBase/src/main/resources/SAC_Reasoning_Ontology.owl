@@ -1245,31 +1245,31 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameter"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementLength"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqLength"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementMaximalSpeed"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqMaximalSpeed"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementPeakTorque"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqPeakTorque"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementWeight"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqWeight"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -1696,79 +1696,79 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameter"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameterWiring"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameterWiring"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputA"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputA"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputV"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementLength"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqLength"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementMaximalSpeed"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqMaximalSpeed"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedAbsoluteEncoder"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedAbsoluteEncoder"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedIncrementalEncoder"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedIncrementalEncoder"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedSensorADC_PSB_Torque"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedSensorADC_PSB_Torque"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementPeakTorque"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqPeakTorque"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementThicknessEngineCase"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqThicknessEngineCase"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"/>
-                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementWeight"/>
+                <owl:hasValue rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqWeight"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -2171,9 +2171,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
@@ -2184,42 +2184,42 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToDiameterWiring -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToDiameterWiring -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToDiameterWiring">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToDiameterWiring">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"/>
-        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation"/>
-        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameterWiring"/>
+        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation"/>
+        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameterWiring"/>
         <sac_reasoning:displayOnValueBoolean rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:displayOnValueBoolean>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputA -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToInputA -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputA">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToInputA">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"/>
-        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation"/>
-        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputA"/>
+        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation"/>
+        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputA"/>
         <sac_reasoning:displayOnValueBoolean rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:displayOnValueBoolean>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputV -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToInputV -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDepFromContinuousRotationToInputV">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDepFromContinuousRotationToInputV">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"/>
-        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementContinuousRotation"/>
-        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV"/>
+        <sac_reasoning:dependsFromRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqContinuousRotation"/>
+        <sac_reasoning:dependsToRequirement rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputV"/>
         <sac_reasoning:displayOnValueBoolean rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:displayOnValueBoolean>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameter -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameter">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameter">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total outer diameter of the SAC unit.</sac_reasoning:hasDescription>
@@ -2234,12 +2234,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameterWiring -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameterWiring -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDiameterWiring">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameterWiring">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
-        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd"/>
+        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionDiameterWiringReq_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionDiameterWiringReq_D_unit_mm>
@@ -2250,12 +2250,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputA -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputA -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputA">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputA">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
-        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMinInd"/>
+        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMinInd"/>
         <sac_reasoning:hasCurrentInputReqMin_I_unit_A rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasCurrentInputReqMin_I_unit_A>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Current I:</sac_reasoning:hasDisplayName>
@@ -2265,12 +2265,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputV -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementInputV">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqInputV">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
-        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd"/>
+        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">24</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Voltage U:</sac_reasoning:hasDisplayName>
@@ -2281,9 +2281,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementLength -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqLength -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementLength">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqLength">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total length of the SAC unit.</sac_reasoning:hasDescription>
@@ -2298,9 +2298,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementMaximalSpeed -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqMaximalSpeed -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementMaximalSpeed">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqMaximalSpeed">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryPerformance"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maximal output speed at nominal voltage.</sac_reasoning:hasDescription>
@@ -2316,9 +2316,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedAbsoluteEncoder -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedAbsoluteEncoder -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedAbsoluteEncoder">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedAbsoluteEncoder">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
@@ -2329,9 +2329,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedIncrementalEncoder -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedIncrementalEncoder -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedIncrementalEncoder">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedIncrementalEncoder">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
@@ -2342,9 +2342,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedSensorADC_PSB_Torque -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedSensorADC_PSB_Torque -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementNeedSensorADC_PSB_Torque">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqNeedSensorADC_PSB_Torque">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
@@ -2355,9 +2355,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementPeakTorque -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqPeakTorque -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementPeakTorque">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqPeakTorque">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryPerformance"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Repeated peak torque without damaging the units.</sac_reasoning:hasDescription>
@@ -2372,12 +2372,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementThicknessEngineCase -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqThicknessEngineCase -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementThicknessEngineCase">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqThicknessEngineCase">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
-        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd"/>
+        <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thickness Engine Case:</sac_reasoning:hasDisplayName>
@@ -2389,33 +2389,33 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExactInd">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExact"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMaxInd -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMaxInd -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMaxInd">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMaxInd">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMax"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMinInd -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMinInd -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMinInd">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMinInd">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMin"/>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementWeight -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqWeight -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementWeight">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqWeight">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total weight of the SAC unit.</sac_reasoning:hasDescription>
@@ -9157,7 +9157,7 @@
                                         <rdf:first>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm"/>
                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d_s1"/>
                                             </rdf:Description>
