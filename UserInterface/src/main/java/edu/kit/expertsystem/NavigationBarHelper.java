@@ -17,13 +17,13 @@ import edu.kit.expertsystem.controller.NavigationItem;
 
 public class NavigationBarHelper {
 
-    private static final int navItemWidthOffset = 20;
+    private static final int navItemWidthOffset = 15;
     private static final int navItemHeightOffset = 5;
 
     private static final int horizontalY = GUI.navBarY;
 
     private static final int verticalX = 5;
-    private static final int verticalBasisY = 70;
+    private static final int verticalBasisY = 75;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
@@ -50,9 +50,9 @@ public class NavigationBarHelper {
         int maxHeight = 0;
 
         for (NavigationItem item : navItems) {
-            item.item = new Button(composite, SWT.NONE);
+            item.item = new Button(composite, SWT.PUSH);
             // calculate max width and height
-            item.item.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
+            item.item.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
             GC gc = new GC(item.item);
             Point size = gc.textExtent(item.name);
             gc.dispose();
@@ -87,14 +87,12 @@ public class NavigationBarHelper {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    item.item.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.BOLD));
-                    item.item.setBackground(Configs.KIT_GREY_30);
+                    item.item.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
                     item.compositeToHandle.setVisible(true);
 
                     for (NavigationItem otherItem : navItems) {
                         if (item != otherItem) {
                             otherItem.item.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
-                            otherItem.item.setBackground(Configs.KIT_GREY_15);
                             otherItem.compositeToHandle.setVisible(false);
                         }
                     }
