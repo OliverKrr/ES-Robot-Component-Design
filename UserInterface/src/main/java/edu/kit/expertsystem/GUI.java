@@ -233,6 +233,7 @@ public class GUI {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
+                requirementsCategory.setVisibilityOfNavItems(true);
                 controllerFuture.cancel(true);
                 controllerFuture = pool.submit(() -> controller.reset());
             }
@@ -242,6 +243,7 @@ public class GUI {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
+                requirementsCategory.setVisibilityOfNavItems(false);
                 try {
                     controllerFuture.get();
                 } catch (InterruptedException | ExecutionException e) {

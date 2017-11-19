@@ -128,6 +128,12 @@ public class RequirementsCategory {
         });
     }
 
+    public void setVisibilityOfNavItems(boolean isVisible) {
+        for (NavigationItem navItem : reqNavItems) {
+            navItem.item.setVisible(isVisible);
+        }
+    }
+
     public void disposeNavItems() {
         reqNavItems.forEach(navItem -> navItem.item.dispose());
     }
