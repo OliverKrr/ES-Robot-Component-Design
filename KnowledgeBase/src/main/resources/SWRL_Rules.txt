@@ -168,6 +168,25 @@ SACunitLength(?sacl) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_ges) ^ CurrentRequ
 
 
 
+
+
+SACunitDiameterInputCalcRule:
+SACunitDiameterInput(?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m) -> hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_m)
+
+
+
+SACunitDiameterSatisfyRule:
+SACunitDiameterInput(?sacdi) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedSACunitDiameterInput(?sacdi)
+
+
+
+
+
+
+
+
+
+
 SACunitLengthMotorGearBoxMatchSatisfyRule:
 SACunit(?sac) ^ hasSACunitLength(?sac, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasMotorGearBoxMatch(?sacli, ?ma) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_res) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g) ^ hasWeight_m_unit_kg(?ma, ?m_ges) -> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_g) ^ SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ SatisfiedLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
 
