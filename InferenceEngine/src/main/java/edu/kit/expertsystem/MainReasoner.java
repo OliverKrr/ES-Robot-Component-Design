@@ -122,22 +122,28 @@ public class MainReasoner {
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
         genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone)
-                .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
-                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob)))
-                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
-                        .getReasoner().subClasses(clas, true)
-                        .forEach(topSubClass -> genericTool.getOntology()
-                                .subClassAxiomsForSuperClass(topSubClass)
-                                .filter(topSupAxiom -> topSupAxiom.getSuperClass().classesInSignature()
-                                        .anyMatch(classs -> topSubClass.equals(classs)))
-                                .forEach(topSupAxiom -> {
-                                    OWLClass clasToCreate = topSupAxiom.getSubClass().asOWLClass();
-                                    String name = clasToCreate.getIRI().getShortForm() + "Ind";
-                                    OWLNamedIndividual ind = genericTool.getFactory()
-                                            .getOWLNamedIndividual(helper.create(name));
-                                    helper.addAxiom(genericTool.getFactory()
-                                            .getOWLClassAssertionAxiom(clasToCreate, ind));
-                                }))));
+                .filter(axiomOfComponentToReason -> axiomOfComponentToReason.getSuperClass()
+                        .objectPropertiesInSignature()
+                        .anyMatch(obOfComponentToReason -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                .equals(obOfComponentToReason)))
+                .forEach(filteredAxiomOfComponentToReason -> filteredAxiomOfComponentToReason.getSuperClass()
+                        .classesInSignature()
+                        .forEach(reasoningPropertyClass -> genericTool.getOntology()
+                                .subClassAxiomsForSuperClass(reasoningPropertyClass)
+                                .forEach(filteredReasoningPropertyAxiom -> filteredReasoningPropertyAxiom
+                                        .getSubClass().classesInSignature()
+                                        .forEach(reasoningPropertySubClass -> genericTool.getOntology()
+                                                .subClassAxiomsForSuperClass(reasoningPropertySubClass)
+                                                .forEach(filteredReasoningPropertySubClassAxiom -> {
+                                                    OWLClass clasToCreate = filteredReasoningPropertySubClassAxiom
+                                                            .getSubClass().asOWLClass();
+                                                    String name = clasToCreate.getIRI().getShortForm()
+                                                            + "Ind";
+                                                    OWLNamedIndividual ind = genericTool.getFactory()
+                                                            .getOWLNamedIndividual(helper.create(name));
+                                                    helper.addAxiom(genericTool.getFactory()
+                                                            .getOWLClassAssertionAxiom(clasToCreate, ind));
+                                                })))));
     }
 
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
@@ -156,7 +162,8 @@ public class MainReasoner {
             } catch (OWLOntologyStorageException | IOException e) {
                 logger.error(e.getMessage(), e);
             }
-            logger.info("Time needed: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+            logger.info(
+                    "Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
@@ -309,37 +316,47 @@ public class MainReasoner {
     }
 
     public List<UnitToReason> getUnitsToReason() {
+        long startTime = System.currentTimeMillis();
         List<UnitToReason> units = new ArrayList<>();
-        genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true)
-                .filter(possibleClasToReason -> genericTool.getOntology()
-                        .subClassAxiomsForSubClass(possibleClasToReason)
-                        .anyMatch(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(
-                                ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(ob))))
-                .forEach(clasToReason -> {
-                    UnitToReason unitToReason = new UnitToReason();
-                    unitToReason.displayName = clasToReason.getIRI().getShortForm();
-                    unitToReason.iriOfUnit = clasToReason.getIRI().getIRIString();
+        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
+                .forEach(axiomOfReasoningTree -> axiomOfReasoningTree.getSubClass().classesInSignature()
+                        .filter(subClassOfReasoningTree -> genericTool.getOntology()
+                                .subClassAxiomsForSubClass(subClassOfReasoningTree)
+                                .anyMatch(subClassOfReasoningTreeAxiom -> subClassOfReasoningTreeAxiom
+                                        .getSuperClass().objectPropertiesInSignature().anyMatch(
+                                                obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                                        .equals(obOfSubClassOfReasoingTree))))
+                        .forEach(classToReason -> {
+                            UnitToReason unitToReason = new UnitToReason();
+                            unitToReason.displayName = classToReason.getIRI().getShortForm();
+                            unitToReason.iriOfUnit = classToReason.getIRI().getIRIString();
 
-                    genericTool.getReasoner().subClasses(clasToReason, true).forEach(subClas -> {
-                        if (unitToReason.iriOfResultUnit == null) {
-                            unitToReason.iriOfResultUnit = subClas.getIRI().getIRIString();
-                        } else {
-                            throw new RuntimeException(
-                                    "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
-                                            + unitToReason.iriOfResultUnit + " and "
-                                            + subClas.getIRI().getIRIString());
-                        }
-                    });
-                    if (unitToReason.iriOfResultUnit == null) {
-                        throw new RuntimeException(
-                                "UnitsToReasone are must have one child to identify resultingUnit (satisfied)");
-                    }
-                    unitToReason.orderPosition = helper.getOrderPositionForClass(clasToReason);
+                            genericTool.getOntology().subClassAxiomsForSuperClass(classToReason)
+                                    .forEach(classToReasonAxiom -> classToReasonAxiom.getSubClass()
+                                            .classesInSignature().forEach(subClassOfClassToReason -> {
+                                                if (unitToReason.iriOfResultUnit == null) {
+                                                    unitToReason.iriOfResultUnit = subClassOfClassToReason
+                                                            .getIRI().getIRIString();
+                                                } else {
+                                                    throw new RuntimeException(
+                                                            "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
+                                                                    + unitToReason.iriOfResultUnit + " and "
+                                                                    + subClassOfClassToReason.getIRI()
+                                                                            .getIRIString());
+                                                }
+                                            }));
+                            if (unitToReason.iriOfResultUnit == null) {
+                                throw new RuntimeException(
+                                        "UnitsToReasone must have one child to identify resultingUnit (satisfied)");
+                            }
+                            unitToReason.orderPosition = helper.getOrderPositionForClass(classToReason);
 
-                    units.add(unitToReason);
-                });
+                            units.add(unitToReason);
+                        }));
 
         Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit1.orderPosition);
+        logger.info("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
+                + "s");
         return units;
     }
 

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -102,47 +101,35 @@ public class MyOWLHelper {
         return value.get();
     }
 
-    public boolean deleteInstance(Stream<OWLClass> subClassesOfUnsatisfied) {
-        List<InformationToDelete> informationToDelete = new ArrayList<>();
+    public boolean deleteInstance(OWLClass subClassOfUnsatisfied) {
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
-
-        subClassesOfUnsatisfied.forEach(subClas -> {
-            int oldSize = axiomsToDelete.size();
-            genericTool.getReasoner().instances(subClas)
-                    .forEach(indiToDelete -> generatedAxioms.stream()
-                            .filter(axiom -> axiom.individualsInSignature()
-                                    .anyMatch(indi -> indi.equals(indiToDelete)))
-                            .forEach(axiom -> axiomsToDelete.add(axiom)));
-
-            if (oldSize != axiomsToDelete.size()) {
-                InformationToDelete infToDelete = new InformationToDelete();
-                genericTool.getOntology().subClassAxiomsForSubClass(subClas).forEach(topAxiom -> {
-                    if (topAxiom.getSuperClass().objectPropertiesInSignature()
-                            .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
-                        topAxiom.getSuperClass().classesInSignature()
-                                .collect(Collectors.toCollection(() -> infToDelete.counterSatisfiedPart));
-                    } else if (topAxiom.getSuperClass().objectPropertiesInSignature()
-                            .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
-                        topAxiom.getSuperClass().classesInSignature()
-                                .collect(Collectors.toCollection(() -> infToDelete.newSatisfiedPart));
-                    }
-                });
-                informationToDelete.add(infToDelete);
-            }
-        });
+        genericTool.getReasoner().instances(subClassOfUnsatisfied)
+                .forEach(indiToDelete -> generatedAxioms.stream().filter(
+                        axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
+                        .forEach(axiom -> axiomsToDelete.add(axiom)));
 
         if (!axiomsToDelete.isEmpty()) {
+            InformationToDelete infoToDelete = new InformationToDelete();
+            genericTool.getOntology().subClassAxiomsForSubClass(subClassOfUnsatisfied).forEach(topAxiom -> {
+                if (topAxiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
+                    topAxiom.getSuperClass().classesInSignature()
+                            .collect(Collectors.toCollection(() -> infoToDelete.counterSatisfiedPart));
+                } else if (topAxiom.getSuperClass().objectPropertiesInSignature()
+                        .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
+                    topAxiom.getSuperClass().classesInSignature()
+                            .collect(Collectors.toCollection(() -> infoToDelete.newSatisfiedPart));
+                }
+            });
+
             logger.info("Deleted number of axioms: " + axiomsToDelete.size());
             genericTool.getManager().removeAxioms(genericTool.getOntology(), axiomsToDelete.stream());
             generatedAxioms.removeAll(axiomsToDelete);
             flush();
 
-            for (InformationToDelete infoDelete : informationToDelete) {
-                infoDelete.counterSatisfiedPart
-                        .forEach(counter -> infoDelete.newSatisfiedPart.forEach(newPart -> genericTool
-                                .getReasoner().instances(counter).forEach(counterInst -> addAxiom(genericTool
-                                        .getFactory().getOWLClassAssertionAxiom(newPart, counterInst)))));
-            }
+            infoToDelete.counterSatisfiedPart.forEach(counter -> infoToDelete.newSatisfiedPart.forEach(
+                    newPart -> genericTool.getReasoner().instances(counter).forEach(counterInst -> addAxiom(
+                            genericTool.getFactory().getOWLClassAssertionAxiom(newPart, counterInst)))));
             flush();
             return true;
         }
@@ -154,11 +141,12 @@ public class MyOWLHelper {
         public List<OWLClass> newSatisfiedPart = new ArrayList<>();
     }
 
-    public boolean handlePossibleSatisfied(Stream<OWLClass> subClasses) {
+    public boolean handlePossibleSatisfied(OWLClass subClassOfPossibleSatisfied) {
         int oldSize = handledPossibleSatisfied.size();
-        subClasses.forEach(subClas -> genericTool.getReasoner().instances(subClas)
+        genericTool.getReasoner().instances(subClassOfPossibleSatisfied)
                 .filter(indi -> !handledPossibleSatisfied.contains(indi))
-                .forEach(indi -> genericTool.getOntology().subClassAxiomsForSubClass(subClas)
+                .forEach(indi -> genericTool.getOntology()
+                        .subClassAxiomsForSubClass(subClassOfPossibleSatisfied)
                         .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
                                 .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob)))
                         .forEach(
@@ -166,7 +154,7 @@ public class MyOWLHelper {
                                     addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(newPart,
                                             indi));
                                     handledPossibleSatisfied.add(indi);
-                                }))));
+                                })));
         if (oldSize != handledPossibleSatisfied.size()) {
             logger.info("Handled possible satisfied");
             flush();

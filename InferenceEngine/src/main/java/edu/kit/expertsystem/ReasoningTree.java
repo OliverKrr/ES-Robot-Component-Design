@@ -38,10 +38,18 @@ public class ReasoningTree {
             if (hasSomethingChanged) {
                 helper.flush();
             }
-            hasSomethingChanged |= helper
-                    .deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED));
-            hasSomethingChanged |= helper.handlePossibleSatisfied(
-                    genericTool.getReasoner().subClasses(Vocabulary.CLASS_POSSIBLESATISFIED));
+
+            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED)
+                    .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
+                            .classesInSignature()
+                            .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
+                                    .deleteInstance(subClassOfUnsatisfied)));
+
+            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
+                    .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
+                            .classesInSignature()
+                            .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
+                                    .handlePossibleSatisfied(subClassOfUnsatisfied)));
         } while (hasSomethingChanged);
     }
 
@@ -104,9 +112,9 @@ public class ReasoningTree {
             String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + "Ind";
             OWLNamedIndividual parentInd = genericTool.getFactory()
                     .getOWLNamedIndividual(helper.create(parentName));
-            // logger.info("\tAdd individual: " + parentInd.getIRI().getShortForm());
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
+                // logger.info("\tAdd individual: " + parentInd.getIRI().getShortForm());
                 for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
                     helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
                             childInd.propertyFromParent, parentInd, childInd.childIndividual));
