@@ -41,7 +41,7 @@ public class RequirementsHelper {
     private final FormToolkit formToolkit;
     private final Composite composite;
 
-    private List<Control> createdControls = new ArrayList<>();
+    private List<Control> createdControls;
     private Button createdButton;
 
     private int y1;
@@ -54,7 +54,7 @@ public class RequirementsHelper {
 
     public void createRequirement(RequirementWrapper requirementWrapper,
             List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int rowNumber) {
-        createdControls.clear();
+        createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;
         y2 = basisY2 + offsetY * rowNumber;

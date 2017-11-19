@@ -52,6 +52,8 @@ public class RequirementsTab {
 
         boolean isAnyFieldDisabled = false;
         RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
+        int lastReqOrderPosition = -1;
+        int rowNumber = 0;
         for (int i = 0; i < requirements.size(); i++) {
             if (requirements.get(i) instanceof TextFieldMinMaxRequirementWrapper) {
                 TextFieldMinMaxRequirement req = (TextFieldMinMaxRequirement) requirements.get(i).requirement;
@@ -65,7 +67,12 @@ public class RequirementsTab {
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
             }
-            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers, i);
+            if (lastReqOrderPosition == requirements.get(i).requirement.orderPosition) {
+                rowNumber--;
+            }
+            lastReqOrderPosition = requirements.get(i).requirement.orderPosition;
+            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers,
+                    rowNumber++);
         }
 
         if (isAnyFieldDisabled) {
@@ -119,7 +126,7 @@ public class RequirementsTab {
         formToolkit.adapt(rightComposite);
         rightScrolledComposite.setContent(rightComposite);
 
-        int rowNumber = 0;
+        rowNumber = 0;
         DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         descriptionHelper.createDescription("min/max:",
                 "Desired min and max values. If no entered, defaults are taken: min=0 and max=infinite.",
