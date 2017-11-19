@@ -38,9 +38,10 @@ public class ReasoningTree {
             if (hasSomethingChanged) {
                 helper.flush();
             }
-            if (helper.deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED))) {
-                hasSomethingChanged = true;
-            }
+            hasSomethingChanged |= helper
+                    .deleteInstance(genericTool.getReasoner().subClasses(Vocabulary.CLASS_UNSATISFIED));
+            hasSomethingChanged |= helper.handlePossibleSatisfied(
+                    genericTool.getReasoner().subClasses(Vocabulary.CLASS_POSSIBLESATISFIED));
         } while (hasSomethingChanged);
     }
 

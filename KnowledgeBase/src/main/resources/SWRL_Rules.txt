@@ -83,6 +83,9 @@ MotorInputBearingMatch(?mibm) ^ hasMotor(?mibm, ?m) ^ hasInputBearing(?mibm, ?ib
 MotorInputBearingMatchUnsatisfiedRule:
 HalfSatisfiedMotorInputBearingMatch(?mibm1) ^ hasMotor(?mibm1, ?m) ^ HalfSatisfiedMotorInputBearingMatch(?mibm2) ^ hasMotor(?mibm2, ?m) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1) -> UnsatisfiedMotorInputBearingMatch(?mibm2)
 
+MotorInputBearingMatchPossibleSatisfiedRule:
+HalfSatisfiedMotorInputBearingMatch(?mibm1) ^ hasMotor(?mibm1, ?m) ^ HalfSatisfiedMotorInputBearingMatch(?mibm2) ^ hasMotor(?mibm2, ?m) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:equal(?d_ib2, ?d_ib1) -> PossibleSatisfiedMotorInputBearingMatch(?mibm1) ^ PossibleSatisfiedMotorInputBearingMatch(?mibm2)
+
 
 
 

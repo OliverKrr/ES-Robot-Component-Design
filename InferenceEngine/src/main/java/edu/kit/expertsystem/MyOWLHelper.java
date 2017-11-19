@@ -8,10 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataHasValue;
+import org.semanticweb.owlapi.model.OWLIndividual;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectProperty;
@@ -22,11 +25,12 @@ import openllet.owlapi.OWLHelper;
 
 public class MyOWLHelper {
 
-    // private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
+    private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
 
     private OWLHelper genericTool;
 
     private Set<OWLAxiom> generatedAxioms = new HashSet<>();
+    private Set<OWLIndividual> handledPossibleSatisfied = new HashSet<>();
 
     public MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
@@ -87,6 +91,17 @@ public class MyOWLHelper {
         generatedAxioms.clear();
     }
 
+    public int getOrderPositionForClass(OWLClass clas) {
+        AtomicInteger value = new AtomicInteger(0);
+        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
+                .componentsWithoutAnnotations()
+                .filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
+                        .equals(((OWLDataHasValue) comp).getProperty()))
+                .findAny()
+                .ifPresent(comp -> value.set(parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
+        return value.get();
+    }
+
     public boolean deleteInstance(Stream<OWLClass> subClassesOfUnsatisfied) {
         List<InformationToDelete> informationToDelete = new ArrayList<>();
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
@@ -117,6 +132,7 @@ public class MyOWLHelper {
         });
 
         if (!axiomsToDelete.isEmpty()) {
+            logger.info("Deleted number of axioms: " + axiomsToDelete.size());
             genericTool.getManager().removeAxioms(genericTool.getOntology(), axiomsToDelete.stream());
             generatedAxioms.removeAll(axiomsToDelete);
             flush();
@@ -138,15 +154,25 @@ public class MyOWLHelper {
         public List<OWLClass> newSatisfiedPart = new ArrayList<>();
     }
 
-    public int getOrderPositionForClass(OWLClass clas) {
-        AtomicInteger value = new AtomicInteger(0);
-        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
-                .componentsWithoutAnnotations()
-                .filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
-                        .equals(((OWLDataHasValue) comp).getProperty()))
-                .findAny()
-                .ifPresent(comp -> value.set(parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
-        return value.get();
+    public boolean handlePossibleSatisfied(Stream<OWLClass> subClasses) {
+        int oldSize = handledPossibleSatisfied.size();
+        subClasses.forEach(subClas -> genericTool.getReasoner().instances(subClas)
+                .filter(indi -> !handledPossibleSatisfied.contains(indi))
+                .forEach(indi -> genericTool.getOntology().subClassAxiomsForSubClass(subClas)
+                        .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
+                                .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob)))
+                        .forEach(
+                                topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(newPart -> {
+                                    addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(newPart,
+                                            indi));
+                                    handledPossibleSatisfied.add(indi);
+                                }))));
+        if (oldSize != handledPossibleSatisfied.size()) {
+            logger.info("Handled possible satisfied");
+            flush();
+            return true;
+        }
+        return false;
     }
 
 }
