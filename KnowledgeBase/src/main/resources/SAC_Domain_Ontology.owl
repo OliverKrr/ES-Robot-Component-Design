@@ -291,6 +291,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing">
@@ -2791,6 +2807,34 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeNoPCB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeNoPCB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeWithPCB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeWithPCB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoIE -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoIE">
@@ -4592,6 +4636,34 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeNoPCB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeNoPCB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeWithPCB -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeWithPCB">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatchVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE">
@@ -4625,6 +4697,7 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
@@ -4759,6 +4832,15 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x13"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x23"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x26"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeNoPCB"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAeWithPCB"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeNoPCB"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithAeWithPCB"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>

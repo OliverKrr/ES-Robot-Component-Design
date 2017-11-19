@@ -115,16 +115,16 @@ SatisfiedSACunitLengthInputLinear(?saclil) ^ has1(?saclil, ?L_1) ^ hasMax1_1(?sa
 
 
 AbsoluteEncoderSensorPCBMatchSatisfy1Rule:
-NoAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+sac_basic:NoAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
 
 AbsoluteEncoderSensorPCBMatchSatisfy2Rule:
-NoAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+sac_basic:NoAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
 
 AbsoluteEncoderSensorPCBMatchSatisfy3Rule:
-WithAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+sac_basic:WithAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
 
 AbsoluteEncoderSensorPCBMatchSatisfy4Rule:
-WithAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+sac_basic:WithAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorADC_PCM_TorqueReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
 
 
 
