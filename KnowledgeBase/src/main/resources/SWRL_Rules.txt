@@ -14,7 +14,7 @@ Motor(?m) ^ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) ^ SatisfiedWeig
 
 
 GearBoxMaximalSpeedSatisfyRule:
-GearBox(?g) ^ hasGearBoxRation_i(?g, ?i) ^ CurrentRequirements(?r) ^ hasMaximalSpeedReqMax_n_max_unit_rpm(?r, ?n_req_max) ^ swrlb:divide(?n_res_min, 650.0, ?i) ^ swrlb:lessThanOrEqual(?n_res_min, ?n_req_max) ^ hasMaximalSpeedReqMin_n_max_unit_rpm(?r, ?n_req_min) ^ swrlb:divide(?n_res_max, 24000.0, ?i) ^ swrlb:greaterThanOrEqual(?n_res_max, ?n_req_min) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?n_max) ^ swrlb:divide(?n_max_res, ?n_max, ?i) ^ swrlb:lessThanOrEqual(?n_res_min, ?n_max_res) ^ swrlb:lessThanOrEqual(?n_req_min, ?n_max_res) -> SatisfiedRotationSpeed(?g)
+GearBox(?g) ^ hasGearBoxRation_i(?g, ?i) ^ CurrentRequirements(?r) ^ hasMaximalSpeedReqMax_n_max_unit_rpm(?r, ?n_req_max) ^ swrlb:divide(?n_res_min, 650.0, ?i) ^ swrlb:lessThanOrEqual(?n_res_min, ?n_req_max) ^ hasMaximalSpeedReqMin_n_max_unit_rpm(?r, ?n_req_min) ^ swrlb:divide(?n_res_max, 24000.0, ?i) ^ swrlb:greaterThanOrEqual(?n_res_max, ?n_req_min) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?n_max) ^ swrlb:divide(?n_max_res, ?n_max, ?i) ^ swrlb:greaterThanOrEqual(?n_max_res, ?n_req_min) ^ swrlb:lessThanOrEqual(?n_max_res, ?n_req_max) -> SatisfiedRotationSpeed(?g)
 
 GearBoxPeakTorqueSatisfyRule:
 GearBox(?g) ^ hasGearBoxRation_i(?g, ?i) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:multiply(?M_res_min, 0.024, ?i) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^ swrlb:multiply(?M_res_max, 11.2, ?i) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_max) ^ swrlb:lessThanOrEqual(?M_req_min, ?M_max) -> SatisfiedPeakTorque(?g)
@@ -33,7 +33,7 @@ MotorGearBoxMatchMaximalSpeedCalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasNominalRotationSpeed_n_max_unit_rpm(?m, ?n_motor) ^ hasGearBoxRation_i(?g, ?i) ^ swrlb:divide(?n_res, ?n_motor, ?i) -> hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res)
 
 MotorGearBoxMatchMaximalSpeedSatisfyRule:
-MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?n_max) ^ hasGearBoxRation_i(?g, ?i) ^ swrlb:divide(?n_max_res, ?n_max, ?i) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ swrlb:lessThanOrEqual(?n_res, ?n_max_res) ^ CurrentRequirements(?r) ^ hasMaximalSpeedReqMax_n_max_unit_rpm(?r, ?n_req_max) ^ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ hasMaximalSpeedReqMin_n_max_unit_rpm(?r, ?n_req_min) ^ swrlb:greaterThanOrEqual(?n_res, ?n_req_min) -> SatisfiedRotationSpeed(?ma)
+MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?n_max) ^ hasGearBoxRation_i(?g, ?i) ^ swrlb:divide(?n_max_res, ?n_max, ?i) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ CurrentRequirements(?r) ^ hasMaximalSpeedReqMax_n_max_unit_rpm(?r, ?n_req_max) ^ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ hasMaximalSpeedReqMin_n_max_unit_rpm(?r, ?n_req_min) ^ swrlb:greaterThanOrEqual(?n_res, ?n_req_min) ^ swrlb:lessThanOrEqual(?n_max_res, ?n_req_max) ^ swrlb:greaterThanOrEqual(?n_max_res, ?n_req_min) -> SatisfiedRotationSpeed(?ma)
 
 
 MotorGearBoxMatchPeakTorqueCalcRule:
