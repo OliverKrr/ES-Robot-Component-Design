@@ -75,6 +75,18 @@ MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) 
 
 
 
+//TODO make right
+SlipRingSatisfyRule:
+_1000MEthernet(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, true) -> SatisfiedSlipRing(?sr)
+
+
+NoSlipRingSatisfyRule:
+NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
+
+
+
+
+
 
 MotorInputBearingMatchSatisfyRule:
 MotorInputBearingMatch(?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasInputBearing(?mibm, ?ib) ^ hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?ib, ?d_ib) ^ swrlb:lessThanOrEqual(?d_ib, ?d_m) -> HalfSatisfiedMotorInputBearingMatch(?mibm)
@@ -196,6 +208,18 @@ SACunitDiameterOutput(?sacdo) ^ hasMax1_1(?sacdo, ?D_max1) ^ hasMax1_2(?sacdo, ?
 
 SACunitDiameterOutputSatisfyRule:
 SACunitDiameterOutput(?sacdo) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdo, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedSACunitDiameterOutput(?sacdo)
+
+
+
+
+//TODO falls einfügen mit Zeilenumbruch gut klappt -> analog auch für andere Regeln übernehmen
+//TODO schauen was von den Werten evtl. noch fehlt
+SACunitDiameterOutputBearingCalcRule:
+SACunitDiameterOutputBearing(?sacdob) ^ hasGearBoxScrewMatch(?sacdob, ?gs) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasSlipRing(?sacdob, ?sr) ^
+hasScrew(?gs, ?s_gs) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
+hasDimensionOuterDiameter_D_unit_mm(?ob, D_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?d_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^  hasDimensionOuterDiameter_D_unit_mm(?s_gs, ?d_s_gs) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
+
+
 
 
 
