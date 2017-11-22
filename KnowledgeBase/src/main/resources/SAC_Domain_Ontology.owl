@@ -3005,30 +3005,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCatTop -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCfront -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCatTop">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorControllerVariants"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MConSide"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MConSide -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MConSide">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCfront">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorControllerVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -3040,6 +3019,27 @@
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCradial"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCradial -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MCradial">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorControllerVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">22.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
