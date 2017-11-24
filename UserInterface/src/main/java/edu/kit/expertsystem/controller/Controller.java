@@ -14,6 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import edu.kit.expertsystem.Configs;
 import edu.kit.expertsystem.GUI;
+import edu.kit.expertsystem.GuiHelper;
 import edu.kit.expertsystem.MainReasoner;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
@@ -219,7 +220,9 @@ public class Controller {
         if (makeGreen) {
             resItem.setForeground(Configs.KIT_GREEN_70);
         }
-        resItem.setFont(SWTResourceManager.getFont("Courier New", 9, SWT.NORMAL));
+        resItem.setFont(
+                SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()),
+                        SWT.NORMAL));
         return resItem;
     }
 

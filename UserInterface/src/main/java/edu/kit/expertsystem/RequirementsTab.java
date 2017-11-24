@@ -18,6 +18,7 @@ import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
@@ -32,6 +33,7 @@ public class RequirementsTab {
     private final FormToolkit formToolkit;
 
     private SashForm requirementsForm;
+    private RequirementsHelper requirementsHelper;
 
     private Composite leftComposite;
     private Button btnEnableFields;
@@ -45,13 +47,13 @@ public class RequirementsTab {
         formToolkit.paintBordersFor(requirementsForm);
     }
 
-    public void createContents(List<RequirementWrapper> requirements,
+    public void createContents(Category category, List<RequirementWrapper> requirements,
             List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
         leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
         boolean isAnyFieldDisabled = false;
-        RequirementsHelper requirementsHelper = new RequirementsHelper(formToolkit, leftComposite);
+        requirementsHelper = new RequirementsHelper(formToolkit, leftComposite, category);
         int lastReqOrderPosition = -1;
         int rowNumber = 0;
         for (int i = 0; i < requirements.size(); i++) {
@@ -144,6 +146,7 @@ public class RequirementsTab {
         requirementsForm.setBounds(sizeOfForm);
         formToolkit.adapt(requirementsForm);
         formToolkit.paintBordersFor(requirementsForm);
+        requirementsHelper.updateSize(leftComposite.getBounds());
         updateEnableField();
     }
 

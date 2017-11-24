@@ -70,7 +70,7 @@ public class RequirementsCategory {
         initSizes(sizeOfShell);
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
             RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
-            tab.createContents(reqsPerCat.getValue(), requirementDependencyWrappers);
+            tab.createContents(reqsPerCat.getKey(), reqsPerCat.getValue(), requirementDependencyWrappers);
             reqTabs.add(tab);
 
             reqNavItems.stream().filter(reqNavItem -> reqNavItem.name.equals(reqsPerCat.getKey().displayName))

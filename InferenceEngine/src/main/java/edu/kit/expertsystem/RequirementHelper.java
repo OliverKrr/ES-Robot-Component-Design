@@ -200,6 +200,8 @@ public class RequirementHelper {
                     genericTool.getReasoner()
                             .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME).findAny()
                             .ifPresent(obProp -> req.category.displayName = obProp.getLiteral());
+                    genericTool.getReasoner().dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASTOPIC)
+                            .findAny().ifPresent(obProp -> req.category.topic = obProp.getLiteral());
                     genericTool.getReasoner()
                             .dataPropertyValues(cate, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
                             .ifPresent(obProp -> req.category.orderPosition = helper
@@ -207,7 +209,6 @@ public class RequirementHelper {
                 });
 
         req.individualIRI = reqIndi.getIRI().getIRIString();
-
 
         // TODO getReasoner weiter entfernen
         genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDISPLAYNAME)

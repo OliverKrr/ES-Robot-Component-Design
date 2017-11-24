@@ -3,6 +3,7 @@ package edu.kit.expertsystem.model;
 public class Category {
 
     public String displayName;
+    public String topic;
     public int orderPosition;
 
     @Override
@@ -11,6 +12,7 @@ public class Category {
         int result = 1;
         result = prime * result + ((displayName == null) ? 0 : displayName.hashCode());
         result = prime * result + orderPosition;
+        result = prime * result + ((topic == null) ? 0 : topic.hashCode());
         return result;
     }
 
@@ -36,12 +38,20 @@ public class Category {
         if (orderPosition != other.orderPosition) {
             return false;
         }
+        if (topic == null) {
+            if (other.topic != null) {
+                return false;
+            }
+        } else if (!topic.equals(other.topic)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Category [displayName=" + displayName + ", orderPosition=" + orderPosition + "]";
+        return "Category [displayName=" + displayName + ", topic=" + topic + ", orderPosition="
+                + orderPosition + "]";
     }
 
 }

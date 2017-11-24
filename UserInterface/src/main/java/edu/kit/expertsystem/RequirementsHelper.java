@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import edu.kit.expertsystem.controller.CheckboxRequirementWrapper;
 import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
 import edu.kit.expertsystem.controller.RequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
 import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.model.Category;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
@@ -34,22 +38,30 @@ public class RequirementsHelper {
     private static final int maxX = 294;
     private static final int unitForMaxX = 340;
 
-    private static final int basisY1 = 36;
-    private static final int basisY2 = 39;
-    private static final int offsetY = 36;
+    private static final int basisY1 = 42;
+    private static final int basisY2 = 45;
+    private static final int offsetY = 38;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
 
+    private Label topicLabel;
     private List<Control> createdControls;
     private Button createdButton;
 
     private int y1;
     private int y2;
 
-    public RequirementsHelper(FormToolkit formToolkit, Composite composite) {
+    public RequirementsHelper(FormToolkit formToolkit, Composite composite, Category category) {
         this.formToolkit = formToolkit;
         this.composite = composite;
+
+        topicLabel = new Label(composite, SWT.WRAP);
+        topicLabel.setText(category.topic);
+        topicLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(topicLabel.getFont()),
+                GuiHelper.getFontHeight(topicLabel.getFont()) + 7, SWT.BOLD));
+        formToolkit.adapt(topicLabel, false, false);
+        topicLabel.setForeground(Configs.KIT_GREEN_100);
     }
 
     public void createRequirement(RequirementWrapper requirementWrapper,
@@ -82,7 +94,7 @@ public class RequirementsHelper {
 
     private void createCommonRequirement(RequirementWrapper requirementWrapper) {
         // \t funktioniert hier -> mehr siehe Arbeitsblatt
-        Label displayName = new Label(composite, SWT.NONE);
+        Label displayName = new Label(composite, SWT.WRAP);
         displayName.setBounds(displayNameX, y1, displayNameWidth, height);
         displayName.setText(requirementWrapper.requirement.displayName);
         formToolkit.adapt(displayName, false, false);
@@ -175,5 +187,22 @@ public class RequirementsHelper {
             formToolkit.adapt(unitForMin, false, false);
             createdControls.add(unitForMin);
         }
+    }
+
+    public void updateSize(Rectangle bounds) {
+        updateTopicSize(bounds);
+        // TODO evtl. Mechanismus auch machen um andere Reqs anzuordnen
+        // TODO bzw. diese auch noch mal schöner machen
+    }
+
+    private void updateTopicSize(Rectangle bounds) {
+        int y = basisY1 + offsetY * -1;
+        Point sizeOfText = GuiHelper.getSizeOfText(topicLabel, topicLabel.getText());
+        int width = sizeOfText.x;
+        int x = (bounds.width - width) / 2;
+        if (x < 0) {
+            x = 0;
+        }
+        topicLabel.setBounds(x, y, width, sizeOfText.y);
     }
 }

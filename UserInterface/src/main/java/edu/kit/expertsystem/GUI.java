@@ -289,9 +289,7 @@ public class GUI {
     private int getUnitsToReasoneComboWidth() {
         int maxWidth = 0;
         for (String unit : unitsToReasonCombo.getItems()) {
-            GC gc = new GC(unitsToReasonCombo);
-            Point size = gc.textExtent(unit);
-            gc.dispose();
+            Point size = GuiHelper.getSizeOfText(unitsToReasonCombo, unit);
             maxWidth = Math.max(maxWidth, size.x);
         }
         return maxWidth + unitsToReasonComboOffsetWidth;

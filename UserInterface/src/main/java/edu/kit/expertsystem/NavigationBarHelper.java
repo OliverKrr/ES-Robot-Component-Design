@@ -5,7 +5,6 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
@@ -51,11 +50,11 @@ public class NavigationBarHelper {
 
         for (NavigationItem item : navItems) {
             item.item = new Button(composite, SWT.PUSH);
+            item.defaultFontHeight = GuiHelper.getFontHeight(item.item.getFont()) + 2;
+            item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()),
+                    item.defaultFontHeight + 2, SWT.BOLD));
             // calculate max width and height
-            item.item.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
-            GC gc = new GC(item.item);
-            Point size = gc.textExtent(item.name);
-            gc.dispose();
+            Point size = GuiHelper.getSizeOfText(item.item, item.name);
             maxWidth = Math.max(maxWidth, size.x);
             maxHeight = Math.max(maxHeight, size.y);
         }
@@ -87,12 +86,15 @@ public class NavigationBarHelper {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    item.item.setFont(SWTResourceManager.getFont("Segoe UI", 13, SWT.BOLD));
+                    item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()),
+                            item.defaultFontHeight + 2, SWT.BOLD));
                     item.compositeToHandle.setVisible(true);
 
                     for (NavigationItem otherItem : navItems) {
                         if (item != otherItem) {
-                            otherItem.item.setFont(SWTResourceManager.getFont("Segoe UI", 11, SWT.NORMAL));
+                            otherItem.item.setFont(SWTResourceManager.getFont(
+                                    GuiHelper.getFontName(otherItem.item.getFont()), item.defaultFontHeight,
+                                    SWT.NORMAL));
                             otherItem.compositeToHandle.setVisible(false);
                         }
                     }
