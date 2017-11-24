@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
@@ -23,13 +24,25 @@ public class ReasoningTree {
 
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
     private boolean hasSomethingChanged;
+    private AtomicBoolean interrupted = new AtomicBoolean(false);
 
     public ReasoningTree(OWLGenericTools genericTool, MyOWLHelper helper) {
         this.genericTool = genericTool;
         this.helper = helper;
     }
 
+    public void interruptReasoning() {
+        interrupted.set(true);
+    }
+
+    public void resetInterrupt() {
+        interrupted.set(false);
+    }
+
     public void makeReasoning() {
+        if (interrupted.get()) {
+            return;
+        }
         appliedClassesToNumberOfPermutations.clear();
         do {
             hasSomethingChanged = false;
@@ -39,21 +52,26 @@ public class ReasoningTree {
                 helper.flush();
             }
 
-            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED)
-                    .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
-                            .classesInSignature()
-                            .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
-                                    .deleteInstance(subClassOfUnsatisfied)));
+            if (!interrupted.get()) {
+                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED)
+                        .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
+                                .classesInSignature()
+                                .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
+                                        .deleteInstance(subClassOfUnsatisfied)));
 
-            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
-                    .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
-                            .classesInSignature()
-                            .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
-                                    .handlePossibleSatisfied(subClassOfUnsatisfied)));
-        } while (hasSomethingChanged);
+                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
+                        .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
+                                .classesInSignature()
+                                .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
+                                        .handlePossibleSatisfied(subClassOfUnsatisfied)));
+            }
+        } while (hasSomethingChanged && !interrupted.get());
     }
 
     private void handleTreeItem(OWLClass treeClass) {
+        if (interrupted.get()) {
+            return;
+        }
         List<ChildInstancesForPermutation> childrenForPermutation = getChildrenForPermutation(treeClass);
         int numberOfPermutations = getNumberOfPermutations(childrenForPermutation);
 

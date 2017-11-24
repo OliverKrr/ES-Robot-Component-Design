@@ -134,6 +134,7 @@ public class GUI {
     }
 
     private void shutdown() {
+        controller.interruptReasoning();
         controllerFuture.cancel(true);
         pool.shutdownNow();
         Configs.disposeConfig();

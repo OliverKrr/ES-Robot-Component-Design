@@ -79,6 +79,10 @@ public class Controller {
         });
     }
 
+    public void interruptReasoning() {
+        reasoner.interruptReasoning();
+    }
+
     public void reset() {
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {
@@ -154,7 +158,9 @@ public class Controller {
 
     public void reason() {
         resultWrapper.results = reasoner.startReasoning(currentUnitToReason, parseToRequirements());
-        gui.notifySolutionIsReady();
+        if (resultWrapper.results != null) {
+            gui.notifySolutionIsReady();
+        }
     }
 
     public void setResults() {

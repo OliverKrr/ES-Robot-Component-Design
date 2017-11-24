@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceType;
+import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import edu.kit.expertsystem.generated.Vocabulary;
@@ -36,6 +38,7 @@ import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.TextFieldRequirement;
 import edu.kit.expertsystem.model.UnitToReason;
+import openllet.core.exceptions.TimerInterruptedException;
 import openllet.owlapi.OWL;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
@@ -59,6 +62,7 @@ public class MainReasoner {
     private ReasoningTree reasoningTree;
     private RequirementHelper requirementHelper;
     private boolean isReasoningPrepared = false;
+    private AtomicBoolean interrupted = new AtomicBoolean(false);
 
     public MainReasoner() {
         group = new OWLManagerGroup();
@@ -153,17 +157,34 @@ public class MainReasoner {
                 prepareReasoning(unitToReason);
             }
             isReasoningPrepared = false;
+            if (interrupted.get()) {
+                return null;
+            }
             addRequirements(requirements);
+            if (interrupted.get()) {
+                return null;
+            }
             helper.flush();
             return reason(OWL.Class(unitToReason.iriOfResultUnit), requirements);
-        } finally {
-            try {
-                saveReasonedOntology();
-            } catch (OWLOntologyStorageException | IOException e) {
-                logger.error(e.getMessage(), e);
+        } catch (ReasonerInterruptedException | TimerInterruptedException e) {
+            // It is OK if we interrupted ourself
+            if (!interrupted.get()) {
+                throw e;
             }
-            logger.info(
-                    "Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+            return null;
+        } finally {
+            if (interrupted.get()) {
+                logger.info("Time needed for interrupted reasoning: "
+                        + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+            } else {
+                try {
+                    saveReasonedOntology();
+                } catch (OWLOntologyStorageException | IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+                logger.info("Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0
+                        + "s");
+            }
         }
     }
 
@@ -211,6 +232,9 @@ public class MainReasoner {
 
     private List<Result> reason(OWLClass resultingUnit, List<Requirement> requirements) {
         reasoningTree.makeReasoning();
+        if (interrupted.get()) {
+            return null;
+        }
         return makeResults(resultingUnit, requirements);
     }
 
@@ -358,6 +382,13 @@ public class MainReasoner {
         logger.info("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
                 + "s");
         return units;
+    }
+
+    public void interruptReasoning() {
+        logger.info("Reasoning interrupted");
+        interrupted.set(true);
+        reasoningTree.interruptReasoning();
+        genericTool.getReasoner().interrupt();
     }
 
     public List<Requirement> getRequirements(UnitToReason unitToReason) {
