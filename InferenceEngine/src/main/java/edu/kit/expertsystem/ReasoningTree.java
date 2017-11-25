@@ -53,17 +53,24 @@ public class ReasoningTree {
             }
 
             if (!interrupted.get()) {
+                // the order is important
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED)
                         .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
                                 .classesInSignature()
                                 .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
-                                        .deleteInstance(subClassOfUnsatisfied)));
+                                        .handleUnsatisfied(subClassOfUnsatisfied)));
+
+                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED)
+                        .forEach(possibleUnsatiesfiedSuperClass -> possibleUnsatiesfiedSuperClass
+                                .getSubClass().classesInSignature()
+                                .forEach(subClassOfPossibleUnsatisfied -> hasSomethingChanged |= helper
+                                        .handlePossibleUnsatisfied(subClassOfPossibleUnsatisfied)));
 
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
-                        .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
+                        .forEach(possibleSatisfiedSuperClass -> possibleSatisfiedSuperClass.getSubClass()
                                 .classesInSignature()
-                                .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
-                                        .handlePossibleSatisfied(subClassOfUnsatisfied)));
+                                .forEach(subClassOfPossibleSatisfied -> hasSomethingChanged |= helper
+                                        .handlePossibleSatisfied(subClassOfPossibleSatisfied)));
             }
         } while (hasSomethingChanged && !interrupted.get());
     }

@@ -1,8 +1,10 @@
 package edu.kit.expertsystem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -29,7 +31,8 @@ public class MyOWLHelper {
     private OWLHelper genericTool;
 
     private Set<OWLAxiom> generatedAxioms = new HashSet<>();
-    private Set<OWLIndividual> handledPossibleSatisfied = new HashSet<>();
+    private Map<OWLClass, Set<OWLIndividual>> handledPossibleUnsatisfied = new HashMap<>();
+    private Map<OWLClass, Set<OWLIndividual>> handledPossibleSatisfied = new HashMap<>();
 
     public MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
@@ -101,7 +104,7 @@ public class MyOWLHelper {
         return value.get();
     }
 
-    public boolean deleteInstance(OWLClass subClassOfUnsatisfied) {
+    public boolean handleUnsatisfied(OWLClass subClassOfUnsatisfied) {
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         genericTool.getReasoner().instances(subClassOfUnsatisfied)
                 .forEach(indiToDelete -> generatedAxioms.stream().filter(
@@ -122,8 +125,9 @@ public class MyOWLHelper {
                 }
             });
 
-            logger.info("Deleted number of axioms: " + axiomsToDelete.size());
-            genericTool.getManager().removeAxioms(genericTool.getOntology(), axiomsToDelete.stream());
+            logger.info("Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: "
+                    + subClassOfUnsatisfied.getIRI().getShortForm());
+            genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
             generatedAxioms.removeAll(axiomsToDelete);
             flush();
 
@@ -139,12 +143,89 @@ public class MyOWLHelper {
     private class InformationToDelete {
         public List<OWLClass> counterSatisfiedPart = new ArrayList<>();
         public List<OWLClass> newSatisfiedPart = new ArrayList<>();
+
+        public List<OWLClass> backupSatisfiedPart = new ArrayList<>();
+        public List<OWLClass> possibleSatisfiedPart = new ArrayList<>();
+    }
+
+    public boolean handlePossibleUnsatisfied(OWLClass subClassOfPossibleUnsatisfied) {
+        if (!handledPossibleUnsatisfied.containsKey(subClassOfPossibleUnsatisfied)) {
+            handledPossibleUnsatisfied.put(subClassOfPossibleUnsatisfied, new HashSet<>());
+        }
+        List<OWLIndividual> possibleUnsatisfiedIndis = new ArrayList<>();
+        genericTool.getReasoner().instances(subClassOfPossibleUnsatisfied)
+                .filter(indi -> !handledPossibleUnsatisfied.get(subClassOfPossibleUnsatisfied).contains(indi))
+                .collect(Collectors.toCollection(() -> possibleUnsatisfiedIndis));
+
+        if (!possibleUnsatisfiedIndis.isEmpty()) {
+            handledPossibleUnsatisfied.get(subClassOfPossibleUnsatisfied).addAll(possibleUnsatisfiedIndis);
+            InformationToDelete infoToDelete = new InformationToDelete();
+            genericTool.getOntology().subClassAxiomsForSubClass(subClassOfPossibleUnsatisfied)
+                    .forEach(topAxiom -> {
+                        if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(
+                                ob -> Vocabulary.OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
+                            topAxiom.getSuperClass().classesInSignature().collect(
+                                    Collectors.toCollection(() -> infoToDelete.counterSatisfiedPart));
+                        } else if (topAxiom.getSuperClass().objectPropertiesInSignature()
+                                .anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
+                            topAxiom.getSuperClass().classesInSignature()
+                                    .collect(Collectors.toCollection(() -> infoToDelete.newSatisfiedPart));
+                        } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(
+                                ob -> Vocabulary.OBJECT_PROPERTY_HASBACKUPSATISFIEDPART.equals(ob))) {
+                            topAxiom.getSuperClass().classesInSignature()
+                                    .collect(Collectors.toCollection(() -> infoToDelete.backupSatisfiedPart));
+                        } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(
+                                ob -> Vocabulary.OBJECT_PROPERTY_HASPOSSIBLESATISFIEDPART.equals(ob))) {
+                            topAxiom.getSuperClass().classesInSignature().collect(
+                                    Collectors.toCollection(() -> infoToDelete.possibleSatisfiedPart));
+                        }
+                    });
+            List<OWLIndividual> counterSatisfiedWithoutUnsatisfiedIndis = new ArrayList<>();
+            infoToDelete.counterSatisfiedPart.forEach(counter -> genericTool.getReasoner().instances(counter)
+                    .filter(indi -> !handledPossibleUnsatisfied.get(subClassOfPossibleUnsatisfied)
+                            .contains(indi))
+                    .collect(Collectors.toCollection(() -> counterSatisfiedWithoutUnsatisfiedIndis)));
+
+            if (counterSatisfiedWithoutUnsatisfiedIndis.isEmpty()) {
+                logger.info("Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
+                        + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
+                infoToDelete.backupSatisfiedPart.forEach(backup -> possibleUnsatisfiedIndis
+                        .forEach(possibleUnsatisfiedInst -> addAxiom(genericTool.getFactory()
+                                .getOWLClassAssertionAxiom(backup, possibleUnsatisfiedInst))));
+
+                if (!handledPossibleSatisfied.containsKey(subClassOfPossibleUnsatisfied)) {
+                    handledPossibleSatisfied.put(subClassOfPossibleUnsatisfied, new HashSet<>());
+                }
+                infoToDelete.possibleSatisfiedPart
+                        .forEach(possibleSat -> genericTool.getReasoner().instances(possibleSat).forEach(
+                                ind -> handledPossibleSatisfied.get(subClassOfPossibleUnsatisfied).add(ind)));
+            } else {
+                Set<OWLAxiom> axiomsToDelete = new HashSet<>();
+                possibleUnsatisfiedIndis.forEach(indiToDelete -> generatedAxioms.stream().filter(
+                        axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
+                        .forEach(axiom -> axiomsToDelete.add(axiom)));
+                logger.info("Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
+                        + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
+                genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
+                generatedAxioms.removeAll(axiomsToDelete);
+                flush();
+
+                infoToDelete.newSatisfiedPart.forEach(
+                        newPart -> counterSatisfiedWithoutUnsatisfiedIndis.forEach(counterInst -> addAxiom(
+                                genericTool.getFactory().getOWLClassAssertionAxiom(newPart, counterInst))));
+            }
+            return true;
+        }
+        return false;
     }
 
     public boolean handlePossibleSatisfied(OWLClass subClassOfPossibleSatisfied) {
+        if (!handledPossibleSatisfied.containsKey(subClassOfPossibleSatisfied)) {
+            handledPossibleSatisfied.put(subClassOfPossibleSatisfied, new HashSet<>());
+        }
         int oldSize = handledPossibleSatisfied.size();
         genericTool.getReasoner().instances(subClassOfPossibleSatisfied)
-                .filter(indi -> !handledPossibleSatisfied.contains(indi))
+                .filter(indi -> !handledPossibleSatisfied.get(subClassOfPossibleSatisfied).contains(indi))
                 .forEach(indi -> genericTool.getOntology()
                         .subClassAxiomsForSubClass(subClassOfPossibleSatisfied)
                         .filter(topAxiom -> topAxiom.getSuperClass().objectPropertiesInSignature()
@@ -153,10 +234,11 @@ public class MyOWLHelper {
                                 topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(newPart -> {
                                     addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(newPart,
                                             indi));
-                                    handledPossibleSatisfied.add(indi);
+                                    handledPossibleSatisfied.get(subClassOfPossibleSatisfied).add(indi);
                                 })));
         if (oldSize != handledPossibleSatisfied.size()) {
-            logger.info("Handled possible satisfied");
+            logger.info(
+                    "Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI().getShortForm());
             flush();
             return true;
         }
