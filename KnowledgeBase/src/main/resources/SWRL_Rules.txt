@@ -100,17 +100,56 @@ TorsionalWaveNoDMS(?twdms) ^ CurrentRequirements(?r) ^ needTorsionalWaveDMSReq(?
 
 
 
-//TODO make right
-SlipRingSatisfyRule:
-_1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
-needContinuousRotationReq(?r, ?ncr) ^
-swrlb:equal(?ncr, true)
--> SatisfiedSlipRing(?sr)
-
-
 NoSlipRingSatisfyRule:
 NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
 
+
+SlipRingCommunicationSatisfy1Rule:
+_1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
+has100MBASET(?sr, ?m100) ^ has1000MBASET(?sr, ?m1000) ^
+needOutputCommunicationReq(?r, ?noc) ^ needContinuousRotationReq(?r, ?ncr) ^
+swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, true) ^ swrlb:add(?nc, ?m100, ?m1000) ^ swrlb:greaterThanOrEqual(?nc, 1)
+-> CommunicationSatisfiedSlipRing(?sr)
+
+SlipRingCommunicationSatisfy2Rule:
+_1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
+needOutputCommunicationReq(?r, ?noc) ^ needContinuousRotationReq(?r, ?ncr) ^
+swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, false)
+-> CommunicationSatisfiedSlipRing(?sr)
+
+
+SlipRingSatisfyRule:
+CommunicationSatisfiedSlipRing(?sr) ^ CurrentRequirements(?r) ^
+hasSignal_2A(?sr, ?s2a) ^ has10A(?sr, ?s10a) ^ has20A(?sr, ?s20a) ^
+hasCurrentOutputReqMax_I_unit_A(?r, ?co) ^ hasNumberOfOutputEmergencyStopReq(?r, ?nooes) ^ hasNumberOfOtherCablesReq(?r, ?nooc) ^
+swrlb:subtract(?restSignal1, ?s2a, ?nooc) ^ swrlb:subtract(?restSignal2, ?restSignal1, ?nooes) ^ swrlb:multiply(?restSignalInA, ?restSignal2, 2.0) ^ swrlb:multiply(?s10aInA, ?s10a, 10.0) ^ swrlb:multiply(?s20aInA, ?s20a, 20.0) ^ swrlb:add(?sumInA1, ?restSignalInA, ?s10aInA) ^ swrlb:add(?sumInA2, ?sumInA1, ?s20aInA) ^ swrlb:divide(?sumHalf, ?sumInA2, 2.0) ^ swrlb:greaterThanOrEqual(?sumHalf, ?co)
+-> HalfSatisfiedSlipRing(?sr)
+
+
+SlipRingUnsatisfied1Rule:
+HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
+-> UnsatisfiedSlipRing(?sr1)
+
+SlipRingUnsatisfied2Rule:
+HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
+-> UnsatisfiedSlipRing(?sr1)
+
+SlipRingUnsatisfied3Rule:
+HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
+-> UnsatisfiedSlipRing(?sr1)
+
+
+SlipRingPossibleSatisfiedRule:
+HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
+-> PossibleSatisfiedSlipRing(?sr1) ^ PossibleSatisfiedSlipRing(?sr2)
 
 
 
