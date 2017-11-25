@@ -91,6 +91,8 @@ public class MyOWLHelper {
     public void clearGeneratedAxioms() {
         genericTool.getManager().removeAxioms(genericTool.getOntology(), generatedAxioms.stream());
         generatedAxioms.clear();
+        handledPossibleSatisfied.clear();
+        handledPossibleUnsatisfied.clear();
     }
 
     public int getOrderPositionForClass(OWLClass clas) {
