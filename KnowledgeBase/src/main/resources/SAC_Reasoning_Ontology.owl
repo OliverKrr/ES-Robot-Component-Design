@@ -2931,6 +2931,7 @@
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Position: Incremental Encoder:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasEnableField rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableField>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needIncrementalEncoderReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needIncrementalEncoderReq>
     </owl:NamedIndividual>
