@@ -287,8 +287,7 @@ public class MainReasoner {
         try {
             Collections.sort(results,
                     Comparator.comparingDouble(result -> result.requirements.stream()
-                            .filter(req -> Vocabulary.DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM
-                                    .getIRI()
+                            .filter(req -> Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM.getIRI()
                                     .getIRIString().equals(req.resultIRI))
                             .findAny().map(req -> ((TextFieldMinMaxRequirement) req).result).get()));
         } catch (NoSuchElementException e) {

@@ -134,7 +134,6 @@ swrlb:equal(?ntssgb, false)
 
 
 
-
 SlipRingTorqueSensorMatchSatisfy1Rule:
 SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ _1000MEthernet(?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ CurrentRequirements(?r) ^
 hasSignal_2A(?sr, ?s2a) ^ has10A(?sr, ?s10a) ^ has20A(?sr, ?s20a) ^ hasSignal_2A(?ts, ?s2a_ts) ^
@@ -316,33 +315,47 @@ swrlb:multiply(?D_s_docm2, 2.0, ?D_s_docm) ^ swrlb:multiply(?D_twdms2, 2.0, ?D_t
 
 
 
-SACunitDiameterOutputBearingPossibleUnsatisfied1Rule
+SACunitDiameterOutputBearingPossibleUnsatisfied1Rule:
 HalfSatisfiedSACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^ hasSACunitDiameterOutput(?docm, ?sacdo)
 hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdo, ?D_docm)
 swrlb:greaterThan(?D_sacdob, ?D_docm)
 -> PossibleUnsatisfiedSACunitDiameterOutputBearing(?sacdob)
 
-SACunitDiameterOutputBearingPossibleUnsatisfied2Rule
-HalfSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+SACunitDiameterOutputBearingPossibleUnsatisfied2Rule:
+HalfSatisfiedSACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^ hasSACunitDiameterOutput(?docm, ?sacdo)
+hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdo, ?D_docm)
+swrlb:lessThanOrEqual(?D_sacdob, ?D_docm)
+-> HalfPossibleUnsatisfiedSatisfiedSACunitDiameterOutputBearing(?sacdob)
+
+SACunitDiameterOutputBearingPossibleUnsatisfied3Rule:
+HalfPossibleUnsatisfiedSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfPossibleUnsatisfiedSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+hasDiameterOutputScrewMatch(?sacdob1, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob1, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob1, ?twdms) ^
+hasDiameterOutputScrewMatch(?sacdob2, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob2, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob2, ?twdms) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacdob1, ?D_sacdob1) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdob2, ?D_sacdob2) ^
 swrlb:greaterThan(?D_sacdob1, ?D_sacdob2) ^ swrlb:lessThan(?D_sacdob2, ?D_sacdob1)
 -> PossibleUnsatisfiedSACunitDiameterOutputBearing(?sacdob2)
 
-SACunitDiameterOutputBearingPossibleSatisfiedRule
-HalfSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+SACunitDiameterOutputBearingPossibleSatisfiedRule:
+HalfPossibleUnsatisfiedSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfPossibleUnsatisfiedSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+hasDiameterOutputScrewMatch(?sacdob1, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob1, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob1, ?twdms) ^
+hasDiameterOutputScrewMatch(?sacdob2, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob2, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob2, ?twdms) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacdob1, ?D_sacdob1) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdob2, ?D_sacdob2) ^
 swrlb:equal(?D_sacdob1, ?D_sacdob2)
 -> PossibleSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ PossibleSatisfiedSACunitDiameterOutputBearing(?sacdob2)
 
 
-SACunitDiameterOutputBearingBackupSatisfiedRule
+SACunitDiameterOutputBearingBackupSatisfiedRule:
 BackupSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ BackupSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+hasDiameterOutputScrewMatch(?sacdob1, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob1, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob1, ?twdms) ^
+hasDiameterOutputScrewMatch(?sacdob2, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob2, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob2, ?twdms) ^
 hasDimensionInnerDiameter_d_unit_mm(?sacdob1, ?d_sacdob1) ^ hasDimensionInnerDiameter_d_unit_mm(?sacdob2, ?d_sacdob2) ^
 swrlb:greaterThan(?d_sacdob2, ?d_sacdob1) ^ swrlb:lessThan(?d_sacdob1, ?d_sacdob2)
 -> UnsatisfiedSACunitDiameterOutputBearing(?sacdob2)
 
-SACunitDiameterOutputBearingBackupPossibleSatisfiedRule
+SACunitDiameterOutputBearingBackupPossibleSatisfiedRule:
 BackupSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ BackupSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
+hasDiameterOutputScrewMatch(?sacdob1, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob1, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob1, ?twdms) ^
+hasDiameterOutputScrewMatch(?sacdob2, ?docm) ^ hasSlipRingTorqueSensorMatch(?sacdob2, ?srtsm) ^ hasTorsionalWaveDMS(?sacdob2, ?twdms) ^
 hasDimensionInnerDiameter_d_unit_mm(?sacdob1, ?d_sacdob1) ^ hasDimensionInnerDiameter_d_unit_mm(?sacdob2, ?d_sacdob2) ^
 swrlb:equal(?d_sacdob1, ?d_sacdob2)
 -> BackupPossibleSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ BackupPossibleSatisfiedSACunitDiameterOutputBearing(?sacdob2)
