@@ -149,18 +149,21 @@ SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ NoSlipRingVariant
 
 SlipRingTorqueSensorMatchUnsatisfied1Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
+hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
 SlipRingTorqueSensorMatchUnsatisfied2Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
+hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
 SlipRingTorqueSensorMatchUnsatisfied3Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
+hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
@@ -168,6 +171,7 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan
 
 SlipRingTorqueSensorMatchPossibleSatisfiedRule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
+hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 -> PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm2)
@@ -181,10 +185,10 @@ DiameterInputInputBearingMatch(?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^
 
 
 DiameterInputInputBearingMatchUnsatisfiedRule:
-HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1) -> UnsatisfiedDiameterInputInputBearingMatch(?mibm2)
+HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1) -> UnsatisfiedDiameterInputInputBearingMatch(?mibm2)
 
 DiameterInputInputBearingMatchPossibleSatisfiedRule:
-HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:equal(?d_ib2, ?d_ib1) -> PossibleSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ PossibleSatisfiedDiameterInputInputBearingMatch(?mibm2)
+HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:equal(?d_ib2, ?d_ib1) -> PossibleSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ PossibleSatisfiedDiameterInputInputBearingMatch(?mibm2)
 
 
 
