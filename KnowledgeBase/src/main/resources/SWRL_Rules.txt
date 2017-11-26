@@ -85,10 +85,9 @@ MCfront(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrl
 hasDimensionLength_L_unit_mm(?mc, ?L_mc)
 -> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_mc)
 
-MotorControllerNoSatisfyRule:
-NoMC(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^ Constants(?con) ^ 
-lengthIncrementalEncoderConnector(?con, ?L_iec)
--> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_iec)
+MotorControllerNoneSatisfyRule:
+NoMC(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
+-> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, 0.0)
 
 
 
@@ -194,10 +193,24 @@ HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?m
 
 
 IncrementalEncoderSatisfy1Rule:
-NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false) -> SatisfiedIncrementalEncoder(?ie)
+NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
+-> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, ?L_iec)
 
 IncrementalEncoderSatisfy2Rule:
-WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true) -> SatisfiedIncrementalEncoder(?ie)
+NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
+-> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, 0.0)
+
+IncrementalEncoderSatisfy3Rule:
+WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
+-> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, ?L_iec)
+
+IncrementalEncoderSatisfy4Rule:
+WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
+-> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, 0.0)
 
 
 
@@ -205,8 +218,8 @@ WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ sw
 SACunitLengthInputLinearCalcRule:
 SACunitLengthInputLinear(?saclil) ^ hasDiameterInputInputBearingMatch(?saclil, ?mibm) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasGearBox(?saclil, ?g) ^ hasInputBearing(?mibm, ?ib) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^
 SatisfiedMotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?ib, ?L_ib) ^ Constants(?con) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_e) ^
-swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_e) ^ swrlb:add(?L_1, ?L_temp2, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
+hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ has1(?ie, ?L_iec) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?ib, ?L_ib) ^ Constants(?con) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_e) ^
+swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_e) ^ swrlb:add(?L_temp3, ?L_temp2, ?L_iec) ^ swrlb:add(?L_1, ?L_temp3, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
 -> has1(?saclil, ?L_1) ^ hasMax1_1(?saclil, ?L_max1) ^ hasMax1_2(?saclil, ?L_max2) ^ SatisfiedSACunitLengthInputLinear(?saclil)
 
 

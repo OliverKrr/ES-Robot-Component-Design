@@ -103,6 +103,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimension_unit_mm"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm">
@@ -3179,6 +3188,12 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -3205,6 +3220,8 @@
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
+    
+    
     
 
 
@@ -5332,6 +5349,12 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
