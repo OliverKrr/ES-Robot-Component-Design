@@ -34,6 +34,8 @@ public class MyOWLHelper {
     private Map<OWLClass, Set<OWLIndividual>> handledPossibleUnsatisfied = new HashMap<>();
     private Map<OWLClass, Set<OWLIndividual>> handledPossibleSatisfied = new HashMap<>();
 
+    private boolean didBackupOnLastRun;
+
     public MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
     }
@@ -151,6 +153,7 @@ public class MyOWLHelper {
     }
 
     public boolean handlePossibleUnsatisfied(OWLClass subClassOfPossibleUnsatisfied) {
+        didBackupOnLastRun = false;
         if (!handledPossibleUnsatisfied.containsKey(subClassOfPossibleUnsatisfied)) {
             handledPossibleUnsatisfied.put(subClassOfPossibleUnsatisfied, new HashSet<>());
         }
@@ -189,11 +192,13 @@ public class MyOWLHelper {
                     .collect(Collectors.toCollection(() -> counterSatisfiedWithoutUnsatisfiedIndis)));
 
             if (counterSatisfiedWithoutUnsatisfiedIndis.isEmpty()) {
+                didBackupOnLastRun = true;
                 logger.info("Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 infoToDelete.backupSatisfiedPart.forEach(backup -> possibleUnsatisfiedIndis
                         .forEach(possibleUnsatisfiedInst -> addAxiom(genericTool.getFactory()
                                 .getOWLClassAssertionAxiom(backup, possibleUnsatisfiedInst))));
+                flush();
 
                 if (!handledPossibleSatisfied.containsKey(subClassOfPossibleUnsatisfied)) {
                     handledPossibleSatisfied.put(subClassOfPossibleUnsatisfied, new HashSet<>());
@@ -225,7 +230,7 @@ public class MyOWLHelper {
         if (!handledPossibleSatisfied.containsKey(subClassOfPossibleSatisfied)) {
             handledPossibleSatisfied.put(subClassOfPossibleSatisfied, new HashSet<>());
         }
-        int oldSize = handledPossibleSatisfied.size();
+        int oldSize = handledPossibleSatisfied.get(subClassOfPossibleSatisfied).size();
         genericTool.getReasoner().instances(subClassOfPossibleSatisfied)
                 .filter(indi -> !handledPossibleSatisfied.get(subClassOfPossibleSatisfied).contains(indi))
                 .forEach(indi -> genericTool.getOntology()
@@ -238,13 +243,17 @@ public class MyOWLHelper {
                                             indi));
                                     handledPossibleSatisfied.get(subClassOfPossibleSatisfied).add(indi);
                                 })));
-        if (oldSize != handledPossibleSatisfied.size()) {
+        if (oldSize != handledPossibleSatisfied.get(subClassOfPossibleSatisfied).size()) {
             logger.info(
                     "Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI().getShortForm());
             flush();
             return true;
         }
         return false;
+    }
+
+    public boolean didBackupOnLastRun() {
+        return didBackupOnLastRun;
     }
 
 }

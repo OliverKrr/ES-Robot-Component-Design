@@ -68,11 +68,15 @@ public class ReasoningTree {
                                 .forEach(subClassOfPossibleUnsatisfied -> hasSomethingChanged |= helper
                                         .handlePossibleUnsatisfied(subClassOfPossibleUnsatisfied)));
 
-                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
-                        .forEach(possibleSatisfiedSuperClass -> possibleSatisfiedSuperClass.getSubClass()
-                                .classesInSignature()
-                                .forEach(subClassOfPossibleSatisfied -> hasSomethingChanged |= helper
-                                        .handlePossibleSatisfied(subClassOfPossibleSatisfied)));
+                if (!helper.didBackupOnLastRun()) {
+                    // If we do backup for possible unsatisfied, we do not delete stuff. In the next
+                    // run we should first check for unsatisfied and then possibleSatisfied
+                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
+                            .forEach(possibleSatisfiedSuperClass -> possibleSatisfiedSuperClass.getSubClass()
+                                    .classesInSignature()
+                                    .forEach(subClassOfPossibleSatisfied -> hasSomethingChanged |= helper
+                                            .handlePossibleSatisfied(subClassOfPossibleSatisfied)));
+                }
             }
         } while (hasSomethingChanged && !interrupted.get());
     }

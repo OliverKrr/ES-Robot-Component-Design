@@ -278,7 +278,7 @@ SACunitLength(?sacl) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_ges) ^ CurrentRequ
 
 
 SACunitDiameterInputCalcRule:
-SACunitDiameterInput(?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m) -> hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_m)
+SACunitDiameterInput(?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m) -> hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?d_input)
 
 
 
@@ -317,16 +317,16 @@ swrlb:multiply(?D_s_docm2, 2.0, ?D_s_docm) ^ swrlb:multiply(?D_twdms2, 2.0, ?D_t
 
 
 SACunitDiameterOutputBearingPossibleUnsatisfied1Rule
-HalfSatisfiedSACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^
-hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^ hasDimensionOuterDiameter_D_unit_mm(?docm, ?D_docm)
+HalfSatisfiedSACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^ hasSACunitDiameterOutput(?docm, ?sacdo)
+hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdo, ?D_docm)
 swrlb:greaterThan(?D_sacdob, ?D_docm)
--> PossibleUsatisfiedSACunitDiameterOutputBearing(?sacdob)
+-> PossibleUnsatisfiedSACunitDiameterOutputBearing(?sacdob)
 
 SACunitDiameterOutputBearingPossibleUnsatisfied2Rule
 HalfSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacdob1, ?D_sacdob1) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdob2, ?D_sacdob2) ^
 swrlb:greaterThan(?D_sacdob1, ?D_sacdob2) ^ swrlb:lessThan(?D_sacdob2, ?D_sacdob1)
--> PossibleUsatisfiedSACunitDiameterOutputBearing(?sacdob2)
+-> PossibleUnsatisfiedSACunitDiameterOutputBearing(?sacdob2)
 
 SACunitDiameterOutputBearingPossibleSatisfiedRule
 HalfSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ HalfSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
@@ -339,7 +339,7 @@ SACunitDiameterOutputBearingBackupSatisfiedRule
 BackupSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ BackupSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
 hasDimensionInnerDiameter_d_unit_mm(?sacdob1, ?d_sacdob1) ^ hasDimensionInnerDiameter_d_unit_mm(?sacdob2, ?d_sacdob2) ^
 swrlb:greaterThan(?d_sacdob2, ?d_sacdob1) ^ swrlb:lessThan(?d_sacdob1, ?d_sacdob2)
--> UsatisfiedSACunitDiameterOutputBearing(?sacdob2)
+-> UnsatisfiedSACunitDiameterOutputBearing(?sacdob2)
 
 SACunitDiameterOutputBearingBackupPossibleSatisfiedRule
 BackupSatisfiedSACunitDiameterOutputBearing(?sacdob1) ^ BackupSatisfiedSACunitDiameterOutputBearing(?sacdob2) ^
