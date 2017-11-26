@@ -189,7 +189,7 @@ public class MainReasoner {
     }
 
     private void addRequirements(List<Requirement> requirements) {
-        logger.info(requirements);
+        // logger.info(requirements);
         OWLNamedIndividual requirementsInd = genericTool.getFactory()
                 .getOWLNamedIndividual(helper.create("currentRequs"));
         helper.addAxiom(genericTool.getFactory()

@@ -46,8 +46,10 @@ public class ReasoningTree {
         appliedClassesToNumberOfPermutations.clear();
         do {
             hasSomethingChanged = false;
-            genericTool.getReasoner().subClasses(Vocabulary.CLASS_REASONINGTREE, true)
-                    .forEach(treeClass -> handleTreeItem(treeClass));
+            // TODO make graph of classes and iterate from bottom to top
+            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
+                    .forEach(treeClassAxiom -> treeClassAxiom.getSubClass().classesInSignature()
+                            .forEach(treeClass -> handleTreeItem(treeClass)));
             if (hasSomethingChanged) {
                 helper.flush();
             }

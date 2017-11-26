@@ -100,56 +100,78 @@ TorsionalWaveNoDMS(?twdms) ^ CurrentRequirements(?r) ^ needTorsionalWaveDMSReq(?
 
 
 
-NoSlipRingSatisfyRule:
-NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
+SlipRingNoneSatisfyRule:
+NoSlipRingVariants(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
 
 
-SlipRingCommunicationSatisfy1Rule:
+SlipRingSatisfy1Rule:
 _1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
 has100MBASET(?sr, ?m100) ^ has1000MBASET(?sr, ?m1000) ^
 needOutputCommunicationReq(?r, ?noc) ^ needContinuousRotationReq(?r, ?ncr) ^
 swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, true) ^ swrlb:add(?nc, ?m100, ?m1000) ^ swrlb:greaterThanOrEqual(?nc, 1)
--> CommunicationSatisfiedSlipRing(?sr)
+-> SatisfiedSlipRing(?sr)
 
-SlipRingCommunicationSatisfy2Rule:
+SlipRingSatisfy2Rule:
 _1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
 needOutputCommunicationReq(?r, ?noc) ^ needContinuousRotationReq(?r, ?ncr) ^
 swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, false)
--> CommunicationSatisfiedSlipRing(?sr)
+-> SatisfiedSlipRing(?sr)
 
 
-SlipRingSatisfyRule:
-CommunicationSatisfiedSlipRing(?sr) ^ CurrentRequirements(?r) ^
-hasSignal_2A(?sr, ?s2a) ^ has10A(?sr, ?s10a) ^ has20A(?sr, ?s20a) ^
+
+TorqueSensorStrainGaugeBased_HollowShaftSatisfyRule:
+StrainGaugeBased_HollowShaft(?ts) ^ CurrentRequirements(?r) ^
+needTorqueSensorStrainGaugeBasedReq(?r, ?ntssgb) ^
+swrlb:equal(?ntssgb, true)
+-> SatisfiedTorqueSensor(?ts)
+
+
+TorqueSensorNoneShaftSatisfyRule:
+NoTorqueSensor(?ts) ^ CurrentRequirements(?r) ^
+needTorqueSensorStrainGaugeBasedReq(?r, ?ntssgb) ^
+swrlb:equal(?ntssgb, false)
+-> SatisfiedTorqueSensor(?ts)
+
+
+
+
+SlipRingTorqueSensorMatchSatisfy1Rule:
+SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ _1000MEthernet(?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ CurrentRequirements(?r) ^
+hasSignal_2A(?sr, ?s2a) ^ has10A(?sr, ?s10a) ^ has20A(?sr, ?s20a) ^ hasSignal_2A(?ts, ?s2a_ts) ^
 hasCurrentOutputReqMax_I_unit_A(?r, ?co) ^ hasNumberOfOutputEmergencyStopReq(?r, ?nooes) ^ hasNumberOfOtherCablesReq(?r, ?nooc) ^
-swrlb:subtract(?restSignal1, ?s2a, ?nooc) ^ swrlb:subtract(?restSignal2, ?restSignal1, ?nooes) ^ swrlb:multiply(?restSignalInA, ?restSignal2, 2.0) ^ swrlb:multiply(?s10aInA, ?s10a, 10.0) ^ swrlb:multiply(?s20aInA, ?s20a, 20.0) ^ swrlb:add(?sumInA1, ?restSignalInA, ?s10aInA) ^ swrlb:add(?sumInA2, ?sumInA1, ?s20aInA) ^ swrlb:divide(?sumHalf, ?sumInA2, 2.0) ^ swrlb:greaterThanOrEqual(?sumHalf, ?co)
--> HalfSatisfiedSlipRing(?sr)
+swrlb:subtract(?restSignal1, ?s2a, ?nooc) ^ swrlb:subtract(?restSignal2, ?restSignal1, ?nooes) ^ swrlb:subtract(?restSignal3, ?restSignal2, ?s2a_ts) ^ swrlb:multiply(?restSignalInA, ?restSignal3, 2.0) ^ swrlb:multiply(?s10aInA, ?s10a, 10.0) ^ swrlb:multiply(?s20aInA, ?s20a, 20.0) ^ swrlb:add(?sumInA1, ?restSignalInA, ?s10aInA) ^ swrlb:add(?sumInA2, ?sumInA1, ?s20aInA) ^ swrlb:divide(?sumHalf, ?sumInA2, 2.0) ^ swrlb:greaterThanOrEqual(?sumHalf, ?co)
+-> HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm)
 
 
-SlipRingUnsatisfied1Rule:
-HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+SlipRingTorqueSensorMatchSatisfy2Rule:
+SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ NoSlipRingVariants(?sr)
+-> SatisfiedSlipRingTorqueSensorMatch(?srtsm)
+
+
+SlipRingTorqueSensorMatchUnsatisfied1Rule:
+HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
--> UnsatisfiedSlipRing(?sr1)
+-> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
-SlipRingUnsatisfied2Rule:
-HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+SlipRingTorqueSensorMatchUnsatisfied2Rule:
+HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
--> UnsatisfiedSlipRing(?sr1)
+-> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
-SlipRingUnsatisfied3Rule:
-HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+SlipRingTorqueSensorMatchUnsatisfied3Rule:
+HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
--> UnsatisfiedSlipRing(?sr1)
+-> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
 
-SlipRingPossibleSatisfiedRule:
-HalfSatisfiedSlipRing(?sr1) ^ HalfSatisfiedSlipRing(?sr2) ^
+SlipRingTorqueSensorMatchPossibleSatisfiedRule:
+HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
--> PossibleSatisfiedSlipRing(?sr1) ^ PossibleSatisfiedSlipRing(?sr2)
+-> PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm2)
 
 
 
@@ -286,7 +308,7 @@ SACunitDiameterOutput(?sacdo) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdo, ?D_o
 
 
 SACunitDiameterOutputBearingCalcRule:
-SACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasSlipRing(?sacdob, ?sr) ^ hasTorsionalWaveDMS(?sacdob, ?twdms) ^ hasScrew(?docm, ?s_docm) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
+SACunitDiameterOutputBearing(?sacdob) ^ hasDiameterOutputScrewMatch(?sacdob, ?docm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorsionalWaveDMS(?sacdob, ?twdms) ^ hasScrew(?docm, ?s_docm) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
 hasDimensionOuterDiameter_D_unit_mm(?ob, ?D_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^  hasDimensionOuterDiameter_D_unit_mm(?s_docm, ?D_s_docm) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionOuterDiameter_D_unit_mm(?twdms, ?D_twdms) ^
 swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:add(?D_sacdob, ?D_ob, ?D_s_ob2) ^
 swrlb:multiply(?D_s_docm2, 2.0, ?D_s_docm) ^ swrlb:multiply(?D_twdms2, 2.0, ?D_twdms) ^ swrlb:add(?temp1, ?d_ob, ?D_s_ob2) ^ swrlb:subtract(?temp2, ?temp1, ?D_s_docm2) ^ swrlb:subtract(?d_sacdob, ?temp2, ?D_twdms2) ^ swrlb:greaterThanOrEqual(?d_sacdob, ?D_sr)
@@ -370,8 +392,9 @@ SACunitSatisfyRule:
 SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ SatisfiedLength(?sac) ^ SatisfiedOuterDiameter(?sac) ^ SatisfiedWeight(?sac) -> SatisfiedSACunit(?sac)
 
 
+
 SACunitIsComposedOfRule:
-SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasSlipRing(?sacdob, ?sr) ^ hasDiameterOutputScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasInputBearing(?mibm, ?ib) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^  hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) -> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxFlexScrew(?s_gs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_gs) ^ isComposedOfInputBearing(?sac, ?ib) ^ isComposedOfAbsoluteEncoderSensorPCB(?sac, ?aespcbm) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr)
+SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasInputBearing(?mibm, ?ib) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^  hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) -> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxFlexScrew(?s_gs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_gs) ^ isComposedOfInputBearing(?sac, ?ib) ^ isComposedOfAbsoluteEncoderSensorPCB(?sac, ?aespcbm) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?ts)
 
 
 
