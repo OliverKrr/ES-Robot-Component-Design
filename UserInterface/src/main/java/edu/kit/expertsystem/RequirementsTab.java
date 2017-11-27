@@ -7,6 +7,7 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -25,10 +26,8 @@ import edu.kit.expertsystem.model.TextFieldRequirement;
 
 public class RequirementsTab {
 
-    private static final int btnEnalbeFieldWidth = 93;
-    private static final int btnEnalbeFieldHeight = 16;
-    private static final int btnEnalbeFieldOffsetXEnd = btnEnalbeFieldWidth;
-    private static final int btnEnalbeFieldOffsetYEnd = btnEnalbeFieldHeight + 7;
+    private static final int btnEnalbeFieldOffsetXEnd = 20;
+    private static final int btnEnalbeFieldOffsetYEnd = 7;
 
     private final FormToolkit formToolkit;
 
@@ -36,7 +35,9 @@ public class RequirementsTab {
     private RequirementsHelper requirementsHelper;
 
     private Composite leftComposite;
+    private Composite rightComposite;
     private Button btnEnableFields;
+    private DescriptionHelper descriptionHelper;
 
     public RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
@@ -124,12 +125,12 @@ public class RequirementsTab {
         rightScrolledComposite.setExpandHorizontal(true);
         formToolkit.adapt(rightScrolledComposite);
 
-        Composite rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
+        rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
         formToolkit.adapt(rightComposite);
         rightScrolledComposite.setContent(rightComposite);
 
         rowNumber = 0;
-        DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
+        descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         descriptionHelper.createDescription("min/max:",
                 "Desired min and max values. If no entered, defaults are taken: min=0 and max=infinite.",
                 rowNumber++);
@@ -147,14 +148,18 @@ public class RequirementsTab {
         formToolkit.adapt(requirementsForm);
         formToolkit.paintBordersFor(requirementsForm);
         requirementsHelper.updateSize(leftComposite.getBounds());
+        descriptionHelper.updateSize(rightComposite.getBounds());
         updateEnableField();
     }
 
     private void updateEnableField() {
         if (btnEnableFields != null) {
-            int xCord = leftComposite.getSize().x - btnEnalbeFieldOffsetXEnd;
-            int yCord = leftComposite.getSize().y - btnEnalbeFieldOffsetYEnd;
-            btnEnableFields.setBounds(xCord, yCord, btnEnalbeFieldWidth, btnEnalbeFieldHeight);
+            Point size = GuiHelper.getSizeOfText(btnEnableFields, "Disable fields");
+            // Offset for width, to include the checkbox size
+            int realWidth = size.x + btnEnalbeFieldOffsetXEnd;
+            int xCord = leftComposite.getBounds().width - realWidth;
+            int yCord = leftComposite.getBounds().height - size.y - btnEnalbeFieldOffsetYEnd;
+            btnEnableFields.setBounds(xCord, yCord, realWidth, size.y);
             formToolkit.adapt(btnEnableFields, true, true);
         }
     }

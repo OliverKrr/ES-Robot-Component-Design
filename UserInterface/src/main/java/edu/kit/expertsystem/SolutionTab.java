@@ -25,7 +25,9 @@ public class SolutionTab {
 
     private SashForm solutionForm;
     private Composite leftComposite;
+    private Composite rightComposite;
     private Tree resultTree;
+    private DescriptionHelper descriptionHelper;
 
     public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
         this.formToolkit = formToolkit;
@@ -52,12 +54,12 @@ public class SolutionTab {
         rightScrolledComposite.setExpandHorizontal(true);
         formToolkit.adapt(rightScrolledComposite);
 
-        Composite rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
+        rightComposite = new Composite(rightScrolledComposite, SWT.NONE);
         formToolkit.adapt(rightComposite);
         rightScrolledComposite.setContent(rightComposite);
 
         int rowNumber = 0;
-        DescriptionHelper descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
+        descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
             if (requirements.get(i).requirement.description != null
                     && requirements.get(i).requirement.resultIRI != null) {
@@ -72,6 +74,7 @@ public class SolutionTab {
         solutionForm.setBounds(contentRec);
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
+        descriptionHelper.updateSize(rightComposite.getBounds());
         updateTreeSize();
     }
 

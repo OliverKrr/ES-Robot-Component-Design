@@ -2867,7 +2867,7 @@
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">24</sac_reasoning:hasDefaultValue>
-        <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO (not used at the moment)</sac_reasoning:hasDescription>
+        <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24V and 48V are allowed. TODO (not used at the moment)</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Input: Voltage U:</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">V</sac_reasoning:hasUnit>
