@@ -179,15 +179,15 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 
 
 
-DiameterInputInputBearingMatchSatisfyRule:
-DiameterInputInputBearingMatch(?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasInputBearing(?mibm, ?ib) ^ hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?ib, ?d_ib) ^ swrlb:lessThanOrEqual(?d_ib, ?d_m) -> HalfSatisfiedDiameterInputInputBearingMatch(?mibm)
+DiameterInputDriveBearingMatchSatisfyRule:
+DiameterInputDriveBearingMatch(?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^ swrlb:lessThanOrEqual(?d_ib, ?d_m) -> HalfSatisfiedDiameterInputDriveBearingMatch(?didbm)
 
 
-DiameterInputInputBearingMatchUnsatisfiedRule:
-HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1) -> UnsatisfiedDiameterInputInputBearingMatch(?mibm2)
+DiameterInputDriveBearingMatchUnsatisfiedRule:
+HalfSatisfiedDiameterInputDriveBearingMatch(?didbm1) ^ hasSACunitDiameterInput(?didbm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputDriveBearingMatch(?didbm2) ^ hasSACunitDiameterInput(?didbm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasDriveBearing(?didbm1, ?db1) ^ hasDriveBearing(?didbm2, ?db2) ^ hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^ swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1) -> UnsatisfiedDiameterInputDriveBearingMatch(?didbm2)
 
-DiameterInputInputBearingMatchPossibleSatisfiedRule:
-HalfSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ hasSACunitDiameterInput(?mibm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputInputBearingMatch(?mibm2) ^ hasSACunitDiameterInput(?mibm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasInputBearing(?mibm1, ?ib1) ^ hasInputBearing(?mibm2, ?ib2) ^ hasDimensionInnerDiameter_d_unit_mm(?ib1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?ib2, ?d_ib2) ^ swrlb:equal(?d_ib2, ?d_ib1) -> PossibleSatisfiedDiameterInputInputBearingMatch(?mibm1) ^ PossibleSatisfiedDiameterInputInputBearingMatch(?mibm2)
+DiameterInputDriveBearingMatchPossibleSatisfiedRule:
+HalfSatisfiedDiameterInputDriveBearingMatch(?didbm1) ^ hasSACunitDiameterInput(?didbm1, ?sacdi1) ^ hasMotor(?sacdi1, ?m) ^ hasMotorController(?sacdi1, ?mc) ^ HalfSatisfiedDiameterInputDriveBearingMatch(?didbm2) ^ hasSACunitDiameterInput(?didbm2, ?sacdi2) ^ hasMotor(?sacdi2, ?m) ^ hasMotorController(?sacdi2, ?mc) ^ hasDriveBearing(?didbm1, ?db1) ^ hasDriveBearing(?didbm2, ?db2) ^ hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^ swrlb:equal(?d_ib2, ?d_ib1) -> PossibleSatisfiedDiameterInputDriveBearingMatch(?didbm1) ^ PossibleSatisfiedDiameterInputDriveBearingMatch(?didbm2)
 
 
 
@@ -216,9 +216,9 @@ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec)
 
 
 SACunitLengthInputLinearCalcRule:
-SACunitLengthInputLinear(?saclil) ^ hasDiameterInputInputBearingMatch(?saclil, ?mibm) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasGearBox(?saclil, ?g) ^ hasInputBearing(?mibm, ?ib) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^
+SACunitLengthInputLinear(?saclil) ^ hasDiameterInputDriveBearingMatch(?saclil, ?didbm) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasGearBox(?saclil, ?g) ^ hasDriveBearing(?didbm, ?db) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^ hasMotorController(?sacdi, ?mc) ^
 SatisfiedMotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ has1(?ie, ?L_iec) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?ib, ?L_ib) ^ Constants(?con) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_e) ^
+hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ has1(?ie, ?L_iec) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ Constants(?con) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_e) ^
 swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_e) ^ swrlb:add(?L_temp3, ?L_temp2, ?L_iec) ^ swrlb:add(?L_1, ?L_temp3, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
 -> has1(?saclil, ?L_1) ^ hasMax1_1(?saclil, ?L_max1) ^ hasMax1_2(?saclil, ?L_max2) ^ SatisfiedSACunitLengthInputLinear(?saclil)
 
@@ -386,13 +386,13 @@ swrlb:equal(?d_sacdob1, ?d_sacdob2)
 
 
 SACunitDiameterEvaluate1Rule:
-SACunitDiameter(?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^
+SACunitDiameter(?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_sacdi) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^
 swrlb:greaterThan(?D_sacdi, ?D_sacdob)
 -> has1(?sacd, ?D_sacdi)
 
 SACunitDiameterEvaluate2Rule:
-SACunitDiameter(?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^
+SACunitDiameter(?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_sacdi) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdob, ?D_sacdob) ^
 swrlb:lessThanOrEqual(?D_sacdi, ?D_sacdob)
 -> has1(?sacd, ?D_sacdob)
@@ -418,7 +418,7 @@ SACunitDiameter(?sacd) ^ hasDimensionOuterDiameter_D_unit_mm(?sacd, ?D_ges) ^ Cu
 
 
 SACunitLengthMotorGearBoxMatchSatisfyRule:
-SACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasGearBox(?sacli, ?g) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^
+SACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasGearBox(?sacli, ?g) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotor(?sacdi, ?m) ^
 hasDimensionOuterDiameter_D_unit_mm(?sacd, ?D_res) ^ hasDimensionLength_L_unit_mm(?sacl, ?L_res)
 SatisfiedMotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasWeight_m_unit_kg(?ma, ?m_ges)
 -> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_res) ^ SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ SatisfiedLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
@@ -430,7 +430,7 @@ SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ Satis
 
 
 SACunitIsComposedOfRule:
-SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputInputBearingMatch(?sacli, ?mibm) ^ hasSACunitDiameterInput(?mibm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasInputBearing(?mibm, ?ib) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^  hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) -> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxFlexScrew(?s_gs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_gs) ^ isComposedOfInputBearing(?sac, ?ib) ^ isComposedOfAbsoluteEncoderSensorPCB(?sac, ?aespcbm) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?ts)
+SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasDriveBearing(?didbm, ?db) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^  hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) -> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxFlexScrew(?s_gs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_gs) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfAbsoluteEncoderSensorPCB(?sac, ?aespcbm) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?ts)
 
 
 

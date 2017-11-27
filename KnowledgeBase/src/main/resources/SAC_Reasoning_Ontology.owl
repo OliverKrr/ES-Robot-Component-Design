@@ -118,12 +118,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"/>
     </owl:ObjectProperty>
     
 
@@ -158,12 +158,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:ObjectProperty>
     
 
@@ -430,12 +430,12 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputBearing -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing -->
 
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputBearing">
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:ObjectProperty>
     
 
@@ -1196,9 +1196,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
 
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"/>
@@ -1432,15 +1432,15 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1506,10 +1506,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"/>
     </owl:Class>
     
 
@@ -1651,15 +1651,15 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputInputBearingMatch">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfied"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNewSatisfiedPart"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -2047,9 +2047,9 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitLengthInput"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -2224,10 +2224,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"/>
     </owl:Class>
     
 
@@ -2598,22 +2598,22 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputInputBearingMatch -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatch -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputInputBearingMatch">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatch">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Unsatisfied"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCounterSatisfiedPart"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNewSatisfiedPart"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputInputBearingMatch"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -3294,7 +3294,7 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputScrewMatch"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatch"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrewMatch"/>
@@ -5784,7 +5784,7 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputInputBearingMatchSatisfyRule</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputDriveBearingMatchSatisfyRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
             <rdf:Description>
@@ -5803,7 +5803,7 @@
                         <rdf:first>
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib"/>
                             </rdf:Description>
@@ -5836,7 +5836,7 @@
                                                 <rdf:first>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputInputBearingMatch"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"/>
                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                                     </rdf:Description>
                                                 </rdf:first>
@@ -5885,7 +5885,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                     </rdf:Description>
                 </rdf:first>
@@ -6361,7 +6361,7 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputInputBearingMatchPossibleSatisfiedRule</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputDriveBearingMatchPossibleSatisfiedRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
             <rdf:Description>
@@ -6369,7 +6369,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm1"/>
                     </rdf:Description>
                 </rdf:first>
@@ -6412,7 +6412,7 @@
                                                 <rdf:first>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                                                     </rdf:Description>
                                                 </rdf:first>
@@ -6455,7 +6455,7 @@
                                                                                 <rdf:first>
                                                                                     <rdf:Description>
                                                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm1"/>
                                                                                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib1"/>
                                                                                     </rdf:Description>
@@ -6466,7 +6466,7 @@
                                                                                         <rdf:first>
                                                                                             <rdf:Description>
                                                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                                                                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib2"/>
                                                                                             </rdf:Description>
@@ -6539,7 +6539,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputInputBearingMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm1"/>
                     </rdf:Description>
                 </rdf:first>
@@ -6549,7 +6549,7 @@
                         <rdf:first>
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputInputBearingMatch"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatch"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                             </rdf:Description>
                         </rdf:first>
@@ -6562,7 +6562,7 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputInputBearingMatchUnsatisfiedRule</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DiameterInputDriveBearingMatchUnsatisfiedRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
             <rdf:Description>
@@ -6570,7 +6570,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm1"/>
                     </rdf:Description>
                 </rdf:first>
@@ -6613,7 +6613,7 @@
                                                 <rdf:first>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputInputBearingMatch"/>
+                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatch"/>
                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                                                     </rdf:Description>
                                                 </rdf:first>
@@ -6656,7 +6656,7 @@
                                                                                 <rdf:first>
                                                                                     <rdf:Description>
                                                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm1"/>
                                                                                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib1"/>
                                                                                     </rdf:Description>
@@ -6667,7 +6667,7 @@
                                                                                         <rdf:first>
                                                                                             <rdf:Description>
                                                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                                                                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib2"/>
                                                                                             </rdf:Description>
@@ -6755,7 +6755,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputInputBearingMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm2"/>
                     </rdf:Description>
                 </rdf:first>
@@ -8768,7 +8768,7 @@
                                                         <rdf:first>
                                                             <rdf:Description>
                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacli"/>
                                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                                             </rdf:Description>
@@ -9085,7 +9085,7 @@
                                         <rdf:first>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacli"/>
                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                             </rdf:Description>
@@ -9237,7 +9237,7 @@
                                         <rdf:first>
                                             <rdf:Description>
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacli"/>
                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                             </rdf:Description>
@@ -11049,7 +11049,7 @@
                                                 <rdf:first>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacli"/>
                                                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                                     </rdf:Description>
@@ -11203,7 +11203,7 @@
                                                                                                                                                                 <rdf:first>
                                                                                                                                                                     <rdf:Description>
                                                                                                                                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                                                                                                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                                                                                                                                                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib"/>
                                                                                                                                                                     </rdf:Description>
@@ -11359,7 +11359,7 @@
                                                         <rdf:first>
                                                             <rdf:Description>
                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputBearing"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing"/>
                                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
                                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib"/>
                                                             </rdf:Description>
@@ -15941,7 +15941,7 @@
                         <rdf:first>
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputInputBearingMatch"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#saclil"/>
                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                             </rdf:Description>
@@ -15974,7 +15974,7 @@
                                                 <rdf:first>
                                                     <rdf:Description>
                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasInputBearing"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mibm"/>
                                                         <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ib"/>
                                                     </rdf:Description>

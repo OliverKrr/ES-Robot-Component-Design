@@ -2991,9 +2991,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing"/>
     </owl:Class>
@@ -3404,7 +3404,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#InputBearing"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:Class>
     
 
