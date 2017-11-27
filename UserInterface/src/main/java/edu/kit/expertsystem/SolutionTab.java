@@ -5,10 +5,14 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.RequirementWrapper;
@@ -16,10 +20,15 @@ import edu.kit.expertsystem.controller.ResultWrapper;
 
 public class SolutionTab {
 
-    private static final int treeOffsetX = 5;
-    private static final int treeOffsetY = 5;
-    private static final int treeOffsetXEnd = 5;
-    private static final int treeOffsetYEnd = 5;
+    public static final String SEARCH_KEY = "SearchString";
+
+    private static final int offsetX = 5;
+    private static final int offsetY = 5;
+    private static final int offsetXEnd = 5;
+    private static final int offsetYEnd = 5;
+
+    private static final int searchTextWidth = 120;
+    private static final int searchTextHeight = 23;
 
     private final FormToolkit formToolkit;
 
@@ -27,6 +36,7 @@ public class SolutionTab {
     private Composite leftComposite;
     private Composite rightComposite;
     private Tree resultTree;
+    private Text searchField;
     private DescriptionHelper descriptionHelper;
 
     public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
@@ -42,9 +52,36 @@ public class SolutionTab {
         leftComposite = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 
+        searchField = new Text(leftComposite, SWT.BORDER);
+        searchField.setMessage("search");
+        searchField.setToolTipText("search");
+        formToolkit.adapt(searchField, true, true);
+
         resultTree = new Tree(leftComposite, SWT.NONE);
-        updateTreeSize();
+        updateSizeOfTreeItem();
         resultWrapper.tree = resultTree;
+
+        searchField.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                updateSizeOfSearchText();
+                String[] currentSearchStrings = searchField.getText().toLowerCase().split(" ");
+                for (TreeItem treeItem : resultTree.getItems()) {
+                    String searchString = String.valueOf(treeItem.getData(SEARCH_KEY)).toLowerCase();
+                    boolean contains = true;
+                    for (String currentSearchString : currentSearchStrings) {
+                        contains &= searchString.contains(currentSearchString);
+                    }
+                    treeItem.setExpanded(contains);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // nothing to do
+            }
+        });
 
         Label separator = new Label(solutionForm, SWT.SEPARATOR | SWT.VERTICAL);
         formToolkit.adapt(separator, false, false);
@@ -75,13 +112,22 @@ public class SolutionTab {
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
         descriptionHelper.updateSize(rightComposite.getBounds());
-        updateTreeSize();
+        updateSizeOfSearchText();
+        updateSizeOfTreeItem();
     }
 
-    private void updateTreeSize() {
-        int width = leftComposite.getSize().x - treeOffsetX - treeOffsetXEnd;
-        int height = leftComposite.getSize().y - treeOffsetY - treeOffsetYEnd;
-        resultTree.setBounds(treeOffsetX, treeOffsetY, width, height);
+    private void updateSizeOfSearchText() {
+        int widthOfSearchText = Math.max(searchTextWidth,
+                GuiHelper.getSizeOfText(searchField, searchField.getText()).x);
+        int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
+        searchField.setBounds(xOfSearchText, offsetY, widthOfSearchText, searchTextHeight);
+    }
+
+    private void updateSizeOfTreeItem() {
+        int yOfTree = offsetY + searchTextHeight + offsetY;
+        int widthOfTree = leftComposite.getBounds().width - offsetX - offsetXEnd;
+        int heightOfTree = leftComposite.getBounds().height - yOfTree - offsetYEnd;
+        resultTree.setBounds(offsetX, yOfTree, widthOfTree, heightOfTree);
         formToolkit.adapt(resultTree, true, true);
     }
 

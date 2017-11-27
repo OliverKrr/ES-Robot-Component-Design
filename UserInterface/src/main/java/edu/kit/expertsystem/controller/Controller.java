@@ -16,6 +16,7 @@ import edu.kit.expertsystem.Configs;
 import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.GuiHelper;
 import edu.kit.expertsystem.MainReasoner;
+import edu.kit.expertsystem.SolutionTab;
 import edu.kit.expertsystem.model.CheckboxRequirement;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Requirement;
@@ -168,6 +169,7 @@ public class Controller {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
+            String concatenationOfNames = "";
 
             double maxNumberOfChars = 0;
             for (Component component : result.components) {
@@ -179,6 +181,7 @@ public class Controller {
                         : component.nameOfComponent + ":"
                                 + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
                                 + component.nameOfInstance;
+                concatenationOfNames += name.replaceAll(" ", "");
                 addTreeItem(resItem, name, true);
             }
 
@@ -205,11 +208,12 @@ public class Controller {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
                 String unit = req.unit == null ? "" : req.unit;
-                addTreeItem(resItem,
-                        req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + " "
-                                + resultValue + getSpacesForResultValue(resultValue) + unit,
-                        false);
+                String name = req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars)
+                        + " " + resultValue + getSpacesForResultValue(resultValue) + unit;
+                concatenationOfNames += name.replaceAll(" ", "");
+                addTreeItem(resItem, name, false);
             }
+            resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNames);
             resItem.setExpanded(true);
         }
     }
@@ -220,9 +224,8 @@ public class Controller {
         if (makeGreen) {
             resItem.setForeground(Configs.KIT_GREEN_70);
         }
-        resItem.setFont(
-                SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()),
-                        SWT.NORMAL));
+        resItem.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()),
+                SWT.NORMAL));
         return resItem;
     }
 
