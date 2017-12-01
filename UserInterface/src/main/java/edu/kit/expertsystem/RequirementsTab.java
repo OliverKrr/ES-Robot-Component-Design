@@ -5,8 +5,8 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
@@ -82,7 +82,7 @@ public class RequirementsTab {
             btnEnableFields = new Button(leftComposite, SWT.CHECK);
             updateEnableField();
             btnEnableFields.setText("Enable fields");
-            btnEnableFields.addSelectionListener(new SelectionListener() {
+            btnEnableFields.addSelectionListener(new SelectionAdapter() {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
@@ -108,11 +108,6 @@ public class RequirementsTab {
                             throw new RuntimeException("Requirement class unknown: " + req.getClass());
                         }
                     }
-                }
-
-                @Override
-                public void widgetDefaultSelected(SelectionEvent event) {
-                    // nothing to do
                 }
             });
         }

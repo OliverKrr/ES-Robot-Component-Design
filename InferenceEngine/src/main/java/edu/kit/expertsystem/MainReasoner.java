@@ -1,12 +1,5 @@
 package edu.kit.expertsystem;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,8 +15,6 @@ import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
@@ -45,15 +36,7 @@ import openllet.owlapi.OWLManagerGroup;
 
 public class MainReasoner {
 
-    private static final String fileEnding = ".owl";
-    private static final String domainFileName = "SAC_Domain_Ontology" + fileEnding;
-    private static final String reasoningFileName = "SAC_Reasoning_Ontology" + fileEnding;
-
-    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src\\main\\resources\\";
-
     private static final Logger logger = LogManager.getLogger(MainReasoner.class);
-
-    private String inferdFilePath = null;
 
     private OWLManagerGroup group;
     private OWLGenericTools genericTool;
@@ -61,6 +44,8 @@ public class MainReasoner {
     private MyOWLHelper helper;
     private ReasoningTree reasoningTree;
     private RequirementHelper requirementHelper;
+    private OntologyReadAndWriteHelper ontologyReadAndWriteHelper;
+
     private boolean isReasoningPrepared = false;
     private AtomicBoolean interrupted = new AtomicBoolean(false);
 
@@ -70,47 +55,17 @@ public class MainReasoner {
 
     public void initialize() {
         long startTime = System.currentTimeMillis();
-        OWLOntology basicOntology = loadOntology(domainFileName, false);
-        OWLOntology ontology = loadOntology(reasoningFileName, true);
-        group.getVolatileManager().addAxioms(ontology, basicOntology.axioms());
+        ontologyReadAndWriteHelper = new OntologyReadAndWriteHelper(group);
+        OWLOntology ontology = ontologyReadAndWriteHelper.loadOntologies();
 
         genericTool = new OWLGenericTools(group, group.getVolatileManager(), ontology);
-
         helper = new MyOWLHelper(genericTool);
+        ontologyReadAndWriteHelper.setGenericToolAndHelper(genericTool, helper);
         helper.checkConsistency();
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
+
         logger.info("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
-    }
-
-    private OWLOntology loadOntology(String fileName, boolean setInferdFilePath) {
-        try (InputStream ontoStream = readOntology(fileName, setInferdFilePath)) {
-            return group.getVolatileManager().loadOntologyFromOntologyDocument(ontoStream);
-        } catch (OWLOntologyCreationException | IOException e) {
-            logger.error(e.getMessage(), e);
-            throw new RuntimeException("Loading the ontology failed");
-        }
-    }
-
-    private InputStream readOntology(String fileName, boolean setInferdFilePath) throws IOException {
-        String path = myPath + fileName;
-        if (setInferdFilePath) {
-            inferdFilePath = path.substring(0, path.length() - fileEnding.length()) + "Inf" + fileEnding;
-        }
-        try {
-            return new FileInputStream(path);
-        } catch (FileNotFoundException e1) {
-            String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
-            if (setInferdFilePath) {
-                inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
-                        + fileEnding;
-            }
-            try {
-                return new FileInputStream(localPath);
-            } catch (FileNotFoundException e2) {
-                return getClass().getResourceAsStream("/" + fileName);
-            }
-        }
     }
 
     public void prepareReasoning(UnitToReason unitToReason) {
@@ -173,18 +128,8 @@ public class MainReasoner {
             }
             return null;
         } finally {
-            if (interrupted.get()) {
-                logger.info("Time needed for interrupted reasoning: "
-                        + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
-            } else {
-                try {
-                    saveReasonedOntology();
-                } catch (OWLOntologyStorageException | IOException e) {
-                    logger.error(e.getMessage(), e);
-                }
-                logger.info("Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0
-                        + "s");
-            }
+            logger.info(
+                    "Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
@@ -332,17 +277,6 @@ public class MainReasoner {
         return copyReqs;
     }
 
-    private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
-        helper.checkConsistency();
-        if (inferdFilePath == null) {
-            return;
-        }
-        OWLOntology inferOnto = genericTool.getReasoner().getRootOntology();
-        try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
-            genericTool.getManager().saveOntology(inferOnto, out);
-        }
-    }
-
     public List<UnitToReason> getUnitsToReason() {
         long startTime = System.currentTimeMillis();
         List<UnitToReason> units = new ArrayList<>();
@@ -391,6 +325,7 @@ public class MainReasoner {
     public void interruptReasoning() {
         logger.info("Reasoning interrupted");
         interrupted.set(true);
+        ontologyReadAndWriteHelper.interruptReasoning();
         reasoningTree.interruptReasoning();
         genericTool.getReasoner().interrupt();
     }
@@ -401,6 +336,10 @@ public class MainReasoner {
 
     public List<RequirementDependencyCheckbox> getRequirementDependencies(List<Requirement> requirements) {
         return requirementHelper.getRequirementDependencies(requirements);
+    }
+
+    public void saveInferredOntology() {
+        ontologyReadAndWriteHelper.saveInferredOntology();
     }
 
 }

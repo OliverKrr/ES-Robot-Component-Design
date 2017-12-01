@@ -85,6 +85,10 @@ public class Controller {
         reasoner.interruptReasoning();
     }
 
+    public void saveSolutionOntology() {
+        reasoner.saveInferredOntology();
+    }
+
     public void reset() {
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {

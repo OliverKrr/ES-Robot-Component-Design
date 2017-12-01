@@ -15,7 +15,6 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -141,7 +140,10 @@ public class GUI {
     }
 
     public void notifySolutionIsReady() {
-        display.asyncExec(() -> controller.setResults());
+        display.asyncExec(() -> {
+            controller.setResults();
+            solutionTab.getSaveSolutionOntologyButton().setVisible(true);
+        });
     }
 
     /**
@@ -152,7 +154,7 @@ public class GUI {
 
         unitsToReasonCombo = new Combo(shell, SWT.DROP_DOWN | SWT.READ_ONLY);
         controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
-        unitsToReasonCombo.addSelectionListener(new SelectionListener() {
+        unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
@@ -175,16 +177,18 @@ public class GUI {
                 solutionTab = new SolutionTab(shell, formToolkit, recOfContent);
                 solutionTab.createContents(controller.getResultWrapper(),
                         controller.getRequirementsWrapper());
+                solutionTab.getSaveSolutionOntologyButton().addSelectionListener(new SelectionAdapter() {
+
+                    @Override
+                    public void widgetSelected(SelectionEvent e) {
+                        controllerFuture = pool.submit(() -> controller.saveSolutionOntology());
+                    }
+                });
 
                 createErrorText(recOfContent);
                 createKitLogo(reqNavBarRec);
                 addNavigationBarListener();
                 updateSize();
-            }
-
-            @Override
-            public void widgetDefaultSelected(SelectionEvent event) {
-                // nothing to to
             }
         });
         unitsToReasonCombo.select(0);
@@ -235,7 +239,6 @@ public class GUI {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 requirementsCategory.setVisibilityOfNavItems(true);
-                controllerFuture.cancel(true);
                 controllerFuture = pool.submit(() -> controller.reset());
             }
         });
@@ -254,6 +257,7 @@ public class GUI {
                 }
                 controller.parseRequirements();
                 controllerFuture = pool.submit(() -> controller.reason());
+                solutionTab.getSaveSolutionOntologyButton().setVisible(false);
             }
         });
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());

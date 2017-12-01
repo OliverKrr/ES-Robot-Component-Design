@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
@@ -110,18 +110,13 @@ public class RequirementsCategory {
         reqNavItems.get(0).item.notifyListeners(SWT.Selection, new Event());
 
         requirementDependencyWrappers.forEach(reqDep -> {
-            reqDep.fromCheckbox.addSelectionListener(new SelectionListener() {
+            reqDep.fromCheckbox.addSelectionListener(new SelectionAdapter() {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
                     reqDep.toControls.forEach(control -> control.setVisible(
                             reqDep.requirementDependencyCheckbox.displayOnValue == reqDep.fromCheckbox
                                     .getSelection()));
-                }
-
-                @Override
-                public void widgetDefaultSelected(SelectionEvent event) {
-                    // nothing to do
                 }
             });
             reqDep.fromCheckbox.notifyListeners(SWT.Selection, new Event());

@@ -8,6 +8,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -27,6 +28,8 @@ public class SolutionTab {
     private static final int offsetXEnd = 5;
     private static final int offsetYEnd = 5;
 
+    private static final int saveSolutionOntologyButtonWidthOffset = 10;
+
     private static final int searchTextWidth = 120;
     private static final int searchTextHeight = 23;
 
@@ -36,6 +39,7 @@ public class SolutionTab {
     private Composite leftComposite;
     private Composite rightComposite;
     private Tree resultTree;
+    private Button saveSolutionOntologyButton;
     private Text searchField;
     private DescriptionHelper descriptionHelper;
 
@@ -51,6 +55,11 @@ public class SolutionTab {
     public void createContents(ResultWrapper resultWrapper, List<RequirementWrapper> requirements) {
         leftComposite = new Composite(solutionForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
+
+        saveSolutionOntologyButton = new Button(leftComposite, SWT.PUSH);
+        saveSolutionOntologyButton.setToolTipText("Saves the solution of the reasoning in an ontology");
+        saveSolutionOntologyButton.setText("Save solution");
+        formToolkit.adapt(saveSolutionOntologyButton, true, true);
 
         searchField = new Text(leftComposite, SWT.BORDER);
         searchField.setMessage("search");
@@ -112,14 +121,27 @@ public class SolutionTab {
         formToolkit.adapt(solutionForm);
         formToolkit.paintBordersFor(solutionForm);
         descriptionHelper.updateSize(rightComposite.getBounds());
+        updateSizeOfSaveSolutionOntologyButton();
         updateSizeOfSearchText();
         updateSizeOfTreeItem();
+    }
+
+    private void updateSizeOfSaveSolutionOntologyButton() {
+        int width = GuiHelper.getSizeOfText(saveSolutionOntologyButton,
+                saveSolutionOntologyButton.getText()).x + saveSolutionOntologyButtonWidthOffset;
+        saveSolutionOntologyButton.setBounds(offsetX, offsetY, width, searchTextHeight);
     }
 
     private void updateSizeOfSearchText() {
         int widthOfSearchText = Math.max(searchTextWidth,
                 GuiHelper.getSizeOfText(searchField, searchField.getText()).x);
         int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
+        int saveSolutionXEnd = saveSolutionOntologyButton.getBounds().x
+                + saveSolutionOntologyButton.getBounds().width;
+        if (xOfSearchText < saveSolutionXEnd + offsetXEnd) {
+            xOfSearchText = saveSolutionXEnd + offsetXEnd;
+            widthOfSearchText = leftComposite.getBounds().width - xOfSearchText - offsetXEnd;
+        }
         searchField.setBounds(xOfSearchText, offsetY, widthOfSearchText, searchTextHeight);
     }
 
@@ -133,6 +155,10 @@ public class SolutionTab {
 
     public SashForm getSolutionForm() {
         return solutionForm;
+    }
+
+    public Button getSaveSolutionOntologyButton() {
+        return saveSolutionOntologyButton;
     }
 
 }
