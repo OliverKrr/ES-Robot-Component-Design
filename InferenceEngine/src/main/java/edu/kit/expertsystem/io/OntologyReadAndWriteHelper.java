@@ -1,4 +1,4 @@
-package edu.kit.expertsystem;
+package edu.kit.expertsystem.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +21,7 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 
+import edu.kit.expertsystem.MyOWLHelper;
 import openllet.core.exceptions.TimerInterruptedException;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;

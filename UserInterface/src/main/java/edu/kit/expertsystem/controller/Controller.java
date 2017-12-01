@@ -17,14 +17,20 @@ import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.GuiHelper;
 import edu.kit.expertsystem.MainReasoner;
 import edu.kit.expertsystem.SolutionTab;
-import edu.kit.expertsystem.model.CheckboxRequirement;
+import edu.kit.expertsystem.controller.wrapper.CheckboxRequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
+import edu.kit.expertsystem.controller.wrapper.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.TextFieldRequirementWrapper;
 import edu.kit.expertsystem.model.Component;
-import edu.kit.expertsystem.model.Requirement;
-import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
 import edu.kit.expertsystem.model.Result;
-import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.TextFieldRequirement;
 import edu.kit.expertsystem.model.UnitToReason;
+import edu.kit.expertsystem.model.req.CheckboxRequirement;
+import edu.kit.expertsystem.model.req.Requirement;
+import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldRequirement;
 
 public class Controller {
 

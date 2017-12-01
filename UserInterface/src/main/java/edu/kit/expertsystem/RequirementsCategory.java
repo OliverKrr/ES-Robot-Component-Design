@@ -16,9 +16,9 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import edu.kit.expertsystem.controller.NavigationItem;
-import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.RequirementWrapper;
-import edu.kit.expertsystem.model.Category;
+import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.model.req.Category;
 
 public class RequirementsCategory {
 

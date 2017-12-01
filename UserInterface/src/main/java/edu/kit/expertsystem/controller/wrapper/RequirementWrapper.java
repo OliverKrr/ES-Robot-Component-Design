@@ -1,6 +1,6 @@
-package edu.kit.expertsystem.controller;
+package edu.kit.expertsystem.controller.wrapper;
 
-import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.req.Requirement;
 
 public class RequirementWrapper {
 

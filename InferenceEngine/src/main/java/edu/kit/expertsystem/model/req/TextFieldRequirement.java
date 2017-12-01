@@ -1,4 +1,4 @@
-package edu.kit.expertsystem.model;
+package edu.kit.expertsystem.model.req;
 
 public class TextFieldRequirement extends Requirement {
 

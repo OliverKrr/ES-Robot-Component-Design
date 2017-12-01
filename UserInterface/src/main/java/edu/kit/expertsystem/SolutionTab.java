@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import edu.kit.expertsystem.controller.RequirementWrapper;
-import edu.kit.expertsystem.controller.ResultWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 
 public class SolutionTab {
 

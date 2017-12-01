@@ -2,6 +2,8 @@ package edu.kit.expertsystem.model;
 
 import java.util.List;
 
+import edu.kit.expertsystem.model.req.Requirement;
+
 public class Result {
 
     public List<Component> components;

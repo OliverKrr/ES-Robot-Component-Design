@@ -1,4 +1,4 @@
-package edu.kit.expertsystem.controller;
+package edu.kit.expertsystem.controller.wrapper;
 
 import java.util.List;
 

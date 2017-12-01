@@ -1,4 +1,4 @@
-package edu.kit.expertsystem;
+package edu.kit.expertsystem.io;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 

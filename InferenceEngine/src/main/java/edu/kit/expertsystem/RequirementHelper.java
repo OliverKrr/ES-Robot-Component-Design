@@ -11,13 +11,13 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 
 import edu.kit.expertsystem.generated.Vocabulary;
-import edu.kit.expertsystem.model.Category;
-import edu.kit.expertsystem.model.CheckboxRequirement;
-import edu.kit.expertsystem.model.Requirement;
-import edu.kit.expertsystem.model.RequirementDependencyCheckbox;
-import edu.kit.expertsystem.model.RequirementType;
-import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.TextFieldRequirement;
+import edu.kit.expertsystem.model.req.Category;
+import edu.kit.expertsystem.model.req.CheckboxRequirement;
+import edu.kit.expertsystem.model.req.Requirement;
+import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
+import edu.kit.expertsystem.model.req.RequirementType;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldRequirement;
 import openllet.owlapi.OWLGenericTools;
 
 public class RequirementHelper {

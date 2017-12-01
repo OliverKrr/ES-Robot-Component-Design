@@ -1,4 +1,4 @@
-package edu.kit.expertsystem;
+package edu.kit.expertsystem.reasoning;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
+import edu.kit.expertsystem.MyOWLHelper;
 import edu.kit.expertsystem.generated.Vocabulary;
 import openllet.owlapi.OWLGenericTools;
 

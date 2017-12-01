@@ -1,4 +1,4 @@
-package edu.kit.expertsystem;
+package edu.kit.expertsystem.reasoning;
 
 import java.util.List;
 

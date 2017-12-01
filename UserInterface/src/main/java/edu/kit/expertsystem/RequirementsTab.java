@@ -14,15 +14,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import edu.kit.expertsystem.controller.CheckboxRequirementWrapper;
-import edu.kit.expertsystem.controller.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.RequirementWrapper;
-import edu.kit.expertsystem.controller.TextFieldMinMaxRequirementWrapper;
-import edu.kit.expertsystem.controller.TextFieldRequirementWrapper;
-import edu.kit.expertsystem.model.Category;
-import edu.kit.expertsystem.model.CheckboxRequirement;
-import edu.kit.expertsystem.model.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.TextFieldRequirement;
+import edu.kit.expertsystem.controller.wrapper.CheckboxRequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.TextFieldMinMaxRequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.model.req.Category;
+import edu.kit.expertsystem.model.req.CheckboxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldRequirement;
 
 public class RequirementsTab {
 

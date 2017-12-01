@@ -1,4 +1,4 @@
-package edu.kit.expertsystem;
+package edu.kit.expertsystem.reasoning;
 
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;

@@ -20,7 +20,6 @@ import openllet.owlapi.OWLHelper;
 
 public class MyOWLHelper {
 
-    @SuppressWarnings("unused")
     private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
 
     private OWLHelper genericTool;

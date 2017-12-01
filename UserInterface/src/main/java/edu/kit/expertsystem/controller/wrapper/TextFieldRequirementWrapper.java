@@ -1,8 +1,8 @@
-package edu.kit.expertsystem.controller;
+package edu.kit.expertsystem.controller.wrapper;
 
 import org.eclipse.swt.widgets.Text;
 
-import edu.kit.expertsystem.model.Requirement;
+import edu.kit.expertsystem.model.req.Requirement;
 
 public class TextFieldRequirementWrapper extends RequirementWrapper {
 
