@@ -76,8 +76,8 @@ public class MainReasoner {
 
         genericTool = new OWLGenericTools(group, group.getVolatileManager(), ontology);
 
-        logger.info("Read Ontology isConsistent: " + genericTool.getReasoner().isConsistent());
         helper = new MyOWLHelper(genericTool);
+        helper.checkConsistency();
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
         logger.info("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
@@ -333,7 +333,7 @@ public class MainReasoner {
     }
 
     private void saveReasonedOntology() throws IOException, OWLOntologyStorageException {
-        logger.info("Reasoned ontology isConsistent: " + genericTool.getReasoner().isConsistent());
+        helper.checkConsistency();
         if (inferdFilePath == null) {
             return;
         }

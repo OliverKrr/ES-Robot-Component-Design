@@ -21,6 +21,7 @@ public class ReasoningTree {
 
     private OWLGenericTools genericTool;
     private MyOWLHelper helper;
+    private ReasoningTreeSpecialCases reasoningTreeSpecialCasesHandler;
 
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
     private boolean hasSomethingChanged;
@@ -29,6 +30,7 @@ public class ReasoningTree {
     public ReasoningTree(OWLGenericTools genericTool, MyOWLHelper helper) {
         this.genericTool = genericTool;
         this.helper = helper;
+        reasoningTreeSpecialCasesHandler = new ReasoningTreeSpecialCases(genericTool, helper);
     }
 
     public void interruptReasoning() {
@@ -43,6 +45,7 @@ public class ReasoningTree {
         if (interrupted.get()) {
             return;
         }
+        reasoningTreeSpecialCasesHandler.reset();
         appliedClassesToNumberOfPermutations.clear();
         do {
             hasSomethingChanged = false;
@@ -58,24 +61,24 @@ public class ReasoningTree {
                 // the order is important
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED)
                         .forEach(unsatiesfiedSuperClass -> unsatiesfiedSuperClass.getSubClass()
-                                .classesInSignature()
-                                .forEach(subClassOfUnsatisfied -> hasSomethingChanged |= helper
-                                        .handleUnsatisfied(subClassOfUnsatisfied)));
+                                .classesInSignature().forEach(
+                                        subClassOfUnsatisfied -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                                .handleUnsatisfied(subClassOfUnsatisfied)));
 
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED)
                         .forEach(possibleUnsatiesfiedSuperClass -> possibleUnsatiesfiedSuperClass
-                                .getSubClass().classesInSignature()
-                                .forEach(subClassOfPossibleUnsatisfied -> hasSomethingChanged |= helper
-                                        .handlePossibleUnsatisfied(subClassOfPossibleUnsatisfied)));
+                                .getSubClass().classesInSignature().forEach(
+                                        subClassOfPossibleUnsatisfied -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                                .handlePossibleUnsatisfied(subClassOfPossibleUnsatisfied)));
 
-                if (!helper.didBackupOnLastRun()) {
+                if (!reasoningTreeSpecialCasesHandler.didBackupOnLastRun()) {
                     // If we do backup for possible unsatisfied, we do not delete stuff. In the next
                     // run we should first check for unsatisfied and then possibleSatisfied
                     genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
                             .forEach(possibleSatisfiedSuperClass -> possibleSatisfiedSuperClass.getSubClass()
-                                    .classesInSignature()
-                                    .forEach(subClassOfPossibleSatisfied -> hasSomethingChanged |= helper
-                                            .handlePossibleSatisfied(subClassOfPossibleSatisfied)));
+                                    .classesInSignature().forEach(
+                                            subClassOfPossibleSatisfied -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                                    .handlePossibleSatisfied(subClassOfPossibleSatisfied)));
                 }
             }
         } while (hasSomethingChanged && !interrupted.get());
