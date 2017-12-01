@@ -189,7 +189,6 @@ public class MainReasoner {
     }
 
     private void addRequirements(List<Requirement> requirements) {
-        // logger.info(requirements);
         OWLNamedIndividual requirementsInd = genericTool.getFactory()
                 .getOWLNamedIndividual(helper.create("currentRequs"));
         helper.addAxiom(genericTool.getFactory()
@@ -200,12 +199,18 @@ public class MainReasoner {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
+                logger.info("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min
+                        + ", " + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
+                logger.info(
+                        "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else if (req instanceof CheckboxRequirement) {
                 CheckboxRequirement realReq = (CheckboxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
+                logger.info(
+                        "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -294,7 +299,6 @@ public class MainReasoner {
             logger.warn("Cannot sort, because weight is not available.");
         }
 
-        // results.forEach(r -> logger.info(r));
         logger.info("Number of results: " + results.size());
         logger.info(
                 "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");

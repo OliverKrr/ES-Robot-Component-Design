@@ -138,6 +138,16 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox">
@@ -154,16 +164,6 @@
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedIncrementalEncoder"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:ObjectProperty>
     
 
@@ -400,6 +400,16 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox">
@@ -426,16 +436,6 @@
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:ObjectProperty>
     
 
@@ -1154,6 +1154,19 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
+
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </rdf:Description>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox -->
 
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox">
@@ -1192,19 +1205,6 @@
 
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
-    </rdf:Description>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
-
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">300</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
     </rdf:Description>
     
 
@@ -1537,7 +1537,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -3189,22 +3189,22 @@
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -3430,10 +3430,10 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ie">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ier">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_iec">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_iec">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ier">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sr">

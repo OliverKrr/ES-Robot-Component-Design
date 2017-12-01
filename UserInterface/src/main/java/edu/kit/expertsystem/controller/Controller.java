@@ -219,6 +219,7 @@ public class Controller {
     }
 
     private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
+        logger.info("Solution: " + text);
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {
