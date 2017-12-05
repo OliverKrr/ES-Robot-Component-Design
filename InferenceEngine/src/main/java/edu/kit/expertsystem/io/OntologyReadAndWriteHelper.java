@@ -113,7 +113,7 @@ public class OntologyReadAndWriteHelper {
             throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
         long startTime = System.currentTimeMillis();
         helper.flush();
-        helper.checkConsistency();
+        boolean isConsistent = helper.checkConsistency();
         if (inferdFilePath == null || interrupted.get()) {
             return;
         }
@@ -123,7 +123,9 @@ public class OntologyReadAndWriteHelper {
         if (interrupted.get()) {
             return;
         }
-        inferredOntologyGenerator.fillOntology(genericTool.getFactory(), inferOnto);
+        if (isConsistent) {
+            inferredOntologyGenerator.fillOntology(genericTool.getFactory(), inferOnto);
+        }
 
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             genericTool.getManager().saveOntology(inferOnto, out);

@@ -330,7 +330,7 @@ public class MainReasoner {
                     units.add(unitToReason);
                 });
 
-        Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit1.orderPosition);
+        Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit2.orderPosition);
         logger.info("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
                 + "s");
         return units;

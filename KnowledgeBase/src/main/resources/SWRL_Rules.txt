@@ -234,25 +234,68 @@ SatisfiedSACunitLengthInputLinear(?saclil) ^ has1(?saclil, ?L_1) ^ hasMax1_1(?sa
 
 
 
-//TODO verschiedene AbsolutEncoder
-AbsoluteEncoderSensorPCBMatchSatisfy1Rule:
-sac_basic:NoAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+AbsolutEncoderWithSatisfyRule:
+AbsolutEncoderMBAD01_05(?ab) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab_r) ^ swrlb:equal(?ab_r, true) -> SatisfiedAbsoluteEncoder(?ab)
 
-AbsoluteEncoderSensorPCBMatchSatisfy2Rule:
-sac_basic:NoAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, false) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+AbsolutEncoderNoneSatisfyRule:
+NoAbsolutEncoder(?ab) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab_r) ^ swrlb:equal(?ab_r, false) -> SatisfiedAbsoluteEncoder(?ab)
 
-AbsoluteEncoderSensorPCBMatchSatisfy3Rule:
-sac_basic:WithAeNoPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
 
-AbsoluteEncoderSensorPCBMatchSatisfy4Rule:
-sac_basic:WithAeWithPCB(?aespcbm) ^ CurrentRequirements(?r) ^ needAbsoluteEncoderReq(?r, ?ab) ^ swrlb:equal(?ab, true) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedAbsoluteEncoderSensorPCBMatch(?aespcbm)
+SensorPCBWithSatisfyRule:
+WithSensorPCB(?spcb) ^ CurrentRequirements(?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedSensorPCB(?spcb)
 
+SensorPCBNoneSatisfyRule:
+NoSensorPCB(?spcb) ^ CurrentRequirements(?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedSensorPCB(?spcb)
+
+
+
+AbsolutEncoderSensorPCBMatchSatisfy1Rule:
+AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ Constants(?con) ^
+hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
+swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
+swrlb:greaterThan(?L_temp, ?L_aewspcb) -> hasDimensionLength_L_unit_mm(?abspcb, ?L_aewspcb) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+
+AbsolutEncoderSensorPCBMatchSatisfy2Rule:
+AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ Constants(?con) ^
+hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
+swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
+swrlb:lessThanOrEqual(?L_temp, ?L_aewspcb) -> hasDimensionLength_L_unit_mm(?abspcb, ?L_temp) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+
+
+
+
+
+GearBoxAbsolutEncoderSensorPCBMatchCalc1Rule:
+GearBoxAbsolutEncoderSensorPCBMatch(?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ AbsolutEncoderMBAD01_05(?ab) ^
+hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?D_s) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
+swrlb:subtract(?D_temp, ?T_g, ?D_s) ^
+swrlb:greaterThanOrEqual(?d_ab, ?D_temp)
+-> HalfSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb)
+
+GearBoxAbsolutEncoderSensorPCBMatchCalc2Rule:
+GearBoxAbsolutEncoderSensorPCBMatch(?gaespcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ NoAbsolutEncoder(?ab)
+-> SatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb)
+
+
+GearBoxAbsolutEncoderSensorPCBMatchUnsatisfiedRule:
+HalfSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb1) ^ hasGearBox(?gaespcb1, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCB(?abspcb1, ?spcb) ^
+HalfSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb2) ^ hasGearBox(?gaespcb2, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCB(?abspcb2, ?spcb) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
+swrlb:greaterThan(?D_ab1, ?D_ab2) ^ swrlb:lessThan(?D_ab2, ?D_ab1)
+-> UnsatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb1)
+
+GearBoxAbsolutEncoderSensorPCBMatchPossibleSatisfiedRule:
+HalfSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb1) ^ hasGearBox(?gaespcb1, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCB(?abspcb1, ?spcb) ^
+HalfSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb2) ^ hasGearBox(?gaespcb2, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCB(?abspcb2, ?spcb) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
+swrlb:equal(?D_ab2, ?D_ab1)
+-> PossibleSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb1) ^ PossibleSatisfiedGearBoxAbsolutEncoderSensorPCBMatch(?gaespcb2)
 
 
 
 
 DiameterOutputCircularScrewMatchSatisfyRule:
-DiameterOutputCircularScrewMatch(?gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasScrew(?gs, ?s) ^ hasGearBox(?sacdo, ?g) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) -> SatisfiedDiameterOutputCircularScrewMatch(?gs)
+DiameterOutputCircularScrewMatch(?gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasScrew(?gs, ?s) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?sacdo, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) -> SatisfiedDiameterOutputCircularScrewMatch(?gs)
 
 
 OutputBearingScrewMatchSatisfyRule:
@@ -261,10 +304,11 @@ OutputBearingScrewMatch(?obs) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s)
 
 
 
+
 SACunitLengthOutputLinearFlexScrewMatchCalcRule:
-SACunitLengthOutputLinearFlexScrewMatch(?saclol) ^ hasSACunitDiameterOutputBearing(?saclol, ?sacdob) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?gs) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasTorsionalWave(?sacdob, ?tw) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasGearBox(?sacdo, ?g) ^ hasScrew(?saclol, ?s_saclol) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^ Constants(?con) ^
+SACunitLengthOutputLinearFlexScrewMatch(?saclol) ^ hasSACunitDiameterOutputBearing(?saclol, ?sacdob) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?gs) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasTorsionalWave(?sacdob, ?tw) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?sacdo, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasScrew(?saclol, ?s_saclol) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^ Constants(?con) ^
 hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_saclol, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) ^
-hasDimensionLength_L_unit_mm(?g, ?L_g) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_saclol, ?L_s_saclol) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_saclol, ?d_s_saclol) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ hasDimensionLength_L_unit_mm(?aespcbm, ?L_loie) ^  hasDimensionLengthFaktor(?tw, ?Lf_tw) ^ hasDimensionLength_L_unit_mm(?ts, ?L_ts) ^ lengthCentering(?con, ?c_con) ^ lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
+hasDimensionLength_L_unit_mm(?g, ?L_g) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_saclol, ?L_s_saclol) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_saclol, ?d_s_saclol) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^  hasDimensionLengthFaktor(?tw, ?Lf_tw) ^ hasDimensionLength_L_unit_mm(?ts, ?L_ts) ^ lengthCentering(?con, ?c_con) ^ lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
 swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L_2kerbe) ^ swrlb:multiply(?L_torWelleTemp2, ?d_s_saclol, 1.5) ^ swrlb:multiply(?L_torWelleTemp3, 2.0, ?L_torWelleTemp2) ^ swrlb:add(?L_torWelleTemp4, ?L_torWelleTemp1, ?L_torWelleTemp3) ^ swrlb:multiply(?L_torWelle, ?Lf_tw, ?L_torWelleTemp4) ^
 swrlb:add(?L_max1_1, ?L_torWelle, ?L_s_saclol) ^ swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^ swrlb:add(?L_max1_2, ?L_loie, ?L_abLager) ^ swrlb:add(?L_max2_1, ?L_ts, ?L_s_saclol) ^ swrlb:multiply(?L_max2_2, 2.0, ?L_s_ob)
 -> hasMax1_1(?saclol, ?L_max1_1) ^ hasMax1_2(?saclol, ?L_max1_2) ^ hasMax2_1(?saclol, ?L_max2_1) ^ hasMax2_2(?saclol, ?L_max2_2) ^ has1(?saclol, ?L_g)
@@ -285,7 +329,7 @@ SACunitLengthOutputLinearFlexScrewMatch(?saclol) ^ has1(?saclol, ?L_part1) ^ has
 
 
 SACunitLengthCalcRule:
-SACunitLength(?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasGearBox(?sacli, ?g) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?docm) ^ hasSACunitDiameterOutput(?docm, ?sacdo) ^ hasGearBox(?sacdo, ?g) ^
+SACunitLength(?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasGearBox(?sacli, ?g) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?docm) ^ hasSACunitDiameterOutput(?docm, ?sacdo) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?sacdo, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^
 hasDimensionLength_L_unit_mm(?sacli, ?L_sacli) ^ hasDimensionLength_L_unit_mm(?saclo, ?L_saclo) ^ swrlb:add(?L_ges, ?L_sacli, ?L_saclo)
 -> hasDimensionLength_L_unit_mm(?sacl, ?L_ges)
 
@@ -310,7 +354,7 @@ SACunitDiameterInput(?sacdi) ^ hasDimensionOuterDiameter_D_unit_mm(?sacdi, ?D_in
 
 
 SACunitDiameterOutputCalcRule:
-SACunitDiameterOutput(?sacdo) ^ hasGearBox(?sacdo, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ Constants(?con) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?D_scp) ^ hasDimensionOuterDiameter_D_unit_mm(?aespcbm, ?D_aespcbm) ^ diameterElectronicsCover(?con, ?D_ec) ^ swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_ec2, ?D_ec, 2.0) ^ swrlb:add(?D_max2, ?D_ec2, ?D_aespcbm) -> hasMax1_1(?sacdo, ?D_max1) ^ hasMax1_2(?sacdo, ?D_max2)
+SACunitDiameterOutput(?sacdo) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?sacdo, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?D_scp) ^ hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ diameterElectronicsCover(?con, ?D_ec) ^ swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_ec2, ?D_ec, 2.0) ^ swrlb:add(?D_max2, ?D_ec2, ?D_ab) -> hasMax1_1(?sacdo, ?D_max1) ^ hasMax1_2(?sacdo, ?D_max2)
 
 
 
@@ -429,8 +473,8 @@ SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ Satis
 
 
 SACunitIsComposedOfRule:
-SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasScrew(?saclo, ?s_saclo) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasDriveBearing(?didbm, ?db) ^ hasAbsoluteEncoderSensorPCBMatch(?sacdo, ?aespcbm) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasTorsionalWave(?sacdob, ?tw) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob)
--> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularScrew(?s_gs) ^ isComposedOfGearBoxCircularScrew(?sac, ?s_gs) ^ GearBoxFlexScrew(?s_saclo) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_saclo) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfAbsoluteEncoderSensorPCB(?sac, ?aespcbm) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?ts) ^ isComposedOfTorsionalWave(?sac, ?tw)
+SatisfiedSACunit(?sac) ^ hasSACunitDiameter(?sac, ?sacd) ^ hasSACunitLength(?sacd, ?sacl) ^ hasSACunitLengthInput(?sacl, ?sacli) ^ hasDiameterInputDriveBearingMatch(?sacli, ?didbm) ^ hasSACunitDiameterInput(?didbm, ?sacdi) ^ hasMotorController(?sacdi, ?mc) ^ hasIncrementalEncoder(?saclil, ?ie) ^ hasMotor(?sacdi, ?m) ^ hasGearBox(?sacli, ?g) ^ hasSACunitLengthOutput(?sacl, ?saclo) ^ hasSACunitDiameterOutputBearing(?saclo, ?sacdob) ^ hasScrew(?saclo, ?s_saclo) ^ hasSlipRingTorqueSensorMatch(?sacdob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputCircularScrewMatch(?sacdob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasSACunitDiameterOutput(?gs, ?sacdo) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?sacdo, ?gaespcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?sacdob, ?obs) ^ hasTorsionalWave(?sacdob, ?tw) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob)
+-> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularScrew(?s_gs) ^ isComposedOfGearBoxCircularScrew(?sac, ?s_gs) ^ GearBoxFlexScrew(?s_saclo) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_saclo) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?ts) ^ isComposedOfTorsionalWave(?sac, ?tw) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb)
 
 
 

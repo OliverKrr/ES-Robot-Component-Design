@@ -100,13 +100,10 @@ public class MyOWLHelper {
         return value.get();
     }
 
-    public void checkConsistency() {
+    public boolean checkConsistency() {
         boolean isConsitent = genericTool.getReasoner().isConsistent();
         logger.info("Ontology is consistent: " + isConsitent);
-        if (!isConsitent) {
-            genericTool.getReasoner().unsatisfiableClasses()
-                    .forEach(clas -> logger.info("Usatisfiable class: " + clas));
-        }
+        return isConsitent;
     }
 
 }

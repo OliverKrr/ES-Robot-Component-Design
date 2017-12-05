@@ -140,10 +140,7 @@ public class GUI {
     }
 
     public void notifySolutionIsReady() {
-        display.asyncExec(() -> {
-            controller.setResults();
-            solutionTab.getSaveSolutionOntologyButton().setVisible(true);
-        });
+        display.asyncExec(() -> controller.setResults());
     }
 
     /**
@@ -257,7 +254,6 @@ public class GUI {
                 }
                 controller.parseRequirements();
                 controllerFuture = pool.submit(() -> controller.reason());
-                solutionTab.getSaveSolutionOntologyButton().setVisible(false);
             }
         });
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());
