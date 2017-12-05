@@ -92,24 +92,21 @@ public class MainReasoner {
                         .classesInSignature()
                         .forEach(reasoningPropertyClass -> genericTool.getOntology()
                                 .subClassAxiomsForSuperClass(reasoningPropertyClass)
-                                .forEach(filteredReasoningPropertyAxiom -> filteredReasoningPropertyAxiom
-                                        .getSubClass().classesInSignature()
-                                        .forEach(reasoningPropertySubClass -> {
-                                            // Add only subclasses
-                                            // However, if none present -> add itself
-                                            int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
-                                            genericTool.getOntology()
-                                                    .subClassAxiomsForSuperClass(reasoningPropertySubClass)
-                                                    .forEach(filteredReasoningPropertySubClassAxiom -> {
-                                                        createIndividualFor(
-                                                                filteredReasoningPropertySubClassAxiom
-                                                                        .getSubClass());
-                                                    });
-                                            if (numberOfGeneratedAxioms == helper.getGeneratedAxioms()
-                                                    .size()) {
-                                                createIndividualFor(reasoningPropertySubClass);
-                                            }
-                                        }))));
+                                .forEach(reasoningPropertyAxiom -> {
+                                    // Add only subclasses
+                                    // However, if none present -> add itself
+                                    int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
+                                    genericTool.getOntology()
+                                            .subClassAxiomsForSuperClass(
+                                                    reasoningPropertyAxiom.getSubClass().asOWLClass())
+                                            .forEach(reasoningPropertySubClassAxiom -> {
+                                                createIndividualFor(
+                                                        reasoningPropertySubClassAxiom.getSubClass());
+                                            });
+                                    if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
+                                        createIndividualFor(reasoningPropertyAxiom.getSubClass());
+                                    }
+                                })));
     }
 
     private void createIndividualFor(OWLClassExpression clasExpres) {
@@ -295,40 +292,43 @@ public class MainReasoner {
         long startTime = System.currentTimeMillis();
         List<UnitToReason> units = new ArrayList<>();
         genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
-                .forEach(axiomOfReasoningTree -> axiomOfReasoningTree.getSubClass().classesInSignature()
-                        .filter(subClassOfReasoningTree -> genericTool.getOntology()
-                                .subClassAxiomsForSubClass(subClassOfReasoningTree)
-                                .anyMatch(subClassOfReasoningTreeAxiom -> subClassOfReasoningTreeAxiom
-                                        .getSuperClass().objectPropertiesInSignature().anyMatch(
-                                                obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                                        .equals(obOfSubClassOfReasoingTree))))
-                        .forEach(classToReason -> {
-                            UnitToReason unitToReason = new UnitToReason();
-                            unitToReason.displayName = classToReason.getIRI().getShortForm();
-                            unitToReason.iriOfUnit = classToReason.getIRI().getIRIString();
+                .filter(axiomOfReasoningTree -> genericTool.getOntology()
+                        .subClassAxiomsForSubClass(axiomOfReasoningTree.getSubClass().asOWLClass())
+                        .anyMatch(subClassOfReasoningTreeAxiom -> subClassOfReasoningTreeAxiom.getSuperClass()
+                                .objectPropertiesInSignature().anyMatch(
+                                        obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                                .equals(obOfSubClassOfReasoingTree))))
+                .forEach(filteredAxiomOfReasoningTree -> {
+                    UnitToReason unitToReason = new UnitToReason();
+                    unitToReason.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass()
+                            .getIRI().getShortForm();
+                    unitToReason.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI()
+                            .getIRIString();
 
-                            genericTool.getOntology().subClassAxiomsForSuperClass(classToReason)
-                                    .forEach(classToReasonAxiom -> classToReasonAxiom.getSubClass()
-                                            .classesInSignature().forEach(subClassOfClassToReason -> {
-                                                if (unitToReason.iriOfResultUnit == null) {
-                                                    unitToReason.iriOfResultUnit = subClassOfClassToReason
-                                                            .getIRI().getIRIString();
-                                                } else {
-                                                    throw new RuntimeException(
-                                                            "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
-                                                                    + unitToReason.iriOfResultUnit + " and "
-                                                                    + subClassOfClassToReason.getIRI()
-                                                                            .getIRIString());
-                                                }
-                                            }));
-                            if (unitToReason.iriOfResultUnit == null) {
-                                throw new RuntimeException(
-                                        "UnitsToReasone must have one child to identify resultingUnit (satisfied)");
-                            }
-                            unitToReason.orderPosition = helper.getOrderPositionForClass(classToReason);
+                    genericTool.getOntology()
+                            .subClassAxiomsForSuperClass(
+                                    filteredAxiomOfReasoningTree.getSubClass().asOWLClass())
+                            .forEach(classToReasonAxiom -> {
+                                if (unitToReason.iriOfResultUnit == null) {
+                                    unitToReason.iriOfResultUnit = classToReasonAxiom.getSubClass()
+                                            .asOWLClass().getIRI().getIRIString();
+                                } else {
+                                    throw new RuntimeException(
+                                            "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
+                                                    + unitToReason.iriOfResultUnit + " and "
+                                                    + classToReasonAxiom.getSubClass().asOWLClass().getIRI()
+                                                            .getIRIString());
+                                }
+                            });
+                    if (unitToReason.iriOfResultUnit == null) {
+                        throw new RuntimeException(
+                                "UnitsToReasone must have one child to identify resultingUnit (satisfied)");
+                    }
+                    unitToReason.orderPosition = helper.getOrderPositionForClass(
+                            filteredAxiomOfReasoningTree.getSubClass().asOWLClass());
 
-                            units.add(unitToReason);
-                        }));
+                    units.add(unitToReason);
+                });
 
         Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit1.orderPosition);
         logger.info("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0

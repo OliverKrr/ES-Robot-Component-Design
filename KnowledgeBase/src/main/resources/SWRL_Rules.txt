@@ -74,7 +74,7 @@ MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) 
 
 
 
-//TODO falls unterschiedliche MC -> MC und MCPosition mit MCMCPositionMatch
+// falls unterschiedliche MC -> MC und MCPosition mit MCMCPositionMatch
 MotorControllerRadialSatisfyRule:
 MCradial(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^ Constants(?con) ^ 
 lengthWiringConduit(?con, ?L_wc) ^ diameterElectronicsCover(?con, ?L_ec) ^ swrlb:add(?L_ges, ?L_wc, ?L_ec)
