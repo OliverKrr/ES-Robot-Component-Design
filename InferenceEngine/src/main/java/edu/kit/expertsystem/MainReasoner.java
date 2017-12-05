@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
@@ -93,18 +94,29 @@ public class MainReasoner {
                                 .subClassAxiomsForSuperClass(reasoningPropertyClass)
                                 .forEach(filteredReasoningPropertyAxiom -> filteredReasoningPropertyAxiom
                                         .getSubClass().classesInSignature()
-                                        .forEach(reasoningPropertySubClass -> genericTool.getOntology()
-                                                .subClassAxiomsForSuperClass(reasoningPropertySubClass)
-                                                .forEach(filteredReasoningPropertySubClassAxiom -> {
-                                                    OWLClass clasToCreate = filteredReasoningPropertySubClassAxiom
-                                                            .getSubClass().asOWLClass();
-                                                    String name = clasToCreate.getIRI().getShortForm()
-                                                            + "Ind";
-                                                    OWLNamedIndividual ind = genericTool.getFactory()
-                                                            .getOWLNamedIndividual(helper.create(name));
-                                                    helper.addAxiom(genericTool.getFactory()
-                                                            .getOWLClassAssertionAxiom(clasToCreate, ind));
-                                                })))));
+                                        .forEach(reasoningPropertySubClass -> {
+                                            // Add only subclasses
+                                            // However, if none present -> add itself
+                                            int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
+                                            genericTool.getOntology()
+                                                    .subClassAxiomsForSuperClass(reasoningPropertySubClass)
+                                                    .forEach(filteredReasoningPropertySubClassAxiom -> {
+                                                        createIndividualFor(
+                                                                filteredReasoningPropertySubClassAxiom
+                                                                        .getSubClass());
+                                                    });
+                                            if (numberOfGeneratedAxioms == helper.getGeneratedAxioms()
+                                                    .size()) {
+                                                createIndividualFor(reasoningPropertySubClass);
+                                            }
+                                        }))));
+    }
+
+    private void createIndividualFor(OWLClassExpression clasExpres) {
+        OWLClass clasToCreate = clasExpres.asOWLClass();
+        String name = clasToCreate.getIRI().getShortForm() + "Ind";
+        OWLNamedIndividual ind = genericTool.getFactory().getOWLNamedIndividual(helper.create(name));
+        helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(clasToCreate, ind));
     }
 
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {

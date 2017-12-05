@@ -354,6 +354,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoderSensorPCBMatch">
@@ -1260,6 +1268,15 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing"/>
+    </owl:Class>
     
 
 
@@ -2991,15 +3008,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Length -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Length">
@@ -3011,6 +3019,23 @@
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
     </owl:Class>
     
 
@@ -3221,14 +3246,12 @@
         </rdfs:subClassOf>
     </owl:Class>
     
-    
-    
 
 
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has1000MBASET"/>
@@ -3265,14 +3288,6 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingVariants"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#_1000MEthernet"/>
     </owl:Class>
     
@@ -4507,14 +4522,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingVariants -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingVariants">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRing"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft">
@@ -5368,7 +5375,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#_1000MEthernet -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#_1000MEthernet">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingVariants"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRing"/>
     </owl:Class>
     
 

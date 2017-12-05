@@ -1234,9 +1234,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing -->
 
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
     </rdf:Description>
     
@@ -2822,7 +2822,6 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqDiameter">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
-        <sac_basic:hasDimensionOuterDiameter_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasDimensionOuterDiameter_D_unit_mm>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total outer diameter of the SAC unit.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionOuterDiameterReqMax_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionOuterDiameterReqMax_D_unit_mm>
         <sac_reasoning:hasDimensionOuterDiameterReqMin_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionOuterDiameterReqMin_D_unit_mm>
@@ -2830,6 +2829,7 @@
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mm</sac_reasoning:hasUnit>
+        <sac_basic:hasDimensionOuterDiameter_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasDimensionOuterDiameter_D_unit_mm>
     </owl:NamedIndividual>
     
 
@@ -2871,7 +2871,6 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqLength">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
-        <sac_basic:hasDimensionLength_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasDimensionLength_L_unit_mm>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total length of the SAC unit.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionLengthReqMax_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionLengthReqMax_L_unit_mm>
         <sac_reasoning:hasDimensionLengthReqMin_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionLengthReqMin_L_unit_mm>
@@ -2879,6 +2878,7 @@
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mm</sac_reasoning:hasUnit>
+        <sac_basic:hasDimensionLength_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasDimensionLength_L_unit_mm>
     </owl:NamedIndividual>
     
 
@@ -3100,7 +3100,6 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqWeight">
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
-        <sac_basic:hasWeight_m_unit_kg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasWeight_m_unit_kg>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total weight of the SAC unit.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Weight m:</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
@@ -3108,6 +3107,7 @@
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">kg</sac_reasoning:hasUnit>
         <sac_reasoning:hasWeightReqMax_m_unit_kg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasWeightReqMax_m_unit_kg>
         <sac_reasoning:hasWeightReqMin_m_unit_kg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasWeightReqMin_m_unit_kg>
+        <sac_basic:hasWeight_m_unit_kg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_basic:hasWeight_m_unit_kg>
     </owl:NamedIndividual>
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
@@ -3176,12 +3176,6 @@
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
     </rdf:Description>
     <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
@@ -3198,6 +3192,12 @@
     </rdf:Description>
     <rdf:Description>
         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -3624,85 +3624,85 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max2">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#saclol">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacdob">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gs">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#obs">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_gs">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ob">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_ob">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_g">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_s_gs">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d_s_gs">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ob">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max2_2">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_s_ob">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_loie">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ts">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#c_con">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#n_con">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_2kerbe">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp1">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp2">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp3">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelle">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max1_1">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_abLagerTemp1">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sacdob">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_abLager">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max1_2">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_abLagerTemp1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#c_con">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#saclol">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#obs">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelle">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp3">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max2_1">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max2_2">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ts">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_s_gs">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_2kerbe">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_ob">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_loie">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ob">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ob">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max1_2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#n_con">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_torWelleTemp2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_gs">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d_s_gs">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_max1_1">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_g">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#n_res">
@@ -13605,7 +13605,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sr"/>
                     </rdf:Description>
                 </rdf:first>
@@ -13733,7 +13733,7 @@
                                 <rdf:first>
                                     <rdf:Description>
                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRingVariants"/>
+                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing"/>
                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sr"/>
                                     </rdf:Description>
                                 </rdf:first>

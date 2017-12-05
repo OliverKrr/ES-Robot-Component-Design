@@ -74,7 +74,7 @@ MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) 
 
 
 
-
+//TODO falls unterschiedliche MC -> MC und MCPosition mit MCMCPositionMatch
 MotorControllerRadialSatisfyRule:
 MCradial(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^ Constants(?con) ^ 
 lengthWiringConduit(?con, ?L_wc) ^ diameterElectronicsCover(?con, ?L_ec) ^ swrlb:add(?L_ges, ?L_wc, ?L_ec)
@@ -100,7 +100,7 @@ TorsionalWaveNoDMS(?twdms) ^ CurrentRequirements(?r) ^ needTorsionalWaveDMSReq(?
 
 
 SlipRingNoneSatisfyRule:
-NoSlipRingVariants(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
+NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
 
 
 SlipRingSatisfy1Rule:
@@ -142,7 +142,7 @@ swrlb:subtract(?restSignal1, ?s2a, ?nooc) ^ swrlb:subtract(?restSignal2, ?restSi
 
 
 SlipRingTorqueSensorMatchSatisfy2Rule:
-SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ NoSlipRingVariants(?sr)
+SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ NoSlipRing(?sr)
 -> SatisfiedSlipRingTorqueSensorMatch(?srtsm)
 
 
