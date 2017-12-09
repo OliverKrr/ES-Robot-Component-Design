@@ -161,7 +161,6 @@ public class Controller {
             } catch (NumberFormatException e) {
                 String message = "Could not parse <" + textToParse.getText() + "> to double. Default value <"
                         + defaultValue + "> will be taken!";
-                gui.setErrorText(message);
                 logger.error(message);
             }
         }
@@ -229,7 +228,7 @@ public class Controller {
     }
 
     private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
-        logger.info("Solution: " + text);
+        logger.debug("Solution: " + text);
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {

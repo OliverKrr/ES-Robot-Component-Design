@@ -10,11 +10,13 @@ import java.util.concurrent.Future;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -35,7 +37,7 @@ import edu.kit.expertsystem.controller.NavigationItem;
 public class GUI {
 
     public static final int navBarY = 10;
-    public static final int errorTextHeight = 83;
+    public static final int errorTextHeight = 115;
     public static final int errorTextYOffset = 2;
     private static final int unitsToReasonComboOffsetWidth = 24;
     private static final Point firstSizeOfShell = new Point(1000, 600);
@@ -80,8 +82,6 @@ public class GUI {
         // do nothing for init and no concurrent problems while creation of gui
         controllerFuture = pool.submit(() -> {
         });
-        controller = new Controller(this);
-        controller.initialize();
     }
 
     /**
@@ -90,6 +90,10 @@ public class GUI {
      * @wbp.parser.entryPoint
      */
     public void open() {
+        createShell();
+        createErrorText();
+        controller = new Controller(this);
+        controller.initialize();
         createContents();
 
         shell.addDisposeListener(new DisposeListener() {
@@ -113,7 +117,7 @@ public class GUI {
     private void startOnSecondScreenIfPossible() {
         Monitor[] monitors = display.getMonitors();
         if (monitors.length < 2) {
-            logger.info("Do not startOnSecondScreen.");
+            logger.debug("Do not startOnSecondScreen.");
             return;
         }
         Rectangle monitorRect = monitors[1].getBounds();
@@ -121,7 +125,7 @@ public class GUI {
         int x = monitorRect.x + ((monitorRect.width - shellRect.width) / 2);
         int y = monitorRect.y + ((monitorRect.height - shellRect.height) / 2);
         shell.setLocation(x, y);
-        logger.info("StartOnSecondScreen");
+        logger.debug("StartOnSecondScreen");
     }
 
     private void startOnTopOfScreen() {
@@ -129,7 +133,7 @@ public class GUI {
         Rectangle shellRect = shell.getBounds();
         int x = monitorRect.x + ((monitorRect.width - shellRect.width) / 2);
         shell.setLocation(x, monitorRect.y);
-        logger.info("startOnTopOfScreen");
+        logger.debug("startOnTopOfScreen");
     }
 
     private void shutdown() {
@@ -147,8 +151,6 @@ public class GUI {
      * Create contents of the window.
      */
     protected void createContents() {
-        createShell();
-
         unitsToReasonCombo = new Combo(shell, SWT.DROP_DOWN | SWT.READ_ONLY);
         controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
         unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
@@ -182,7 +184,6 @@ public class GUI {
                     }
                 });
 
-                createErrorText(recOfContent);
                 createKitLogo(reqNavBarRec);
                 addNavigationBarListener();
                 updateSize();
@@ -249,7 +250,6 @@ public class GUI {
                     controllerFuture.get();
                 } catch (InterruptedException | ExecutionException e) {
                     logger.error(e.getMessage(), e);
-                    errorText.setText(e.getLocalizedMessage());
                     return;
                 }
                 controller.parseRequirements();
@@ -295,12 +295,13 @@ public class GUI {
         return maxWidth + unitsToReasonComboOffsetWidth;
     }
 
-    private void createErrorText(Rectangle contentRec) {
-        if (errorText != null) {
-            errorText.dispose();
-        }
+    private void createErrorText() {
         errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
         errorText.setEditable(false);
+        MyAppenderForGui lastInstance = MyAppenderForGui.getLastInstance();
+        if (lastInstance != null) {
+            lastInstance.setGui(this);
+        }
     }
 
     private void createKitLogo(Rectangle recToFill) {
@@ -325,7 +326,24 @@ public class GUI {
         return scaled;
     }
 
-    public void setErrorText(String message) {
-        errorText.setText(message + "\n" + errorText.getText());
+    public void setErrorText(String message, Color color) {
+        display.asyncExec(() -> {
+            if (errorText == null) {
+                return;
+            }
+            StyleRange[] oldStyleRanges = errorText.getStyleRanges();
+
+            String newMessage = message + "\n";
+            errorText.setText(newMessage + errorText.getText());
+
+            StyleRange[] newStyleRanges = new StyleRange[oldStyleRanges.length + 1];
+            newStyleRanges[0] = new StyleRange(0, newMessage.length(), color, null, SWT.NONE);
+
+            for (int i = 0; i < oldStyleRanges.length; ++i) {
+                oldStyleRanges[i].start += newMessage.length();
+                newStyleRanges[i + 1] = oldStyleRanges[i];
+            }
+            errorText.setStyleRanges(newStyleRanges);
+        });
     }
 }

@@ -68,7 +68,8 @@ public class MainReasoner {
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
 
-        logger.info("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+        logger.debug(
+                "Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     public void prepareReasoning(UnitToReason unitToReason) {
@@ -78,7 +79,7 @@ public class MainReasoner {
         helper.flush();
         genericTool.getReasoner().precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
-        logger.info(
+        logger.debug(
                 "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
@@ -155,17 +156,18 @@ public class MainReasoner {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
-                logger.info("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min
+                logger.debug(
+                        "Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min
                         + ", " + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
-                logger.info(
+                logger.debug(
                         "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else if (req instanceof CheckboxRequirement) {
                 CheckboxRequirement realReq = (CheckboxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
-                logger.info(
+                logger.debug(
                         "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
@@ -255,8 +257,9 @@ public class MainReasoner {
             logger.warn("Cannot sort, because weight is not available.");
         }
 
-        logger.info("Number of results: " + results.size());
-        logger.info(
+        helper.checkConsistency();
+        logger.debug("Number of results: " + results.size());
+        logger.debug(
                 "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return results;
     }
@@ -331,13 +334,13 @@ public class MainReasoner {
                 });
 
         Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit2.orderPosition);
-        logger.info("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
+        logger.debug("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
                 + "s");
         return units;
     }
 
     public void interruptReasoning() {
-        logger.info("Reasoning interrupted");
+        logger.debug("Reasoning interrupted");
         interrupted.set(true);
         ontologyReadAndWriteHelper.interruptReasoning();
         reasoningTree.interruptReasoning();

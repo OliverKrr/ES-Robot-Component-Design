@@ -56,7 +56,7 @@ public class RequirementHelper {
             }
             return sortCat;
         });
-        logger.info("Time needed for get Requirements: " + (System.currentTimeMillis() - startTime) / 1000.0
+        logger.debug("Time needed for get Requirements: " + (System.currentTimeMillis() - startTime) / 1000.0
                 + "s");
         return requirements;
     }
@@ -86,7 +86,7 @@ public class RequirementHelper {
                 requirementDependencies.add(requirementDependencyCheckbox);
             }
         });
-        logger.info("Time needed for get RequirementDependencies: "
+        logger.debug("Time needed for get RequirementDependencies: "
                 + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return requirementDependencies;
     }

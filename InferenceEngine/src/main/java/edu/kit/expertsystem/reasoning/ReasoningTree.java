@@ -95,7 +95,7 @@ public class ReasoningTree {
         }
 
         childrenForPermutation.stream()
-                .forEach(childForPermutation -> logger.info(treeClass.getIRI().getShortForm() + " has "
+                .forEach(childForPermutation -> logger.debug(treeClass.getIRI().getShortForm() + " has "
                         + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm()
                         + " with number of children: " + childForPermutation.childInstances.size()));
 
@@ -146,7 +146,7 @@ public class ReasoningTree {
                     .getOWLNamedIndividual(helper.create(parentName));
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
-                // logger.info("\tAdd individual: " + parentInd.getIRI().getShortForm());
+                // logger.debug("\tAdd individual: " + parentInd.getIRI().getShortForm());
                 for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
                     helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
                             childInd.propertyFromParent, parentInd, childInd.childIndividual));
