@@ -4,12 +4,9 @@ Motor(?m) ^ hasNominalRotationSpeed_n_max_unit_rpm(?m, ?n_motor) ^ CurrentRequir
 MotorPeakTorqueSatisfyRule:
 Motor(?m) ^ hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:multiply(?M_res_min, ?M_n, 1.0) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^ swrlb:multiply(?M_res_max, ?M_n, 160.0) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min) -> SatisfiedPeakTorque(?m)
 
-MotorWeightSatisfyRule:
-Motor(?m) ^ hasWeight_m_unit_kg(?m, ?m_m) ^ CurrentRequirements(?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:add(?m_res_min, ?m_m, 0.0) ^ swrlb:lessThanOrEqual(?m_res_min, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:add(?m_res_max, ?m_m, 1.9) ^ swrlb:greaterThanOrEqual(?m_res_max, ?m_req_min) -> SatisfiedWeight(?m)
-
 
 MotorSatisfyRule:
-Motor(?m) ^ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) ^ SatisfiedWeight(?m) -> SatisfiedMotor(?m)
+Motor(?m) ^ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) -> SatisfiedMotor(?m)
 
 
 
@@ -19,12 +16,9 @@ GearBox(?g) ^ hasGearBoxRation_i(?g, ?i) ^ CurrentRequirements(?r) ^ hasMaximalS
 GearBoxPeakTorqueSatisfyRule:
 GearBox(?g) ^ hasGearBoxRation_i(?g, ?i) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:multiply(?M_res_min, 0.024, ?i) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^ swrlb:multiply(?M_res_max, 11.2, ?i) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_max) ^ swrlb:lessThanOrEqual(?M_req_min, ?M_max) -> SatisfiedPeakTorque(?g)
 
-GearBoxWeightSatisfyRule:
-GearBox(?g) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ CurrentRequirements(?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:add(?m_res_min, ?m_g, 0.016) ^ swrlb:lessThanOrEqual(?m_res_min, ?m_req_max) ^ swrlb:add(?m_res_max, ?m_g, 2.17) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:greaterThanOrEqual(?m_res_max, ?m_req_min) -> SatisfiedWeight(?g)
-
 
 GearBoxSatisfyRule:
-GearBox(?g) ^ SatisfiedRotationSpeed(?g) ^ SatisfiedPeakTorque(?g) ^ SatisfiedWeight(?g) -> SatisfiedGearBox(?g)
+GearBox(?g) ^ SatisfiedRotationSpeed(?g) ^ SatisfiedPeakTorque(?g) -> SatisfiedGearBox(?g)
 
 
 
@@ -50,6 +44,10 @@ MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionL
 MotorGearBoxMatchLengthSatisfyRule:
 MotorGearBoxMatch(?ma) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ CurrentRequirements(?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min) -> SatisfiedDimensionLength(?ma)
 
+MotorGearBoxMatchLengthMaxSatisfyRule:
+MotorGearBoxMatch(?ma) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ CurrentRequirements(?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) -> SatisfiedDimensionLengthMax(?ma)
+
+
 
 MotorGearBoxMatchOuterDiameter1CalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:greaterThan(?D_m, ?D_g) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_m)
@@ -59,6 +57,9 @@ MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasDimensionO
 MotorGearBoxMatchOuterDiameterSatisfyRule:
 MotorGearBoxMatch(?ma) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min) -> SatisfiedOuterDiameter(?ma)
 
+MotorGearBoxMatchOuterDiameterMaxSatisfyRule:
+MotorGearBoxMatch(?ma) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) -> SatisfiedOuterDiameterMax(?ma)
+
 
 
 MotorGearBoxMatchWeightCalcRule:
@@ -67,10 +68,18 @@ MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasWeight_m_u
 MotorGearBoxMatchWeightSatisfyRule:
 MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ CurrentRequirements(?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min) -> SatisfiedWeight(?ma)
 
+MotorGearBoxMatchWeightMaxSatisfyRule:
+MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ CurrentRequirements(?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) -> SatisfiedWeightMax(?ma)
+
 
 
 MotorGearBoxMatchSatisfyRule:
-MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) -> SatisfiedMotorGearBoxMatch(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g)
+MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
+-> SatisfiedMotorGearBoxMatch(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g)
+
+MotorGearBoxMatchForSACunitSatisfyRule:
+MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
+-> SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g)
 
 
 
@@ -340,7 +349,7 @@ OutputBearingScrewMatch(?obs) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s)
 
 LengthOutputLinearFlexScrewMatchCalcRule:
 LengthOutputLinearFlexScrewMatch(?lol) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasTorsionalWave(?dob, ?tw) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasScrew(?lol, ?s_lol) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^ Constants(?con) ^
-hasLengthInput(?lol, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ SatisfiedMotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
+hasLengthInput(?lol, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
 hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_lol, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_lol, ?L_s_lol) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_lol, ?d_s_lol) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^  hasDimensionLengthFaktor(?tw, ?Lf_tw) ^ hasDimensionLength_L_unit_mm(?ts, ?L_ts) ^ lengthCentering(?con, ?c_con) ^ lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
 swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L_2kerbe) ^ swrlb:multiply(?L_torWelleTemp2, ?d_s_lol, 1.5) ^ swrlb:multiply(?L_torWelleTemp3, 2.0, ?L_torWelleTemp2) ^ swrlb:add(?L_torWelleTemp4, ?L_torWelleTemp1, ?L_torWelleTemp3) ^ swrlb:multiply(?L_torWelle, ?Lf_tw, ?L_torWelleTemp4) ^
 swrlb:add(?L_max1_1, ?L_torWelle, ?L_s_lol) ^ swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^ swrlb:add(?L_max1_2, ?L_loie, ?L_abLager) ^ swrlb:add(?L_max2_1, ?L_ts, ?L_s_lol) ^ swrlb:multiply(?L_max2_2, 2.0, ?L_s_ob)
@@ -513,7 +522,7 @@ Diameter(?d) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ CurrentRequirem
 LengthMotorGearBoxMatchSatisfyRule:
 SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^
 hasDimensionOuterDiameter_D_unit_mm(?d, ?D_res) ^ hasDimensionLength_L_unit_mm(?l, ?L_res)
-SatisfiedMotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasWeight_m_unit_kg(?ma, ?m_ges)
+SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasWeight_m_unit_kg(?ma, ?m_ges)
 -> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_res) ^ SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
 
 
