@@ -43,7 +43,7 @@ public final class MyAppenderForGui extends AbstractAppender {
     public void append(LogEvent event) {
         readLock.lock();
         try {
-            if (gui != null && event.getLevel().isMoreSpecificThan(Level.INFO)) {
+            if (gui != null) {
                 gui.setErrorText(event.getMessage().getFormattedMessage(),
                         matchLevelToColor(event.getLevel()));
             }
