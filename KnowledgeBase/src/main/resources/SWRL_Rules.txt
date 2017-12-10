@@ -100,7 +100,8 @@ NoTorsionalWave(?tw) ^ CurrentRequirements(?r) ^ needTorqueSensorStrainGaugeBase
 
 
 SlipRingNoneSatisfyRule:
-NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) -> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D)
+NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D)
+-> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D) ^ hasMax1_1(?sr, ?D)
 
 
 SlipRingSatisfy1Rule:
@@ -115,6 +116,32 @@ _1000MEthernet(?sr) ^ CurrentRequirements(?r) ^
 needOutputCommunicationReq(?r, ?noc) ^ needContinuousRotationReq(?r, ?ncr) ^
 swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, false)
 -> SatisfiedSlipRing(?sr)
+
+
+SlipRingEvaluate1Rule:
+SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D_max_sr) ^
+swrlb:greaterThan(?D_sr, ?D_max_sr)
+-> has1(?sr, ?D_sr)
+
+SlipRingEvaluate2Rule:
+SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D_max_sr) ^
+swrlb:lessThanOrEqual(?D_sr, ?D_max_sr)
+-> has1(?sr, ?D_max_sr)
+
+SlipRingEvaluate3Rule:
+SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+has1(?sr, ?D_sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
+swrlb:greaterThan(?D_sr, ?d_sr)
+-> hasMax1_1(?sr, ?D_sr)
+
+SlipRingEvaluate4Rule:
+SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+has1(?sr, ?D_sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
+swrlb:lessThanOrEqual(?D_sr, ?d_sr)
+-> hasMax1_1(?sr, ?d_sr)
+
 
 
 
@@ -149,21 +176,21 @@ SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ NoSlipRing(?sr)
 SlipRingTorqueSensorMatchUnsatisfied1Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
-hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasMax1_1(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasMax1_1(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
 SlipRingTorqueSensorMatchUnsatisfied2Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
-hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasMax1_1(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasMax1_1(?sr2, ?D_sr2) ^
 swrlb:greaterThan(?L_sr1, ?L_sr2) ^ swrlb:lessThan(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
 SlipRingTorqueSensorMatchUnsatisfied3Rule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
-hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasMax1_1(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasMax1_1(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan(?D_sr2, ?D_sr1)
 -> UnsatisfiedSlipRingTorqueSensorMatch(?srtsm1)
 
@@ -171,10 +198,17 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:greaterThan(?D_sr1, ?D_sr2) ^ swrlb:lessThan
 SlipRingTorqueSensorMatchPossibleSatisfiedRule:
 HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ hasSlipRing(?srtsm1, ?sr1) ^ HalfSatisfiedSlipRingTorqueSensorMatch(?srtsm2) ^ hasSlipRing(?srtsm2, ?sr2) ^
 hasTorqueSensor(?srtsm1, ?ts) ^ hasTorqueSensor(?srtsm2, ?ts) ^
-hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasDimensionOuterDiameter_D_unit_mm(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasDimensionOuterDiameter_D_unit_mm(?sr2, ?D_sr2) ^
+hasDimensionLength_L_unit_mm(?sr1, ?L_sr1) ^ hasMax1_1(?sr1, ?D_sr1) ^ hasDimensionLength_L_unit_mm(?sr2, ?L_sr2) ^ hasMax1_1(?sr2, ?D_sr2) ^
 swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 -> PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm1) ^ PossibleSatisfiedSlipRingTorqueSensorMatch(?srtsm2)
 
+
+
+GearBoxConsiderSlipRingSatisfyRule:
+SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ SatisfiedSlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
+swrlb:greaterThanOrEqual(?d_g, ?D_sr)
+-> SatisfiedGearBoxInMotorGearBoxMatchConsiderSlipRing(?g)
 
 
 

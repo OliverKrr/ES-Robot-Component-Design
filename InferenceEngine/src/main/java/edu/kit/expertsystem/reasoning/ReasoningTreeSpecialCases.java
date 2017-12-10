@@ -61,7 +61,7 @@ public class ReasoningTreeSpecialCases {
                 }
             });
 
-            logger.info("Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: "
+            logger.debug("Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: "
                     + subClassOfUnsatisfied.getIRI().getShortForm());
             genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
             helper.getGeneratedAxioms().removeAll(axiomsToDelete);
@@ -126,7 +126,7 @@ public class ReasoningTreeSpecialCases {
 
             if (counterSatisfiedWithoutUnsatisfiedIndis.isEmpty()) {
                 didBackupOnLastRun = true;
-                logger.info("Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
+                logger.debug("Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 infoToDelete.backupSatisfiedPart.forEach(backup -> possibleUnsatisfiedIndis
                         .forEach(possibleUnsatisfiedInst -> helper.addAxiom(genericTool.getFactory()
@@ -144,7 +144,7 @@ public class ReasoningTreeSpecialCases {
                 possibleUnsatisfiedIndis.forEach(indiToDelete -> helper.getGeneratedAxioms().stream().filter(
                         axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
                         .forEach(axiom -> axiomsToDelete.add(axiom)));
-                logger.info("Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
+                logger.debug("Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
                 helper.getGeneratedAxioms().removeAll(axiomsToDelete);
@@ -177,7 +177,7 @@ public class ReasoningTreeSpecialCases {
                                     handledPossibleSatisfied.get(subClassOfPossibleSatisfied).add(indi);
                                 })));
         if (oldSize != handledPossibleSatisfied.get(subClassOfPossibleSatisfied).size()) {
-            logger.info(
+            logger.debug(
                     "Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI().getShortForm());
             helper.flush();
             return true;
