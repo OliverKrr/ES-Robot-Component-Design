@@ -347,13 +347,32 @@ OutputBearingScrewMatch(?obs) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s)
 
 
 
-LengthOutputLinearFlexScrewMatchCalcRule:
+LengthOutputLinearFlexScrewMatchCalc1Rule:
 LengthOutputLinearFlexScrewMatch(?lol) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasTorsionalWave(?dob, ?tw) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasScrew(?lol, ?s_lol) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^ Constants(?con) ^
 hasLengthInput(?lol, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
 hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_s1) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_lol, ?d_s2) ^ swrlb:equal(?d_s1, ?d_s2) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_lol, ?L_s_lol) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_lol, ?d_s_lol) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^  hasDimensionLengthFaktor(?tw, ?Lf_tw) ^ hasDimensionLength_L_unit_mm(?ts, ?L_ts) ^ lengthCentering(?con, ?c_con) ^ lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
 swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L_2kerbe) ^ swrlb:multiply(?L_torWelleTemp2, ?d_s_lol, 1.5) ^ swrlb:multiply(?L_torWelleTemp3, 2.0, ?L_torWelleTemp2) ^ swrlb:add(?L_torWelleTemp4, ?L_torWelleTemp1, ?L_torWelleTemp3) ^ swrlb:multiply(?L_torWelle, ?Lf_tw, ?L_torWelleTemp4) ^
 swrlb:add(?L_max1_1, ?L_torWelle, ?L_s_lol) ^ swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^ swrlb:add(?L_max1_2, ?L_loie, ?L_abLager) ^ swrlb:add(?L_max2_1, ?L_ts, ?L_s_lol) ^ swrlb:multiply(?L_max2_2, 2.0, ?L_s_ob)
 -> hasMax1_1(?lol, ?L_max1_1) ^ hasMax1_2(?lol, ?L_max1_2) ^ hasMax2_1(?lol, ?L_max2_1) ^ hasMax2_2(?lol, ?L_max2_2)
+
+
+LengthOutputLinearFlexScrewMatchCalc2Rule:
+LengthOutputLinearFlexScrewMatch(?lol) ^ hasLengthInput(?lol, ?li) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ Constants(?con) ^
+hasDimensionInnerDiameterWaveGenerator_unit_mm(?g, ?d_wg_g) ^ hasMax1_1(?sr, ?d_sr) ^ diameterSafetySlipRingInGearBox(?c, ?c_d) ^
+swrlb:add(?d_max, ?d_sr, ?c_d) ^ swrlb:greaterThanOrEqual(?d_wg_g, ?d_max) ^
+hasDimensionLengthInner_L_unit_mm(?sr, ?l_sr) ^ hasDimensionLength_L_unit_mm(?sr, ?L_sr) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^
+swrlb:add(?temp1, ?l_sr, ?L_sr) ^ swrlb:subtract(?temp2, ?temp1, ?L_li) ^ swrlb:subtract(?L_max3_2, ?temp2, ?L_g)
+-> hasMax3_2(?lol, ?L_max3_2)
+
+
+LengthOutputLinearFlexScrewMatchCalc3Rule:
+LengthOutputLinearFlexScrewMatch(?lol) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ Constants(?con) ^
+hasDimensionInnerDiameterWaveGenerator_unit_mm(?g, ?d_wg_g) ^ hasMax1_1(?sr, ?d_sr) ^ diameterSafetySlipRingInGearBox(?c, ?c_d) ^
+swrlb:add(?d_max, ?d_sr, ?c_d) ^ swrlb:lessThan(?d_wg_g, ?d_max) ^
+hasDimensionLength_L_unit_mm(?sr, ?L_sr) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^ hasDimensionLengthWaveGenerator_F_unit_mm(?g, ?L_wg_g) ^
+swrlb:add(?temp1, ?L_sr, ?L_g) ^ swrlb:subtract(?L_max3_2, ?temp1, ?L_wg_g)
+-> hasMax3_2(?lol, ?L_max3_2)
+
 
 
 LengthOutputLinearFlexScrewMatchEvaluate1Rule:
@@ -373,13 +392,26 @@ LengthOutputLinearFlexScrewMatchEvaluate3Rule:
 LengthOutputLinearFlexScrewMatch(?lol) ^
 has1(?lol, ?L_part1) ^ hasMax2_1(?lol, ?L_max2_1) ^ hasMax2_2(?lol, ?L_max2_2) ^
 swrlb:greaterThan(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_ges, ?L_part1, ?L_max2_1)
--> hasDimensionLength_L_unit_mm(?lol, ?L_ges) ^ SatisfiedLengthOutputLinearFlexScrewMatch(?lol)
+-> hasMax3_1(?lol, ?L_ges)
 
 LengthOutputLinearFlexScrewMatchEvaluate4Rule:
 LengthOutputLinearFlexScrewMatch(?lol) ^
 has1(?lol, ?L_part1) ^ hasMax2_1(?lol, ?L_max2_1) ^ hasMax2_2(?lol, ?L_max2_2) ^
 swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_ges, ?L_part1, ?L_max2_2)
--> hasDimensionLength_L_unit_mm(?lol, ?L_ges) ^ SatisfiedLengthOutputLinearFlexScrewMatch(?lol)
+-> hasMax3_1(?lol, ?L_ges)
+
+LengthOutputLinearFlexScrewMatchEvaluate5Rule:
+LengthOutputLinearFlexScrewMatch(?lol) ^
+hasMax3_1(?lol, ?L_max3_1) ^ hasMax3_2(?lol, ?L_max3_2) ^
+swrlb:greaterThan(?L_max3_1, ?L_max3_2)
+-> hasDimensionLength_L_unit_mm(?lol, ?L_max3_1) ^ SatisfiedLengthOutputLinearFlexScrewMatch(?lol)
+
+LengthOutputLinearFlexScrewMatchEvaluate6Rule:
+LengthOutputLinearFlexScrewMatch(?lol) ^
+hasMax3_1(?lol, ?L_max3_1) ^ hasMax3_2(?lol, ?L_max3_2) ^
+swrlb:lessThanOrEqual(?L_max3_1, ?L_max3_2)
+-> hasDimensionLength_L_unit_mm(?lol, ?L_max3_2) ^ SatisfiedLengthOutputLinearFlexScrewMatch(?lol)
+
 
 
 
