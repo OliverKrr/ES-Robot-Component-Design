@@ -388,7 +388,10 @@ DiameterInput(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ Curren
 
 
 DiameterOutputCalcRule:
-DiameterOutput(?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?D_scp) ^ hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ diameterElectronicsCover(?con, ?D_ec) ^ swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_ec2, ?D_ec, 2.0) ^ swrlb:add(?D_max2, ?D_ec2, ?D_ab) -> hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2)
+DiameterOutput(?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?D_scp) ^ hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^  hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
+swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?D_max2, ?D_oc2, ?D_ab)
+-> hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2)
 
 
 
