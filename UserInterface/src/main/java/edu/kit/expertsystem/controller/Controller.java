@@ -34,7 +34,7 @@ import edu.kit.expertsystem.model.req.TextFieldRequirement;
 
 public class Controller {
 
-    private static final int MAXIMAL_NEEDED_SPACES = 6;
+    private static final int MAXIMAL_NEEDED_SPACES = 7;
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
 

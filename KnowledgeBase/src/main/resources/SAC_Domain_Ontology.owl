@@ -3529,18 +3529,10 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61700_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61700_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3559,6 +3551,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0019</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3566,7 +3564,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61701_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61701_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3585,6 +3583,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">18.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0031</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3592,7 +3596,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61702_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61702_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3611,6 +3615,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">21.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0036</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3618,7 +3628,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61703_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61703_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3637,6 +3647,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">23.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0040</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3644,7 +3660,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61704_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61704_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3663,6 +3679,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">27.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0059</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3670,7 +3692,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61705_2RU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61705_2RU">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3689,6 +3711,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0071</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3696,7 +3724,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61706_2RU -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61706_2RU">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3715,6 +3743,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">37.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0083</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3722,7 +3756,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61807_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61807_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3741,6 +3775,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">47.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.032</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3748,7 +3788,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61808_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61808_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3767,6 +3807,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">52.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.035</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3774,7 +3820,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61809_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61809_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3793,6 +3839,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">58.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.042</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3800,7 +3852,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61810_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61810_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3819,6 +3871,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">65.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.052</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3826,7 +3884,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61811_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61811_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3845,6 +3903,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">72.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.083</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3852,7 +3916,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3871,6 +3935,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">78.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.104</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3878,7 +3948,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3897,6 +3967,12 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.126</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -3904,7 +3980,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -3923,6 +3999,285 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.134</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_672_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_672_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00008</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_679_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_679_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">14.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00198</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0007</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00071</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00099</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00028</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00033</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00034</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"/>
     </owl:Class>
     
 
@@ -5617,6 +5972,19 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_672_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_679_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>

@@ -1426,9 +1426,17 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing -->
 
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing -->
+
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"/>
     </rdf:Description>
     
@@ -2771,7 +2779,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningHelpClasses"/>
     </owl:Class>
     
 
@@ -3668,12 +3676,6 @@
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
     </rdf:Description>
     <rdf:Description>
-        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </rdf:Description>
-    <rdf:Description>
         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
@@ -3684,6 +3686,12 @@
     </rdf:Description>
     <rdf:Description>
         <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+    </rdf:Description>
+    <rdf:Description>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </rdf:Description>
     <rdf:Description>
         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
@@ -4506,13 +4514,16 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_res">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d_g">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_lo">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_gs">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_db">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d_g">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description>
@@ -13445,7 +13456,7 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorGearBoxMatchForSACunitSatisfyRule</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorGearBoxMatchSatisfyRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
             <rdf:Description>
@@ -13552,7 +13563,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
                     </rdf:Description>
                 </rdf:first>
@@ -13561,9 +13572,10 @@
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                         <rdf:first>
                             <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorInMotorGearBoxMatch"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m"/>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotor"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -13571,9 +13583,10 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxInMotorGearBoxMatch"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
                                     </rdf:Description>
                                 </rdf:first>
                                 <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
@@ -13587,7 +13600,7 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorGearBoxMatchSatisfyRule</rdfs:label>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorGearBoxMatchForSACunitSatisfyRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
             <rdf:Description>
@@ -13694,7 +13707,7 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
                     </rdf:Description>
                 </rdf:first>
@@ -13718,33 +13731,7 @@
                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                        <rdf:first>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotor"/>
-                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
-                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m"/>
-                                            </rdf:Description>
-                                        </rdf:first>
-                                        <rdf:rest>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                <rdf:first>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox"/>
-                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
-                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
-                                                    </rdf:Description>
-                                                </rdf:first>
-                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                            </rdf:Description>
-                                        </rdf:rest>
-                                    </rdf:Description>
-                                </rdf:rest>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -14945,20 +14932,7 @@
                                                                                                                                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#M_res"/>
                                                                                                                                             </rdf:Description>
                                                                                                                                         </rdf:first>
-                                                                                                                                        <rdf:rest>
-                                                                                                                                            <rdf:Description>
-                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                                                                                                <rdf:first>
-                                                                                                                                                    <rdf:Description>
-                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
-                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ma"/>
-                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_ges"/>
-                                                                                                                                                    </rdf:Description>
-                                                                                                                                                </rdf:first>
-                                                                                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                                                                            </rdf:Description>
-                                                                                                                                        </rdf:rest>
+                                                                                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                                                                                                                                     </rdf:Description>
                                                                                                                                 </rdf:rest>
                                                                                                                             </rdf:Description>
@@ -15060,7 +15034,7 @@
                                                                 <rdf:first>
                                                                     <rdf:Description>
                                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeight"/>
+                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLength"/>
                                                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
                                                                     </rdf:Description>
                                                                 </rdf:first>
@@ -15070,9 +15044,119 @@
                                                                         <rdf:first>
                                                                             <rdf:Description>
                                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
                                                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
-                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_ges"/>
+                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_res"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:first>
+                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SACunitWeightSatisfyRule</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunit"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameter"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLength"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#l"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthOutput"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#l"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lo"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthInput"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lo"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#li"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#li"/>
+                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#didbm"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInput"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#didbm"/>
+                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#di"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                        <rdf:first>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController"/>
+                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#di"/>
+                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
                                                                             </rdf:Description>
                                                                         </rdf:first>
                                                                         <rdf:rest>
@@ -15080,9 +15164,10 @@
                                                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                                                                 <rdf:first>
                                                                                     <rdf:Description>
-                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLength"/>
-                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasIncrementalEncoder"/>
+                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lil"/>
+                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ie"/>
                                                                                     </rdf:Description>
                                                                                 </rdf:first>
                                                                                 <rdf:rest>
@@ -15090,13 +15175,318 @@
                                                                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                                                                         <rdf:first>
                                                                                             <rdf:Description>
-                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
-                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_res"/>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotor"/>
+                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#di"/>
+                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m"/>
                                                                                             </rdf:Description>
                                                                                         </rdf:first>
-                                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                        <rdf:rest>
+                                                                                            <rdf:Description>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                <rdf:first>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox"/>
+                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#li"/>
+                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:first>
+                                                                                                <rdf:rest>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                        <rdf:first>
+                                                                                                            <rdf:Description>
+                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputBearing"/>
+                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lo"/>
+                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#dob"/>
+                                                                                                            </rdf:Description>
+                                                                                                        </rdf:first>
+                                                                                                        <rdf:rest>
+                                                                                                            <rdf:Description>
+                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                <rdf:first>
+                                                                                                                    <rdf:Description>
+                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew"/>
+                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lo"/>
+                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_lo"/>
+                                                                                                                    </rdf:Description>
+                                                                                                                </rdf:first>
+                                                                                                                <rdf:rest>
+                                                                                                                    <rdf:Description>
+                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                        <rdf:first>
+                                                                                                                            <rdf:Description>
+                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRingTorqueSensorMatch"/>
+                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#dob"/>
+                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#srtsm"/>
+                                                                                                                            </rdf:Description>
+                                                                                                                        </rdf:first>
+                                                                                                                        <rdf:rest>
+                                                                                                                            <rdf:Description>
+                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                <rdf:first>
+                                                                                                                                    <rdf:Description>
+                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRing"/>
+                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#srtsm"/>
+                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sr"/>
+                                                                                                                                    </rdf:Description>
+                                                                                                                                </rdf:first>
+                                                                                                                                <rdf:rest>
+                                                                                                                                    <rdf:Description>
+                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                        <rdf:first>
+                                                                                                                                            <rdf:Description>
+                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorqueSensor"/>
+                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#srtsm"/>
+                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ts"/>
+                                                                                                                                            </rdf:Description>
+                                                                                                                                        </rdf:first>
+                                                                                                                                        <rdf:rest>
+                                                                                                                                            <rdf:Description>
+                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                <rdf:first>
+                                                                                                                                                    <rdf:Description>
+                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputCircularScrewMatch"/>
+                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#dob"/>
+                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gs"/>
+                                                                                                                                                    </rdf:Description>
+                                                                                                                                                </rdf:first>
+                                                                                                                                                <rdf:rest>
+                                                                                                                                                    <rdf:Description>
+                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                        <rdf:first>
+                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew"/>
+                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gs"/>
+                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_gs"/>
+                                                                                                                                                            </rdf:Description>
+                                                                                                                                                        </rdf:first>
+                                                                                                                                                        <rdf:rest>
+                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                <rdf:first>
+                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutput"/>
+                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gs"/>
+                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#do"/>
+                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                </rdf:first>
+                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"/>
+                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#didbm"/>
+                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#db"/>
+                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBoxAbsolutEncoderSensorPCBMatch"/>
+                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#do"/>
+                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gaespcb"/>
+                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoderSensorPCBMatch"/>
+                                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#gaespcb"/>
+                                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#abspcb"/>
+                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoder"/>
+                                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#abspcb"/>
+                                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ab"/>
+                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCB"/>
+                                                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#abspcb"/>
+                                                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#spcb"/>
+                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearingScrewMatch"/>
+                                                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#dob"/>
+                                                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#obs"/>
+                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorsionalWave"/>
+                                                                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#dob"/>
+                                                                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#tw"/>
+                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearing"/>
+                                                                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#obs"/>
+                                                                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#ob"/>
+                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew"/>
+                                                                                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#obs"/>
+                                                                                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#s_ob"/>
+                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                                                                                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m"/>
+                                                                                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_m"/>
+                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                                                                                                                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                                                                                                                                                                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#g"/>
+                                                                                                                                                                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_g"/>
+                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                                                                                                                                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                                                                                                                                                                                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#db"/>
+                                                                                                                                                                                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_db"/>
+                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                                                                                <rdf:rest>
+                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                                                        <rdf:first>
+                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                                                                                                                                                                                                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
+                                                                                                                                                                                                                                                                                <swrl:arguments rdf:parseType="Collection">
+                                                                                                                                                                                                                                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#temp1"/>
+                                                                                                                                                                                                                                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_m"/>
+                                                                                                                                                                                                                                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_g"/>
+                                                                                                                                                                                                                                                                                </swrl:arguments>
+                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                        </rdf:first>
+                                                                                                                                                                                                                                                                        <rdf:rest>
+                                                                                                                                                                                                                                                                            <rdf:Description>
+                                                                                                                                                                                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                                                                                                                                                                                                <rdf:first>
+                                                                                                                                                                                                                                                                                    <rdf:Description>
+                                                                                                                                                                                                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                                                                                                                                                                                                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
+                                                                                                                                                                                                                                                                                        <swrl:arguments rdf:parseType="Collection">
+                                                                                                                                                                                                                                                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_ges"/>
+                                                                                                                                                                                                                                                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#temp1"/>
+                                                                                                                                                                                                                                                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_db"/>
+                                                                                                                                                                                                                                                                                        </swrl:arguments>
+                                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                                </rdf:first>
+                                                                                                                                                                                                                                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                                </rdf:rest>
+                                                                                                                                                                            </rdf:Description>
+                                                                                                                                                                        </rdf:rest>
+                                                                                                                                                                    </rdf:Description>
+                                                                                                                                                                </rdf:rest>
+                                                                                                                                                            </rdf:Description>
+                                                                                                                                                        </rdf:rest>
+                                                                                                                                                    </rdf:Description>
+                                                                                                                                                </rdf:rest>
+                                                                                                                                            </rdf:Description>
+                                                                                                                                        </rdf:rest>
+                                                                                                                                    </rdf:Description>
+                                                                                                                                </rdf:rest>
+                                                                                                                            </rdf:Description>
+                                                                                                                        </rdf:rest>
+                                                                                                                    </rdf:Description>
+                                                                                                                </rdf:rest>
+                                                                                                            </rdf:Description>
+                                                                                                        </rdf:rest>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:rest>
+                                                                                            </rdf:Description>
+                                                                                        </rdf:rest>
                                                                                     </rdf:Description>
                                                                                 </rdf:rest>
                                                                             </rdf:Description>
@@ -15113,6 +15503,32 @@
                                 </rdf:rest>
                             </rdf:Description>
                         </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeight"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sac"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#m_ges"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                     </rdf:Description>
                 </rdf:rest>
             </rdf:Description>

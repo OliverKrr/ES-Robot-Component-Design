@@ -74,11 +74,11 @@ MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ CurrentRequirements(
 
 
 MotorGearBoxMatchSatisfyRule:
-MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
--> SatisfiedMotorGearBoxMatch(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g)
+MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
+-> SatisfiedMotorGearBoxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g)
 
 MotorGearBoxMatchForSACunitSatisfyRule:
-MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
+MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
 -> SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ SatisfiedMotorInMotorGearBoxMatch(?m) ^ SatisfiedGearBoxInMotorGearBoxMatch(?g)
 
 
@@ -621,8 +621,15 @@ Diameter(?d) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ CurrentRequirem
 LengthMotorGearBoxMatchSatisfyRule:
 SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^
 hasDimensionOuterDiameter_D_unit_mm(?d, ?D_res) ^ hasDimensionLength_L_unit_mm(?l, ?L_res)
-SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasWeight_m_unit_kg(?ma, ?m_ges)
--> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_res) ^ SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
+SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
+-> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_res) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
+
+
+SACunitWeightSatisfyRule:
+SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorController(?di, ?mc) ^ hasIncrementalEncoder(?lil, ?ie) ^ hasMotor(?di, ?m) ^ hasGearBox(?li, ?g) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasScrew(?lo, ?s_lo) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasDiameterOutput(?gs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalWave(?dob, ?tw) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
+hasWeight_m_unit_kg(?m, ?m_m) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ hasWeight_m_unit_kg(?db, ?m_db) ^
+swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?m_ges, ?temp1, ?m_db)
+-> SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges)
 
 
 SACunitSatisfyRule:
