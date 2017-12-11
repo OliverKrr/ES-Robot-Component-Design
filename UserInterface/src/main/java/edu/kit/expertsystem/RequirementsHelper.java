@@ -96,7 +96,7 @@ public class RequirementsHelper {
         // \t funktioniert hier -> mehr siehe Arbeitsblatt
         Label displayName = new Label(composite, SWT.WRAP);
         displayName.setBounds(displayNameX, y1, displayNameWidth, height);
-        displayName.setText(requirementWrapper.requirement.displayName);
+        displayName.setText(requirementWrapper.requirement.displayName + ":");
         formToolkit.adapt(displayName, false, false);
         displayName.setForeground(Configs.KIT_GREEN_70);
         createdControls.add(displayName);

@@ -3251,7 +3251,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Set for Slip Ring</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Continuous Rotation:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Continuous Rotation</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needContinuousRotationReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needContinuousRotationReq>
     </owl:NamedIndividual>
@@ -3321,7 +3321,7 @@
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total outer diameter of the SAC unit.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionOuterDiameterReqMax_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionOuterDiameterReqMax_D_unit_mm>
         <sac_reasoning:hasDimensionOuterDiameterReqMin_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionOuterDiameterReqMin_D_unit_mm>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diameter D:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diameter D</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mm</sac_reasoning:hasUnit>
@@ -3339,7 +3339,7 @@
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.0</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The thru-bore required for the cabling. Set to 0 if external cabling is used. If you use a strain-gauge based torque sensor, there are additional 6 cables to consider.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionDiameterWiringReq_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionDiameterWiringReq_D_unit_mm>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diameter wiring:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Diameter wiring</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mm</sac_reasoning:hasUnit>
     </owl:NamedIndividual>
@@ -3354,7 +3354,7 @@
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">24</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">24V and 48V are allowed. TODO (not used at the moment)</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Input: Voltage U:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Input: Voltage U</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">V</sac_reasoning:hasUnit>
         <sac_reasoning:hasVoltageReq_U_unit_V rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasVoltageReq_U_unit_V>
@@ -3370,7 +3370,7 @@
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total length of the SAC unit.</sac_reasoning:hasDescription>
         <sac_reasoning:hasDimensionLengthReqMax_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionLengthReqMax_L_unit_mm>
         <sac_reasoning:hasDimensionLengthReqMin_L_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasDimensionLengthReqMin_L_unit_mm>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Length L:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Length L</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mm</sac_reasoning:hasUnit>
@@ -3385,7 +3385,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryPerformance"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maximal output speed at nominal voltage.</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maximal Speed n_max:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Maximal Speed n_max</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMax rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMax>
         <sac_reasoning:hasMaximalSpeedReqMax_n_max_unit_rpm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasMaximalSpeedReqMax_n_max_unit_rpm>
         <sac_reasoning:hasMaximalSpeedReqMin_n_max_unit_rpm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasMaximalSpeedReqMin_n_max_unit_rpm>
@@ -3403,7 +3403,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Position: Absolute Encoder:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Position: Absolute Encoder</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needAbsoluteEncoderReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needAbsoluteEncoderReq>
     </owl:NamedIndividual>
@@ -3416,7 +3416,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Position: Incremental Encoder:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Position: Incremental Encoder</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableField rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableField>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needIncrementalEncoderReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needIncrementalEncoderReq>
@@ -3430,7 +3430,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryControlAndCommunication"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Motor Controller:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Motor Controller</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needMotorControllerReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needMotorControllerReq>
     </owl:NamedIndividual>
@@ -3443,7 +3443,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryControlAndCommunication"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sensor Control Board:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sensor Control Board</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">200</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needSensorControlBoardReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needSensorControlBoardReq>
     </owl:NamedIndividual>
@@ -3456,7 +3456,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategorySensors"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Torque: Strain-Gauge Based:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Torque: Strain-Gauge Based</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needTorqueSensorStrainGaugeBasedReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needTorqueSensorStrainGaugeBasedReq>
     </owl:NamedIndividual>
@@ -3471,7 +3471,7 @@
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMaxInd"/>
         <sac_reasoning:hasCurrentOutputReqMax_I_unit_A rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasCurrentOutputReqMax_I_unit_A>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Current I:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Current I</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A</sac_reasoning:hasUnit>
     </owl:NamedIndividual>
@@ -3486,7 +3486,7 @@
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMinInd"/>
         <sac_reasoning:hasDefaultValueMin rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1</sac_reasoning:hasDefaultValueMin>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Emergency Stop:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Emergency Stop</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasNumberOfOutputEmergencyStopReq rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasNumberOfOutputEmergencyStopReq>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500</sac_reasoning:hasOrderPosition>
     </owl:NamedIndividual>
@@ -3499,7 +3499,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">One wire for 100M BASET or 1000M BASET.</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Communication (RJ45):</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Communication (RJ45)</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">400</sac_reasoning:hasOrderPosition>
         <sac_reasoning:needOutputCommunicationReq rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sac_reasoning:needOutputCommunicationReq>
     </owl:NamedIndividual>
@@ -3513,7 +3513,7 @@
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryElectricalInputsAndOutputs"/>
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeMinInd"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Number of signal cables exclusive emergency stop.</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Other cables:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Output: Other cables</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasNumberOfOtherCablesReq rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasNumberOfOtherCablesReq>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">600</sac_reasoning:hasOrderPosition>
     </owl:NamedIndividual>
@@ -3526,7 +3526,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryPerformance"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Repeated peak torque without damaging the units.</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Peak Torque M_max:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Peak Torque M_max</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMax rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMax>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasPeakTorqueReqMax_M_max_unit_Nm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasPeakTorqueReqMax_M_max_unit_Nm>
@@ -3545,7 +3545,7 @@
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thickness Engine Case:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thickness Engine Case</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableField rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableField>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">400</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasThicknessEngineCaseReq_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasThicknessEngineCaseReq_D_unit_mm>
@@ -3562,7 +3562,7 @@
         <sac_reasoning:hasRequirementType rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReqTypeExactInd"/>
         <sac_reasoning:hasDefaultValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</sac_reasoning:hasDefaultValue>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TODO</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thickness Output Case:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thickness Output Case</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableField rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableField>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasThicknessOutputCaseReq_D_unit_mm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1</sac_reasoning:hasThicknessOutputCaseReq_D_unit_mm>
@@ -3601,7 +3601,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"/>
         <sac_reasoning:hasCategory rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CategoryDimensions"/>
         <sac_reasoning:hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The total weight of the SAC unit.</sac_reasoning:hasDescription>
-        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Weight m:</sac_reasoning:hasDisplayName>
+        <sac_reasoning:hasDisplayName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Weight m</sac_reasoning:hasDisplayName>
         <sac_reasoning:hasEnableFieldMin rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</sac_reasoning:hasEnableFieldMin>
         <sac_reasoning:hasOrderPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300</sac_reasoning:hasOrderPosition>
         <sac_reasoning:hasUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">kg</sac_reasoning:hasUnit>

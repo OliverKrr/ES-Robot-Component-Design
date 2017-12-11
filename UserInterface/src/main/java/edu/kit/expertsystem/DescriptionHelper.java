@@ -41,7 +41,7 @@ public class DescriptionHelper {
         maxYEnd = Math.max(maxYEnd, y + height);
 
         Label label = new Label(composite, SWT.WRAP);
-        label.setText(labelText);
+        label.setText(labelText + ":");
         label.setBounds(labelX, y, 0, height);
         formToolkit.adapt(label, false, false);
         label.setForeground(Configs.KIT_GREEN_70);

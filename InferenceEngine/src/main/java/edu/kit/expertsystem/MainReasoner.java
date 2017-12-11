@@ -2,9 +2,7 @@ package edu.kit.expertsystem;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.logging.log4j.LogManager;
@@ -156,9 +154,8 @@ public class MainReasoner {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
-                logger.debug(
-                        "Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min
-                        + ", " + realReq.max);
+                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", "
+                        + realReq.min + ", " + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
@@ -247,16 +244,6 @@ public class MainReasoner {
             results.add(result);
         });
 
-        try {
-            Collections.sort(results,
-                    Comparator.comparingDouble(result -> result.requirements.stream()
-                            .filter(req -> Vocabulary.DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM.getIRI()
-                                    .getIRIString().equals(req.resultIRI))
-                            .findAny().map(req -> ((TextFieldMinMaxRequirement) req).result).get()));
-        } catch (NoSuchElementException e) {
-            logger.warn("Cannot sort, because weight is not available.");
-        }
-
         helper.checkConsistency();
         logger.debug("Number of results: " + results.size());
         logger.debug(
@@ -269,6 +256,10 @@ public class MainReasoner {
         Component component = new Component();
         component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
         component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
+        if (component.nameOfInstance.contains(ReasoningTree.PermutationSeparator)) {
+            component.nameOfInstance = component.nameOfInstance.substring(0,
+                    component.nameOfInstance.indexOf(ReasoningTree.PermutationSeparator));
+        }
         genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty())
                 .forEach(range -> component.orderPosition = helper
                         .getOrderPositionForClass(range.getRange().asOWLClass()));

@@ -7,8 +7,11 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -41,6 +44,7 @@ public class SolutionTab {
     private Tree resultTree;
     private Button saveSolutionOntologyButton;
     private Text searchField;
+    private Combo orderByCombo;
     private DescriptionHelper descriptionHelper;
 
     public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
@@ -65,6 +69,20 @@ public class SolutionTab {
         searchField.setMessage("search");
         searchField.setToolTipText("search");
         formToolkit.adapt(searchField, true, true);
+        resultWrapper.searchField = searchField;
+
+        orderByCombo = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        formToolkit.adapt(orderByCombo, true, true);
+        updateSizeOfOrderByCombo();
+        orderByCombo.addModifyListener(new ModifyListener() {
+
+            @Override
+            public void modifyText(ModifyEvent e) {
+                updateSizeOfOrderByCombo();
+                updateSizeOfSearchText();
+            }
+        });
+        resultWrapper.orderBy = orderByCombo;
 
         resultTree = new Tree(leftComposite, SWT.NONE);
         updateSizeOfTreeItem();
@@ -122,6 +140,7 @@ public class SolutionTab {
         formToolkit.paintBordersFor(solutionForm);
         descriptionHelper.updateSize(rightComposite.getBounds());
         updateSizeOfSaveSolutionOntologyButton();
+        updateSizeOfOrderByCombo();
         updateSizeOfSearchText();
         updateSizeOfTreeItem();
     }
@@ -132,21 +151,31 @@ public class SolutionTab {
         saveSolutionOntologyButton.setBounds(offsetX, offsetY, width, searchTextHeight);
     }
 
+    private void updateSizeOfOrderByCombo() {
+        int maxWidth = 0;
+        for (String item : orderByCombo.getItems()) {
+            maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(orderByCombo, item).x);
+        }
+        maxWidth += GUI.comboOffsetWidth;
+        int x = saveSolutionOntologyButton.getBounds().x + saveSolutionOntologyButton.getBounds().width
+                + offsetX;
+        orderByCombo.setBounds(x, offsetY, maxWidth, searchTextHeight);
+    }
+
     private void updateSizeOfSearchText() {
         int widthOfSearchText = Math.max(searchTextWidth,
                 GuiHelper.getSizeOfText(searchField, searchField.getText()).x);
         int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
-        int saveSolutionXEnd = saveSolutionOntologyButton.getBounds().x
-                + saveSolutionOntologyButton.getBounds().width;
-        if (xOfSearchText < saveSolutionXEnd + offsetXEnd) {
-            xOfSearchText = saveSolutionXEnd + offsetXEnd;
+        int endXOfOther = orderByCombo.getBounds().x + orderByCombo.getBounds().width;
+        if (xOfSearchText < endXOfOther + offsetXEnd) {
+            xOfSearchText = endXOfOther + offsetXEnd;
             widthOfSearchText = leftComposite.getBounds().width - xOfSearchText - offsetXEnd;
         }
         searchField.setBounds(xOfSearchText, offsetY, widthOfSearchText, searchTextHeight);
     }
 
     private void updateSizeOfTreeItem() {
-        int yOfTree = offsetY + searchTextHeight + offsetY;
+        int yOfTree = 2 * offsetY + searchTextHeight;
         int widthOfTree = leftComposite.getBounds().width - offsetX - offsetXEnd;
         int heightOfTree = leftComposite.getBounds().height - yOfTree - offsetYEnd;
         resultTree.setBounds(offsetX, yOfTree, widthOfTree, heightOfTree);

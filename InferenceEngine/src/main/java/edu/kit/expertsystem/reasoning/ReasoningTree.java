@@ -18,6 +18,8 @@ import openllet.owlapi.OWLGenericTools;
 
 public class ReasoningTree {
 
+    public static final String PermutationSeparator = "--";
+
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
     private OWLGenericTools genericTool;
@@ -165,7 +167,7 @@ public class ReasoningTree {
             }
         } else {
             ChildIndividualWithObjectPropertyFromParent[] indiToCreate = new ChildIndividualWithObjectPropertyFromParent[currentPositions.length];
-            String name = "--";
+            String name = PermutationSeparator;
             for (int i = 0; i < currentPositions.length; i++) {
                 ChildInstancesForPermutation childrend = childrenForPermutation.get(i);
                 OWLNamedIndividual child = childrend.childInstances.get(currentPositions[i]);
@@ -173,7 +175,7 @@ public class ReasoningTree {
                         childrend.propertyFromParent);
                 name += helper.getNameOfOWLNamedIndividual(child);
                 if (i != currentPositions.length - 1) {
-                    name += "--";
+                    name += PermutationSeparator;
                 }
             }
             permutations.add(new PermutationOfChildInstances(indiToCreate, name));

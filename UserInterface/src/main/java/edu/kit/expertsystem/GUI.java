@@ -39,7 +39,7 @@ public class GUI {
     public static final int navBarY = 10;
     public static final int errorTextHeight = 115;
     public static final int errorTextYOffset = 2;
-    private static final int unitsToReasonComboOffsetWidth = 24;
+    public static final int comboOffsetWidth = 24;
     private static final Point firstSizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
@@ -151,7 +151,7 @@ public class GUI {
      * Create contents of the window.
      */
     protected void createContents() {
-        unitsToReasonCombo = new Combo(shell, SWT.DROP_DOWN | SWT.READ_ONLY);
+        unitsToReasonCombo = new Combo(shell, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
         unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
 
@@ -270,13 +270,11 @@ public class GUI {
         int unitToReasonComboX = updatedRec.x + updatedRec.width - unitsToReasonComboWidth;
         unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth,
                 unitsToReasonCombo.getSize().y);
-        formToolkit.adapt(unitsToReasonCombo);
-        formToolkit.paintBordersFor(unitsToReasonCombo);
+        formToolkit.adapt(unitsToReasonCombo, true, true);
 
         int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
         errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
         formToolkit.adapt(errorText);
-        formToolkit.paintBordersFor(errorText);
     }
 
     private int[] getWeights() {
@@ -292,7 +290,7 @@ public class GUI {
             Point size = GuiHelper.getSizeOfText(unitsToReasonCombo, unit);
             maxWidth = Math.max(maxWidth, size.x);
         }
-        return maxWidth + unitsToReasonComboOffsetWidth;
+        return maxWidth + comboOffsetWidth;
     }
 
     private void createErrorText() {

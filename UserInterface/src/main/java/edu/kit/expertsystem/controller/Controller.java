@@ -1,12 +1,17 @@
 package edu.kit.expertsystem.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
@@ -126,6 +131,7 @@ public class Controller {
     }
 
     public void parseRequirements() {
+        resultWrapper.orderBy.removeAll();
         resultWrapper.tree.removeAll();
 
         for (RequirementWrapper req : requirementsWrapper) {
@@ -175,50 +181,79 @@ public class Controller {
     }
 
     public void setResults() {
+        resultWrapper.displayNameToIriMap.clear();
+        for (Result result : resultWrapper.results) {
+            double maxNumberOfCharsForComp = getMaxNumberOfCharsForComp(result);
+            logger.debug("Solution:");
+            result.components.forEach(
+                    comp -> logger.debug("Component: " + getNameForComponent(comp, maxNumberOfCharsForComp)));
+
+            double maxNumberOfCharsForReq = getMaxNumberOfCharsForReq(result);
+            for (Requirement req : result.requirements) {
+                if (req.resultIRI != null) {
+                    logger.debug("Requirement: " + getNameForReq(req, maxNumberOfCharsForReq));
+
+                    if (!resultWrapper.displayNameToIriMap.containsKey(req.displayName)) {
+                        resultWrapper.displayNameToIriMap.put(req.displayName, req.resultIRI);
+                        resultWrapper.orderBy.add(req.displayName + " \u25BC");
+                        resultWrapper.orderBy.add(req.displayName + " \u25B2");
+                    }
+                }
+            }
+        }
+
+        resultWrapper.orderBy.addSelectionListener(new SelectionAdapter() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                String currentSelection = resultWrapper.orderBy.getText();
+                String displayName = currentSelection.substring(0, currentSelection.length() - 2);
+
+                Collections.sort(resultWrapper.results,
+                        Comparator.comparingDouble(result -> result.requirements.stream()
+                                .filter(req -> resultWrapper.displayNameToIriMap.get(displayName)
+                                        .equals(req.resultIRI))
+                                .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result)
+                                .orElse(-Double.MAX_VALUE)));
+
+                if (currentSelection.endsWith("\u25B2")) {
+                    Collections.reverse(resultWrapper.results);
+                }
+
+                resultWrapper.tree.removeAll();
+                buildTree();
+
+                Event reloadSearchE = new Event();
+                reloadSearchE.type = SWT.KeyUp;
+                reloadSearchE.keyCode = ' ';
+                resultWrapper.searchField.notifyListeners(SWT.KeyUp, reloadSearchE);
+            }
+        });
+        resultWrapper.orderBy.select(0);
+        resultWrapper.orderBy.notifyListeners(SWT.Selection, new Event());
+    }
+
+    private void buildTree() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
             String concatenationOfNames = "";
 
-            double maxNumberOfChars = 0;
-            for (Component component : result.components) {
-                maxNumberOfChars = Math.max(maxNumberOfChars, component.nameOfComponent.length());
-            }
+            double maxNumberOfChars = getMaxNumberOfCharsForComp(result);
 
             for (Component component : result.components) {
-                String name = "".equals(component.nameOfComponent) ? component.nameOfInstance
-                        : component.nameOfComponent + ":"
-                                + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
-                                + component.nameOfInstance;
+                String name = getNameForComponent(component, maxNumberOfChars);
                 concatenationOfNames += name.replaceAll(" ", "");
                 addTreeItem(resItem, name, true);
             }
 
-            maxNumberOfChars = 0;
-            for (Requirement req : result.requirements) {
-                maxNumberOfChars = Math.max(maxNumberOfChars, req.displayName.length());
-            }
+            maxNumberOfChars = getMaxNumberOfCharsForReq(result);
 
             for (Requirement req : result.requirements) {
                 if (req.resultIRI == null) {
                     continue;
                 }
-                String resultValue = "";
-                if (req instanceof TextFieldMinMaxRequirement) {
-                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
-                } else if (req instanceof TextFieldRequirement) {
-                    TextFieldRequirement realReq = (TextFieldRequirement) req;
-                    resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
-                } else if (req instanceof CheckboxRequirement) {
-                    CheckboxRequirement realReq = (CheckboxRequirement) req;
-                    resultValue = String.valueOf(realReq.result);
-                } else {
-                    throw new RuntimeException("Requirement class unknown: " + req.getClass());
-                }
-                String unit = req.unit == null ? "" : req.unit;
-                String name = req.displayName + getSpacesForDisplayName(req.displayName, maxNumberOfChars)
-                        + " " + resultValue + getSpacesForResultValue(resultValue) + unit;
+                String name = getNameForReq(req, maxNumberOfChars);
                 concatenationOfNames += name.replaceAll(" ", "");
                 addTreeItem(resItem, name, false);
             }
@@ -227,8 +262,45 @@ public class Controller {
         }
     }
 
+    private double getMaxNumberOfCharsForComp(Result result) {
+        return result.components.stream()
+                .max((val1, val2) -> val1.nameOfComponent.length() - val2.nameOfComponent.length())
+                .get().nameOfComponent.length();
+    }
+
+    private String getNameForComponent(Component component, double maxNumberOfChars) {
+        return "".equals(component.nameOfComponent) ? component.nameOfInstance
+                : component.nameOfComponent + ": "
+                        + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
+                        + component.nameOfInstance;
+    }
+
+    private double getMaxNumberOfCharsForReq(Result result) {
+        return result.requirements.stream().filter(req -> req.resultIRI != null)
+                .max((val1, val2) -> val1.displayName.length() - val2.displayName.length()).get().displayName
+                        .length();
+    }
+
+    private String getNameForReq(Requirement req, double maxNumberOfChars) {
+        String resultValue = "";
+        if (req instanceof TextFieldMinMaxRequirement) {
+            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+        } else if (req instanceof TextFieldRequirement) {
+            TextFieldRequirement realReq = (TextFieldRequirement) req;
+            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+        } else if (req instanceof CheckboxRequirement) {
+            CheckboxRequirement realReq = (CheckboxRequirement) req;
+            resultValue = String.valueOf(realReq.result);
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+        }
+        String unit = req.unit == null ? "" : req.unit;
+        return req.displayName + ": " + getSpacesForDisplayName(req.displayName, maxNumberOfChars)
+                + resultValue + getSpacesForResultValue(resultValue) + unit;
+    }
+
     private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
-        logger.debug("Solution: " + text);
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {
