@@ -517,15 +517,15 @@ swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:
 
 
 DiameterOutputEvaluate1Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> hasDimensionOuterDiameter_D_unit_mm(?do, ?D_max1)
+DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
 
 DiameterOutputEvaluate2Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> hasDimensionOuterDiameter_D_unit_mm(?do, ?D_max2)
+DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
 
 
 
 DiameterOutputSatisfyRule:
-DiameterOutput(?do) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutput(?do)
+DiameterOutput(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutput(?do)
 
 
 
@@ -541,15 +541,15 @@ swrlb:multiply(?D_s_docm2, 2.0, ?D_s_docm) ^ swrlb:multiply(?D_tw2, 2.0, ?D_tw) 
 
 DiameterOutputBearingPossibleUnsatisfied1Rule:
 HalfSatisfiedDiameterOutputBearing(?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do)
-hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_docm)
+hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ has1(?do, ?D_docm)
 swrlb:greaterThan(?D_dob, ?D_docm)
--> PossibleUnsatisfiedDiameterOutputBearing(?dob)
+-> PossibleUnsatisfiedDiameterOutputBearing(?dob) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_dob)
 
 DiameterOutputBearingPossibleUnsatisfied2Rule:
 HalfSatisfiedDiameterOutputBearing(?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do)
-hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_docm)
+hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ has1(?do, ?D_docm)
 swrlb:lessThanOrEqual(?D_dob, ?D_docm)
--> HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearing(?dob)
+-> HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearing(?dob) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_docm)
 
 DiameterOutputBearingPossibleUnsatisfied3Rule:
 HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearing(?dob1) ^ HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearing(?dob2) ^
@@ -587,27 +587,15 @@ swrlb:equal(?d_dob1, ?d_dob2)
 
 
 DiameterEvaluate1Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterOutputBearing(?lo, ?dob) ^
-hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^
-swrlb:greaterThan(?D_di, ?D_dob)
--> has1(?d, ?D_di)
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do) ^
+hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
+swrlb:greaterThan(?D_di, ?D_do)
+-> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_di)
 
 DiameterEvaluate2Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterOutputBearing(?lo, ?dob) ^
-hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^
-swrlb:lessThanOrEqual(?D_di, ?D_dob)
--> has1(?d, ?D_dob)
-
-DiameterEvaluate3Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^  hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do)
-has1(?d, ?D_1) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
-swrlb:greaterThan(?D_1, ?D_do)
--> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_1)
-
-DiameterEvaluate4Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^  hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do)
-has1(?d, ?D_1) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
-swrlb:lessThanOrEqual(?D_1, ?D_do)
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docm) ^ hasDiameterOutput(?docm, ?do) ^
+hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
+swrlb:lessThanOrEqual(?D_di, ?D_do)
 -> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_do)
 
 
