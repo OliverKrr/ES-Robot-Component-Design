@@ -625,11 +625,14 @@ SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, 
 -> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_res) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res)
 
 
-SACunitWeightSatisfyRule:
+SACunitWeightCalcRule:
 SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthOutput(?l, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorController(?di, ?mc) ^ hasIncrementalEncoder(?lil, ?ie) ^ hasMotor(?di, ?m) ^ hasGearBox(?li, ?g) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasScrew(?lo, ?s_lo) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasScrew(?gs, ?s_gs) ^ hasDiameterOutput(?gs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalWave(?dob, ?tw) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
 hasWeight_m_unit_kg(?m, ?m_m) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ hasWeight_m_unit_kg(?db, ?m_db) ^
 swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?m_ges, ?temp1, ?m_db)
--> SatisfiedWeight(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges)
+-> hasWeight_m_unit_kg(?sac, ?m_ges)
+
+SACunitWeightSatisfyRule:
+SACunit(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ CurrentRequirements(?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min) -> SatisfiedWeight(?sac)
 
 
 SACunitSatisfyRule:

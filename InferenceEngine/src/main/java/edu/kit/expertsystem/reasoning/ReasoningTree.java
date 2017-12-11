@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
+import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
 import edu.kit.expertsystem.MyOWLHelper;
 import edu.kit.expertsystem.generated.Vocabulary;
@@ -26,6 +27,7 @@ public class ReasoningTree {
     private MyOWLHelper helper;
     private ReasoningTreeSpecialCases reasoningTreeSpecialCasesHandler;
 
+    private List<OWLSubClassOfAxiom> reasoningTreeElements;
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
     private boolean hasSomethingChanged;
     private AtomicBoolean interrupted = new AtomicBoolean(false);
@@ -34,6 +36,8 @@ public class ReasoningTree {
         this.genericTool = genericTool;
         this.helper = helper;
         reasoningTreeSpecialCasesHandler = new ReasoningTreeSpecialCases(genericTool, helper);
+        reasoningTreeElements = genericTool.getOntology()
+                .subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE).collect(Collectors.toList());
     }
 
     public void interruptReasoning() {
@@ -53,7 +57,7 @@ public class ReasoningTree {
         do {
             hasSomethingChanged = false;
             // TODO make graph of classes and iterate from bottom to top
-            genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
+            reasoningTreeElements
                     .forEach(treeClassAxiom -> handleTreeItem(treeClassAxiom.getSubClass().asOWLClass()));
             if (hasSomethingChanged) {
                 helper.flush();
