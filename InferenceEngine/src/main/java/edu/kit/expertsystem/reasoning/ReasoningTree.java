@@ -165,13 +165,16 @@ public class ReasoningTree {
             }
         } else {
             ChildIndividualWithObjectPropertyFromParent[] indiToCreate = new ChildIndividualWithObjectPropertyFromParent[currentPositions.length];
-            String name = "";
+            String name = "--";
             for (int i = 0; i < currentPositions.length; i++) {
                 ChildInstancesForPermutation childrend = childrenForPermutation.get(i);
                 OWLNamedIndividual child = childrend.childInstances.get(currentPositions[i]);
                 indiToCreate[i] = new ChildIndividualWithObjectPropertyFromParent(child,
                         childrend.propertyFromParent);
                 name += helper.getNameOfOWLNamedIndividual(child);
+                if (i != currentPositions.length - 1) {
+                    name += "--";
+                }
             }
             permutations.add(new PermutationOfChildInstances(indiToCreate, name));
         }
