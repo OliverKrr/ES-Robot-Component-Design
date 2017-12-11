@@ -21,12 +21,12 @@
 		</RollingFile>
 	</Appenders>
 	<Loggers>
-		<Root level="info">
-			<AppenderRef level="info" ref="MyAppenderForGui" />
-		</Root>
 		<Logger name="edu.kit.expertsystem" level="debug">
 			<AppenderRef level="debug" ref="STDOUT" />
 			<AppenderRef level="debug" ref="RollingFile" />
 		</Logger>
+		<Root level="info">
+			<AppenderRef level="info" ref="MyAppenderForGui" />
+		</Root>
 	</Loggers>
 </Configuration>

@@ -61,7 +61,7 @@ public final class MyAppenderForGui extends AbstractAppender {
             return Configs.RED;
         }
         if (Level.WARN.equals(level)) {
-            return Configs.YELLOW;
+            return Configs.DARK_YELLOW;
         }
         // default
         return null;
