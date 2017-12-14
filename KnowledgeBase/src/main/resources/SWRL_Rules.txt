@@ -436,7 +436,7 @@ LengthOutputLinearFlexScrewMatchCalc3Rule:
 LengthOutputLinearFlexScrewMatch(?lol) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ Constants(?con) ^
 hasDimensionInnerDiameterWaveGenerator_unit_mm(?g, ?d_wg_g) ^ hasMax1_1(?sr, ?d_sr) ^ diameterSafetySlipRingInGearBox(?c, ?c_d) ^
 swrlb:add(?d_max, ?d_sr, ?c_d) ^ swrlb:lessThan(?d_wg_g, ?d_max) ^
-hasDimensionLength_L_unit_mm(?sr, ?L_sr) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^ hasDimensionLengthWaveGenerator_F_unit_mm(?g, ?L_wg_g) ^
+hasDimensionLength_L_unit_mm(?sr, ?L_sr) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^ hasDimensionLengthWaveGenerator_H_unit_mm(?g, ?L_wg_g) ^
 swrlb:add(?temp1, ?L_sr, ?L_g) ^ swrlb:subtract(?L_max3_2, ?temp1, ?L_wg_g)
 -> hasMax3_2(?lol, ?L_max3_2)
 
