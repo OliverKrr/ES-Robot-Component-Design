@@ -256,15 +256,15 @@ swrlb:lessThanOrEqual(?D_ib, ?temp)
 DiameterInputDriveBearingMatchClinchedUnsatisfiedRule:
 HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
 HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
-hasDimensionOuterDiameter_D_unit_mm(?db1, ?D_ib1) ^ hasDimensionOuterDiameter_D_unit_mm(?db2, ?D_ib2) ^
-swrlb:greaterThan(?D_ib1, ?D_ib2) ^ swrlb:lessThan(?D_ib2, ?D_ib1)
+hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^
+swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1)
 -> UnsatisfiedDiameterInputDriveBearingMatchClinched(?didbm2)
 
 DiameterInputDriveBearingMatchClinchedPossibleSatisfiedRule:
 HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
 HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
-hasDimensionOuterDiameter_D_unit_mm(?db1, ?D_ib1) ^ hasDimensionOuterDiameter_D_unit_mm(?db2, ?D_ib2) ^
-swrlb:equal(?D_ib2, ?D_ib1)
+hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^
+swrlb:equal(?d_ib2, ?d_ib1)
 -> PossibleSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ PossibleSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2)
 
 
