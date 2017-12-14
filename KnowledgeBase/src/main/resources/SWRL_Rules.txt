@@ -110,7 +110,7 @@ NoTorsionalShaft(?ts) ^ CurrentRequirements(?r) ^ needTorqueSensorStrainGaugeBas
 
 SlipRingNoneSatisfyRule:
 NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D)
--> SatisfiedSlipRing(?sr) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D) ^ hasMax1_1(?sr, ?D)
+-> SatisfiedSlipRing(?sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?D) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D) ^ hasMax1_1(?sr, ?D)
 
 
 SlipRingSatisfy1Rule:
@@ -213,6 +213,7 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 
 
 
+//TODO das ist so nicht möglich -> Kombination bilden
 GearBoxConsiderSlipRingSatisfyRule:
 SatisfiedGearBoxInMotorGearBoxMatch(?g) ^ SatisfiedSlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
@@ -245,27 +246,27 @@ swrlb:equal(?d_ib2, ?d_ib1)
 
 
 
-DiameterInputDriveBearingMatchClinchedSatisfyRule:
-DiameterInputDriveBearingMatchClinched(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^
+DiameterInputDriveBearingMatchCompressedSatisfyRule:
+DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_ib) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
 swrlb:lessThanOrEqual(?D_ib, ?temp)
--> HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm)
+-> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
 
-DiameterInputDriveBearingMatchClinchedUnsatisfiedRule:
-HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
-HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
+DiameterInputDriveBearingMatchCompressedUnsatisfiedRule:
+HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
+HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
 hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^
 swrlb:greaterThan(?d_ib1, ?d_ib2) ^ swrlb:lessThan(?d_ib2, ?d_ib1)
--> UnsatisfiedDiameterInputDriveBearingMatchClinched(?didbm2)
+-> UnsatisfiedDiameterInputDriveBearingMatchCompressed(?didbm2)
 
-DiameterInputDriveBearingMatchClinchedPossibleSatisfiedRule:
-HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
-HalfSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
+DiameterInputDriveBearingMatchCompressedPossibleSatisfiedRule:
+HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm1) ^ hasDiameterInput(?didbm1, ?di) ^ hasDriveBearing(?didbm1, ?db1) ^
+HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm2) ^ hasDiameterInput(?didbm2, ?di) ^ hasDriveBearing(?didbm2, ?db2) ^
 hasDimensionInnerDiameter_d_unit_mm(?db1, ?d_ib1) ^ hasDimensionInnerDiameter_d_unit_mm(?db2, ?d_ib2) ^
 swrlb:equal(?d_ib2, ?d_ib1)
--> PossibleSatisfiedDiameterInputDriveBearingMatchClinched(?didbm1) ^ PossibleSatisfiedDiameterInputDriveBearingMatchClinched(?didbm2)
+-> PossibleSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm1) ^ PossibleSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm2)
 
 
 
@@ -308,35 +309,35 @@ SatisfiedLengthInputLinear(?lil) ^ has1(?lil, ?L_1) ^ hasMax1_1(?lil, ?L_max1) ^
 
 
 
-LengthInputClinchedCalcRule:
-LengthInputClinched(?lic) ^ hasDiameterInputDriveBearingMatch(?lic, ?didbm) ^ hasIncrementalEncoder(?lic, ?ie) ^ hasGearBox(?lic, ?g) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
+LengthInputCompressedCalcRule:
+LengthInputCompressed(?lic) ^ hasDiameterInputDriveBearingMatch(?lic, ?didbm) ^ hasIncrementalEncoder(?lic, ?ie) ^ hasGearBox(?lic, ?g) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
 hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
 swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp3, ?temp2, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?c_g) ^
 swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_1, ?L_floatB, ?L_fixedB) ^
 swrlb:add(?L_max2_2, ?mc_con, ?rg_con)
--> has1(?lic, ?L_1) ^ hasMax1_1(?lic, ?L_max1_1) ^ hasMax2_1(?lic, ?L_ie) ^ hasMax2_2(?lic, ?L_max2_2) ^ SatisfiedLengthInputClinched(?lic)
+-> has1(?lic, ?L_1) ^ hasMax1_1(?lic, ?L_max1_1) ^ hasMax2_1(?lic, ?L_ie) ^ hasMax2_2(?lic, ?L_max2_2) ^ SatisfiedLengthInputCompressed(?lic)
 
 
-LengthInputClinchedEvaluate1Rule:
-SatisfiedLengthInputClinched(?lic) ^
+LengthInputCompressedEvaluate1Rule:
+SatisfiedLengthInputCompressed(?lic) ^
 hasMax2_1(?lic, ?L_max2_1) ^ hasMax2_2(?lic, ?L_max2_2) ^ has1(?lic, ?L_1) ^
 swrlb:greaterThan(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_1, ?L_max2_1)
 -> hasMax1_2(?lic, ?L_max1_2)
 
-LengthInputClinchedEvaluate2Rule:
-SatisfiedLengthInputClinched(?lic) ^
+LengthInputCompressedEvaluate2Rule:
+SatisfiedLengthInputCompressed(?lic) ^
 hasMax2_1(?lic, ?L_max2_1) ^ hasMax2_2(?lic, ?L_max2_2) ^ has1(?lic, ?L_1) ^
 swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_1, ?L_max2_2)
 -> hasMax1_2(?lic, ?L_max1_2)
 
-LengthInputClinchedEvaluate3Rule:
-SatisfiedLengthInputClinched(?lic) ^
+LengthInputCompressedEvaluate3Rule:
+SatisfiedLengthInputCompressed(?lic) ^
 hasMax1_1(?lic, ?L_max1_1) ^ hasMax1_2(?lic, ?L_max1_2)
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
 -> hasDimensionLength_L_unit_mm(?lic, ?L_max1_1)
 
-LengthInputClinchedEvaluate4Rule:
-SatisfiedLengthInputClinched(?lic) ^
+LengthInputCompressedEvaluate4Rule:
+SatisfiedLengthInputCompressed(?lic) ^
 hasMax1_1(?lic, ?L_max1_1) ^ hasMax1_2(?lic, ?L_max1_2)
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 -> hasDimensionLength_L_unit_mm(?lic, ?L_max1_2)
@@ -413,7 +414,7 @@ OutputBearingScrewMatch(?obs) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s)
 
 
 
-
+//TODO GearBoxSlipRingAbsolutEncoderSensorPCBMatch vergleich neben GearBoxMatch
 LengthOutputLinearFlexScrewMatchCalc1Rule:
 LengthOutputLinearFlexScrewMatch(?lol) ^ hasDiameterOutputBearing(?lol, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?gs) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasSlipRingTorqueSensorMatch(?dob, ?srtsm) ^ hasTorsionalShaft(?dob, ?ts) ^ hasTorqueSensor(?srtsm, ?ts) ^ hasDiameterOutput(?gs, ?do) ^ hasGearBoxAbsolutEncoderSensorPCBMatch(?do, ?gaespcb) ^ hasGearBox(?gaespcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gaespcb, ?abspcb) ^ hasScrew(?lol, ?s_lol) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^ Constants(?con) ^
 hasLengthInput(?lol, ?li) ^ hasGearBox(?li, ?g) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
