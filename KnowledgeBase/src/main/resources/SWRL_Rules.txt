@@ -341,54 +341,82 @@ WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ sw
 
 
 
+LengthInputBeforeEvaluate1Rule:
+LengthInput(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasIncrementalEncoder(?li, ?ie) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionAbsolutEncoderOnAxisLength_unit_mm(?ab, ?L_ab) ^
+swrlb:greaterThan(?L_ie, ?L_ab)
+-> has1(?li, ?L_ie)
+
+LengthInputBeforeEvaluate2Rule:
+LengthInput(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasIncrementalEncoder(?li, ?ie) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionAbsolutEncoderOnAxisLength_unit_mm(?ab, ?L_ab) ^
+swrlb:lessThanOrEqual(?L_ie, ?L_ab)
+-> has1(?li, ?L_ab)
+
+
+LengthInputAfterEvaluate1Rule:
+LengthInput(?li) ^  hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
+has3(?li, ?L_drive) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_s1) ^ has3(?mcpm, ?L_tangential) ^
+swrlb:multiply(?d_s15, 1.5, ?d_s1) ^ swrlb:add(?d_max2, ?d_s15, ?L_tangential) ^
+swrlb:greaterThan(?L_drive, ?d_max2)
+-> hasDimensionLength_L_unit_mm(?li, ?L_drive)
+
+LengthInputAfterEvaluate2Rule:
+LengthInput(?li) ^  hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
+has3(?li, ?L_drive) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_s1) ^ has3(?mcpm, ?L_tangential) ^
+swrlb:multiply(?d_s15, 1.5, ?d_s1) ^ swrlb:add(?d_max2, ?d_s15, ?L_tangential) ^
+swrlb:lessThanOrEqual(?L_drive, ?d_max2)
+-> hasDimensionLength_L_unit_mm(?li, ?d_max2)
+
+
 
 LengthInputLinearCalcRule:
-LengthInputLinear(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasIncrementalEncoder(?li, ?ie) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
-hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^
-swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_1, ?L_temp1, ?c_g) ^ swrlb:add(?L_flofsatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_flofsatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
--> has1(?li, ?L_1) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ SatisfiedLengthInputLinear(?li)
+LengthInputLinear(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
+has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^
+swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_2, ?L_temp1, ?c_g) ^ swrlb:add(?L_flofsatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_flofsatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
+-> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ SatisfiedLengthInputLinear(?li)
 
 
 LengthInputLinearEvaluate1Rule:
-SatisfiedLengthInputLinear(?li) ^ has1(?li, ?L_1) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_1, ?L_max1) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> has3(?li, ?L_ges)
 
 LengthInputLinearEvaluate2Rule:
-SatisfiedLengthInputLinear(?li) ^ has1(?li, ?L_1) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_1, ?L_max2) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> has3(?li, ?L_ges)
 
 
 
 LengthInputCompressedCalcRule:
-LengthInputCompressed(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasIncrementalEncoder(?li, ?ie) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
-hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
+LengthInputCompressed(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
+has1(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?s_gwg) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
 swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp3, ?temp2, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?c_g) ^
-swrlb:add(?L_flofsatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_1, ?L_flofsatB, ?L_fixedB) ^
+swrlb:add(?L_flofsatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?temp4, ?L_flofsatB, ?L_fixedB) ^ swrlb:multiply(?s_gwg15, 1.5, ?s_gwg) ^ swrlb:add(?L_2, ?s_gwg15, ?temp4) ^
 swrlb:add(?L_max2_2, ?mc_con, ?rg_con)
--> has1(?li, ?L_1) ^ hasMax1_1(?li, ?L_max1_1) ^ hasMax2_1(?li, ?L_ie) ^ hasMax2_2(?li, ?L_max2_2) ^ SatisfiedLengthInputCompressed(?li)
+-> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1_1) ^ hasMax2_1(?li, ?L_ie) ^ hasMax2_2(?li, ?L_max2_2) ^ SatisfiedLengthInputCompressed(?li)
 
 
 LengthInputCompressedEvaluate1Rule:
 SatisfiedLengthInputCompressed(?li) ^
-hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has1(?li, ?L_1) ^
-swrlb:greaterThan(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_1, ?L_max2_1)
+hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has2(?li, ?L_2) ^
+swrlb:greaterThan(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_2, ?L_max2_1)
 -> hasMax1_2(?li, ?L_max1_2)
 
 LengthInputCompressedEvaluate2Rule:
 SatisfiedLengthInputCompressed(?li) ^
-hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has1(?li, ?L_1) ^
-swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_1, ?L_max2_2)
+hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has2(?li, ?L_2) ^
+swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_2, ?L_max2_2)
 -> hasMax1_2(?li, ?L_max1_2)
 
 LengthInputCompressedEvaluate3Rule:
 SatisfiedLengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
--> hasDimensionLength_L_unit_mm(?li, ?L_max1_1)
+-> has3(?li, ?L_max1_1)
 
 LengthInputCompressedEvaluate4Rule:
 SatisfiedLengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
--> hasDimensionLength_L_unit_mm(?li, ?L_max1_2)
+-> has3(?li, ?L_max1_2)
 
 
 
