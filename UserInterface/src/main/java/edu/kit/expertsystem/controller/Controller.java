@@ -207,20 +207,19 @@ public class Controller {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 String currentSelection = resultWrapper.orderBy.getText();
-                if (currentSelection.length() < 2) {
-                    return;
-                }
-                String displayName = currentSelection.substring(0, currentSelection.length() - 2);
+                if (currentSelection.length() > 2) {
+                    String displayName = currentSelection.substring(0, currentSelection.length() - 2);
 
-                Collections.sort(resultWrapper.results,
-                        Comparator.comparingDouble(result -> result.requirements.stream()
-                                .filter(req -> resultWrapper.displayNameToIriMap.get(displayName)
-                                        .equals(req.resultIRI))
-                                .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result)
-                                .orElse(-Double.MAX_VALUE)));
+                    Collections.sort(resultWrapper.results,
+                            Comparator.comparingDouble(result -> result.requirements.stream()
+                                    .filter(req -> resultWrapper.displayNameToIriMap.get(displayName)
+                                            .equals(req.resultIRI))
+                                    .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result)
+                                    .orElse(-Double.MAX_VALUE)));
 
-                if (currentSelection.endsWith("\u25B2")) {
-                    Collections.reverse(resultWrapper.results);
+                    if (currentSelection.endsWith("\u25B2")) {
+                        Collections.reverse(resultWrapper.results);
+                    }
                 }
 
                 resultWrapper.tree.removeAll();

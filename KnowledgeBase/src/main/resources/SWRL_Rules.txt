@@ -83,20 +83,31 @@ MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) 
 
 
 
-//TODO falls unterschiedlihe MC -> MC und MCPosition mit MCMCPositionMatch
-MotorControllerRadialSatisfyRule:
-MCradial(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^ Constants(?con) ^ 
-lengthWiringConduit(?con, ?L_wc) ^ diameterElectronicsCover(?con, ?L_ec) ^ swrlb:add(?L_ges, ?L_wc, ?L_ec)
--> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_ges)
-
-MotorControllerFrontSatisfyRule:
-MCfront(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^ 
-hasDimensionLength_L_unit_mm(?mc, ?L_mc)
--> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_mc)
+MotorControllerSatisfyRule:
+ElmoServoDrive(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
+-> SatisfiedMotorController(?mc)
 
 MotorControllerNoneSatisfyRule:
 NoMC(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
--> SatisfiedMotorController(?mc) ^ hasDimensionLengthElectric_L_uni_mm(?mc, 0.0)
+-> SatisfiedMotorController(?mc)
+
+
+// (has1 = L_axial, has2=D_axial, has3=L_tangential, has4=D_tangential)
+MotorControllerPositionMatchAxialSatisfyRule:
+MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MotorControllerPositionAxial(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ Constants(?con) ^
+hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ lengthMotorControllerAxialOffset(?con, ?L_offset) ^
+swrlb:add(?L_axial, ?D_mc, ?L_offset) ^ swrlb:multiply(?L_mc2, 2.0, ?L_mc) ^ swrlb:subtract(?D_axial, ?L_mc2, ?L_offset)
+-> has1(?mcpm, ?L_axial) ^ has2(?mcpm, ?D_axial) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
+
+MotorControllerPositionMatchTangentialSatisfyRule:
+MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MotorControllerPositionTangential(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ Constants(?con) ^
+hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_tangential) ^ lengthMotorControllerTangentialPCBOffset(?con, ?L_offset) ^
+swrlb:add(?L_tangential, ?L_mc, ?L_offset)
+-> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, ?L_tangential) ^ has4(?mcpm, ?D_tangential) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
+
+MotorControllerPositionMatchNoneSatisfyRule:
+MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MoterControllerPositionNone(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ NoMC(?mc)
+-> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
 
 
 
@@ -270,24 +281,12 @@ swrlb:equal(?d_ib2, ?d_ib1)
 
 
 IncrementalEncoderSatisfy1Rule:
-NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
-hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
--> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, ?L_iec)
+NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false)
+-> SatisfiedIncrementalEncoder(?ie)
 
 IncrementalEncoderSatisfy2Rule:
-NoIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, false) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
-hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
--> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, 0.0)
-
-IncrementalEncoderSatisfy3Rule:
-WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
-hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
--> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, ?L_iec)
-
-IncrementalEncoderSatisfy4Rule:
-WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
-hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) 
--> SatisfiedIncrementalEncoder(?ie) ^ has1(?ie, 0.0)
+WithIE(?ie) ^ CurrentRequirements(?r) ^ needIncrementalEncoderReq(?r, ?ier) ^ swrlb:equal(?ier, true)
+-> SatisfiedIncrementalEncoder(?ie)
 
 
 
@@ -490,17 +489,19 @@ swrlb:lessThanOrEqual(?L_max3_1, ?L_max3_2)
 
 
 
-//TODO only stump -> move calc from length here and add there
+//TODO need to include formular. So is not right
 LengthElektroSatisfyRule:
-LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs)
--> SatisfiedLengthElektro(?le)
+LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasIncrementalEncoder(?li, ?ie) ^
+has1(?mcpm, ?L_axial) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^
+swrlb:add(?L_le, ?L_axial, ?L_iec)
+-> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
 
 
 
 LengthCalcRule:
-Length(?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasIncrementalEncoder(?li, ?ie) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorController(?di, ?mc) ^
-hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionLength_L_unit_mm(?lofs, ?L_lofs) ^ has1(?ie, ?L_iec) ^ hasDimensionLengthElectric_L_uni_mm(?mc, ?L_e)  ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^
-swrlb:add(?L_temp1, ?L_li, ?L_g) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_lofs) ^ swrlb:add(?L_temp3, ?L_temp2, ?L_iec) ^ swrlb:add(?L_ges, ?L_temp3, ?L_e)
+Length(?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasIncrementalEncoder(?li, ?ie) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^
+hasDimensionLength_L_unit_mm(?le, ?L_le) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionLength_L_unit_mm(?lofs, ?L_lofs) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^
+swrlb:add(?L_temp1, ?L_li, ?L_g) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_lofs) ^ swrlb:add(?L_ges, ?L_temp2, ?L_le)
 -> hasDimensionLength_L_unit_mm(?l, ?L_ges)
 
 
@@ -513,8 +514,8 @@ Length(?l) ^ hasDimensionLength_L_unit_mm(?l, ?L_ges) ^ CurrentRequirements(?r) 
 
 
 DiameterInputLinearCalcRule:
-DiameterInputLinear(?di) ^ hasMotor(?di, ?m) ^ hasMotorController(?di, ?mc) ^
-hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m)
+DiameterInputLinear(?di) ^ hasMotor(?di, ?m) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
+hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ has4(?mcpm, ?D_tangential) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmcpm, ?D_tangential, 2.0) ^ swrlb:add(?temp, ?dec, ?dmcpm) ^ swrlb:add(?d_input, ?temp, ?D_m)
 -> hasDimensionOuterDiameter_D_unit_mm(?di, ?d_input)
 
 
@@ -633,7 +634,7 @@ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(
 
 
 SACunitWeightCalcRule:
-SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorController(?di, ?mc) ^ hasIncrementalEncoder(?li, ?ie) ^ hasMotor(?di, ?m) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasScrew(?lofs, ?s_lofs) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasScrew(?docs, ?s_gs) ^ hasDiameterOutput(?docs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalShaft(?dob, ?ts) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
+SACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasIncrementalEncoder(?li, ?ie) ^ hasMotor(?di, ?m) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasScrew(?lofs, ?s_lofs) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasScrew(?docs, ?s_gs) ^ hasDiameterOutput(?docs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalShaft(?dob, ?ts) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
 hasWeight_m_unit_kg(?m, ?m_m) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ hasWeight_m_unit_kg(?db, ?m_db) ^ hasWeight_m_unit_kg(?ob, ?m_ob) ^ hasWeight_m_unit_kg(?ab, ?m_ab) ^
 swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?temp2, ?temp1, ?m_db) ^ swrlb:add(?temp3, ?temp2, ?m_ab) ^ swrlb:add(?m_ges, ?temp3, ?m_ob)
 -> hasWeight_m_unit_kg(?sac, ?m_ges)
@@ -648,8 +649,8 @@ SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ Satis
 
 
 SACunitIsComposedOfRule:
-SatisfiedSACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorController(?di, ?mc) ^ hasIncrementalEncoder(?li, ?ie) ^ hasMotor(?di, ?m) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasScrew(?lofs, ?s_lofs) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasScrew(?docs, ?s_gs) ^ hasDiameterOutput(?docs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalShaft(?dob, ?ts) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
--> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularScrew(?s_gs) ^ isComposedOfGearBoxCircularScrew(?sac, ?s_gs) ^ GearBoxFlexScrew(?s_lofs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_lofs) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfTorsionalShaft(?sac, ?ts) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfLengthInput(?sac, ?li)
+SatisfiedSACunit(?sac) ^ hasDiameter(?sac, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasIncrementalEncoder(?li, ?ie) ^ hasMotor(?di, ?m) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasScrew(?lofs, ?s_lofs) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasScrew(?docs, ?s_gs) ^ hasDiameterOutput(?docs, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCB(?abspcb, ?spcb) ^ hasOutputBearingScrewMatch(?dob, ?obs) ^ hasTorsionalShaft(?dob, ?ts) ^ hasOutputBearing(?obs, ?ob) ^ hasScrew(?obs, ?s_ob) ^
+-> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularScrew(?s_gs) ^ isComposedOfGearBoxCircularScrew(?sac, ?s_gs) ^ GearBoxFlexScrew(?s_lofs) ^  isComposedOfGearBoxFlexScrew(?sac, ?s_lofs) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfTorsionalShaft(?sac, ?ts) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfLengthInput(?sac, ?li)
 
 
 
