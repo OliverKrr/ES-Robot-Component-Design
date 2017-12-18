@@ -512,35 +512,37 @@ Length(?l) ^ hasDimensionLength_L_unit_mm(?l, ?L_ges) ^ CurrentRequirements(?r) 
 
 
 
-DiameterInputCalcRule:
-DiameterInput(?di) ^ hasMotor(?di, ?m) ^ hasMotorController(?di, ?mc) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m) -> hasDimensionOuterDiameter_D_unit_mm(?di, ?d_input)
+DiameterInputLinearCalcRule:
+DiameterInputLinear(?di) ^ hasMotor(?di, ?m) ^ hasMotorController(?di, ?mc) ^
+hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ CurrentRequirements(?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:multiply(?dmc, ?D_mc, 2.0) ^ swrlb:add(?temp, ?dec, ?dmc) ^ swrlb:add(?d_input, ?temp, ?D_m)
+-> hasDimensionOuterDiameter_D_unit_mm(?di, ?d_input)
 
 
 
-DiameterInputSatisfyRule:
-DiameterInput(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInput(?di)
+DiameterInputLinearSatisfyRule:
+DiameterInputLinear(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInputLinear(?di)
 
 
 
 
-DiameterOutputCalcRule:
-DiameterOutput(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+DiameterOutputLinearCalcRule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?srtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ CurrentRequirements(?r) ^
 hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?D_scp) ^ hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^  hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
 swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?D_scp, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?D_max2, ?D_oc2, ?D_ab)
 -> hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2)
 
 
 
-DiameterOutputEvaluate1Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
+DiameterOutputLinearEvaluate1Rule:
+DiameterOutputLinear(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
 
-DiameterOutputEvaluate2Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
+DiameterOutputLinearEvaluate2Rule:
+DiameterOutputLinear(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
 
 
 
-DiameterOutputSatisfyRule:
-DiameterOutput(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutput(?do)
+DiameterOutputLinearSatisfyRule:
+DiameterOutputLinear(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutputLinear(?do)
 
 
 
