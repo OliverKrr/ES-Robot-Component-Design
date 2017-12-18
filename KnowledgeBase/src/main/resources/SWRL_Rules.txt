@@ -83,6 +83,25 @@ MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) 
 
 
 
+
+RequirementExternCabeling1Rule:
+CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
+swrlb:equal(?ncr, false) ^ swrlb:equal(?D, 0.0)
+-> needExternCabeling(?r, true)
+
+RequirementExternCabeling2Rule:
+CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^
+swrlb:equal(?ncr, true)
+-> needExternCabeling(?r, false)
+
+RequirementExternCabeling3Rule:
+CurrentRequirements(?r) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
+swrlb:notEqual(?D, 0.0)
+-> needExternCabeling(?r, false)
+
+
+
+
 MotorControllerSatisfyRule:
 ElmoServoDrive(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
 -> SatisfiedMotorController(?mc)
@@ -255,12 +274,44 @@ swrlb:equal(?d_ib2, ?d_ib1)
 
 
 
-DiameterInputDriveBearingMatchCompressedSatisfyRule:
-DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^
-hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_ib) ^ thicknessMotorShaft(?con, ?tms_con) ^
+DiameterInputDriveBearingMatchCompressedSatisfy1Rule:
+DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_ib, ?temp)
+swrlb:lessThanOrEqual(?D_db, ?temp) ^
+needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, true) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^
+swrlb:greaterThanOrEqual(?d_db, ?tis_con)
 -> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
+DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
+DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
+swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
+swrlb:lessThanOrEqual(?D_db, ?temp) ^
+needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
+hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w)
+swrlb:multiply(?tsrs_con2, 2.0, ?tsrs_con) ^ swrlb:add(?temp2, ?d_sr, ?tsrs_con2) ^ swrlb:add(?d_max_2, ?temp2, ?trsd_con) ^
+swrlb:greaterThan(?D_w, ?d_max_2) ^
+swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need, ?tis_con2, ?D_w) ^
+swrlb:greaterThanOrEqual(?d_db, ?d_need)
+-> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
+DiameterInputDriveBearingMatchCompressedSatisfy3Rule:
+DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
+swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
+swrlb:lessThanOrEqual(?D_db, ?temp) ^
+needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
+hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?gsrtsabspcb, ?srtsabspcb) ^ hasSlipRingTorqueSensorMatch(?srtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w)
+swrlb:multiply(?tsrs_con2, 2.0, ?tsrs_con) ^ swrlb:add(?temp2, ?d_sr, ?tsrs_con2) ^ swrlb:add(?d_max_2, ?temp2, ?trsd_con) ^
+swrlb:lessThanOrEqual(?D_w, ?d_max_2) ^
+swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need, ?tis_con2, ?d_max_2) ^
+swrlb:greaterThanOrEqual(?d_db, ?d_need)
+-> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
 
 
 DiameterInputDriveBearingMatchCompressedUnsatisfiedRule:
@@ -341,16 +392,10 @@ swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 
 
 
-AbsolutEncoderWithSatisfy1Rule:
+AbsolutEncoderWithSatisfyRule:
 AbsolutEncoderMBAD01_05(?ab) ^ CurrentRequirements(?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^ needContinuousRotationReq(?r, ?ncr) ^
-swrlb:equal(?ab_r, true) ^ swrlb:equal(?ncr, true)
--> SatisfiedAbsoluteEncoder(?ab)
-
-AbsolutEncoderWithSatisfy2Rule:
-AbsolutEncoderMBAD01_05(?ab) ^ CurrentRequirements(?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
-swrlb:equal(?ab_r, true) ^ swrlb:greaterThan(?D, 0.0)
+needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabeling(?r, ?nec) ^
+swrlb:equal(?ab_r, true) ^ swrlb:equal(?nec, false)
 -> SatisfiedAbsoluteEncoder(?ab)
 
 
@@ -363,8 +408,8 @@ swrlb:equal(?ab_r, false)
 
 AbsolutEncoderOnAxisSatisfyRule:
 AbsolutEncoderOnAxis(?ab) ^ CurrentRequirements(?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^ needContinuousRotationReq(?r, ?ncr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
-swrlb:equal(?ab_r, true) ^ swrlb:equal(?ncr, false) ^ swrlb:equal(?D, 0.0)
+needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabeling(?r, ?nec) ^
+swrlb:equal(?ab_r, true) ^ swrlb:equal(?nec, true)
 -> SatisfiedAbsoluteEncoder(?ab)
 
 
