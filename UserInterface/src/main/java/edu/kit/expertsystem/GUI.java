@@ -295,6 +295,8 @@ public class GUI {
 
     private void createErrorText() {
         errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+        errorText.setFont(SWTResourceManager.getFont("Courier New",
+                GuiHelper.getFontHeight(errorText.getFont()), SWT.NORMAL));
         errorText.setEditable(false);
         MyAppenderForGui lastInstance = MyAppenderForGui.getLastInstance();
         if (lastInstance != null) {

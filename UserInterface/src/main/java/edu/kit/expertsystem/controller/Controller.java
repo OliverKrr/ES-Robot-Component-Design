@@ -207,6 +207,9 @@ public class Controller {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 String currentSelection = resultWrapper.orderBy.getText();
+                if (currentSelection.length() < 2) {
+                    return;
+                }
                 String displayName = currentSelection.substring(0, currentSelection.length() - 2);
 
                 Collections.sort(resultWrapper.results,

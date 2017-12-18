@@ -20,6 +20,7 @@ import openllet.owlapi.OWLGenericTools;
 public class ReasoningTree {
 
     public static final String PermutationSeparator = "--";
+    private static final int NUMBER_OF_SPACES = 3;
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
@@ -106,12 +107,20 @@ public class ReasoningTree {
                         + " with number of children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
-            logger.info(
-                    "Add " + numberOfPermutations + " individuals for: " + treeClass.getIRI().getShortForm());
+            logger.info("Add " + getSpacesFor(numberOfPermutations) + numberOfPermutations
+                    + " individuals for: " + treeClass.getIRI().getShortForm());
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
             hasSomethingChanged = true;
         }
+    }
+
+    private String getSpacesFor(int value) {
+        String ret = "";
+        for (int i = String.valueOf(value).length(); i <= NUMBER_OF_SPACES; ++i) {
+            ret += " ";
+        }
+        return ret;
     }
 
     private List<ChildInstancesForPermutation> getChildrenForPermutation(OWLClass treeClass) {
