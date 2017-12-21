@@ -259,6 +259,12 @@ public class MainReasoner {
         if (component.nameOfInstance.contains(ReasoningTree.PermutationSeparator)) {
             component.nameOfInstance = component.nameOfInstance.substring(0,
                     component.nameOfInstance.indexOf(ReasoningTree.PermutationSeparator));
+            if (component.nameOfInstance.contains(Vocabulary.CLASS_LINEAR.getIRI().getShortForm())) {
+                component.nameOfInstance = Vocabulary.CLASS_LINEAR.getIRI().getShortForm();
+            } else if (component.nameOfInstance
+                    .contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
+                component.nameOfInstance = Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm();
+            }
         }
         genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty())
                 .forEach(range -> component.orderPosition = helper
