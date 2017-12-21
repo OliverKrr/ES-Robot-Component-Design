@@ -107,8 +107,6 @@ public class ReasoningTree {
                         + " with number of children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
-            logger.info("Add " + getSpacesFor(numberOfPermutations) + numberOfPermutations
-                    + " individuals for: " + treeClass.getIRI().getShortForm());
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
             hasSomethingChanged = true;
@@ -155,6 +153,7 @@ public class ReasoningTree {
         List<PermutationOfChildInstances> permutations = new ArrayList<>(numberOfPermutations);
         buildPermutations(permutations, childrenForPermutation, new int[childrenForPermutation.size()], 0);
 
+        int realAddedIndis = 0;
         for (PermutationOfChildInstances permutation : permutations) {
             String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + "Ind";
             OWLNamedIndividual parentInd = genericTool.getFactory()
@@ -162,6 +161,7 @@ public class ReasoningTree {
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
                 // logger.debug("\tAdd individual: " + parentInd.getIRI().getShortForm());
+                ++realAddedIndis;
                 for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
                     helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(
                             childInd.propertyFromParent, parentInd, childInd.childIndividual));
@@ -169,6 +169,8 @@ public class ReasoningTree {
             }
 
         }
+        logger.info("Add " + getSpacesFor(realAddedIndis) + realAddedIndis + " individuals for: "
+                + treeClass.getIRI().getShortForm());
     }
 
     private void buildPermutations(List<PermutationOfChildInstances> permutations,

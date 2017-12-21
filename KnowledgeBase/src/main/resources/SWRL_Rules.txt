@@ -751,20 +751,20 @@ swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2
 
 
 DiameterInputOutputCompressedEvaluate1Rule:
-DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv)
+DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
 swrlb:greaterThan(?D_ab, ?D_spcb)
 -> hasMax2_1(?di, ?D_ab)
 
 DiameterInputOutputCompressedEvaluate2Rule:
-DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv)
+DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
 swrlb:lessThanOrEqual(?D_ab, ?D_spcb)
 -> hasMax2_1(?di, ?D_spcb)
 
 
 DiameterInputOutputCompressedEvaluateAndCalc1Rule:
-DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv)
+DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
 hasMax2_1(?di, ?D_max2_1) ^ has2(?mcpm, ?D_axial) ^
 swrlb:greaterThan(?D_max2_1, ?D_axial) ^
 CurrentRequirements(?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
@@ -772,7 +772,7 @@ swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2
 -> hasMax1_1(?di, ?D_drive_electro)
 
 DiameterInputOutputCompressedEvaluateAndCalc2Rule:
-DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv)
+DiameterInputOutputCompressed(?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
 hasMax2_1(?di, ?D_max2_1) ^ has2(?mcpm, ?D_axial) ^
 swrlb:lessThanOrEqual(?D_max2_1, ?D_axial) ^
 CurrentRequirements(?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
@@ -795,8 +795,11 @@ DiameterInputEvaluate2Rule:
 DiameterInput(?di) ^ hasMax1_1(?di, ?D_max1) ^ hasMax1_2(?di, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> hasDimensionOuterDiameter_D_unit_mm(?di, ?D_max2)
 
 
-DiameterInputSatisfyRule:
-DiameterInput(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInputOutputLinear(?di)
+DiameterInputLinearSatisfyRule:
+DiameterInputOutputLinear(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInputOutputLinear(?di)
+
+DiameterInputCompressedSatisfyRule:
+DiameterInputOutputCompressed(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInputOutputCompressed(?di)
 
 
 
