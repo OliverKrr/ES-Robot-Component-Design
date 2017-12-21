@@ -111,22 +111,22 @@ NoMC(?mc) ^ CurrentRequirements(?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:e
 -> SatisfiedMotorController(?mc)
 
 
-// (has1 = L_axial, has2=D_axial, has3=L_tangential, has4=D_tangential)
+// (has1 = L_axial, has2=D_axial, has3=L_tangential, has4=D_tangential, has5=L_wiringConduit)
 MotorControllerPositionMatchAxialSatisfyRule:
 MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MotorControllerPositionAxial(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ Constants(?con) ^
-hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ lengthMotorControllerAxialOffset(?con, ?L_offset) ^
-swrlb:add(?L_axial, ?D_mc, ?L_offset) ^ swrlb:multiply(?L_mc2, 2.0, ?L_mc) ^ swrlb:subtract(?D_axial, ?L_mc2, ?L_offset)
--> has1(?mcpm, ?L_axial) ^ has2(?mcpm, ?D_axial) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
+hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ lengthMotorControllerAxialOffset(?con, ?L_offset) ^ diameterMotorControllerAxialOffset(?con, ?D_offset) ^
+swrlb:add(?L_axial, ?D_mc, ?L_offset) ^ swrlb:add(?D_axial, ?L_mc, ?D_offset) ^
+-> has1(?mcpm, ?L_axial) ^ has2(?mcpm, ?D_axial) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ has5(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
 
 MotorControllerPositionMatchTangentialSatisfyRule:
 MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MotorControllerPositionTangential(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ Constants(?con) ^
-hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_tangential) ^ lengthMotorControllerTangentialPCBOffset(?con, ?L_offset) ^
+hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_tangential) ^ lengthMotorControllerTangentialPCBOffset(?con, ?L_offset) ^ lengthWiringConduit(?con, ?L_wc_con) ^
 swrlb:add(?L_tangential, ?L_mc, ?L_offset)
--> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, ?L_tangential) ^ has4(?mcpm, ?D_tangential) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
+-> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, ?L_tangential) ^ has4(?mcpm, ?D_tangential) ^ has5(?mcpm, ?L_wc_con) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
 
 MotorControllerPositionMatchNoneSatisfyRule:
 MotorControllerPositionMatch(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MoterControllerPositionNone(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ NoMC(?mc)
--> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
+-> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ has5(?mcpm, 0.0) ^ SatisfiedMotorControllerPositionMatch(?mcpm)
 
 
 
@@ -534,13 +534,13 @@ LengthOutputFlexScrewMatchOutputLinear(?lofs) ^ hasDiameterOutputBearing(?lofs, 
 hasDimensionScrewInnerDiameterM_d_unit_mm(?s_lofs, ?d_s_lofs) ^  hasDimensionLengthFaktor(?ts, ?Lf_ts) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_lofsie) ^
 lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
 swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L_2kerbe) ^ swrlb:multiply(?L_torWelleTemp2, ?d_s_lofs, 1.5) ^ swrlb:multiply(?L_torWelleTemp3, 2.0, ?L_torWelleTemp2) ^ swrlb:add(?L_torWelleTemp4, ?L_torWelleTemp1, ?L_torWelleTemp3) ^ swrlb:multiply(?L_torWelle, ?Lf_ts, ?L_torWelleTemp4)
--> has2(?lofs, ?L_torWelle) ^ has3(?lofs, ?L_lofsie) ^ has4(?lofs, 0.0)
+-> has2(?lofs, ?L_torWelle) ^ has3(?lofs, ?L_lofsie) ^ has4(?lofs, 0.0) ^ has5(?lofs, 0.0)
 
 
 LengthOutputFlexScrewMatchOutputCompressedCalcRule:
-LengthOutputFlexScrewMatchOutputCompressed(?lofs) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasDiameterOutput(?docs, ?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^
-hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap)
--> has2(?lofs, 0.0) ^ has3(?lofs, 0.0) ^ has4(?lofs, ?L_overlap)
+LengthOutputFlexScrewMatchOutputCompressed(?lofs) ^ hasDiameterOutputBearing(?lofs, ?dob) ^ hasDiameterOutputCircularScrewMatch(?dob, ?docs) ^ hasDiameterOutput(?docs, ?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^
+hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide)
+-> has2(?lofs, 0.0) ^ has3(?lofs, 0.0) ^ has4(?lofs, ?L_overlap) ^ has5(?lofs, ?L_elecInnerOnDriveSide)
 
 
 
@@ -611,17 +611,52 @@ swrlb:lessThanOrEqual(?L_max3_1, ?L_max3_2)
 
 
 
-//TODO need to include formular. So is not right
-LengthElektroSatisfyRule:
-LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^ hasIncrementalEncoder(?li, ?ie) ^
-has1(?mcpm, ?L_axial) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^
-swrlb:add(?L_le, ?L_axial, ?L_iec)
+LengthElektroCalc1Rule:
+LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasIncrementalEncoder(?li, ?ie) ^
+hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ab, ?L_abc)
+swrlb:greaterThan(?L_iec, ?L_abc)
+-> has1(?le, ?L_iec)
+
+LengthElektroCalc2Rule:
+LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasIncrementalEncoder(?li, ?ie) ^
+hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ab, ?L_abc)
+swrlb:lessThanOrEqual(?L_iec, ?L_abc)
+-> has1(?le, ?L_abc)
+
+
+LengthElektroSatisfy1Rule:
+LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
+has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lofs, ?L_elecInnerOnDriveSide) ^
+swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
+swrlb:greaterThan(?L_1, ?L_wiringConduit)
+-> hasMax2_2(?le, ?L_1)
+
+LengthElektroSatisfy2Rule:
+LengthElektro(?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotorControllerPositionMatch(?di, ?mcpm) ^
+has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lofs, ?L_elecInnerOnDriveSide) ^
+swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
+swrlb:lessThanOrEqual(?L_1, ?L_wiringConduit)
+-> hasMax2_2(?le, ?L_wiringConduit)
+
+
+LengthElektroSatisfy3Rule:
+LengthElektro(?le) ^ CurrentRequirements(?r) ^
+hasMax2_2(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+swrlb:greaterThan(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
+-> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
+
+LengthElektroSatisfy4Rule:
+LengthElektro(?le) ^ CurrentRequirements(?r) ^
+hasMax2_2(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_max2_2, ?t_req_c)
 -> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
 
 
 
 LengthCalcRule:
-Length(?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasIncrementalEncoder(?li, ?ie) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^
+Length(?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutputFlexScrewMatch(?le, ?lofs) ^ hasLengthInput(?lofs, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^
 hasDimensionLength_L_unit_mm(?le, ?L_le) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionLength_L_unit_mm(?lofs, ?L_lofs) ^ hasDimensionLength_L_unit_mm(?g, ?L_g) ^
 swrlb:add(?L_temp1, ?L_li, ?L_g) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_lofs) ^ swrlb:add(?L_ges, ?L_temp2, ?L_le)
 -> hasDimensionLength_L_unit_mm(?l, ?L_ges)
