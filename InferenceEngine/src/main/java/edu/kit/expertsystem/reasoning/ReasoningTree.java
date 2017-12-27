@@ -60,9 +60,6 @@ public class ReasoningTree {
             // TODO make graph of classes and iterate from bottom to top
             reasoningTreeElements
                     .forEach(treeClassAxiom -> handleTreeItem(treeClassAxiom.getSubClass().asOWLClass()));
-            if (hasSomethingChanged) {
-                helper.flush();
-            }
 
             if (!interrupted.get()) {
                 // the order is important
@@ -74,8 +71,8 @@ public class ReasoningTree {
                         .forEach(
                                 possibleUnsatiesfiedSuperClass -> hasSomethingChanged |=
                                         reasoningTreeSpecialCasesHandler
-                                        .handlePossibleUnsatisfied(
-                                                possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
+                                                .handlePossibleUnsatisfied(
+                                                        possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
 
                 if (!reasoningTreeSpecialCasesHandler.didBackupOnLastRun()) {
                     // If we do backup for possible unsatisfied, we do not delete stuff. In the next
@@ -84,8 +81,8 @@ public class ReasoningTree {
                             .forEach(
                                     possibleSatisfiedSuperClass -> hasSomethingChanged |=
                                             reasoningTreeSpecialCasesHandler
-                                            .handlePossibleSatisfied(
-                                                    possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
+                                                    .handlePossibleSatisfied(
+                                                            possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
                 }
             }
         } while (hasSomethingChanged && !interrupted.get());
@@ -111,7 +108,6 @@ public class ReasoningTree {
         if (numberOfPermutations > 0) {
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
-            hasSomethingChanged = true;
         }
     }
 
@@ -144,8 +140,10 @@ public class ReasoningTree {
                             double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
                             if (timeNeeded >= TIME_NEEDED_THRESHOLD) {
                                 logger.debug(
-                                        "Time needed for " + axiom.getSuperClass().classesInSignature()
-                                                .findAny().get().getIRI().getShortForm() + " : " + timeNeeded + "s");
+                                        "Time needed for " + treeClass.getIRI().getShortForm() + " and child" +
+                                                axiom.getSuperClass().classesInSignature()
+                                                .map(clas -> clas.getIRI().getShortForm()).reduce("", (a, b) -> a +
+                                                        " " + b) + ": " + timeNeeded + "s");
                             }
                         });
         return childrenForPermutation;
@@ -179,6 +177,10 @@ public class ReasoningTree {
                 }
             }
 
+        }
+        if (realAddedIndis > 0){
+            hasSomethingChanged = true;
+            helper.flush();
         }
         logger.info("Add " + getSpacesFor(realAddedIndis) + realAddedIndis + " individuals for: "
                 + treeClass.getIRI().getShortForm());
