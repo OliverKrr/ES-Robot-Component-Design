@@ -960,6 +960,19 @@ swrlb:equal(?D_dob1, ?D_dob2)
 -> PossibleSatisfiedDiameterOutputBearingOutputCompressed(?dob1) ^ PossibleSatisfiedDiameterOutputBearingOutputCompressed(?dob2)
 
 
+DiameterOutputBearingOutputCompressedEvaluate1Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do)
+hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ has1(?do, ?D_do)
+swrlb:greaterThan(?D_dob, ?D_do)
+-> hasDimensionOuterDiameter_D_unit_mm(?do, ?D_dob)
+
+DiameterOutputBearingOutputCompressedEvaluate2Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do)
+hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ has1(?do, ?D_do)
+swrlb:lessThanOrEqual(?D_dob, ?D_do)
+-> hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do)
+
+
 
 
 DiameterEvaluate1Rule:
