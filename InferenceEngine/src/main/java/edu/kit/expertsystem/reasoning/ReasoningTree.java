@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ReasoningTree {
 
     public static final String PermutationSeparator = "--";
-    public static final double TIME_NEEDED_THRESHOLD = 0.5;
+    public static final double TIME_NEEDED_THRESHOLD = 5.0;
     private static final int NUMBER_OF_SPACES = 3;
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
