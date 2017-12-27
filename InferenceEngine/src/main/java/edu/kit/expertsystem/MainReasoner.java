@@ -284,7 +284,8 @@ public class MainReasoner {
                         .subClassAxiomsForSubClass(axiomOfReasoningTree.getSubClass().asOWLClass())
                         .anyMatch(subClassOfReasoningTreeAxiom -> subClassOfReasoningTreeAxiom.getSuperClass()
                                 .objectPropertiesInSignature().anyMatch(
-                                        obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                        obOfSubClassOfReasoingTree -> Vocabulary
+                                                .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
                                                 .equals(obOfSubClassOfReasoingTree))))
                 .forEach(filteredAxiomOfReasoningTree -> {
                     UnitToReason unitToReason = new UnitToReason();
@@ -302,7 +303,8 @@ public class MainReasoner {
                                             .asOWLClass().getIRI().getIRIString();
                                 } else {
                                     throw new RuntimeException(
-                                            "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
+                                            "UnitsToReasone are only allowed to have one child to identify " +
+                                                    "resultingUnit (satisfied), found at least: "
                                                     + unitToReason.iriOfResultUnit + " and "
                                                     + classToReasonAxiom.getSubClass().asOWLClass().getIRI()
                                                     .getIRIString());

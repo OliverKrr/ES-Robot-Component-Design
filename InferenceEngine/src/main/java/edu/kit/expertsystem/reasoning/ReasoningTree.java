@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 public class ReasoningTree {
 
     public static final String PermutationSeparator = "--";
+    public static final double TIME_NEEDED_THRESHOLD = 0.5;
     private static final int NUMBER_OF_SPACES = 3;
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
@@ -71,7 +72,8 @@ public class ReasoningTree {
 
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED)
                         .forEach(
-                                possibleUnsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                possibleUnsatiesfiedSuperClass -> hasSomethingChanged |=
+                                        reasoningTreeSpecialCasesHandler
                                         .handlePossibleUnsatisfied(
                                                 possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
 
@@ -80,7 +82,8 @@ public class ReasoningTree {
                     // run we should first check for unsatisfied and then possibleSatisfied
                     genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
                             .forEach(
-                                    possibleSatisfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                    possibleSatisfiedSuperClass -> hasSomethingChanged |=
+                                            reasoningTreeSpecialCasesHandler
                                             .handlePossibleSatisfied(
                                                     possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
                 }
@@ -128,14 +131,23 @@ public class ReasoningTree {
                                 .anyMatch(propSupers -> Vocabulary.OBJECT_PROPERTY_HASCHILD
                                         .equals(propSupers.getSuperProperty()))))
                 .forEach(
-                        axiom -> childrenForPermutation
-                                .add(new ChildInstancesForPermutation(
-                                        genericTool.getReasoner()
-                                                .instances(axiom.getSuperClass().classesInSignature()
-                                                        .findAny().get())
-                                                .collect(Collectors.toList()),
-                                        axiom.getSuperClass().objectPropertiesInSignature().findAny()
-                                                .get())));
+                        axiom -> {
+                            long startTime = System.currentTimeMillis();
+                            childrenForPermutation
+                                    .add(new ChildInstancesForPermutation(
+                                            genericTool.getReasoner()
+                                                    .instances(axiom.getSuperClass().classesInSignature()
+                                                            .findAny().get())
+                                                    .collect(Collectors.toList()),
+                                            axiom.getSuperClass().objectPropertiesInSignature().findAny()
+                                                    .get()));
+                            double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
+                            if (timeNeeded >= TIME_NEEDED_THRESHOLD) {
+                                logger.debug(
+                                        "Time needed for " + axiom.getSuperClass().classesInSignature()
+                                                .findAny().get().getIRI().getShortForm() + " : " + timeNeeded + "s");
+                            }
+                        });
         return childrenForPermutation;
     }
 
@@ -173,14 +185,16 @@ public class ReasoningTree {
     }
 
     private void buildPermutations(List<PermutationOfChildInstances> permutations,
-                                   List<ChildInstancesForPermutation> childrenForPermutation, int[] currentPositions, int position) {
+                                   List<ChildInstancesForPermutation> childrenForPermutation, int[] currentPositions,
+                                   int position) {
         if (position != currentPositions.length) {
             for (int i = 0; i < childrenForPermutation.get(position).childInstances.size(); i++) {
                 currentPositions[position] = i;
                 buildPermutations(permutations, childrenForPermutation, currentPositions, position + 1);
             }
         } else {
-            ChildIndividualWithObjectPropertyFromParent[] indiToCreate = new ChildIndividualWithObjectPropertyFromParent[currentPositions.length];
+            ChildIndividualWithObjectPropertyFromParent[] indiToCreate = new
+                    ChildIndividualWithObjectPropertyFromParent[currentPositions.length];
             String name = PermutationSeparator;
             for (int i = 0; i < currentPositions.length; i++) {
                 ChildInstancesForPermutation childrend = childrenForPermutation.get(i);

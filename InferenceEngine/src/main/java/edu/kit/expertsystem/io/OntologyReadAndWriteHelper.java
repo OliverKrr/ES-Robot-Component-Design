@@ -26,7 +26,8 @@ public class OntologyReadAndWriteHelper {
     private static final String domainFileName = "SAC_Domain_Ontology" + fileEnding;
     private static final String reasoningFileName = "SAC_Reasoning_Ontology" + fileEnding;
 
-    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src\\main\\resources\\";
+    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src" +
+            "\\main\\resources\\";
 
     private static final Logger logger = LogManager.getLogger(OntologyReadAndWriteHelper.class);
 

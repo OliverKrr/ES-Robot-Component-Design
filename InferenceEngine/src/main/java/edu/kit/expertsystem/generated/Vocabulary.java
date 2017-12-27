@@ -25,7 +25,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class AC7183.<p>
      */
-    public static final OWLClass CLASS_AC7183 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AC7183"));
+    public static final OWLClass CLASS_AC7183 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#AC7183"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AC7195-XX
@@ -34,7 +35,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class AC7195_XX.<p>
      */
-    public static final OWLClass CLASS_AC7195_XX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AC7195-XX"));
+    public static final OWLClass CLASS_AC7195_XX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#AC7195-XX"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05
@@ -43,7 +45,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ABSOLUTENCODERMBAD01_05.<p>
      */
-    public static final OWLClass CLASS_ABSOLUTENCODERMBAD01_05 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"));
+    public static final OWLClass CLASS_ABSOLUTENCODERMBAD01_05 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis
@@ -52,7 +55,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ABSOLUTENCODERONAXIS.<p>
      */
-    public static final OWLClass CLASS_ABSOLUTENCODERONAXIS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis"));
+    public static final OWLClass CLASS_ABSOLUTENCODERONAXIS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder
@@ -61,7 +65,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ABSOLUTEENCODER.<p>
      */
-    public static final OWLClass CLASS_ABSOLUTEENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"));
+    public static final OWLClass CLASS_ABSOLUTEENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing
@@ -70,7 +75,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class BEARING.<p>
      */
-    public static final OWLClass CLASS_BEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"));
+    public static final OWLClass CLASS_BEARING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Bearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrushlessDcMotor
@@ -79,7 +85,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class BRUSHLESSDCMOTOR.<p>
      */
-    public static final OWLClass CLASS_BRUSHLESSDCMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrushlessDcMotor"));
+    public static final OWLClass CLASS_BRUSHLESSDCMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#BrushlessDcMotor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_100_2A
@@ -88,7 +95,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_14_100_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_14_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_100_2A"));
+    public static final OWLClass CLASS_CPL_14_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_14_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_50_2A
@@ -97,7 +105,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_14_50_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_14_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_50_2A"));
+    public static final OWLClass CLASS_CPL_14_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_14_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_80_2A
@@ -106,7 +115,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_14_80_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_14_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_14_80_2A"));
+    public static final OWLClass CLASS_CPL_14_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_14_80_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_100_2A
@@ -115,7 +125,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_17_100_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_17_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_100_2A"));
+    public static final OWLClass CLASS_CPL_17_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_17_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_120_2A
@@ -124,7 +135,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_17_120_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_17_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_120_2A"));
+    public static final OWLClass CLASS_CPL_17_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_17_120_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_50_2A
@@ -133,7 +145,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_17_50_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_17_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_50_2A"));
+    public static final OWLClass CLASS_CPL_17_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_17_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_80_2A
@@ -142,7 +155,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_17_80_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_17_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_17_80_2A"));
+    public static final OWLClass CLASS_CPL_17_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_17_80_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_100_2A
@@ -151,7 +165,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_20_100_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_20_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_100_2A"));
+    public static final OWLClass CLASS_CPL_20_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_20_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_120_2A
@@ -160,7 +175,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_20_120_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_20_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_120_2A"));
+    public static final OWLClass CLASS_CPL_20_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_20_120_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_160_2A
@@ -169,7 +185,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_20_160_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_20_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_160_2A"));
+    public static final OWLClass CLASS_CPL_20_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_20_160_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_50_2A
@@ -178,7 +195,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_20_50_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_20_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_50_2A"));
+    public static final OWLClass CLASS_CPL_20_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_20_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_80_2A
@@ -187,7 +205,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_20_80_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_20_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_20_80_2A"));
+    public static final OWLClass CLASS_CPL_20_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_20_80_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_100_2A
@@ -196,7 +215,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_25_100_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_25_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_100_2A"));
+    public static final OWLClass CLASS_CPL_25_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_25_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_120_2A
@@ -205,7 +225,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_25_120_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_25_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_120_2A"));
+    public static final OWLClass CLASS_CPL_25_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_25_120_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_160_2A
@@ -214,7 +235,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_25_160_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_25_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_160_2A"));
+    public static final OWLClass CLASS_CPL_25_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_25_160_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_50_2A
@@ -223,7 +245,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_25_50_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_25_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_50_2A"));
+    public static final OWLClass CLASS_CPL_25_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_25_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_80_2A
@@ -232,7 +255,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_25_80_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_25_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_25_80_2A"));
+    public static final OWLClass CLASS_CPL_25_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_25_80_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_2A
@@ -241,7 +265,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_2A"));
+    public static final OWLClass CLASS_CPL_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_100_2A
@@ -250,7 +275,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_32_100_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_32_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_100_2A"));
+    public static final OWLClass CLASS_CPL_32_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_32_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_120_2A
@@ -259,7 +285,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_32_120_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_32_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_120_2A"));
+    public static final OWLClass CLASS_CPL_32_120_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_32_120_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_160_2A
@@ -268,7 +295,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_32_160_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_32_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_160_2A"));
+    public static final OWLClass CLASS_CPL_32_160_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_32_160_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_50_2A
@@ -277,7 +305,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_32_50_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_32_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_50_2A"));
+    public static final OWLClass CLASS_CPL_32_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_32_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_80_2A
@@ -286,7 +315,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CPL_32_80_2A.<p>
      */
-    public static final OWLClass CLASS_CPL_32_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CPL_32_80_2A"));
+    public static final OWLClass CLASS_CPL_32_80_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CPL_32_80_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_14_100_2A
@@ -295,7 +325,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_14_100_2A.<p>
      */
-    public static final OWLClass CLASS_CSD_14_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_14_100_2A"));
+    public static final OWLClass CLASS_CSD_14_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_14_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_14_50_2A
@@ -304,7 +335,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_14_50_2A.<p>
      */
-    public static final OWLClass CLASS_CSD_14_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_14_50_2A"));
+    public static final OWLClass CLASS_CSD_14_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_14_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_17_100_2A
@@ -313,7 +345,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_17_100_2A.<p>
      */
-    public static final OWLClass CLASS_CSD_17_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_17_100_2A"));
+    public static final OWLClass CLASS_CSD_17_100_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_17_100_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_17_50_2A
@@ -322,7 +355,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_17_50_2A.<p>
      */
-    public static final OWLClass CLASS_CSD_17_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_17_50_2A"));
+    public static final OWLClass CLASS_CSD_17_50_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_17_50_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_100_2A_BB
@@ -331,7 +365,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_20_100_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_20_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_100_2A_BB"));
+    public static final OWLClass CLASS_CSD_20_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_20_100_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_160_2A_BB
@@ -340,7 +375,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_20_160_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_20_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_160_2A_BB"));
+    public static final OWLClass CLASS_CSD_20_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_20_160_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_50_2A_BB
@@ -349,7 +385,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_20_50_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_20_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_20_50_2A_BB"));
+    public static final OWLClass CLASS_CSD_20_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_20_50_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_100_2A_BB
@@ -358,7 +395,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_25_100_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_25_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_100_2A_BB"));
+    public static final OWLClass CLASS_CSD_25_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_25_100_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_160_2A_BB
@@ -367,7 +405,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_25_160_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_25_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_160_2A_BB"));
+    public static final OWLClass CLASS_CSD_25_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_25_160_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_50_2A_BB
@@ -376,7 +415,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_25_50_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_25_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_25_50_2A_BB"));
+    public static final OWLClass CLASS_CSD_25_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_25_50_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_2A
@@ -385,7 +425,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_2A.<p>
      */
-    public static final OWLClass CLASS_CSD_2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_2A"));
+    public static final OWLClass CLASS_CSD_2A = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_100_2A_BB
@@ -394,7 +435,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_32_100_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_32_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_100_2A_BB"));
+    public static final OWLClass CLASS_CSD_32_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_32_100_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_160_2A_BB
@@ -403,7 +445,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_32_160_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_32_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_160_2A_BB"));
+    public static final OWLClass CLASS_CSD_32_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_32_160_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_50_2A_BB
@@ -412,7 +455,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_32_50_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_32_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_32_50_2A_BB"));
+    public static final OWLClass CLASS_CSD_32_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_32_50_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_100_2A_BB
@@ -421,7 +465,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_40_100_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_40_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_100_2A_BB"));
+    public static final OWLClass CLASS_CSD_40_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_40_100_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_160_2A_BB
@@ -430,7 +475,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_40_160_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_40_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_160_2A_BB"));
+    public static final OWLClass CLASS_CSD_40_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_40_160_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_50_2A_BB
@@ -439,7 +485,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_40_50_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_40_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_40_50_2A_BB"));
+    public static final OWLClass CLASS_CSD_40_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_40_50_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_100_2A_BB
@@ -448,7 +495,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_50_100_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_50_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_100_2A_BB"));
+    public static final OWLClass CLASS_CSD_50_100_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_50_100_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_160_2A_BB
@@ -457,7 +505,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_50_160_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_50_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_160_2A_BB"));
+    public static final OWLClass CLASS_CSD_50_160_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_50_160_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_50_2A_BB
@@ -466,7 +515,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CSD_50_50_2A_BB.<p>
      */
-    public static final OWLClass CLASS_CSD_50_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#CSD_50_50_2A_BB"));
+    public static final OWLClass CLASS_CSD_50_50_2A_BB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#CSD_50_50_2A_BB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984
@@ -475,7 +525,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984.<p>
      */
-    public static final OWLClass CLASS_DIN7984 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984"));
+    public static final OWLClass CLASS_DIN7984 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M3
@@ -484,7 +535,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984_M3.<p>
      */
-    public static final OWLClass CLASS_DIN7984_M3 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M3"));
+    public static final OWLClass CLASS_DIN7984_M3 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984_M3"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M4
@@ -493,7 +545,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984_M4.<p>
      */
-    public static final OWLClass CLASS_DIN7984_M4 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M4"));
+    public static final OWLClass CLASS_DIN7984_M4 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984_M4"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M5
@@ -502,7 +555,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984_M5.<p>
      */
-    public static final OWLClass CLASS_DIN7984_M5 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M5"));
+    public static final OWLClass CLASS_DIN7984_M5 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984_M5"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M6
@@ -511,7 +565,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984_M6.<p>
      */
-    public static final OWLClass CLASS_DIN7984_M6 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M6"));
+    public static final OWLClass CLASS_DIN7984_M6 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984_M6"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M8
@@ -520,7 +575,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIN7984_M8.<p>
      */
-    public static final OWLClass CLASS_DIN7984_M8 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DIN7984_M8"));
+    public static final OWLClass CLASS_DIN7984_M8 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DIN7984_M8"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device
@@ -529,7 +585,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DEVICE.<p>
      */
-    public static final OWLClass CLASS_DEVICE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"));
+    public static final OWLClass CLASS_DEVICE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Device"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing
@@ -538,7 +595,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DRIVEBEARING.<p>
      */
-    public static final OWLClass CLASS_DRIVEBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#DriveBearing"));
+    public static final OWLClass CLASS_DRIVEBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#DriveBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElectricMotor
@@ -547,7 +605,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ELECTRICMOTOR.<p>
      */
-    public static final OWLClass CLASS_ELECTRICMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElectricMotor"));
+    public static final OWLClass CLASS_ELECTRICMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ElectricMotor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoServoDrive
@@ -556,7 +615,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ELMOSERVODRIVE.<p>
      */
-    public static final OWLClass CLASS_ELMOSERVODRIVE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoServoDrive"));
+    public static final OWLClass CLASS_ELMOSERVODRIVE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ElmoServoDrive"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoTwitterGold
@@ -565,7 +625,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ELMOTWITTERGOLD.<p>
      */
-    public static final OWLClass CLASS_ELMOTWITTERGOLD = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoTwitterGold"));
+    public static final OWLClass CLASS_ELMOTWITTERGOLD = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ElmoTwitterGold"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing
@@ -574,7 +635,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class EPICYCLICGEARING.<p>
      */
-    public static final OWLClass CLASS_EPICYCLICGEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing"));
+    public static final OWLClass CLASS_EPICYCLICGEARING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#EpicyclicGearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox
@@ -583,7 +645,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARBOX.<p>
      */
-    public static final OWLClass CLASS_GEARBOX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox"));
+    public static final OWLClass CLASS_GEARBOX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearBox"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues
@@ -592,7 +655,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARBOXPROPERTYVALUES.<p>
      */
-    public static final OWLClass CLASS_GEARBOXPROPERTYVALUES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"));
+    public static final OWLClass CLASS_GEARBOXPROPERTYVALUES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio100
@@ -601,7 +665,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIO100.<p>
      */
-    public static final OWLClass CLASS_GEARRATIO100 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio100"));
+    public static final OWLClass CLASS_GEARRATIO100 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatio100"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio120
@@ -610,7 +675,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIO120.<p>
      */
-    public static final OWLClass CLASS_GEARRATIO120 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio120"));
+    public static final OWLClass CLASS_GEARRATIO120 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatio120"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio160
@@ -619,7 +685,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIO160.<p>
      */
-    public static final OWLClass CLASS_GEARRATIO160 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio160"));
+    public static final OWLClass CLASS_GEARRATIO160 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatio160"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio50
@@ -628,7 +695,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIO50.<p>
      */
-    public static final OWLClass CLASS_GEARRATIO50 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio50"));
+    public static final OWLClass CLASS_GEARRATIO50 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatio50"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio80
@@ -637,7 +705,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIO80.<p>
      */
-    public static final OWLClass CLASS_GEARRATIO80 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio80"));
+    public static final OWLClass CLASS_GEARRATIO80 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatio80"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios
@@ -646,7 +715,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARRATIOS.<p>
      */
-    public static final OWLClass CLASS_GEARRATIOS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"));
+    public static final OWLClass CLASS_GEARRATIOS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#GearRatios"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_14
@@ -655,7 +725,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZE_14.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_14 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_14"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_14 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_14"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_17
@@ -664,7 +735,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZE_17.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_17 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_17"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_17 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_17"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_20
@@ -673,7 +745,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZE_20.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_20 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_20"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_20 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_20"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_25
@@ -682,7 +755,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZE_25.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_25 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_25"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_25 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_25"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_32
@@ -691,7 +765,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZE_32.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_32 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_32"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZE_32 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Size_32"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Sizes
@@ -700,7 +775,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CPL_2A_SIZES.<p>
      */
-    public static final OWLClass CLASS_GEAR_CPL_2A_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Sizes"));
+    public static final OWLClass CLASS_GEAR_CPL_2A_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_20
@@ -709,7 +785,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_BB_SIZE_20.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_20 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_20"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_20 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_20"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_25
@@ -718,7 +795,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_BB_SIZE_25.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_25 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_25"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_25 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_25"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_32
@@ -727,7 +805,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_BB_SIZE_32.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_32 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_32"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_32 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_32"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_40
@@ -736,7 +815,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_BB_SIZE_40.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_40 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_40"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_40 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_40"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_50
@@ -745,7 +825,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_BB_SIZE_50.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_50 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_50"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_BB_SIZE_50 = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_BB_Size_50"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_14
@@ -754,7 +835,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_SIZE_14.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_SIZE_14 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_14"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_SIZE_14 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_14"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_17
@@ -763,7 +845,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_SIZE_17.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_SIZE_17 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_17"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_SIZE_17 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Size_17"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Sizes
@@ -772,7 +855,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEAR_CSD_2A_SIZES.<p>
      */
-    public static final OWLClass CLASS_GEAR_CSD_2A_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Sizes"));
+    public static final OWLClass CLASS_GEAR_CSD_2A_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDrive
@@ -781,7 +865,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class HARMONICDRIVE.<p>
      */
-    public static final OWLClass CLASS_HARMONICDRIVE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDrive"));
+    public static final OWLClass CLASS_HARMONICDRIVE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#HarmonicDrive"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDriveComponentSets2A
@@ -790,7 +875,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class HARMONICDRIVECOMPONENTSETS2A.<p>
      */
-    public static final OWLClass CLASS_HARMONICDRIVECOMPONENTSETS2A = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDriveComponentSets2A"));
+    public static final OWLClass CLASS_HARMONICDRIVECOMPONENTSETS2A = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDriveComponentSets2A"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM115x25
@@ -799,7 +885,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM115X25.<p>
      */
-    public static final OWLClass CLASS_ILM115X25 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM115x25"));
+    public static final OWLClass CLASS_ILM115X25 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM115x25"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM115x50
@@ -808,7 +895,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM115X50.<p>
      */
-    public static final OWLClass CLASS_ILM115X50 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM115x50"));
+    public static final OWLClass CLASS_ILM115X50 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM115x50"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM25x04
@@ -817,7 +905,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM25X04.<p>
      */
-    public static final OWLClass CLASS_ILM25X04 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM25x04"));
+    public static final OWLClass CLASS_ILM25X04 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM25x04"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM25x08
@@ -826,7 +915,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM25X08.<p>
      */
-    public static final OWLClass CLASS_ILM25X08 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM25x08"));
+    public static final OWLClass CLASS_ILM25X08 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM25x08"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM38x06
@@ -835,7 +925,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM38X06.<p>
      */
-    public static final OWLClass CLASS_ILM38X06 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM38x06"));
+    public static final OWLClass CLASS_ILM38X06 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM38x06"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM38x12
@@ -844,7 +935,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM38X12.<p>
      */
-    public static final OWLClass CLASS_ILM38X12 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM38x12"));
+    public static final OWLClass CLASS_ILM38X12 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM38x12"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM50x08
@@ -853,7 +945,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM50X08.<p>
      */
-    public static final OWLClass CLASS_ILM50X08 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM50x08"));
+    public static final OWLClass CLASS_ILM50X08 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM50x08"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM50x14
@@ -862,7 +955,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM50X14.<p>
      */
-    public static final OWLClass CLASS_ILM50X14 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM50x14"));
+    public static final OWLClass CLASS_ILM50X14 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM50x14"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM70x10
@@ -871,7 +965,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM70X10.<p>
      */
-    public static final OWLClass CLASS_ILM70X10 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM70x10"));
+    public static final OWLClass CLASS_ILM70X10 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM70x10"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM70x18
@@ -880,7 +975,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM70X18.<p>
      */
-    public static final OWLClass CLASS_ILM70X18 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM70x18"));
+    public static final OWLClass CLASS_ILM70X18 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM70x18"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x04
@@ -889,7 +985,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM85X04.<p>
      */
-    public static final OWLClass CLASS_ILM85X04 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x04"));
+    public static final OWLClass CLASS_ILM85X04 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM85x04"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x13
@@ -898,7 +995,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM85X13.<p>
      */
-    public static final OWLClass CLASS_ILM85X13 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x13"));
+    public static final OWLClass CLASS_ILM85X13 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM85x13"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x23
@@ -907,7 +1005,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM85X23.<p>
      */
-    public static final OWLClass CLASS_ILM85X23 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x23"));
+    public static final OWLClass CLASS_ILM85X23 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM85x23"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x26
@@ -916,7 +1015,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ILM85X26.<p>
      */
-    public static final OWLClass CLASS_ILM85X26 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x26"));
+    public static final OWLClass CLASS_ILM85X26 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ILM85x26"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762
@@ -925,7 +1025,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ISO4762.<p>
      */
-    public static final OWLClass CLASS_ISO4762 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762"));
+    public static final OWLClass CLASS_ISO4762 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ISO4762"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2
@@ -934,7 +1035,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ISO4762_M2.<p>
      */
-    public static final OWLClass CLASS_ISO4762_M2 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2"));
+    public static final OWLClass CLASS_ISO4762_M2 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ISO4762_M2"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5
@@ -943,7 +1045,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ISO4762_M2_5.<p>
      */
-    public static final OWLClass CLASS_ISO4762_M2_5 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5"));
+    public static final OWLClass CLASS_ISO4762_M2_5 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#ISO4762_M2_5"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder
@@ -952,7 +1055,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class INCREMENTALENCODER.<p>
      */
-    public static final OWLClass CLASS_INCREMENTALENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"));
+    public static final OWLClass CLASS_INCREMENTALENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants
@@ -961,7 +1065,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class INCREMENTALENCODERVARIANTS.<p>
      */
-    public static final OWLClass CLASS_INCREMENTALENCODERVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants"));
+    public static final OWLClass CLASS_INCREMENTALENCODERVARIANTS = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoderVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00
@@ -970,7 +1075,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MBA7_MRA7D049AB025E00.<p>
      */
-    public static final OWLClass CLASS_MBA7_MRA7D049AB025E00 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00"));
+    public static final OWLClass CLASS_MBA7_MRA7D049AB025E00 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00
@@ -979,7 +1085,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MBA8_MRA8D080AB055E00.<p>
      */
-    public static final OWLClass CLASS_MBA8_MRA8D080AB055E00 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00"));
+    public static final OWLClass CLASS_MBA8_MRA8D080AB055E00 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Moog
@@ -988,7 +1095,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOOG.<p>
      */
-    public static final OWLClass CLASS_MOOG = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Moog"));
+    public static final OWLClass CLASS_MOOG = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Moog"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Motor
@@ -997,7 +1105,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTOR.<p>
      */
-    public static final OWLClass CLASS_MOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Motor"));
+    public static final OWLClass CLASS_MOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Motor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorController
@@ -1006,7 +1115,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORCONTROLLER.<p>
      */
-    public static final OWLClass CLASS_MOTORCONTROLLER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorController"));
+    public static final OWLClass CLASS_MOTORCONTROLLER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#MotorController"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder
@@ -1015,7 +1125,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOABSOLUTENCODER.<p>
      */
-    public static final OWLClass CLASS_NOABSOLUTENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder"));
+    public static final OWLClass CLASS_NOABSOLUTENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoIE
@@ -1024,7 +1135,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOIE.<p>
      */
-    public static final OWLClass CLASS_NOIE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoIE"));
+    public static final OWLClass CLASS_NOIE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoIE"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoMC
@@ -1033,7 +1145,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOMC.<p>
      */
-    public static final OWLClass CLASS_NOMC = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoMC"));
+    public static final OWLClass CLASS_NOMC = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoMC"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSensorPCB
@@ -1042,7 +1155,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOSENSORPCB.<p>
      */
-    public static final OWLClass CLASS_NOSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSensorPCB"));
+    public static final OWLClass CLASS_NOSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoSensorPCB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing
@@ -1051,7 +1165,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOSLIPRING.<p>
      */
-    public static final OWLClass CLASS_NOSLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSlipRing"));
+    public static final OWLClass CLASS_NOSLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoSlipRing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorqueSensor
@@ -1060,7 +1175,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOTORQUESENSOR.<p>
      */
-    public static final OWLClass CLASS_NOTORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorqueSensor"));
+    public static final OWLClass CLASS_NOTORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoTorqueSensor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorsionalShaft
@@ -1069,7 +1185,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class NOTORSIONALSHAFT.<p>
      */
-    public static final OWLClass CLASS_NOTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorsionalShaft"));
+    public static final OWLClass CLASS_NOTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#NoTorsionalShaft"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing
@@ -1078,7 +1195,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class OUTPUTBEARING.<p>
      */
-    public static final OWLClass CLASS_OUTPUTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing"));
+    public static final OWLClass CLASS_OUTPUTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#OutputBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor
@@ -1087,7 +1205,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class POSITIONSENSOR.<p>
      */
-    public static final OWLClass CLASS_POSITIONSENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor"));
+    public static final OWLClass CLASS_POSITIONSENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#PositionSensor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PropertyValues
@@ -1096,7 +1215,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class PROPERTYVALUES.<p>
      */
-    public static final OWLClass CLASS_PROPERTYVALUES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PropertyValues"));
+    public static final OWLClass CLASS_PROPERTYVALUES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#PropertyValues"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RequirementDependency
@@ -1105,7 +1225,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTDEPENDENCY.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTDEPENDENCY = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RequirementDependency"));
+    public static final OWLClass CLASS_REQUIREMENTDEPENDENCY = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#RequirementDependency"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RoboDriveServoKibILM
@@ -1114,7 +1235,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ROBODRIVESERVOKIBILM.<p>
      */
-    public static final OWLClass CLASS_ROBODRIVESERVOKIBILM = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RoboDriveServoKibILM"));
+    public static final OWLClass CLASS_ROBODRIVESERVOKIBILM = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#RoboDriveServoKibILM"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61700_2Z
@@ -1123,7 +1245,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61700_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61700_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61700_2Z"));
+    public static final OWLClass CLASS_SBN_61700_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61700_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61701_2Z
@@ -1132,7 +1255,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61701_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61701_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61701_2Z"));
+    public static final OWLClass CLASS_SBN_61701_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61701_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61702_2Z
@@ -1141,7 +1265,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61702_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61702_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61702_2Z"));
+    public static final OWLClass CLASS_SBN_61702_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61702_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61703_2Z
@@ -1150,7 +1275,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61703_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61703_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61703_2Z"));
+    public static final OWLClass CLASS_SBN_61703_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61703_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61704_2Z
@@ -1159,7 +1285,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61704_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61704_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61704_2Z"));
+    public static final OWLClass CLASS_SBN_61704_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61704_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61705_2RU
@@ -1168,7 +1295,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61705_2RU.<p>
      */
-    public static final OWLClass CLASS_SBN_61705_2RU = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61705_2RU"));
+    public static final OWLClass CLASS_SBN_61705_2RU = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61705_2RU"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61706_2RU
@@ -1177,7 +1305,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61706_2RU.<p>
      */
-    public static final OWLClass CLASS_SBN_61706_2RU = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61706_2RU"));
+    public static final OWLClass CLASS_SBN_61706_2RU = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61706_2RU"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61807_2RU_2Z
@@ -1186,7 +1315,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61807_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61807_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61807_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61807_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61807_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61808_2RU_2Z
@@ -1195,7 +1325,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61808_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61808_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61808_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61808_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61808_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61809_2RU_2Z
@@ -1204,7 +1335,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61809_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61809_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61809_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61809_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61809_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61810_2RU_2Z
@@ -1213,7 +1345,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61810_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61810_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61810_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61810_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61810_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61811_2RU_2Z
@@ -1222,7 +1355,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61811_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61811_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61811_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61811_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61811_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z
@@ -1231,7 +1365,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61812_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61812_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61812_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61812_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z
@@ -1240,7 +1375,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61813_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61813_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61813_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61813_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z
@@ -1249,7 +1385,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_61814_2RU_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_61814_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z"));
+    public static final OWLClass CLASS_SBN_61814_2RU_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_61814_2RU_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_672_2Z
@@ -1258,7 +1395,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_672_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_672_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_672_2Z"));
+    public static final OWLClass CLASS_SBN_672_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_672_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_679_2Z
@@ -1267,7 +1405,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_679_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_679_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_679_2Z"));
+    public static final OWLClass CLASS_SBN_679_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_679_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z
@@ -1276,7 +1415,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_106_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_106_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z"));
+    public static final OWLClass CLASS_SBN_MR_106_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_106_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z
@@ -1285,7 +1425,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_117_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_117_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z"));
+    public static final OWLClass CLASS_SBN_MR_117_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_117_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z
@@ -1294,7 +1435,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_128_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_128_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z"));
+    public static final OWLClass CLASS_SBN_MR_128_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_128_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z
@@ -1303,7 +1445,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_63_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_63_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z"));
+    public static final OWLClass CLASS_SBN_MR_63_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_63_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z
@@ -1312,7 +1455,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_74_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_74_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z"));
+    public static final OWLClass CLASS_SBN_MR_74_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_74_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z
@@ -1321,7 +1465,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MR_85_2Z.<p>
      */
-    public static final OWLClass CLASS_SBN_MR_85_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z"));
+    public static final OWLClass CLASS_SBN_MR_85_2Z = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_MR_85_2Z"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing
@@ -1330,7 +1475,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_MINIATUREBALLBEARING.<p>
      */
-    public static final OWLClass CLASS_SBN_MINIATUREBALLBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"));
+    public static final OWLClass CLASS_SBN_MINIATUREBALLBEARING = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_MiniatureBallBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1800_TN
@@ -1339,7 +1485,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1800_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1800_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1800_TN"));
+    public static final OWLClass CLASS_SBN_Q_1800_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1800_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1801_TN
@@ -1348,7 +1495,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1801_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1801_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1801_TN"));
+    public static final OWLClass CLASS_SBN_Q_1801_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1801_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1802_TN
@@ -1357,7 +1505,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1802_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1802_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1802_TN"));
+    public static final OWLClass CLASS_SBN_Q_1802_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1802_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1803_TN
@@ -1366,7 +1515,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1803_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1803_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1803_TN"));
+    public static final OWLClass CLASS_SBN_Q_1803_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1803_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1804_TN
@@ -1375,7 +1525,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1804_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1804_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1804_TN"));
+    public static final OWLClass CLASS_SBN_Q_1804_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1804_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1805_TN
@@ -1384,7 +1535,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_Q_1805_TN.<p>
      */
-    public static final OWLClass CLASS_SBN_Q_1805_TN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_Q_1805_TN"));
+    public static final OWLClass CLASS_SBN_Q_1805_TN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SBN_Q_1805_TN"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing
@@ -1393,7 +1545,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_RADIALGROOVEBALLBEARING.<p>
      */
-    public static final OWLClass CLASS_SBN_RADIALGROOVEBALLBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"));
+    public static final OWLClass CLASS_SBN_RADIALGROOVEBALLBEARING = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_RadialGrooveBallBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_ThinSection4PointBearing
@@ -1402,7 +1555,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SBN_THINSECTION4POINTBEARING.<p>
      */
-    public static final OWLClass CLASS_SBN_THINSECTION4POINTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_ThinSection4PointBearing"));
+    public static final OWLClass CLASS_SBN_THINSECTION4POINTBEARING = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#SBN_ThinSection4PointBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01
@@ -1411,7 +1565,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01.<p>
      */
-    public static final OWLClass CLASS_SNE01 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01"));
+    public static final OWLClass CLASS_SNE01 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-06
@@ -1420,7 +1575,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_06.<p>
      */
-    public static final OWLClass CLASS_SNE01_06 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-06"));
+    public static final OWLClass CLASS_SNE01_06 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-06"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-06_Sizes
@@ -1429,7 +1585,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_06_SIZES.<p>
      */
-    public static final OWLClass CLASS_SNE01_06_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-06_Sizes"));
+    public static final OWLClass CLASS_SNE01_06_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-06_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12
@@ -1438,7 +1595,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_12.<p>
      */
-    public static final OWLClass CLASS_SNE01_12 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12"));
+    public static final OWLClass CLASS_SNE01_12 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-12"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12G
@@ -1447,7 +1605,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_12G.<p>
      */
-    public static final OWLClass CLASS_SNE01_12G = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12G"));
+    public static final OWLClass CLASS_SNE01_12G = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-12G"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12V
@@ -1456,7 +1615,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_12V.<p>
      */
-    public static final OWLClass CLASS_SNE01_12V = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12V"));
+    public static final OWLClass CLASS_SNE01_12V = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-12V"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12_Sizes
@@ -1465,7 +1625,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_12_SIZES.<p>
      */
-    public static final OWLClass CLASS_SNE01_12_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-12_Sizes"));
+    public static final OWLClass CLASS_SNE01_12_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-12_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18
@@ -1474,7 +1635,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18.<p>
      */
-    public static final OWLClass CLASS_SNE01_18 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18"));
+    public static final OWLClass CLASS_SNE01_18 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18G
@@ -1483,7 +1645,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18G.<p>
      */
-    public static final OWLClass CLASS_SNE01_18G = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18G"));
+    public static final OWLClass CLASS_SNE01_18G = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18G"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18GV
@@ -1492,7 +1655,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18GV.<p>
      */
-    public static final OWLClass CLASS_SNE01_18GV = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18GV"));
+    public static final OWLClass CLASS_SNE01_18GV = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18GV"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18V
@@ -1501,7 +1665,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18V.<p>
      */
-    public static final OWLClass CLASS_SNE01_18V = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18V"));
+    public static final OWLClass CLASS_SNE01_18V = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18V"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18X
@@ -1510,7 +1675,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18X.<p>
      */
-    public static final OWLClass CLASS_SNE01_18X = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18X"));
+    public static final OWLClass CLASS_SNE01_18X = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18X"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18_Sizes
@@ -1519,7 +1685,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_18_SIZES.<p>
      */
-    public static final OWLClass CLASS_SNE01_18_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-18_Sizes"));
+    public static final OWLClass CLASS_SNE01_18_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-18_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24
@@ -1528,7 +1695,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24.<p>
      */
-    public static final OWLClass CLASS_SNE01_24 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24"));
+    public static final OWLClass CLASS_SNE01_24 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24G
@@ -1537,7 +1705,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24G.<p>
      */
-    public static final OWLClass CLASS_SNE01_24G = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24G"));
+    public static final OWLClass CLASS_SNE01_24G = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24G"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GG
@@ -1546,7 +1715,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24GG.<p>
      */
-    public static final OWLClass CLASS_SNE01_24GG = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GG"));
+    public static final OWLClass CLASS_SNE01_24GG = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24GG"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GV
@@ -1555,7 +1725,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24GV.<p>
      */
-    public static final OWLClass CLASS_SNE01_24GV = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GV"));
+    public static final OWLClass CLASS_SNE01_24GV = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24GV"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GX
@@ -1564,7 +1735,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24GX.<p>
      */
-    public static final OWLClass CLASS_SNE01_24GX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24GX"));
+    public static final OWLClass CLASS_SNE01_24GX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24GX"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24V
@@ -1573,7 +1745,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24V.<p>
      */
-    public static final OWLClass CLASS_SNE01_24V = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24V"));
+    public static final OWLClass CLASS_SNE01_24V = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24V"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24X
@@ -1582,7 +1755,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24X.<p>
      */
-    public static final OWLClass CLASS_SNE01_24X = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24X"));
+    public static final OWLClass CLASS_SNE01_24X = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24X"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24_Sizes
@@ -1591,7 +1765,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SNE01_24_SIZES.<p>
      */
-    public static final OWLClass CLASS_SNE01_24_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SNE01-24_Sizes"));
+    public static final OWLClass CLASS_SNE01_24_SIZES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SNE01-24_Sizes"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SRA-73805
@@ -1600,7 +1775,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SRA_73805.<p>
      */
-    public static final OWLClass CLASS_SRA_73805 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SRA-73805"));
+    public static final OWLClass CLASS_SRA_73805 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SRA-73805"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SRA-73806
@@ -1609,7 +1785,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SRA_73806.<p>
      */
-    public static final OWLClass CLASS_SRA_73806 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SRA-73806"));
+    public static final OWLClass CLASS_SRA_73806 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SRA-73806"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Screw
@@ -1618,7 +1795,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SCREW.<p>
      */
-    public static final OWLClass CLASS_SCREW = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Screw"));
+    public static final OWLClass CLASS_SCREW = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#Screw"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCB
@@ -1627,7 +1805,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SENSORPCB.<p>
      */
-    public static final OWLClass CLASS_SENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCB"));
+    public static final OWLClass CLASS_SENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SensorPCB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCBVariants
@@ -1636,7 +1815,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SENSORPCBVARIANTS.<p>
      */
-    public static final OWLClass CLASS_SENSORPCBVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCBVariants"));
+    public static final OWLClass CLASS_SENSORPCBVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SensorPCBVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRing
@@ -1645,7 +1825,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SLIPRING.<p>
      */
-    public static final OWLClass CLASS_SLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRing"));
+    public static final OWLClass CLASS_SLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#SlipRing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingPropertyValues
@@ -1654,7 +1835,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SLIPRINGPROPERTYVALUES.<p>
      */
-    public static final OWLClass CLASS_SLIPRINGPROPERTYVALUES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingPropertyValues"));
+    public static final OWLClass CLASS_SLIPRINGPROPERTYVALUES = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingPropertyValues"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft
@@ -1663,7 +1845,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class STRAINGAUGEBASED_HOLLOWSHAFT.<p>
      */
-    public static final OWLClass CLASS_STRAINGAUGEBASED_HOLLOWSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft"));
+    public static final OWLClass CLASS_STRAINGAUGEBASED_HOLLOWSHAFT = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK
@@ -1672,7 +1855,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK.<p>
      */
-    public static final OWLClass CLASS_THK = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK"));
+    public static final OWLClass CLASS_THK = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA-C
@@ -1681,7 +1865,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA-C"));
+    public static final OWLClass CLASS_THK_RA_C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA-C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_10008C
@@ -1690,7 +1875,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_10008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_10008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_10008C"));
+    public static final OWLClass CLASS_THK_RA_10008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_10008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_11008C
@@ -1699,7 +1885,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_11008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_11008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_11008C"));
+    public static final OWLClass CLASS_THK_RA_11008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_11008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_12008C
@@ -1708,7 +1895,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_12008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_12008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_12008C"));
+    public static final OWLClass CLASS_THK_RA_12008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_12008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_13008C
@@ -1717,7 +1905,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_13008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_13008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_13008C"));
+    public static final OWLClass CLASS_THK_RA_13008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_13008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_14008C
@@ -1726,7 +1915,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_14008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_14008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_14008C"));
+    public static final OWLClass CLASS_THK_RA_14008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_14008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_15008C
@@ -1735,7 +1925,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_15008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_15008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_15008C"));
+    public static final OWLClass CLASS_THK_RA_15008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_15008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_5008C
@@ -1744,7 +1935,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_5008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_5008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_5008C"));
+    public static final OWLClass CLASS_THK_RA_5008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_5008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_6008C
@@ -1753,7 +1945,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_6008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_6008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_6008C"));
+    public static final OWLClass CLASS_THK_RA_6008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_6008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_7008C
@@ -1762,7 +1955,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_7008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_7008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_7008C"));
+    public static final OWLClass CLASS_THK_RA_7008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_7008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_8008C
@@ -1771,7 +1965,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_8008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_8008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_8008C"));
+    public static final OWLClass CLASS_THK_RA_8008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_8008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_9008C
@@ -1780,7 +1975,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RA_9008C.<p>
      */
-    public static final OWLClass CLASS_THK_RA_9008C = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RA_9008C"));
+    public static final OWLClass CLASS_THK_RA_9008C = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RA_9008C"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB
@@ -1789,7 +1985,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB.<p>
      */
-    public static final OWLClass CLASS_THK_RB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB"));
+    public static final OWLClass CLASS_THK_RB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_2008
@@ -1798,7 +1995,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_2008.<p>
      */
-    public static final OWLClass CLASS_THK_RB_2008 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_2008"));
+    public static final OWLClass CLASS_THK_RB_2008 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_2008"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_2508
@@ -1807,7 +2005,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_2508.<p>
      */
-    public static final OWLClass CLASS_THK_RB_2508 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_2508"));
+    public static final OWLClass CLASS_THK_RB_2508 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_2508"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_3010
@@ -1816,7 +2015,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_3010.<p>
      */
-    public static final OWLClass CLASS_THK_RB_3010 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_3010"));
+    public static final OWLClass CLASS_THK_RB_3010 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_3010"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_3510
@@ -1825,7 +2025,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_3510.<p>
      */
-    public static final OWLClass CLASS_THK_RB_3510 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_3510"));
+    public static final OWLClass CLASS_THK_RB_3510 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_3510"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_4010
@@ -1834,7 +2035,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_4010.<p>
      */
-    public static final OWLClass CLASS_THK_RB_4010 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_4010"));
+    public static final OWLClass CLASS_THK_RB_4010 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_4010"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_4510
@@ -1843,7 +2045,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class THK_RB_4510.<p>
      */
-    public static final OWLClass CLASS_THK_RB_4510 = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#THK_RB_4510"));
+    public static final OWLClass CLASS_THK_RB_4510 = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#THK_RB_4510"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensor
@@ -1852,7 +2055,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TORQUESENSOR.<p>
      */
-    public static final OWLClass CLASS_TORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensor"));
+    public static final OWLClass CLASS_TORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#TorqueSensor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants
@@ -1861,7 +2065,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TORQUESENSORVARIANTS.<p>
      */
-    public static final OWLClass CLASS_TORQUESENSORVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants"));
+    public static final OWLClass CLASS_TORQUESENSORVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorsionalShaft
@@ -1870,7 +2075,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TORSIONALSHAFT.<p>
      */
-    public static final OWLClass CLASS_TORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorsionalShaft"));
+    public static final OWLClass CLASS_TORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#TorsionalShaft"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorsionalShaftVariants
@@ -1879,7 +2085,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TORSIONALSHAFTVARIANTS.<p>
      */
-    public static final OWLClass CLASS_TORSIONALSHAFTVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorsionalShaftVariants"));
+    public static final OWLClass CLASS_TORSIONALSHAFTVARIANTS = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#TorsionalShaftVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE
@@ -1888,7 +2095,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class WITHIE.<p>
      */
-    public static final OWLClass CLASS_WITHIE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE"));
+    public static final OWLClass CLASS_WITHIE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#WithIE"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSensorPCB
@@ -1897,7 +2105,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class WITHSENSORPCB.<p>
      */
-    public static final OWLClass CLASS_WITHSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSensorPCB"));
+    public static final OWLClass CLASS_WITHSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#WithSensorPCB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithTorsionalShaft
@@ -1906,7 +2115,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class WITHTORSIONALSHAFT.<p>
      */
-    public static final OWLClass CLASS_WITHTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithTorsionalShaft"));
+    public static final OWLClass CLASS_WITHTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#WithTorsionalShaft"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#_1000MEthernet
@@ -1915,7 +2125,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class _1000METHERNET.<p>
      */
-    public static final OWLClass CLASS__1000METHERNET = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#_1000MEthernet"));
+    public static final OWLClass CLASS__1000METHERNET = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_basic#_1000MEthernet"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#AbsoluteEncoderSensorPCBMatch
@@ -1924,25 +2135,34 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class ABSOLUTEENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLClass CLASS_ABSOLUTEENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#AbsoluteEncoderSensorPCBMatch"));
+    public static final OWLClass CLASS_ABSOLUTEENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#AbsoluteEncoderSensorPCBMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#BackupPossibleSatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#BackupPossibleSatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class BACKUPPOSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * BACKUPPOSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_BACKUPPOSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#BackupPossibleSatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_BACKUPPOSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#BackupPossibleSatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#BackupSatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#BackupSatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class BACKUPSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * BACKUPSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_BACKUPSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#BackupSatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_BACKUPSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#BackupSatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement
@@ -1951,7 +2171,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CHECKBOXREQUIREMENT.<p>
      */
-    public static final OWLClass CLASS_CHECKBOXREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"));
+    public static final OWLClass CLASS_CHECKBOXREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#CheckboxRequirement"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Compressed
@@ -1960,7 +2181,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class COMPRESSED.<p>
      */
-    public static final OWLClass CLASS_COMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Compressed"));
+    public static final OWLClass CLASS_COMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Compressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Constants
@@ -1969,7 +2191,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CONSTANTS.<p>
      */
-    public static final OWLClass CLASS_CONSTANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Constants"));
+    public static final OWLClass CLASS_CONSTANTS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Constants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ConstructionForms
@@ -1978,7 +2201,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CONSTRUCTIONFORMS.<p>
      */
-    public static final OWLClass CLASS_CONSTRUCTIONFORMS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ConstructionForms"));
+    public static final OWLClass CLASS_CONSTRUCTIONFORMS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#ConstructionForms"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CurrentRequirements
@@ -1987,7 +2211,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class CURRENTREQUIREMENTS.<p>
      */
-    public static final OWLClass CLASS_CURRENTREQUIREMENTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CurrentRequirements"));
+    public static final OWLClass CLASS_CURRENTREQUIREMENTS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#CurrentRequirements"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Diameter
@@ -1996,7 +2221,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETER.<p>
      */
-    public static final OWLClass CLASS_DIAMETER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Diameter"));
+    public static final OWLClass CLASS_DIAMETER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Diameter"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInput
@@ -2005,34 +2231,41 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUT.<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInput"));
+    public static final OWLClass CLASS_DIAMETERINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#DiameterInput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTDRIVEBEARINGMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTDRIVEBEARINGMATCH
+     * .<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"));
+    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchCompressed"));
+    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchLinear"));
+    public static final OWLClass CLASS_DIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputDriveBearingMatchLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputCompressed
@@ -2041,7 +2274,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUTOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputCompressed"));
+    public static final OWLClass CLASS_DIAMETERINPUTOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputLinear
@@ -2050,7 +2284,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETERINPUTOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_DIAMETERINPUTOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputLinear"));
+    public static final OWLClass CLASS_DIAMETERINPUTOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterInputOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutput
@@ -2059,7 +2294,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUT.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutput"));
+    public static final OWLClass CLASS_DIAMETEROUTPUT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#DiameterOutput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearing
@@ -2068,52 +2304,65 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTBEARING.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearing"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputCompressed"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatch"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputCompressed"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputLinear"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCircularScrewMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCompressed
@@ -2122,7 +2371,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCompressed"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputLinear
@@ -2131,7 +2381,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DIAMETEROUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_DIAMETEROUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DiameterOutputLinear"));
+    public static final OWLClass CLASS_DIAMETEROUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#DiameterOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DropdownRequirement
@@ -2140,7 +2391,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class DROPDOWNREQUIREMENT.<p>
      */
-    public static final OWLClass CLASS_DROPDOWNREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#DropdownRequirement"));
+    public static final OWLClass CLASS_DROPDOWNREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#DropdownRequirement"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxCircularScrew
@@ -2149,7 +2401,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARBOXCIRCULARSCREW.<p>
      */
-    public static final OWLClass CLASS_GEARBOXCIRCULARSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxCircularScrew"));
+    public static final OWLClass CLASS_GEARBOXCIRCULARSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#GearBoxCircularScrew"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxFlexScrew
@@ -2158,88 +2411,127 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class GEARBOXFLEXSCREW.<p>
      */
-    public static final OWLClass CLASS_GEARBOXFLEXSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxFlexScrew"));
+    public static final OWLClass CLASS_GEARBOXFLEXSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#GearBoxFlexScrew"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
+    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed"));
+    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED =
+            factory.getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning" +
+                    "#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
+    public static final OWLClass CLASS_GEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory
+            .getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFPOSSIBLEUNSATISFIEDSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFPOSSIBLEUNSATISFIEDSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_HALFPOSSIBLEUNSATISFIEDSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_HALFPOSSIBLEUNSATISFIEDSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory
+            .getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#HalfPossibleUnsatisfiedSatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchCompressed"));
+    public static final OWLClass CLASS_HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
      */
-    public static final OWLClass CLASS_HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchLinear"));
+    public static final OWLClass CLASS_HALFSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterInputDriveBearingMatchLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_HALFSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_HALFSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning
+     * #HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_HALFSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
+    public static final OWLClass
+            CLASS_HALFSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning" +
+                    "#HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedSlipRingTorqueSensorMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class HALFSATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * HALFSATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLClass CLASS_HALFSATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedSlipRingTorqueSensorMatch"));
+    public static final OWLClass CLASS_HALFSATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#HalfSatisfiedSlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#InputForm
@@ -2248,7 +2540,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class INPUTFORM.<p>
      */
-    public static final OWLClass CLASS_INPUTFORM = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#InputForm"));
+    public static final OWLClass CLASS_INPUTFORM = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#InputForm"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Length
@@ -2257,7 +2550,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTH.<p>
      */
-    public static final OWLClass CLASS_LENGTH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Length"));
+    public static final OWLClass CLASS_LENGTH = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Length"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthElektro
@@ -2266,7 +2560,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTHELEKTRO.<p>
      */
-    public static final OWLClass CLASS_LENGTHELEKTRO = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthElektro"));
+    public static final OWLClass CLASS_LENGTHELEKTRO = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#LengthElektro"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInput
@@ -2275,7 +2570,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTHINPUT.<p>
      */
-    public static final OWLClass CLASS_LENGTHINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInput"));
+    public static final OWLClass CLASS_LENGTHINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#LengthInput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInputCompressed
@@ -2284,7 +2580,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTHINPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_LENGTHINPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInputCompressed"));
+    public static final OWLClass CLASS_LENGTHINPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#LengthInputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInputLinear
@@ -2293,7 +2590,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTHINPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_LENGTHINPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthInputLinear"));
+    public static final OWLClass CLASS_LENGTHINPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#LengthInputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatch
@@ -2302,25 +2600,30 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LENGTHOUTPUTFLEXSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatch"));
+    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class LENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * LENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputCompressed"));
+    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class LENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * LENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputLinear"));
+    public static final OWLClass CLASS_LENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#LengthOutputFlexScrewMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Linear
@@ -2329,7 +2632,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class LINEAR.<p>
      */
-    public static final OWLClass CLASS_LINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Linear"));
+    public static final OWLClass CLASS_LINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Linear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MoterControllerPositionNone
@@ -2338,7 +2642,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTERCONTROLLERPOSITIONNONE.<p>
      */
-    public static final OWLClass CLASS_MOTERCONTROLLERPOSITIONNONE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MoterControllerPositionNone"));
+    public static final OWLClass CLASS_MOTERCONTROLLERPOSITIONNONE = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MoterControllerPositionNone"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPosition
@@ -2347,7 +2652,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORCONTROLLERPOSITION.<p>
      */
-    public static final OWLClass CLASS_MOTORCONTROLLERPOSITION = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPosition"));
+    public static final OWLClass CLASS_MOTORCONTROLLERPOSITION = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPosition"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionAxial
@@ -2356,7 +2662,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORCONTROLLERPOSITIONAXIAL.<p>
      */
-    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONAXIAL = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionAxial"));
+    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONAXIAL = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionAxial"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionMatch
@@ -2365,16 +2672,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORCONTROLLERPOSITIONMATCH.<p>
      */
-    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionMatch"));
+    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionTangential
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class MOTORCONTROLLERPOSITIONTANGENTIAL.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * MOTORCONTROLLERPOSITIONTANGENTIAL.<p>
      */
-    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONTANGENTIAL = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionTangential"));
+    public static final OWLClass CLASS_MOTORCONTROLLERPOSITIONTANGENTIAL = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionTangential"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatch
@@ -2383,7 +2693,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORGEARBOXMATCH.<p>
      */
-    public static final OWLClass CLASS_MOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatch"));
+    public static final OWLClass CLASS_MOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatchProperty
@@ -2392,7 +2703,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class MOTORGEARBOXMATCHPROPERTY.<p>
      */
-    public static final OWLClass CLASS_MOTORGEARBOXMATCHPROPERTY = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatchProperty"));
+    public static final OWLClass CLASS_MOTORGEARBOXMATCHPROPERTY = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorGearBoxMatchProperty"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrew
@@ -2401,7 +2713,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class OUTPUTBEARINGSCREW.<p>
      */
-    public static final OWLClass CLASS_OUTPUTBEARINGSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrew"));
+    public static final OWLClass CLASS_OUTPUTBEARINGSCREW = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrew"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrewMatch
@@ -2410,7 +2723,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class OUTPUTBEARINGSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_OUTPUTBEARINGSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrewMatch"));
+    public static final OWLClass CLASS_OUTPUTBEARINGSCREWMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputBearingScrewMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputForm
@@ -2419,7 +2733,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class OUTPUTFORM.<p>
      */
-    public static final OWLClass CLASS_OUTPUTFORM = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#OutputForm"));
+    public static final OWLClass CLASS_OUTPUTFORM = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#OutputForm"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfied
@@ -2428,52 +2743,74 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIED.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfied"));
+    public static final OWLClass CLASS_POSSIBLESATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfied"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchCompressed"));
+    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory
+            .getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchLinear"));
+    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterInputDriveBearingMatchLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_POSSIBLESATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning
+     * #PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLESATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
+    public static final OWLClass
+            CLASS_POSSIBLESATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning" +
+                    "#PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedSlipRingTorqueSensorMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLESATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLESATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLClass CLASS_POSSIBLESATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedSlipRingTorqueSensorMatch"));
+    public static final OWLClass CLASS_POSSIBLESATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleSatisfiedSlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfied
@@ -2482,16 +2819,21 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class POSSIBLEUNSATISFIED.<p>
      */
-    public static final OWLClass CLASS_POSSIBLEUNSATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfied"));
+    public static final OWLClass CLASS_POSSIBLEUNSATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfied"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfiedDiameterOutputBearingOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class POSSIBLEUNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * POSSIBLEUNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_POSSIBLEUNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_POSSIBLEUNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#PossibleUnsatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningHelpClasses
@@ -2500,7 +2842,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REASONINGHELPCLASSES.<p>
      */
-    public static final OWLClass CLASS_REASONINGHELPCLASSES = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningHelpClasses"));
+    public static final OWLClass CLASS_REASONINGHELPCLASSES = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#ReasoningHelpClasses"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree
@@ -2509,7 +2852,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REASONINGTREE.<p>
      */
-    public static final OWLClass CLASS_REASONINGTREE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"));
+    public static final OWLClass CLASS_REASONINGTREE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#ReasoningTree"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTreeProperty
@@ -2518,7 +2862,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REASONINGTREEPROPERTY.<p>
      */
-    public static final OWLClass CLASS_REASONINGTREEPROPERTY = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ReasoningTreeProperty"));
+    public static final OWLClass CLASS_REASONINGTREEPROPERTY = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#ReasoningTreeProperty"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Requirement
@@ -2527,7 +2872,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENT.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Requirement"));
+    public static final OWLClass CLASS_REQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Requirement"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementCategory
@@ -2536,7 +2882,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTCATEGORY.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTCATEGORY = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementCategory"));
+    public static final OWLClass CLASS_REQUIREMENTCATEGORY = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#RequirementCategory"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox
@@ -2545,7 +2892,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTDEPENDENCYCHECKBOX.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTDEPENDENCYCHECKBOX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"));
+    public static final OWLClass CLASS_REQUIREMENTDEPENDENCYCHECKBOX = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementDependencyCheckbox"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementType
@@ -2554,7 +2902,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTTYPE.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTTYPE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementType"));
+    public static final OWLClass CLASS_REQUIREMENTTYPE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#RequirementType"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExact
@@ -2563,7 +2912,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTTYPEEXACT.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTTYPEEXACT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExact"));
+    public static final OWLClass CLASS_REQUIREMENTTYPEEXACT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#RequirementTypeExact"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMax
@@ -2572,7 +2922,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTTYPEMAX.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTTYPEMAX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMax"));
+    public static final OWLClass CLASS_REQUIREMENTTYPEMAX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMax"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMin
@@ -2581,7 +2932,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class REQUIREMENTTYPEMIN.<p>
      */
-    public static final OWLClass CLASS_REQUIREMENTTYPEMIN = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMin"));
+    public static final OWLClass CLASS_REQUIREMENTTYPEMIN = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#RequirementTypeMin"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunit
@@ -2590,7 +2942,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SACUNIT.<p>
      */
-    public static final OWLClass CLASS_SACUNIT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunit"));
+    public static final OWLClass CLASS_SACUNIT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SACunit"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty
@@ -2599,7 +2952,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SACUNITPROPERTY.<p>
      */
-    public static final OWLClass CLASS_SACUNITPROPERTY = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"));
+    public static final OWLClass CLASS_SACUNITPROPERTY = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SACunitProperty"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoder
@@ -2608,16 +2962,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDABSOLUTEENCODER.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDABSOLUTEENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoder"));
+    public static final OWLClass CLASS_SATISFIEDABSOLUTEENCODER = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoder"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoderSensorPCBMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDABSOLUTEENCODERSENSORPCBMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDABSOLUTEENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDABSOLUTEENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoderSensorPCBMatch"));
+    public static final OWLClass CLASS_SATISFIEDABSOLUTEENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedAbsoluteEncoderSensorPCBMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameter
@@ -2626,7 +2983,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETER.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameter"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETER = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameter"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInput
@@ -2635,52 +2993,66 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInput"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUT = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchCompressed"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchLinear"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputDriveBearingMatchLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUTOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETERINPUTOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETERINPUTOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETERINPUTOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETERINPUTOUTPUTLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterInputOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutput
@@ -2689,70 +3061,91 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutput"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUT = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearing
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTBEARING.<p>
+     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTBEARING
+     * .<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearing"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARING = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearing"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatch"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTCOMPRESSED = factory
+            .getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCIRCULARSCREWMATCHOUTPUTLINEAR = factory.getOWLClass
+            (IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCircularScrewMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDDIAMETEROUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputLinear
@@ -2761,7 +3154,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIAMETEROUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDDIAMETEROUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDiameterOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLength
@@ -2770,7 +3164,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIMENSIONLENGTH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIMENSIONLENGTH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLength"));
+    public static final OWLClass CLASS_SATISFIEDDIMENSIONLENGTH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLength"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLengthMax
@@ -2779,7 +3174,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDDIMENSIONLENGTHMAX.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDDIMENSIONLENGTHMAX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLengthMax"));
+    public static final OWLClass CLASS_SATISFIEDDIMENSIONLENGTHMAX = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedDimensionLengthMax"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBox
@@ -2788,43 +3184,63 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDGEARBOX.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDGEARBOX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBox"));
+    public static final OWLClass CLASS_SATISFIEDGEARBOX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBox"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxInMotorGearBoxMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDGEARBOXINMOTORGEARBOXMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDGEARBOXINMOTORGEARBOXMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDGEARBOXINMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxInMotorGearBoxMatch"));
+    public static final OWLClass CLASS_SATISFIEDGEARBOXINMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxInMotorGearBoxMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
+    public static final OWLClass CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH = factory
+            .getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning
+     * #SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed"));
+    public static final OWLClass
+            CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning" +
+                    "#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning
+     * #SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR =
+            factory.getOWLClass(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning" +
+                    "#SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedIncrementalEncoder
@@ -2833,7 +3249,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDINCREMENTALENCODER.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDINCREMENTALENCODER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedIncrementalEncoder"));
+    public static final OWLClass CLASS_SATISFIEDINCREMENTALENCODER = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedIncrementalEncoder"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLength
@@ -2842,7 +3259,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLength"));
+    public static final OWLClass CLASS_SATISFIEDLENGTH = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedLength"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthElektro
@@ -2851,7 +3269,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHELEKTRO.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHELEKTRO = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthElektro"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHELEKTRO = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthElektro"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInput
@@ -2860,16 +3279,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHINPUT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInput"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHINPUT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInput"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHINPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHINPUTCOMPRESSED
+     * .<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHINPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHINPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputLinear
@@ -2878,34 +3300,45 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHINPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHINPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputLinear"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHINPUTLINEAR = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthInputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHOUTPUTFLEXSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDLENGTHOUTPUTFLEXSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatch"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatch"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDLENGTHOUTPUTFLEXSCREWMATCHOUTPUTLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedLengthOutputFlexScrewMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotor
@@ -2914,7 +3347,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTOR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotor"));
+    public static final OWLClass CLASS_SATISFIEDMOTOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorController
@@ -2923,16 +3357,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTORCONTROLLER.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTORCONTROLLER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorController"));
+    public static final OWLClass CLASS_SATISFIEDMOTORCONTROLLER = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorController"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorControllerPositionMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTORCONTROLLERPOSITIONMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDMOTORCONTROLLERPOSITIONMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTORCONTROLLERPOSITIONMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorControllerPositionMatch"));
+    public static final OWLClass CLASS_SATISFIEDMOTORCONTROLLERPOSITIONMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorControllerPositionMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch
@@ -2941,25 +3378,30 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTORGEARBOXMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"));
+    public static final OWLClass CLASS_SATISFIEDMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTORGEARBOXMATCHFORSACUNIT.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDMOTORGEARBOXMATCHFORSACUNIT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit"));
+    public static final OWLClass CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorGearBoxMatchForSACunit"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorInMotorGearBoxMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDMOTORINMOTORGEARBOXMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDMOTORINMOTORGEARBOXMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDMOTORINMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorInMotorGearBoxMatch"));
+    public static final OWLClass CLASS_SATISFIEDMOTORINMOTORGEARBOXMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorInMotorGearBoxMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameter
@@ -2968,7 +3410,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDOUTERDIAMETER.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDOUTERDIAMETER = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameter"));
+    public static final OWLClass CLASS_SATISFIEDOUTERDIAMETER = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameter"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameterMax
@@ -2977,16 +3420,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDOUTERDIAMETERMAX.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDOUTERDIAMETERMAX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameterMax"));
+    public static final OWLClass CLASS_SATISFIEDOUTERDIAMETERMAX = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOuterDiameterMax"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOutputBearingScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDOUTPUTBEARINGSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDOUTPUTBEARINGSCREWMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDOUTPUTBEARINGSCREWMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOutputBearingScrewMatch"));
+    public static final OWLClass CLASS_SATISFIEDOUTPUTBEARINGSCREWMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedOutputBearingScrewMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedPeakTorque
@@ -2995,7 +3441,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDPEAKTORQUE.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDPEAKTORQUE = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedPeakTorque"));
+    public static final OWLClass CLASS_SATISFIEDPEAKTORQUE = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedPeakTorque"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedRequirements
@@ -3004,7 +3451,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDREQUIREMENTS.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDREQUIREMENTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedRequirements"));
+    public static final OWLClass CLASS_SATISFIEDREQUIREMENTS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedRequirements"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedRotationSpeed
@@ -3013,7 +3461,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDROTATIONSPEED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDROTATIONSPEED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedRotationSpeed"));
+    public static final OWLClass CLASS_SATISFIEDROTATIONSPEED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedRotationSpeed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSACunit
@@ -3022,7 +3471,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSACUNIT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSACUNIT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSACunit"));
+    public static final OWLClass CLASS_SATISFIEDSACUNIT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedSACunit"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCB
@@ -3031,34 +3481,41 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSENSORPCB.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCB"));
+    public static final OWLClass CLASS_SATISFIEDSENSORPCB = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCB"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSENSORPCBOUTPUTCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDSENSORPCBOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputCompressed"));
+    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSENSORPCBOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSENSORPCBOUTPUTLINEAR
+     * .<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputLinear"));
+    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputVariants
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSENSORPCBOUTPUTVARIANTS.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDSENSORPCBOUTPUTVARIANTS.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputVariants"));
+    public static final OWLClass CLASS_SATISFIEDSENSORPCBOUTPUTVARIANTS = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSensorPCBOutputVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRing
@@ -3067,16 +3524,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSLIPRING.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRing"));
+    public static final OWLClass CLASS_SATISFIEDSLIPRING = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRing"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRingTorqueSensorMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class SATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * SATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRingTorqueSensorMatch"));
+    public static final OWLClass CLASS_SATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedSlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorqueSensor
@@ -3085,7 +3545,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDTORQUESENSOR.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDTORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorqueSensor"));
+    public static final OWLClass CLASS_SATISFIEDTORQUESENSOR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorqueSensor"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorsionalShaft
@@ -3094,7 +3555,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDTORSIONALSHAFT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorsionalShaft"));
+    public static final OWLClass CLASS_SATISFIEDTORSIONALSHAFT = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedTorsionalShaft"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeight
@@ -3103,7 +3565,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDWEIGHT.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDWEIGHT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeight"));
+    public static final OWLClass CLASS_SATISFIEDWEIGHT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeight"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeightMax
@@ -3112,7 +3575,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SATISFIEDWEIGHTMAX.<p>
      */
-    public static final OWLClass CLASS_SATISFIEDWEIGHTMAX = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeightMax"));
+    public static final OWLClass CLASS_SATISFIEDWEIGHTMAX = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SatisfiedWeightMax"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ScrewKinds
@@ -3121,7 +3585,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SCREWKINDS.<p>
      */
-    public static final OWLClass CLASS_SCREWKINDS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#ScrewKinds"));
+    public static final OWLClass CLASS_SCREWKINDS = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#ScrewKinds"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputCompressed
@@ -3130,7 +3595,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SENSORPCBOUTPUTCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_SENSORPCBOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputCompressed"));
+    public static final OWLClass CLASS_SENSORPCBOUTPUTCOMPRESSED = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputCompressed"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputLinear
@@ -3139,7 +3605,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SENSORPCBOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_SENSORPCBOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputLinear"));
+    public static final OWLClass CLASS_SENSORPCBOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputVariants
@@ -3148,7 +3615,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SENSORPCBOUTPUTVARIANTS.<p>
      */
-    public static final OWLClass CLASS_SENSORPCBOUTPUTVARIANTS = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputVariants"));
+    public static final OWLClass CLASS_SENSORPCBOUTPUTVARIANTS = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SensorPCBOutputVariants"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SlipRingTorqueSensorMatch
@@ -3157,7 +3625,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class SLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLClass CLASS_SLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SlipRingTorqueSensorMatch"));
+    public static final OWLClass CLASS_SLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#SlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement
@@ -3166,7 +3635,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TEXTFIELDMINMAXREQUIREMENT.<p>
      */
-    public static final OWLClass CLASS_TEXTFIELDMINMAXREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"));
+    public static final OWLClass CLASS_TEXTFIELDMINMAXREQUIREMENT = factory.getOWLClass(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldMinMaxRequirement"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement
@@ -3175,7 +3645,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class TEXTFIELDREQUIREMENT.<p>
      */
-    public static final OWLClass CLASS_TEXTFIELDREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"));
+    public static final OWLClass CLASS_TEXTFIELDREQUIREMENT = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#TextFieldRequirement"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Unsatisfied
@@ -3184,70 +3655,93 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL api representation of the class UNSATISFIED.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Unsatisfied"));
+    public static final OWLClass CLASS_UNSATISFIED = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#Unsatisfied"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchCompressed
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchCompressed
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchCompressed"));
+    public static final OWLClass CLASS_UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHCOMPRESSED = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchCompressed"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchLinear"));
+    public static final OWLClass CLASS_UNSATISFIEDDIAMETERINPUTDRIVEBEARINGMATCHLINEAR = factory.getOWLClass(IRI
+            .create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterInputDriveBearingMatchLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterOutputBearingOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class UNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * UNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterOutputBearingOutputLinear"));
+    public static final OWLClass CLASS_UNSATISFIEDDIAMETEROUTPUTBEARINGOUTPUTLINEAR = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedDiameterOutputBearingOutputLinear"));
 
     /* ***************************************************
-     * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
+     * Class http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning
+     * #UnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class UNSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * UNSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
+    public static final OWLClass CLASS_UNSATISFIEDGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR
+            = factory.getOWLClass(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning" +
+            "#UnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear"));
 
     /* ***************************************************
      * Class http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedSlipRingTorqueSensorMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL api representation of the class UNSATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
+     * A constant to give access to the Manchester OWL api representation of the class
+     * UNSATISFIEDSLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLClass CLASS_UNSATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedSlipRingTorqueSensorMatch"));
+    public static final OWLClass CLASS_UNSATISFIEDSLIPRINGTORQUESENSORMATCH = factory.getOWLClass(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#UnsatisfiedSlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsFromRequirement
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property DEPENDSFROMREQUIREMENT.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * DEPENDSFROMREQUIREMENT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_DEPENDSFROMREQUIREMENT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsFromRequirement"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_DEPENDSFROMREQUIREMENT = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsFromRequirement"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsToRequirement
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property DEPENDSTOREQUIREMENT.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property DEPENDSTOREQUIREMENT
+     * .<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_DEPENDSTOREQUIREMENT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsToRequirement"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_DEPENDSTOREQUIREMENT = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#dependsToRequirement"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoder
@@ -3256,25 +3750,31 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASABSOLUTEENCODER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASABSOLUTEENCODER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoder"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASABSOLUTEENCODER = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoder"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoderSensorPCBMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASABSOLUTEENCODERSENSORPCBMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASABSOLUTEENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASABSOLUTEENCODERSENSORPCBMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoderSensorPCBMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASABSOLUTEENCODERSENSORPCBMATCH = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasAbsoluteEncoderSensorPCBMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasBackupSatisfiedPart
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASBACKUPSATISFIEDPART.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASBACKUPSATISFIEDPART.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASBACKUPSATISFIEDPART = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasBackupSatisfiedPart"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASBACKUPSATISFIEDPART = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasBackupSatisfiedPart"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCategory
@@ -3283,7 +3783,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASCATEGORY.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASCATEGORY = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCategory"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASCATEGORY = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCategory"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild
@@ -3292,16 +3793,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASCHILD.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASCHILD = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASCHILD = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasChild"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCounterSatisfiedPart
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASCOUNTERSATISFIEDPART.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASCOUNTERSATISFIEDPART.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCounterSatisfiedPart"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCounterSatisfiedPart"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameter
@@ -3310,7 +3814,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameter"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETER = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameter"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInput
@@ -3319,16 +3824,20 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETERINPUT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETERINPUT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInput"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETERINPUT = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInput"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETERINPUTDRIVEBEARINGMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASDIAMETERINPUTDRIVEBEARINGMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETERINPUTDRIVEBEARINGMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETERINPUTDRIVEBEARINGMATCH = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDiameterInputDriveBearingMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutput
@@ -3337,25 +3846,32 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETEROUTPUT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutput"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUT = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutput"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputBearing
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETEROUTPUTBEARING.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASDIAMETEROUTPUTBEARING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUTBEARING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputBearing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUTBEARING = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputBearing"));
 
     /* ***************************************************
-     * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputCircularScrewMatch
+     * Object Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputCircularScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASDIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASDIAMETEROUTPUTCIRCULARSCREWMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUTCIRCULARSCREWMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputCircularScrewMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDIAMETEROUTPUTCIRCULARSCREWMATCH = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDiameterOutputCircularScrewMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing
@@ -3364,7 +3880,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASDRIVEBEARING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASDRIVEBEARING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASDRIVEBEARING = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDriveBearing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox
@@ -3373,25 +3890,32 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASGEARBOX.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASGEARBOX = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASGEARBOX = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBox"));
 
     /* ***************************************************
-     * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
+     * Object Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASGEARBOXSLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCH
+            = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+            ".org/oliver/ontologies/sac/sac_reasoning#hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasIncrementalEncoder
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASINCREMENTALENCODER.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASINCREMENTALENCODER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASINCREMENTALENCODER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasIncrementalEncoder"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASINCREMENTALENCODER = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasIncrementalEncoder"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLength
@@ -3400,7 +3924,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASLENGTH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLength"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTH = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLength"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthElektro
@@ -3409,7 +3934,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASLENGTHELEKTRO.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHELEKTRO = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthElektro"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHELEKTRO = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthElektro"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthInput
@@ -3418,16 +3944,20 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASLENGTHINPUT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHINPUT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthInput"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHINPUT = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthInput"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthOutputFlexScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASLENGTHOUTPUTFLEXSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASLENGTHOUTPUTFLEXSCREWMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHOUTPUTFLEXSCREWMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasLengthOutputFlexScrewMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASLENGTHOUTPUTFLEXSCREWMATCH = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasLengthOutputFlexScrewMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotor
@@ -3436,7 +3966,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASMOTOR.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTOR = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotor"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTOR = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotor"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController
@@ -3445,34 +3976,42 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASMOTORCONTROLLER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLER = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPosition
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASMOTORCONTROLLERPOSITION.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASMOTORCONTROLLERPOSITION.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLERPOSITION = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPosition"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLERPOSITION = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPosition"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPositionMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASMOTORCONTROLLERPOSITIONMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASMOTORCONTROLLERPOSITIONMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLERPOSITIONMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPositionMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORCONTROLLERPOSITIONMATCH = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPositionMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorGearBoxMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASMOTORGEARBOXMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property HASMOTORGEARBOXMATCH
+     * .<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORGEARBOXMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorGearBoxMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASMOTORGEARBOXMATCH = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorGearBoxMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNewSatisfiedPart
@@ -3481,7 +4020,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASNEWSATISFIEDPART.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASNEWSATISFIEDPART = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNewSatisfiedPart"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASNEWSATISFIEDPART = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNewSatisfiedPart"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearing
@@ -3490,34 +4030,41 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASOUTPUTBEARING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASOUTPUTBEARING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASOUTPUTBEARING = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearingScrewMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASOUTPUTBEARINGSCREWMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASOUTPUTBEARINGSCREWMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASOUTPUTBEARINGSCREWMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearingScrewMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASOUTPUTBEARINGSCREWMATCH = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOutputBearingScrewMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPossibleSatisfiedPart
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASPOSSIBLESATISFIEDPART.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASPOSSIBLESATISFIEDPART.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASPOSSIBLESATISFIEDPART = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPossibleSatisfiedPart"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASPOSSIBLESATISFIEDPART = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPossibleSatisfiedPart"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReasoningTreeProperty
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASREASONINGTREEPROPERTY.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASREASONINGTREEPROPERTY.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASREASONINGTREEPROPERTY = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReasoningTreeProperty"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASREASONINGTREEPROPERTY = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReasoningTreeProperty"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement
@@ -3526,7 +4073,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASREQUIREMENT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASREQUIREMENT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASREQUIREMENT = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirement"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementType
@@ -3535,7 +4083,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASREQUIREMENTTYPE.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASREQUIREMENTTYPE = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementType"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASREQUIREMENTTYPE = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementType"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew
@@ -3544,7 +4093,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASSCREW.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASSCREW = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASSCREW = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScrew"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCB
@@ -3553,16 +4103,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASSENSORPCB.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASSENSORPCB = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCB"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASSENSORPCB = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCB"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCBOutputVariants
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASSENSORPCBOUTPUTVARIANTS.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASSENSORPCBOUTPUTVARIANTS.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASSENSORPCBOUTPUTVARIANTS = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCBOutputVariants"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASSENSORPCBOUTPUTVARIANTS = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSensorPCBOutputVariants"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRing
@@ -3571,16 +4124,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASSLIPRING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASSLIPRING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASSLIPRING = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRingTorqueSensorMatch
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property HASSLIPRINGTORQUESENSORMATCH.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * HASSLIPRINGTORQUESENSORMATCH.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASSLIPRINGTORQUESENSORMATCH = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRingTorqueSensorMatch"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASSLIPRINGTORQUESENSORMATCH = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasSlipRingTorqueSensorMatch"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorqueSensor
@@ -3589,7 +4145,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASTORQUESENSOR.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASTORQUESENSOR = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorqueSensor"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASTORQUESENSOR = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorqueSensor"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorsionalShaft
@@ -3598,16 +4155,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property HASTORSIONALSHAFT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_HASTORSIONALSHAFT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorsionalShaft"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_HASTORSIONALSHAFT = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTorsionalShaft"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfAbsoluteEncoder
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFABSOLUTEENCODER.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFABSOLUTEENCODER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFABSOLUTEENCODER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfAbsoluteEncoder"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFABSOLUTEENCODER = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfAbsoluteEncoder"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice
@@ -3616,16 +4176,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFDEVICE.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDevice"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFDRIVEBEARING.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFDRIVEBEARING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFDRIVEBEARING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFDRIVEBEARING = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfDriveBearing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox
@@ -3634,43 +4197,54 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFGEARBOX.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOX = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBox"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxCircularScrew
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFGEARBOXCIRCULARSCREW.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFGEARBOXCIRCULARSCREW.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOXCIRCULARSCREW = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxCircularScrew"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOXCIRCULARSCREW = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxCircularScrew"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxFlexScrew
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFGEARBOXFLEXSCREW.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFGEARBOXFLEXSCREW.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOXFLEXSCREW = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxFlexScrew"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFGEARBOXFLEXSCREW = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfGearBoxFlexScrew"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfIncrementalEncoder
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFINCREMENTALENCODER.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFINCREMENTALENCODER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFINCREMENTALENCODER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfIncrementalEncoder"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFINCREMENTALENCODER = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#isComposedOfIncrementalEncoder"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputForm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFINPUTFORM.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFINPUTFORM.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFINPUTFORM = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputForm"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFINPUTFORM = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfInputForm"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotor
@@ -3679,88 +4253,110 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFMOTOR.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotor"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTOR = factory.getOWLObjectProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotor"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorController
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFMOTORCONTROLLER.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFMOTORCONTROLLER.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTORCONTROLLER = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorController"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTORCONTROLLER = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorController"));
 
     /* ***************************************************
-     * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorControllerPosition
+     * Object Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorControllerPosition
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFMOTORCONTROLLERPOSITION.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFMOTORCONTROLLERPOSITION.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTORCONTROLLERPOSITION = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorControllerPosition"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFMOTORCONTROLLERPOSITION = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#isComposedOfMotorControllerPosition"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearing
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFOUTPUTBEARING.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFOUTPUTBEARING.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTBEARING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTBEARING = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearingScrew
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFOUTPUTBEARINGSCREW.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFOUTPUTBEARINGSCREW.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTBEARINGSCREW = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearingScrew"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTBEARINGSCREW = factory
+            .getOWLObjectProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputBearingScrew"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputForm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFOUTPUTFORM.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFOUTPUTFORM.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTFORM = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputForm"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFOUTPUTFORM = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfOutputForm"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSensorPCB
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFSENSORPCB.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFSENSORPCB.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFSENSORPCB = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSensorPCB"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFSENSORPCB = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSensorPCB"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSlipRing
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFSLIPRING.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFSLIPRING
+     * .<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFSLIPRING = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSlipRing"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFSLIPRING = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfSlipRing"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorqueSensor
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFTORQUESENSOR.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFTORQUESENSOR.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFTORQUESENSOR = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorqueSensor"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFTORQUESENSOR = factory.getOWLObjectProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorqueSensor"));
 
     /* ***************************************************
      * Object Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorsionalShaft
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the object property ISCOMPOSEDOFTORSIONALSHAFT.<p>
+     * A constant to give access to the Manchester OWL API representation of the object property
+     * ISCOMPOSEDOFTORSIONALSHAFT.<p>
      */
-    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFTORSIONALSHAFT = factory.getOWLObjectProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorsionalShaft"));
+    public static final OWLObjectProperty OBJECT_PROPERTY_ISCOMPOSEDOFTORSIONALSHAFT = factory.getOWLObjectProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#isComposedOfTorsionalShaft"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has1000MBASET
@@ -3769,7 +4365,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS1000MBASET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS1000MBASET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has1000MBASET"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS1000MBASET = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has1000MBASET"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has100MBASET
@@ -3778,7 +4375,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS100MBASET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS100MBASET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has100MBASET"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS100MBASET = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has100MBASET"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has10A
@@ -3787,7 +4385,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS10A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS10A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has10A"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS10A = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#has10A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has20A
@@ -3796,7 +4395,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS20A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS20A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#has20A"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS20A = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#has20A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentCircuitsNo
@@ -3805,25 +4405,30 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASCURRENTCIRCUITSNO.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTCIRCUITSNO = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentCircuitsNo"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTCIRCUITSNO = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentCircuitsNo"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentInput_I_unit_A
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASCURRENTINPUT_I_UNIT_A.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASCURRENTINPUT_I_UNIT_A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTINPUT_I_UNIT_A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentInput_I_unit_A"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTINPUT_I_UNIT_A = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentInput_I_unit_A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentOutput_I_unit_A
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASCURRENTOUTPUT_I_UNIT_A.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASCURRENTOUTPUT_I_UNIT_A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTOUTPUT_I_UNIT_A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentOutput_I_unit_A"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTOUTPUT_I_UNIT_A = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrentOutput_I_unit_A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrent_I_unit_A
@@ -3832,187 +4437,254 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASCURRENT_I_UNIT_A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCURRENT_I_UNIT_A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrent_I_unit_A"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCURRENT_I_UNIT_A = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasCurrent_I_unit_A"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONABSOLUTENCODERONAXISLENGTH_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONABSOLUTENCODERONAXISLENGTH_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONABSOLUTENCODERONAXISLENGTH_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONABSOLUTENCODERONAXISLENGTH_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONDIAMETERPITCHCIRCLEFLEXSPLINE_T_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONDIAMETERPITCHCIRCLEFLEXSPLINE_T_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONDIAMETERPITCHCIRCLEFLEXSPLINE_T_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONDIAMETERPITCHCIRCLEFLEXSPLINE_T_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterFlexSpline_K_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterFlexSpline_K_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONINNERDIAMETERFLEXSPLINE_K_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONINNERDIAMETERFLEXSPLINE_K_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETERFLEXSPLINE_K_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterFlexSpline_K_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETERFLEXSPLINE_K_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterFlexSpline_K_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterWaveGenerator_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterWaveGenerator_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONINNERDIAMETERWAVEGENERATOR_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONINNERDIAMETERWAVEGENERATOR_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETERWAVEGENERATOR_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterWaveGenerator_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETERWAVEGENERATOR_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameterWaveGenerator_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONINNERDIAMETER_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONINNERDIAMETER_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETER_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONINNERDIAMETER_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHFAKTOR.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHFAKTOR.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHFAKTOR = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHFAKTOR = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHINCREMENTALENCODERCONNECTOR_L_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHINCREMENTALENCODERCONNECTOR_L_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHINCREMENTALENCODERCONNECTOR_L_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHINCREMENTALENCODERCONNECTOR_L_UNIT_MM =
+            factory.getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthInner_L_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHINNER_L_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHINNER_L_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHINNER_L_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthInner_L_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHINNER_L_UNIT_MM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthInner_L_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthOverlapping_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHOVERLAPPING_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHOVERLAPPING_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHOVERLAPPING_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthOverlapping_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHOVERLAPPING_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionLengthOverlapping_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHSCREWHEAD_K_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHSCREWHEAD_K_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHSCREWHEAD_K_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHSCREWHEAD_K_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGenerator_H_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGenerator_H_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHWAVEGENERATOR_H_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHWAVEGENERATOR_H_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHWAVEGENERATOR_H_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGenerator_H_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHWAVEGENERATOR_H_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGenerator_H_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTH_L_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTH_L_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTH_L_UNIT_MM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionMaxDiameter_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONMAXDIAMETER_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONMAXDIAMETER_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONMAXDIAMETER_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionMaxDiameter_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONMAXDIAMETER_D_UNIT_MM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionMaxDiameter_D_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterFlexSpline_a_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterFlexSpline_a_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONOUTERDIAMETERFLEXSPLINE_A_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONOUTERDIAMETERFLEXSPLINE_A_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERFLEXSPLINE_A_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterFlexSpline_a_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERFLEXSPLINE_A_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameterFlexSpline_a_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONOUTERDIAMETER_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONOUTERDIAMETER_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionSafety_c_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONSAFETY_C_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONSAFETY_C_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSAFETY_C_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionSafety_c_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSAFETY_C_UNIT_MM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionSafety_c_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONSCREWINNERDIAMETERCIRCULARSPLINEM_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONSCREWINNERDIAMETERCIRCULARSPLINEM_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERCIRCULARSPLINEM_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERCIRCULARSPLINEM_D_UNIT_MM =
+            factory.getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONSCREWINNERDIAMETERFLEXSPLINEM_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONSCREWINNERDIAMETERFLEXSPLINEM_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERFLEXSPLINEM_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERFLEXSPLINEM_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONSCREWINNERDIAMETERM_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONSCREWINNERDIAMETERM_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERM_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERM_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONSCREWINNERDIAMETERWAVEGENERATORM_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONSCREWINNERDIAMETERWAVEGENERATORM_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERWAVEGENERATORM_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONSCREWINNERDIAMETERWAVEGENERATORM_D_UNIT_MM =
+            factory.getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimension_unit_mm
@@ -4021,7 +4693,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSION_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSION_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimension_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSION_UNIT_MM = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimension_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasEthernetChannelsNo
@@ -4030,7 +4703,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASETHERNETCHANNELSNO.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASETHERNETCHANNELSNO = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasEthernetChannelsNo"));
+    public static final OWLDataProperty DATA_PROPERTY_HASETHERNETCHANNELSNO = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasEthernetChannelsNo"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i
@@ -4039,52 +4713,66 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASGEARBOXRATION_I.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASGEARBOXRATION_I = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"));
+    public static final OWLDataProperty DATA_PROPERTY_HASGEARBOXRATION_I = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaxEfficiency_unit_percent
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASMAXEFFICIENCY_UNIT_PERCENT.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASMAXEFFICIENCY_UNIT_PERCENT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAXEFFICIENCY_UNIT_PERCENT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaxEfficiency_unit_percent"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAXEFFICIENCY_UNIT_PERCENT = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaxEfficiency_unit_percent"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaxRotationInputSpeedGrease_n_max_unit_rpm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_basic#hasMaxRotationInputSpeedGrease_n_max_unit_rpm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASMAXROTATIONINPUTSPEEDGREASE_N_MAX_UNIT_RPM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASMAXROTATIONINPUTSPEEDGREASE_N_MAX_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAXROTATIONINPUTSPEEDGREASE_N_MAX_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAXROTATIONINPUTSPEEDGREASE_N_MAX_UNIT_RPM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasMaxRotationInputSpeedGrease_n_max_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasNominalRotationSpeed_n_max_unit_rpm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASNOMINALROTATIONSPEED_N_MAX_UNIT_RPM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASNOMINALROTATIONSPEED_N_MAX_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASNOMINALROTATIONSPEED_N_MAX_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasNominalRotationSpeed_n_max_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASNOMINALROTATIONSPEED_N_MAX_UNIT_RPM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_basic#hasNominalRotationSpeed_n_max_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasNominalTorque_M_n_unit_Nm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASNOMINALTORQUE_M_N_UNIT_NM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASNOMINALTORQUE_M_N_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASNOMINALTORQUE_M_N_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasNominalTorque_M_n_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASNOMINALTORQUE_M_N_UNIT_NM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasNominalTorque_M_n_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorque_M_max_unit_Nm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASPEAKTORQUE_M_MAX_UNIT_NM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASPEAKTORQUE_M_MAX_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUE_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorque_M_max_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUE_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasPeakTorque_M_max_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCount
@@ -4093,34 +4781,41 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASSCREWCOUNT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCount"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCount"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountCircularSpline
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASSCREWCOUNTCIRCULARSPLINE.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASSCREWCOUNTCIRCULARSPLINE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTCIRCULARSPLINE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountCircularSpline"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTCIRCULARSPLINE = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountCircularSpline"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountFlexSpline
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASSCREWCOUNTFLEXSPLINE.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASSCREWCOUNTFLEXSPLINE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTFLEXSPLINE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountFlexSpline"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTFLEXSPLINE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountFlexSpline"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountWaveGenerator
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASSCREWCOUNTWAVEGENERATOR.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASSCREWCOUNTWAVEGENERATOR.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTWAVEGENERATOR = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountWaveGenerator"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSCREWCOUNTWAVEGENERATOR = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasScrewCountWaveGenerator"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A
@@ -4129,7 +4824,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASSIGNAL_2A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSIGNAL_2A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSIGNAL_2A = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSpeed_n_unit_rpm
@@ -4138,7 +4834,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASSPEED_N_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSPEED_N_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSpeed_n_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSPEED_N_UNIT_RPM = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSpeed_n_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasTorque_M_unit_Nm
@@ -4147,7 +4844,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASTORQUE_M_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASTORQUE_M_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasTorque_M_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASTORQUE_M_UNIT_NM = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasTorque_M_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue
@@ -4156,7 +4854,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue"));
+    public static final OWLDataProperty DATA_PROPERTY_HASVALUE = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasVoltage_U_unit_V
@@ -4165,7 +4864,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASVOLTAGE_U_UNIT_V.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASVOLTAGE_U_UNIT_V = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasVoltage_U_unit_V"));
+    public static final OWLDataProperty DATA_PROPERTY_HASVOLTAGE_U_UNIT_V = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasVoltage_U_unit_V"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg
@@ -4174,7 +4874,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASWEIGHT_M_UNIT_KG.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHT_M_UNIT_KG = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"));
+    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHT_M_UNIT_KG = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterConstantValue
@@ -4183,25 +4884,30 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property DIAMETERCONSTANTVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DIAMETERCONSTANTVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterConstantValue"));
+    public static final OWLDataProperty DATA_PROPERTY_DIAMETERCONSTANTVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterConstantValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterMotorControllerAxialOffset
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property DIAMETERMOTORCONTROLLERAXIALOFFSET.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * DIAMETERMOTORCONTROLLERAXIALOFFSET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DIAMETERMOTORCONTROLLERAXIALOFFSET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterMotorControllerAxialOffset"));
+    public static final OWLDataProperty DATA_PROPERTY_DIAMETERMOTORCONTROLLERAXIALOFFSET = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterMotorControllerAxialOffset"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterSafetySlipRingInGearBox
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property DIAMETERSAFETYSLIPRINGINGEARBOX.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * DIAMETERSAFETYSLIPRINGINGEARBOX.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DIAMETERSAFETYSLIPRINGINGEARBOX = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterSafetySlipRingInGearBox"));
+    public static final OWLDataProperty DATA_PROPERTY_DIAMETERSAFETYSLIPRINGINGEARBOX = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterSafetySlipRingInGearBox"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterWiring
@@ -4210,7 +4916,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property DIAMETERWIRING.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DIAMETERWIRING = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterWiring"));
+    public static final OWLDataProperty DATA_PROPERTY_DIAMETERWIRING = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterWiring"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValue
@@ -4219,7 +4926,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property DISPLAYONVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DISPLAYONVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValue"));
+    public static final OWLDataProperty DATA_PROPERTY_DISPLAYONVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValueBoolean
@@ -4228,7 +4936,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property DISPLAYONVALUEBOOLEAN.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_DISPLAYONVALUEBOOLEAN = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValueBoolean"));
+    public static final OWLDataProperty DATA_PROPERTY_DISPLAYONVALUEBOOLEAN = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#displayOnValueBoolean"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1
@@ -4237,7 +4946,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS1.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS1 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS1 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has2
@@ -4246,7 +4956,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS2.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS2 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has2"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS2 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#has2"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has3
@@ -4255,7 +4966,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS3.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS3 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has3"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS3 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#has3"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has4
@@ -4264,7 +4976,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS4.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS4 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has4"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS4 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#has4"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has5
@@ -4273,7 +4986,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HAS5.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HAS5 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has5"));
+    public static final OWLDataProperty DATA_PROPERTY_HAS5 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#has5"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasConstantValue
@@ -4282,16 +4996,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASCONSTANTVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCONSTANTVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasConstantValue"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCONSTANTVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasConstantValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCurrentOutputReqMax_I_unit_A
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASCURRENTOUTPUTREQMAX_I_UNIT_A.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASCURRENTOUTPUTREQMAX_I_UNIT_A.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTOUTPUTREQMAX_I_UNIT_A = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCurrentOutputReqMax_I_unit_A"));
+    public static final OWLDataProperty DATA_PROPERTY_HASCURRENTOUTPUTREQMAX_I_UNIT_A = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasCurrentOutputReqMax_I_unit_A"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValue
@@ -4300,7 +5017,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDEFAULTVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValue"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMax
@@ -4309,7 +5027,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDEFAULTVALUEMAX.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUEMAX = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMax"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUEMAX = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMax"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMin
@@ -4318,7 +5037,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDEFAULTVALUEMIN.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUEMIN = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMin"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDEFAULTVALUEMIN = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDefaultValueMin"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDescription
@@ -4327,61 +5047,81 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDESCRIPTION.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDESCRIPTION = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDescription"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDESCRIPTION = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDescription"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionDiameterWiringReq_D_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#hasDimensionDiameterWiringReq_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONDIAMETERWIRINGREQ_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONDIAMETERWIRINGREQ_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONDIAMETERWIRINGREQ_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionDiameterWiringReq_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONDIAMETERWIRINGREQ_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDimensionDiameterWiringReq_D_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthElectric_L_uni_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHELECTRIC_L_UNI_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHELECTRIC_L_UNI_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHELECTRIC_L_UNI_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthElectric_L_uni_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHELECTRIC_L_UNI_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthElectric_L_uni_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMax_L_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHREQMAX_L_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHREQMAX_L_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHREQMAX_L_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMax_L_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHREQMAX_L_UNIT_MM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMax_L_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMin_L_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONLENGTHREQMIN_L_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONLENGTHREQMIN_L_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHREQMIN_L_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMin_L_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONLENGTHREQMIN_L_UNIT_MM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionLengthReqMin_L_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMax_D_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMax_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMax_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMAX_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMax_D_unit_mm"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMin_D_unit_mm
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMin_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMin_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDIMENSIONOUTERDIAMETERREQMIN_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMin_D_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDisplayName
@@ -4390,7 +5130,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASDISPLAYNAME.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASDISPLAYNAME = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDisplayName"));
+    public static final OWLDataProperty DATA_PROPERTY_HASDISPLAYNAME = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDisplayName"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableField
@@ -4399,7 +5140,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASENABLEFIELD.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELD = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableField"));
+    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELD = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableField"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMax
@@ -4408,7 +5150,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASENABLEFIELDMAX.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELDMAX = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMax"));
+    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELDMAX = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMax"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMin
@@ -4417,7 +5160,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASENABLEFIELDMIN.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELDMIN = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMin"));
+    public static final OWLDataProperty DATA_PROPERTY_HASENABLEFIELDMIN = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasEnableFieldMin"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasHelperValue
@@ -4426,7 +5170,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASHELPERVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASHELPERVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasHelperValue"));
+    public static final OWLDataProperty DATA_PROPERTY_HASHELPERVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasHelperValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1
@@ -4435,7 +5180,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX1_1.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX1_1 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX1_1 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_2
@@ -4444,7 +5190,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX1_2.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX1_2 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_2"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX1_2 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_2"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_1
@@ -4453,7 +5200,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX2_1.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX2_1 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_1"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX2_1 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_1"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_2
@@ -4462,7 +5210,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX2_2.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX2_2 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_2"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX2_2 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax2_2"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_1
@@ -4471,7 +5220,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX3_1.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX3_1 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_1"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX3_1 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_1"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_2
@@ -4480,52 +5230,65 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASMAX3_2.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAX3_2 = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_2"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAX3_2 = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax3_2"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMax_n_max_unit_rpm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMax_n_max_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDREQMAX_N_MAX_UNIT_RPM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMax_n_max_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMin_n_max_unit_rpm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMin_n_max_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDREQMIN_N_MAX_UNIT_RPM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedReqMin_n_max_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedRes_n_max_unit_rpm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedRes_n_max_unit_rpm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASMAXIMALSPEEDRES_N_MAX_UNIT_RPM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMaximalSpeedRes_n_max_unit_rpm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOtherCablesReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASNUMBEROFOTHERCABLESREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASNUMBEROFOTHERCABLESREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASNUMBEROFOTHERCABLESREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOtherCablesReq"));
+    public static final OWLDataProperty DATA_PROPERTY_HASNUMBEROFOTHERCABLESREQ = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOtherCablesReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOutputEmergencyStopReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASNUMBEROFOUTPUTEMERGENCYSTOPREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASNUMBEROFOUTPUTEMERGENCYSTOPREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASNUMBEROFOUTPUTEMERGENCYSTOPREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOutputEmergencyStopReq"));
+    public static final OWLDataProperty DATA_PROPERTY_HASNUMBEROFOUTPUTEMERGENCYSTOPREQ = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasNumberOfOutputEmergencyStopReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition
@@ -4534,34 +5297,41 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASORDERPOSITION.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASORDERPOSITION = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"));
+    public static final OWLDataProperty DATA_PROPERTY_HASORDERPOSITION = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasOrderPosition"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMax_M_max_unit_Nm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMax_M_max_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUEREQMAX_M_MAX_UNIT_NM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMax_M_max_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMin_M_max_unit_Nm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMin_M_max_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUEREQMIN_M_MAX_UNIT_NM = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueReqMin_M_max_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueRes_M_max_unit_Nm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASPEAKTORQUERES_M_MAX_UNIT_NM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASPEAKTORQUERES_M_MAX_UNIT_NM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueRes_M_max_unit_Nm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASPEAKTORQUERES_M_MAX_UNIT_NM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasPeakTorqueRes_M_max_unit_Nm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValue
@@ -4570,7 +5340,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASREQVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValue"));
+    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUE = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueExact
@@ -4579,7 +5350,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASREQVALUEEXACT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEEXACT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueExact"));
+    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEEXACT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueExact"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMax
@@ -4588,7 +5360,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASREQVALUEMAX.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEMAX = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMax"));
+    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEMAX = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMax"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMin
@@ -4597,52 +5370,65 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASREQVALUEMIN.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEMIN = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMin"));
+    public static final OWLDataProperty DATA_PROPERTY_HASREQVALUEMIN = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasReqValueMin"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementAttribute
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASREQUIREMENTATTRIBUTE.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASREQUIREMENTATTRIBUTE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASREQUIREMENTATTRIBUTE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementAttribute"));
+    public static final OWLDataProperty DATA_PROPERTY_HASREQUIREMENTATTRIBUTE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasRequirementAttribute"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScaleFromOntologyToUI
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASSCALEFROMONTOLOGYTOUI.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASSCALEFROMONTOLOGYTOUI.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScaleFromOntologyToUI"));
+    public static final OWLDataProperty DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasScaleFromOntologyToUI"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessCoverReq_t_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASTHICKNESSCOVERREQ_T_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASTHICKNESSCOVERREQ_T_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSCOVERREQ_T_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessCoverReq_t_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSCOVERREQ_T_UNIT_MM = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessCoverReq_t_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessEngineCaseReq_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASTHICKNESSENGINECASEREQ_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASTHICKNESSENGINECASEREQ_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSENGINECASEREQ_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessEngineCaseReq_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSENGINECASEREQ_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasThicknessEngineCaseReq_D_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessOutputCaseReq_D_unit_mm
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASTHICKNESSOUTPUTCASEREQ_D_UNIT_MM.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASTHICKNESSOUTPUTCASEREQ_D_UNIT_MM.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSOUTPUTCASEREQ_D_UNIT_MM = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasThicknessOutputCaseReq_D_unit_mm"));
+    public static final OWLDataProperty DATA_PROPERTY_HASTHICKNESSOUTPUTCASEREQ_D_UNIT_MM = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#hasThicknessOutputCaseReq_D_unit_mm"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTopic
@@ -4651,7 +5437,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASTOPIC.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASTOPIC = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTopic"));
+    public static final OWLDataProperty DATA_PROPERTY_HASTOPIC = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasTopic"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasUnit
@@ -4660,43 +5447,52 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property HASUNIT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASUNIT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasUnit"));
+    public static final OWLDataProperty DATA_PROPERTY_HASUNIT = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasUnit"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasVoltageReq_U_unit_V
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASVOLTAGEREQ_U_UNIT_V.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property HASVOLTAGEREQ_U_UNIT_V
+     * .<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASVOLTAGEREQ_U_UNIT_V = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasVoltageReq_U_unit_V"));
+    public static final OWLDataProperty DATA_PROPERTY_HASVOLTAGEREQ_U_UNIT_V = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasVoltageReq_U_unit_V"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMax_m_unit_kg
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASWEIGHTREQMAX_M_UNIT_KG.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASWEIGHTREQMAX_M_UNIT_KG.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMax_m_unit_kg"));
+    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHTREQMAX_M_UNIT_KG = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMax_m_unit_kg"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMin_m_unit_kg
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property HASWEIGHTREQMIN_M_UNIT_KG.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * HASWEIGHTREQMIN_M_UNIT_KG.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMin_m_unit_kg"));
+    public static final OWLDataProperty DATA_PROPERTY_HASWEIGHTREQMIN_M_UNIT_KG = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasWeightReqMin_m_unit_kg"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthAbsoluteEncoderWithSensorPCB
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHABSOLUTEENCODERWITHSENSORPCB.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * LENGTHABSOLUTEENCODERWITHSENSORPCB.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHABSOLUTEENCODERWITHSENSORPCB = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthAbsoluteEncoderWithSensorPCB"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHABSOLUTEENCODERWITHSENSORPCB = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthAbsoluteEncoderWithSensorPCB"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthCentering
@@ -4705,7 +5501,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHCENTERING.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHCENTERING = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthCentering"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHCENTERING = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthCentering"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthConstantValue
@@ -4714,43 +5511,54 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHCONSTANTVALUE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHCONSTANTVALUE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthConstantValue"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHCONSTANTVALUE = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthConstantValue"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthFloatBearingOffset
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHFLOATBEARINGOFFSET.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * LENGTHFLOATBEARINGOFFSET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHFLOATBEARINGOFFSET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthFloatBearingOffset"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHFLOATBEARINGOFFSET = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthFloatBearingOffset"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMeasurementWidth
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMEASUREMENTWIDTH.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMEASUREMENTWIDTH
+     * .<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMEASUREMENTWIDTH = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMeasurementWidth"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMEASUREMENTWIDTH = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMeasurementWidth"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerAxialOffset
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORCONTROLLERAXIALOFFSET.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * LENGTHMOTORCONTROLLERAXIALOFFSET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCONTROLLERAXIALOFFSET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerAxialOffset"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCONTROLLERAXIALOFFSET = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerAxialOffset"));
 
     /* ***************************************************
-     * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerTangentialPCBOffset
+     * Data Property http://www.semanticweb
+     * .org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerTangentialPCBOffset
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORCONTROLLERTANGENTIALPCBOFFSET.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * LENGTHMOTORCONTROLLERTANGENTIALPCBOFFSET.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCONTROLLERTANGENTIALPCBOFFSET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerTangentialPCBOffset"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCONTROLLERTANGENTIALPCBOFFSET = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerTangentialPCBOffset"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorCover
@@ -4759,16 +5567,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORCOVER.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCOVER = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorCover"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORCOVER = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorCover"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorStopBracket
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORSTOPBRACKET.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORSTOPBRACKET
+     * .<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORSTOPBRACKET = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorStopBracket"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORSTOPBRACKET = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorStopBracket"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorWiring
@@ -4777,7 +5588,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHMOTORWIRING.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORWIRING = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorWiring"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHMOTORWIRING = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorWiring"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthNotch
@@ -4786,7 +5598,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHNOTCH.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHNOTCH = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthNotch"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHNOTCH = factory.getOWLDataProperty(IRI.create("http://www" +
+            ".semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthNotch"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthRotationGap
@@ -4795,7 +5608,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHROTATIONGAP.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHROTATIONGAP = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthRotationGap"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHROTATIONGAP = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthRotationGap"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthWiringConduit
@@ -4804,25 +5618,30 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property LENGTHWIRINGCONDUIT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_LENGTHWIRINGCONDUIT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthWiringConduit"));
+    public static final OWLDataProperty DATA_PROPERTY_LENGTHWIRINGCONDUIT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthWiringConduit"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needAbsoluteEncoderReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDABSOLUTEENCODERREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property NEEDABSOLUTEENCODERREQ
+     * .<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDABSOLUTEENCODERREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needAbsoluteEncoderReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDABSOLUTEENCODERREQ = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needAbsoluteEncoderReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needContinuousRotationReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDCONTINUOUSROTATIONREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * NEEDCONTINUOUSROTATIONREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDCONTINUOUSROTATIONREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needContinuousRotationReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDCONTINUOUSROTATIONREQ = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needContinuousRotationReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needExternCabeling
@@ -4831,52 +5650,64 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property NEEDEXTERNCABELING.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDEXTERNCABELING = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needExternCabeling"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDEXTERNCABELING = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needExternCabeling"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needIncrementalEncoderReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDINCREMENTALENCODERREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * NEEDINCREMENTALENCODERREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDINCREMENTALENCODERREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needIncrementalEncoderReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDINCREMENTALENCODERREQ = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needIncrementalEncoderReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needMotorControllerReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDMOTORCONTROLLERREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property NEEDMOTORCONTROLLERREQ
+     * .<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDMOTORCONTROLLERREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needMotorControllerReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDMOTORCONTROLLERREQ = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needMotorControllerReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needOutputCommunicationReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDOUTPUTCOMMUNICATIONREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * NEEDOUTPUTCOMMUNICATIONREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDOUTPUTCOMMUNICATIONREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needOutputCommunicationReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDOUTPUTCOMMUNICATIONREQ = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needOutputCommunicationReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needSensorControlBoardReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDSENSORCONTROLBOARDREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * NEEDSENSORCONTROLBOARDREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDSENSORCONTROLBOARDREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needSensorControlBoardReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDSENSORCONTROLBOARDREQ = factory.getOWLDataProperty(IRI
+            .create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needSensorControlBoardReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needTorqueSensorStrainGaugeBasedReq
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property NEEDTORQUESENSORSTRAINGAUGEBASEDREQ.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * NEEDTORQUESENSORSTRAINGAUGEBASEDREQ.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_NEEDTORQUESENSORSTRAINGAUGEBASEDREQ = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#needTorqueSensorStrainGaugeBasedReq"));
+    public static final OWLDataProperty DATA_PROPERTY_NEEDTORQUESENSORSTRAINGAUGEBASEDREQ = factory
+            .getOWLDataProperty(IRI.create("http://www.semanticweb" +
+                    ".org/oliver/ontologies/sac/sac_reasoning#needTorqueSensorStrainGaugeBasedReq"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessInnerShaft
@@ -4885,7 +5716,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property THICKNESSINNERSHAFT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_THICKNESSINNERSHAFT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessInnerShaft"));
+    public static final OWLDataProperty DATA_PROPERTY_THICKNESSINNERSHAFT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessInnerShaft"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessMotorShaft
@@ -4894,16 +5726,19 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property THICKNESSMOTORSHAFT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_THICKNESSMOTORSHAFT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessMotorShaft"));
+    public static final OWLDataProperty DATA_PROPERTY_THICKNESSMOTORSHAFT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessMotorShaft"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessRotationSafetyDistance
      */
 
     /**
-     * A constant to give access to the Manchester OWL API representation of the data property THICKNESSROTATIONSAFETYDISTANCE.<p>
+     * A constant to give access to the Manchester OWL API representation of the data property
+     * THICKNESSROTATIONSAFETYDISTANCE.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_THICKNESSROTATIONSAFETYDISTANCE = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessRotationSafetyDistance"));
+    public static final OWLDataProperty DATA_PROPERTY_THICKNESSROTATIONSAFETYDISTANCE = factory.getOWLDataProperty
+            (IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessRotationSafetyDistance"));
 
     /* ***************************************************
      * Data Property http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessSlipRingSlot
@@ -4912,7 +5747,8 @@ public class Vocabulary {
     /**
      * A constant to give access to the Manchester OWL API representation of the data property THICKNESSSLIPRINGSLOT.<p>
      */
-    public static final OWLDataProperty DATA_PROPERTY_THICKNESSSLIPRINGSLOT = factory.getOWLDataProperty(IRI.create("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessSlipRingSlot"));
+    public static final OWLDataProperty DATA_PROPERTY_THICKNESSSLIPRINGSLOT = factory.getOWLDataProperty(IRI.create
+            ("http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#thicknessSlipRingSlot"));
 
 
 }

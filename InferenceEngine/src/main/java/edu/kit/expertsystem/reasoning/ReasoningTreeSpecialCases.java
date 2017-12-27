@@ -35,6 +35,7 @@ public class ReasoningTreeSpecialCases {
     }
 
     public boolean handleUnsatisfied(OWLClass subClassOfUnsatisfied) {
+        long startTime = System.currentTimeMillis();
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         genericTool.getReasoner().instances(subClassOfUnsatisfied)
                 .forEach(indiToDelete -> helper.getGeneratedAxioms().stream().filter(
@@ -66,6 +67,12 @@ public class ReasoningTreeSpecialCases {
                             .instances(counter).forEach(counterInst -> helper.addAxiom(genericTool
                                     .getFactory().getOWLClassAssertionAxiom(newPart, counterInst)))));
             helper.flush();
+            double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
+            if (timeNeeded >= ReasoningTree.TIME_NEEDED_THRESHOLD) {
+                logger.debug(
+                        "Time needed for handleUnsatisfied of " + subClassOfUnsatisfied.getIRI().getShortForm() + " " +
+                                ": " + timeNeeded + "s");
+            }
             return true;
         }
         return false;
@@ -80,6 +87,7 @@ public class ReasoningTreeSpecialCases {
     }
 
     public boolean handlePossibleUnsatisfied(OWLClass subClassOfPossibleUnsatisfied) {
+        long startTime = System.currentTimeMillis();
         didBackupOnLastRun = false;
         if (!handledPossibleUnsatisfied.containsKey(subClassOfPossibleUnsatisfied)) {
             handledPossibleUnsatisfied.put(subClassOfPossibleUnsatisfied, new HashSet<>());
@@ -148,12 +156,20 @@ public class ReasoningTreeSpecialCases {
                         .forEach(counterInst -> helper.addAxiom(
                                 genericTool.getFactory().getOWLClassAssertionAxiom(newPart, counterInst))));
             }
+            double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
+            if (timeNeeded >= ReasoningTree.TIME_NEEDED_THRESHOLD) {
+                logger.debug(
+                        "Time needed for handlePossibleUnsatisfied of " + subClassOfPossibleUnsatisfied.getIRI()
+                                .getShortForm() + " " +
+                                ": " + timeNeeded + "s");
+            }
             return true;
         }
         return false;
     }
 
     public boolean handlePossibleSatisfied(OWLClass subClassOfPossibleSatisfied) {
+        long startTime = System.currentTimeMillis();
         if (!handledPossibleSatisfied.containsKey(subClassOfPossibleSatisfied)) {
             handledPossibleSatisfied.put(subClassOfPossibleSatisfied, new HashSet<>());
         }
@@ -174,6 +190,13 @@ public class ReasoningTreeSpecialCases {
             logger.debug(
                     "Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI().getShortForm());
             helper.flush();
+            double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
+            if (timeNeeded >= ReasoningTree.TIME_NEEDED_THRESHOLD) {
+                logger.debug(
+                        "Time needed for handlePossibleSatisfied of " + subClassOfPossibleSatisfied.getIRI()
+                                .getShortForm() + " " +
+                                ": " + timeNeeded + "s");
+            }
             return true;
         }
         return false;

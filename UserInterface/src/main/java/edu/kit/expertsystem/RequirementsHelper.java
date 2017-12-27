@@ -56,7 +56,8 @@ public class RequirementsHelper {
     }
 
     public void createRequirement(RequirementWrapper requirementWrapper,
-                                  List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int rowNumber) {
+                                  List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int
+                                          rowNumber) {
         createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;
