@@ -815,25 +815,60 @@ DiameterInputOutputCompressed(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D
 
 
 
+DiameterOutputLinearBeforeEvaluate1Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
+swrlb:greaterThan(?D_ab, ?D_spcb)
+-> has3(?do, ?D_ab)
 
-DiameterOutputLinearCalcRule:
-DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ Constants(?con) ^ CurrentRequirements(?r) ^
-hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ diameterWiring(?con, ?D_w) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^  hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
-swrlb:multiply(?D_w2, ?D_w, 2.0) ^ swrlb:multiply(?D_scp2, ?d_g_cs, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_scp2) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?D_max2, ?D_oc2, ?D_ab)
+DiameterOutputLinearBeforeEvaluate2Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
+swrlb:lessThanOrEqual(?D_ab, ?D_spcb)
+-> has3(?do, ?D_spcb)
+
+
+DiameterOutputLinearBeforeEvaluate3Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ Constants(?con) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ diameterWiring(?con, ?D_w) ^
+swrlb:notEqual(?L_loie, 0.0)
+-> has2(?do, ?D_w)
+
+DiameterOutputLinearBeforeEvaluate4Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^
+swrlb:equal(?L_loie, 0.0)
+-> has2(?do, 0.0)
+
+
+
+DiameterOutputCompressedBeforeCalcRule:
+DiameterOutputCompressed(?do)
+-> has2(?do, 0.0) ^ has3(?do, 0.0)
+
+
+DiameterOutputCalcRule:
+DiameterOutput(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ CurrentRequirements(?r) ^
+has2(?do, ?height_wiring) ^ has3(?do, ?D_electro_output) ^
+hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
+swrlb:multiply(?D_w2, ?height_wiring, 2.0) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_oc2) ^ swrlb:add(?D_max2, ?D_oc2, ?D_electro_output)
 -> hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2)
 
 
 
-DiameterOutputLinearEvaluate1Rule:
-DiameterOutputLinear(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
+DiameterOutputEvaluate1Rule:
+DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
 
-DiameterOutputLinearEvaluate2Rule:
-DiameterOutputLinear(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
+DiameterOutputEvaluate2Rule:
+DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
 
 
 
 DiameterOutputLinearSatisfyRule:
 DiameterOutputLinear(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutputLinear(?do)
+
+DiameterOutputCompressedSatisfyRule:
+DiameterOutputCompressed(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutputCompressed(?do)
 
 
 
