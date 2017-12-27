@@ -38,13 +38,8 @@ public class Result {
             return false;
         }
         if (requirements == null) {
-            if (other.requirements != null) {
-                return false;
-            }
-        } else if (!requirements.equals(other.requirements)) {
-            return false;
-        }
-        return true;
+            return other.requirements == null;
+        } else return requirements.equals(other.requirements);
     }
 
     @Override

@@ -39,13 +39,8 @@ public class Category {
             return false;
         }
         if (topic == null) {
-            if (other.topic != null) {
-                return false;
-            }
-        } else if (!topic.equals(other.topic)) {
-            return false;
-        }
-        return true;
+            return other.topic == null;
+        } else return topic.equals(other.topic);
     }
 
     @Override

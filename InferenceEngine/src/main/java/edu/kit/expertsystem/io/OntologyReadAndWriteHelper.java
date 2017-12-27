@@ -69,7 +69,7 @@ public class OntologyReadAndWriteHelper {
         }
     }
 
-    private InputStream readOntology(String fileName, boolean setInferdFilePath) throws IOException {
+    private InputStream readOntology(String fileName, boolean setInferdFilePath) {
         String path = myPath + fileName;
         if (setInferdFilePath) {
             inferdFilePath = path.substring(0, path.length() - fileEnding.length()) + "Inf" + fileEnding;

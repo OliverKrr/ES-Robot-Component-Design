@@ -48,10 +48,7 @@ public class Component {
         } else if (!nameOfInstance.equals(other.nameOfInstance)) {
             return false;
         }
-        if (orderPosition != other.orderPosition) {
-            return false;
-        }
-        return true;
+        return orderPosition == other.orderPosition;
     }
 
 }

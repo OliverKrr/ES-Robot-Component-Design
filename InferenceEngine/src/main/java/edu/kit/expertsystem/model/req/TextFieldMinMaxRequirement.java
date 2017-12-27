@@ -106,11 +106,8 @@ public class TextFieldMinMaxRequirement extends Requirement {
         if (Double.doubleToLongBits(result) != Double.doubleToLongBits(other.result)) {
             return false;
         }
-        if (Double.doubleToLongBits(scaleFromOntologyToUI) != Double
-                .doubleToLongBits(other.scaleFromOntologyToUI)) {
-            return false;
-        }
-        return true;
+        return Double.doubleToLongBits(scaleFromOntologyToUI) == Double
+                .doubleToLongBits(other.scaleFromOntologyToUI);
     }
 
     @Override

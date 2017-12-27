@@ -89,13 +89,8 @@ public class Requirement {
             return false;
         }
         if (unit == null) {
-            if (other.unit != null) {
-                return false;
-            }
-        } else if (!unit.equals(other.unit)) {
-            return false;
-        }
-        return true;
+            return other.unit == null;
+        } else return unit.equals(other.unit);
     }
 
     @Override

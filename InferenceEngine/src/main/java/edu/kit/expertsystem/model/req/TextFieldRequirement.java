@@ -81,10 +81,7 @@ public class TextFieldRequirement extends Requirement {
                 .doubleToLongBits(other.scaleFromOntologyToUI)) {
             return false;
         }
-        if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value)) {
-            return false;
-        }
-        return true;
+        return Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
     }
 
     @Override

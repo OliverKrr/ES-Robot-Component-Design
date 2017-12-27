@@ -51,10 +51,7 @@ public class UnitToReason {
         } else if (!iriOfUnit.equals(other.iriOfUnit)) {
             return false;
         }
-        if (orderPosition != other.orderPosition) {
-            return false;
-        }
-        return true;
+        return orderPosition == other.orderPosition;
     }
 
     @Override

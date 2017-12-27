@@ -62,10 +62,7 @@ public class CheckboxRequirement extends Requirement {
         if (result != other.result) {
             return false;
         }
-        if (value != other.value) {
-            return false;
-        }
-        return true;
+        return value == other.value;
     }
 
     @Override

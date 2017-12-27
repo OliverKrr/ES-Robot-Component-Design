@@ -39,13 +39,8 @@ public class RequirementDependencyCheckbox {
             return false;
         }
         if (to == null) {
-            if (other.to != null) {
-                return false;
-            }
-        } else if (!to.equals(other.to)) {
-            return false;
-        }
-        return true;
+            return other.to == null;
+        } else return to.equals(other.to);
     }
 
     @Override
