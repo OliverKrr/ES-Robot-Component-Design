@@ -1,12 +1,12 @@
 package edu.kit.expertsystem.io;
 
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.semanticweb.owlapi.model.OWLClassAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
+
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MyInferredClassAssertionAxiomGenerator extends MyInferredGenerator<OWLClassAssertionAxiom> {
 
@@ -14,7 +14,7 @@ public class MyInferredClassAssertionAxiomGenerator extends MyInferredGenerator<
 
     @Override
     protected void addAxioms(OWLNamedIndividual entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-            Set<OWLClassAssertionAxiom> result) {
+                             Set<OWLClassAssertionAxiom> result) {
         if (isStopped.get()) {
             return;
         }

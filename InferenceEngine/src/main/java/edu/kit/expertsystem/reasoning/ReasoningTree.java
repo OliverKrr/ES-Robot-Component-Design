@@ -1,21 +1,20 @@
 package edu.kit.expertsystem.reasoning;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
-
+import edu.kit.expertsystem.MyOWLHelper;
+import edu.kit.expertsystem.generated.Vocabulary;
+import openllet.owlapi.OWLGenericTools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
-import edu.kit.expertsystem.MyOWLHelper;
-import edu.kit.expertsystem.generated.Vocabulary;
-import openllet.owlapi.OWLGenericTools;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class ReasoningTree {
 
@@ -149,7 +148,7 @@ public class ReasoningTree {
     }
 
     private void makePermutations(OWLClass treeClass,
-            List<ChildInstancesForPermutation> childrenForPermutation, int numberOfPermutations) {
+                                  List<ChildInstancesForPermutation> childrenForPermutation, int numberOfPermutations) {
         List<PermutationOfChildInstances> permutations = new ArrayList<>(numberOfPermutations);
         buildPermutations(permutations, childrenForPermutation, new int[childrenForPermutation.size()], 0);
 
@@ -174,7 +173,7 @@ public class ReasoningTree {
     }
 
     private void buildPermutations(List<PermutationOfChildInstances> permutations,
-            List<ChildInstancesForPermutation> childrenForPermutation, int[] currentPositions, int position) {
+                                   List<ChildInstancesForPermutation> childrenForPermutation, int[] currentPositions, int position) {
         if (position != currentPositions.length) {
             for (int i = 0; i < childrenForPermutation.get(position).childInstances.size(); i++) {
                 currentPositions[position] = i;

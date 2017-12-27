@@ -1,39 +1,27 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLDataProperty;
-import org.semanticweb.owlapi.model.OWLDataPropertyAssertionAxiom;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLSubObjectPropertyOfAxiom;
-import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
-import org.semanticweb.owlapi.vocab.OWL2Datatype;
-
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.io.OntologyReadAndWriteHelper;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.UnitToReason;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.Requirement;
-import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import edu.kit.expertsystem.model.req.*;
 import edu.kit.expertsystem.reasoning.ReasoningTree;
 import openllet.core.exceptions.TimerInterruptedException;
 import openllet.owlapi.OWL;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.reasoner.InferenceType;
+import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
+import org.semanticweb.owlapi.vocab.OWL2Datatype;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainReasoner {
 
@@ -252,7 +240,7 @@ public class MainReasoner {
     }
 
     private Component parseComponent(OWLSubObjectPropertyOfAxiom subOb,
-            OWLNamedIndividual composedComponent) {
+                                     OWLNamedIndividual composedComponent) {
         Component component = new Component();
         component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
         component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
@@ -317,7 +305,7 @@ public class MainReasoner {
                                             "UnitsToReasone are only allowed to have one child to identify resultingUnit (satisfied), found at least: "
                                                     + unitToReason.iriOfResultUnit + " and "
                                                     + classToReasonAxiom.getSubClass().asOWLClass().getIRI()
-                                                            .getIRIString());
+                                                    .getIRIString());
                                 }
                             });
                     if (unitToReason.iriOfResultUnit == null) {

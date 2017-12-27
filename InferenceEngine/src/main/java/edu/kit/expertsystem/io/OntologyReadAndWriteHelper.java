@@ -1,17 +1,9 @@
 package edu.kit.expertsystem.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
-
+import edu.kit.expertsystem.MyOWLHelper;
+import openllet.core.exceptions.TimerInterruptedException;
+import openllet.owlapi.OWLGenericTools;
+import openllet.owlapi.OWLManagerGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLIndividualAxiom;
@@ -21,10 +13,12 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 
-import edu.kit.expertsystem.MyOWLHelper;
-import openllet.core.exceptions.TimerInterruptedException;
-import openllet.owlapi.OWLGenericTools;
-import openllet.owlapi.OWLManagerGroup;
+import java.io.*;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class OntologyReadAndWriteHelper {
 

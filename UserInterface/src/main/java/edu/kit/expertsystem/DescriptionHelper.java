@@ -1,14 +1,14 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DescriptionHelper {
 

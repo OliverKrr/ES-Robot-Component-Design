@@ -1,11 +1,10 @@
 package edu.kit.expertsystem.controller.wrapper;
 
-import java.util.List;
-
+import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Control;
 
-import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
+import java.util.List;
 
 public class RequirementDependencyCheckboxWrapper {
 

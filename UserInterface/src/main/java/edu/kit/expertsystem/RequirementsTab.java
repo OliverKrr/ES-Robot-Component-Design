@@ -1,7 +1,10 @@
 package edu.kit.expertsystem;
 
-import java.util.List;
-
+import edu.kit.expertsystem.controller.wrapper.*;
+import edu.kit.expertsystem.model.req.Category;
+import edu.kit.expertsystem.model.req.CheckboxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
+import edu.kit.expertsystem.model.req.TextFieldRequirement;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -14,15 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import edu.kit.expertsystem.controller.wrapper.CheckboxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldMinMaxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldRequirementWrapper;
-import edu.kit.expertsystem.model.req.Category;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import java.util.List;
 
 public class RequirementsTab {
 
@@ -49,7 +44,7 @@ public class RequirementsTab {
     }
 
     public void createContents(Category category, List<RequirementWrapper> requirements,
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
+                               List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
         leftComposite = new Composite(requirementsForm, SWT.NONE);
         formToolkit.adapt(leftComposite);
 

@@ -1,28 +1,19 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wb.swt.SWTResourceManager;
-
-import edu.kit.expertsystem.controller.wrapper.CheckboxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldMinMaxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldRequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.*;
 import edu.kit.expertsystem.model.req.Category;
 import edu.kit.expertsystem.model.req.CheckboxRequirement;
 import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
 import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.*;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RequirementsHelper {
 
@@ -65,7 +56,7 @@ public class RequirementsHelper {
     }
 
     public void createRequirement(RequirementWrapper requirementWrapper,
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int rowNumber) {
+                                  List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int rowNumber) {
         createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;

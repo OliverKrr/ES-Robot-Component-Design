@@ -1,8 +1,7 @@
 package edu.kit.expertsystem.controller.wrapper;
 
-import org.eclipse.swt.widgets.Button;
-
 import edu.kit.expertsystem.model.req.Requirement;
+import org.eclipse.swt.widgets.Button;
 
 public class CheckboxRequirementWrapper extends RequirementWrapper {
 

@@ -1,11 +1,11 @@
 package edu.kit.expertsystem.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Stream;
-
+import edu.kit.expertsystem.*;
+import edu.kit.expertsystem.controller.wrapper.*;
+import edu.kit.expertsystem.model.Component;
+import edu.kit.expertsystem.model.Result;
+import edu.kit.expertsystem.model.UnitToReason;
+import edu.kit.expertsystem.model.req.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -17,25 +17,11 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import edu.kit.expertsystem.Configs;
-import edu.kit.expertsystem.GUI;
-import edu.kit.expertsystem.GuiHelper;
-import edu.kit.expertsystem.MainReasoner;
-import edu.kit.expertsystem.SolutionTab;
-import edu.kit.expertsystem.controller.wrapper.CheckboxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldMinMaxRequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.TextFieldRequirementWrapper;
-import edu.kit.expertsystem.model.Component;
-import edu.kit.expertsystem.model.Result;
-import edu.kit.expertsystem.model.UnitToReason;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.Requirement;
-import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Controller {
 
@@ -273,14 +259,14 @@ public class Controller {
     private String getNameForComponent(Component component, double maxNumberOfChars) {
         return "".equals(component.nameOfComponent) ? component.nameOfInstance
                 : component.nameOfComponent + ": "
-                        + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
-                        + component.nameOfInstance;
+                + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
+                + component.nameOfInstance;
     }
 
     private double getMaxNumberOfCharsForReq(Result result) {
         return result.requirements.stream().filter(req -> req.resultIRI != null)
                 .max((val1, val2) -> val1.displayName.length() - val2.displayName.length()).get().displayName
-                        .length();
+                .length();
     }
 
     private String getNameForReq(Requirement req, double maxNumberOfChars) {

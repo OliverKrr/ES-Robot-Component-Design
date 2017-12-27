@@ -1,12 +1,7 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
+import edu.kit.expertsystem.controller.Controller;
+import edu.kit.expertsystem.controller.NavigationItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -16,23 +11,17 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Monitor;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.graphics.*;
+import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import edu.kit.expertsystem.controller.Controller;
-import edu.kit.expertsystem.controller.NavigationItem;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class GUI {
 
@@ -280,7 +269,7 @@ public class GUI {
     private int[] getWeights() {
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         float ratioForWeights = 1f * newWidthOfContent / 835;
-        int[] newContentWeights = { Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights) };
+        int[] newContentWeights = {Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights)};
         return newContentWeights;
     }
 

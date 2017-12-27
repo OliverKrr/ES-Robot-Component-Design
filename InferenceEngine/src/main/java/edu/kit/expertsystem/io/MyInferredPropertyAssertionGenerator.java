@@ -1,16 +1,15 @@
 package edu.kit.expertsystem.io;
 
-import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
-
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-
+import openllet.owlapi.OWLGenericTools;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLPropertyAssertionAxiom;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 
-import openllet.owlapi.OWLGenericTools;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
 public class MyInferredPropertyAssertionGenerator
         extends MyInferredGenerator<OWLPropertyAssertionAxiom<?, ?>> {
@@ -24,7 +23,7 @@ public class MyInferredPropertyAssertionGenerator
 
     @Override
     protected void addAxioms(OWLNamedIndividual entity, OWLReasoner reasoner, OWLDataFactory dataFactory,
-            Set<OWLPropertyAssertionAxiom<?, ?>> result) {
+                             Set<OWLPropertyAssertionAxiom<?, ?>> result) {
         if (isStopped.get()) {
             return;
         }

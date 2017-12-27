@@ -6,7 +6,7 @@ public class PermutationOfChildInstances {
     public String permutationName;
 
     public PermutationOfChildInstances(ChildIndividualWithObjectPropertyFromParent[] permutatedChildren,
-            String permutationName) {
+                                       String permutationName) {
         this.permutatedChildren = permutatedChildren;
         this.permutationName = permutationName;
     }

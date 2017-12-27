@@ -1,7 +1,6 @@
 package edu.kit.expertsystem;
 
-import java.util.List;
-
+import edu.kit.expertsystem.controller.NavigationItem;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -12,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import edu.kit.expertsystem.controller.NavigationItem;
+import java.util.List;
 
 public class NavigationBarHelper {
 

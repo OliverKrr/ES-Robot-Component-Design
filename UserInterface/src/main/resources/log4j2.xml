@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <Configuration status="warn" name="SAC" packages="edu.kit.expertsystem">
-	<Appenders>
-		<MyAppenderForGui name="MyAppenderForGui">
-			<PatternLayout pattern="%m%n" />
-		</MyAppenderForGui>
-		<Console name="STDOUT" target="SYSTEM_OUT">
-			<PatternLayout pattern="%m%n" />
-		</Console>
-		<RollingFile name="RollingFile" fileName="logs/sac.log"
-			filePattern="logs/sac-%d{yyyy-MM-dd}-%i.log.gz">
-			<PatternLayout>
-				<Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L [%t] - %m%n</Pattern>
-			</PatternLayout>
-			<Policies>
-				<TimeBasedTriggeringPolicy />
-				<SizeBasedTriggeringPolicy size="250 MB" />
-			</Policies>
-			<DefaultRolloverStrategy max="20" />
-		</RollingFile>
-	</Appenders>
-	<Loggers>
-		<Logger name="edu.kit.expertsystem" level="debug">
-			<AppenderRef level="debug" ref="STDOUT" />
-			<AppenderRef level="debug" ref="RollingFile" />
-		</Logger>
-		<Root level="info">
-			<AppenderRef level="info" ref="MyAppenderForGui" />
-		</Root>
-	</Loggers>
+    <Appenders>
+        <MyAppenderForGui name="MyAppenderForGui">
+            <PatternLayout pattern="%m%n"/>
+        </MyAppenderForGui>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%m%n"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="logs/sac.log"
+                     filePattern="logs/sac-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L [%t] - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="edu.kit.expertsystem" level="debug">
+            <AppenderRef level="debug" ref="STDOUT"/>
+            <AppenderRef level="debug" ref="RollingFile"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef level="info" ref="MyAppenderForGui"/>
+        </Root>
+    </Loggers>
 </Configuration>

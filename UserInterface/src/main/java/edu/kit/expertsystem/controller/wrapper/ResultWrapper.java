@@ -1,14 +1,13 @@
 package edu.kit.expertsystem.controller.wrapper;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import edu.kit.expertsystem.model.Result;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 
-import edu.kit.expertsystem.model.Result;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ResultWrapper {
 

@@ -9,7 +9,7 @@ public class ChildIndividualWithObjectPropertyFromParent {
     public OWLObjectPropertyExpression propertyFromParent;
 
     public ChildIndividualWithObjectPropertyFromParent(OWLNamedIndividual childIndividual,
-            OWLObjectPropertyExpression propertyFromParent) {
+                                                       OWLObjectPropertyExpression propertyFromParent) {
         this.childIndividual = childIndividual;
         this.propertyFromParent = propertyFromParent;
     }

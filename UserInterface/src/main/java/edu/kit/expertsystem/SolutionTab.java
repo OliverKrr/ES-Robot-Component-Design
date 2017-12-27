@@ -1,7 +1,7 @@
 package edu.kit.expertsystem;
 
-import java.util.List;
-
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -10,17 +10,10 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
-import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
+import java.util.List;
 
 public class SolutionTab {
 

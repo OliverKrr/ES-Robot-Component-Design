@@ -1,10 +1,5 @@
 package edu.kit.expertsystem;
 
-import java.io.Serializable;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.Layout;
@@ -17,6 +12,11 @@ import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.eclipse.swt.graphics.Color;
+
+import java.io.Serializable;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 // from https://stackoverflow.com/questions/24205093/how-to-create-a-custom-appender-in-log4j2/24220688
 // note: class name need not match the @Plugin name.
@@ -31,7 +31,7 @@ public final class MyAppenderForGui extends AbstractAppender {
     private GUI gui;
 
     protected MyAppenderForGui(String name, Filter filter, Layout<? extends Serializable> layout,
-            final boolean ignoreExceptions) {
+                               final boolean ignoreExceptions) {
         super(name, filter, layout, ignoreExceptions);
     }
 
@@ -69,9 +69,9 @@ public final class MyAppenderForGui extends AbstractAppender {
 
     @PluginFactory
     public static MyAppenderForGui createAppender(@PluginAttribute("name") String name,
-            @PluginElement("Layout") Layout<? extends Serializable> layout,
-            @PluginElement("Filter") final Filter filter,
-            @PluginAttribute("otherAttribute") String otherAttribute) {
+                                                  @PluginElement("Layout") Layout<? extends Serializable> layout,
+                                                  @PluginElement("Filter") final Filter filter,
+                                                  @PluginAttribute("otherAttribute") String otherAttribute) {
         if (name == null) {
             LOGGER.error("No name provided for MyAppenderForGui");
             return null;

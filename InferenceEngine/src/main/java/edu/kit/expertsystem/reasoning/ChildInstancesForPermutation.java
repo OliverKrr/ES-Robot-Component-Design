@@ -1,9 +1,9 @@
 package edu.kit.expertsystem.reasoning;
 
-import java.util.List;
-
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
+
+import java.util.List;
 
 public class ChildInstancesForPermutation {
 
@@ -11,7 +11,7 @@ public class ChildInstancesForPermutation {
     public OWLObjectPropertyExpression propertyFromParent;
 
     public ChildInstancesForPermutation(List<OWLNamedIndividual> childInstances,
-            OWLObjectPropertyExpression propertyFromParent) {
+                                        OWLObjectPropertyExpression propertyFromParent) {
         this.childInstances = childInstances;
         this.propertyFromParent = propertyFromParent;
     }

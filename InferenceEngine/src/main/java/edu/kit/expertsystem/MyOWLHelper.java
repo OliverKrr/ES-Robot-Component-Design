@@ -1,22 +1,15 @@
 package edu.kit.expertsystem;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.semanticweb.owlapi.model.IRI;
-import org.semanticweb.owlapi.model.OWLAxiom;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLDataHasValue;
-import org.semanticweb.owlapi.model.OWLLiteral;
-import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLObjectProperty;
-
 import edu.kit.expertsystem.generated.Vocabulary;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.semanticweb.owlapi.model.*;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyOWLHelper {
 
@@ -48,7 +41,7 @@ public class MyOWLHelper {
 
     /**
      * Remove "Ind"
-     * 
+     *
      * @param ind
      * @return
      */
@@ -58,7 +51,7 @@ public class MyOWLHelper {
 
     /**
      * Remove "isComposedOf"
-     * 
+     *
      * @param namedProperty
      * @return
      */

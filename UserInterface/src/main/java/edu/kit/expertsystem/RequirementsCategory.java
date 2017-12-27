@@ -1,11 +1,9 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import edu.kit.expertsystem.controller.NavigationItem;
+import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
+import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
+import edu.kit.expertsystem.model.req.Category;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -15,10 +13,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
-import edu.kit.expertsystem.controller.NavigationItem;
-import edu.kit.expertsystem.controller.wrapper.RequirementDependencyCheckboxWrapper;
-import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
-import edu.kit.expertsystem.model.req.Category;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class RequirementsCategory {
 

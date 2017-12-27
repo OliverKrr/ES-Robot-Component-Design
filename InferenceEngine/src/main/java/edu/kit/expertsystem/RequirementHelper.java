@@ -1,24 +1,17 @@
 package edu.kit.expertsystem;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import edu.kit.expertsystem.generated.Vocabulary;
+import edu.kit.expertsystem.model.req.*;
+import openllet.owlapi.OWLGenericTools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 
-import edu.kit.expertsystem.generated.Vocabulary;
-import edu.kit.expertsystem.model.req.Category;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.Requirement;
-import edu.kit.expertsystem.model.req.RequirementDependencyCheckbox;
-import edu.kit.expertsystem.model.req.RequirementType;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
-import openllet.owlapi.OWLGenericTools;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class RequirementHelper {
 
@@ -44,7 +37,7 @@ public class RequirementHelper {
                         .forEach(axiom -> axiom.componentsWithoutAnnotations()
                                 .filter(component -> component instanceof OWLObjectHasValue
                                         && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT
-                                                .equals(((OWLObjectHasValue) component).getProperty()))
+                                        .equals(((OWLObjectHasValue) component).getProperty()))
                                 .forEach(component -> requirements
                                         .add(parseRequirement(((OWLObjectHasValue) component).getFiller()
                                                 .asOWLNamedIndividual()))))));
@@ -80,7 +73,7 @@ public class RequirementHelper {
                             .findAny().ifPresent(req -> requirementDependencyCheckbox.to = req));
             genericTool.getReasoner().dataPropertyValues(dep, Vocabulary.DATA_PROPERTY_DISPLAYONVALUEBOOLEAN)
                     .findAny().ifPresent(
-                            literal -> requirementDependencyCheckbox.displayOnValue = literal.parseBoolean());
+                    literal -> requirementDependencyCheckbox.displayOnValue = literal.parseBoolean());
 
             if (requirementDependencyCheckbox.from != null && requirementDependencyCheckbox.to != null) {
                 requirementDependencies.add(requirementDependencyCheckbox);
@@ -106,7 +99,7 @@ public class RequirementHelper {
                 genericTool.getReasoner()
                         .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
                         .findAny().ifPresent(
-                                obProp -> textReq.scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
+                        obProp -> textReq.scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
                 genericTool.getReasoner()
                         .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMIN).findAny()
                         .ifPresent(obProp -> textReq.defaultMin = helper.parseValueToDouble(obProp));
@@ -136,7 +129,7 @@ public class RequirementHelper {
                 genericTool.getReasoner()
                         .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI)
                         .findAny().ifPresent(
-                                obProp -> textReq.scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
+                        obProp -> textReq.scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
                 genericTool.getReasoner()
                         .dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE).findAny()
                         .ifPresent(obProp -> textReq.defaultValue = helper.parseValueToDouble(obProp));
