@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SAC.iml" filepath="$PROJECT_DIR$/SAC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SAC-InferenceEngine.iml" filepath="$PROJECT_DIR$/SAC-InferenceEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SAC-KnowledgeBase.iml" filepath="$PROJECT_DIR$/SAC-KnowledgeBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SAC-UserInterface.iml" filepath="$PROJECT_DIR$/SAC-UserInterface.iml" />
+    </modules>
+  </component>
+</project>
