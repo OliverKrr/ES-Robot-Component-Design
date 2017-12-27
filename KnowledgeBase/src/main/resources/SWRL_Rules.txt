@@ -872,13 +872,19 @@ DiameterOutputCompressed(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ ha
 
 
 
+DiameterOutputBearingCalcRule:
+DiameterOutputBearingOutputLinear(?dob) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+hasDimensionOuterDiameter_D_unit_mm(?ob, ?D_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^
+swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:add(?D_dob, ?D_ob, ?D_s_ob2) ^
+-> hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob)
+
 
 DiameterOutputBearingOutputLinearCalcRule:
 DiameterOutputBearingOutputLinear(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^ hasTorsionalShaft(?dob, ?ts) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
-hasDimensionOuterDiameter_D_unit_mm(?ob, ?D_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^  hasDimensionOuterDiameter_D_unit_mm(?s_g_cs, ?D_s_g_cs) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionOuterDiameter_D_unit_mm(?ts, ?D_ts) ^
-swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:add(?D_dob, ?D_ob, ?D_s_ob2) ^
-swrlb:multiply(?D_s_g_cs2, 2.0, ?D_s_g_cs) ^ swrlb:multiply(?D_ts2, 2.0, ?D_ts) ^ swrlb:add(?temp1, ?d_ob, ?D_s_ob2) ^ swrlb:subtract(?temp2, ?temp1, ?D_s_g_cs2) ^ swrlb:subtract(?d_dob, ?temp2, ?D_ts2) ^ swrlb:greaterThanOrEqual(?d_dob, ?D_sr)
--> HalfSatisfiedDiameterOutputBearingOutputLinear(?dob) ^ hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ hasDimensionInnerDiameter_d_unit_mm(?dob, ?d_dob)
+hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^  hasDimensionOuterDiameter_D_unit_mm(?s_g_cs, ?D_s_g_cs) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionOuterDiameter_D_unit_mm(?ts, ?D_ts) ^
+swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:multiply(?D_s_g_cs2, 2.0, ?D_s_g_cs) ^ swrlb:multiply(?D_ts2, 2.0, ?D_ts) ^ swrlb:add(?temp1, ?d_ob, ?D_s_ob2) ^ swrlb:subtract(?temp2, ?temp1, ?D_s_g_cs2) ^ swrlb:subtract(?d_dob, ?temp2, ?D_ts2) ^ swrlb:greaterThanOrEqual(?d_dob, ?D_sr)
+-> HalfSatisfiedDiameterOutputBearingOutputLinear(?dob) ^ hasDimensionInnerDiameter_d_unit_mm(?dob, ?d_dob)
+
 
 
 
@@ -926,6 +932,33 @@ hasDiameterOutput(?dob2, ?do) ^ hasTorsionalShaft(?dob2, ?ts) ^
 hasDimensionInnerDiameter_d_unit_mm(?dob1, ?d_dob1) ^ hasDimensionInnerDiameter_d_unit_mm(?dob2, ?d_dob2) ^
 swrlb:equal(?d_dob1, ?d_dob2)
 -> BackupPossibleSatisfiedDiameterOutputBearingOutputLinear(?dob1) ^ BackupPossibleSatisfiedDiameterOutputBearingOutputLinear(?dob2)
+
+
+
+DiameterOutputBearingOutputCompressedCalcRule:
+DiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasOutputBearing(?dob, ?ob) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^
+hasDimensionOuterDiameter_D_unit_mm(?ob, ?D_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^ hasDimensionOuterDiameterFlexSpline_a_unit_mm(?g, ?D_a_g) ^
+swrlb:subtract(?ob_diff, ?D_ob, ?d_ob) ^ swrlb:divide(?D_bearingSet, ?ob_diff, 2.0) ^ swrlb:subtract(?d_dob, ?d_ob, ?D_bearingSet) ^
+swrlb:greaterThanOrEqual(?d_dob, ?D_a_g)
+-> HalfSatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDimensionInnerDiameter_d_unit_mm(?dob, ?d_dob)
+
+
+DiameterOutputBearingOutputCompressedSatisfiedRule:
+HalfSatisfiedDiameterOutputBearingOutputCompressed(?dob1) ^ HalfSatisfiedDiameterOutputBearingOutputCompressed(?dob2) ^
+hasDiameterOutput(?dob1, ?do) ^ hasTorsionalShaft(?dob1, ?ts) ^
+hasDiameterOutput(?dob2, ?do) ^ hasTorsionalShaft(?dob2, ?ts) ^
+hasDimensionOuterDiameter_D_unit_mm(?dob1, ?D_dob1) ^ hasDimensionOuterDiameter_D_unit_mm(?dob2, ?D_dob2) ^
+swrlb:greaterThan(?D_dob2, ?D_dob1) ^ swrlb:lessThan(?D_dob1, ?D_dob2)
+-> UnsatisfiedDiameterOutputBearingOutputCompressed(?dob2)
+
+DiameterOutputBearingOutputCompressedPossibleSatisfiedRule:
+HalfSatisfiedDiameterOutputBearingOutputCompressed(?dob1) ^ HalfSatisfiedDiameterOutputBearingOutputCompressed(?dob2) ^
+hasDiameterOutput(?dob1, ?do) ^ hasTorsionalShaft(?dob1, ?ts) ^
+hasDiameterOutput(?dob2, ?do) ^ hasTorsionalShaft(?dob2, ?ts) ^
+hasDimensionOuterDiameter_D_unit_mm(?dob1, ?D_dob1) ^ hasDimensionOuterDiameter_D_unit_mm(?dob2, ?D_dob2) ^
+swrlb:equal(?D_dob1, ?D_dob2)
+-> PossibleSatisfiedDiameterOutputBearingOutputCompressed(?dob1) ^ PossibleSatisfiedDiameterOutputBearingOutputCompressed(?dob2)
+
 
 
 
