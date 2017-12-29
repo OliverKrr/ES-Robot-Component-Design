@@ -218,17 +218,14 @@ public class Controller {
     private void buildTree() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
 
-        Map<String, Boolean> showKeys = new HashMap<>();
+        Map<String, ShowResult> showKeys = new HashMap<>();
         if (resultWrapper.showOnlyDiffsCheckBox.getSelection()) {
-            Map<String, String> currentValues = new HashMap<>();
             for (Result result : resultWrapper.results) {
                 for (Component component : result.components) {
-                    handleShow(showKeys, currentValues, component.nameOfComponent, component.nameOfInstance);
+                    handleShow(showKeys, component.nameOfComponent, component.nameOfInstance, true);
                 }
                 for (Requirement req : result.requirements) {
-                    String resultValue = "";
-                    resultValue = getResultValue(req);
-                    handleShow(showKeys, currentValues, req.displayName, resultValue);
+                    handleShow(showKeys, req.displayName, getResultValue(req), false);
                 }
             }
         }
@@ -241,7 +238,8 @@ public class Controller {
 
             StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
-                if (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(component.nameOfComponent)) {
+                if (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(component.nameOfComponent)
+                        .showResult) {
                     continue;
                 }
                 String name = getNameForComponent(component, maxNumberOfChars);
@@ -254,7 +252,7 @@ public class Controller {
 
             for (Requirement req : result.requirements) {
                 if (req.resultIRI == null || (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(req
-                        .displayName))) {
+                        .displayName).showResult)) {
                     continue;
                 }
                 String name = getNameForReq(req, maxNumberOfChars);
@@ -267,30 +265,26 @@ public class Controller {
     }
 
     private String getResultValue(Requirement req) {
-        String resultValue = "";
         if (req instanceof TextFieldMinMaxRequirement) {
             TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
         } else if (req instanceof TextFieldRequirement) {
             TextFieldRequirement realReq = (TextFieldRequirement) req;
-            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
         } else if (req instanceof CheckboxRequirement) {
             CheckboxRequirement realReq = (CheckboxRequirement) req;
-            resultValue = String.valueOf(realReq.result);
+            return String.valueOf(realReq.result);
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
-        return resultValue;
     }
 
-    private void handleShow(Map<String, Boolean> showKeys, Map<String, String> currentValues, String key, String
-            value) {
-        if (!currentValues.containsKey(key)) {
-            currentValues.put(key, value);
-            showKeys.put(key, false);
+    private void handleShow(Map<String, ShowResult> showKeys, String key, String value, boolean isComponent) {
+        if (!showKeys.containsKey(key)) {
+            showKeys.put(key, new ShowResult(value, false, isComponent));
         }
-        if (!currentValues.get(key).equals(value)) {
-            showKeys.put(key, true);
+        if (!showKeys.get(key).firstValue.equals(value)) {
+            showKeys.get(key).showResult = true;
         }
     }
 
@@ -316,7 +310,7 @@ public class Controller {
                 getSpacesForResultValue(resultValue) + unit;
     }
 
-    private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
+    private void addTreeItem(TreeItem parent, String text, boolean makeGreen) {
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {
@@ -324,7 +318,6 @@ public class Controller {
         }
         resItem.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()), SWT
                 .NORMAL));
-        return resItem;
     }
 
     private TreeItem addTreeItem(Tree parent, String text) {
@@ -372,4 +365,16 @@ public class Controller {
         return resultWrapper;
     }
 
+
+    private static class ShowResult {
+        String firstValue;
+        boolean showResult;
+        boolean isComponent;
+
+        ShowResult(String firstValue, boolean showResult, boolean isComponent) {
+            this.firstValue = firstValue;
+            this.showResult = showResult;
+            this.isComponent = isComponent;
+        }
+    }
 }
