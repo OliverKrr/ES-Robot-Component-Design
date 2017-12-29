@@ -56,7 +56,7 @@ public class ReasoningTreeSpecialCases {
                 }
             });
 
-            logger.debug("Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: "
+            logger.debug("SpecialCase: Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: "
                     + subClassOfUnsatisfied.getIRI().getShortForm());
             genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
             helper.getGeneratedAxioms().removeAll(axiomsToDelete);
@@ -78,7 +78,7 @@ public class ReasoningTreeSpecialCases {
         return false;
     }
 
-    private class InformationToDelete {
+    private static class InformationToDelete {
         public List<OWLClass> counterSatisfiedPart = new ArrayList<>();
         public List<OWLClass> newSatisfiedPart = new ArrayList<>();
 
@@ -128,7 +128,7 @@ public class ReasoningTreeSpecialCases {
 
             if (counterSatisfiedWithoutUnsatisfiedIndis.isEmpty()) {
                 didBackupOnLastRun = true;
-                logger.debug("Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
+                logger.debug("SpecialCase: Possible unsatisfied: Move to backup: " + possibleUnsatisfiedIndis.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 infoToDelete.backupSatisfiedPart.forEach(backup -> possibleUnsatisfiedIndis
                         .forEach(possibleUnsatisfiedInst -> helper.addAxiom(genericTool.getFactory()
@@ -146,7 +146,7 @@ public class ReasoningTreeSpecialCases {
                 possibleUnsatisfiedIndis.forEach(indiToDelete -> helper.getGeneratedAxioms().stream().filter(
                         axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)))
                         .forEach(axiom -> axiomsToDelete.add(axiom)));
-                logger.debug("Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
+                logger.debug("SpecialCase: Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
                 helper.getGeneratedAxioms().removeAll(axiomsToDelete);
@@ -188,7 +188,8 @@ public class ReasoningTreeSpecialCases {
                                 })));
         if (oldSize != handledPossibleSatisfied.get(subClassOfPossibleSatisfied).size()) {
             logger.debug(
-                    "Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI().getShortForm());
+                    "SpecialCase: Handled possible satisfied for: " + subClassOfPossibleSatisfied.getIRI()
+                            .getShortForm());
             helper.flush();
             double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
             if (timeNeeded >= ReasoningTree.TIME_NEEDED_THRESHOLD) {

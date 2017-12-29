@@ -61,7 +61,7 @@ public class ReasoningTree {
             reasoningTreeElements
                     .forEach(treeClassAxiom -> handleTreeItem(treeClassAxiom.getSubClass().asOWLClass()));
 
-            if (!interrupted.get()) {
+            if (!interrupted.get() && !hasSomethingChanged) {
                 // the order is important
                 genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED).forEach(
                         unsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
@@ -112,11 +112,11 @@ public class ReasoningTree {
     }
 
     private String getSpacesFor(int value) {
-        String ret = "";
+        StringBuilder builder = new StringBuilder("");
         for (int i = String.valueOf(value).length(); i <= NUMBER_OF_SPACES; ++i) {
-            ret += " ";
+            builder.append(" ");
         }
-        return ret;
+        return builder.toString();
     }
 
     private List<ChildInstancesForPermutation> getChildrenForPermutation(OWLClass treeClass) {
@@ -197,18 +197,18 @@ public class ReasoningTree {
         } else {
             ChildIndividualWithObjectPropertyFromParent[] indiToCreate = new
                     ChildIndividualWithObjectPropertyFromParent[currentPositions.length];
-            String name = PermutationSeparator;
+            StringBuilder nameBuilder = new StringBuilder(PermutationSeparator);
             for (int i = 0; i < currentPositions.length; i++) {
                 ChildInstancesForPermutation childrend = childrenForPermutation.get(i);
                 OWLNamedIndividual child = childrend.childInstances.get(currentPositions[i]);
                 indiToCreate[i] = new ChildIndividualWithObjectPropertyFromParent(child,
                         childrend.propertyFromParent);
-                name += helper.getNameOfOWLNamedIndividual(child);
+                nameBuilder.append(helper.getNameOfOWLNamedIndividual(child));
                 if (i != currentPositions.length - 1) {
-                    name += PermutationSeparator;
+                    nameBuilder.append(PermutationSeparator);
                 }
             }
-            permutations.add(new PermutationOfChildInstances(indiToCreate, name));
+            permutations.add(new PermutationOfChildInstances(indiToCreate, nameBuilder.toString()));
         }
     }
 

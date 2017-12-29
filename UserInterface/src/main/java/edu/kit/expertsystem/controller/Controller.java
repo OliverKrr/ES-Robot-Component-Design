@@ -225,15 +225,17 @@ public class Controller {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
-            String concatenationOfNames = "";
+            StringBuilder concatenationOfNamesBuilder = new StringBuilder();
 
             double maxNumberOfChars = getMaxNumberOfCharsForComp(result);
 
+            StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
                 String name = getNameForComponent(component, maxNumberOfChars);
-                concatenationOfNames += name.replaceAll(" ", "");
+                builder.append(name.replaceAll(" ", ""));
                 addTreeItem(resItem, name, true);
             }
+            concatenationOfNamesBuilder.append(builder.toString());
 
             maxNumberOfChars = getMaxNumberOfCharsForReq(result);
 
@@ -242,10 +244,10 @@ public class Controller {
                     continue;
                 }
                 String name = getNameForReq(req, maxNumberOfChars);
-                concatenationOfNames += name.replaceAll(" ", "");
+                concatenationOfNamesBuilder.append(name.replaceAll(" ", ""));
                 addTreeItem(resItem, name, false);
             }
-            resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNames);
+            resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
             resItem.setExpanded(true);
         }
     }
@@ -307,19 +309,19 @@ public class Controller {
     }
 
     private String getSpacesForDisplayName(String currentDisplayName, double maxNumberOfChars) {
-        String ret = "";
+        StringBuilder builder = new StringBuilder("");
         for (int i = currentDisplayName.length(); i <= maxNumberOfChars; ++i) {
-            ret += " ";
+            builder.append(" ");
         }
-        return ret;
+        return builder.toString();
     }
 
     private String getSpacesForResultValue(String value) {
-        String ret = "";
+        StringBuilder builder = new StringBuilder("");
         for (int i = value.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {
-            ret += " ";
+            builder.append(" ");
         }
-        return ret;
+        return builder.toString();
     }
 
     public void updateUnitToReason(String unitToReason) {

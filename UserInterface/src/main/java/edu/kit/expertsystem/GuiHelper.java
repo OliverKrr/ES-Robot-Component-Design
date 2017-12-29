@@ -10,7 +10,7 @@ public class GuiHelper {
 
     public static String getFontName(Font font) {
         for (FontData fontData : font.getFontData()) {
-            if (fontData.getName() != null && fontData.getName() != "") {
+            if (fontData.getName() != null && !fontData.getName().equals("")) {
                 return fontData.getName();
             }
         }
