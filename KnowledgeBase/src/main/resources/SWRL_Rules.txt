@@ -156,9 +156,16 @@ NoTorsionalShaft(?ts) ^ CurrentRequirements(?r) ^ needTorqueSensorStrainGaugeBas
 
 
 
+SlipRingNoneSetRule:
+NoSlipRing(?sr) ^ CurrentRequirements(?r) ^
+hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D)
+-> hasDimensionInnerDiameter_d_unit_mm(?sr, ?D) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D)
+
 SlipRingNoneSatisfyRule:
-NoSlipRing(?sr) ^ CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D)
--> SatisfiedSlipRing(?sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?D) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D) ^ hasMax1_1(?sr, ?D)
+NoSlipRing(?sr) ^ CurrentRequirements(?r) ^
+needContinuousRotationReq(?r, ?ncr) ^
+swrlb:equal(?ncr, false)
+-> SatisfiedSlipRing(?sr)
 
 
 SlipRingSatisfy1Rule:
@@ -176,25 +183,25 @@ swrlb:equal(?ncr, true) ^ swrlb:equal(?noc, false)
 
 
 SlipRingEvaluate1Rule:
-SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+SatisfiedSlipRing(?sr) ^
 hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D_max_sr) ^
 swrlb:greaterThan(?D_sr, ?D_max_sr)
 -> has1(?sr, ?D_sr)
 
 SlipRingEvaluate2Rule:
-SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+SatisfiedSlipRing(?sr) ^
 hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionMaxDiameter_D_unit_mm(?sr, ?D_max_sr) ^
 swrlb:lessThanOrEqual(?D_sr, ?D_max_sr)
 -> has1(?sr, ?D_max_sr)
 
 SlipRingEvaluate3Rule:
-SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+SatisfiedSlipRing(?sr) ^
 has1(?sr, ?D_sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
 swrlb:greaterThan(?D_sr, ?d_sr)
 -> hasMax1_1(?sr, ?D_sr)
 
 SlipRingEvaluate4Rule:
-SatisfiedSlipRing(?sr) ^ _1000MEthernet(?sr) ^
+SatisfiedSlipRing(?sr) ^
 has1(?sr, ?D_sr) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
 swrlb:lessThanOrEqual(?D_sr, ?d_sr)
 -> hasMax1_1(?sr, ?d_sr)
@@ -285,43 +292,30 @@ swrlb:equal(?d_ib2, ?d_ib1)
 -> PossibleSatisfiedDiameterInputDriveBearingMatchLinear(?didbm1) ^ PossibleSatisfiedDiameterInputDriveBearingMatchLinear(?didbm2)
 
 
-//TODO diese Regeln aufteilen mit has(blub...) -> redundanz vermeiden
-DiameterInputDriveBearingMatchCompressedSatisfy1Rule:
+
+DiameterInputDriveBearingMatchCompressedBeforeSatisfyRule:
 DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp) ^
+swrlb:lessThanOrEqual(?D_db, ?temp)
+-> BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
+DiameterInputDriveBearingMatchCompressedSatisfy1Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
 needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, true) ^
 hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^
 swrlb:greaterThanOrEqual(?d_db, ?tis_con)
 -> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
-DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
-DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
-hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
-swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp) ^
-needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
-hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
-hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w) ^
-swrlb:multiply(?tsrs_con2, 2.0, ?tsrs_con) ^ swrlb:add(?temp2, ?d_sr, ?tsrs_con2) ^ swrlb:add(?d_max_2, ?temp2, ?trsd_con) ^
-swrlb:greaterThan(?D_w, ?d_max_2) ^
-swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need, ?tis_con2, ?D_w) ^
-swrlb:greaterThanOrEqual(?d_db, ?d_need)
--> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
-DiameterInputDriveBearingMatchCompressedSatisfy3Rule:
-DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasMotor(?di, ?m) ^ hasDriveBearing(?didbm, ?db) ^ Constants(?con) ^ CurrentRequirements(?r) ^
-hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
-swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp) ^
+DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ CurrentRequirements(?r) ^
 needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
-hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ Constants(?con) ^
 hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w) ^
 swrlb:multiply(?tsrs_con2, 2.0, ?tsrs_con) ^ swrlb:add(?temp2, ?d_sr, ?tsrs_con2) ^ swrlb:add(?d_max_2, ?temp2, ?trsd_con) ^
-swrlb:lessThanOrEqual(?D_w, ?d_max_2) ^
-swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need, ?tis_con2, ?d_max_2) ^
-swrlb:greaterThanOrEqual(?d_db, ?d_need)
+swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need1, ?tis_con2, ?D_w) ^ swrlb:add(?d_need2, ?tis_con2, ?d_max_2) ^
+swrlb:greaterThanOrEqual(?d_db, ?d_need1) ^ swrlb:greaterThanOrEqual(?d_db, ?d_need2)
 -> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
 
