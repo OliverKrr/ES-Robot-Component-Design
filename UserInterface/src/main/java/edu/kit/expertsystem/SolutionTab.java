@@ -7,8 +7,9 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -25,6 +26,7 @@ public class SolutionTab {
     private static final int offsetYEnd = 5;
 
     private static final int saveSolutionOntologyButtonWidthOffset = 10;
+    private static final int showOnlyDiffsCheckBoxWidthOffset = 20;
 
     private static final int searchTextWidth = 120;
     private static final int searchTextHeight = 23;
@@ -38,6 +40,7 @@ public class SolutionTab {
     private Button saveSolutionOntologyButton;
     private Text searchField;
     private Combo orderByCombo;
+    private Button showOnlyDiffsCheckBox;
     private DescriptionHelper descriptionHelper;
 
     public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
@@ -67,15 +70,25 @@ public class SolutionTab {
         orderByCombo = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         formToolkit.adapt(orderByCombo, true, true);
         updateSizeOfOrderByCombo();
-        orderByCombo.addModifyListener(new ModifyListener() {
-
-            @Override
-            public void modifyText(ModifyEvent e) {
-                updateSizeOfOrderByCombo();
-                updateSizeOfSearchText();
-            }
+        orderByCombo.addModifyListener(e -> {
+            updateSizeOfOrderByCombo();
+            updateSizeOfSearchText();
         });
         resultWrapper.orderBy = orderByCombo;
+
+        showOnlyDiffsCheckBox = new Button(leftComposite, SWT.CHECK);
+        showOnlyDiffsCheckBox.setText("Show only differences in results");
+        showOnlyDiffsCheckBox.addSelectionListener(new SelectionAdapter() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                showOnlyDiffsCheckBox.setText(showOnlyDiffsCheckBox.getSelection() ? "Show all components and values"
+                        + " of results" : "Show only differences in results");
+            }
+        });
+        updateSizeOfShowOnlyDiffsCheckBox();
+        formToolkit.adapt(showOnlyDiffsCheckBox, true, true);
+        resultWrapper.showOnlyDiffsCheckBox = showOnlyDiffsCheckBox;
 
         resultTree = new Tree(leftComposite, SWT.NONE);
         updateSizeOfTreeItem();
@@ -135,6 +148,7 @@ public class SolutionTab {
         updateSizeOfSaveSolutionOntologyButton();
         updateSizeOfOrderByCombo();
         updateSizeOfSearchText();
+        updateSizeOfShowOnlyDiffsCheckBox();
         updateSizeOfTreeItem();
     }
 
@@ -166,8 +180,16 @@ public class SolutionTab {
         searchField.setBounds(xOfSearchText, offsetY, widthOfSearchText, searchTextHeight);
     }
 
+    private void updateSizeOfShowOnlyDiffsCheckBox() {
+        int y = 2 * offsetY + searchTextHeight;
+        Point size = GuiHelper.getSizeOfText(showOnlyDiffsCheckBox, "Show all components and values of results");
+        // Offset for width, to include the checkbox size
+        int realWidth = size.x + showOnlyDiffsCheckBoxWidthOffset;
+        showOnlyDiffsCheckBox.setBounds(offsetX, y, realWidth, searchTextHeight);
+    }
+
     private void updateSizeOfTreeItem() {
-        int yOfTree = 2 * offsetY + searchTextHeight;
+        int yOfTree = 3 * offsetY + 2 * searchTextHeight;
         int widthOfTree = leftComposite.getBounds().width - offsetX - offsetXEnd;
         int heightOfTree = leftComposite.getBounds().height - yOfTree - offsetYEnd;
         resultTree.setBounds(offsetX, yOfTree, widthOfTree, heightOfTree);

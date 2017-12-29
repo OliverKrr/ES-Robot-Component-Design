@@ -17,10 +17,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Controller {
@@ -184,7 +181,7 @@ public class Controller {
             }
         }
 
-        resultWrapper.orderBy.addSelectionListener(new SelectionAdapter() {
+        SelectionAdapter listener = new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
@@ -210,13 +207,32 @@ public class Controller {
                 reloadSearchE.keyCode = ' ';
                 resultWrapper.searchField.notifyListeners(SWT.KeyUp, reloadSearchE);
             }
-        });
+        };
+        resultWrapper.orderBy.addSelectionListener(listener);
+        resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(listener);
+
         resultWrapper.orderBy.select(0);
         resultWrapper.orderBy.notifyListeners(SWT.Selection, new Event());
     }
 
     private void buildTree() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
+
+        Map<String, Boolean> showKeys = new HashMap<>();
+        if (resultWrapper.showOnlyDiffsCheckBox.getSelection()) {
+            Map<String, String> currentValues = new HashMap<>();
+            for (Result result : resultWrapper.results) {
+                for (Component component : result.components) {
+                    handleShow(showKeys, currentValues, component.nameOfComponent, component.nameOfInstance);
+                }
+                for (Requirement req : result.requirements) {
+                    String resultValue = "";
+                    resultValue = getResultValue(req);
+                    handleShow(showKeys, currentValues, req.displayName, resultValue);
+                }
+            }
+        }
+
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
             StringBuilder concatenationOfNamesBuilder = new StringBuilder();
@@ -225,6 +241,9 @@ public class Controller {
 
             StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
+                if (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(component.nameOfComponent)) {
+                    continue;
+                }
                 String name = getNameForComponent(component, maxNumberOfChars);
                 builder.append(name.replaceAll(" ", ""));
                 addTreeItem(resItem, name, true);
@@ -234,7 +253,8 @@ public class Controller {
             maxNumberOfChars = getMaxNumberOfCharsForReq(result);
 
             for (Requirement req : result.requirements) {
-                if (req.resultIRI == null) {
+                if (req.resultIRI == null || (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(req
+                        .displayName))) {
                     continue;
                 }
                 String name = getNameForReq(req, maxNumberOfChars);
@@ -243,6 +263,34 @@ public class Controller {
             }
             resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
             resItem.setExpanded(true);
+        }
+    }
+
+    private String getResultValue(Requirement req) {
+        String resultValue = "";
+        if (req instanceof TextFieldMinMaxRequirement) {
+            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+        } else if (req instanceof TextFieldRequirement) {
+            TextFieldRequirement realReq = (TextFieldRequirement) req;
+            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+        } else if (req instanceof CheckboxRequirement) {
+            CheckboxRequirement realReq = (CheckboxRequirement) req;
+            resultValue = String.valueOf(realReq.result);
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+        }
+        return resultValue;
+    }
+
+    private void handleShow(Map<String, Boolean> showKeys, Map<String, String> currentValues, String key, String
+            value) {
+        if (!currentValues.containsKey(key)) {
+            currentValues.put(key, value);
+            showKeys.put(key, false);
+        }
+        if (!currentValues.get(key).equals(value)) {
+            showKeys.put(key, true);
         }
     }
 
@@ -262,19 +310,7 @@ public class Controller {
     }
 
     private String getNameForReq(Requirement req, double maxNumberOfChars) {
-        String resultValue = "";
-        if (req instanceof TextFieldMinMaxRequirement) {
-            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
-        } else if (req instanceof TextFieldRequirement) {
-            TextFieldRequirement realReq = (TextFieldRequirement) req;
-            resultValue = String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
-        } else if (req instanceof CheckboxRequirement) {
-            CheckboxRequirement realReq = (CheckboxRequirement) req;
-            resultValue = String.valueOf(realReq.result);
-        } else {
-            throw new RuntimeException("Requirement class unknown: " + req.getClass());
-        }
+        String resultValue = getResultValue(req);
         String unit = req.unit == null ? "" : req.unit;
         return req.displayName + ": " + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + resultValue +
                 getSpacesForResultValue(resultValue) + unit;
