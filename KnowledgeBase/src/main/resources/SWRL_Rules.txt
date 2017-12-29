@@ -308,11 +308,18 @@ swrlb:greaterThanOrEqual(?d_db, ?tis_con)
 -> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
 
-DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
-BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ CurrentRequirements(?r) ^
+// This rule is needed due to strange behavior. If combined with rule below the runtime explodes for no reason. Only the separation of CurrentRequirements, Constants and hasSlipRing fixes the problem. I have no idea why...
+DiameterInputDriveBearingMatchCompressedBeforeSatisfy2Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ CurrentRequirements(?r) ^ Constants(?con) ^
 needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
-hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ Constants(?con) ^
-hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w) ^
+thicknessInnerShaft(?con, ?tis_con) ^ thicknessSlipRingSlot(?con, ?tsrs_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w)
+-> has1(?didbm, ?tis_con) ^ has2(?didbm, ?tsrs_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w)
+
+
+DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+has1(?didbm, ?tis_con) ^ has2(?didbm, ?tsrs_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
 swrlb:multiply(?tsrs_con2, 2.0, ?tsrs_con) ^ swrlb:add(?temp2, ?d_sr, ?tsrs_con2) ^ swrlb:add(?d_max_2, ?temp2, ?trsd_con) ^
 swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:add(?d_need1, ?tis_con2, ?D_w) ^ swrlb:add(?d_need2, ?tis_con2, ?d_max_2) ^
 swrlb:greaterThanOrEqual(?d_db, ?d_need1) ^ swrlb:greaterThanOrEqual(?d_db, ?d_need2)
