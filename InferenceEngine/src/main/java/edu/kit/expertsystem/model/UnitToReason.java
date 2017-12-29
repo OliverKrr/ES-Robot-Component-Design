@@ -56,8 +56,8 @@ public class UnitToReason {
 
     @Override
     public String toString() {
-        return "UnitToReason [displayName=" + displayName + ", iriOfUnit=" + iriOfUnit + ", iriOfResultUnit="
-                + iriOfResultUnit + ", orderPosition=" + orderPosition + "]";
+        return "UnitToReason [displayName=" + displayName + ", iriOfUnit=" + iriOfUnit + ", iriOfResultUnit=" +
+                iriOfResultUnit + ", orderPosition=" + orderPosition + "]";
     }
 
 }

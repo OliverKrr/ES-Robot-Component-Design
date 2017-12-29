@@ -62,9 +62,8 @@ public class RequirementsCategory {
         return navHelper.createVerticalNavBar(reqNavItems, 0);
     }
 
-    public Rectangle createReqContent(
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int contentY,
-            Point sizeOfShell) {
+    public Rectangle createReqContent(List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int
+            contentY, Point sizeOfShell) {
         this.contentY = contentY + contentYOffsetStart;
         initSizes(sizeOfShell);
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
@@ -86,11 +85,9 @@ public class RequirementsCategory {
     }
 
     public Rectangle updateSize(Point sizeOfShell, int[] newContentWeights) {
-        int contentX = navHelper.getLastRectangle().x + navHelper.getLastRectangle().width
-                + contentXOffsetStart;
+        int contentX = navHelper.getLastRectangle().x + navHelper.getLastRectangle().width + contentXOffsetStart;
         int contentWidth = sizeOfShell.x - contentX - contentXOffsetEnd;
-        int contentHeight = sizeOfShell.y - contentY - GUI.errorTextHeight - GUI.errorTextYOffset
-                - contentYOffsetEnd;
+        int contentHeight = sizeOfShell.y - contentY - GUI.errorTextHeight - GUI.errorTextYOffset - contentYOffsetEnd;
         conentRec = new Rectangle(contentX, contentY, contentWidth, contentHeight);
         sizeOfTab = new Rectangle(0, 0, conentRec.width, conentRec.height);
 
@@ -104,8 +101,7 @@ public class RequirementsCategory {
         return conentRec;
     }
 
-    private void handleDependencies(
-            List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
+    private void handleDependencies(List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
         reqNavItems.get(0).item.notifyListeners(SWT.Selection, new Event());
 
         requirementDependencyWrappers.forEach(reqDep -> {
@@ -113,9 +109,8 @@ public class RequirementsCategory {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    reqDep.toControls.forEach(control -> control.setVisible(
-                            reqDep.requirementDependencyCheckbox.displayOnValue == reqDep.fromCheckbox
-                                    .getSelection()));
+                    reqDep.toControls.forEach(control -> control.setVisible(reqDep.requirementDependencyCheckbox
+                            .displayOnValue == reqDep.fromCheckbox.getSelection()));
                 }
             });
             reqDep.fromCheckbox.notifyListeners(SWT.Selection, new Event());

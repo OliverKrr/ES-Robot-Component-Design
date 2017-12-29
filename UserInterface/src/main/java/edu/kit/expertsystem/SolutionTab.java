@@ -118,10 +118,10 @@ public class SolutionTab {
         int rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         for (int i = 0; i < requirements.size(); i++) {
-            if (requirements.get(i).requirement.description != null
-                    && requirements.get(i).requirement.resultIRI != null) {
-                descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
-                        requirements.get(i).requirement.description, rowNumber++);
+            if (requirements.get(i).requirement.description != null && requirements.get(i).requirement.resultIRI !=
+                    null) {
+                descriptionHelper.createDescription(requirements.get(i).requirement.displayName, requirements.get(i)
+                        .requirement.description, rowNumber++);
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
@@ -139,8 +139,8 @@ public class SolutionTab {
     }
 
     private void updateSizeOfSaveSolutionOntologyButton() {
-        int width = GuiHelper.getSizeOfText(saveSolutionOntologyButton,
-                saveSolutionOntologyButton.getText()).x + saveSolutionOntologyButtonWidthOffset;
+        int width = GuiHelper.getSizeOfText(saveSolutionOntologyButton, saveSolutionOntologyButton.getText()).x +
+                saveSolutionOntologyButtonWidthOffset;
         saveSolutionOntologyButton.setBounds(offsetX, offsetY, width, searchTextHeight);
     }
 
@@ -150,14 +150,13 @@ public class SolutionTab {
             maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(orderByCombo, item).x);
         }
         maxWidth += GUI.comboOffsetWidth;
-        int x = saveSolutionOntologyButton.getBounds().x + saveSolutionOntologyButton.getBounds().width
-                + offsetX;
+        int x = saveSolutionOntologyButton.getBounds().x + saveSolutionOntologyButton.getBounds().width + offsetX;
         orderByCombo.setBounds(x, offsetY, maxWidth, searchTextHeight);
     }
 
     private void updateSizeOfSearchText() {
-        int widthOfSearchText = Math.max(searchTextWidth,
-                GuiHelper.getSizeOfText(searchField, searchField.getText()).x);
+        int widthOfSearchText = Math.max(searchTextWidth, GuiHelper.getSizeOfText(searchField, searchField.getText())
+                .x);
         int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
         int endXOfOther = orderByCombo.getBounds().x + orderByCombo.getBounds().width;
         if (xOfSearchText < endXOfOther + offsetXEnd) {

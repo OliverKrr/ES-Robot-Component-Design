@@ -32,7 +32,8 @@ public class RequirementWrapper {
         RequirementWrapper other = (RequirementWrapper) obj;
         if (requirement == null) {
             return other.requirement == null;
-        } else return requirement.equals(other.requirement);
+        } else
+            return requirement.equals(other.requirement);
     }
 
     @Override

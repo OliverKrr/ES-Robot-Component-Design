@@ -18,8 +18,7 @@ public class MyInferredClassAssertionAxiomGenerator extends MyInferredGenerator<
         if (isStopped.get()) {
             return;
         }
-        reasoner.types(entity, true)
-                .forEach(t -> result.add(dataFactory.getOWLClassAssertionAxiom(t, entity)));
+        reasoner.types(entity, true).forEach(t -> result.add(dataFactory.getOWLClassAssertionAxiom(t, entity)));
     }
 
     @Override

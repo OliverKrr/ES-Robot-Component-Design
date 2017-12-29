@@ -106,16 +106,15 @@ public class TextFieldMinMaxRequirement extends Requirement {
         if (Double.doubleToLongBits(result) != Double.doubleToLongBits(other.result)) {
             return false;
         }
-        return Double.doubleToLongBits(scaleFromOntologyToUI) == Double
-                .doubleToLongBits(other.scaleFromOntologyToUI);
+        return Double.doubleToLongBits(scaleFromOntologyToUI) == Double.doubleToLongBits(other.scaleFromOntologyToUI);
     }
 
     @Override
     public String toString() {
-        return "TextFieldMinMaxRequirement [scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", minIRI="
-                + minIRI + ", maxIRI=" + maxIRI + ", enableMin=" + enableMin + ", enableMax=" + enableMax
-                + ", defaultMin=" + defaultMin + ", defaultMax=" + defaultMax + ", min=" + min + ", max="
-                + max + ", result=" + result + ", toString()=" + super.toString() + "]";
+        return "TextFieldMinMaxRequirement [scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", minIRI=" + minIRI +
+                ", maxIRI=" + maxIRI + ", enableMin=" + enableMin + ", enableMax=" + enableMax + ", defaultMin=" +
+                defaultMin + ", defaultMax=" + defaultMax + ", min=" + min + ", max=" + max + ", result=" + result +
+                ", toString()=" + super.toString() + "]";
     }
 
 }

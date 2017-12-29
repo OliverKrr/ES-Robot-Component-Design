@@ -50,8 +50,8 @@ public class NavigationBarHelper {
         for (NavigationItem item : navItems) {
             item.item = new Button(composite, SWT.PUSH);
             item.defaultFontHeight = GuiHelper.getFontHeight(item.item.getFont()) + 2;
-            item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()),
-                    item.defaultFontHeight + 2, SWT.BOLD));
+            item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()), item
+                    .defaultFontHeight + 2, SWT.BOLD));
             // calculate max width and height
             Point size = GuiHelper.getSizeOfText(item.item, item.name);
             maxWidth = Math.max(maxWidth, size.x);
@@ -85,15 +85,14 @@ public class NavigationBarHelper {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()),
-                            item.defaultFontHeight + 2, SWT.BOLD));
+                    item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()), item
+                            .defaultFontHeight + 2, SWT.BOLD));
                     item.compositeToHandle.setVisible(true);
 
                     for (NavigationItem otherItem : navItems) {
                         if (item != otherItem) {
-                            otherItem.item.setFont(SWTResourceManager.getFont(
-                                    GuiHelper.getFontName(otherItem.item.getFont()), item.defaultFontHeight,
-                                    SWT.NORMAL));
+                            otherItem.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(otherItem.item
+                                    .getFont()), item.defaultFontHeight, SWT.NORMAL));
                             otherItem.compositeToHandle.setVisible(false);
                         }
                     }

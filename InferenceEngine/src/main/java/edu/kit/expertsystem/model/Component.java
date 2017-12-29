@@ -8,8 +8,8 @@ public class Component {
 
     @Override
     public String toString() {
-        return "Component [nameOfComponent=" + nameOfComponent + ", nameOfInstance=" + nameOfInstance
-                + ", orderPosition=" + orderPosition + "]";
+        return "Component [nameOfComponent=" + nameOfComponent + ", nameOfInstance=" + nameOfInstance + ", " +
+                "orderPosition=" + orderPosition + "]";
     }
 
     @Override

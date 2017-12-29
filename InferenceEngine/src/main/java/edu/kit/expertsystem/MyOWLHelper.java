@@ -84,12 +84,10 @@ public class MyOWLHelper {
 
     public int getOrderPositionForClass(OWLClass clas) {
         AtomicInteger value = new AtomicInteger(0);
-        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
-                .componentsWithoutAnnotations()
-                .filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_HASORDERPOSITION
-                        .equals(((OWLDataHasValue) comp).getProperty()))
-                .findAny()
-                .ifPresent(comp -> value.set(parseValueToInteger(((OWLDataHasValue) comp).getFiller()))));
+        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom.componentsWithoutAnnotations
+                ().filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_HASORDERPOSITION.equals
+                (((OWLDataHasValue) comp).getProperty())).findAny().ifPresent(comp -> value.set(parseValueToInteger((
+                        (OWLDataHasValue) comp).getFiller()))));
         return value.get();
     }
 

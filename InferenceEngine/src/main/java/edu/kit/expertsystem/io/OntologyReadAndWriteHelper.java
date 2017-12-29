@@ -26,8 +26,8 @@ public class OntologyReadAndWriteHelper {
     private static final String domainFileName = "SAC_Domain_Ontology" + fileEnding;
     private static final String reasoningFileName = "SAC_Reasoning_Ontology" + fileEnding;
 
-    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src" +
-            "\\main\\resources\\";
+    private static final String myPath = "C:\\Users\\Oliver\\Dropbox\\MyGits\\PraxisDerForschung\\KnowledgeBase\\src"
+            + "\\main\\resources\\";
 
     private static final Logger logger = LogManager.getLogger(OntologyReadAndWriteHelper.class);
 
@@ -50,8 +50,8 @@ public class OntologyReadAndWriteHelper {
         this.helper = helper;
         generators.add(new MyInferredClassAssertionAxiomGenerator());
         generators.add(new MyInferredPropertyAssertionGenerator(genericTool));
-        inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(),
-                generators.stream().collect(Collectors.toList()));
+        inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(), generators.stream()
+                .collect(Collectors.toList()));
     }
 
     public OWLOntology loadOntologies() {
@@ -80,8 +80,7 @@ public class OntologyReadAndWriteHelper {
         } catch (FileNotFoundException e1) {
             String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
             if (setInferdFilePath) {
-                inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf"
-                        + fileEnding;
+                inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf" + fileEnding;
             }
             try {
                 return new FileInputStream(localPath);
@@ -104,8 +103,7 @@ public class OntologyReadAndWriteHelper {
         }
     }
 
-    private void saveOntology()
-            throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
+    private void saveOntology() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
         long startTime = System.currentTimeMillis();
         helper.flush();
         boolean isConsistent = helper.checkConsistency();
@@ -125,8 +123,7 @@ public class OntologyReadAndWriteHelper {
         try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
             genericTool.getManager().saveOntology(inferOnto, out);
         }
-        logger.info("Time needed for saveReasonedOntology: "
-                + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+        logger.info("Time needed for saveReasonedOntology: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     public void interruptReasoning() {

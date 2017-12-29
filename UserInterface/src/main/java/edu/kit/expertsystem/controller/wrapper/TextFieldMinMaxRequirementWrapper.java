@@ -16,12 +16,14 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        if (!super.equals(o))
+            return false;
         TextFieldMinMaxRequirementWrapper that = (TextFieldMinMaxRequirementWrapper) o;
-        return Objects.equals(minValue, that.minValue) &&
-                Objects.equals(maxValue, that.maxValue);
+        return Objects.equals(minValue, that.minValue) && Objects.equals(maxValue, that.maxValue);
     }
 
     @Override
@@ -32,10 +34,8 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
     @Override
     public String toString() {
-        return "TextFieldMinMaxRequirementWrapper{" +
-                "minValue=" + minValue +
-                ", maxValue=" + maxValue +
-                "} " + super.toString();
+        return "TextFieldMinMaxRequirementWrapper{" + "minValue=" + minValue + ", maxValue=" + maxValue + "} " +
+                super.toString();
     }
 
 }

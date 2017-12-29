@@ -39,7 +39,8 @@ public class Result {
         }
         if (requirements == null) {
             return other.requirements == null;
-        } else return requirements.equals(other.requirements);
+        } else
+            return requirements.equals(other.requirements);
     }
 
     @Override

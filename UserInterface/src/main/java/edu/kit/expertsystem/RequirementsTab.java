@@ -69,8 +69,7 @@ public class RequirementsTab {
                 rowNumber--;
             }
             lastReqOrderPosition = requirements.get(i).requirement.orderPosition;
-            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers,
-                    rowNumber++);
+            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers, rowNumber++);
         }
 
         if (isAnyFieldDisabled) {
@@ -81,16 +80,13 @@ public class RequirementsTab {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    btnEnableFields
-                            .setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
+                    btnEnableFields.setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
                     for (RequirementWrapper req : requirements) {
                         if (req instanceof TextFieldMinMaxRequirementWrapper) {
                             TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                             TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
-                            reqWrapper.minValue
-                                    .setEnabled(realReq.enableMin || !reqWrapper.minValue.isEnabled());
-                            reqWrapper.maxValue
-                                    .setEnabled(realReq.enableMax || !reqWrapper.maxValue.isEnabled());
+                            reqWrapper.minValue.setEnabled(realReq.enableMin || !reqWrapper.minValue.isEnabled());
+                            reqWrapper.maxValue.setEnabled(realReq.enableMax || !reqWrapper.maxValue.isEnabled());
                         } else if (req instanceof TextFieldRequirementWrapper) {
                             TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
                             TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
@@ -121,13 +117,12 @@ public class RequirementsTab {
 
         rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
-        descriptionHelper.createDescription("min/max:",
-                "Desired min and max values. If no entered, defaults are taken: min=0 and max=infinite.",
-                rowNumber++);
+        descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are " +
+                "taken: min=0 and max=infinite.", rowNumber++);
         for (int i = 0; i < requirements.size(); i++) {
             if (requirements.get(i).requirement.description != null) {
-                descriptionHelper.createDescription(requirements.get(i).requirement.displayName,
-                        requirements.get(i).requirement.description, rowNumber++);
+                descriptionHelper.createDescription(requirements.get(i).requirement.displayName, requirements.get(i)
+                        .requirement.description, rowNumber++);
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());

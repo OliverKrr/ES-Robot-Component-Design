@@ -67,9 +67,8 @@ public class CheckboxRequirement extends Requirement {
 
     @Override
     public String toString() {
-        return "CheckboxRequirement [reqIri=" + reqIri + ", enable=" + enable + ", defaultValue="
-                + defaultValue + ", value=" + value + ", result=" + result + ", toString()="
-                + super.toString() + "]";
+        return "CheckboxRequirement [reqIri=" + reqIri + ", enable=" + enable + ", defaultValue=" + defaultValue + "," +
+                " value=" + value + ", result=" + result + ", toString()=" + super.toString() + "]";
     }
 
 }

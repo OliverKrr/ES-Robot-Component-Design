@@ -40,13 +40,14 @@ public class RequirementDependencyCheckbox {
         }
         if (to == null) {
             return other.to == null;
-        } else return to.equals(other.to);
+        } else
+            return to.equals(other.to);
     }
 
     @Override
     public String toString() {
-        return "RequirementDependencyCheckbox [from=" + from + ", to=" + to + ", displayOnValue="
-                + displayOnValue + "]";
+        return "RequirementDependencyCheckbox [from=" + from + ", to=" + to + ", displayOnValue=" + displayOnValue +
+                "]";
     }
 
 }

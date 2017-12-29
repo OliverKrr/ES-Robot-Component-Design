@@ -14,8 +14,7 @@ public class RequirementDependencyCheckboxWrapper {
 
     @Override
     public String toString() {
-        return "RequirementDependencyCheckboxWrapper [requirementDependencyCheckbox="
-                + requirementDependencyCheckbox + ", fromCheckbox=" + fromCheckbox + ", toControls="
-                + toControls + "]";
+        return "RequirementDependencyCheckboxWrapper [requirementDependencyCheckbox=" + requirementDependencyCheckbox
+                + ", fromCheckbox=" + fromCheckbox + ", toControls=" + toControls + "]";
     }
 }

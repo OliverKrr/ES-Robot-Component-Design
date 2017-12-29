@@ -77,8 +77,7 @@ public class TextFieldRequirement extends Requirement {
         if (Double.doubleToLongBits(result) != Double.doubleToLongBits(other.result)) {
             return false;
         }
-        if (Double.doubleToLongBits(scaleFromOntologyToUI) != Double
-                .doubleToLongBits(other.scaleFromOntologyToUI)) {
+        if (Double.doubleToLongBits(scaleFromOntologyToUI) != Double.doubleToLongBits(other.scaleFromOntologyToUI)) {
             return false;
         }
         return Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
@@ -86,10 +85,9 @@ public class TextFieldRequirement extends Requirement {
 
     @Override
     public String toString() {
-        return "TextFieldRequirement [scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", reqIri=" + reqIri
-                + ", enable=" + enable + ", requirementType=" + requirementType + ", defaultValue="
-                + defaultValue + ", value=" + value + ", result=" + result + ", toString()="
-                + super.toString() + "]";
+        return "TextFieldRequirement [scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", reqIri=" + reqIri + ", " +
+                "enable=" + enable + ", requirementType=" + requirementType + ", defaultValue=" + defaultValue + ", " +
+                "value=" + value + ", result=" + result + ", toString()=" + super.toString() + "]";
     }
 
 }

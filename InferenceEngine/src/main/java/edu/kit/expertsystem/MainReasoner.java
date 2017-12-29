@@ -54,8 +54,7 @@ public class MainReasoner {
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
 
-        logger.debug(
-                "Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+        logger.debug("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     public void prepareReasoning(UnitToReason unitToReason) {
@@ -65,35 +64,27 @@ public class MainReasoner {
         helper.flush();
         genericTool.getReasoner().precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
-        logger.debug(
-                "Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+        logger.debug("Time needed for preparation: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
-        genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone)
-                .filter(axiomOfComponentToReason -> axiomOfComponentToReason.getSuperClass()
-                        .objectPropertiesInSignature()
-                        .anyMatch(obOfComponentToReason -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                .equals(obOfComponentToReason)))
+        genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone).filter(axiomOfComponentToReason ->
+                axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(obOfComponentToReason
+                        -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(obOfComponentToReason)))
                 .forEach(filteredAxiomOfComponentToReason -> filteredAxiomOfComponentToReason.getSuperClass()
-                        .classesInSignature()
-                        .forEach(reasoningPropertyClass -> genericTool.getOntology()
-                                .subClassAxiomsForSuperClass(reasoningPropertyClass)
-                                .forEach(reasoningPropertyAxiom -> {
-                                    // Add only subclasses
-                                    // However, if none present -> add itself
-                                    int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
-                                    genericTool.getOntology()
-                                            .subClassAxiomsForSuperClass(
-                                                    reasoningPropertyAxiom.getSubClass().asOWLClass())
-                                            .forEach(reasoningPropertySubClassAxiom -> {
-                                                createIndividualFor(
-                                                        reasoningPropertySubClassAxiom.getSubClass());
-                                            });
-                                    if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
-                                        createIndividualFor(reasoningPropertyAxiom.getSubClass());
-                                    }
-                                })));
+                        .classesInSignature().forEach(reasoningPropertyClass -> genericTool.getOntology()
+                                .subClassAxiomsForSuperClass(reasoningPropertyClass).forEach(reasoningPropertyAxiom -> {
+            // Add only subclasses
+            // However, if none present -> add itself
+            int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
+            genericTool.getOntology().subClassAxiomsForSuperClass(reasoningPropertyAxiom.getSubClass().asOWLClass())
+                    .forEach(reasoningPropertySubClassAxiom -> {
+                createIndividualFor(reasoningPropertySubClassAxiom.getSubClass());
+            });
+            if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
+                createIndividualFor(reasoningPropertyAxiom.getSubClass());
+            }
+        })));
     }
 
     private void createIndividualFor(OWLClassExpression clasExpres) {
@@ -126,34 +117,31 @@ public class MainReasoner {
             }
             return null;
         } finally {
-            logger.info(
-                    "Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+            logger.info("Time needed for reasoning: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         }
     }
 
     private void addRequirements(List<Requirement> requirements) {
-        OWLNamedIndividual requirementsInd = genericTool.getFactory()
-                .getOWLNamedIndividual(helper.create("currentRequs"));
-        helper.addAxiom(genericTool.getFactory()
-                .getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS, requirementsInd));
+        OWLNamedIndividual requirementsInd = genericTool.getFactory().getOWLNamedIndividual(helper.create
+                ("currentRequs"));
+        helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS,
+                requirementsInd));
 
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
-                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", "
-                        + realReq.min + ", " + realReq.max);
+                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ", " +
+                        "" + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
-                logger.debug(
-                        "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
+                logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else if (req instanceof CheckboxRequirement) {
                 CheckboxRequirement realReq = (CheckboxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
-                logger.debug(
-                        "Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
+                logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -165,16 +153,16 @@ public class MainReasoner {
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
-        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(
-                property, requirementsInd,
-                genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_DECIMAL));
+        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
+                requirementsInd, genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype
+                        .XSD_DECIMAL));
         helper.addAxiom(reqAxiom);
     }
 
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, boolean value) {
-        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(
-                property, requirementsInd,
-                genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype.XSD_BOOLEAN));
+        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
+                requirementsInd, genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype
+                        .XSD_BOOLEAN));
         helper.addAxiom(reqAxiom);
     }
 
@@ -193,13 +181,10 @@ public class MainReasoner {
             Result result = new Result();
             result.components = new ArrayList<>();
 
-            genericTool.getOntology()
-                    .objectSubPropertyAxiomsForSuperProperty(Vocabulary.OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE)
-                    .forEach(subOb -> genericTool.getReasoner()
-                            .objectPropertyValues(resultingComponent,
-                                    subOb.getSubProperty().getNamedProperty())
-                            .forEach(composedComponent -> result.components
-                                    .add(parseComponent(subOb, composedComponent))));
+            genericTool.getOntology().objectSubPropertyAxiomsForSuperProperty(Vocabulary
+                    .OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE).forEach(subOb -> genericTool.getReasoner()
+                    .objectPropertyValues(resultingComponent, subOb.getSubProperty().getNamedProperty()).forEach
+                            (composedComponent -> result.components.add(parseComponent(subOb, composedComponent))));
             Collections.sort(result.components, (comp1, comp2) -> comp1.orderPosition - comp2.orderPosition);
 
             result.requirements = copyRequirements(requirements);
@@ -209,21 +194,18 @@ public class MainReasoner {
                 }
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    genericTool.getReasoner()
-                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny()
-                            .ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
+                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
+                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
+                            (obProp));
                 } else if (req instanceof TextFieldRequirement) {
                     TextFieldRequirement realReq = (TextFieldRequirement) req;
-                    genericTool.getReasoner()
-                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny()
-                            .ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
+                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
+                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
+                            (obProp));
                 } else if (req instanceof CheckboxRequirement) {
                     CheckboxRequirement realReq = (CheckboxRequirement) req;
-                    genericTool.getReasoner()
-                            .dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
-                            .findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
+                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
+                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -234,29 +216,25 @@ public class MainReasoner {
 
         helper.checkConsistency();
         logger.debug("Number of results: " + results.size());
-        logger.debug(
-                "Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
+        logger.debug("Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return results;
     }
 
-    private Component parseComponent(OWLSubObjectPropertyOfAxiom subOb,
-                                     OWLNamedIndividual composedComponent) {
+    private Component parseComponent(OWLSubObjectPropertyOfAxiom subOb, OWLNamedIndividual composedComponent) {
         Component component = new Component();
         component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
         component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
         if (component.nameOfInstance.contains(ReasoningTree.PermutationSeparator)) {
-            component.nameOfInstance = component.nameOfInstance.substring(0,
-                    component.nameOfInstance.indexOf(ReasoningTree.PermutationSeparator));
+            component.nameOfInstance = component.nameOfInstance.substring(0, component.nameOfInstance.indexOf
+                    (ReasoningTree.PermutationSeparator));
             if (component.nameOfInstance.contains(Vocabulary.CLASS_LINEAR.getIRI().getShortForm())) {
                 component.nameOfInstance = Vocabulary.CLASS_LINEAR.getIRI().getShortForm();
-            } else if (component.nameOfInstance
-                    .contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
+            } else if (component.nameOfInstance.contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
                 component.nameOfInstance = Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm();
             }
         }
-        genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty())
-                .forEach(range -> component.orderPosition = helper
-                        .getOrderPositionForClass(range.getRange().asOWLClass()));
+        genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty()).forEach(range
+                -> component.orderPosition = helper.getOrderPositionForClass(range.getRange().asOWLClass()));
         return component;
     }
 
@@ -279,50 +257,38 @@ public class MainReasoner {
     public List<UnitToReason> getUnitsToReason() {
         long startTime = System.currentTimeMillis();
         List<UnitToReason> units = new ArrayList<>();
-        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
-                .filter(axiomOfReasoningTree -> genericTool.getOntology()
-                        .subClassAxiomsForSubClass(axiomOfReasoningTree.getSubClass().asOWLClass())
-                        .anyMatch(subClassOfReasoningTreeAxiom -> subClassOfReasoningTreeAxiom.getSuperClass()
-                                .objectPropertiesInSignature().anyMatch(
-                                        obOfSubClassOfReasoingTree -> Vocabulary
-                                                .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                                .equals(obOfSubClassOfReasoingTree))))
-                .forEach(filteredAxiomOfReasoningTree -> {
-                    UnitToReason unitToReason = new UnitToReason();
-                    unitToReason.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass()
-                            .getIRI().getShortForm();
-                    unitToReason.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI()
+        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE).filter
+                (axiomOfReasoningTree -> genericTool.getOntology().subClassAxiomsForSubClass(axiomOfReasoningTree
+                        .getSubClass().asOWLClass()).anyMatch(subClassOfReasoningTreeAxiom ->
+                        subClassOfReasoningTreeAxiom.getSuperClass().objectPropertiesInSignature().anyMatch
+                                (obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
+                                        .equals(obOfSubClassOfReasoingTree)))).forEach(filteredAxiomOfReasoningTree -> {
+            UnitToReason unitToReason = new UnitToReason();
+            unitToReason.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getShortForm();
+            unitToReason.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getIRIString();
+
+            genericTool.getOntology().subClassAxiomsForSuperClass(filteredAxiomOfReasoningTree.getSubClass()
+                    .asOWLClass()).forEach(classToReasonAxiom -> {
+                if (unitToReason.iriOfResultUnit == null) {
+                    unitToReason.iriOfResultUnit = classToReasonAxiom.getSubClass().asOWLClass().getIRI()
                             .getIRIString();
+                } else {
+                    throw new RuntimeException("UnitsToReasone are only allowed to have one child to identify " +
+                            "resultingUnit (satisfied), found at least: " + unitToReason.iriOfResultUnit + " and " +
+                            classToReasonAxiom.getSubClass().asOWLClass().getIRI().getIRIString());
+                }
+            });
+            if (unitToReason.iriOfResultUnit == null) {
+                throw new RuntimeException("UnitsToReasone must have one child to identify resultingUnit (satisfied)");
+            }
+            unitToReason.orderPosition = helper.getOrderPositionForClass(filteredAxiomOfReasoningTree.getSubClass()
+                    .asOWLClass());
 
-                    genericTool.getOntology()
-                            .subClassAxiomsForSuperClass(
-                                    filteredAxiomOfReasoningTree.getSubClass().asOWLClass())
-                            .forEach(classToReasonAxiom -> {
-                                if (unitToReason.iriOfResultUnit == null) {
-                                    unitToReason.iriOfResultUnit = classToReasonAxiom.getSubClass()
-                                            .asOWLClass().getIRI().getIRIString();
-                                } else {
-                                    throw new RuntimeException(
-                                            "UnitsToReasone are only allowed to have one child to identify " +
-                                                    "resultingUnit (satisfied), found at least: "
-                                                    + unitToReason.iriOfResultUnit + " and "
-                                                    + classToReasonAxiom.getSubClass().asOWLClass().getIRI()
-                                                    .getIRIString());
-                                }
-                            });
-                    if (unitToReason.iriOfResultUnit == null) {
-                        throw new RuntimeException(
-                                "UnitsToReasone must have one child to identify resultingUnit (satisfied)");
-                    }
-                    unitToReason.orderPosition = helper.getOrderPositionForClass(
-                            filteredAxiomOfReasoningTree.getSubClass().asOWLClass());
-
-                    units.add(unitToReason);
-                });
+            units.add(unitToReason);
+        });
 
         Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit2.orderPosition);
-        logger.debug("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0
-                + "s");
+        logger.debug("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return units;
     }
 

@@ -15,9 +15,12 @@ public class CheckboxRequirementWrapper extends RequirementWrapper {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        if (!super.equals(o))
+            return false;
         CheckboxRequirementWrapper that = (CheckboxRequirementWrapper) o;
         return Objects.equals(value, that.value);
     }
@@ -30,9 +33,7 @@ public class CheckboxRequirementWrapper extends RequirementWrapper {
 
     @Override
     public String toString() {
-        return "CheckboxRequirementWrapper{" +
-                "value=" + value +
-                "} " + super.toString();
+        return "CheckboxRequirementWrapper{" + "value=" + value + "} " + super.toString();
     }
 
 }

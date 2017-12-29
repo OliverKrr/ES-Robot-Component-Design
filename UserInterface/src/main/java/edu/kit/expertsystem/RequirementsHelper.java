@@ -49,15 +49,14 @@ public class RequirementsHelper {
 
         topicLabel = new Label(composite, SWT.WRAP);
         topicLabel.setText(category.topic);
-        topicLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(topicLabel.getFont()),
-                GuiHelper.getFontHeight(topicLabel.getFont()) + 7, SWT.BOLD));
+        topicLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(topicLabel.getFont()), GuiHelper
+                .getFontHeight(topicLabel.getFont()) + 7, SWT.BOLD));
         formToolkit.adapt(topicLabel, false, false);
         topicLabel.setForeground(Configs.KIT_GREEN_100);
     }
 
-    public void createRequirement(RequirementWrapper requirementWrapper,
-                                  List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int
-                                          rowNumber) {
+    public void createRequirement(RequirementWrapper requirementWrapper, List<RequirementDependencyCheckboxWrapper>
+            requirementDependencyWrappers, int rowNumber) {
         createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;

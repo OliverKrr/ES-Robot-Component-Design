@@ -40,13 +40,13 @@ public class Category {
         }
         if (topic == null) {
             return other.topic == null;
-        } else return topic.equals(other.topic);
+        } else
+            return topic.equals(other.topic);
     }
 
     @Override
     public String toString() {
-        return "Category [displayName=" + displayName + ", topic=" + topic + ", orderPosition="
-                + orderPosition + "]";
+        return "Category [displayName=" + displayName + ", topic=" + topic + ", orderPosition=" + orderPosition + "]";
     }
 
 }

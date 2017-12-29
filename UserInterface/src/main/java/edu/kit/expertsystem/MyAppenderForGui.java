@@ -30,8 +30,8 @@ public final class MyAppenderForGui extends AbstractAppender {
 
     private GUI gui;
 
-    protected MyAppenderForGui(String name, Filter filter, Layout<? extends Serializable> layout,
-                               final boolean ignoreExceptions) {
+    protected MyAppenderForGui(String name, Filter filter, Layout<? extends Serializable> layout, final boolean
+            ignoreExceptions) {
         super(name, filter, layout, ignoreExceptions);
     }
 
@@ -44,8 +44,7 @@ public final class MyAppenderForGui extends AbstractAppender {
         readLock.lock();
         try {
             if (gui != null) {
-                gui.setErrorText(event.getMessage().getFormattedMessage(),
-                        matchLevelToColor(event.getLevel()));
+                gui.setErrorText(event.getMessage().getFormattedMessage(), matchLevelToColor(event.getLevel()));
             }
         } catch (Exception ex) {
             if (!ignoreExceptions()) {
@@ -68,10 +67,9 @@ public final class MyAppenderForGui extends AbstractAppender {
     }
 
     @PluginFactory
-    public static MyAppenderForGui createAppender(@PluginAttribute("name") String name,
-                                                  @PluginElement("Layout") Layout<? extends Serializable> layout,
-                                                  @PluginElement("Filter") final Filter filter,
-                                                  @PluginAttribute("otherAttribute") String otherAttribute) {
+    public static MyAppenderForGui createAppender(@PluginAttribute("name") String name, @PluginElement("Layout")
+            Layout<? extends Serializable> layout, @PluginElement("Filter") final Filter filter, @PluginAttribute
+            ("otherAttribute") String otherAttribute) {
         if (name == null) {
             LOGGER.error("No name provided for MyAppenderForGui");
             return null;

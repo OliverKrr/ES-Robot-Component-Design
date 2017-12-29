@@ -12,8 +12,8 @@ public class NavigationItem {
 
     @Override
     public String toString() {
-        return "NavigationItem [name=" + name + ", compositeToHandle=" + compositeToHandle + ", item=" + item
-                + ", defaultFontHeight=" + defaultFontHeight + "]";
+        return "NavigationItem [name=" + name + ", compositeToHandle=" + compositeToHandle + ", item=" + item + ", " +
+                "defaultFontHeight=" + defaultFontHeight + "]";
     }
 
 }

@@ -153,18 +153,15 @@ public class GUI {
                     solutionTab.getSolutionForm().dispose();
                 }
                 requirementsCategory = new RequirementsCategory(shell, formToolkit);
-                Rectangle reqNavBarRec = requirementsCategory
-                        .createNavBars(controller.getRequirementsWrapper());
+                Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
                 Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
                 unitsToReasonCombo.setSize(0, mainNavBarRec.height);
 
-                Rectangle recOfContent = requirementsCategory.createReqContent(
-                        controller.getRequirementDependencyWrapper(), mainNavBarRec.y + mainNavBarRec.height,
-                        firstSizeOfShell);
+                Rectangle recOfContent = requirementsCategory.createReqContent(controller
+                        .getRequirementDependencyWrapper(), mainNavBarRec.y + mainNavBarRec.height, firstSizeOfShell);
 
                 solutionTab = new SolutionTab(shell, formToolkit, recOfContent);
-                solutionTab.createContents(controller.getResultWrapper(),
-                        controller.getRequirementsWrapper());
+                solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
                 solutionTab.getSaveSolutionOntologyButton().addSelectionListener(new SelectionAdapter() {
 
                     @Override
@@ -212,8 +209,8 @@ public class GUI {
         mainNavBars.add(solutionItem);
 
         mainNavBarHelper = new NavigationBarHelper(formToolkit, shell);
-        return mainNavBarHelper.createHorizontalNavBar(mainNavBars, 0,
-                RequirementsCategory.contentXOffsetStart + reqNavBarRec.x + reqNavBarRec.width);
+        return mainNavBarHelper.createHorizontalNavBar(mainNavBars, 0, RequirementsCategory.contentXOffsetStart +
+                reqNavBarRec.x + reqNavBarRec.width);
     }
 
     private void addNavigationBarListener() {
@@ -257,8 +254,8 @@ public class GUI {
 
         int unitsToReasonComboWidth = getUnitsToReasoneComboWidth();
         int unitToReasonComboX = updatedRec.x + updatedRec.width - unitsToReasonComboWidth;
-        unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth,
-                unitsToReasonCombo.getSize().y);
+        unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth, unitsToReasonCombo.getSize
+                ().y);
         formToolkit.adapt(unitsToReasonCombo, true, true);
 
         int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
@@ -284,8 +281,8 @@ public class GUI {
 
     private void createErrorText() {
         errorText = new StyledText(shell, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-        errorText.setFont(SWTResourceManager.getFont("Courier New",
-                GuiHelper.getFontHeight(errorText.getFont()), SWT.NORMAL));
+        errorText.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(errorText.getFont()), SWT
+                .NORMAL));
         errorText.setEditable(false);
         MyAppenderForGui lastInstance = MyAppenderForGui.getLastInstance();
         if (lastInstance != null) {

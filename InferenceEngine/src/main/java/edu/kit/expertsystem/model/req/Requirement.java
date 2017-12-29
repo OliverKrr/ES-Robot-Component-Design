@@ -90,13 +90,14 @@ public class Requirement {
         }
         if (unit == null) {
             return other.unit == null;
-        } else return unit.equals(other.unit);
+        } else
+            return unit.equals(other.unit);
     }
 
     @Override
     public String toString() {
-        return "Requirement [displayName=" + displayName + ", description=" + description + ", unit=" + unit
-                + ", category=" + category + ", orderPosition=" + orderPosition + ", individualIRI="
-                + individualIRI + ", resultIRI=" + resultIRI + "]";
+        return "Requirement [displayName=" + displayName + ", description=" + description + ", unit=" + unit + ", " +
+                "category=" + category + ", orderPosition=" + orderPosition + ", individualIRI=" + individualIRI + "," +
+                " resultIRI=" + resultIRI + "]";
     }
 }

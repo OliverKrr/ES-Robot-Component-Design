@@ -68,8 +68,7 @@ public class Controller {
             }
         });
 
-        List<RequirementDependencyCheckbox> requirementDependencies = reasoner
-                .getRequirementDependencies(requirements);
+        List<RequirementDependencyCheckbox> requirementDependencies = reasoner.getRequirementDependencies(requirements);
         requirementDependencyMappers = new ArrayList<>(requirementDependencies.size());
         requirementDependencies.forEach(reqDep -> {
             RequirementDependencyCheckboxWrapper wrapper = new RequirementDependencyCheckboxWrapper();
@@ -125,16 +124,13 @@ public class Controller {
                 TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
 
-                realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin)
-                        / realReq.scaleFromOntologyToUI;
-                realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax)
-                        / realReq.scaleFromOntologyToUI;
+                realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
+                realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
             } else if (req instanceof TextFieldRequirementWrapper) {
                 TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
                 TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
 
-                realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue)
-                        / realReq.scaleFromOntologyToUI;
+                realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue) / realReq.scaleFromOntologyToUI;
             } else if (req instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
@@ -151,8 +147,8 @@ public class Controller {
             try {
                 return Double.parseDouble(textToParse.getText());
             } catch (NumberFormatException e) {
-                String message = "Could not parse <" + textToParse.getText() + "> to double. Default value <"
-                        + defaultValue + "> will be taken!";
+                String message = "Could not parse <" + textToParse.getText() + "> to double. Default value <" +
+                        defaultValue + "> will be taken!";
                 logger.error(message);
             }
         }
@@ -171,8 +167,8 @@ public class Controller {
         for (Result result : resultWrapper.results) {
             double maxNumberOfCharsForComp = getMaxNumberOfCharsForComp(result);
             logger.debug("Solution:");
-            result.components.forEach(
-                    comp -> logger.debug("Component: " + getNameForComponent(comp, maxNumberOfCharsForComp)));
+            result.components.forEach(comp -> logger.debug("Component: " + getNameForComponent(comp,
+                    maxNumberOfCharsForComp)));
 
             double maxNumberOfCharsForReq = getMaxNumberOfCharsForReq(result);
             for (Requirement req : result.requirements) {
@@ -196,12 +192,10 @@ public class Controller {
                 if (currentSelection.length() > 2) {
                     String displayName = currentSelection.substring(0, currentSelection.length() - 2);
 
-                    Collections.sort(resultWrapper.results,
-                            Comparator.comparingDouble(result -> result.requirements.stream()
-                                    .filter(req -> resultWrapper.displayNameToIriMap.get(displayName)
-                                            .equals(req.resultIRI))
-                                    .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result)
-                                    .orElse(-Double.MAX_VALUE)));
+                    resultWrapper.results.sort(Comparator.comparingDouble(result -> result.requirements.stream()
+                            .filter(req -> resultWrapper.displayNameToIriMap.get(displayName).equals(req.resultIRI))
+                            .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result).orElse(-Double
+                                    .MAX_VALUE)));
 
                     if (currentSelection.endsWith("\u25B2")) {
                         Collections.reverse(resultWrapper.results);
@@ -253,22 +247,18 @@ public class Controller {
     }
 
     private double getMaxNumberOfCharsForComp(Result result) {
-        return result.components.stream()
-                .max((val1, val2) -> val1.nameOfComponent.length() - val2.nameOfComponent.length())
-                .get().nameOfComponent.length();
+        return result.components.stream().max((val1, val2) -> val1.nameOfComponent.length() - val2.nameOfComponent
+                .length()).get().nameOfComponent.length();
     }
 
     private String getNameForComponent(Component component, double maxNumberOfChars) {
-        return "".equals(component.nameOfComponent) ? component.nameOfInstance
-                : component.nameOfComponent + ": "
-                + getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars)
-                + component.nameOfInstance;
+        return "".equals(component.nameOfComponent) ? component.nameOfInstance : component.nameOfComponent + ": " +
+                getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars) + component.nameOfInstance;
     }
 
     private double getMaxNumberOfCharsForReq(Result result) {
-        return result.requirements.stream().filter(req -> req.resultIRI != null)
-                .max((val1, val2) -> val1.displayName.length() - val2.displayName.length()).get().displayName
-                .length();
+        return result.requirements.stream().filter(req -> req.resultIRI != null).max((val1, val2) -> val1.displayName
+                .length() - val2.displayName.length()).get().displayName.length();
     }
 
     private String getNameForReq(Requirement req, double maxNumberOfChars) {
@@ -286,8 +276,8 @@ public class Controller {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
         String unit = req.unit == null ? "" : req.unit;
-        return req.displayName + ": " + getSpacesForDisplayName(req.displayName, maxNumberOfChars)
-                + resultValue + getSpacesForResultValue(resultValue) + unit;
+        return req.displayName + ": " + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + resultValue +
+                getSpacesForResultValue(resultValue) + unit;
     }
 
     private TreeItem addTreeItem(TreeItem parent, String text, boolean makeGreen) {
@@ -296,8 +286,8 @@ public class Controller {
         if (makeGreen) {
             resItem.setForeground(Configs.KIT_GREEN_70);
         }
-        resItem.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()),
-                SWT.NORMAL));
+        resItem.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()), SWT
+                .NORMAL));
         return resItem;
     }
 
@@ -325,8 +315,8 @@ public class Controller {
     }
 
     public void updateUnitToReason(String unitToReason) {
-        unitsToReason.stream().filter(unit -> unit.displayName.equals(unitToReason))
-                .forEach(unit -> currentUnitToReason = unit);
+        unitsToReason.stream().filter(unit -> unit.displayName.equals(unitToReason)).forEach(unit ->
+                currentUnitToReason = unit);
         initRequirements();
     }
 

@@ -11,8 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.semanticweb.owlapi.model.parameters.Imports.INCLUDED;
 
-public class MyInferredPropertyAssertionGenerator
-        extends MyInferredGenerator<OWLPropertyAssertionAxiom<?, ?>> {
+public class MyInferredPropertyAssertionGenerator extends MyInferredGenerator<OWLPropertyAssertionAxiom<?, ?>> {
 
     private OWLGenericTools genericTool;
     private AtomicBoolean isStopped = new AtomicBoolean(false);
@@ -29,9 +28,9 @@ public class MyInferredPropertyAssertionGenerator
         }
         genericTool.getOntology().dataPropertiesInSignature(INCLUDED)
                 // take only data props which have no other children -> filer unnecessary
-                .filter(p -> genericTool.getOntology().dataSubPropertyAxiomsForSuperProperty(p).count() == 0)
-                .forEach(p -> reasoner.getDataPropertyValues(entity, p).forEach(
-                        v -> result.add(dataFactory.getOWLDataPropertyAssertionAxiom(p, entity, v))));
+                .filter(p -> genericTool.getOntology().dataSubPropertyAxiomsForSuperProperty(p).count() == 0).forEach
+                (p -> reasoner.getDataPropertyValues(entity, p).forEach(v -> result.add(dataFactory
+                        .getOWLDataPropertyAssertionAxiom(p, entity, v))));
     }
 
     @Override
