@@ -61,22 +61,31 @@ public class ReasoningTree {
             reasoningTreeElements.forEach(treeClassAxiom -> handleTreeItem(treeClassAxiom.getSubClass().asOWLClass()));
 
             if (!interrupted.get() && !hasSomethingChanged) {
-                // the order is important
-                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED).forEach
-                        (unsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
-                                .handleUnsatisfied(unsatiesfiedSuperClass.getSubClass().asOWLClass()));
+                boolean anySpecialChanges = false;
+                do {
+                    hasSomethingChanged = false;
+                    // the order is important
+                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED).forEach
+                            (unsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
+                                    .handleUnsatisfied(unsatiesfiedSuperClass.getSubClass().asOWLClass()));
 
-                genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED).forEach
-                        (possibleUnsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
-                                .handlePossibleUnsatisfied(possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
 
-                if (!reasoningTreeSpecialCasesHandler.didBackupOnLastRun()) {
-                    // If we do backup for possible unsatisfied, we do not delete stuff. In the next
-                    // run we should first check for unsatisfied and then possibleSatisfied
-                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED).forEach
-                            (possibleSatisfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
-                                    .handlePossibleSatisfied(possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
-                }
+                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED)
+                            .forEach(possibleUnsatiesfiedSuperClass -> hasSomethingChanged |=
+                                    reasoningTreeSpecialCasesHandler.handlePossibleUnsatisfied
+                                            (possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
+
+                    if (!reasoningTreeSpecialCasesHandler.didBackupOnLastRun()) {
+                        // If we do backup for possible unsatisfied, we do not delete stuff. In the next
+                        // run we should first check for unsatisfied and then possibleSatisfied
+                        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
+                                .forEach(possibleSatisfiedSuperClass -> hasSomethingChanged |=
+                                        reasoningTreeSpecialCasesHandler.handlePossibleSatisfied
+                                                (possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
+                    }
+                    anySpecialChanges |= hasSomethingChanged;
+                } while (hasSomethingChanged && !interrupted.get());
+                hasSomethingChanged = anySpecialChanges;
             }
         } while (hasSomethingChanged && !interrupted.get());
     }
@@ -93,9 +102,9 @@ public class ReasoningTree {
             return;
         }
 
-        childrenForPermutation.stream().forEach(childForPermutation -> logger.debug(treeClass.getIRI().getShortForm()
-                + " has " + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm() + " " +
-                "with number of children: " + childForPermutation.childInstances.size()));
+        childrenForPermutation.forEach(childForPermutation -> logger.debug(treeClass.getIRI().getShortForm() + " has " +
+                "" + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm() + " " + "with " +
+                "number of children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);

@@ -496,13 +496,15 @@ AbsolutEncoderSensorPCBMatchSatisfy1Rule:
 AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ Constants(?con) ^
 hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
 swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
-swrlb:greaterThan(?L_temp, ?L_aewspcb) -> hasDimensionLength_L_unit_mm(?abspcb, ?L_aewspcb) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+swrlb:greaterThan(?L_temp, ?L_aewspcb)
+-> hasDimensionLength_L_unit_mm(?abspcb, ?L_aewspcb) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
 
 AbsolutEncoderSensorPCBMatchSatisfy2Rule:
 AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ Constants(?con) ^
 hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
 swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
-swrlb:lessThanOrEqual(?L_temp, ?L_aewspcb) -> hasDimensionLength_L_unit_mm(?abspcb, ?L_temp) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+swrlb:lessThanOrEqual(?L_temp, ?L_aewspcb)
+-> hasDimensionLength_L_unit_mm(?abspcb, ?L_temp) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
 
 
 
@@ -511,12 +513,58 @@ swrlb:lessThanOrEqual(?L_temp, ?L_aewspcb) -> hasDimensionLength_L_unit_mm(?absp
 GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearCalc1Rule:
 GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ AbsolutEncoderMBAD01_05(?ab) ^
 hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
-hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
-swrlb:subtract(?D_temp, ?T_g, ?d_g_fs) ^
-swrlb:greaterThanOrEqual(?d_ab, ?D_temp) ^
+hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^
+swrlb:subtract(?d_temp, ?T_g, ?d_g_fs) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
--> HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
+-> HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ has1(?gsrtsabspcb, ?d_temp)
+
+
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleUnsatisfied1Rule:
+HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+has1(?gsrtsabspcb, ?d_need) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
+swrlb:lessThan(?d_ab, ?d_need)
+-> PossibleUnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleUnsatisfied2Rule:
+HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+has1(?gsrtsabspcb, ?d_need) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
+swrlb:greaterThanOrEqual(?d_ab, ?d_need) ^
+-> HalfPossibleUnsatisfiedSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
+
+
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearUnsatisfiedRule:
+HalfPossibleUnsatisfiedSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
+HalfPossibleUnsatisfiedSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
+swrlb:greaterThan(?D_ab1, ?D_ab2) ^ swrlb:lessThan(?D_ab2, ?D_ab1)
+-> PossibleUnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1)
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleSatisfiedRule:
+HalfPossibleUnsatisfiedSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
+HalfPossibleUnsatisfiedSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
+hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
+swrlb:equal(?D_ab2, ?D_ab1)
+-> PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2)
+
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearBackupSatisfiedRule:
+BackupSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
+BackupSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
+hasDimensionInnerDiameter_d_unit_mm(?ab1, ?d_ab1) ^ hasDimensionInnerDiameter_d_unit_mm(?ab2, ?d_ab2) ^
+swrlb:greaterThan(?d_ab2, ?d_ab1) ^ swrlb:lessThan(?d_ab1, ?d_ab2)
+-> UnsatisfiedDiameterOutputBearingOutputLinear(?gsrtsabspcb1)
+
+GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearBackupPossibleSatisfiedRule:
+BackupSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
+BackupSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
+hasDimensionInnerDiameter_d_unit_mm(?ab1, ?d_ab1) ^ hasDimensionInnerDiameter_d_unit_mm(?ab2, ?d_ab2) ^
+swrlb:equal(?d_ab2, ?d_ab1)
+-> BackupPossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ BackupPossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2)
+
+
 
 GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearCalc2Rule:
 GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ NoAbsolutEncoder(?ab) ^
@@ -532,20 +580,6 @@ hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiame
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 -> SatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
 
-
-GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearUnsatisfiedRule:
-HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
-HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
-hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
-swrlb:greaterThan(?D_ab1, ?D_ab2) ^ swrlb:lessThan(?D_ab2, ?D_ab1)
--> UnsatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1)
-
-GearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleSatisfiedRule:
-HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasGearBox(?gsrtsabspcb1, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
-HalfSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasGearBox(?gsrtsabspcb2, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
-hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
-swrlb:equal(?D_ab2, ?D_ab1)
--> PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ PossibleSatisfiedGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2)
 
 
 
