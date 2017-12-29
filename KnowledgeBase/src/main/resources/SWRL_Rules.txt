@@ -874,7 +874,7 @@ DiameterOutputCompressed(?do) ^ has1(?do, ?D_out) ^ CurrentRequirements(?r) ^ ha
 
 
 DiameterOutputBearingCalcRule:
-DiameterOutputBearingOutputLinear(?dob) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+DiameterOutputBearing(?dob) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
 hasDimensionOuterDiameter_D_unit_mm(?ob, ?D_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^
 swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:add(?D_dob, ?D_ob, ?D_s_ob2) ^
 -> hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob)
