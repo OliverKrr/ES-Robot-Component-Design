@@ -9,6 +9,7 @@ public class TextFieldRequirement extends Requirement {
     public String reqIri;
     public boolean enable = true;
     public RequirementType requirementType = RequirementType.EXACT;
+    public boolean isIntegerValue = false;
 
     public double defaultValue = 0;
     public double value = defaultValue;
@@ -24,6 +25,7 @@ public class TextFieldRequirement extends Requirement {
         reqIri = other.reqIri;
         enable = other.enable;
         requirementType = other.requirementType;
+        isIntegerValue = other.isIntegerValue;
         defaultValue = other.defaultValue;
         value = other.value;
         result = other.result;
@@ -39,21 +41,22 @@ public class TextFieldRequirement extends Requirement {
             return false;
         TextFieldRequirement that = (TextFieldRequirement) o;
         return Double.compare(that.scaleFromOntologyToUI, scaleFromOntologyToUI) == 0 && enable == that.enable &&
-                Double.compare(that.defaultValue, defaultValue) == 0 && Double.compare(that.value, value) == 0 &&
-                Double.compare(that.result, result) == 0 && Objects.equals(reqIri, that.reqIri) && requirementType ==
-                that.requirementType;
+                isIntegerValue == that.isIntegerValue && Double.compare(that.defaultValue, defaultValue) == 0 &&
+                Double.compare(that.value, value) == 0 && Double.compare(that.result, result) == 0 && Objects.equals
+                (reqIri, that.reqIri) && requirementType == that.requirementType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), scaleFromOntologyToUI, reqIri, enable, requirementType, defaultValue,
-                value, result);
+        return Objects.hash(super.hashCode(), scaleFromOntologyToUI, reqIri, enable, requirementType, isIntegerValue,
+                defaultValue, value, result);
     }
 
     @Override
     public String toString() {
         return "TextFieldRequirement{" + "scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", reqIri='" + reqIri +
-                '\'' + ", enable=" + enable + ", requirementType=" + requirementType + ", defaultValue=" +
-                defaultValue + ", value=" + value + ", selectedValue=" + result + "} " + super.toString();
+                '\'' + ", enable=" + enable + ", requirementType=" + requirementType + ", isIntegerValue=" +
+                isIntegerValue + ", defaultValue=" + defaultValue + ", value=" + value + ", result=" + result + "} "
+                + super.toString();
     }
 }

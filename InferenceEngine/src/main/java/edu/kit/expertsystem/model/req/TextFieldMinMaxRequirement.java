@@ -11,6 +11,8 @@ public class TextFieldMinMaxRequirement extends Requirement {
     public boolean enableMin = true;
     public boolean enableMax = true;
 
+    public boolean isIntegerValue = false;
+
     public double defaultMin = 0;
     public double defaultMax = Double.MAX_VALUE;
 
@@ -30,6 +32,7 @@ public class TextFieldMinMaxRequirement extends Requirement {
         maxIRI = other.maxIRI;
         enableMin = other.enableMin;
         enableMax = other.enableMax;
+        isIntegerValue = other.isIntegerValue;
         defaultMin = other.defaultMin;
         defaultMax = other.defaultMax;
         min = other.min;
@@ -47,23 +50,23 @@ public class TextFieldMinMaxRequirement extends Requirement {
             return false;
         TextFieldMinMaxRequirement that = (TextFieldMinMaxRequirement) o;
         return Double.compare(that.scaleFromOntologyToUI, scaleFromOntologyToUI) == 0 && enableMin == that.enableMin
-                && enableMax == that.enableMax && Double.compare(that.defaultMin, defaultMin) == 0 && Double.compare
-                (that.defaultMax, defaultMax) == 0 && Double.compare(that.min, min) == 0 && Double.compare(that.max,
-                max) == 0 && Double.compare(that.result, result) == 0 && Objects.equals(minIRI, that.minIRI) &&
-                Objects.equals(maxIRI, that.maxIRI);
+                && enableMax == that.enableMax && isIntegerValue == that.isIntegerValue && Double.compare(that
+                .defaultMin, defaultMin) == 0 && Double.compare(that.defaultMax, defaultMax) == 0 && Double.compare
+                (that.min, min) == 0 && Double.compare(that.max, max) == 0 && Double.compare(that.result, result) ==
+                0 && Objects.equals(minIRI, that.minIRI) && Objects.equals(maxIRI, that.maxIRI);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), scaleFromOntologyToUI, minIRI, maxIRI, enableMin, enableMax,
-                defaultMin, defaultMax, min, max, result);
+                isIntegerValue, defaultMin, defaultMax, min, max, result);
     }
 
     @Override
     public String toString() {
         return "TextFieldMinMaxRequirement{" + "scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", minIRI='" +
                 minIRI + '\'' + ", maxIRI='" + maxIRI + '\'' + ", enableMin=" + enableMin + ", enableMax=" +
-                enableMax + ", defaultMin=" + defaultMin + ", defaultMax=" + defaultMax + ", min=" + min + ", max=" +
-                max + ", selectedValue=" + result + "} " + super.toString();
+                enableMax + ", isIntegerValue=" + isIntegerValue + ", defaultMin=" + defaultMin + ", defaultMax=" +
+                defaultMax + ", min=" + min + ", max=" + max + ", result=" + result + "} " + super.toString();
     }
 }

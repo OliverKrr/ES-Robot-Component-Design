@@ -126,13 +126,23 @@ public class Controller {
                 TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
 
-                realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
-                realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
+                if (realReq.isIntegerValue) {
+                    realReq.min = parseInteger(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
+                    realReq.max = parseInteger(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
+                } else {
+                    realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
+                    realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
+                }
             } else if (req instanceof TextFieldRequirementWrapper) {
                 TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
                 TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
 
-                realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue) / realReq.scaleFromOntologyToUI;
+                if (realReq.isIntegerValue) {
+                    realReq.value = parseInteger(reqWrapper.value, realReq.defaultValue) / realReq
+                            .scaleFromOntologyToUI;
+                } else {
+                    realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue) / realReq.scaleFromOntologyToUI;
+                }
             } else if (req instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
@@ -160,6 +170,19 @@ public class Controller {
             }
         }
         return defaultValue;
+    }
+
+    private double parseInteger(Text textToParse, double defaultValue) {
+        if (!textToParse.getText().isEmpty()) {
+            try {
+                return Integer.parseInt(textToParse.getText());
+            } catch (NumberFormatException e) {
+                String message = "Could not parse <" + textToParse.getText() + "> to int. Default value <" + Math
+                        .round(defaultValue) + "> will be taken!";
+                logger.error(message);
+            }
+        }
+        return Math.round(defaultValue);
     }
 
     public void reason() {

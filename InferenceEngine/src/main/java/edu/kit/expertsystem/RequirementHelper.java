@@ -87,6 +87,8 @@ public class RequirementHelper {
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary
                         .DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI).findAny().ifPresent(obProp -> textReq
                         .scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISINTEGERVALUE)
+                        .findAny().ifPresent(obProp -> textReq.isIntegerValue = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMIN)
                         .findAny().ifPresent(obProp -> textReq.defaultMin = helper.parseValueToDouble(obProp));
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMAX)
@@ -114,6 +116,8 @@ public class RequirementHelper {
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary
                         .DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI).findAny().ifPresent(obProp -> textReq
                         .scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISINTEGERVALUE)
+                        .findAny().ifPresent(obProp -> textReq.isIntegerValue = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE)
                         .findAny().ifPresent(obProp -> textReq.defaultValue = helper.parseValueToDouble(obProp));
 

@@ -100,7 +100,11 @@ public class RequirementsHelper {
         requirementWrapper.minValue.setMessage("min");
         requirementWrapper.minValue.setToolTipText("min");
         if (realReq.defaultMin != 0) {
-            requirementWrapper.minValue.setText(String.valueOf(realReq.defaultMin));
+            if (realReq.isIntegerValue) {
+                requirementWrapper.minValue.setText(String.valueOf(Math.round(realReq.defaultMin)));
+            } else {
+                requirementWrapper.minValue.setText(String.valueOf(realReq.defaultMin));
+            }
         }
         requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.minValue, true, true);
@@ -113,7 +117,11 @@ public class RequirementsHelper {
         requirementWrapper.maxValue.setMessage("max");
         requirementWrapper.maxValue.setToolTipText("max");
         if (realReq.defaultMax != Double.MAX_VALUE) {
-            requirementWrapper.maxValue.setText(String.valueOf(realReq.defaultMax));
+            if (realReq.isIntegerValue) {
+                requirementWrapper.maxValue.setText(String.valueOf(Math.round(realReq.defaultMax)));
+            } else {
+                requirementWrapper.maxValue.setText(String.valueOf(realReq.defaultMax));
+            }
         }
         requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.maxValue, true, true);
@@ -132,7 +140,11 @@ public class RequirementsHelper {
         requirementWrapper.value.setMessage(type);
         requirementWrapper.value.setToolTipText(type);
         if (realReq.defaultValue != 0) {
-            requirementWrapper.value.setText(String.valueOf(realReq.defaultValue));
+            if (realReq.isIntegerValue) {
+                requirementWrapper.value.setText(String.valueOf(Math.round(realReq.defaultValue)));
+            } else {
+                requirementWrapper.value.setText(String.valueOf(realReq.defaultValue));
+            }
         }
         requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.value, true, true);
