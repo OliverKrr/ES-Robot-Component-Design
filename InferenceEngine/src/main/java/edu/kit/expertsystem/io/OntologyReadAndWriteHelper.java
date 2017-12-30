@@ -18,7 +18,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 public class OntologyReadAndWriteHelper {
 
@@ -50,8 +49,8 @@ public class OntologyReadAndWriteHelper {
         this.helper = helper;
         generators.add(new MyInferredClassAssertionAxiomGenerator());
         generators.add(new MyInferredPropertyAssertionGenerator(genericTool));
-        inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(), generators.stream()
-                .collect(Collectors.toList()));
+        inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(), new ArrayList<>
+                (generators));
     }
 
     public OWLOntology loadOntologies() {
@@ -128,12 +127,12 @@ public class OntologyReadAndWriteHelper {
 
     public void interruptReasoning() {
         interrupted.set(true);
-        generators.forEach(gen -> gen.stop());
+        generators.forEach(MyInferredGenerator::stop);
     }
 
     public void resetInterrupt() {
         interrupted.set(false);
-        generators.forEach(gen -> gen.reset());
+        generators.forEach(MyInferredGenerator::reset);
     }
 
 }

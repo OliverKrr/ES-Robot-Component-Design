@@ -7,8 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.*;
@@ -53,7 +51,6 @@ public class GUI {
     /**
      * Launch the application.
      *
-     * @param args
      * @wbp.parser.entryPoint
      */
     public static void main(String[] args) {
@@ -66,7 +63,7 @@ public class GUI {
         }
     }
 
-    public GUI() {
+    private GUI() {
         pool = Executors.newSingleThreadExecutor();
         // do nothing for init and no concurrent problems while creation of gui
         controllerFuture = pool.submit(() -> {
@@ -78,19 +75,14 @@ public class GUI {
      *
      * @wbp.parser.entryPoint
      */
-    public void open() {
+    private void open() {
         createShell();
         createErrorText();
         controller = new Controller(this);
         controller.initialize();
         createContents();
 
-        shell.addDisposeListener(new DisposeListener() {
-            @Override
-            public void widgetDisposed(DisposeEvent event) {
-                shutdown();
-            }
-        });
+        shell.addDisposeListener(event -> shutdown());
         // startOnSecondScreenIfPossible();
         startOnTopOfScreen();
         shell.open();
@@ -139,7 +131,7 @@ public class GUI {
     /**
      * Create contents of the window.
      */
-    protected void createContents() {
+    private void createContents() {
         unitsToReasonCombo = new Combo(shell, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
         unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
@@ -178,13 +170,10 @@ public class GUI {
         unitsToReasonCombo.select(0);
         unitsToReasonCombo.notifyListeners(SWT.Selection, new Event());
 
-        shell.addListener(SWT.Resize, new Listener() {
-            @Override
-            public void handleEvent(Event e) {
-                // have to update twice, because one does not update everything
-                updateSize();
-                updateSize();
-            }
+        shell.addListener(SWT.Resize, e -> {
+            // have to update twice, because one does not update everything
+            updateSize();
+            updateSize();
         });
     }
 
@@ -266,8 +255,7 @@ public class GUI {
     private int[] getWeights() {
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         float ratioForWeights = 1f * newWidthOfContent / 835;
-        int[] newContentWeights = {Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights)};
-        return newContentWeights;
+        return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights)};
     }
 
     private int getUnitsToReasoneComboWidth() {

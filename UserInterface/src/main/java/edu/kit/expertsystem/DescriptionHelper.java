@@ -31,7 +31,7 @@ public class DescriptionHelper {
 
     private int maxYEnd;
 
-    public DescriptionHelper(FormToolkit formToolkit, Composite composite) {
+    DescriptionHelper(FormToolkit formToolkit, Composite composite) {
         this.formToolkit = formToolkit;
         this.composite = composite;
     }

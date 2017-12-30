@@ -39,7 +39,7 @@ public class RequirementsCategory {
     private List<RequirementsTab> reqTabs = new ArrayList<>();
     private List<NavigationItem> reqNavItems = new ArrayList<>();
 
-    public RequirementsCategory(Composite parent, FormToolkit formToolkit) {
+    RequirementsCategory(Composite parent, FormToolkit formToolkit) {
         this.parent = parent;
         this.formToolkit = formToolkit;
         navHelper = new NavigationBarHelper(formToolkit, parent);

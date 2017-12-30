@@ -31,7 +31,7 @@ public class RequirementsTab {
     private Button btnEnableFields;
     private DescriptionHelper descriptionHelper;
 
-    public RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
+    RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
         this.formToolkit = formToolkit;
 
         requirementsForm = new SashForm(parent, SWT.NONE);
@@ -49,27 +49,27 @@ public class RequirementsTab {
         requirementsHelper = new RequirementsHelper(formToolkit, leftComposite, category);
         int lastReqOrderPosition = -1;
         int rowNumber = 0;
-        for (int i = 0; i < requirements.size(); i++) {
-            if (requirements.get(i) instanceof TextFieldMinMaxRequirementWrapper) {
-                TextFieldMinMaxRequirement req = (TextFieldMinMaxRequirement) requirements.get(i).requirement;
+        for (RequirementWrapper requirement1 : requirements) {
+            if (requirement1 instanceof TextFieldMinMaxRequirementWrapper) {
+                TextFieldMinMaxRequirement req = (TextFieldMinMaxRequirement) requirement1.requirement;
                 isAnyFieldDisabled |= !req.enableMin || !req.enableMax;
-            } else if (requirements.get(i) instanceof TextFieldRequirementWrapper) {
-                TextFieldRequirement req = (TextFieldRequirement) requirements.get(i).requirement;
+            } else if (requirement1 instanceof TextFieldRequirementWrapper) {
+                TextFieldRequirement req = (TextFieldRequirement) requirement1.requirement;
                 isAnyFieldDisabled |= !req.enable;
-            } else if (requirements.get(i) instanceof CheckboxRequirementWrapper) {
-                CheckboxRequirement req = (CheckboxRequirement) requirements.get(i).requirement;
+            } else if (requirement1 instanceof CheckboxRequirementWrapper) {
+                CheckboxRequirement req = (CheckboxRequirement) requirement1.requirement;
                 isAnyFieldDisabled |= !req.enable;
-            } else if (requirements.get(i) instanceof DropdownRequirementWrapper) {
-                DropdownRequirement req = (DropdownRequirement) requirements.get(i).requirement;
+            } else if (requirement1 instanceof DropdownRequirementWrapper) {
+                DropdownRequirement req = (DropdownRequirement) requirement1.requirement;
                 isAnyFieldDisabled |= !req.enable;
             } else {
-                throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
+                throw new RuntimeException("Requirement class unknown: " + requirement1.getClass());
             }
-            if (lastReqOrderPosition == requirements.get(i).requirement.orderPosition) {
+            if (lastReqOrderPosition == requirement1.requirement.orderPosition) {
                 rowNumber--;
             }
-            lastReqOrderPosition = requirements.get(i).requirement.orderPosition;
-            requirementsHelper.createRequirement(requirements.get(i), requirementDependencyWrappers, rowNumber++);
+            lastReqOrderPosition = requirement1.requirement.orderPosition;
+            requirementsHelper.createRequirement(requirement1, requirementDependencyWrappers, rowNumber++);
         }
 
         if (isAnyFieldDisabled) {
@@ -123,10 +123,10 @@ public class RequirementsTab {
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
         descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are " +
                 "taken: min=0 and max=infinite.", rowNumber++);
-        for (int i = 0; i < requirements.size(); i++) {
-            if (requirements.get(i).requirement.description != null) {
-                descriptionHelper.createDescription(requirements.get(i).requirement.displayName, requirements.get(i)
-                        .requirement.description, rowNumber++);
+        for (RequirementWrapper requirement : requirements) {
+            if (requirement.requirement.description != null) {
+                descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
+                        .description, rowNumber++);
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());

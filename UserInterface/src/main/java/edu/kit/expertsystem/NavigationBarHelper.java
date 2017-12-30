@@ -29,7 +29,7 @@ public class NavigationBarHelper {
     private int horizontalX;
     private Rectangle lastRectangle;
 
-    public NavigationBarHelper(FormToolkit formToolkit, Composite composite) {
+    NavigationBarHelper(FormToolkit formToolkit, Composite composite) {
         this.formToolkit = formToolkit;
         this.composite = composite;
     }

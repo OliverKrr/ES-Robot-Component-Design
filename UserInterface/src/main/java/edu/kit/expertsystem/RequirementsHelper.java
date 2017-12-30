@@ -106,13 +106,7 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.minValue, true, true);
         createdControls.add(requirementWrapper.minValue);
 
-        if (requirementWrapper.requirement.unit != null) {
-            Label unitForMin = new Label(composite, SWT.NONE);
-            unitForMin.setText(requirementWrapper.requirement.unit);
-            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
-            formToolkit.adapt(unitForMin, false, false);
-            createdControls.add(unitForMin);
-        }
+        addUnit(requirementWrapper, unitForMinX);
 
         requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
         requirementWrapper.maxValue.setEnabled(realReq.enableMax);
@@ -125,13 +119,7 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.maxValue, true, true);
         createdControls.add(requirementWrapper.maxValue);
 
-        if (requirementWrapper.requirement.unit != null) {
-            Label unitForMax = new Label(composite, SWT.NONE);
-            unitForMax.setText(requirementWrapper.requirement.unit);
-            unitForMax.setBounds(unitForMaxX, y2, unitWidth, height);
-            formToolkit.adapt(unitForMax, false, false);
-            createdControls.add(unitForMax);
-        }
+        addUnit(requirementWrapper, unitForMaxX);
     }
 
     private void createTextFieldRequirement(TextFieldRequirementWrapper requirementWrapper) {
@@ -150,13 +138,7 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.value, true, true);
         createdControls.add(requirementWrapper.value);
 
-        if (requirementWrapper.requirement.unit != null) {
-            Label unitForMin = new Label(composite, SWT.NONE);
-            unitForMin.setText(requirementWrapper.requirement.unit);
-            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
-            formToolkit.adapt(unitForMin, false, false);
-            createdControls.add(unitForMin);
-        }
+        addUnit(requirementWrapper, unitForMinX);
     }
 
     private void createCheckboxRequirement(CheckboxRequirementWrapper requirementWrapper) {
@@ -170,13 +152,7 @@ public class RequirementsHelper {
         createdControls.add(requirementWrapper.value);
         createdButton = requirementWrapper.value;
 
-        if (requirementWrapper.requirement.unit != null) {
-            Label unitForMin = new Label(composite, SWT.NONE);
-            unitForMin.setText(requirementWrapper.requirement.unit);
-            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
-            formToolkit.adapt(unitForMin, false, false);
-            createdControls.add(unitForMin);
-        }
+        addUnit(requirementWrapper, unitForMinX);
     }
 
     private void createDropdownRequirement(DropdownRequirementWrapper requirementWrapper) {
@@ -198,10 +174,14 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.values, true, true);
         createdControls.add(requirementWrapper.values);
 
-        if (requirementWrapper.requirement.unit != null) {
+        addUnit(requirementWrapper, unitForMinX);
+    }
+
+    private void addUnit(RequirementWrapper wrapper, int unit) {
+        if (wrapper.requirement.unit != null) {
             Label unitForMin = new Label(composite, SWT.NONE);
-            unitForMin.setText(requirementWrapper.requirement.unit);
-            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
+            unitForMin.setText(wrapper.requirement.unit);
+            unitForMin.setBounds(unit, y2, unitWidth, height);
             formToolkit.adapt(unitForMin, false, false);
             createdControls.add(unitForMin);
         }

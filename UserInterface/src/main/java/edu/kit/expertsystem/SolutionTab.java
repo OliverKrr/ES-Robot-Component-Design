@@ -43,7 +43,7 @@ public class SolutionTab {
     private Button showOnlyDiffsCheckBox;
     private DescriptionHelper descriptionHelper;
 
-    public SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
+    SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
         this.formToolkit = formToolkit;
 
         solutionForm = new SashForm(parent, SWT.NONE);
@@ -130,11 +130,10 @@ public class SolutionTab {
 
         int rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
-        for (int i = 0; i < requirements.size(); i++) {
-            if (requirements.get(i).requirement.description != null && requirements.get(i).requirement.resultIRI !=
-                    null) {
-                descriptionHelper.createDescription(requirements.get(i).requirement.displayName, requirements.get(i)
-                        .requirement.description, rowNumber++);
+        for (RequirementWrapper requirement : requirements) {
+            if (requirement.requirement.description != null && requirement.requirement.resultIRI != null) {
+                descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
+                        .description, rowNumber++);
             }
         }
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());

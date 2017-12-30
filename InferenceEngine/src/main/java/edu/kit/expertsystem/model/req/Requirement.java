@@ -13,10 +13,10 @@ public class Requirement {
     public String individualIRI;
     public String resultIRI;
 
-    public Requirement() {
+    Requirement() {
     }
 
-    public Requirement(Requirement other) {
+    Requirement(Requirement other) {
         displayName = other.displayName;
         description = other.description;
         unit = other.unit;

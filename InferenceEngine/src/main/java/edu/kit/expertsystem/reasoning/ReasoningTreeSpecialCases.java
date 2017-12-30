@@ -24,7 +24,7 @@ public class ReasoningTreeSpecialCases {
 
     private boolean didBackupOnLastRun;
 
-    public ReasoningTreeSpecialCases(OWLHelper genericTool, MyOWLHelper helper) {
+    ReasoningTreeSpecialCases(OWLHelper genericTool, MyOWLHelper helper) {
         this.genericTool = genericTool;
         this.helper = helper;
     }
@@ -39,17 +39,17 @@ public class ReasoningTreeSpecialCases {
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         genericTool.getReasoner().instances(subClassOfUnsatisfied).forEach(indiToDelete -> helper.getGeneratedAxioms
                 ().stream().filter(axiom -> axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete)
-        )).forEach(axiom -> axiomsToDelete.add(axiom)));
+        )).forEach(axiomsToDelete::add));
 
         if (!axiomsToDelete.isEmpty()) {
             InformationToDelete infoToDelete = new InformationToDelete();
             genericTool.getOntology().subClassAxiomsForSubClass(subClassOfUnsatisfied).forEach(topAxiom -> {
-                if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
+                if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .counterSatisfiedPart));
-                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
+                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASNEWSATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .newSatisfiedPart));
                 }
@@ -76,11 +76,11 @@ public class ReasoningTreeSpecialCases {
     }
 
     private static class InformationToDelete {
-        public List<OWLClass> counterSatisfiedPart = new ArrayList<>();
-        public List<OWLClass> newSatisfiedPart = new ArrayList<>();
+        List<OWLClass> counterSatisfiedPart = new ArrayList<>();
+        List<OWLClass> newSatisfiedPart = new ArrayList<>();
 
-        public List<OWLClass> backupSatisfiedPart = new ArrayList<>();
-        public List<OWLClass> possibleSatisfiedPart = new ArrayList<>();
+        List<OWLClass> backupSatisfiedPart = new ArrayList<>();
+        List<OWLClass> possibleSatisfiedPart = new ArrayList<>();
     }
 
     public boolean handlePossibleUnsatisfied(OWLClass subClassOfPossibleUnsatisfied) {
@@ -98,20 +98,20 @@ public class ReasoningTreeSpecialCases {
             handledPossibleUnsatisfied.get(subClassOfPossibleUnsatisfied).addAll(possibleUnsatisfiedIndis);
             InformationToDelete infoToDelete = new InformationToDelete();
             genericTool.getOntology().subClassAxiomsForSubClass(subClassOfPossibleUnsatisfied).forEach(topAxiom -> {
-                if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART.equals(ob))) {
+                if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASCOUNTERSATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .counterSatisfiedPart));
-                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASNEWSATISFIEDPART.equals(ob))) {
+                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASNEWSATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .newSatisfiedPart));
-                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASBACKUPSATISFIEDPART.equals(ob))) {
+                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASBACKUPSATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .backupSatisfiedPart));
-                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(ob -> Vocabulary
-                        .OBJECT_PROPERTY_HASPOSSIBLESATISFIEDPART.equals(ob))) {
+                } else if (topAxiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASPOSSIBLESATISFIEDPART::equals)) {
                     topAxiom.getSuperClass().classesInSignature().collect(Collectors.toCollection(() -> infoToDelete
                             .possibleSatisfiedPart));
                 }
@@ -139,8 +139,8 @@ public class ReasoningTreeSpecialCases {
             } else {
                 Set<OWLAxiom> axiomsToDelete = new HashSet<>();
                 possibleUnsatisfiedIndis.forEach(indiToDelete -> helper.getGeneratedAxioms().stream().filter(axiom ->
-                        axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete))).forEach(axiom ->
-                        axiomsToDelete.add(axiom)));
+                        axiom.individualsInSignature().anyMatch(indi -> indi.equals(indiToDelete))).forEach
+                        (axiomsToDelete::add));
                 logger.debug("SpecialCase: Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
                 genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
@@ -170,9 +170,9 @@ public class ReasoningTreeSpecialCases {
         genericTool.getReasoner().instances(subClassOfPossibleSatisfied).filter(indi -> !handledPossibleSatisfied.get
                 (subClassOfPossibleSatisfied).contains(indi)).forEach(indi -> genericTool.getOntology()
                 .subClassAxiomsForSubClass(subClassOfPossibleSatisfied).filter(topAxiom -> topAxiom.getSuperClass()
-                        .objectPropertiesInSignature().anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASNEWSATISFIEDPART
-                                .equals(ob))).forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature()
-                        .forEach(newPart -> {
+                        .objectPropertiesInSignature().anyMatch(Vocabulary
+                                .OBJECT_PROPERTY_HASNEWSATISFIEDPART::equals)).forEach(topAxiom -> topAxiom
+                        .getSuperClass().classesInSignature().forEach(newPart -> {
             helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(newPart, indi));
             handledPossibleSatisfied.get(subClassOfPossibleSatisfied).add(indi);
         })));

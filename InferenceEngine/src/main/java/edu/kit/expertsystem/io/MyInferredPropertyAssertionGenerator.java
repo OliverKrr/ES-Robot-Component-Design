@@ -16,7 +16,7 @@ public class MyInferredPropertyAssertionGenerator extends MyInferredGenerator<OW
     private OWLGenericTools genericTool;
     private AtomicBoolean isStopped = new AtomicBoolean(false);
 
-    public MyInferredPropertyAssertionGenerator(OWLGenericTools genericTool) {
+    MyInferredPropertyAssertionGenerator(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
     }
 
