@@ -19,6 +19,7 @@ public class RequirementsHelper {
     private static final int unitWidth = 44;
 
     private static final int height = 23;
+    private static final int heightForLabels = height + 6;
 
     private static final int displayNameX = 10;
     private static final int minX = 198;
@@ -85,7 +86,7 @@ public class RequirementsHelper {
     private void createCommonRequirement(RequirementWrapper requirementWrapper) {
         // \t funktioniert hier -> mehr siehe Arbeitsblatt
         Label displayName = new Label(composite, SWT.WRAP);
-        displayName.setBounds(displayNameX, y1, displayNameWidth, height);
+        displayName.setBounds(displayNameX, y1, displayNameWidth, heightForLabels);
         displayName.setText(requirementWrapper.requirement.displayName + ":");
         formToolkit.adapt(displayName, false, false);
         displayName.setForeground(Configs.KIT_GREEN_70);
@@ -193,7 +194,7 @@ public class RequirementsHelper {
         if (wrapper.requirement.unit != null) {
             Label unitForMin = new Label(composite, SWT.NONE);
             unitForMin.setText(wrapper.requirement.unit);
-            unitForMin.setBounds(unit, y2, unitWidth, height);
+            unitForMin.setBounds(unit, y2, unitWidth, heightForLabels);
             formToolkit.adapt(unitForMin, false, false);
             createdControls.add(unitForMin);
         }

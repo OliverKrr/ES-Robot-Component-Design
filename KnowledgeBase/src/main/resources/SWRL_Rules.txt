@@ -7,20 +7,20 @@ swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max
 
 MotorPeakTorqueCalc1Rule:
 Motor(?m) ^ CurrentRequirements(?r) ^
-hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^
+hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyGearBox_percentage(?r, ?g_perc) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
 swrlb:equal(?M_type, "M_max") ^
-swrlb:divide(?perc, ?M_per, 100.0) ^ swrlb:multiply(?M_res, ?M_p, ?perc)
+swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp2, ?temp1, ?g_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp2, ?o_fac)
 -> has1(?m, ?M_res)
 
 MotorPeakTorqueCalc2Rule:
 Motor(?m) ^ CurrentRequirements(?r) ^
-hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^
+hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyGearBox_percentage(?r, ?g_perc) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
 swrlb:equal(?M_type, "M_n") ^
-swrlb:divide(?perc, ?M_per, 100.0) ^ swrlb:multiply(?M_res, ?M_n, ?perc)
+swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_n, ?M_fac) ^ swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp2, ?temp1, ?g_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp2, ?o_fac)
 -> has1(?m, ?M_res)
 
 
-//TODO und nutze efficienc of gear box
+
 MotorPeakTorqueSatisfyRule:
 Motor(?m) ^ CurrentRequirements(?r) ^ Constants(?con) ^
 has1(?m, ?M_peak) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_min(?con, ?i_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
@@ -87,7 +87,7 @@ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ swrlb:greaterThanOrEqual(?n_res, ?n_
 -> SatisfiedRotationSpeed(?ma)
 
 
-//TODO
+
 MotorGearBoxMatchPeakTorqueCalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
 has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^
