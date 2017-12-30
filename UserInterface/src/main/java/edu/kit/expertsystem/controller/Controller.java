@@ -308,8 +308,8 @@ public class Controller {
             CheckboxRequirement realReq = (CheckboxRequirement) req;
             return String.valueOf(realReq.result);
         } else if (req instanceof DropdownRequirement) {
-            logger.warn("DropdownRequirements should not have results!");
-            return "";
+            DropdownRequirement realReq = (DropdownRequirement) req;
+            return realReq.result;
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }

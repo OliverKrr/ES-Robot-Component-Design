@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
-import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -129,17 +128,17 @@ public class MainReasoner {
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
-                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ", " +
-                        "" + "" + "" + "" + "" + "" + "" + "" + "" + realReq.max);
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), String.valueOf(realReq.min));
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), String.valueOf(realReq.max));
+                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ","
+                        + " " + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), String.valueOf(realReq.value));
                 logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else if (req instanceof CheckboxRequirement) {
                 CheckboxRequirement realReq = (CheckboxRequirement) req;
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), String.valueOf(realReq.value));
                 logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
             } else if (req instanceof DropdownRequirement) {
                 DropdownRequirement realReq = (DropdownRequirement) req;
@@ -155,23 +154,10 @@ public class MainReasoner {
         return genericTool.getFactory().getOWLDataProperty(IRI.create(iri));
     }
 
-    private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, double value) {
-        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
-                requirementsInd, genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype
-                        .XSD_DECIMAL));
-        helper.addAxiom(reqAxiom);
-    }
-
-    private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, boolean value) {
-        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
-                requirementsInd, genericTool.getFactory().getOWLLiteral(String.valueOf(value), OWL2Datatype
-                        .XSD_BOOLEAN));
-        helper.addAxiom(reqAxiom);
-    }
-
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, String value) {
         OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
-                requirementsInd, genericTool.getFactory().getOWLLiteral(value, OWL2Datatype.XSD_STRING));
+                requirementsInd, genericTool.getFactory().getOWLLiteral(value, genericTool.getOntology()
+                        .dataPropertyRangeAxioms(property).findAny().get().getRange().asOWLDatatype()));
         helper.addAxiom(reqAxiom);
     }
 
@@ -216,7 +202,9 @@ public class MainReasoner {
                     genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
                             .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
                 } else if (req instanceof DropdownRequirement) {
-                    logger.warn("DropdownRequirements should not have results!");
+                    DropdownRequirement realReq = (DropdownRequirement) req;
+                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
+                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.getLiteral());
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }

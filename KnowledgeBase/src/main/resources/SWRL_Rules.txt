@@ -5,12 +5,27 @@ swrlb:divide(?n_res_min, ?n_motor, ?i_max) ^ swrlb:lessThanOrEqual(?n_res_min, ?
 swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max, ?n_req_min)
 -> SatisfiedRotationSpeed(?m)
 
-//TODO und dann nur nach oben abschätzen, da bei match Wert noch kleiner wird
+MotorPeakTorqueCalc1Rule:
+Motor(?m) ^ CurrentRequirements(?r) ^
+hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^
+swrlb:equal(?M_type, "M_max") ^
+swrlb:divide(?perc, ?M_per, 100.0) ^ swrlb:multiply(?M_res, ?M_p, ?perc)
+-> has1(?m, ?M_res)
+
+MotorPeakTorqueCalc2Rule:
+Motor(?m) ^ CurrentRequirements(?r) ^
+hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^
+swrlb:equal(?M_type, "M_n") ^
+swrlb:divide(?perc, ?M_per, 100.0) ^ swrlb:multiply(?M_res, ?M_n, ?perc)
+-> has1(?m, ?M_res)
+
+
+//TODO und nutze efficienc of gear box
 MotorPeakTorqueSatisfyRule:
 Motor(?m) ^ CurrentRequirements(?r) ^ Constants(?con) ^
-hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_min(?con, ?i_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
-swrlb:multiply(?M_res_min, ?M_n, ?i_min) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^
-swrlb:multiply(?M_res_max, ?M_n, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min)
+has1(?m, ?M_peak) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_min(?con, ?i_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
+swrlb:multiply(?M_res_min, ?M_peak, ?i_min) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^
+swrlb:multiply(?M_res_max, ?M_peak, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min)
 -> SatisfiedPeakTorque(?m)
 
 
@@ -75,8 +90,8 @@ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ swrlb:greaterThanOrEqual(?n_res, ?n_
 //TODO
 MotorGearBoxMatchPeakTorqueCalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasGearBoxRation_i(?g, ?i) ^
-swrlb:multiply(?M_res, ?M_n, ?i)
+has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^
+swrlb:multiply(?M_res, ?M_peak, ?i)
 -> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
 
 MotorGearBoxMatchPeakTorqueSatisfyRule:
