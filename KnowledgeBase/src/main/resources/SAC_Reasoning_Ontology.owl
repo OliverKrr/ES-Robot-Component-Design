@@ -4176,7 +4176,7 @@
         <sac_reasoning:diameterSafetySlipRingInGearBox rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.5</sac_reasoning:diameterSafetySlipRingInGearBox>
         <sac_reasoning:diameterWiring rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.0</sac_reasoning:diameterWiring>
         <sac_reasoning:hasGearBoxRation_i_max rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">160.0</sac_reasoning:hasGearBoxRation_i_max>
-        <sac_reasoning:hasGearBoxRation_i_min rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</sac_reasoning:hasGearBoxRation_i_min>
+        <sac_reasoning:hasGearBoxRation_i_min rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</sac_reasoning:hasGearBoxRation_i_min>
         <sac_reasoning:lengthAbsoluteEncoderWithSensorPCB rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">13.0</sac_reasoning:lengthAbsoluteEncoderWithSensorPCB>
         <sac_reasoning:lengthCentering rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</sac_reasoning:lengthCentering>
         <sac_reasoning:lengthFloatBearingOffset rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.0</sac_reasoning:lengthFloatBearingOffset>
