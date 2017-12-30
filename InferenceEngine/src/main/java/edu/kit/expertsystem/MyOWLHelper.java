@@ -19,7 +19,7 @@ public class MyOWLHelper {
 
     private Set<OWLAxiom> generatedAxioms = new HashSet<>();
 
-    public MyOWLHelper(OWLGenericTools genericTool) {
+    MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
     }
 
@@ -41,9 +41,6 @@ public class MyOWLHelper {
 
     /**
      * Remove "Ind"
-     *
-     * @param ind
-     * @return
      */
     public String getNameOfOWLNamedIndividual(OWLNamedIndividual ind) {
         return ind.getIRI().getShortForm().substring(0, ind.getIRI().getShortForm().length() - 3);
@@ -51,9 +48,6 @@ public class MyOWLHelper {
 
     /**
      * Remove "isComposedOf"
-     *
-     * @param namedProperty
-     * @return
      */
     public String getNameOfComponent(OWLObjectProperty prop) {
         return prop.getIRI().getShortForm().substring(12, prop.getIRI().getShortForm().length());

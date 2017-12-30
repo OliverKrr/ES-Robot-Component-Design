@@ -1,10 +1,7 @@
 package edu.kit.expertsystem;
 
 import edu.kit.expertsystem.controller.wrapper.*;
-import edu.kit.expertsystem.model.req.Category;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import edu.kit.expertsystem.model.req.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
@@ -43,7 +40,7 @@ public class RequirementsHelper {
     private int y1;
     private int y2;
 
-    public RequirementsHelper(FormToolkit formToolkit, Composite composite, Category category) {
+    RequirementsHelper(FormToolkit formToolkit, Composite composite, Category category) {
         this.formToolkit = formToolkit;
         this.composite = composite;
 
@@ -69,6 +66,8 @@ public class RequirementsHelper {
             createTextFieldRequirement((TextFieldRequirementWrapper) requirementWrapper);
         } else if (requirementWrapper instanceof CheckboxRequirementWrapper) {
             createCheckboxRequirement((CheckboxRequirementWrapper) requirementWrapper);
+        } else if (requirementWrapper instanceof DropdownRequirementWrapper) {
+            createDropdownRequirement((DropdownRequirementWrapper) requirementWrapper);
         } else {
             throw new RuntimeException("Requirement class unknown: " + requirementWrapper.getClass());
         }
@@ -170,6 +169,34 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.value, true, true);
         createdControls.add(requirementWrapper.value);
         createdButton = requirementWrapper.value;
+
+        if (requirementWrapper.requirement.unit != null) {
+            Label unitForMin = new Label(composite, SWT.NONE);
+            unitForMin.setText(requirementWrapper.requirement.unit);
+            unitForMin.setBounds(unitForMinX, y2, unitWidth, height);
+            formToolkit.adapt(unitForMin, false, false);
+            createdControls.add(unitForMin);
+        }
+    }
+
+    private void createDropdownRequirement(DropdownRequirementWrapper requirementWrapper) {
+        DropdownRequirement realReq = (DropdownRequirement) requirementWrapper.requirement;
+
+        requirementWrapper.values = new Combo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        requirementWrapper.values.setEnabled(realReq.enable);
+        int selectionIndex = 0;
+        int maxWidth = 0;
+        for (int i = 0; i < realReq.values.length; i++) {
+            requirementWrapper.values.add(realReq.values[i]);
+            if (realReq.values[i].equals(realReq.defaultValue)) {
+                selectionIndex = i;
+            }
+            maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(requirementWrapper.values, realReq.values[i]).x);
+        }
+        requirementWrapper.values.select(selectionIndex);
+        requirementWrapper.values.setBounds(minX, y1, maxWidth + GUI.comboOffsetWidth, height);
+        formToolkit.adapt(requirementWrapper.values, true, true);
+        createdControls.add(requirementWrapper.values);
 
         if (requirementWrapper.requirement.unit != null) {
             Label unitForMin = new Label(composite, SWT.NONE);

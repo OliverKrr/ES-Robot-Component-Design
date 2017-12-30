@@ -1,15 +1,15 @@
 package edu.kit.expertsystem.controller.wrapper;
 
 import edu.kit.expertsystem.model.req.Requirement;
-import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 
 import java.util.Objects;
 
-public class CheckboxRequirementWrapper extends RequirementWrapper {
+public class DropdownRequirementWrapper extends RequirementWrapper {
 
-    public Button value;
+    public Combo values;
 
-    public CheckboxRequirementWrapper(Requirement requirement) {
+    public DropdownRequirementWrapper(Requirement requirement) {
         super(requirement);
     }
 
@@ -21,17 +21,17 @@ public class CheckboxRequirementWrapper extends RequirementWrapper {
             return false;
         if (!super.equals(o))
             return false;
-        CheckboxRequirementWrapper that = (CheckboxRequirementWrapper) o;
-        return Objects.equals(value, that.value);
+        DropdownRequirementWrapper that = (DropdownRequirementWrapper) o;
+        return Objects.equals(values, that.values);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), value);
+        return Objects.hash(super.hashCode(), values);
     }
 
     @Override
     public String toString() {
-        return "CheckboxRequirementWrapper{" + "value=" + value + "} " + super.toString();
+        return "DropdownRequirementWrapper{" + "values=" + values + "} " + super.toString();
     }
 }

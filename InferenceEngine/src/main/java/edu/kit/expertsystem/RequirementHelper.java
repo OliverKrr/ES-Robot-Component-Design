@@ -10,7 +10,6 @@ import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLObjectHasValue;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class RequirementHelper {
@@ -20,7 +19,7 @@ public class RequirementHelper {
     private OWLGenericTools genericTool;
     private MyOWLHelper helper;
 
-    public RequirementHelper(OWLGenericTools genericTool, MyOWLHelper helper) {
+    RequirementHelper(OWLGenericTools genericTool, MyOWLHelper helper) {
         this.genericTool = genericTool;
         this.helper = helper;
     }
@@ -30,15 +29,16 @@ public class RequirementHelper {
         List<Requirement> requirements = new ArrayList<>();
 
         genericTool.getOntology().subClassAxiomsForSubClass(forClass).filter(topAxiom -> topAxiom.getSuperClass()
-                .objectPropertiesInSignature().anyMatch(ob -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                        .equals(ob))).forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas
-                -> genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
-                .componentsWithoutAnnotations().filter(component -> component instanceof OWLObjectHasValue &&
-                        Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT.equals(((OWLObjectHasValue) component).getProperty
-                                ())).forEach(component -> requirements.add(parseRequirement(((OWLObjectHasValue)
-                        component).getFiller().asOWLNamedIndividual()))))));
+                .objectPropertiesInSignature().anyMatch(Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals))
+                .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
+                        .getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
+                                .componentsWithoutAnnotations().filter(component -> component instanceof
+                                        OWLObjectHasValue && Vocabulary.OBJECT_PROPERTY_HASREQUIREMENT.equals((
+                                                (OWLObjectHasValue) component).getProperty())).forEach(component ->
+                                        requirements.add(parseRequirement(((OWLObjectHasValue) component).getFiller()
+                                                .asOWLNamedIndividual()))))));
 
-        Collections.sort(requirements, (req1, req2) -> {
+        requirements.sort((req1, req2) -> {
             int sortCat = req1.category.orderPosition - req2.category.orderPosition;
             if (sortCat == 0) {
                 return req1.orderPosition - req2.orderPosition;
@@ -135,6 +135,29 @@ public class RequirementHelper {
                         .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE)
                         .findAny().ifPresent(obProp -> textReq.defaultValue = obProp.parseBoolean());
+
+                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
+                        .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()
+                                .superDataProperties(dataProp).forEach(supDataProp -> {
+                    if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
+                        textReq.reqIri = dataProp.getIRI().getIRIString();
+                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                        textReq.resultIRI = dataProp.getIRI().getIRIString();
+                    }
+                })));
+                return textReq;
+            } else if (Vocabulary.CLASS_DROPDOWNREQUIREMENT.equals(type)) {
+                DropdownRequirement textReq = new DropdownRequirement();
+                parseCommonRequirement(textReq, reqIndi);
+
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                        .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE)
+                        .findAny().ifPresent(obProp -> textReq.defaultValue = obProp.getLiteral());
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASSEPARATOR).findAny
+                        ().ifPresent(obProp -> textReq.separator = obProp.getLiteral());
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDROPDOWNVALUES)
+                        .findAny().ifPresent(obProp -> textReq.values = obProp.getLiteral().split(textReq.separator));
 
                 genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
                         .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()

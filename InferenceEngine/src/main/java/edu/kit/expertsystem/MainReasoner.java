@@ -19,7 +19,7 @@ import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 import org.semanticweb.owlapi.vocab.OWL2Datatype;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -69,18 +69,17 @@ public class MainReasoner {
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
         genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone).filter(axiomOfComponentToReason ->
-                axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(obOfComponentToReason
-                        -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY.equals(obOfComponentToReason)))
-                .forEach(filteredAxiomOfComponentToReason -> filteredAxiomOfComponentToReason.getSuperClass()
-                        .classesInSignature().forEach(reasoningPropertyClass -> genericTool.getOntology()
-                                .subClassAxiomsForSuperClass(reasoningPropertyClass).forEach(reasoningPropertyAxiom -> {
+                axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                        .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
+                -> filteredAxiomOfComponentToReason.getSuperClass().classesInSignature().forEach
+                (reasoningPropertyClass -> genericTool.getOntology().subClassAxiomsForSuperClass
+                        (reasoningPropertyClass).forEach(reasoningPropertyAxiom -> {
             // Add only subclasses
             // However, if none present -> add itself
             int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
             genericTool.getOntology().subClassAxiomsForSuperClass(reasoningPropertyAxiom.getSubClass().asOWLClass())
-                    .forEach(reasoningPropertySubClassAxiom -> {
-                createIndividualFor(reasoningPropertySubClassAxiom.getSubClass());
-            });
+                    .forEach(reasoningPropertySubClassAxiom -> createIndividualFor(reasoningPropertySubClassAxiom
+                            .getSubClass()));
             if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
                 createIndividualFor(reasoningPropertyAxiom.getSubClass());
             }
@@ -133,7 +132,7 @@ public class MainReasoner {
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), realReq.min);
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), realReq.max);
                 logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ", " +
-                        "" + realReq.max);
+                        "" + "" + "" + "" + "" + "" + "" + "" + "" + realReq.max);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
@@ -142,6 +141,10 @@ public class MainReasoner {
                 CheckboxRequirement realReq = (CheckboxRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.value);
                 logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.value);
+            } else if (req instanceof DropdownRequirement) {
+                DropdownRequirement realReq = (DropdownRequirement) req;
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.selectedValue);
+                logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.selectedValue);
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -166,6 +169,12 @@ public class MainReasoner {
         helper.addAxiom(reqAxiom);
     }
 
+    private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, String value) {
+        OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
+                requirementsInd, genericTool.getFactory().getOWLLiteral(value, OWL2Datatype.XSD_STRING));
+        helper.addAxiom(reqAxiom);
+    }
+
     private List<Result> reason(OWLClass resultingUnit, List<Requirement> requirements) {
         reasoningTree.makeReasoning();
         if (interrupted.get()) {
@@ -185,7 +194,7 @@ public class MainReasoner {
                     .OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE).forEach(subOb -> genericTool.getReasoner()
                     .objectPropertyValues(resultingComponent, subOb.getSubProperty().getNamedProperty()).forEach
                             (composedComponent -> result.components.add(parseComponent(subOb, composedComponent))));
-            Collections.sort(result.components, (comp1, comp2) -> comp1.orderPosition - comp2.orderPosition);
+            result.components.sort(Comparator.comparingInt(comp -> comp.orderPosition));
 
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
@@ -206,6 +215,8 @@ public class MainReasoner {
                     CheckboxRequirement realReq = (CheckboxRequirement) req;
                     genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
                             .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
+                } else if (req instanceof DropdownRequirement) {
+                    logger.warn("DropdownRequirements should not have results!");
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -247,6 +258,8 @@ public class MainReasoner {
                 copyReqs.add(new TextFieldRequirement((TextFieldRequirement) req));
             } else if (req instanceof CheckboxRequirement) {
                 copyReqs.add(new CheckboxRequirement((CheckboxRequirement) req));
+            } else if (req instanceof DropdownRequirement) {
+                copyReqs.add(new DropdownRequirement((DropdownRequirement) req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -261,8 +274,8 @@ public class MainReasoner {
                 (axiomOfReasoningTree -> genericTool.getOntology().subClassAxiomsForSubClass(axiomOfReasoningTree
                         .getSubClass().asOWLClass()).anyMatch(subClassOfReasoningTreeAxiom ->
                         subClassOfReasoningTreeAxiom.getSuperClass().objectPropertiesInSignature().anyMatch
-                                (obOfSubClassOfReasoingTree -> Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY
-                                        .equals(obOfSubClassOfReasoingTree)))).forEach(filteredAxiomOfReasoningTree -> {
+                                (Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals))).forEach
+                (filteredAxiomOfReasoningTree -> {
             UnitToReason unitToReason = new UnitToReason();
             unitToReason.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getShortForm();
             unitToReason.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getIRIString();
@@ -287,7 +300,7 @@ public class MainReasoner {
             units.add(unitToReason);
         });
 
-        Collections.sort(units, (unit1, unit2) -> unit1.orderPosition - unit2.orderPosition);
+        units.sort(Comparator.comparingInt(unit -> unit.orderPosition));
         logger.debug("Time needed for get UnitsToReason: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
         return units;
     }

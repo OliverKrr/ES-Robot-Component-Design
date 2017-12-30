@@ -2,43 +2,33 @@ package edu.kit.expertsystem.controller.wrapper;
 
 import edu.kit.expertsystem.model.req.Requirement;
 
+import java.util.Objects;
+
 public class RequirementWrapper {
 
     public Requirement requirement;
 
-    public RequirementWrapper(Requirement requirement) {
+    RequirementWrapper(Requirement requirement) {
         this.requirement = requirement;
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((requirement == null) ? 0 : requirement.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        RequirementWrapper that = (RequirementWrapper) o;
+        return Objects.equals(requirement, that.requirement);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        RequirementWrapper other = (RequirementWrapper) obj;
-        if (requirement == null) {
-            return other.requirement == null;
-        } else
-            return requirement.equals(other.requirement);
+    public int hashCode() {
+        return Objects.hash(requirement);
     }
 
     @Override
     public String toString() {
-        return "RequirementWrapper [requirement=" + requirement + "]";
+        return "RequirementWrapper{" + "requirement=" + requirement + '}';
     }
-
 }

@@ -60,6 +60,8 @@ public class Controller {
                 requirementsWrapper.add(new TextFieldRequirementWrapper(req));
             } else if (req instanceof CheckboxRequirement) {
                 requirementsWrapper.add(new CheckboxRequirementWrapper(req));
+            } else if (req instanceof DropdownRequirement) {
+                requirementsWrapper.add(new DropdownRequirementWrapper(req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -97,6 +99,9 @@ public class Controller {
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
                 realReq.value = realReq.defaultValue;
                 realReq.result = false;
+            } else if (req instanceof DropdownRequirementWrapper) {
+                DropdownRequirement realReq = (DropdownRequirement) req.requirement;
+                realReq.selectedValue = realReq.defaultValue;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -133,6 +138,11 @@ public class Controller {
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
 
                 realReq.value = reqWrapper.value.getSelection();
+            } else if (req instanceof DropdownRequirementWrapper) {
+                DropdownRequirementWrapper reqWrapper = (DropdownRequirementWrapper) req;
+                DropdownRequirement realReq = (DropdownRequirement) req.requirement;
+
+                realReq.selectedValue = reqWrapper.values.getText();
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -274,6 +284,9 @@ public class Controller {
         } else if (req instanceof CheckboxRequirement) {
             CheckboxRequirement realReq = (CheckboxRequirement) req;
             return String.valueOf(realReq.result);
+        } else if (req instanceof DropdownRequirement) {
+            logger.warn("DropdownRequirements should not have results!");
+            return "";
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
@@ -289,8 +302,8 @@ public class Controller {
     }
 
     private double getMaxNumberOfCharsForComp(Result result) {
-        return result.components.stream().max((val1, val2) -> val1.nameOfComponent.length() - val2.nameOfComponent
-                .length()).get().nameOfComponent.length();
+        return result.components.stream().max(Comparator.comparingInt(val -> val.nameOfComponent.length())).get()
+                .nameOfComponent.length();
     }
 
     private String getNameForComponent(Component component, double maxNumberOfChars) {
@@ -299,8 +312,8 @@ public class Controller {
     }
 
     private double getMaxNumberOfCharsForReq(Result result) {
-        return result.requirements.stream().filter(req -> req.resultIRI != null).max((val1, val2) -> val1.displayName
-                .length() - val2.displayName.length()).get().displayName.length();
+        return result.requirements.stream().filter(req -> req.resultIRI != null).max(Comparator.comparingInt(val ->
+                val.displayName.length())).get().displayName.length();
     }
 
     private String getNameForReq(Requirement req, double maxNumberOfChars) {

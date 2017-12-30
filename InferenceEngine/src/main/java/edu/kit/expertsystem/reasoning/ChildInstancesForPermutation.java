@@ -10,7 +10,7 @@ public class ChildInstancesForPermutation {
     public List<OWLNamedIndividual> childInstances;
     public OWLObjectPropertyExpression propertyFromParent;
 
-    public ChildInstancesForPermutation(List<OWLNamedIndividual> childInstances, OWLObjectPropertyExpression
+    ChildInstancesForPermutation(List<OWLNamedIndividual> childInstances, OWLObjectPropertyExpression
             propertyFromParent) {
         this.childInstances = childInstances;
         this.propertyFromParent = propertyFromParent;

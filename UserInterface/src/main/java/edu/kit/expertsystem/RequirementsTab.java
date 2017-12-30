@@ -1,10 +1,7 @@
 package edu.kit.expertsystem;
 
 import edu.kit.expertsystem.controller.wrapper.*;
-import edu.kit.expertsystem.model.req.Category;
-import edu.kit.expertsystem.model.req.CheckboxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
-import edu.kit.expertsystem.model.req.TextFieldRequirement;
+import edu.kit.expertsystem.model.req.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -62,6 +59,9 @@ public class RequirementsTab {
             } else if (requirements.get(i) instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirement req = (CheckboxRequirement) requirements.get(i).requirement;
                 isAnyFieldDisabled |= !req.enable;
+            } else if (requirements.get(i) instanceof DropdownRequirementWrapper) {
+                DropdownRequirement req = (DropdownRequirement) requirements.get(i).requirement;
+                isAnyFieldDisabled |= !req.enable;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirements.get(i).getClass());
             }
@@ -95,6 +95,10 @@ public class RequirementsTab {
                             CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
                             CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
                             reqWrapper.value.setEnabled(realReq.enable || !reqWrapper.value.isEnabled());
+                        } else if (req instanceof DropdownRequirementWrapper) {
+                            DropdownRequirementWrapper reqWrapper = (DropdownRequirementWrapper) req;
+                            DropdownRequirement realReq = (DropdownRequirement) req.requirement;
+                            reqWrapper.values.setEnabled(realReq.enable || !reqWrapper.values.isEnabled());
                         } else {
                             throw new RuntimeException("Requirement class unknown: " + req.getClass());
                         }

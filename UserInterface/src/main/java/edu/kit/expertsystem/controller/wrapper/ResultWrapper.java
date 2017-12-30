@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Tree;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ResultWrapper {
 
@@ -21,8 +22,27 @@ public class ResultWrapper {
     public Map<String, String> displayNameToIriMap = new HashMap<>();
 
     @Override
-    public String toString() {
-        return "ResultWrapper [results=" + results + "]";
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        ResultWrapper that = (ResultWrapper) o;
+        return Objects.equals(results, that.results) && Objects.equals(tree, that.tree) && Objects.equals(orderBy,
+                that.orderBy) && Objects.equals(searchField, that.searchField) && Objects.equals
+                (showOnlyDiffsCheckBox, that.showOnlyDiffsCheckBox) && Objects.equals(displayNameToIriMap, that
+                .displayNameToIriMap);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(results, tree, orderBy, searchField, showOnlyDiffsCheckBox, displayNameToIriMap);
+    }
+
+    @Override
+    public String toString() {
+        return "ResultWrapper{" + "results=" + results + ", tree=" + tree + ", orderBy=" + orderBy + ", searchField="
+                + searchField + ", showOnlyDiffsCheckBox=" + showOnlyDiffsCheckBox + ", displayNameToIriMap=" +
+                displayNameToIriMap + '}';
+    }
 }

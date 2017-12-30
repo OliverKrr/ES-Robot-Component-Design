@@ -1,5 +1,7 @@
 package edu.kit.expertsystem.model.req;
 
+import java.util.Objects;
+
 public class RequirementDependencyCheckbox {
 
     public Requirement from;
@@ -7,47 +9,23 @@ public class RequirementDependencyCheckbox {
     public boolean displayOnValue;
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (displayOnValue ? 1231 : 1237);
-        result = prime * result + ((from == null) ? 0 : from.hashCode());
-        result = prime * result + ((to == null) ? 0 : to.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        RequirementDependencyCheckbox that = (RequirementDependencyCheckbox) o;
+        return displayOnValue == that.displayOnValue && Objects.equals(from, that.from) && Objects.equals(to, that.to);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        RequirementDependencyCheckbox other = (RequirementDependencyCheckbox) obj;
-        if (displayOnValue != other.displayOnValue) {
-            return false;
-        }
-        if (from == null) {
-            if (other.from != null) {
-                return false;
-            }
-        } else if (!from.equals(other.from)) {
-            return false;
-        }
-        if (to == null) {
-            return other.to == null;
-        } else
-            return to.equals(other.to);
+    public int hashCode() {
+        return Objects.hash(from, to, displayOnValue);
     }
 
     @Override
     public String toString() {
-        return "RequirementDependencyCheckbox [from=" + from + ", to=" + to + ", displayOnValue=" + displayOnValue +
-                "]";
+        return "RequirementDependencyCheckbox{" + "from=" + from + ", to=" + to + ", displayOnValue=" +
+                displayOnValue + '}';
     }
-
 }

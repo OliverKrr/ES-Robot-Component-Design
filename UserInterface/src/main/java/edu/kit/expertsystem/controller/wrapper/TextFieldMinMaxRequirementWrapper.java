@@ -28,7 +28,6 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(super.hashCode(), minValue, maxValue);
     }
 
