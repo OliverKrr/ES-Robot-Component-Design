@@ -14,8 +14,28 @@ swrlb:multiply(?M_res_max, ?M_n, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_max, 
 -> SatisfiedPeakTorque(?m)
 
 
+MotorVoltageSatisfy1Rule
+Motor(?m) ^ CurrentRequirements(?r) ^
+hasVoltageReq_U_unit_V(?r, ?v_req) ^
+swrlb:equal(?v_req, "any V")
+-> SatisfiedVoltage(?m)
+
+MotorVoltageSatisfy2Rule
+Motor(?m) ^ CurrentRequirements(?r) ^
+hasVoltage_U_unit_V(?m, ?U_m) ^ hasVoltageReq_U_unit_V(?r, ?v_req) ^
+swrlb:equal(?v_req, "24 V") ^ swrlb:equal(?U_m, 24.0)
+-> SatisfiedVoltage(?m)
+
+MotorVoltageSatisfy3Rule
+Motor(?m) ^ CurrentRequirements(?r) ^
+hasVoltage_U_unit_V(?m, ?U_m) ^ hasVoltageReq_U_unit_V(?r, ?v_req) ^
+swrlb:equal(?v_req, "48 V") ^ swrlb:equal(?U_m, 48.0)
+-> SatisfiedVoltage(?m)
+
+
+
 MotorSatisfyRule:
-Motor(?m) ^ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) -> SatisfiedMotor(?m)
+Motor(?m) ^ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) ^ SatisfiedVoltage(?m) -> SatisfiedMotor(?m)
 
 
 
