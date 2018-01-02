@@ -7,24 +7,23 @@ swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max
 
 MotorPeakTorqueCalc1Rule:
 Motor(?m) ^ CurrentRequirements(?r) ^
-hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyGearBox_percentage(?r, ?g_perc) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
 swrlb:equal(?M_type, "M_max") ^
-swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp2, ?temp1, ?g_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp2, ?o_fac)
+swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 MotorPeakTorqueCalc2Rule:
 Motor(?m) ^ CurrentRequirements(?r) ^
-hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyGearBox_percentage(?r, ?g_perc) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
 swrlb:equal(?M_type, "M_n") ^
-swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_n, ?M_fac) ^ swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp2, ?temp1, ?g_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp2, ?o_fac)
+swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_n, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 
 
 MotorPeakTorqueSatisfyRule:
 Motor(?m) ^ CurrentRequirements(?r) ^ Constants(?con) ^
-has1(?m, ?M_peak) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_min(?con, ?i_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
-swrlb:multiply(?M_res_min, ?M_peak, ?i_min) ^ swrlb:lessThanOrEqual(?M_res_min, ?M_req_max) ^
+has1(?m, ?M_peak) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
 swrlb:multiply(?M_res_max, ?M_peak, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min)
 -> SatisfiedPeakTorque(?m)
 
@@ -88,11 +87,22 @@ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ swrlb:greaterThanOrEqual(?n_res, ?n_
 
 
 
-MotorGearBoxMatchPeakTorqueCalcRule:
-MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
+MotorGearBoxMatchPeakTorqueCalc1Rule:
+MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ CurrentRequirements(?r) ^
+useEfficiencyGearBox(?r, ?uegb) ^
+swrlb:equal(?uegb, false) ^
 has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^
 swrlb:multiply(?M_res, ?M_peak, ?i)
 -> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
+
+MotorGearBoxMatchPeakTorqueCalc2Rule:
+MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ CurrentRequirements(?r) ^
+useEfficiencyGearBox(?r, ?uegb) ^
+swrlb:equal(?uegb, true) ^
+has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^ hasMaximalEfficiency_percentage(?g, ?g_perc)
+swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp1, ?M_peak, ?g_fac) ^ swrlb:multiply(?M_res, ?temp1, ?i)
+-> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
+
 
 MotorGearBoxMatchPeakTorqueSatisfyRule:
 MotorGearBoxMatch(?ma) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) -> SatisfiedPeakTorque(?ma)
