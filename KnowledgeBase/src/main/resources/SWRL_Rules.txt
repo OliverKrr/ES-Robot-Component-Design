@@ -75,9 +75,23 @@ GearBox(?g) ^ SatisfiedRotationSpeed(?g) ^ SatisfiedPeakTorque(?g) -> SatisfiedG
 
 MotorGearBoxMatchMaximalSpeedCalcRule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-hasNominalRotationSpeed_n_max_unit_rpm(?m, ?n_motor) ^ hasGearBoxRation_i(?g, ?i) ^
-swrlb:divide(?n_res, ?n_motor, ?i)
--> hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res)
+hasNominalRotationSpeed_n_max_unit_rpm(?m, ?n_motor) ^ hasGearBoxRation_i(?g, ?i) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?n_max) ^
+swrlb:divide(?n_max1, ?n_motor, ?i) ^ swrlb:divide(?n_max2, ?n_max, ?i)
+-> hasMax1_1(?ma, ?n_max1) ^ hasMax1_2(?ma, ?n_max2)
+
+
+MotorGearBoxMatchMaximalSpeedEvaluate1Rule:
+MotorGearBoxMatch(?ma) ^
+hasMax1_1(?ma, ?n_max1) ^ hasMax1_2(?ma, ?n_max2) ^
+swrlb:greaterThan(?n_max1, ?n_max2)
+-> hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_max2)
+
+MotorGearBoxMatchMaximalSpeedEvaluate2Rule:
+MotorGearBoxMatch(?ma) ^
+hasMax1_1(?ma, ?n_max1) ^ hasMax1_2(?ma, ?n_max2) ^
+swrlb:lessThanOrEqual(?n_max1, ?n_max2)
+-> hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_max1)
+
 
 MotorGearBoxMatchMaximalSpeedSatisfyRule:
 MotorGearBoxMatch(?ma) ^ CurrentRequirements(?r) ^
@@ -93,7 +107,7 @@ useEfficiencyGearBox(?r, ?uegb) ^
 swrlb:equal(?uegb, false) ^
 has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^
 swrlb:multiply(?M_res, ?M_peak, ?i)
--> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
+-> has1(?ma, ?M_res)
 
 MotorGearBoxMatchPeakTorqueCalc2Rule:
 MotorGearBoxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^ CurrentRequirements(?r) ^
@@ -101,7 +115,20 @@ useEfficiencyGearBox(?r, ?uegb) ^
 swrlb:equal(?uegb, true) ^
 has1(?m, ?M_peak) ^ hasGearBoxRation_i(?g, ?i) ^ hasMaximalEfficiency_percentage(?g, ?g_perc)
 swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp1, ?M_peak, ?g_fac) ^ swrlb:multiply(?M_res, ?temp1, ?i)
--> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
+-> hasMax1_1(?ma, ?M_res)
+
+
+MotorGearBoxMatchPeakTorqueEvaluate1Rule:
+MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^
+hasMax1_1(?ma, ?M_max1) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max2) ^
+swrlb:greaterThan(?M_max1, ?M_max2)
+-> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_max2)
+
+MotorGearBoxMatchPeakTorqueEvaluate2Rule:
+MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^
+hasMax1_1(?ma, ?M_max1) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max2) ^
+swrlb:lessThanOrEqual(?M_max1, ?M_max2)
+-> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_max1)
 
 
 MotorGearBoxMatchPeakTorqueSatisfyRule:
