@@ -999,15 +999,27 @@ swrlb:lessThanOrEqual(?D_ab, ?D_spcb)
 
 
 DiameterOutputLinearBeforeEvaluate3Rule:
-DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ Constants(?con) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ diameterWiring(?con, ?D_w) ^
-swrlb:notEqual(?L_loie, 0.0)
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ Constants(?con) ^ CurrentRequirements(?r) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ diameterWiring(?con, ?D_w) ^ needHiddenElectronics(?r, ?nhe_r) ^
+swrlb:notEqual(?L_loie, 0.0) ^ swrlb:equal(?nhe_r, true)
 -> has2(?do, ?D_w)
 
 DiameterOutputLinearBeforeEvaluate4Rule:
-DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^
-swrlb:equal(?L_loie, 0.0)
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ CurrentRequirements(?r) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenElectronics(?r, ?nhe_r) ^
+swrlb:equal(?L_loie, 0.0) ^ swrlb:equal(?nhe_r, true)
+-> has2(?do, 0.0)
+
+DiameterOutputLinearBeforeEvaluate5Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ CurrentRequirements(?r) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenElectronics(?r, ?nhe_r) ^
+swrlb:equal(?L_loie, 0.0) ^ swrlb:equal(?nhe_r, false)
+-> has2(?do, 0.0)
+
+DiameterOutputLinearBeforeEvaluate6Rule:
+DiameterOutputLinear(?do) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ CurrentRequirements(?r) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenElectronics(?r, ?nhe_r) ^
+swrlb:notEqual(?L_loie, 0.0) ^ swrlb:equal(?nhe_r, false)
 -> has2(?do, 0.0)
 
 
