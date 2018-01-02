@@ -95,7 +95,7 @@ swrlb:multiply(?M_res, ?M_peak, ?i)
 -> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
 
 MotorGearBoxMatchPeakTorqueSatisfyRule:
-MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ swrlb:lessThanOrEqual(?M_res, ?M_max) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) -> SatisfiedPeakTorque(?ma)
+MotorGearBoxMatch(?ma) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ CurrentRequirements(?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) -> SatisfiedPeakTorque(?ma)
 
 
 
@@ -162,6 +162,31 @@ SatisfiedGearBoxInMotorGearBoxMatch(?g) ^
 hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^ Screw(?s_g_wg) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_wg, ?d_s_g_wg) ^ swrlb:equal(?d_g_wg, ?d_s_g_wg)
 -> hasWaveGeneratorScrew(?g, ?s_g_wg)
 
+
+GearBoxMaxOverlappingEvaluate1Rule:
+SatisfiedGearBoxInMotorGearBoxMatch(?g) ^
+hasDimensionLengthWaveGeneratorOverlapping_unit_mm(?g, ?L_wgo_g) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^
+swrlb:greaterThan(?L_wgo_g, ?c_g)
+-> has1(?g, ?L_wgo_g)
+
+GearBoxMaxOverlappingEvaluate2Rule:
+SatisfiedGearBoxInMotorGearBoxMatch(?g) ^
+hasDimensionLengthWaveGeneratorOverlapping_unit_mm(?g, ?L_wgo_g) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^
+swrlb:lessThanOrEqual(?L_wgo_g, ?c_g)
+-> has1(?g, ?c_g)
+
+
+GearBoxMaxLengthWgEvaluate1Rule:
+SatisfiedGearBoxInMotorGearBoxMatch(?g) ^
+hasDimensionLengthWaveGeneratorOverlapping_unit_mm(?g, ?L_wgo_g) ^ hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^
+swrlb:multiply(?s_gwg15, 1.5, ?d_g_wg) ^ swrlb:greaterThan(?L_wgo_g, ?s_gwg15)
+-> has2(?g, ?L_wgo_g)
+
+GearBoxMaxLengthWgEvaluate2Rule:
+SatisfiedGearBoxInMotorGearBoxMatch(?g) ^
+hasDimensionLengthWaveGeneratorOverlapping_unit_mm(?g, ?L_wgo_g) ^ hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^
+swrlb:multiply(?s_gwg15, 1.5, ?d_g_wg) ^ swrlb:lessThanOrEqual(?L_wgo_g, ?s_gwg15)
+-> has2(?g, ?s_gwg15)
 
 
 
@@ -453,8 +478,8 @@ swrlb:lessThanOrEqual(?L_drive, ?d_max2)
 
 LengthInputLinearCalcRule:
 LengthInputLinear(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
-has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^
-swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_2, ?L_temp1, ?c_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
+has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ has1(?g, ?overlapping_g) ^
+swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_2, ?L_temp1, ?overlapping_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
 -> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ SatisfiedLengthInputLinear(?li) ^ Linear(?li)
 
 
@@ -468,9 +493,9 @@ SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ ha
 
 LengthInputCompressedCalcRule:
 LengthInputCompressed(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?di, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?di, ?m) ^ Constants(?con) ^
-has1(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ hasDimensionSafety_c_unit_mm(?g, ?c_g) ^ hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
-swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp3, ?temp2, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?c_g) ^
-swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?temp4, ?L_floatB, ?L_fixedB) ^ swrlb:multiply(?s_gwg15, 1.5, ?d_g_wg) ^ swrlb:add(?L_2, ?s_gwg15, ?temp4) ^
+has1(?ie, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ has1(?g, ?overlapping_g) ^ has2(?g, ?d_g_wg) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
+swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp3, ?temp2, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?overlapping_g) ^
+swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?temp4, ?L_floatB, ?L_fixedB) ^ swrlb:add(?L_2, ?d_g_wg, ?temp4) ^
 swrlb:add(?L_max2_2, ?mc_con, ?rg_con)
 -> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1_1) ^ hasMax2_1(?li, ?L_ie) ^ hasMax2_2(?li, ?L_max2_2) ^ SatisfiedLengthInputCompressed(?li) ^ Compressed(?li)
 
