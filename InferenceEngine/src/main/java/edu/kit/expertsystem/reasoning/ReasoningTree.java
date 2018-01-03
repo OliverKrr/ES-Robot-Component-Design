@@ -5,14 +5,12 @@ import edu.kit.expertsystem.generated.Vocabulary;
 import openllet.owlapi.OWLGenericTools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -30,6 +28,7 @@ public class ReasoningTree {
 
     private List<OWLSubClassOfAxiom> reasoningTreeElements;
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
+    private Map<OWLNamedIndividual, OWLClass> individualToClassMapper = new HashMap<>();
     private boolean hasSomethingChanged;
     private AtomicBoolean interrupted = new AtomicBoolean(false);
 
@@ -55,6 +54,7 @@ public class ReasoningTree {
         }
         reasoningTreeSpecialCasesHandler.reset();
         appliedClassesToNumberOfPermutations.clear();
+        individualToClassMapper.clear();
         do {
             hasSomethingChanged = false;
             // TODO make graph of classes and iterate from bottom to top
@@ -102,11 +102,12 @@ public class ReasoningTree {
             return;
         }
 
-        childrenForPermutation.forEach(childForPermutation -> logger.debug(treeClass.getIRI().getShortForm() + " has " +
-                "" + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm() + " " + "with " +
-                "number of children: " + childForPermutation.childInstances.size()));
+        childrenForPermutation.forEach(childForPermutation -> logger.debug(treeClass.getIRI().getShortForm() + " has"
+                + " " + childForPermutation.propertyFromParent.getNamedProperty().getIRI().getShortForm() + " " +
+                "with number of " + "children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
+            deleteNotSatisfied(treeClass, childrenForPermutation);
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
         }
@@ -148,6 +149,41 @@ public class ReasoningTree {
         return numberOfPermutations;
     }
 
+    private void deleteNotSatisfied(OWLClass treeClass, List<ChildInstancesForPermutation> childrenForPermutation) {
+        Set<OWLAxiom> axiomsToDelete = new HashSet<>();
+        Set<OWLClass> handledTypes = new HashSet<>();
+        for (ChildInstancesForPermutation childInstancesForPermutation : childrenForPermutation) {
+            if (!childInstancesForPermutation.childInstances.isEmpty()) {
+                childInstancesForPermutation.childInstances.forEach(satisfiedIndi -> {
+                    OWLClass type = null;
+                    if (individualToClassMapper.containsKey(satisfiedIndi)) {
+                        type = individualToClassMapper.get(satisfiedIndi);
+                    } else {
+                        //TODO also for devices and not only reasoningTreeElements, but need right type of common
+                        // parent class (e.g. DriveBearing, OutputBearing)
+                    }
+                    if (type != null && !handledTypes.contains(type)) {
+                        handledTypes.add(type);
+                        int oldSize = axiomsToDelete.size();
+                        handleDelete(axiomsToDelete, childInstancesForPermutation.childInstances, type);
+                        logger.debug("Deleted number of axioms: " + (axiomsToDelete.size() - oldSize) + " for: " +
+                                type.getIRI().getShortForm());
+                    }
+                });
+            }
+        }
+        helper.removeAxioms(axiomsToDelete);
+        helper.flush();
+    }
+
+    private void handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
+            type) {
+        individualToClassMapper.entrySet().stream().filter(set -> set.getValue().equals(type) && childInstances
+                .stream().noneMatch(instSatisfied -> instSatisfied.equals(set.getKey()))).forEach(set -> helper
+                .getGeneratedAxioms().stream().filter(axiom -> axiom.individualsInSignature().anyMatch(indi -> indi
+                        .equals(set.getKey()))).forEach(axiomsToDelete::add));
+    }
+
     private void makePermutations(OWLClass treeClass, List<ChildInstancesForPermutation> childrenForPermutation, int
             numberOfPermutations) {
         List<PermutationOfChildInstances> permutations = new ArrayList<>(numberOfPermutations);
@@ -159,6 +195,7 @@ public class ReasoningTree {
             OWLNamedIndividual parentInd = genericTool.getFactory().getOWLNamedIndividual(helper.create(parentName));
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
+                individualToClassMapper.put(parentInd, treeClass);
                 // logger.debug("\tAdd individual: " + parentInd.getIRI().getShortForm());
                 ++realAddedIndis;
                 for (ChildIndividualWithObjectPropertyFromParent childInd : permutation.permutatedChildren) {
@@ -171,9 +208,36 @@ public class ReasoningTree {
         if (realAddedIndis > 0) {
             hasSomethingChanged = true;
             helper.flush();
+            logger.info("Add " + getSpacesFor(realAddedIndis) + realAddedIndis + " individuals for: " + treeClass
+                    .getIRI().getShortForm());
+
+            deleteNotSatisfied(treeClass);
         }
-        logger.info("Add " + getSpacesFor(realAddedIndis) + realAddedIndis + " individuals for: " + treeClass.getIRI
-                ().getShortForm());
+    }
+
+    private void deleteNotSatisfied(OWLClass treeClass) {
+        long startTime = System.currentTimeMillis();
+        Set<OWLNamedIndividual> satisfiedChildInstances = new HashSet<>();
+        if (Vocabulary.CLASS_MOTORGEARBOXMATCH.equals(treeClass)) {
+            //TODO handle this special case in a general way
+            satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
+                    .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toCollection(HashSet::new)));
+        }
+        genericTool.getOntology().subClassAxiomsForSuperClass(treeClass).forEach(axiom -> satisfiedChildInstances
+                .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toCollection
+                        (HashSet::new))));
+        Set<OWLAxiom> axiomsToDelete = new HashSet<>();
+        handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
+        logger.debug("Deleted number of axioms: " + axiomsToDelete.size() + " for: " + treeClass.getIRI()
+                .getShortForm());
+        helper.removeAxioms(axiomsToDelete);
+        helper.flush();
+
+        double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
+        if (timeNeeded >= TIME_NEEDED_THRESHOLD) {
+            logger.debug("Time needed for " + treeClass.getIRI().getShortForm() + " to delete not satisfied: " +
+                    timeNeeded + "s");
+        }
     }
 
     private void buildPermutations(List<PermutationOfChildInstances> permutations, List<ChildInstancesForPermutation>

@@ -57,8 +57,7 @@ public class ReasoningTreeSpecialCases {
 
             logger.debug("SpecialCase: Unsatisfied: Deleted number of axioms: " + axiomsToDelete.size() + " for: " +
                     subClassOfUnsatisfied.getIRI().getShortForm());
-            genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
-            helper.getGeneratedAxioms().removeAll(axiomsToDelete);
+            helper.removeAxioms(axiomsToDelete);
             helper.flush();
 
             infoToDelete.counterSatisfiedPart.forEach(counter -> infoToDelete.newSatisfiedPart.forEach(newPart ->
@@ -143,8 +142,7 @@ public class ReasoningTreeSpecialCases {
                         (axiomsToDelete::add));
                 logger.debug("SpecialCase: Possible unsatisfied: Deleted number of axioms: " + axiomsToDelete.size()
                         + " for: " + subClassOfPossibleUnsatisfied.getIRI().getShortForm());
-                genericTool.getOntology().removeAxioms(axiomsToDelete.stream());
-                helper.getGeneratedAxioms().removeAll(axiomsToDelete);
+                helper.removeAxioms(axiomsToDelete);
                 helper.flush();
 
                 infoToDelete.newSatisfiedPart.forEach(newPart -> counterSatisfiedWithoutUnsatisfiedIndis.forEach

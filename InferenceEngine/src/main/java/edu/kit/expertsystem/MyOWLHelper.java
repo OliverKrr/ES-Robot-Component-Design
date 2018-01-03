@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.*;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,6 +19,7 @@ public class MyOWLHelper {
     private OWLHelper genericTool;
 
     private Set<OWLAxiom> generatedAxioms = new HashSet<>();
+    private Set<OWLAxiom> removedAxioms = new HashSet<>();
 
     MyOWLHelper(OWLGenericTools genericTool) {
         this.genericTool = genericTool;
@@ -28,11 +30,17 @@ public class MyOWLHelper {
     }
 
     public boolean addAxiom(OWLAxiom axiomToAdd) {
-        if (!generatedAxioms.add(axiomToAdd)) {
+        if (removedAxioms.contains(axiomToAdd) || !generatedAxioms.add(axiomToAdd)) {
             return false;
         }
         genericTool.getManager().addAxiom(genericTool.getOntology(), axiomToAdd);
         return true;
+    }
+
+    public void removeAxioms(Collection<OWLAxiom> axioms) {
+        genericTool.getOntology().removeAxioms(axioms.stream());
+        removedAxioms.addAll(axioms);
+        generatedAxioms.removeAll(axioms);
     }
 
     public void flush() {
@@ -70,6 +78,7 @@ public class MyOWLHelper {
     public void clearGeneratedAxioms() {
         genericTool.getManager().removeAxioms(genericTool.getOntology(), generatedAxioms.stream());
         generatedAxioms.clear();
+        removedAxioms.clear();
     }
 
     public Set<OWLAxiom> getGeneratedAxioms() {
