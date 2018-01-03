@@ -140,12 +140,10 @@ public class RequirementsHelper {
         String type = realReq.requirementType.toString().toLowerCase();
         requirementWrapper.value.setMessage(type);
         requirementWrapper.value.setToolTipText(type);
-        if (realReq.defaultValue != 0) {
-            if (realReq.isIntegerValue) {
-                requirementWrapper.value.setText(String.valueOf(Math.round(realReq.defaultValue)));
-            } else {
-                requirementWrapper.value.setText(String.valueOf(realReq.defaultValue));
-            }
+        if (realReq.isIntegerValue) {
+            requirementWrapper.value.setText(String.valueOf(Math.round(realReq.defaultValue)));
+        } else {
+            requirementWrapper.value.setText(String.valueOf(realReq.defaultValue));
         }
         requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.value, true, true);
