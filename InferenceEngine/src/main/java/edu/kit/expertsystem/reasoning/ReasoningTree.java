@@ -107,13 +107,13 @@ public class ReasoningTree {
                 "with number of " + "children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
-            deleteNotSatisfied(treeClass, childrenForPermutation);
+            deleteNotSatisfied(childrenForPermutation);
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
         }
     }
 
-    private String getSpacesFor(int value) {
+    private String getSpacesFor(long value) {
         StringBuilder builder = new StringBuilder("");
         for (int i = String.valueOf(value).length(); i <= NUMBER_OF_SPACES; ++i) {
             builder.append(" ");
@@ -149,7 +149,7 @@ public class ReasoningTree {
         return numberOfPermutations;
     }
 
-    private void deleteNotSatisfied(OWLClass treeClass, List<ChildInstancesForPermutation> childrenForPermutation) {
+    private void deleteNotSatisfied(List<ChildInstancesForPermutation> childrenForPermutation) {
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         Set<OWLClass> handledTypes = new HashSet<>();
         for (ChildInstancesForPermutation childInstancesForPermutation : childrenForPermutation) {
@@ -164,24 +164,31 @@ public class ReasoningTree {
                     }
                     if (type != null && !handledTypes.contains(type)) {
                         handledTypes.add(type);
-                        int oldSize = axiomsToDelete.size();
-                        handleDelete(axiomsToDelete, childInstancesForPermutation.childInstances, type);
-                        logger.debug("Deleted number of axioms: " + (axiomsToDelete.size() - oldSize) + " for: " +
-                                type.getIRI().getShortForm());
+                        long numberOfDeletedChildren = handleDelete(axiomsToDelete, childInstancesForPermutation
+                                .childInstances, type);
+                        if (numberOfDeletedChildren > 0) {
+                            logger.info("Delete " + getSpacesFor(numberOfDeletedChildren) + numberOfDeletedChildren +
+                                    " individuals of not satisfied " + type.getIRI().getShortForm());
+                        }
                     }
                 });
             }
         }
-        helper.removeAxioms(axiomsToDelete);
-        helper.flush();
+        if (!axiomsToDelete.isEmpty()) {
+            helper.removeAxioms(axiomsToDelete);
+            helper.flush();
+        }
     }
 
-    private void handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
+    private long handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
             type) {
-        individualToClassMapper.entrySet().stream().filter(set -> set.getValue().equals(type) && childInstances
-                .stream().noneMatch(instSatisfied -> instSatisfied.equals(set.getKey()))).forEach(set -> helper
-                .getGeneratedAxioms().stream().filter(axiom -> axiom.individualsInSignature().anyMatch(indi -> indi
-                        .equals(set.getKey()))).forEach(axiomsToDelete::add));
+        ArrayList<Map.Entry<OWLNamedIndividual, OWLClass>> instancesToDelete = individualToClassMapper.entrySet()
+                .stream().filter(set -> set.getValue().equals(type) && childInstances.stream().noneMatch
+                        (instSatisfied -> instSatisfied.equals(set.getKey()))).collect(Collectors.toCollection
+                        (ArrayList::new));
+        instancesToDelete.forEach(set -> helper.getGeneratedAxioms().stream().filter(axiom -> axiom
+                .individualsInSignature().anyMatch(indi -> indi.equals(set.getKey()))).forEach(axiomsToDelete::add));
+        return instancesToDelete.size();
     }
 
     private void makePermutations(OWLClass treeClass, List<ChildInstancesForPermutation> childrenForPermutation, int
@@ -227,11 +234,13 @@ public class ReasoningTree {
                 .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toCollection
                         (HashSet::new))));
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
-        handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
-        logger.debug("Deleted number of axioms: " + axiomsToDelete.size() + " for: " + treeClass.getIRI()
-                .getShortForm());
-        helper.removeAxioms(axiomsToDelete);
-        helper.flush();
+        long numberOfDeletedChildren = handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
+        if (!axiomsToDelete.isEmpty()) {
+            logger.info("Delete " + getSpacesFor(numberOfDeletedChildren) + numberOfDeletedChildren + " individuals "
+                    + "of not satisfied " + treeClass.getIRI().getShortForm());
+            helper.removeAxioms(axiomsToDelete);
+            helper.flush();
+        }
 
         double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
         if (timeNeeded >= TIME_NEEDED_THRESHOLD) {

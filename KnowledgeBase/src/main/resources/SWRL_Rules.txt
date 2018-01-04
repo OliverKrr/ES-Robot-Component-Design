@@ -1027,10 +1027,16 @@ swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2
 
 
 DiameterElektroLinearSatisfyRule:
-DiameterElektroOutputLinear(?de) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputLinear(?de)
+DiameterElektroOutputLinear(?de) ^
+hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?de, ?m) ^
+SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputLinear(?de)
 
 DiameterElektroCompressedSatisfyRule:
-DiameterElektroOutputCompressed(?de) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputCompressed(?de)
+DiameterElektroOutputCompressed(?de) ^
+hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?de, ?m) ^
+SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ CurrentRequirements(?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputCompressed(?de)
 
 
 
