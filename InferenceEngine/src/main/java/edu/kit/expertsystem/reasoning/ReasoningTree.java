@@ -107,7 +107,6 @@ public class ReasoningTree {
                 "with number of " + "children: " + childForPermutation.childInstances.size()));
 
         if (numberOfPermutations > 0) {
-            deleteNotSatisfied(childrenForPermutation);
             makePermutations(treeClass, childrenForPermutation, numberOfPermutations);
             appliedClassesToNumberOfPermutations.put(treeClass, numberOfPermutations);
         }
@@ -147,48 +146,6 @@ public class ReasoningTree {
             numberOfPermutations *= child.childInstances.size();
         }
         return numberOfPermutations;
-    }
-
-    private void deleteNotSatisfied(List<ChildInstancesForPermutation> childrenForPermutation) {
-        Set<OWLAxiom> axiomsToDelete = new HashSet<>();
-        Set<OWLClass> handledTypes = new HashSet<>();
-        for (ChildInstancesForPermutation childInstancesForPermutation : childrenForPermutation) {
-            if (!childInstancesForPermutation.childInstances.isEmpty()) {
-                childInstancesForPermutation.childInstances.forEach(satisfiedIndi -> {
-                    OWLClass type = null;
-                    if (individualToClassMapper.containsKey(satisfiedIndi)) {
-                        type = individualToClassMapper.get(satisfiedIndi);
-                    } else {
-                        //TODO also for devices and not only reasoningTreeElements, but need right type of common
-                        // parent class (e.g. DriveBearing, OutputBearing)
-                    }
-                    if (type != null && !handledTypes.contains(type)) {
-                        handledTypes.add(type);
-                        long numberOfDeletedChildren = handleDelete(axiomsToDelete, childInstancesForPermutation
-                                .childInstances, type);
-                        if (numberOfDeletedChildren > 0) {
-                            logger.info("Delete " + getSpacesFor(numberOfDeletedChildren) + numberOfDeletedChildren +
-                                    " individuals of not satisfied " + type.getIRI().getShortForm());
-                        }
-                    }
-                });
-            }
-        }
-        if (!axiomsToDelete.isEmpty()) {
-            helper.removeAxioms(axiomsToDelete);
-            helper.flush();
-        }
-    }
-
-    private long handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
-            type) {
-        ArrayList<Map.Entry<OWLNamedIndividual, OWLClass>> instancesToDelete = individualToClassMapper.entrySet()
-                .stream().filter(set -> set.getValue().equals(type) && childInstances.stream().noneMatch
-                        (instSatisfied -> instSatisfied.equals(set.getKey()))).collect(Collectors.toCollection
-                        (ArrayList::new));
-        instancesToDelete.forEach(set -> helper.getGeneratedAxioms().stream().filter(axiom -> axiom
-                .individualsInSignature().anyMatch(indi -> indi.equals(set.getKey()))).forEach(axiomsToDelete::add));
-        return instancesToDelete.size();
     }
 
     private void makePermutations(OWLClass treeClass, List<ChildInstancesForPermutation> childrenForPermutation, int
@@ -247,6 +204,17 @@ public class ReasoningTree {
             logger.debug("Time needed for " + treeClass.getIRI().getShortForm() + " to delete not satisfied: " +
                     timeNeeded + "s");
         }
+    }
+
+    private long handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
+            type) {
+        ArrayList<Map.Entry<OWLNamedIndividual, OWLClass>> instancesToDelete = individualToClassMapper.entrySet()
+                .stream().filter(set -> set.getValue().equals(type) && childInstances.stream().noneMatch
+                        (instSatisfied -> instSatisfied.equals(set.getKey()))).collect(Collectors.toCollection
+                        (ArrayList::new));
+        instancesToDelete.forEach(set -> helper.getGeneratedAxioms().stream().filter(axiom -> axiom
+                .individualsInSignature().anyMatch(indi -> indi.equals(set.getKey()))).forEach(axiomsToDelete::add));
+        return instancesToDelete.size();
     }
 
     private void buildPermutations(List<PermutationOfChildInstances> permutations, List<ChildInstancesForPermutation>
