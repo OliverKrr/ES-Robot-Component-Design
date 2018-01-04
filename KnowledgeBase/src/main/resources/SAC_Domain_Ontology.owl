@@ -665,7 +665,6 @@
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
     </owl:Class>
     
 
@@ -3581,6 +3580,22 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDrive -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HarmonicDrive">
@@ -4688,6 +4703,27 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHallSensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHallSensor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor"/>
     </owl:Class>
     
 
@@ -7838,6 +7874,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.002</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithIE">
@@ -7921,6 +7977,14 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
