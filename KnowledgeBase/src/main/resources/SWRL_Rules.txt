@@ -540,21 +540,6 @@ swrlb:lessThanOrEqual(?L_ie, ?L_ab)
 -> has1(?li, ?L_ab)
 
 
-LengthInputAfterEvaluate1Rule:
-LengthInput(?li) ^  hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
-has3(?li, ?L_drive) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?d_max2, ?d_s15, ?L_tangential) ^
-swrlb:greaterThan(?L_drive, ?d_max2)
--> hasDimensionLength_L_unit_mm(?li, ?L_drive)
-
-LengthInputAfterEvaluate2Rule:
-LengthInput(?li) ^  hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
-has3(?li, ?L_drive) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?d_max2, ?d_s15, ?L_tangential) ^
-swrlb:lessThanOrEqual(?L_drive, ?d_max2)
--> hasDimensionLength_L_unit_mm(?li, ?d_max2)
-
-
 
 LengthInputLinearCalcRule:
 LengthInputLinear(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotor(?de, ?m) ^ Constants(?con) ^
@@ -564,10 +549,10 @@ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ s
 
 
 LengthInputLinearEvaluate1Rule:
-SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> has3(?li, ?L_ges)
+SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 LengthInputLinearEvaluate2Rule:
-SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> has3(?li, ?L_ges)
+SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 
 
@@ -596,13 +581,13 @@ LengthInputCompressedEvaluate3Rule:
 SatisfiedLengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
--> has3(?li, ?L_max1_1)
+-> hasDimensionLength_L_unit_mm(?li, ?L_max1_1)
 
 LengthInputCompressedEvaluate4Rule:
 SatisfiedLengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
--> has3(?li, ?L_max1_2)
+-> hasDimensionLength_L_unit_mm(?li, ?L_max1_2)
 
 
 
@@ -931,25 +916,40 @@ LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasD
 has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^
 swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
 swrlb:greaterThan(?L_1, ?L_wiringConduit)
--> hasMax2_2(?le, ?L_1)
+-> hasMax1_1(?le, ?L_1)
 
 LengthElektroSatisfy2Rule:
 LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
 has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^
 swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
 swrlb:lessThanOrEqual(?L_1, ?L_wiringConduit)
--> hasMax2_2(?le, ?L_wiringConduit)
+-> hasMax1_1(?le, ?L_wiringConduit)
 
 
 LengthElektroSatisfy3Rule:
+LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
+hasMax1_1(?le, ?L_max1) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?temp1, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max2, ?temp1, ?L_li) ^
+swrlb:greaterThan(?L_max1, ?L_max2)
+-> hasMax2_1(?le, ?L_max1)
+
+LengthElektroSatisfy4Rule:
+LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasGearBoxSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasGearBox(?gsrtsabspcb, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
+hasMax1_1(?le, ?L_max1) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?temp1, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max2, ?temp1, ?L_li) ^
+swrlb:lessThanOrEqual(?L_max1, ?L_max2)
+-> hasMax2_1(?le, ?L_max2)
+
+
+LengthElektroSatisfy5Rule:
 LengthElektro(?le) ^ CurrentRequirements(?r) ^
-hasMax2_2(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+hasMax2_1(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:greaterThan(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
 -> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
 
-LengthElektroSatisfy4Rule:
+LengthElektroSatisfy6Rule:
 LengthElektro(?le) ^ CurrentRequirements(?r) ^
-hasMax2_2(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+hasMax2_1(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_max2_2, ?t_req_c)
 -> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
 
