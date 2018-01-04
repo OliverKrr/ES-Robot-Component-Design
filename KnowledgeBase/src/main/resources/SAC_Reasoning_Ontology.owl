@@ -5455,13 +5455,16 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#nhe_r">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_gesHalf">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#d">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#l">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#le">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#lo">
@@ -5470,28 +5473,25 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#li">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sde_con">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#l">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_di">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_overlap">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#sde_con">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_diHalf">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#le">
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_gesHalf">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_overlap">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ie">
@@ -5683,7 +5683,13 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_out">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_req_max">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max_allowed">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_ges">
@@ -5825,6 +5831,9 @@
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_sr2">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_lo">
@@ -11172,9 +11181,9 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_overlap"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest>
@@ -11183,25 +11192,12 @@
                         <rdf:first>
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_2"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2"/>
                             </rdf:Description>
                         </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_2"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2"/>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                            </rdf:Description>
-                        </rdf:rest>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                     </rdf:Description>
                 </rdf:rest>
             </rdf:Description>
@@ -16155,10 +16151,9 @@
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                         <rdf:first>
                             <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_overlap"/>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CurrentRequirements"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#r"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -16166,9 +16161,10 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#CurrentRequirements"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#r"/>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionHeight_H_unit_mm"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max"/>
                                     </rdf:Description>
                                 </rdf:first>
                                 <rdf:rest>
@@ -16187,15 +16183,44 @@
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                                 <rdf:first>
                                                     <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
-                                                        <swrl:arguments rdf:parseType="Collection">
-                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_overlap"/>
-                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_req_max"/>
-                                                        </swrl:arguments>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasDimensionOuterDiameterReqMax_D_unit_mm"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#r"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_req_max"/>
                                                     </rdf:Description>
                                                 </rdf:first>
-                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
+                                                                <swrl:arguments rdf:parseType="Collection">
+                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max_allowed"/>
+                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_req_max"/>
+                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_req_max"/>
+                                                                </swrl:arguments>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
+                                                                        <swrl:arguments rdf:parseType="Collection">
+                                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max"/>
+                                                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max_allowed"/>
+                                                                        </swrl:arguments>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
                                             </rdf:Description>
                                         </rdf:rest>
                                     </rdf:Description>
@@ -24460,7 +24485,7 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                                 <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -24482,7 +24507,7 @@
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
                                                 <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
                                                 <swrl:arguments rdf:parseType="Collection">
-                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1"/>
                                                     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2"/>
                                                 </swrl:arguments>
                                             </rdf:Description>
@@ -24504,7 +24529,7 @@
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                         <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionHeight_H_unit_mm"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
@@ -24534,7 +24559,7 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
                                 <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMax1_1"/>
                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#h"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1"/>
                             </rdf:Description>
                         </rdf:first>
                         <rdf:rest>
@@ -24556,7 +24581,7 @@
                                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
                                                 <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThanOrEqual"/>
                                                 <swrl:arguments rdf:parseType="Collection">
-                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_ges"/>
+                                                    <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max1"/>
                                                     <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_max2"/>
                                                 </swrl:arguments>
                                             </rdf:Description>
@@ -29411,6 +29436,249 @@
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorControllerPositionMatchAxialSatisfyRule</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
+                        <swrl:arguments rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_axial"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_mc"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_offset"/>
+                        </swrl:arguments>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_mc"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
+                                        <swrl:arguments rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_axial"/>
+                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_mc"/>
+                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_offset"/>
+                                        </swrl:arguments>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionAxial"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcp"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterMotorControllerAxialOffset"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_offset"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Constants"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoServoDrive"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                        <rdf:first>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerAxialOffset"/>
+                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
+                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_offset"/>
+                                                                            </rdf:Description>
+                                                                        </rdf:first>
+                                                                        <rdf:rest>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                <rdf:first>
+                                                                                    <rdf:Description>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionMatch"/>
+                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                                                    </rdf:Description>
+                                                                                </rdf:first>
+                                                                                <rdf:rest>
+                                                                                    <rdf:Description>
+                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                        <rdf:first>
+                                                                                            <rdf:Description>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController"/>
+                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
+                                                                                            </rdf:Description>
+                                                                                        </rdf:first>
+                                                                                        <rdf:rest>
+                                                                                            <rdf:Description>
+                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                <rdf:first>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPosition"/>
+                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcp"/>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:first>
+                                                                                                <rdf:rest>
+                                                                                                    <rdf:Description>
+                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                                                        <rdf:first>
+                                                                                                            <rdf:Description>
+                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
+                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_mc"/>
+                                                                                                            </rdf:Description>
+                                                                                                        </rdf:first>
+                                                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                                                    </rdf:Description>
+                                                                                                </rdf:rest>
+                                                                                            </rdf:Description>
+                                                                                        </rdf:rest>
+                                                                                    </rdf:Description>
+                                                                                </rdf:rest>
+                                                                            </rdf:Description>
+                                                                        </rdf:rest>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has2"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_axial"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_axial"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorControllerPositionMatch"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has3"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has4"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                        <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has5"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
+                                                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LengthMotorGearBoxMatchSatisfyRule</rdfs:label>
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
         <swrl:body>
@@ -29813,249 +30081,6 @@
                                                                 </rdf:rest>
                                                             </rdf:Description>
                                                         </rdf:rest>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </rdf:rest>
-                                    </rdf:Description>
-                                </rdf:rest>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MotorControllerPositionMatchAxialSatisfyRule</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
-                        <swrl:arguments rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_axial"/>
-                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_mc"/>
-                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_offset"/>
-                        </swrl:arguments>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_mc"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
-                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#add"/>
-                                        <swrl:arguments rdf:parseType="Collection">
-                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_axial"/>
-                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_mc"/>
-                                            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_offset"/>
-                                        </swrl:arguments>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                        <rdf:first>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionAxial"/>
-                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcp"/>
-                                            </rdf:Description>
-                                        </rdf:first>
-                                        <rdf:rest>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                <rdf:first>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#diameterMotorControllerAxialOffset"/>
-                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
-                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_offset"/>
-                                                    </rdf:Description>
-                                                </rdf:first>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                        <rdf:first>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                                <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#Constants"/>
-                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
-                                                            </rdf:Description>
-                                                        </rdf:first>
-                                                        <rdf:rest>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                <rdf:first>
-                                                                    <rdf:Description>
-                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ElmoServoDrive"/>
-                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
-                                                                    </rdf:Description>
-                                                                </rdf:first>
-                                                                <rdf:rest>
-                                                                    <rdf:Description>
-                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                        <rdf:first>
-                                                                            <rdf:Description>
-                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#lengthMotorControllerAxialOffset"/>
-                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#con"/>
-                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_offset"/>
-                                                                            </rdf:Description>
-                                                                        </rdf:first>
-                                                                        <rdf:rest>
-                                                                            <rdf:Description>
-                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                                <rdf:first>
-                                                                                    <rdf:Description>
-                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                                                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#MotorControllerPositionMatch"/>
-                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                                                    </rdf:Description>
-                                                                                </rdf:first>
-                                                                                <rdf:rest>
-                                                                                    <rdf:Description>
-                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                                        <rdf:first>
-                                                                                            <rdf:Description>
-                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorController"/>
-                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
-                                                                                            </rdf:Description>
-                                                                                        </rdf:first>
-                                                                                        <rdf:rest>
-                                                                                            <rdf:Description>
-                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                                                <rdf:first>
-                                                                                                    <rdf:Description>
-                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#hasMotorControllerPosition"/>
-                                                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcp"/>
-                                                                                                    </rdf:Description>
-                                                                                                </rdf:first>
-                                                                                                <rdf:rest>
-                                                                                                    <rdf:Description>
-                                                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                                                                        <rdf:first>
-                                                                                                            <rdf:Description>
-                                                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-                                                                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mc"/>
-                                                                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#D_mc"/>
-                                                                                                            </rdf:Description>
-                                                                                                        </rdf:first>
-                                                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                                                                    </rdf:Description>
-                                                                                                </rdf:rest>
-                                                                                            </rdf:Description>
-                                                                                        </rdf:rest>
-                                                                                    </rdf:Description>
-                                                                                </rdf:rest>
-                                                                            </rdf:Description>
-                                                                        </rdf:rest>
-                                                                    </rdf:Description>
-                                                                </rdf:rest>
-                                                            </rdf:Description>
-                                                        </rdf:rest>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </rdf:rest>
-                                    </rdf:Description>
-                                </rdf:rest>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has2"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#H_axial"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has1"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#L_axial"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
-                                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#SatisfiedMotorControllerPositionMatch"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                        <rdf:first>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has3"/>
-                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
-                                            </rdf:Description>
-                                        </rdf:first>
-                                        <rdf:rest>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                <rdf:first>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has4"/>
-                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                        <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
-                                                    </rdf:Description>
-                                                </rdf:first>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                        <rdf:first>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
-                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_reasoning#has5"/>
-                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/oliver/ontologies/2017/9/sac_reasoning#mcpm"/>
-                                                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</swrl:argument2>
-                                                            </rdf:Description>
-                                                        </rdf:first>
-                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                                                     </rdf:Description>
                                                 </rdf:rest>
                                             </rdf:Description>
