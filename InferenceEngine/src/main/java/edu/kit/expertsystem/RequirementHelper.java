@@ -173,6 +173,22 @@ public class RequirementHelper {
                     }
                 })));
                 return textReq;
+            } else if (Vocabulary.CLASS_REQUIREMENTONLYFORSOLUTION.equals(type)) {
+                RequirementOnlyForSolution textReq = new RequirementOnlyForSolution();
+                parseCommonRequirement(textReq, reqIndi);
+
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary
+                        .DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI).findAny().ifPresent(obProp -> textReq
+                        .scaleFromOntologyToUI = helper.parseValueToDouble(obProp));
+
+                genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
+                        .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()
+                                .superDataProperties(dataProp).forEach(supDataProp -> {
+                    if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                        textReq.resultIRI = dataProp.getIRI().getIRIString();
+                    }
+                })));
+                return textReq;
             } else {
                 throw new RuntimeException("Requirement type unknown: " + type);
             }

@@ -62,6 +62,8 @@ public class RequirementsTab {
             } else if (requirement1 instanceof DropdownRequirementWrapper) {
                 DropdownRequirement req = (DropdownRequirement) requirement1.requirement;
                 isAnyFieldDisabled |= !req.enable;
+            } else if (requirement1 instanceof RequirementOnlyForSolutionWrapper) {
+                // RequirementOnlyForSolution will not be displayed
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirement1.getClass());
             }
@@ -69,7 +71,9 @@ public class RequirementsTab {
                 rowNumber--;
             }
             lastReqOrderPosition = requirement1.requirement.orderPosition;
-            requirementsHelper.createRequirement(requirement1, requirementDependencyWrappers, rowNumber++);
+            if (requirementsHelper.createRequirement(requirement1, requirementDependencyWrappers, rowNumber)) {
+                ++rowNumber;
+            }
         }
 
         if (isAnyFieldDisabled) {
@@ -99,6 +103,8 @@ public class RequirementsTab {
                             DropdownRequirementWrapper reqWrapper = (DropdownRequirementWrapper) req;
                             DropdownRequirement realReq = (DropdownRequirement) req.requirement;
                             reqWrapper.values.setEnabled(realReq.enable || !reqWrapper.values.isEnabled());
+                        } else if (req instanceof RequirementOnlyForSolutionWrapper) {
+                            // RequirementOnlyForSolution will not be displayed
                         } else {
                             throw new RuntimeException("Requirement class unknown: " + req.getClass());
                         }
@@ -124,7 +130,8 @@ public class RequirementsTab {
         descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are " +
                 "taken: min=0 and max=infinite.", rowNumber++);
         for (RequirementWrapper requirement : requirements) {
-            if (requirement.requirement.description != null) {
+            if (requirement.requirement.description != null && !(requirement instanceof
+                    RequirementOnlyForSolutionWrapper)) {
                 descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
                         .description, rowNumber++);
             }

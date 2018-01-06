@@ -62,6 +62,8 @@ public class Controller {
                 requirementsWrapper.add(new CheckboxRequirementWrapper(req));
             } else if (req instanceof DropdownRequirement) {
                 requirementsWrapper.add(new DropdownRequirementWrapper(req));
+            } else if (req instanceof RequirementOnlyForSolution) {
+                requirementsWrapper.add(new RequirementOnlyForSolutionWrapper(req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -102,6 +104,9 @@ public class Controller {
             } else if (req instanceof DropdownRequirementWrapper) {
                 DropdownRequirement realReq = (DropdownRequirement) req.requirement;
                 realReq.selectedValue = realReq.defaultValue;
+            } else if (req instanceof RequirementOnlyForSolutionWrapper) {
+                RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req.requirement;
+                realReq.result = -1;
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -153,6 +158,8 @@ public class Controller {
                 DropdownRequirement realReq = (DropdownRequirement) req.requirement;
 
                 realReq.selectedValue = reqWrapper.values.getText();
+            } else if (req instanceof RequirementOnlyForSolutionWrapper) {
+                // RequirementOnlyForSolution have no value
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -224,8 +231,25 @@ public class Controller {
 
                     resultWrapper.results.sort(Comparator.comparingDouble(result -> result.requirements.stream()
                             .filter(req -> resultWrapper.displayNameToIriMap.get(displayName).equals(req.resultIRI))
-                            .findAny().map(req -> -((TextFieldMinMaxRequirement) req).result).orElse(-Double
-                                    .MAX_VALUE)));
+                            .findAny().map(req -> {
+                        if (req instanceof TextFieldMinMaxRequirement) {
+                            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+                            return -realReq.result;
+                        } else if (req instanceof TextFieldRequirement) {
+                            TextFieldRequirement realReq = (TextFieldRequirement) req;
+                            return -realReq.result;
+                        } else if (req instanceof CheckboxRequirement) {
+                            // CheckboxRequirement have no results
+                        } else if (req instanceof DropdownRequirement) {
+                            // DropdownRequirement have no results
+                        } else if (req instanceof RequirementOnlyForSolution) {
+                            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+                            return -realReq.result;
+                        } else {
+                            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                        }
+                        return -Double.MAX_VALUE;
+                    }).orElse(-Double.MAX_VALUE)));
 
                     if (currentSelection.endsWith("\u25B2")) {
                         Collections.reverse(resultWrapper.results);
@@ -310,6 +334,9 @@ public class Controller {
         } else if (req instanceof DropdownRequirement) {
             DropdownRequirement realReq = (DropdownRequirement) req;
             return realReq.result;
+        } else if (req instanceof RequirementOnlyForSolution) {
+            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }

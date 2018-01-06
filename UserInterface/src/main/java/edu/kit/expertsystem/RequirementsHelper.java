@@ -53,8 +53,12 @@ public class RequirementsHelper {
         topicLabel.setForeground(Configs.KIT_GREEN_100);
     }
 
-    public void createRequirement(RequirementWrapper requirementWrapper, List<RequirementDependencyCheckboxWrapper>
+    public boolean createRequirement(RequirementWrapper requirementWrapper, List<RequirementDependencyCheckboxWrapper>
             requirementDependencyWrappers, int rowNumber) {
+        if (requirementWrapper instanceof RequirementOnlyForSolutionWrapper) {
+            // RequirementOnlyForSolution will not be displayed
+            return false;
+        }
         createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;
@@ -81,6 +85,7 @@ public class RequirementsHelper {
                 reqDep.toControls = createdControls;
             }
         });
+        return true;
     }
 
     private void createCommonRequirement(RequirementWrapper requirementWrapper) {

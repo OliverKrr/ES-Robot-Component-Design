@@ -144,6 +144,8 @@ public class MainReasoner {
                 DropdownRequirement realReq = (DropdownRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), realReq.selectedValue);
                 logger.debug("Requirement (displayName, value): " + realReq.displayName + ", " + realReq.selectedValue);
+            } else if (req instanceof RequirementOnlyForSolution) {
+                // RequirementOnlyForSolution have no value
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
@@ -205,6 +207,11 @@ public class MainReasoner {
                     DropdownRequirement realReq = (DropdownRequirement) req;
                     genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
                             .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.getLiteral());
+                } else if (req instanceof RequirementOnlyForSolution) {
+                    RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
+                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
+                            (obProp));
                 } else {
                     throw new RuntimeException("Requirement class unknown: " + req.getClass());
                 }
@@ -248,6 +255,8 @@ public class MainReasoner {
                 copyReqs.add(new CheckboxRequirement((CheckboxRequirement) req));
             } else if (req instanceof DropdownRequirement) {
                 copyReqs.add(new DropdownRequirement((DropdownRequirement) req));
+            } else if (req instanceof RequirementOnlyForSolution) {
+                copyReqs.add(new RequirementOnlyForSolution((RequirementOnlyForSolution) req));
             } else {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }

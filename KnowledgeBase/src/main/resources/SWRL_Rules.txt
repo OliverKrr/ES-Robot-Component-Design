@@ -1497,13 +1497,25 @@ swrlb:lessThanOrEqual(?H_max, ?H_max_allowed)
 
 
 
-LengthMotorGearBoxMatchSatisfyRule:
+SACunitMotorGearBoxMatchSatisfyRule:
 SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^
-hasDimensionHeight_H_unit_mm(?h, ?H_res) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res)
 SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
 hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
--> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^ SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res)
+-> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res)
+
+
+
+SACunitPowerDensityCalcRule:
+SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
+hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res) ^ hasDimensionHeight_H_unit_mm(?h, ?H_res) ^
+hasDimensionLength_L_unit_mm(?li, ?L_drive) ^ hasDimensionLength_L_unit_mm(?lo, ?L_output) ^ hasDimensionLength_L_unit_mm(?le, ?L_elektro) ^
+hasDimensionOuterDiameter_D_unit_mm(?do, ?D_output) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_drive) ^
+hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^
+swrlb:multiply(?D_output2, 2.0, ?D_output) ^ swrlb:multiply(?D_elektro2, 2.0, ?D_elektro) ^ swrlb:multiply(?D_drive2, 2.0, ?D_drive) ^
+swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_elektro, ?L_elektro, ?D_elektro2) ^
+swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pd, ?temp3, ?temp2)
+-> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd)
 
 
 
