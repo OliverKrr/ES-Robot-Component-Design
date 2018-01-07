@@ -50,6 +50,7 @@ public class MainReasoner {
         //OpenlletOptions.AUTO_REALIZE = false;                         // 39.569s
         //OpenlletOptions.USE_INCREMENTAL_DELETION = true;              // 42.371s
 
+        //TODO test again with different option and check if right set
         //        try {
         //            OpenlletOptions.load(MainReasoner.class.getResource("/openllet.properties"));
         //        } catch (IOException e) {

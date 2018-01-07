@@ -42,6 +42,7 @@ public class MyOWLHelper {
         removedAxioms.addAll(axioms);
         generatedAxioms.removeAll(axioms);
 
+        //TODO test
         //        if (!axioms.isEmpty()) {
         //            PelletReasoner reasoner = (PelletReasoner) genericTool.getReasoner();
         //            reasoner.refresh();
