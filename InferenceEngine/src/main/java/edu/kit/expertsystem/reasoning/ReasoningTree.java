@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
-import org.semanticweb.owlapi.model.OWLSubClassOfAxiom;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -22,11 +21,27 @@ public class ReasoningTree {
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
+    static List<String> possibleTreeClassExtensions = new ArrayList<>();
+
+    static {
+        possibleTreeClassExtensions.add("");
+        possibleTreeClassExtensions.add("Linear");
+        possibleTreeClassExtensions.add("Compressed");
+        possibleTreeClassExtensions.add("TwoSide");
+        possibleTreeClassExtensions.add("InputLinear");
+        possibleTreeClassExtensions.add("InputCompressed");
+        possibleTreeClassExtensions.add("InputTwoSide");
+        possibleTreeClassExtensions.add("OutputLinear");
+        possibleTreeClassExtensions.add("OutputCompressed");
+        possibleTreeClassExtensions.add("OutputTwoSide");
+    }
+
+
     private OWLGenericTools genericTool;
     private MyOWLHelper helper;
     private ReasoningTreeSpecialCases reasoningTreeSpecialCasesHandler;
 
-    private List<OWLSubClassOfAxiom> reasoningTreeElements;
+    private List<OWLClass> reasoningTreeElements = new ArrayList<>();
     private OWLNamedIndividual currentRequirement;
     private List<OWLNamedIndividual> constances;
 
@@ -39,8 +54,44 @@ public class ReasoningTree {
         this.genericTool = genericTool;
         this.helper = helper;
         reasoningTreeSpecialCasesHandler = new ReasoningTreeSpecialCases(genericTool, helper);
-        reasoningTreeElements = genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE)
-                .collect(Collectors.toList());
+        setResasoningTreeELements();
+    }
+
+    private void setResasoningTreeELements() {
+        List<OWLClass> unorderdReasoningTreeElements = genericTool.getOntology().subClassAxiomsForSuperClass
+                (Vocabulary.CLASS_REASONINGTREE).map(treeEle -> treeEle.getSubClass().asOWLClass()).collect
+                (Collectors.toList());
+
+        Map<String, List<String>> mapClassNameToChildren = new HashMap<>();
+        unorderdReasoningTreeElements.forEach(treeElement -> {
+            List<String> children = new ArrayList<>();
+            genericTool.getOntology().subClassAxiomsForSubClass(treeElement).filter(axiom -> axiom.getSuperClass()
+                    .objectPropertiesInSignature().anyMatch(ob -> genericTool.getOntology()
+                            .objectSubPropertyAxiomsForSubProperty(ob).anyMatch(propSupers -> Vocabulary
+                                    .OBJECT_PROPERTY_HASCHILD.equals(propSupers.getSuperProperty())))).forEach(axiom
+                    -> children.add(helper.getNameOfOWLObjectProperty(axiom.getSuperClass()
+                    .objectPropertiesInSignature().findAny().get())));
+            mapClassNameToChildren.put(treeElement.getIRI().getShortForm(), children);
+        });
+
+        while (!mapClassNameToChildren.isEmpty()) {
+            for (OWLClass clas : unorderdReasoningTreeElements) {
+                String clasName = clas.getIRI().getShortForm();
+                if (!mapClassNameToChildren.containsKey(clasName)) {
+                    continue;
+                }
+                boolean isAnyStillInList = false;
+                for (String childName : mapClassNameToChildren.get(clasName)) {
+                    isAnyStillInList |= mapClassNameToChildren.keySet().stream().filter(key -> !key.equals(clasName))
+                            .anyMatch(key -> possibleTreeClassExtensions.stream().anyMatch(exten -> (childName +
+                                    exten).equals(key)));
+                }
+                if (!isAnyStillInList) {
+                    reasoningTreeElements.add(clas);
+                    mapClassNameToChildren.remove(clasName);
+                }
+            }
+        }
     }
 
     public void interruptReasoning() {
@@ -60,8 +111,7 @@ public class ReasoningTree {
         individualToClassMapper.clear();
         do {
             hasSomethingChanged = false;
-            // TODO make graph of classes and iterate from bottom to top
-            reasoningTreeElements.forEach(treeClassAxiom -> handleTreeItem(treeClassAxiom.getSubClass().asOWLClass()));
+            reasoningTreeElements.stream().forEachOrdered(treeClassAxiom -> handleTreeItem(treeClassAxiom));
 
             if (!interrupted.get() && !hasSomethingChanged) {
                 boolean anySpecialChanges = false;
@@ -188,16 +238,18 @@ public class ReasoningTree {
     }
 
     private void deleteNotSatisfied(OWLClass treeClass) {
+        if (genericTool.getOntology().subClassAxiomsForSuperClass(treeClass).count() == 0) {
+            return;
+        }
         long startTime = System.currentTimeMillis();
         Set<OWLNamedIndividual> satisfiedChildInstances = new HashSet<>();
         if (Vocabulary.CLASS_MOTORGEARBOXMATCH.equals(treeClass)) {
             //TODO handle this special case in a general way
             satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
-                    .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toCollection(HashSet::new)));
+                    .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toSet()));
         }
         genericTool.getOntology().subClassAxiomsForSuperClass(treeClass).forEach(axiom -> satisfiedChildInstances
-                .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toCollection
-                        (HashSet::new))));
+                .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toSet())));
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         long numberOfDeletedChildren = handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
         if (!axiomsToDelete.isEmpty()) {
@@ -216,10 +268,9 @@ public class ReasoningTree {
 
     private long handleDelete(Set<OWLAxiom> axiomsToDelete, Collection<OWLNamedIndividual> childInstances, OWLClass
             type) {
-        ArrayList<Map.Entry<OWLNamedIndividual, OWLClass>> instancesToDelete = individualToClassMapper.entrySet()
-                .stream().filter(set -> set.getValue().equals(type) && childInstances.stream().noneMatch
-                        (instSatisfied -> instSatisfied.equals(set.getKey()))).collect(Collectors.toCollection
-                        (ArrayList::new));
+        List<Map.Entry<OWLNamedIndividual, OWLClass>> instancesToDelete = individualToClassMapper.entrySet().stream()
+                .filter(set -> set.getValue().equals(type) && childInstances.stream().noneMatch(instSatisfied ->
+                        instSatisfied.equals(set.getKey()))).collect(Collectors.toList());
         instancesToDelete.forEach(set -> helper.getGeneratedAxioms().stream().filter(axiom -> axiom
                 .individualsInSignature().anyMatch(indi -> indi.equals(set.getKey()))).forEach(axiomsToDelete::add));
         return instancesToDelete.size();

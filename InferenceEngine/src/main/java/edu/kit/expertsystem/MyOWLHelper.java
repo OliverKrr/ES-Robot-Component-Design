@@ -33,7 +33,7 @@ public class MyOWLHelper {
         if (removedAxioms.contains(axiomToAdd) || !generatedAxioms.add(axiomToAdd)) {
             return false;
         }
-        genericTool.getManager().addAxiom(genericTool.getOntology(), axiomToAdd);
+        genericTool.getOntology().addAxiom(axiomToAdd);
         return true;
     }
 
@@ -41,6 +41,11 @@ public class MyOWLHelper {
         genericTool.getOntology().removeAxioms(axioms.stream());
         removedAxioms.addAll(axioms);
         generatedAxioms.removeAll(axioms);
+
+        //        if (!axioms.isEmpty()) {
+        //            PelletReasoner reasoner = (PelletReasoner) genericTool.getReasoner();
+        //            reasoner.refresh();
+        //        }
     }
 
     public void flush() {
@@ -52,6 +57,13 @@ public class MyOWLHelper {
      */
     public String getNameOfOWLNamedIndividual(OWLNamedIndividual ind) {
         return ind.getIRI().getShortForm().substring(0, ind.getIRI().getShortForm().length() - 3);
+    }
+
+    /**
+     * Remove "has"
+     */
+    public String getNameOfOWLObjectProperty(OWLObjectProperty obj) {
+        return obj.getIRI().getShortForm().substring(3, obj.getIRI().getShortForm().length());
     }
 
     /**

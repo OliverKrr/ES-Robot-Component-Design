@@ -43,12 +43,18 @@ public class MainReasoner {
 
     public MainReasoner() {
         // 41.107s
-        //openllet.core.OpenlletOptions.USE_UNIQUE_NAME_ASSUMPTION = false;         // 40.098s
-        //openllet.core.OpenlletOptions.SILENT_UNDEFINED_ENTITY_HANDLING = false;   // 45.06s
-        //openllet.core.OpenlletOptions.REALIZE_INDIVIDUAL_AT_A_TIME = true;        // 40.259s
-        //openllet.core.OpenlletOptions.USE_FULL_DATATYPE_REASONING = false;        // 40.423s
-        //openllet.core.OpenlletOptions.IGNORE_INVERSES = true;                     // 41.835s
-        //openllet.core.OpenlletOptions.AUTO_REALIZE = false;                       // 42.175s
+        //OpenlletOptions.SILENT_UNDEFINED_ENTITY_HANDLING = false;     // 39.574s
+        //OpenlletOptions.REALIZE_INDIVIDUAL_AT_A_TIME = true;          // 38.397s
+        //OpenlletOptions.USE_FULL_DATATYPE_REASONING = false;          // 38.742s
+        //OpenlletOptions.IGNORE_INVERSES = true;                       // 39.057s
+        //OpenlletOptions.AUTO_REALIZE = false;                         // 39.569s
+        //OpenlletOptions.USE_INCREMENTAL_DELETION = true;              // 42.371s
+
+        //        try {
+        //            OpenlletOptions.load(MainReasoner.class.getResource("/openllet.properties"));
+        //        } catch (IOException e) {
+        //            logger.error(e.getMessage(), e);
+        //        }
         group = new OWLManagerGroup();
     }
 

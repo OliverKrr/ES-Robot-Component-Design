@@ -594,14 +594,14 @@ LengthInputLinearCalcRule:
 LengthInputLinear(?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasHallSensor(?li, ?hs) ^ hasConstant(?li, ?con) ^
 has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?mb, ?L_mb) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ hasDimensionLength_L_unit_mm(?hs, ?L_hs) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ has1(?g, ?overlapping_g) ^
 swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_mb) ^ swrlb:add(?L_temp3, ?L_temp2, ?L_hs) ^ swrlb:add(?L_2, ?L_temp3, ?overlapping_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
--> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ SatisfiedLengthInputLinear(?li) ^ Linear(?li)
+-> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ Linear(?li)
 
 
 LengthInputLinearEvaluate1Rule:
-SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+LengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 LengthInputLinearEvaluate2Rule:
-SatisfiedLengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+LengthInputLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 
 
@@ -611,29 +611,29 @@ has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L
 swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp25, ?temp2, ?L_mb) ^ swrlb:add(?temp26, ?temp25, ?L_hs) ^ swrlb:add(?temp3, ?temp26, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?overlapping_g) ^
 swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?temp4, ?L_floatB, ?L_fixedB) ^ swrlb:add(?L_2, ?d_g_wg, ?temp4) ^
 swrlb:add(?L_max2_2, ?mc_con, ?rg_con)
--> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1_1) ^ hasMax2_1(?li, ?L_ie) ^ hasMax2_2(?li, ?L_max2_2) ^ SatisfiedLengthInputCompressed(?li) ^ Compressed(?li)
+-> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1_1) ^ hasMax2_1(?li, ?L_ie) ^ hasMax2_2(?li, ?L_max2_2) ^ Compressed(?li)
 
 
 LengthInputCompressedEvaluate1Rule:
-SatisfiedLengthInputCompressed(?li) ^
+LengthInputCompressed(?li) ^
 hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has2(?li, ?L_2) ^
 swrlb:greaterThan(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_2, ?L_max2_1)
 -> hasMax1_2(?li, ?L_max1_2)
 
 LengthInputCompressedEvaluate2Rule:
-SatisfiedLengthInputCompressed(?li) ^
+LengthInputCompressed(?li) ^
 hasMax2_1(?li, ?L_max2_1) ^ hasMax2_2(?li, ?L_max2_2) ^ has2(?li, ?L_2) ^
 swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2) ^ swrlb:add(?L_max1_2, ?L_2, ?L_max2_2)
 -> hasMax1_2(?li, ?L_max1_2)
 
 LengthInputCompressedEvaluate3Rule:
-SatisfiedLengthInputCompressed(?li) ^
+LengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
 -> hasDimensionLength_L_unit_mm(?li, ?L_max1_1)
 
 LengthInputCompressedEvaluate4Rule:
-SatisfiedLengthInputCompressed(?li) ^
+LengthInputCompressed(?li) ^
 hasMax1_1(?li, ?L_max1_1) ^ hasMax1_2(?li, ?L_max1_2)
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 -> hasDimensionLength_L_unit_mm(?li, ?L_max1_2)
@@ -735,33 +735,33 @@ SensorPCBNoneSatisfyRule:
 NoSensorPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedSensorPCB(?spcb)
 
 
-SensorPCBOutputLinearWithCalc1Rule:
-SensorPCBOutputLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasGearBox(?spcbv, ?g) ^
+SensorPCBOutputVariantsLinearWithCalc1Rule:
+SensorPCBOutputVariantsLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasGearBox(?spcbv, ?g) ^
 WithSensorPCB(?spcb) ^
 hasDimensionOuterDiameter_D_unit_mm(?spcb, ?D_spcb) ^ hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^
 swrlb:subtract(?D_temp, ?T_g, ?d_g_fs) ^ swrlb:divide(?D_half, ?D_spcb, 2.0) ^ swrlb:add(?D_max2, ?D_temp, ?D_half) ^
 swrlb:greaterThan(?D_spcb, ?D_max2)
--> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputLinear(?spcbv)
+-> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv)
 
-SensorPCBOutputLinearWithCalc2Rule:
-SensorPCBOutputLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasGearBox(?spcbv, ?g) ^
+SensorPCBOutputVariantsLinearWithCalc2Rule:
+SensorPCBOutputVariantsLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasGearBox(?spcbv, ?g) ^
 WithSensorPCB(?spcb) ^
 hasDimensionOuterDiameter_D_unit_mm(?spcb, ?D_spcb) ^ hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^
 swrlb:subtract(?D_temp, ?T_g, ?d_g_fs) ^ swrlb:divide(?D_half, ?D_spcb, 2.0) ^ swrlb:add(?D_max2, ?D_temp, ?D_half) ^
 swrlb:lessThanOrEqual(?D_spcb, ?D_max2)
--> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_max2) ^ SatisfiedSensorPCBOutputLinear(?spcbv)
+-> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_max2) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv)
 
-SensorPCBOutputLinearNoCalcRule:
-SensorPCBOutputLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^
+SensorPCBOutputVariantsLinearNoCalcRule:
+SensorPCBOutputVariantsLinear(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^
 NoSensorPCB(?spcb) ^
 hasDimensionOuterDiameter_D_unit_mm(?spcb, ?D_spcb)
--> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputLinear(?spcbv)
+-> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv)
 
 
-SensorPCBOutputCompressedCalcRule:
-SensorPCBOutputCompressed(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^
+SensorPCBOutputVariantsCompressedCalcRule:
+SensorPCBOutputVariantsCompressed(?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^
 hasDimensionOuterDiameter_D_unit_mm(?spcb, ?D_spcb)
--> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputCompressed(?spcbv)
+-> hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^ SatisfiedSensorPCBOutputVariantsCompressed(?spcbv)
 
 
 
@@ -770,14 +770,14 @@ AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasS
 hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
 swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
 swrlb:greaterThan(?L_temp, ?L_aewspcb)
--> hasDimensionLength_L_unit_mm(?abspcb, ?L_aewspcb) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+-> hasDimensionLength_L_unit_mm(?abspcb, ?L_aewspcb)
 
 AbsolutEncoderSensorPCBMatchSatisfy2Rule:
 AbsoluteEncoderSensorPCBMatch(?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasConstant(?abspcb, ?con) ^
 hasDimensionLength_L_unit_mm(?ab, ?L_ab) ^ hasDimensionLength_L_unit_mm(?spcb, ?L_spcb) ^ lengthAbsoluteEncoderWithSensorPCB(?con, ?L_aewspcb) ^
 swrlb:add(?L_temp, ?L_ab, ?L_spcb) ^
 swrlb:lessThanOrEqual(?L_temp, ?L_aewspcb)
--> hasDimensionLength_L_unit_mm(?abspcb, ?L_temp) ^ SatisfiedAbsoluteEncoderSensorPCBMatch(?abspcb)
+-> hasDimensionLength_L_unit_mm(?abspcb, ?L_temp)
 
 
 
@@ -787,7 +787,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearCalc1Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ AbsolutEncoderMBAD01_05(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Linear(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm(?g, ?T_g) ^ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^
 swrlb:subtract(?d_temp, ?T_g, ?d_g_fs) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
@@ -798,7 +798,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearCalc2Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ NoAbsolutEncoder(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Linear(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 -> SatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
@@ -807,7 +807,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearCalc3Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ AbsolutEncoderOnAxis(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Linear(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsLinear(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 -> SatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
@@ -865,7 +865,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedCalc1Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasConstant(?gsrtsabspcb, ?con) ^ hasCurrentRequirement(?gsrtsabspcb, ?r) ^ AbsolutEncoderMBAD01_05(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Compressed(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
 thicknessRotationSafetyDistance(?con, ?trsd_con) ^ thicknessCableChannel(?con, ?tcc_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w) ^
 swrlb:multiply(?tcc_con2, 2.0, ?tcc_con) ^ swrlb:add(?temp1, ?trsd_con, ?tcc_con2) ^
@@ -879,7 +879,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedCalc2Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ NoAbsolutEncoder(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Compressed(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 -> SatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb)
@@ -888,7 +888,7 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedCalc3Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ AbsolutEncoderOnAxis(?ab) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Compressed(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
-hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
+hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 -> SatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb)
@@ -1160,13 +1160,13 @@ LengthElektroSatisfy5Rule:
 LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
 hasMax2_1(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:greaterThan(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
--> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
+-> hasDimensionLength_L_unit_mm(?le, ?L_le)
 
 LengthElektroSatisfy6Rule:
 LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
 hasMax2_1(?le, ?L_max2_2) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_2) ^ swrlb:add(?L_le, ?L_max2_2, ?t_req_c)
--> SatisfiedLengthElektro(?le) ^ hasDimensionLength_L_unit_mm(?le, ?L_le)
+-> hasDimensionLength_L_unit_mm(?le, ?L_le)
 
 
 
