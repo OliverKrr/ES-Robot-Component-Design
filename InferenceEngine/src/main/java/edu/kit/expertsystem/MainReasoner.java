@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class MainReasoner {
 
@@ -34,11 +35,14 @@ public class MainReasoner {
     private RequirementHelper requirementHelper;
     private OntologyReadAndWriteHelper ontologyReadAndWriteHelper;
 
+    private List<OWLNamedIndividual> constances;
+    private List<OWLNamedIndividual> basicIndividuals = new ArrayList<>();
+
     private boolean isReasoningPrepared = false;
     private AtomicBoolean interrupted = new AtomicBoolean(false);
 
     public MainReasoner() {
-                                                                                    // 41.107s
+        // 41.107s
         //openllet.core.OpenlletOptions.USE_UNIQUE_NAME_ASSUMPTION = false;         // 40.098s
         //openllet.core.OpenlletOptions.SILENT_UNDEFINED_ENTITY_HANDLING = false;   // 45.06s
         //openllet.core.OpenlletOptions.REALIZE_INDIVIDUAL_AT_A_TIME = true;        // 40.259s
@@ -54,11 +58,15 @@ public class MainReasoner {
         OWLOntology ontology = ontologyReadAndWriteHelper.loadOntologies();
 
         genericTool = new OWLGenericTools(group, group.getVolatileManager(), ontology);
+
         helper = new MyOWLHelper(genericTool);
         ontologyReadAndWriteHelper.setGenericToolAndHelper(genericTool, helper);
         helper.checkConsistency();
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
+
+        constances = genericTool.getReasoner().instances(Vocabulary.CLASS_CONSTANTS).collect(Collectors.toList());
+        reasoningTree.setConstances(constances);
 
         logger.debug("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
@@ -74,6 +82,7 @@ public class MainReasoner {
     }
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
+        basicIndividuals.clear();
         genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone).filter(axiomOfComponentToReason ->
                 axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
                         .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
@@ -97,6 +106,10 @@ public class MainReasoner {
         String name = clasToCreate.getIRI().getShortForm() + "Ind";
         OWLNamedIndividual ind = genericTool.getFactory().getOWLNamedIndividual(helper.create(name));
         helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(clasToCreate, ind));
+
+        constances.forEach(con -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
+                (Vocabulary.OBJECT_PROPERTY_HASCONSTANT, ind, con)));
+        basicIndividuals.add(ind);
     }
 
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
@@ -157,6 +170,9 @@ public class MainReasoner {
                 throw new RuntimeException("Requirement class unknown: " + req.getClass());
             }
         }
+        reasoningTree.setCurrentRequirement(requirementsInd);
+        basicIndividuals.forEach(ind -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
+                (Vocabulary.OBJECT_PROPERTY_HASCURRENTREQUIREMENT, ind, requirementsInd)));
     }
 
     private OWLDataProperty getOWLDataProperty(String iri) {

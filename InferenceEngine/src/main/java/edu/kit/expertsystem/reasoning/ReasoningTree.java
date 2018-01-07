@@ -27,6 +27,9 @@ public class ReasoningTree {
     private ReasoningTreeSpecialCases reasoningTreeSpecialCasesHandler;
 
     private List<OWLSubClassOfAxiom> reasoningTreeElements;
+    private OWLNamedIndividual currentRequirement;
+    private List<OWLNamedIndividual> constances;
+
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
     private Map<OWLNamedIndividual, OWLClass> individualToClassMapper = new HashMap<>();
     private boolean hasSomethingChanged;
@@ -159,6 +162,11 @@ public class ReasoningTree {
             OWLNamedIndividual parentInd = genericTool.getFactory().getOWLNamedIndividual(helper.create(parentName));
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
+                helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(Vocabulary
+                        .OBJECT_PROPERTY_HASCURRENTREQUIREMENT, parentInd, currentRequirement));
+                constances.forEach(con -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
+                        (Vocabulary.OBJECT_PROPERTY_HASCONSTANT, parentInd, con)));
+
                 individualToClassMapper.put(parentInd, treeClass);
                 // logger.debug("\tAdd individual: " + parentInd.getIRI().getShortForm());
                 ++realAddedIndis;
@@ -241,4 +249,15 @@ public class ReasoningTree {
         }
     }
 
+    public void setCurrentRequirement(OWLNamedIndividual currentRequirement) {
+        this.currentRequirement = currentRequirement;
+    }
+
+    public List<OWLNamedIndividual> getConstances() {
+        return constances;
+    }
+
+    public void setConstances(List<OWLNamedIndividual> constances) {
+        this.constances = constances;
+    }
 }
