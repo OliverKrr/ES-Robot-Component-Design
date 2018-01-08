@@ -189,8 +189,24 @@ swrlb:lessThanOrEqual(?M_max1, ?M_max2)
 -> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_max1)
 
 
-MotorGearBoxMatchPeakTorqueSatisfyRule:
-MotorGearBoxMatch(?ma) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^ hasCurrentRequirement(?ma, ?r) ^ hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) -> SatisfiedPeakTorque(?ma)
+MotorGearBoxMatchPeakTorqueSatisfy1Rule:
+MotorGearBoxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^
+hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
+hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
+removeSmallGearBoxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, false)
+-> SatisfiedPeakTorque(?ma)
+
+MotorGearBoxMatchPeakTorqueSatisfy2Rule:
+MotorGearBoxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^
+hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
+hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
+removeSmallGearBoxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, true) ^
+hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
+has1(?m, ?M_peak) ^ hasPeakTorque_M_max_unit_Nm(?g, ?g_max) ^
+swrlb:divide(?M_peak2, ?M_peak, 2.0) ^ swrlb:lessThanOrEqual(?M_peak2, ?g_max)
+-> SatisfiedPeakTorque(?ma)
 
 
 
