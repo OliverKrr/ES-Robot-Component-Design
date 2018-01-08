@@ -7,6 +7,7 @@ import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.UnitToReason;
 import edu.kit.expertsystem.model.req.*;
 import edu.kit.expertsystem.reasoning.ReasoningTree;
+import openllet.core.OpenlletOptions;
 import openllet.core.exceptions.TimerInterruptedException;
 import openllet.owlapi.OWL;
 import openllet.owlapi.OWLGenericTools;
@@ -17,6 +18,7 @@ import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.InferenceType;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -42,20 +44,11 @@ public class MainReasoner {
     private AtomicBoolean interrupted = new AtomicBoolean(false);
 
     public MainReasoner() {
-        // 41.107s
-        //OpenlletOptions.SILENT_UNDEFINED_ENTITY_HANDLING = false;     // 39.574s
-        //OpenlletOptions.REALIZE_INDIVIDUAL_AT_A_TIME = true;          // 38.397s
-        //OpenlletOptions.USE_FULL_DATATYPE_REASONING = false;          // 38.742s
-        //OpenlletOptions.IGNORE_INVERSES = true;                       // 39.057s
-        //OpenlletOptions.AUTO_REALIZE = false;                         // 39.569s
-        //OpenlletOptions.USE_INCREMENTAL_DELETION = true;              // 42.371s
-
-        //TODO test again with different option and check if right set
-        //        try {
-        //            OpenlletOptions.load(MainReasoner.class.getResource("/openllet.properties"));
-        //        } catch (IOException e) {
-        //            logger.error(e.getMessage(), e);
-        //        }
+        try {
+            OpenlletOptions.load(MainReasoner.class.getResource("/myOpenllet.properties"));
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
         group = new OWLManagerGroup();
     }
 
