@@ -15,11 +15,23 @@
             <groupId>edu.kit.expertsystem</groupId>
             <artifactId>SAC-InferenceEngine</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>edu.kit.expertsystem</groupId>
             <artifactId>SAC-KnowledgeBase</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
@@ -32,6 +44,12 @@
             <groupId>org.eclipse.swt</groupId>
             <artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
             <version>4.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.eclipse.core/commands -->
@@ -39,6 +57,12 @@
             <groupId>org.eclipse.core</groupId>
             <artifactId>commands</artifactId>
             <version>3.3.0-I20070605-0010</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.eclipse/jface -->
@@ -46,6 +70,12 @@
             <groupId>org.eclipse</groupId>
             <artifactId>jface</artifactId>
             <version>3.3.0-I20070606-0010</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.eclipse.ui/forms -->
@@ -53,6 +83,12 @@
             <groupId>org.eclipse.ui</groupId>
             <artifactId>forms</artifactId>
             <version>3.3.0-v20070511</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
@@ -61,6 +97,12 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>1.10</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
@@ -68,6 +110,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.10.0</version>
+            
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
