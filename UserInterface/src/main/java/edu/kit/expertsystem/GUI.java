@@ -26,7 +26,7 @@ public class GUI {
     public static final int navBarY = 10;
     public static final int errorTextHeight = 115;
     public static final int errorTextYOffset = 2;
-    public static final int comboOffsetWidth = 24;
+    public static final int comboOffsetWidth = 38;
     private static final Point firstSizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
@@ -85,6 +85,7 @@ public class GUI {
         shell.addDisposeListener(event -> shutdown());
         // startOnSecondScreenIfPossible();
         startOnTopOfScreen();
+        shell.setMaximized(true);
         shell.open();
         shell.layout();
         while (!shell.isDisposed()) {
@@ -255,7 +256,7 @@ public class GUI {
     private int[] getWeights() {
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         float ratioForWeights = 1f * newWidthOfContent / 835;
-        return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(280 / ratioForWeights)};
+        return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(310 / ratioForWeights)};
     }
 
     private int getUnitsToReasoneComboWidth() {

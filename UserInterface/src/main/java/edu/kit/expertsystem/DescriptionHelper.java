@@ -14,7 +14,7 @@ public class DescriptionHelper {
 
     private static final float widthRatio = 0.27f;
 
-    private static final int height = 55;
+    private static final int height = 82;
 
     private static final int labelX = 1;
     private static final int descriptionXOffset = 3;

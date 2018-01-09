@@ -19,17 +19,17 @@ public class RequirementsHelper {
     private static final int unitWidth = 44;
 
     private static final int height = 23;
-    private static final int heightForLabels = height + 6;
+    private static final int heightForLabels = height + 18;
 
     private static final int displayNameX = 10;
-    private static final int minX = 198;
-    private static final int unitForMinX = 244;
-    private static final int maxX = 294;
-    private static final int unitForMaxX = 340;
+    private static final int minX = 208;
+    private static final int unitForMinX = 254;
+    private static final int maxX = 304;
+    private static final int unitForMaxX = 350;
 
-    private static final int basisY1 = 42;
-    private static final int basisY2 = 45;
-    private static final int offsetY = 38;
+    private static final int basisY1 = 61;
+    private static final int basisY2 = 64;
+    private static final int offsetY = 57;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
