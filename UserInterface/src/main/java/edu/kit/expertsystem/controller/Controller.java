@@ -17,12 +17,14 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Stream;
 
 public class Controller {
 
-    private static final int MAXIMAL_NEEDED_SPACES = 7;
+    private static final int MAXIMAL_NEEDED_SPACES = 13;
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
@@ -35,11 +37,14 @@ public class Controller {
     private UnitToReason currentUnitToReason;
     private ResultWrapper resultWrapper;
 
+    private DecimalFormat df = new DecimalFormat("#.####");
+
     boolean haveRequirementChanged = true;
     boolean isReseted = false;
 
     public Controller(GUI gui) {
         this.gui = gui;
+        df.setRoundingMode(RoundingMode.CEILING);
         reasoner = new MainReasoner();
     }
 
@@ -90,7 +95,7 @@ public class Controller {
     }
 
     public void reset() {
-        if (!isReseted){
+        if (!isReseted) {
             reasoner.prepareReasoning(currentUnitToReason);
             isReseted = true;
         }
@@ -324,10 +329,10 @@ public class Controller {
     private String getResultValue(Requirement req) {
         if (req instanceof TextFieldMinMaxRequirement) {
             TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+            return df.format(realReq.result * realReq.scaleFromOntologyToUI);
         } else if (req instanceof TextFieldRequirement) {
             TextFieldRequirement realReq = (TextFieldRequirement) req;
-            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+            return df.format(realReq.result * realReq.scaleFromOntologyToUI);
         } else if (req instanceof CheckboxRequirement) {
             CheckboxRequirement realReq = (CheckboxRequirement) req;
             return String.valueOf(realReq.result);
@@ -336,7 +341,7 @@ public class Controller {
             return realReq.result;
         } else if (req instanceof RequirementOnlyForSolution) {
             RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
-            return String.valueOf(realReq.result * realReq.scaleFromOntologyToUI);
+            return df.format(realReq.result * realReq.scaleFromOntologyToUI);
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
