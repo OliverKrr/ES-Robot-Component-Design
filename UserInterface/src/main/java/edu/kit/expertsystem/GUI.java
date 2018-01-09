@@ -222,14 +222,15 @@ public class GUI {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 requirementsCategory.setVisibilityOfNavItems(false);
-                try {
-                    controllerFuture.get();
-                } catch (InterruptedException | ExecutionException e) {
-                    logger.error(e.getMessage(), e);
-                    return;
-                }
                 controller.parseRequirements();
-                controllerFuture = pool.submit(() -> controller.reason());
+                if (controller.haveRequirementChanged()) {
+                    try {
+                        controllerFuture.get();
+                    } catch (InterruptedException | ExecutionException e) {
+                        logger.error(e.getMessage(), e);
+                    }
+                    controllerFuture = pool.submit(() -> controller.reason());
+                }
             }
         });
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());

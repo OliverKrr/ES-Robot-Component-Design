@@ -35,6 +35,9 @@ public class Controller {
     private UnitToReason currentUnitToReason;
     private ResultWrapper resultWrapper;
 
+    boolean haveRequirementChanged = true;
+    boolean isReseted = false;
+
     public Controller(GUI gui) {
         this.gui = gui;
         reasoner = new MainReasoner();
@@ -87,31 +90,10 @@ public class Controller {
     }
 
     public void reset() {
-        for (RequirementWrapper req : requirementsWrapper) {
-            if (req instanceof TextFieldMinMaxRequirementWrapper) {
-                TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
-                realReq.min = realReq.defaultMin;
-                realReq.max = realReq.defaultMax;
-                realReq.result = -1;
-            } else if (req instanceof TextFieldRequirementWrapper) {
-                TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
-                realReq.value = realReq.defaultValue;
-                realReq.result = -1;
-            } else if (req instanceof CheckboxRequirementWrapper) {
-                CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
-                realReq.value = realReq.defaultValue;
-                realReq.result = false;
-            } else if (req instanceof DropdownRequirementWrapper) {
-                DropdownRequirement realReq = (DropdownRequirement) req.requirement;
-                realReq.selectedValue = realReq.defaultValue;
-            } else if (req instanceof RequirementOnlyForSolutionWrapper) {
-                RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req.requirement;
-                realReq.result = -1;
-            } else {
-                throw new RuntimeException("Requirement class unknown: " + req.getClass());
-            }
+        if (!isReseted){
+            reasoner.prepareReasoning(currentUnitToReason);
+            isReseted = true;
         }
-        reasoner.prepareReasoning(currentUnitToReason);
     }
 
     private List<Requirement> parseToRequirements() {
@@ -123,14 +105,13 @@ public class Controller {
     }
 
     public void parseRequirements() {
-        resultWrapper.orderBy.removeAll();
-        resultWrapper.tree.removeAll();
-
         for (RequirementWrapper req : requirementsWrapper) {
             if (req instanceof TextFieldMinMaxRequirementWrapper) {
                 TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req.requirement;
 
+                double oldMin = realReq.min;
+                double oldMax = realReq.max;
                 if (realReq.isIntegerValue) {
                     realReq.min = parseInteger(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
                     realReq.max = parseInteger(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
@@ -138,26 +119,34 @@ public class Controller {
                     realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
                     realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
                 }
+                haveRequirementChanged |= Math.abs(oldMin - realReq.min) > 0.000001 || Math.abs(oldMax - realReq.max)
+                        > 0.000001;
             } else if (req instanceof TextFieldRequirementWrapper) {
                 TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
                 TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;
 
+                double oldValue = realReq.value;
                 if (realReq.isIntegerValue) {
                     realReq.value = parseInteger(reqWrapper.value, realReq.defaultValue) / realReq
                             .scaleFromOntologyToUI;
                 } else {
                     realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue) / realReq.scaleFromOntologyToUI;
                 }
+                haveRequirementChanged |= Math.abs(oldValue - realReq.value) > 0.000001;
             } else if (req instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
 
+                boolean oldValue = realReq.value;
                 realReq.value = reqWrapper.value.getSelection();
+                haveRequirementChanged |= oldValue != realReq.value;
             } else if (req instanceof DropdownRequirementWrapper) {
                 DropdownRequirementWrapper reqWrapper = (DropdownRequirementWrapper) req;
                 DropdownRequirement realReq = (DropdownRequirement) req.requirement;
 
+                String oldSelectedValue = realReq.selectedValue;
                 realReq.selectedValue = reqWrapper.values.getText();
+                haveRequirementChanged |= !oldSelectedValue.equals(realReq.selectedValue);
             } else if (req instanceof RequirementOnlyForSolutionWrapper) {
                 // RequirementOnlyForSolution have no value
             } else {
@@ -193,14 +182,25 @@ public class Controller {
     }
 
     public void reason() {
-        resultWrapper.results = reasoner.startReasoning(currentUnitToReason, parseToRequirements());
-        if (resultWrapper.results != null) {
-            gui.notifySolutionIsReady();
+        if (haveRequirementChanged) {
+            haveRequirementChanged = false;
+            isReseted = false;
+            resultWrapper.results = reasoner.startReasoning(currentUnitToReason, parseToRequirements());
+            if (resultWrapper.results != null) {
+                gui.notifySolutionIsReady();
+            }
         }
     }
 
+    public boolean haveRequirementChanged() {
+        return haveRequirementChanged;
+    }
+
     public void setResults() {
+        resultWrapper.orderBy.removeAll();
+        resultWrapper.tree.removeAll();
         resultWrapper.displayNameToIriMap.clear();
+
         for (Result result : resultWrapper.results) {
             double maxNumberOfCharsForComp = getMaxNumberOfCharsForComp(result);
             logger.debug("Solution:");
