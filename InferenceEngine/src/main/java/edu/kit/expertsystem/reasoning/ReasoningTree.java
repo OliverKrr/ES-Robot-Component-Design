@@ -21,7 +21,7 @@ public class ReasoningTree {
 
     private static final Logger logger = LogManager.getLogger(ReasoningTree.class);
 
-    static List<String> possibleTreeClassExtensions = new ArrayList<>();
+    private static List<String> possibleTreeClassExtensions = new ArrayList<>();
 
     static {
         possibleTreeClassExtensions.add("");
@@ -47,6 +47,7 @@ public class ReasoningTree {
 
     private Map<OWLClass, Integer> appliedClassesToNumberOfPermutations = new HashMap<>();
     private Map<OWLNamedIndividual, OWLClass> individualToClassMapper = new HashMap<>();
+    private Map<OWLClass, List<OWLNamedIndividual>> deviceToIndividualsMapper = new HashMap<>();
     private boolean hasSomethingChanged;
     private AtomicBoolean interrupted = new AtomicBoolean(false);
 
@@ -111,7 +112,7 @@ public class ReasoningTree {
         individualToClassMapper.clear();
         do {
             hasSomethingChanged = false;
-            reasoningTreeElements.stream().forEachOrdered(treeClassAxiom -> handleTreeItem(treeClassAxiom));
+            reasoningTreeElements.stream().forEachOrdered(this::handleTreeItem);
 
             if (!interrupted.get() && !hasSomethingChanged) {
                 boolean anySpecialChanges = false;
@@ -208,6 +209,9 @@ public class ReasoningTree {
 
         int realAddedIndis = 0;
         for (PermutationOfChildInstances permutation : permutations) {
+            if (skipPermutation(treeClass, permutation)) {
+                continue;
+            }
             String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + "Ind";
             OWLNamedIndividual parentInd = genericTool.getFactory().getOWLNamedIndividual(helper.create(parentName));
 
@@ -235,6 +239,43 @@ public class ReasoningTree {
 
             deleteNotSatisfied(treeClass);
         }
+    }
+
+    private boolean skipPermutation(OWLClass treeClass, PermutationOfChildInstances permutation) {
+        //TODO do all in genearl way -> same as in MainReasoner
+
+        if (Vocabulary.CLASS_LENGTHOUTPUTLINEAR.equals(treeClass) || Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals
+                (treeClass) || Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
+            boolean hasSameGearBox = false;
+            for (OWLNamedIndividual gearBox : deviceToIndividualsMapper.get(Vocabulary.CLASS_GEARBOX)) {
+                String[] split = permutation.permutationName.split(helper.getNameOfOWLNamedIndividual(gearBox));
+                if (split.length >= 2) {
+                    hasSameGearBox = true;
+                    break;
+                }
+            }
+            if (!hasSameGearBox) {
+                logger.debug("Skip different GearBoxes: " + permutation.permutationName);
+                return true;
+            }
+        }
+
+        if (Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals(treeClass)) {
+            if (!permutation.permutationName.contains(Vocabulary.CLASS_STRAINGAUGEBASED_SPOKEWHEEL.getIRI()
+                    .getShortForm()) && !permutation.permutationName.contains(Vocabulary.CLASS_NOTORQUESENSOR.getIRI
+                    ().getShortForm())) {
+                logger.debug("Skip (compressed) false torqueSensor: " + permutation.permutationName);
+                return true;
+            }
+        }
+
+        if (Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
+            if (!permutation.permutationName.contains(Vocabulary.CLASS_POSITIONENCODERBASED.getIRI().getShortForm())) {
+                logger.debug("Skip (twoSide) false torqueSensor: " + permutation.permutationName);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void deleteNotSatisfied(OWLClass treeClass) {
@@ -304,11 +345,21 @@ public class ReasoningTree {
         this.currentRequirement = currentRequirement;
     }
 
-    public List<OWLNamedIndividual> getConstances() {
-        return constances;
-    }
-
     public void setConstances(List<OWLNamedIndividual> constances) {
         this.constances = constances;
+    }
+
+    public void resetDeviceToIndividual() {
+        deviceToIndividualsMapper.clear();
+    }
+
+    public void addDeviceToIndividual(OWLClass device, OWLNamedIndividual individual) {
+        if (deviceToIndividualsMapper.containsKey(device)) {
+            deviceToIndividualsMapper.get(device).add(individual);
+        } else {
+            List<OWLNamedIndividual> list = new ArrayList<>();
+            list.add(individual);
+            deviceToIndividualsMapper.put(device, list);
+        }
     }
 }

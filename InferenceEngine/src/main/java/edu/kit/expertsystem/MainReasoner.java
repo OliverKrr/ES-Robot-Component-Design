@@ -83,6 +83,7 @@ public class MainReasoner {
 
     private void createBasicIndividuals(OWLClass componentToReasone) {
         basicIndividuals.clear();
+        reasoningTree.resetDeviceToIndividual();
         genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone).filter(axiomOfComponentToReason ->
                 axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
                         .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
@@ -93,15 +94,15 @@ public class MainReasoner {
             // However, if none present -> add itself
             int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
             genericTool.getOntology().subClassAxiomsForSuperClass(reasoningPropertyAxiom.getSubClass().asOWLClass())
-                    .forEach(reasoningPropertySubClassAxiom -> createIndividualFor(reasoningPropertySubClassAxiom
-                            .getSubClass()));
+                    .forEach(reasoningPropertySubClassAxiom -> createIndividualFor(reasoningPropertyAxiom.getSubClass
+                            ().asOWLClass(), reasoningPropertySubClassAxiom.getSubClass()));
             if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
-                createIndividualFor(reasoningPropertyAxiom.getSubClass());
+                createIndividualFor(null, reasoningPropertyAxiom.getSubClass());
             }
         })));
     }
 
-    private void createIndividualFor(OWLClassExpression clasExpres) {
+    private void createIndividualFor(OWLClass parent, OWLClassExpression clasExpres) {
         OWLClass clasToCreate = clasExpres.asOWLClass();
         String name = clasToCreate.getIRI().getShortForm() + "Ind";
         OWLNamedIndividual ind = genericTool.getFactory().getOWLNamedIndividual(helper.create(name));
@@ -110,6 +111,13 @@ public class MainReasoner {
         constances.forEach(con -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
                 (Vocabulary.OBJECT_PROPERTY_HASCONSTANT, ind, con)));
         basicIndividuals.add(ind);
+
+        if (Vocabulary.CLASS_HFUC_2A.equals(parent) || Vocabulary.CLASS_CSD_2A.equals(parent) || Vocabulary
+                .CLASS_CPL_2A.equals(parent)) {
+            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_GEARBOX, ind);
+        } else if (Vocabulary.CLASS_ROBODRIVESERVOKIBILM.equals(parent)) {
+            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_MOTOR, ind);
+        }
     }
 
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
