@@ -242,20 +242,20 @@ public class ReasoningTree {
     }
 
     private boolean skipPermutation(OWLClass treeClass, PermutationOfChildInstances permutation) {
-        //TODO do all in genearl way -> same as in MainReasoner
+        //TODO do all in general way -> same as in MainReasoner
 
         if (Vocabulary.CLASS_LENGTHOUTPUTLINEAR.equals(treeClass) || Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals
                 (treeClass) || Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
             boolean hasSameGearBox = false;
             for (OWLNamedIndividual gearBox : deviceToIndividualsMapper.get(Vocabulary.CLASS_GEARBOX)) {
-                String[] split = permutation.permutationName.split(helper.getNameOfOWLNamedIndividual(gearBox));
-                if (split.length >= 2) {
+                String checkString = "-" + permutation.permutationName + "-";
+                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(gearBox));
+                if (split.length > 2) {
                     hasSameGearBox = true;
                     break;
                 }
             }
             if (!hasSameGearBox) {
-                logger.debug("Skip different GearBoxes: " + permutation.permutationName);
                 return true;
             }
         }
@@ -264,14 +264,12 @@ public class ReasoningTree {
             if (!permutation.permutationName.contains(Vocabulary.CLASS_STRAINGAUGEBASED_SPOKEWHEEL.getIRI()
                     .getShortForm()) && !permutation.permutationName.contains(Vocabulary.CLASS_NOTORQUESENSOR.getIRI
                     ().getShortForm())) {
-                logger.debug("Skip (compressed) false torqueSensor: " + permutation.permutationName);
                 return true;
             }
         }
 
         if (Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
             if (!permutation.permutationName.contains(Vocabulary.CLASS_POSITIONENCODERBASED.getIRI().getShortForm())) {
-                logger.debug("Skip (twoSide) false torqueSensor: " + permutation.permutationName);
                 return true;
             }
         }
