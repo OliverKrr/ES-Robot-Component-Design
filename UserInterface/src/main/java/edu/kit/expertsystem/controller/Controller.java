@@ -230,6 +230,7 @@ public class Controller {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
+                resultWrapper.tree.forceFocus();
                 String currentSelection = resultWrapper.orderBy.getText();
                 if (currentSelection.length() > 2) {
                     String displayName = currentSelection.substring(0, currentSelection.length() - 2);
