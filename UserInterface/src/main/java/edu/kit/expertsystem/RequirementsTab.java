@@ -22,6 +22,7 @@ public class RequirementsTab {
     private static final int btnEnalbeFieldOffsetYEnd = 7;
 
     private final FormToolkit formToolkit;
+    private final boolean isOptimization;
 
     private SashForm requirementsForm;
     private RequirementsHelper requirementsHelper;
@@ -31,8 +32,9 @@ public class RequirementsTab {
     private Button btnEnableFields;
     private DescriptionHelper descriptionHelper;
 
-    RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm) {
+    RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm, boolean isOptimization) {
         this.formToolkit = formToolkit;
+        this.isOptimization = isOptimization;
 
         requirementsForm = new SashForm(parent, SWT.NONE);
         requirementsForm.setBounds(sizeOfForm);
@@ -46,7 +48,7 @@ public class RequirementsTab {
         formToolkit.adapt(leftComposite);
 
         boolean isAnyFieldDisabled = false;
-        requirementsHelper = new RequirementsHelper(formToolkit, leftComposite, category);
+        requirementsHelper = new RequirementsHelper(formToolkit, leftComposite, category, isOptimization);
         int lastReqOrderPosition = -1;
         int rowNumber = 0;
         for (RequirementWrapper requirement1 : requirements) {
@@ -67,7 +69,7 @@ public class RequirementsTab {
             } else {
                 throw new RuntimeException("Requirement class unknown: " + requirement1.getClass());
             }
-            if (lastReqOrderPosition == requirement1.requirement.orderPosition) {
+            if (lastReqOrderPosition == requirement1.requirement.orderPosition && !isOptimization) {
                 rowNumber--;
             }
             lastReqOrderPosition = requirement1.requirement.orderPosition;
@@ -76,7 +78,7 @@ public class RequirementsTab {
             }
         }
 
-        if (isAnyFieldDisabled) {
+        if (isAnyFieldDisabled && !isOptimization) {
             btnEnableFields = new Button(leftComposite, SWT.CHECK);
             updateEnableField();
             btnEnableFields.setText("Enable fields");
@@ -127,11 +129,23 @@ public class RequirementsTab {
 
         rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
-        descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are " +
-                "taken: min=0 and max=infinite.", rowNumber++);
+        if (!isOptimization) {
+            descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are"
+                    + " taken: min=0 and max=infinite.", rowNumber++);
+
+        }
         for (RequirementWrapper requirement : requirements) {
             if (requirement.requirement.description != null && !(requirement instanceof
                     RequirementOnlyForSolutionWrapper)) {
+                if (isOptimization) {
+                    if (!(requirement instanceof TextFieldMinMaxRequirementWrapper)) {
+                        continue;
+                    }
+                    if (!((TextFieldMinMaxRequirement) ((TextFieldMinMaxRequirementWrapper) requirement).requirement)
+                            .allowOptimization) {
+                        continue;
+                    }
+                }
                 descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
                         .description, rowNumber++);
             }

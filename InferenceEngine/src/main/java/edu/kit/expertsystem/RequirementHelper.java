@@ -93,6 +93,8 @@ public class RequirementHelper {
                         .findAny().ifPresent(obProp -> textReq.defaultMin = helper.parseValueToDouble(obProp));
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUEMAX)
                         .findAny().ifPresent(obProp -> textReq.defaultMax = helper.parseValueToDouble(obProp));
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ALLOWOPTIMIZATION)
+                        .findAny().ifPresent(obProp -> textReq.allowOptimization = obProp.parseBoolean());
 
                 genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
                         .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()

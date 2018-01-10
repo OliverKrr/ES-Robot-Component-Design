@@ -33,6 +33,7 @@ public class RequirementsHelper {
 
     private final FormToolkit formToolkit;
     private final Composite composite;
+    private final boolean isOptimization;
 
     private Label topicLabel;
     private List<Control> createdControls;
@@ -41,24 +42,40 @@ public class RequirementsHelper {
     private int y1;
     private int y2;
 
-    RequirementsHelper(FormToolkit formToolkit, Composite composite, Category category) {
+    RequirementsHelper(FormToolkit formToolkit, Composite composite, Category category, boolean isOptimization) {
         this.formToolkit = formToolkit;
         this.composite = composite;
+        this.isOptimization = isOptimization;
 
         topicLabel = new Label(composite, SWT.WRAP);
-        topicLabel.setText(category.topic);
+        if (isOptimization) {
+            topicLabel.setText("Optimization");
+        } else {
+            topicLabel.setText(category.topic);
+        }
         topicLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(topicLabel.getFont()), GuiHelper
                 .getFontHeight(topicLabel.getFont()) + 7, SWT.BOLD));
         formToolkit.adapt(topicLabel, false, false);
         topicLabel.setForeground(Configs.KIT_GREEN_100);
     }
 
-    public boolean createRequirement(RequirementWrapper requirementWrapper, List<RequirementDependencyCheckboxWrapper>
-            requirementDependencyWrappers, int rowNumber) {
+    public boolean createRequirement(RequirementWrapper requirementWrapper,
+                                     List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int
+                                             rowNumber) {
         if (requirementWrapper instanceof RequirementOnlyForSolutionWrapper) {
             // RequirementOnlyForSolution will not be displayed
             return false;
         }
+        if (isOptimization) {
+            if (!(requirementWrapper instanceof TextFieldMinMaxRequirementWrapper)) {
+                return false;
+            }
+            if (!((TextFieldMinMaxRequirement) ((TextFieldMinMaxRequirementWrapper) requirementWrapper).requirement)
+                    .allowOptimization) {
+                return false;
+            }
+        }
+
         createdControls = new ArrayList<>();
         createdButton = null;
         y1 = basisY1 + offsetY * rowNumber;
@@ -101,37 +118,59 @@ public class RequirementsHelper {
     private void createTextFieldMinMaxRequirement(TextFieldMinMaxRequirementWrapper requirementWrapper) {
         TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) requirementWrapper.requirement;
 
-        requirementWrapper.minValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.minValue.setEnabled(realReq.enableMin);
-        requirementWrapper.minValue.setMessage("min");
-        requirementWrapper.minValue.setToolTipText("min");
+        Text min;
+        if (isOptimization) {
+            requirementWrapper.minValueOptimization = new Text(composite, SWT.BORDER);
+            min = requirementWrapper.minValueOptimization;
+            requirementWrapper.minValue.addModifyListener(e -> requirementWrapper.minValueOptimization.setText
+                    (requirementWrapper.minValue.getText()));
+        } else {
+            requirementWrapper.minValue = new Text(composite, SWT.BORDER);
+            min = requirementWrapper.minValue;
+        }
+        min.setEnabled(realReq.enableMin && !isOptimization);
+        min.setMessage("min");
+        min.setToolTipText("min");
         if (realReq.defaultMin != 0) {
             if (realReq.isIntegerValue) {
-                requirementWrapper.minValue.setText(String.valueOf(Math.round(realReq.defaultMin)));
+                min.setText(String.valueOf(Math.round(realReq.defaultMin)));
             } else {
-                requirementWrapper.minValue.setText(String.valueOf(realReq.defaultMin));
+                min.setText(String.valueOf(realReq.defaultMin));
             }
         }
-        requirementWrapper.minValue.setBounds(minX, y1, minMaxWidth, height);
-        formToolkit.adapt(requirementWrapper.minValue, true, true);
-        createdControls.add(requirementWrapper.minValue);
+        min.setBounds(minX, y1, minMaxWidth, height);
+        formToolkit.adapt(min, true, true);
+        createdControls.add(min);
 
         addUnit(requirementWrapper, unitForMinX);
 
-        requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
-        requirementWrapper.maxValue.setEnabled(realReq.enableMax);
-        requirementWrapper.maxValue.setMessage("max");
-        requirementWrapper.maxValue.setToolTipText("max");
+        Text max;
+        if (isOptimization) {
+            requirementWrapper.maxValueOptimization = new Text(composite, SWT.BORDER);
+            max = requirementWrapper.maxValueOptimization;
+            requirementWrapper.maxValue.addModifyListener(e -> requirementWrapper.maxValueOptimization.setText
+                    (requirementWrapper.maxValue.getText()));
+        } else {
+            requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
+            max = requirementWrapper.maxValue;
+        }
+        max.setEnabled(realReq.enableMax && !isOptimization);
+        max.setMessage("max");
+        max.setToolTipText("max");
         if (realReq.defaultMax != Double.MAX_VALUE) {
             if (realReq.isIntegerValue) {
-                requirementWrapper.maxValue.setText(String.valueOf(Math.round(realReq.defaultMax)));
+                max.setText(String.valueOf(Math.round(realReq.defaultMax)));
             } else {
-                requirementWrapper.maxValue.setText(String.valueOf(realReq.defaultMax));
+                max.setText(String.valueOf(realReq.defaultMax));
             }
         }
-        requirementWrapper.maxValue.setBounds(maxX, y1, minMaxWidth, height);
-        formToolkit.adapt(requirementWrapper.maxValue, true, true);
-        createdControls.add(requirementWrapper.maxValue);
+
+        max.setBounds(maxX, y1, minMaxWidth, height);
+        formToolkit.adapt(max, true, true);
+        createdControls.add(max);
+
+        //TODO add deviation and userWeighting
+        //TODO add parsing to controller for != null
 
         addUnit(requirementWrapper, unitForMaxX);
     }

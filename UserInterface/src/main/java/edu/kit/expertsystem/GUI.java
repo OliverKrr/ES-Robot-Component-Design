@@ -36,6 +36,7 @@ public class GUI {
     private final FormToolkit formToolkit = new FormToolkit(display);
 
     private RequirementsCategory requirementsCategory;
+    private RequirementsCategory requirementsOptimization;
     private SolutionTab solutionTab;
 
     private final ExecutorService pool;
@@ -144,14 +145,22 @@ public class GUI {
                     requirementsCategory.disposeNavItems();
                     requirementsCategory.getRequirementsOverallForm().dispose();
                     solutionTab.getSolutionForm().dispose();
+                    requirementsOptimization.disposeNavItems();
+                    requirementsOptimization.getRequirementsOverallForm().dispose();
                 }
-                requirementsCategory = new RequirementsCategory(shell, formToolkit);
+                requirementsCategory = new RequirementsCategory(shell, formToolkit, false);
                 Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
                 Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
                 unitsToReasonCombo.setSize(0, mainNavBarRec.height);
 
                 Rectangle recOfContent = requirementsCategory.createReqContent(controller
                         .getRequirementDependencyWrapper(), mainNavBarRec.y + mainNavBarRec.height, firstSizeOfShell);
+
+                requirementsOptimization = new RequirementsCategory(shell, formToolkit, true);
+                requirementsOptimization.createNavBars(controller.getRequirementsWrapper());
+                requirementsOptimization.updateSize(recOfContent, getWeights());
+                requirementsOptimization.createReqContent(controller.getRequirementDependencyWrapper(), mainNavBarRec
+                        .y + mainNavBarRec.height, firstSizeOfShell);
 
                 solutionTab = new SolutionTab(shell, formToolkit, recOfContent);
                 solutionTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
@@ -194,6 +203,10 @@ public class GUI {
         reqItem.name = "Requirements";
         mainNavBars.add(reqItem);
 
+        NavigationItem optimizationItem = new NavigationItem();
+        optimizationItem.name = "Optimization";
+        mainNavBars.add(optimizationItem);
+
         NavigationItem solutionItem = new NavigationItem();
         solutionItem.name = "Solution";
         mainNavBars.add(solutionItem);
@@ -205,7 +218,8 @@ public class GUI {
 
     private void addNavigationBarListener() {
         mainNavBars.get(0).compositeToHandle = requirementsCategory.getRequirementsOverallForm();
-        mainNavBars.get(1).compositeToHandle = solutionTab.getSolutionForm();
+        mainNavBars.get(1).compositeToHandle = requirementsOptimization.getRequirementsOverallForm();
+        mainNavBars.get(2).compositeToHandle = solutionTab.getSolutionForm();
         mainNavBarHelper.addListener(mainNavBars);
 
         mainNavBars.get(0).item.addSelectionListener(new SelectionAdapter() {
@@ -213,6 +227,7 @@ public class GUI {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 requirementsCategory.setVisibilityOfNavItems(true);
+                requirementsOptimization.setVisibilityOfNavItems(false);
                 controllerFuture = pool.submit(() -> controller.reset());
             }
         });
@@ -222,6 +237,17 @@ public class GUI {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 requirementsCategory.setVisibilityOfNavItems(false);
+                requirementsOptimization.setVisibilityOfNavItems(true);
+                controllerFuture = pool.submit(() -> controller.reset());
+            }
+        });
+
+        mainNavBars.get(2).item.addSelectionListener(new SelectionAdapter() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                requirementsCategory.setVisibilityOfNavItems(false);
+                requirementsOptimization.setVisibilityOfNavItems(false);
                 controller.parseRequirements();
                 if (controller.haveRequirementChanged()) {
                     try {
@@ -241,6 +267,7 @@ public class GUI {
         formToolkit.adapt(solutionTab.getSolutionForm());
 
         Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), getWeights());
+        requirementsOptimization.updateSize(updatedRec, getWeights());
         solutionTab.updateSize(updatedRec);
 
         int unitsToReasonComboWidth = getUnitsToReasoneComboWidth();

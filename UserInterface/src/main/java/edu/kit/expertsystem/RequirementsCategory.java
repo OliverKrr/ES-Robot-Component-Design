@@ -28,6 +28,7 @@ public class RequirementsCategory {
 
     private final Composite parent;
     private final FormToolkit formToolkit;
+    private final boolean isOptimization;
 
     private Composite requirementsOverallForm;
     private Rectangle sizeOfTab;
@@ -39,15 +40,23 @@ public class RequirementsCategory {
     private List<RequirementsTab> reqTabs = new ArrayList<>();
     private List<NavigationItem> reqNavItems = new ArrayList<>();
 
-    RequirementsCategory(Composite parent, FormToolkit formToolkit) {
+    RequirementsCategory(Composite parent, FormToolkit formToolkit, boolean isOptimization) {
         this.parent = parent;
         this.formToolkit = formToolkit;
+        this.isOptimization = isOptimization;
         navHelper = new NavigationBarHelper(formToolkit, parent);
     }
 
     public Rectangle createNavBars(List<RequirementWrapper> requirements) {
+        Category optiCat = new Category();
+        if (isOptimization) {
+            List<RequirementWrapper> reqs = new ArrayList<>();
+            reqPerCategory.put(optiCat, reqs);
+        }
         for (RequirementWrapper req : requirements) {
-            if (reqPerCategory.containsKey(req.requirement.category)) {
+            if (isOptimization) {
+                reqPerCategory.get(optiCat).add(req);
+            } else if (reqPerCategory.containsKey(req.requirement.category)) {
                 reqPerCategory.get(req.requirement.category).add(req);
             } else {
                 List<RequirementWrapper> reqs = new ArrayList<>();
@@ -59,28 +68,37 @@ public class RequirementsCategory {
                 reqNavItems.add(item);
             }
         }
+        if (isOptimization) {
+            return new Rectangle(0, 0, 0, 0);
+        }
         return navHelper.createVerticalNavBar(reqNavItems, 0);
     }
 
     public Rectangle createReqContent(List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers, int
             contentY, Point sizeOfShell) {
         this.contentY = contentY + contentYOffsetStart;
-        initSizes(sizeOfShell);
+        requirementsOverallForm = new Composite(parent, SWT.NONE);
+        if (!isOptimization) {
+            initSizes(sizeOfShell);
+        }
         for (Entry<Category, List<RequirementWrapper>> reqsPerCat : reqPerCategory.entrySet()) {
-            RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab);
+            RequirementsTab tab = new RequirementsTab(requirementsOverallForm, formToolkit, sizeOfTab, isOptimization);
             tab.createContents(reqsPerCat.getKey(), reqsPerCat.getValue(), requirementDependencyWrappers);
             reqTabs.add(tab);
 
-            reqNavItems.stream().filter(reqNavItem -> reqNavItem.name.equals(reqsPerCat.getKey().displayName))
-                    .forEach(reqNavItem -> reqNavItem.compositeToHandle = tab.getRequirementsForm());
+            if (!isOptimization) {
+                reqNavItems.stream().filter(reqNavItem -> reqNavItem.name.equals(reqsPerCat.getKey().displayName))
+                        .forEach(reqNavItem -> reqNavItem.compositeToHandle = tab.getRequirementsForm());
+            }
         }
-        navHelper.addListener(reqNavItems);
-        handleDependencies(requirementDependencyWrappers);
+        if (!isOptimization) {
+            navHelper.addListener(reqNavItems);
+            handleDependencies(requirementDependencyWrappers);
+        }
         return conentRec;
     }
 
     private void initSizes(Point sizeOfShell) {
-        requirementsOverallForm = new Composite(parent, SWT.NONE);
         updateSize(sizeOfShell, null);
     }
 
@@ -99,6 +117,21 @@ public class RequirementsCategory {
             tab.updateSize(sizeOfTab);
         }
         return conentRec;
+    }
+
+    public void updateSize(Rectangle conentRec, int[] newContentWeights) {
+        this.conentRec = conentRec;
+        sizeOfTab = new Rectangle(0, 0, conentRec.width, conentRec.height);
+
+        if (requirementsOverallForm != null) {
+            requirementsOverallForm.setBounds(conentRec);
+            formToolkit.adapt(requirementsOverallForm);
+        }
+        for (RequirementsTab tab : reqTabs) {
+            tab.getRequirementsForm().setWeights(newContentWeights);
+            formToolkit.adapt(tab.getRequirementsForm());
+            tab.updateSize(sizeOfTab);
+        }
     }
 
     private void handleDependencies(List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
