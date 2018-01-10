@@ -544,14 +544,27 @@ needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
 thicknessInnerShaft(?con, ?tis_con) ^ thicknessCableChannel(?con, ?tcc_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w)
 -> has1(?didbm, ?tis_con) ^ has2(?didbm, ?tcc_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w)
 
-
 DiameterInputDriveBearingMatchCompressedSatisfy2Rule:
-BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
 has1(?didbm, ?tis_con) ^ has2(?didbm, ?tcc_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w) ^
-hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
+hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
 swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:multiply(?tcc_con2, 2.0, ?tcc_con) ^ swrlb:add(?temp1, ?tis_con2, ?tcc_con2) ^ swrlb:add(?temp2, ?temp1, ?trsd_con) ^ 
 swrlb:add(?d_need1, ?temp2, ?D_w) ^ swrlb:add(?d_need2, ?temp2, ?d_sr) ^
-swrlb:greaterThanOrEqual(?d_db, ?d_need1) ^ swrlb:greaterThanOrEqual(?d_db, ?d_need2)
+-> hasMax1_1(?didbm, ?d_need1) ^ hasMax1_2(?didbm, ?d_need2) 
+
+
+DiameterInputDriveBearingMatchCompressedEvaluate1Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasCurrentRequirement(?didbm, ?r) ^
+needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, true) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ hasMax1_2(?didbm, ?d_need2) ^
+swrlb:greaterThanOrEqual(?d_db, ?d_need2)
+-> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
+DiameterInputDriveBearingMatchCompressedEvaluate2Rule:
+BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasCurrentRequirement(?didbm, ?r) ^
+needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^
+hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ hasMax1_1(?didbm, ?d_need1) ^
+swrlb:greaterThanOrEqual(?d_db, ?d_need1)
 -> HalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
 
@@ -882,14 +895,28 @@ SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^
 hasTorqueSensor(?srtsm, ?tos) ^ Compressed(?tos) ^
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
 hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ SatisfiedSensorPCBOutputVariantsCompressed(?spcbv) ^ hasGearBox(?spcbv, ?g) ^
-hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
 thicknessRotationSafetyDistance(?con, ?trsd_con) ^ thicknessCableChannel(?con, ?tcc_con) ^ hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w) ^
 swrlb:multiply(?tcc_con2, 2.0, ?tcc_con) ^ swrlb:add(?temp1, ?trsd_con, ?tcc_con2) ^
 swrlb:add(?d_need1, ?temp1, ?D_w) ^ swrlb:add(?d_need2, ?temp1, ?d_sr) ^
-swrlb:greaterThanOrEqual(?d_ab, ?d_need1) ^ swrlb:greaterThanOrEqual(?d_ab, ?d_need2) ^
 hasDimensionInnerDiameterFlexSpline_K_unit_mm(?g, ?d_g) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^
 swrlb:greaterThanOrEqual(?d_g, ?D_sr)
+->  hasMax1_1(?gsrtsabspcb, ?d_need1) ^ hasMax1_2(?gsrtsabspcb, ?d_need2)
+
+
+SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedEvaluate1Rule:
+SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasCurrentRequirement(?didbm, ?r) ^
+needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, true) ^
+hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^ hasMax1_2(?gsrtsabspcb, ?d_need2) ^
+swrlb:greaterThanOrEqual(?d_ab, ?d_need2)
 -> HalfSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb)
+
+SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedEvaluate2Rule:
+SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasCurrentRequirement(?didbm, ?r) ^
+needContinuousRotationReq(?r, ?ncr) ^ swrlb:equal(?ncr, false) ^
+hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^ hasMax1_1(?gsrtsabspcb, ?d_need1) ^
+swrlb:greaterThanOrEqual(?d_ab, ?d_need1)
+-> HalfSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb)
+
 
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressedCalc2Rule:
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputCompressed(?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ NoAbsolutEncoder(?ab) ^
