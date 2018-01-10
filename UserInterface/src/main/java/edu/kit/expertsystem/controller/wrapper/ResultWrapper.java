@@ -16,6 +16,7 @@ public class ResultWrapper {
     public List<Result> results;
     public Tree tree;
     public Combo orderBy;
+    public Combo orderBy2;
     public Text searchField;
     public Button showOnlyDiffsCheckBox;
 
@@ -29,20 +30,20 @@ public class ResultWrapper {
             return false;
         ResultWrapper that = (ResultWrapper) o;
         return Objects.equals(results, that.results) && Objects.equals(tree, that.tree) && Objects.equals(orderBy,
-                that.orderBy) && Objects.equals(searchField, that.searchField) && Objects.equals
-                (showOnlyDiffsCheckBox, that.showOnlyDiffsCheckBox) && Objects.equals(displayNameToIriMap, that
-                .displayNameToIriMap);
+                that.orderBy) && Objects.equals(orderBy2, that.orderBy2) && Objects.equals(searchField, that
+                .searchField) && Objects.equals(showOnlyDiffsCheckBox, that.showOnlyDiffsCheckBox) && Objects.equals
+                (displayNameToIriMap, that.displayNameToIriMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results, tree, orderBy, searchField, showOnlyDiffsCheckBox, displayNameToIriMap);
+        return Objects.hash(results, tree, orderBy, orderBy2, searchField, showOnlyDiffsCheckBox, displayNameToIriMap);
     }
 
     @Override
     public String toString() {
-        return "ResultWrapper{" + "results=" + results + ", tree=" + tree + ", orderBy=" + orderBy + ", searchField="
-                + searchField + ", showOnlyDiffsCheckBox=" + showOnlyDiffsCheckBox + ", displayNameToIriMap=" +
-                displayNameToIriMap + '}';
+        return "ResultWrapper{" + "results=" + results + ", tree=" + tree + ", orderBy=" + orderBy + ", orderBy2=" +
+                orderBy2 + ", searchField=" + searchField + ", showOnlyDiffsCheckBox=" + showOnlyDiffsCheckBox + ", "
+                + "displayNameToIriMap=" + displayNameToIriMap + '}';
     }
 }

@@ -40,6 +40,7 @@ public class SolutionTab {
     private Button saveSolutionOntologyButton;
     private Text searchField;
     private Combo orderByCombo;
+    private Combo orderByCombo2;
     private Button showOnlyDiffsCheckBox;
     private DescriptionHelper descriptionHelper;
 
@@ -69,12 +70,20 @@ public class SolutionTab {
 
         orderByCombo = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         formToolkit.adapt(orderByCombo, true, true);
-        updateSizeOfOrderByCombo();
         orderByCombo.addModifyListener(e -> {
-            updateSizeOfOrderByCombo();
+            updateSizeOfOrderByCombos();
             updateSizeOfSearchText();
         });
         resultWrapper.orderBy = orderByCombo;
+
+        orderByCombo2 = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        formToolkit.adapt(orderByCombo2, true, true);
+        updateSizeOfOrderByCombos();
+        orderByCombo2.addModifyListener(e -> {
+            updateSizeOfOrderByCombos();
+            updateSizeOfSearchText();
+        });
+        resultWrapper.orderBy2 = orderByCombo2;
 
         showOnlyDiffsCheckBox = new Button(leftComposite, SWT.CHECK);
         showOnlyDiffsCheckBox.setText("Show only differences in results");
@@ -145,7 +154,7 @@ public class SolutionTab {
         formToolkit.paintBordersFor(solutionForm);
         descriptionHelper.updateSize(rightComposite.getBounds());
         updateSizeOfSaveSolutionOntologyButton();
-        updateSizeOfOrderByCombo();
+        updateSizeOfOrderByCombos();
         updateSizeOfSearchText();
         updateSizeOfShowOnlyDiffsCheckBox();
         updateSizeOfTreeItem();
@@ -157,7 +166,7 @@ public class SolutionTab {
         saveSolutionOntologyButton.setBounds(offsetX, offsetY, width, searchTextHeight);
     }
 
-    private void updateSizeOfOrderByCombo() {
+    private void updateSizeOfOrderByCombos() {
         int maxWidth = 0;
         for (String item : orderByCombo.getItems()) {
             maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(orderByCombo, item).x);
@@ -165,13 +174,15 @@ public class SolutionTab {
         maxWidth += GUI.comboOffsetWidth;
         int x = saveSolutionOntologyButton.getBounds().x + saveSolutionOntologyButton.getBounds().width + offsetX;
         orderByCombo.setBounds(x, offsetY, maxWidth, searchTextHeight);
+        int x2 = x + maxWidth + offsetX;
+        orderByCombo2.setBounds(x2, offsetY, maxWidth, searchTextHeight);
     }
 
     private void updateSizeOfSearchText() {
         int widthOfSearchText = Math.max(searchTextWidth, GuiHelper.getSizeOfText(searchField, searchField.getText())
                 .x);
         int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
-        int endXOfOther = orderByCombo.getBounds().x + orderByCombo.getBounds().width;
+        int endXOfOther = orderByCombo2.getBounds().x + orderByCombo2.getBounds().width;
         if (xOfSearchText < endXOfOther + offsetXEnd) {
             xOfSearchText = endXOfOther + offsetXEnd;
             widthOfSearchText = leftComposite.getBounds().width - xOfSearchText - offsetXEnd;

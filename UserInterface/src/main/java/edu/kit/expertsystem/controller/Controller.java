@@ -202,7 +202,10 @@ public class Controller {
     }
 
     public void setResults() {
+        int oldSelectionOfOrderBy = resultWrapper.orderBy.getSelectionIndex();
+        int oldSelectionOfOrderBy2 = resultWrapper.orderBy2.getSelectionIndex();
         resultWrapper.orderBy.removeAll();
+        resultWrapper.orderBy2.removeAll();
         resultWrapper.tree.removeAll();
         resultWrapper.displayNameToIriMap.clear();
 
@@ -221,6 +224,8 @@ public class Controller {
                         resultWrapper.displayNameToIriMap.put(req.displayName, req.resultIRI);
                         resultWrapper.orderBy.add(req.displayName + " \u25BC");
                         resultWrapper.orderBy.add(req.displayName + " \u25B2");
+                        resultWrapper.orderBy2.add(req.displayName + " \u25BC");
+                        resultWrapper.orderBy2.add(req.displayName + " \u25B2");
                     }
                 }
             }
@@ -232,34 +237,47 @@ public class Controller {
             public void widgetSelected(SelectionEvent event) {
                 resultWrapper.tree.forceFocus();
                 String currentSelection = resultWrapper.orderBy.getText();
-                if (currentSelection.length() > 2) {
+                String currentSelection2 = resultWrapper.orderBy.getText();
+                if (currentSelection.length() > 2 && currentSelection2.length() > 2) {
                     String displayName = currentSelection.substring(0, currentSelection.length() - 2);
+                    String displayName2 = currentSelection2.substring(0, currentSelection2.length() - 2);
 
-                    resultWrapper.results.sort(Comparator.comparingDouble(result -> result.requirements.stream()
-                            .filter(req -> resultWrapper.displayNameToIriMap.get(displayName).equals(req.resultIRI))
-                            .findAny().map(req -> {
-                        if (req instanceof TextFieldMinMaxRequirement) {
-                            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                            return -realReq.result;
-                        } else if (req instanceof TextFieldRequirement) {
-                            TextFieldRequirement realReq = (TextFieldRequirement) req;
-                            return -realReq.result;
-                        } else if (req instanceof CheckboxRequirement) {
-                            // CheckboxRequirement have no results
-                        } else if (req instanceof DropdownRequirement) {
-                            // DropdownRequirement have no results
-                        } else if (req instanceof RequirementOnlyForSolution) {
-                            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
-                            return -realReq.result;
-                        } else {
-                            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                    resultWrapper.results.sort((first, second) -> {
+                        double valueFirst1 = 0;
+                        double valueFirst2 = 0;
+                        for (Requirement req : first.requirements) {
+                            if (resultWrapper.displayNameToIriMap.get(displayName).equals(req.resultIRI)) {
+                                valueFirst1 = getResultValueAsDouble(req);
+                            }
+                            if (resultWrapper.displayNameToIriMap.get(displayName2).equals(req.resultIRI)) {
+                                valueFirst2 = getResultValueAsDouble(req);
+                            }
                         }
-                        return -Double.MAX_VALUE;
-                    }).orElse(-Double.MAX_VALUE)));
+                        double valueSecond1 = 0;
+                        double valueSecond2 = 0;
+                        for (Requirement req : second.requirements) {
+                            if (resultWrapper.displayNameToIriMap.get(displayName).equals(req.resultIRI)) {
+                                valueSecond1 = getResultValueAsDouble(req);
+                            }
+                            if (resultWrapper.displayNameToIriMap.get(displayName2).equals(req.resultIRI)) {
+                                valueSecond2 = getResultValueAsDouble(req);
+                            }
+                        }
 
-                    if (currentSelection.endsWith("\u25B2")) {
-                        Collections.reverse(resultWrapper.results);
-                    }
+                        if (Math.abs(valueFirst1 - valueSecond1) > 0.000001) {
+                            if (currentSelection.endsWith("\u25B2")) {
+                                return Double.compare(valueFirst1, valueSecond1);
+                            } else {
+                                return Double.compare(valueSecond1, valueFirst1);
+                            }
+                        } else {
+                            if (currentSelection2.endsWith("\u25B2")) {
+                                return Double.compare(valueFirst2, valueSecond2);
+                            } else {
+                                return Double.compare(valueSecond2, valueFirst2);
+                            }
+                        }
+                    });
                 }
 
                 resultWrapper.tree.removeAll();
@@ -271,10 +289,22 @@ public class Controller {
                 resultWrapper.searchField.notifyListeners(SWT.KeyUp, reloadSearchE);
             }
         };
-        resultWrapper.orderBy.addSelectionListener(listener);
-        resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(listener);
+        if (resultWrapper.orderBy.getItemCount() > oldSelectionOfOrderBy) {
+            if (oldSelectionOfOrderBy == -1) {
+                oldSelectionOfOrderBy = 0;
+            }
+            resultWrapper.orderBy.select(oldSelectionOfOrderBy);
+        }
+        if (resultWrapper.orderBy2.getItemCount() > oldSelectionOfOrderBy2) {
+            if (oldSelectionOfOrderBy2 == -1) {
+                oldSelectionOfOrderBy2 = 0;
+            }
+            resultWrapper.orderBy2.select(oldSelectionOfOrderBy2);
+        }
 
-        resultWrapper.orderBy.select(0);
+        resultWrapper.orderBy.addSelectionListener(listener);
+        resultWrapper.orderBy2.addSelectionListener(listener);
+        resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(listener);
         resultWrapper.orderBy.notifyListeners(SWT.Selection, new Event());
     }
 
@@ -324,6 +354,27 @@ public class Controller {
             }
             resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
             resItem.setExpanded(true);
+        }
+    }
+
+    private double getResultValueAsDouble(Requirement req) {
+        if (req instanceof TextFieldMinMaxRequirement) {
+            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+            return realReq.result * realReq.scaleFromOntologyToUI;
+        } else if (req instanceof TextFieldRequirement) {
+            TextFieldRequirement realReq = (TextFieldRequirement) req;
+            return realReq.result * realReq.scaleFromOntologyToUI;
+        } else if (req instanceof CheckboxRequirement) {
+            CheckboxRequirement realReq = (CheckboxRequirement) req;
+            return realReq.result ? 1 : 0;
+        } else if (req instanceof DropdownRequirement) {
+            // DropdownRequirement have no results
+            return Double.MAX_VALUE;
+        } else if (req instanceof RequirementOnlyForSolution) {
+            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+            return realReq.result * realReq.scaleFromOntologyToUI;
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
     }
 
