@@ -27,6 +27,7 @@ public class RequirementsTab {
     private SashForm requirementsForm;
     private RequirementsHelper requirementsHelper;
 
+    private ScrolledComposite leftScrolledComposite;
     private Composite leftComposite;
     private Composite rightComposite;
     private Button btnEnableFields;
@@ -44,8 +45,14 @@ public class RequirementsTab {
 
     public void createContents(Category category, List<RequirementWrapper> requirements,
                                List<RequirementDependencyCheckboxWrapper> requirementDependencyWrappers) {
-        leftComposite = new Composite(requirementsForm, SWT.NONE);
+        leftScrolledComposite = new ScrolledComposite(requirementsForm, SWT.V_SCROLL | SWT.H_SCROLL);
+        leftScrolledComposite.setExpandVertical(true);
+        leftScrolledComposite.setExpandHorizontal(true);
+        formToolkit.adapt(leftScrolledComposite);
+
+        leftComposite = new Composite(leftScrolledComposite, SWT.NONE);
         formToolkit.adapt(leftComposite);
+        leftScrolledComposite.setContent(leftComposite);
 
         boolean isAnyFieldDisabled = false;
         requirementsHelper = new RequirementsHelper(formToolkit, leftComposite, category, isOptimization);
@@ -158,10 +165,17 @@ public class RequirementsTab {
     }
 
     public void updateSize(Rectangle sizeOfForm) {
+        if (btnEnableFields != null) {
+            // set to o so it will not extend leftComposite.width
+            // it will be set back later on accordingly to leftComposite
+            btnEnableFields.setBounds(0, 0, 0, 0);
+        }
         requirementsForm.setBounds(sizeOfForm);
         formToolkit.adapt(requirementsForm);
         formToolkit.paintBordersFor(requirementsForm);
         requirementsHelper.updateSize(leftComposite.getBounds());
+        leftScrolledComposite.setMinWidth(requirementsHelper.getMaxXEnd());
+        leftScrolledComposite.setMinHeight(requirementsHelper.getMaxYEnd());
         descriptionHelper.updateSize(rightComposite.getBounds());
         updateEnableField();
     }

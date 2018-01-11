@@ -49,6 +49,9 @@ public class RequirementsHelper {
     private List<Control> createdControls;
     private Button createdButton;
 
+    private int maxXEnd;
+    private int maxYEnd;
+
     private int y;
     private int y1;
     private int y2;
@@ -104,6 +107,7 @@ public class RequirementsHelper {
         y = basisY + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
         y1 = basisY1 + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
         y2 = basisY2 + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
+        maxYEnd = Math.max(maxYEnd, y2 + heightForLabels);
         createCommonRequirement(requirementWrapper);
 
         if (requirementWrapper instanceof TextFieldMinMaxRequirementWrapper) {
@@ -204,6 +208,7 @@ public class RequirementsHelper {
         max.setBounds(maxX, y1, minMaxWidth, height);
         formToolkit.adapt(max, true, true);
         createdControls.add(max);
+        maxXEnd = Math.max(maxXEnd, maxX + minMaxWidth);
 
         addUnit(requirementWrapper, unitForMaxX);
 
@@ -310,7 +315,7 @@ public class RequirementsHelper {
         userWeightingLabel.setBounds(userWeightingLabelX, 0, userWeightingLabelSize.x, userWeightingLabelSize.y);
         formToolkit.adapt(userWeightingLabel, false, false);
         userWeightingLabel.setForeground(Configs.KIT_GREEN_70);
-
+        maxXEnd = Math.max(maxXEnd, userWeightingLabelX + userWeightingLabelSize.x);
     }
 
     private void createTextFieldRequirement(TextFieldRequirementWrapper requirementWrapper) {
@@ -330,6 +335,7 @@ public class RequirementsHelper {
         requirementWrapper.value.setBounds(minX, y1, minMaxWidth, height);
         formToolkit.adapt(requirementWrapper.value, true, true);
         createdControls.add(requirementWrapper.value);
+        maxXEnd = Math.max(maxXEnd, minX + minMaxWidth);
 
         addUnit(requirementWrapper, unitForMinX);
     }
@@ -344,6 +350,7 @@ public class RequirementsHelper {
         formToolkit.adapt(requirementWrapper.value, true, true);
         createdControls.add(requirementWrapper.value);
         createdButton = requirementWrapper.value;
+        maxXEnd = Math.max(maxXEnd, minX + minMaxWidth);
 
         addUnit(requirementWrapper, unitForMinX);
     }
@@ -366,6 +373,7 @@ public class RequirementsHelper {
         requirementWrapper.values.setBounds(minX, y1, maxWidth + GUI.comboOffsetWidth, height);
         formToolkit.adapt(requirementWrapper.values, true, true);
         createdControls.add(requirementWrapper.values);
+        maxXEnd = Math.max(maxXEnd, minX + maxWidth);
 
         addUnit(requirementWrapper, unitForMinX);
     }
@@ -377,6 +385,7 @@ public class RequirementsHelper {
             unitForMin.setBounds(unit, y2, unitWidth, heightForLabels);
             formToolkit.adapt(unitForMin, false, false);
             createdControls.add(unitForMin);
+            maxXEnd = Math.max(maxXEnd, unit + unitWidth);
         }
     }
 
@@ -397,6 +406,7 @@ public class RequirementsHelper {
             x = 0;
         }
         topicLabel.setBounds(x, y, width, sizeOfText.y);
+        maxXEnd = Math.max(maxXEnd, x + width);
 
         if (isOptimization) {
             int secondY = y + sizeOfText.y + Math.round((basisY - y - sizeOfText.y) / 2.f);
@@ -406,6 +416,15 @@ public class RequirementsHelper {
             Rectangle userWeightingBounds = userWeightingLabel.getBounds();
             userWeightingLabel.setBounds(userWeightingBounds.x, secondY, userWeightingBounds.width,
                     userWeightingBounds.height);
+            maxXEnd = Math.max(maxXEnd, userWeightingBounds.x + userWeightingBounds.width);
         }
+    }
+
+    public int getMaxXEnd() {
+        return maxXEnd;
+    }
+
+    public int getMaxYEnd() {
+        return maxYEnd;
     }
 }
