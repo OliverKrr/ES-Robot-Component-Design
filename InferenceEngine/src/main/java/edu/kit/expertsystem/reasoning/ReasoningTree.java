@@ -287,6 +287,11 @@ public class ReasoningTree {
             satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
                     .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toSet()));
         }
+        if (Vocabulary.CLASS_MOTORCONTROLLERPOSITIONMATCH.equals(treeClass)) {
+            // I have no idea why this is not working...
+            // It just deletes everything everytime...
+            return;
+        }
         genericTool.getOntology().subClassAxiomsForSuperClass(treeClass).forEach(axiom -> satisfiedChildInstances
                 .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toSet())));
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();

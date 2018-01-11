@@ -326,12 +326,47 @@ swrlb:notEqual(?D, 0.0)
 
 
 MotorControllerSatisfyRule:
-ElmoServoDrive(?mc) ^ hasCurrentRequirement(?mc, ?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, true) ^
+ElmoServoDrive(?mc) ^ hasCurrentRequirement(?mc, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^
+swrlb:notEqual(?nmc, "None")
 -> SatisfiedMotorController(?mc)
 
 MotorControllerNoneSatisfyRule:
-NoMC(?mc) ^ hasCurrentRequirement(?mc, ?r) ^ needMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, false) ^
+NoMC(?mc) ^ hasCurrentRequirement(?mc, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^
+swrlb:equal(?nmc, "None")
 -> SatisfiedMotorController(?mc)
+
+
+
+MotorControllerPositionAxialSatisfy1Rule:
+MotorControllerPositionAxial(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Any")
+-> SatisfiedMotorControllerPosition(?mcp)
+
+MotorControllerPositionAxialSatisfy2Rule:
+MotorControllerPositionAxial(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Axial")
+-> SatisfiedMotorControllerPosition(?mcp)
+
+
+MotorControllerPositionTangentialSatisfy1Rule:
+MotorControllerPositionTangential(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Any")
+-> SatisfiedMotorControllerPosition(?mcp)
+
+MotorControllerPositionTangentialSatisfy2Rule:
+MotorControllerPositionTangential(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Tangential")
+-> SatisfiedMotorControllerPosition(?mcp)
+
+
+MoterControllerPositionNoneSatisfy1Rule:
+MoterControllerPositionNone(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "None")
+-> SatisfiedMotorControllerPosition(?mcp)
+
+
 
 
 // (has1 = L_axial, has2=H_axial, has3=L_tangential, has4=H_tangential, has5=L_wiringConduit)
