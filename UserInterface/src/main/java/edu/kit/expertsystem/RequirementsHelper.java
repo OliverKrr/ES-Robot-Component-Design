@@ -276,8 +276,8 @@ public class RequirementsHelper {
         requirementWrapper.maxValue.addModifyListener(e -> update.run());
 
 
-        Point spinnerSize = spinnerDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-        Point scaleSize = scaleDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+        Point spinnerSize = GuiHelper.getSizeOfControl(spinnerDeviation);
+        Point scaleSize = GuiHelper.getSizeOfControl(scaleDeviation);
         int scaleHeight = Math.min(scaleSize.y, heightForLabels);
         int scaleX = deviationSpinnerX + spinnerSize.x + deviationScaleOffsetX;
         int scaleY = y + Math.round(heightForLabels / 2.f) - Math.round(scaleHeight / 2.f);
@@ -287,7 +287,7 @@ public class RequirementsHelper {
         scaleDeviation.setBounds(scaleX, scaleY, scaleSize.x, scaleHeight);
         formToolkit.adapt(scaleDeviation, true, true);
 
-        Point deviationSize = GuiHelper.getSizeOfText(deviationLabel, deviationLabel.getText());
+        Point deviationSize = GuiHelper.getSizeOfControl(deviationLabel);
         int deviationX = deviationSpinnerX + Math.round((spinnerSize.x + scaleSize.x + deviationScaleOffsetX) / 2.f)
                 - Math.round(deviationSize.x / 2.f);
 
@@ -303,12 +303,12 @@ public class RequirementsHelper {
             userWeighting.add(String.valueOf(i));
         }
         userWeighting.select(TextFieldMinMaxRequirementWrapper.defaultUserWeighting);
-        Point userWeightingSize = userWeighting.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+        Point userWeightingSize = GuiHelper.getSizeOfControl(userWeighting);
         int userWeightingX = scaleX + scaleSize.x + userWeightingOffsetX;
         userWeighting.setBounds(userWeightingX, y1, userWeightingSize.x, height);
         formToolkit.adapt(userWeighting, true, true);
 
-        Point userWeightingLabelSize = GuiHelper.getSizeOfText(userWeightingLabel, userWeightingLabel.getText());
+        Point userWeightingLabelSize = GuiHelper.getSizeOfControl(userWeightingLabel);
         int userWeightingLabelX = userWeightingX + Math.round(userWeightingSize.x / 2.f) - Math.round
                 (userWeightingLabelSize.x / 2.f);
 
@@ -361,16 +361,15 @@ public class RequirementsHelper {
         requirementWrapper.values = new Combo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         requirementWrapper.values.setEnabled(realReq.enable);
         int selectionIndex = 0;
-        int maxWidth = 0;
         for (int i = 0; i < realReq.values.length; i++) {
             requirementWrapper.values.add(realReq.values[i]);
             if (realReq.values[i].equals(realReq.defaultValue)) {
                 selectionIndex = i;
             }
-            maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(requirementWrapper.values, realReq.values[i]).x);
         }
+        int maxWidth = GuiHelper.getSizeOfControl(requirementWrapper.values).x;
         requirementWrapper.values.select(selectionIndex);
-        requirementWrapper.values.setBounds(minX, y1, maxWidth + GUI.comboOffsetWidth, height);
+        requirementWrapper.values.setBounds(minX, y1, maxWidth, height);
         formToolkit.adapt(requirementWrapper.values, true, true);
         createdControls.add(requirementWrapper.values);
         maxXEnd = Math.max(maxXEnd, minX + maxWidth);
@@ -399,7 +398,7 @@ public class RequirementsHelper {
 
     private void updateTopicSize(Rectangle bounds) {
         int y = basisY + offsetY * -1;
-        Point sizeOfText = GuiHelper.getSizeOfText(topicLabel, topicLabel.getText());
+        Point sizeOfText = GuiHelper.getSizeOfControl(topicLabel);
         int width = sizeOfText.x;
         int x = (bounds.width - width) / 2;
         if (x < 0) {

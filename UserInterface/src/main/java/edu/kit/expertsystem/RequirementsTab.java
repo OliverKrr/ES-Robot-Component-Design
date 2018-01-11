@@ -182,7 +182,7 @@ public class RequirementsTab {
 
     private void updateEnableField() {
         if (btnEnableFields != null) {
-            Point size = GuiHelper.getSizeOfText(btnEnableFields, "Disable fields");
+            Point size = GuiHelper.getSizeOfControl(btnEnableFields);
             // Offset for width, to include the checkbox size
             int realWidth = size.x + btnEnalbeFieldOffsetXEnd;
             int xCord = leftComposite.getBounds().width - realWidth;

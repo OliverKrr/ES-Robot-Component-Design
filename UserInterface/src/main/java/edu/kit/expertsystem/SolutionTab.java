@@ -161,26 +161,20 @@ public class SolutionTab {
     }
 
     private void updateSizeOfSaveSolutionOntologyButton() {
-        int width = GuiHelper.getSizeOfText(saveSolutionOntologyButton, saveSolutionOntologyButton.getText()).x +
-                saveSolutionOntologyButtonWidthOffset;
+        int width = GuiHelper.getSizeOfControl(saveSolutionOntologyButton).x + saveSolutionOntologyButtonWidthOffset;
         saveSolutionOntologyButton.setBounds(offsetX, offsetY, width, searchTextHeight);
     }
 
     private void updateSizeOfOrderByCombos() {
-        int maxWidth = 0;
-        for (String item : orderByCombo.getItems()) {
-            maxWidth = Math.max(maxWidth, GuiHelper.getSizeOfText(orderByCombo, item).x);
-        }
-        maxWidth += GUI.comboOffsetWidth;
+        int width = GuiHelper.getSizeOfControl(orderByCombo).x;
         int x = saveSolutionOntologyButton.getBounds().x + saveSolutionOntologyButton.getBounds().width + offsetX;
-        orderByCombo.setBounds(x, offsetY, maxWidth, searchTextHeight);
-        int x2 = x + maxWidth + offsetX;
-        orderByCombo2.setBounds(x2, offsetY, maxWidth, searchTextHeight);
+        orderByCombo.setBounds(x, offsetY, width, searchTextHeight);
+        int x2 = x + width + offsetX;
+        orderByCombo2.setBounds(x2, offsetY, width, searchTextHeight);
     }
 
     private void updateSizeOfSearchText() {
-        int widthOfSearchText = Math.max(searchTextWidth, GuiHelper.getSizeOfText(searchField, searchField.getText())
-                .x);
+        int widthOfSearchText = Math.max(searchTextWidth, GuiHelper.getSizeOfControl(searchField).x);
         int xOfSearchText = leftComposite.getBounds().width - widthOfSearchText - offsetXEnd;
         int endXOfOther = orderByCombo2.getBounds().x + orderByCombo2.getBounds().width;
         if (xOfSearchText < endXOfOther + offsetXEnd) {
@@ -192,7 +186,7 @@ public class SolutionTab {
 
     private void updateSizeOfShowOnlyDiffsCheckBox() {
         int y = 2 * offsetY + searchTextHeight;
-        Point size = GuiHelper.getSizeOfText(showOnlyDiffsCheckBox, "Show all components and values of results");
+        Point size = GuiHelper.getSizeOfControl(showOnlyDiffsCheckBox);
         // Offset for width, to include the checkbox size
         int realWidth = size.x + showOnlyDiffsCheckBoxWidthOffset;
         showOnlyDiffsCheckBox.setBounds(offsetX, y, realWidth, searchTextHeight);

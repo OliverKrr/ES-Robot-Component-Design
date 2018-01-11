@@ -14,10 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import java.util.List;
 
 public class NavigationBarHelper {
-
-    private static final int navItemWidthOffset = 15;
-    private static final int navItemHeightOffset = 5;
-
+    
     private static final int horizontalY = GUI.navBarY;
 
     private static final int verticalX = 5;
@@ -44,28 +41,24 @@ public class NavigationBarHelper {
     }
 
     private Rectangle createNavBar(List<NavigationItem> navItems, int level, boolean isHorizontal) {
-        int maxWidth = 0;
-        int maxHeight = 0;
+        int navItemWidth = 0;
+        int navItemHeight = 0;
 
         for (NavigationItem item : navItems) {
             item.item = new Button(composite, SWT.PUSH);
             item.defaultFontHeight = GuiHelper.getFontHeight(item.item.getFont()) + 2;
             item.item.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(item.item.getFont()), item
                     .defaultFontHeight + 2, SWT.BOLD));
+            item.item.setText(item.name);
             // calculate max width and height
-            Point size = GuiHelper.getSizeOfText(item.item, item.name);
-            maxWidth = Math.max(maxWidth, size.x);
-            maxHeight = Math.max(maxHeight, size.y);
+            Point size = GuiHelper.getSizeOfControl(item.item);
+            navItemWidth = Math.max(navItemWidth, size.x);
+            navItemHeight = Math.max(navItemHeight, size.y);
         }
 
-        int navItemWidth = maxWidth + navItemWidthOffset;
-        int navItemHeight = maxHeight + navItemHeightOffset;
         lastRectangle = new Rectangle(0, 0, navItemWidth, navItemHeight);
 
         for (int i = 0; i < navItems.size(); i++) {
-            NavigationItem item = navItems.get(i);
-            item.item.setText(item.name);
-
             if (isHorizontal) {
                 lastRectangle.x = horizontalX + i * navItemWidth;
                 lastRectangle.y = horizontalY + level * navItemHeight;
@@ -73,6 +66,7 @@ public class NavigationBarHelper {
                 lastRectangle.x = verticalX + level * navItemWidth;
                 lastRectangle.y = verticalBasisY + i * navItemHeight;
             }
+            NavigationItem item = navItems.get(i);
             item.item.setBounds(lastRectangle);
             formToolkit.adapt(item.item, true, true);
         }

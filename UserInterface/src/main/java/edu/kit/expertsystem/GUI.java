@@ -26,7 +26,6 @@ public class GUI {
     public static final int navBarY = 10;
     public static final int errorTextHeight = 115;
     public static final int errorTextYOffset = 2;
-    public static final int comboOffsetWidth = 38;
     private static final Point firstSizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
@@ -270,7 +269,7 @@ public class GUI {
         requirementsOptimization.updateSize(updatedRec, getWeights());
         solutionTab.updateSize(updatedRec);
 
-        int unitsToReasonComboWidth = getUnitsToReasoneComboWidth();
+        int unitsToReasonComboWidth = GuiHelper.getSizeOfControl(unitsToReasonCombo).x;
         int unitToReasonComboX = updatedRec.x + updatedRec.width - unitsToReasonComboWidth;
         unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth, unitsToReasonCombo.getSize
                 ().y);
@@ -285,15 +284,6 @@ public class GUI {
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         float ratioForWeights = 1f * newWidthOfContent / 835;
         return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(310 / ratioForWeights)};
-    }
-
-    private int getUnitsToReasoneComboWidth() {
-        int maxWidth = 0;
-        for (String unit : unitsToReasonCombo.getItems()) {
-            Point size = GuiHelper.getSizeOfText(unitsToReasonCombo, unit);
-            maxWidth = Math.max(maxWidth, size.x);
-        }
-        return maxWidth + comboOffsetWidth;
     }
 
     private void createErrorText() {
