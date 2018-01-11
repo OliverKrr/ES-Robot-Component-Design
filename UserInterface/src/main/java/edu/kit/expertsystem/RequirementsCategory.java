@@ -50,8 +50,7 @@ public class RequirementsCategory {
     public Rectangle createNavBars(List<RequirementWrapper> requirements) {
         Category optiCat = new Category();
         if (isOptimization) {
-            List<RequirementWrapper> reqs = new ArrayList<>();
-            reqPerCategory.put(optiCat, reqs);
+            reqPerCategory.put(optiCat, new ArrayList<>());
         }
         for (RequirementWrapper req : requirements) {
             if (isOptimization) {

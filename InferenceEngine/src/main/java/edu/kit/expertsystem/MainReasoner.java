@@ -224,34 +224,8 @@ public class MainReasoner {
 
             result.requirements = copyRequirements(requirements);
             for (Requirement req : result.requirements) {
-                if (req.resultIRI == null) {
-                    continue;
-                }
-                if (req instanceof TextFieldMinMaxRequirement) {
-                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
-                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
-                            (obProp));
-                } else if (req instanceof TextFieldRequirement) {
-                    TextFieldRequirement realReq = (TextFieldRequirement) req;
-                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
-                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
-                            (obProp));
-                } else if (req instanceof CheckboxRequirement) {
-                    CheckboxRequirement realReq = (CheckboxRequirement) req;
-                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
-                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
-                } else if (req instanceof DropdownRequirement) {
-                    DropdownRequirement realReq = (DropdownRequirement) req;
-                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
-                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = obProp.getLiteral());
-                } else if (req instanceof RequirementOnlyForSolution) {
-                    RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
-                    genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req
-                            .resultIRI)).findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble
-                            (obProp));
-                } else {
-                    throw new RuntimeException("Requirement class unknown: " + req.getClass());
+                if (req.resultIRI != null) {
+                    setResult(resultingComponent, req);
                 }
             }
 
@@ -301,6 +275,32 @@ public class MainReasoner {
             }
         }
         return copyReqs;
+    }
+
+    private void setResult(OWLNamedIndividual resultingComponent, Requirement req) {
+        if (req instanceof TextFieldMinMaxRequirement) {
+            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+            genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    .findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
+        } else if (req instanceof TextFieldRequirement) {
+            TextFieldRequirement realReq = (TextFieldRequirement) req;
+            genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    .findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
+        } else if (req instanceof CheckboxRequirement) {
+            CheckboxRequirement realReq = (CheckboxRequirement) req;
+            genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    .findAny().ifPresent(obProp -> realReq.result = obProp.parseBoolean());
+        } else if (req instanceof DropdownRequirement) {
+            DropdownRequirement realReq = (DropdownRequirement) req;
+            genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    .findAny().ifPresent(obProp -> realReq.result = obProp.getLiteral());
+        } else if (req instanceof RequirementOnlyForSolution) {
+            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+            genericTool.getReasoner().dataPropertyValues(resultingComponent, getOWLDataProperty(req.resultIRI))
+                    .findAny().ifPresent(obProp -> realReq.result = helper.parseValueToDouble(obProp));
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+        }
     }
 
     private void handleDeviations(List<Result> results) {

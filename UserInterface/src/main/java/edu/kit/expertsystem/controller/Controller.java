@@ -40,8 +40,8 @@ public class Controller {
 
     private DecimalFormat df = new DecimalFormat("#.####");
 
-    boolean haveRequirementChanged = true;
-    boolean isReseted = false;
+    private boolean haveRequirementChanged = true;
+    private boolean isReseted = false;
 
     public Controller(GUI gui) {
         this.gui = gui;

@@ -140,7 +140,7 @@ public class RequirementsTab {
             descriptionHelper.createDescription("Deviation", "The amount of deviation the result can differ from.",
                     rowNumber++);
             descriptionHelper.createDescription("Priority", "Influences the quality index depending on the actual " +
-                    "deviation.", rowNumber++);
+                    "deviation.\n0=no influence\n5=very important", rowNumber++);
         } else {
             descriptionHelper.createDescription("min/max", "Desired min and max values. If no entered, defaults are"
                     + " taken: min=0 and max=infinite.", rowNumber++);

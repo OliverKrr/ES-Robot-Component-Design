@@ -31,7 +31,7 @@ swrlb:multiply(?M_res_max, ?M_peak, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_ma
 MotorVoltageSatisfy1Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
 hasVoltageReq_U_unit_V(?r, ?v_req) ^
-swrlb:equal(?v_req, "any V")
+swrlb:equal(?v_req, "Any V")
 -> SatisfiedVoltage(?m)
 
 MotorVoltageSatisfy2Rule:
@@ -410,46 +410,105 @@ TorqueSensorStrainGaugeBased_HollowShaftSatisfy1Rule:
 StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Any")
--> SatisfiedTorqueSensor(?tos) ^ Linear(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Linear(?tos)
 
 TorqueSensorStrainGaugeBased_HollowShaftSatisfy2Rule:
 StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Strain-Gauge-Based")
--> SatisfiedTorqueSensor(?tos) ^ Linear(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Linear(?tos)
 
 
 TorqueSensorStrainGaugeBased_SpokeWheelSatisfy1Rule:
 StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Any")
--> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 TorqueSensorStrainGaugeBased_SpokeWheelSatisfy2Rule:
 StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Strain-Gauge-Based")
--> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 
 TorqueSensorPositionEncoderBasedSatisfy1Rule:
 PositionEncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Any")
--> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 TorqueSensorPositionEncoderBasedSatisfy2Rule:
 PositionEncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "Position-Encoder-Based")
--> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
+-> BeforeSatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 
 TorqueSensorNoneSatisfyRule:
 NoTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
 needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?ntssgb, "None")
+-> BeforeSatisfiedTorqueSensor(?tos)
+
+
+
+TorqueSensorStrainGaugeBased_HollowShaftAfterSatisfy1Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Any")
+-> SatisfiedTorqueSensor(?tos)
+
+TorqueSensorStrainGaugeBased_HollowShaftAfterSatisfy2Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Linear")
+-> SatisfiedTorqueSensor(?tos)
+
+
+TorqueSensorStrainGaugeBased_SpokeWheelAfterSatisfy1Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Any")
+-> SatisfiedTorqueSensor(?tos)
+
+TorqueSensorStrainGaugeBased_SpokeWheelAfterSatisfy2Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Compressed")
+-> SatisfiedTorqueSensor(?tos)
+
+
+TorqueSensorPositionEncoderBasedAfterSatisfy1Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ PositionEncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Any")
+-> SatisfiedTorqueSensor(?tos)
+
+TorqueSensorPositionEncoderBasedAfterSatisfy2Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ PositionEncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "TwoSide")
+-> SatisfiedTorqueSensor(?tos)
+
+
+TorqueSensorNoneAfterSatisfy1Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ NoTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Any")
 -> SatisfiedTorqueSensor(?tos) ^ Linear(?tos) ^ Compressed(?tos)
+
+TorqueSensorNoneAfterSatisfy2Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ NoTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Linear")
+-> SatisfiedTorqueSensor(?tos) ^ Linear(?tos)
+
+TorqueSensorNoneAfterSatisfy3Rule:
+BeforeSatisfiedTorqueSensor(?tos) ^ NoTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+chooseOutputStructure(?r, ?cos) ^
+swrlb:equal(?cos, "Compressed")
+-> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 
 
@@ -497,12 +556,18 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 
 
 
-
-
-DiameterInputDriveBearingMatchLinearSatisfyRule:
+DiameterInputDriveBearingMatchLinearSatisfy1Rule:
 DiameterInputDriveBearingMatchLinear(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^
-swrlb:lessThanOrEqual(?d_ib, ?d_m)
+swrlb:lessThanOrEqual(?d_ib, ?d_m) ^
+hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
+-> HalfSatisfiedDiameterInputDriveBearingMatchLinear(?didbm)
+
+DiameterInputDriveBearingMatchLinearSatisfy2Rule:
+DiameterInputDriveBearingMatchLinear(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
+hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^
+swrlb:lessThanOrEqual(?d_ib, ?d_m) ^
+hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
 -> HalfSatisfiedDiameterInputDriveBearingMatchLinear(?didbm)
 
 
@@ -526,8 +591,18 @@ DiameterInputDriveBearingMatchCompressedBeforeSatisfy1Rule:
 DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp)
+swrlb:lessThanOrEqual(?D_db, ?temp) ^
+hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
 -> BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
+DiameterInputDriveBearingMatchCompressedBeforeSatisfy12Rule:
+DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
+hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
+swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
+swrlb:lessThanOrEqual(?D_db, ?temp) ^
+hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
+-> BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
+
 
 DiameterInputDriveBearingMatchCompressedSatisfy1Rule:
 BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
@@ -1585,7 +1660,7 @@ SACunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ Satis
 
 SACunitIsComposedOfRule:
 SatisfiedSACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasIncrementalEncoder(?li, ?ie) ^ hasHallSensor(?li, ?hs) ^ hasMotor(?de, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
--> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfHallSensor(?sac, ?hs) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularSplineScrew(?s_g_cs) ^ isComposedOfGearBoxCircularSplineScrew(?sac, ?s_g_cs) ^ GearBoxFlexSplineScrew(?s_g_fs) ^  isComposedOfGearBoxFlexSplineScrew(?sac, ?s_g_fs) ^ GearBoxWaveGeneratorScrew(?s_g_wg) ^  isComposedOfGearBoxWaveGeneratorScrew(?sac, ?s_g_wg) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfMotorBrake(?sac, ?mb) ^ isComposedOfInputForm(?sac, ?li) ^ isComposedOfOutputForm(?sac, ?lo)
+-> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfHallSensor(?sac, ?hs) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearBox(?sac, ?g) ^ GearBoxCircularSplineScrew(?s_g_cs) ^ isComposedOfGearBoxCircularSplineScrew(?sac, ?s_g_cs) ^ GearBoxFlexSplineScrew(?s_g_fs) ^  isComposedOfGearBoxFlexSplineScrew(?sac, ?s_g_fs) ^ GearBoxWaveGeneratorScrew(?s_g_wg) ^  isComposedOfGearBoxWaveGeneratorScrew(?sac, ?s_g_wg) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfMotorBrake(?sac, ?mb) ^ isComposedOfDriveStructure(?sac, ?li) ^ isComposedOfOutputStructure(?sac, ?lo)
 
 
 
