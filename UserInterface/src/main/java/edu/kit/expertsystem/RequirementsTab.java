@@ -129,10 +129,14 @@ public class RequirementsTab {
 
         rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
-        if (!isOptimization) {
-            descriptionHelper.createDescription("min/max:", "Desired min and max values. If no entered, defaults are"
+        if (isOptimization) {
+            descriptionHelper.createDescription("Deviation", "The amount of deviation the result can differ from.",
+                    rowNumber++);
+            descriptionHelper.createDescription("Prioritization", "Influences the matchingValue depending on the " +
+                    "actual deviation.", rowNumber++);
+        } else {
+            descriptionHelper.createDescription("min/max", "Desired min and max values. If no entered, defaults are"
                     + " taken: min=0 and max=infinite.", rowNumber++);
-
         }
         for (RequirementWrapper requirement : requirements) {
             if (requirement.requirement.description != null && !(requirement instanceof

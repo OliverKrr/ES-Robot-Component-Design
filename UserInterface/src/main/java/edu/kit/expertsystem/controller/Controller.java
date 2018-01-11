@@ -126,6 +126,17 @@ public class Controller {
                 }
                 haveRequirementChanged |= Math.abs(oldMin - realReq.min) > 0.000001 || Math.abs(oldMax - realReq.max)
                         > 0.000001;
+
+                if (realReq.allowOptimization) {
+                    double oldDeviationPercentage = realReq.deviationPercentage;
+                    int oldUserWeight = realReq.userWeight;
+                    realReq.deviationPercentage = reqWrapper.deviation.getSelection() / Math.pow(10,
+                            TextFieldMinMaxRequirementWrapper.digitsDeviation);
+                    realReq.userWeight = Integer.parseInt(reqWrapper.userWeighting.getText());
+
+                    haveRequirementChanged |= Math.abs(oldDeviationPercentage - realReq.deviationPercentage) >
+                            0.000001 || oldUserWeight != realReq.userWeight;
+                }
             } else if (req instanceof TextFieldRequirementWrapper) {
                 TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
                 TextFieldRequirement realReq = (TextFieldRequirement) req.requirement;

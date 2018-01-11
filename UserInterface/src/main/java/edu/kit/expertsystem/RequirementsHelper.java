@@ -3,6 +3,8 @@ package edu.kit.expertsystem;
 import edu.kit.expertsystem.controller.wrapper.*;
 import edu.kit.expertsystem.model.req.*;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.*;
@@ -14,21 +16,26 @@ import java.util.List;
 
 public class RequirementsHelper {
 
-    private static final int displayNameWidth = 182;
+    private static final int displayNameWidth = 172;
     private static final int minMaxWidth = 40;
-    private static final int unitWidth = 44;
+    private static final int unitWidth = 30;
 
     private static final int height = 23;
     private static final int heightForLabels = height + 18;
 
     private static final int displayNameX = 10;
-    private static final int minX = 208;
-    private static final int unitForMinX = 254;
-    private static final int maxX = 304;
-    private static final int unitForMaxX = 350;
+    private static final int minX = displayNameX + displayNameWidth + 16;
+    private static final int unitForMinX = minX + minMaxWidth + 6;
+    private static final int maxX = unitForMinX + unitWidth + 6;
+    private static final int unitForMaxX = maxX + minMaxWidth + 6;
+    private static final int deviationSpinnerX = unitForMaxX + unitWidth + 35;
+    private static final int deviationScaleOffsetX = 4;
+    private static final int userWeightingOffsetX = 45;
 
-    private static final int basisY1 = 61;
-    private static final int basisY2 = 64;
+    private static final int optimizationYOffset = 20;
+    private static final int basisY = 61;
+    private static final int basisY1 = basisY + Math.round(heightForLabels / 2.f) - Math.round(height / 2.f);
+    private static final int basisY2 = basisY1 + 3;
     private static final int offsetY = 57;
 
     private final FormToolkit formToolkit;
@@ -36,9 +43,12 @@ public class RequirementsHelper {
     private final boolean isOptimization;
 
     private Label topicLabel;
+    private Label deviationLabel;
+    private Label userWeightingLabel;
     private List<Control> createdControls;
     private Button createdButton;
 
+    private int y;
     private int y1;
     private int y2;
 
@@ -57,6 +67,18 @@ public class RequirementsHelper {
                 .getFontHeight(topicLabel.getFont()) + 7, SWT.BOLD));
         formToolkit.adapt(topicLabel, false, false);
         topicLabel.setForeground(Configs.KIT_GREEN_100);
+
+        if (isOptimization) {
+            deviationLabel = new Label(composite, SWT.WRAP);
+            deviationLabel.setText("Allowed deviation in %");
+            deviationLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(deviationLabel.getFont()),
+                    GuiHelper.getFontHeight(deviationLabel.getFont()) + 3, SWT.BOLD));
+
+            userWeightingLabel = new Label(composite, SWT.WRAP);
+            userWeightingLabel.setText("Prioritization");
+            userWeightingLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(userWeightingLabel.getFont())
+                    , GuiHelper.getFontHeight(userWeightingLabel.getFont()) + 3, SWT.BOLD));
+        }
     }
 
     public boolean createRequirement(RequirementWrapper requirementWrapper,
@@ -78,8 +100,9 @@ public class RequirementsHelper {
 
         createdControls = new ArrayList<>();
         createdButton = null;
-        y1 = basisY1 + offsetY * rowNumber;
-        y2 = basisY2 + offsetY * rowNumber;
+        y = basisY + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
+        y1 = basisY1 + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
+        y2 = basisY2 + offsetY * rowNumber + (isOptimization ? optimizationYOffset : 0);
         createCommonRequirement(requirementWrapper);
 
         if (requirementWrapper instanceof TextFieldMinMaxRequirementWrapper) {
@@ -108,7 +131,7 @@ public class RequirementsHelper {
     private void createCommonRequirement(RequirementWrapper requirementWrapper) {
         // \t funktioniert hier -> mehr siehe Arbeitsblatt
         Label displayName = new Label(composite, SWT.WRAP);
-        displayName.setBounds(displayNameX, y1, displayNameWidth, heightForLabels);
+        displayName.setBounds(displayNameX, y, displayNameWidth, heightForLabels);
         displayName.setText(requirementWrapper.requirement.displayName + ":");
         formToolkit.adapt(displayName, false, false);
         displayName.setForeground(Configs.KIT_GREEN_70);
@@ -169,10 +192,76 @@ public class RequirementsHelper {
         formToolkit.adapt(max, true, true);
         createdControls.add(max);
 
-        //TODO add deviation and userWeighting
-        //TODO add parsing to controller for != null
-
         addUnit(requirementWrapper, unitForMaxX);
+
+        if (isOptimization) {
+            createOptimizationComponents(requirementWrapper);
+        }
+    }
+
+    private void createOptimizationComponents(TextFieldMinMaxRequirementWrapper requirementWrapper) {
+        int spinnerFactor = (int) Math.round(Math.pow(10, TextFieldMinMaxRequirementWrapper.digitsDeviation));
+        int spinnerMaximum = TextFieldMinMaxRequirementWrapper.maxDeviation * spinnerFactor;
+        Spinner spinnerDeviation = new Spinner(composite, SWT.WRAP | SWT.BORDER);
+        requirementWrapper.deviation = spinnerDeviation;
+        spinnerDeviation.setValues(0, 0, spinnerMaximum, TextFieldMinMaxRequirementWrapper.digitsDeviation,
+                spinnerMaximum / spinnerFactor, spinnerMaximum / spinnerFactor * 5);
+
+        Scale scaleDeviation = new Scale(composite, SWT.WRAP | SWT.BORDER);
+        scaleDeviation.setSelection(0);
+        scaleDeviation.setMinimum(0);
+        scaleDeviation.setMaximum(TextFieldMinMaxRequirementWrapper.maxDeviation);
+        scaleDeviation.setIncrement(1);
+        scaleDeviation.setPageIncrement(5);
+        scaleDeviation.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                spinnerDeviation.setSelection(scaleDeviation.getSelection() * 100);
+            }
+        });
+        spinnerDeviation.addModifyListener(e -> scaleDeviation.setSelection(Math.round(spinnerDeviation.getSelection
+                () / 100.f)));
+
+        Point spinnerSize = spinnerDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+        Point scaleSize = scaleDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+        int scaleHeight = Math.min(scaleSize.y, heightForLabels);
+        int scaleX = deviationSpinnerX + spinnerSize.x + deviationScaleOffsetX;
+        int scaleY = y + Math.round(heightForLabels / 2.f) - Math.round(scaleHeight / 2.f);
+
+        spinnerDeviation.setBounds(deviationSpinnerX, y1, spinnerSize.x, height);
+        formToolkit.adapt(spinnerDeviation, true, true);
+        scaleDeviation.setBounds(scaleX, scaleY, scaleSize.x, scaleHeight);
+        formToolkit.adapt(scaleDeviation, true, true);
+
+        Point deviationSize = GuiHelper.getSizeOfText(deviationLabel, deviationLabel.getText());
+        int deviationX = deviationSpinnerX + Math.round((spinnerSize.x + scaleSize.x + deviationScaleOffsetX) / 2.f)
+                - Math.round(deviationSize.x / 2.f);
+
+        deviationLabel.setBounds(deviationX, 0, deviationSize.x, deviationSize.y);
+        formToolkit.adapt(deviationLabel, false, false);
+        deviationLabel.setForeground(Configs.KIT_GREEN_70);
+
+
+        Combo userWeighting = new Combo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        requirementWrapper.userWeighting = userWeighting;
+        for (int i = TextFieldMinMaxRequirementWrapper.minUserWeighting; i <= TextFieldMinMaxRequirementWrapper
+                .maxUserWeighting; ++i) {
+            userWeighting.add(String.valueOf(i));
+        }
+        userWeighting.select(TextFieldMinMaxRequirementWrapper.defaultUserWeighting);
+        Point userWeightingSize = userWeighting.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+        int userWeightingX = scaleX + scaleSize.x + userWeightingOffsetX;
+        userWeighting.setBounds(userWeightingX, y1, userWeightingSize.x, height);
+        formToolkit.adapt(userWeighting, true, true);
+
+        Point userWeightingLabelSize = GuiHelper.getSizeOfText(userWeightingLabel, userWeightingLabel.getText());
+        int userWeightingLabelX = userWeightingX + Math.round(userWeightingSize.x / 2.f) - Math.round
+                (userWeightingLabelSize.x / 2.f);
+
+        userWeightingLabel.setBounds(userWeightingLabelX, 0, userWeightingLabelSize.x, userWeightingLabelSize.y);
+        formToolkit.adapt(userWeightingLabel, false, false);
+        userWeightingLabel.setForeground(Configs.KIT_GREEN_70);
+
     }
 
     private void createTextFieldRequirement(TextFieldRequirementWrapper requirementWrapper) {
@@ -246,10 +335,12 @@ public class RequirementsHelper {
         updateTopicSize(bounds);
         // TODO evtl. Mechanismus auch machen um andere Reqs anzuordnen
         // TODO bzw. diese auch noch mal schöner machen
+        // TODO use compouteSize -> take Maximum propagate to outside
+        // use max of everyone and updateSize
     }
 
     private void updateTopicSize(Rectangle bounds) {
-        int y = basisY1 + offsetY * -1;
+        int y = basisY + offsetY * -1;
         Point sizeOfText = GuiHelper.getSizeOfText(topicLabel, topicLabel.getText());
         int width = sizeOfText.x;
         int x = (bounds.width - width) / 2;
@@ -257,5 +348,15 @@ public class RequirementsHelper {
             x = 0;
         }
         topicLabel.setBounds(x, y, width, sizeOfText.y);
+
+        if (isOptimization) {
+            int secondY = y + sizeOfText.y + Math.round((basisY - y - sizeOfText.y) / 2.f);
+            Rectangle deviationBounds = deviationLabel.getBounds();
+            deviationLabel.setBounds(deviationBounds.x, secondY, deviationBounds.width, deviationBounds.height);
+
+            Rectangle userWeightingBounds = userWeightingLabel.getBounds();
+            userWeightingLabel.setBounds(userWeightingBounds.x, secondY, userWeightingBounds.width,
+                    userWeightingBounds.height);
+        }
     }
 }

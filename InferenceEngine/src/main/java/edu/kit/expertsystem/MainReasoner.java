@@ -156,10 +156,16 @@ public class MainReasoner {
         for (Requirement req : requirements) {
             if (req instanceof TextFieldMinMaxRequirement) {
                 TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), String.valueOf(realReq.min));
-                addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), String.valueOf(realReq.max));
-                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ","
-                        + " " + realReq.max);
+                double minValue = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
+                double maxValue = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
+                if (!Double.isFinite(maxValue)) {
+                    maxValue = Double.MAX_VALUE;
+                }
+
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), String.valueOf(minValue));
+                addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), String.valueOf(maxValue));
+                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + minValue + "," +
+                        " " + maxValue);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), String.valueOf(realReq.value));

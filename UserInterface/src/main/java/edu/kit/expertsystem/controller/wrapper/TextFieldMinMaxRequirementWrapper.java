@@ -1,16 +1,26 @@
 package edu.kit.expertsystem.controller.wrapper;
 
 import edu.kit.expertsystem.model.req.Requirement;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
 import java.util.Objects;
 
 public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
+    public static final int maxDeviation = 50;
+    public static final int digitsDeviation = 2;
+    public static final int minUserWeighting = 0;
+    public static final int defaultUserWeighting = 3;
+    public static final int maxUserWeighting = 5;
+
     public Text minValue;
     public Text minValueOptimization;
     public Text maxValue;
     public Text maxValueOptimization;
+    public Spinner deviation;
+    public Combo userWeighting;
 
     public TextFieldMinMaxRequirementWrapper(Requirement requirement) {
         super(requirement);
@@ -27,19 +37,21 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
         TextFieldMinMaxRequirementWrapper that = (TextFieldMinMaxRequirementWrapper) o;
         return Objects.equals(minValue, that.minValue) && Objects.equals(minValueOptimization, that
                 .minValueOptimization) && Objects.equals(maxValue, that.maxValue) && Objects.equals
-                (maxValueOptimization, that.maxValueOptimization);
+                (maxValueOptimization, that.maxValueOptimization) && Objects.equals(deviation, that.deviation) &&
+                Objects.equals(userWeighting, that.userWeighting);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), minValue, minValueOptimization, maxValue, maxValueOptimization);
+        return Objects.hash(super.hashCode(), minValue, minValueOptimization, maxValue, maxValueOptimization,
+                deviation, userWeighting);
     }
 
     @Override
     public String toString() {
         return "TextFieldMinMaxRequirementWrapper{" + "minValue=" + minValue + ", minValueOptimization=" +
                 minValueOptimization + ", maxValue=" + maxValue + ", maxValueOptimization=" + maxValueOptimization +
-                "} " + super.toString();
+                ", deviation=" + deviation + ", userWeighting=" + userWeighting + "} " + super.toString();
     }
 
 }
