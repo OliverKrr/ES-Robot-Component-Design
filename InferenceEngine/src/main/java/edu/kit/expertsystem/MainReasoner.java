@@ -3,6 +3,7 @@ package edu.kit.expertsystem;
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.io.OntologyReadAndWriteHelper;
 import edu.kit.expertsystem.model.Component;
+import edu.kit.expertsystem.model.Line;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.UnitToReason;
 import edu.kit.expertsystem.model.req.*;
@@ -257,6 +258,7 @@ public class MainReasoner {
             results.add(result);
         });
 
+        handleDeviations(results);
         helper.checkConsistency();
         logger.debug("Number of results: " + results.size());
         logger.debug("Time needed for make results: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
@@ -299,6 +301,50 @@ public class MainReasoner {
             }
         }
         return copyReqs;
+    }
+
+    private void handleDeviations(List<Result> results) {
+        for (Result result : results) {
+            double weightSum = 0;
+            double sum = 0;
+            for (Requirement req : result.requirements) {
+                if (req instanceof TextFieldMinMaxRequirement) {
+                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+                    double weightInSum = 0;
+
+                    double deviationMin = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
+                    Line minLine = new Line(deviationMin, 0.5, realReq.min, 1.0);
+                    double devMin = minLine.getY(realReq.result);
+                    if (devMin >= 0.5 && devMin < 1) {
+                        weightInSum = devMin * realReq.userWeight;
+                    } else if (devMin >= 1) {
+                        weightInSum = realReq.userWeight;
+                    }
+
+                    double deviationMax = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
+                    if (Double.isFinite(deviationMax) && realReq.max * realReq.scaleFromOntologyToUI < Double
+                            .MAX_VALUE) {
+                        Line maxLine = new Line(realReq.max, 1.0, deviationMax, 0.5);
+                        double devMax = maxLine.getY(realReq.result);
+                        if (devMax >= 0.5 && devMax < 1) {
+                            weightInSum = Math.min(weightInSum, devMax * realReq.userWeight);
+                        } else if (devMax >= 1) {
+                            weightInSum = Math.min(weightInSum, realReq.userWeight);
+                        }
+                    }
+
+                    if (weightInSum > 0) {
+                        sum += weightInSum;
+                        weightSum += realReq.userWeight;
+                    }
+                }
+            }
+
+            double dev = 1.0 / weightSum * sum;
+            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASQUALITYINDEX.getIRI().getIRIString
+                    ().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req -> (
+                            (RequirementOnlyForSolution) req).result = dev);
+        }
     }
 
     public List<UnitToReason> getUnitsToReason() {

@@ -76,7 +76,7 @@ public class RequirementsHelper {
                     GuiHelper.getFontHeight(deviationLabel.getFont()) + 3, SWT.BOLD));
 
             userWeightingLabel = new Label(composite, SWT.WRAP);
-            userWeightingLabel.setText("Prioritization");
+            userWeightingLabel.setText("Priority");
             userWeightingLabel.setFont(SWTResourceManager.getFont(GuiHelper.getFontName(userWeightingLabel.getFont())
                     , GuiHelper.getFontHeight(userWeightingLabel.getFont()) + 3, SWT.BOLD));
         }
@@ -218,7 +218,7 @@ public class RequirementsHelper {
         Spinner spinnerDeviation = new Spinner(composite, SWT.WRAP | SWT.BORDER);
         requirementWrapper.deviation = spinnerDeviation;
         spinnerDeviation.setValues(0, 0, spinnerMaximum, TextFieldMinMaxRequirementWrapper.digitsDeviation,
-                spinnerMaximum / spinnerFactor, spinnerMaximum / spinnerFactor * 5);
+                spinnerMaximum / 100, 5 * spinnerMaximum / 100);
 
         Scale scaleDeviation = new Scale(composite, SWT.WRAP | SWT.BORDER);
         scaleDeviation.setSelection(0);
@@ -229,11 +229,11 @@ public class RequirementsHelper {
         scaleDeviation.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                spinnerDeviation.setSelection(scaleDeviation.getSelection() * 100);
+                spinnerDeviation.setSelection(scaleDeviation.getSelection() * spinnerFactor);
             }
         });
-        spinnerDeviation.addModifyListener(e -> scaleDeviation.setSelection(Math.round(spinnerDeviation.getSelection
-                () / 100.f)));
+        spinnerDeviation.addModifyListener(e -> scaleDeviation.setSelection(Math.round(1f * spinnerDeviation
+                .getSelection() / spinnerFactor)));
         Runnable update = () -> {
             try {
                 if (!"".equals(requirementWrapper.minValue.getText())) {
@@ -241,6 +241,8 @@ public class RequirementsHelper {
                     double minAppliedDeviation = minValue - (1.0 * spinnerDeviation.getSelection() / spinnerFactor /
                             100.0 * minValue);
                     requirementWrapper.minApplied.setText("(" + String.valueOf(minAppliedDeviation) + ")");
+                } else {
+                    requirementWrapper.minApplied.setText("");
                 }
             } catch (NumberFormatException e) {
                 requirementWrapper.minApplied.setText("(NAN)");
@@ -251,6 +253,8 @@ public class RequirementsHelper {
                     double maxAppliedDeviation = maxValue + (1.0 * spinnerDeviation.getSelection() / spinnerFactor /
                             100.0 * maxValue);
                     requirementWrapper.maxApplied.setText("(" + String.valueOf(maxAppliedDeviation) + ")");
+                } else {
+                    requirementWrapper.maxApplied.setText("");
                 }
             } catch (NumberFormatException e) {
                 requirementWrapper.maxApplied.setText("(NAN)");

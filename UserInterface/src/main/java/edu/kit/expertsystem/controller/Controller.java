@@ -24,7 +24,8 @@ import java.util.stream.Stream;
 
 public class Controller {
 
-    private static final int MAXIMAL_NEEDED_SPACES = 13;
+    private static final int MAXIMAL_NEEDED_SPACES = 9;
+    private static final double EPSILON = 0.00001;
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
@@ -124,8 +125,8 @@ public class Controller {
                     realReq.min = parseDouble(reqWrapper.minValue, realReq.defaultMin) / realReq.scaleFromOntologyToUI;
                     realReq.max = parseDouble(reqWrapper.maxValue, realReq.defaultMax) / realReq.scaleFromOntologyToUI;
                 }
-                haveRequirementChanged |= Math.abs(oldMin - realReq.min) > 0.000001 || Math.abs(oldMax - realReq.max)
-                        > 0.000001;
+                haveRequirementChanged |= Math.abs(oldMin - realReq.min) > EPSILON || Math.abs(oldMax - realReq.max)
+                        > EPSILON;
 
                 if (realReq.allowOptimization) {
                     double oldDeviationPercentage = realReq.deviationPercentage;
@@ -135,7 +136,7 @@ public class Controller {
                     realReq.userWeight = Integer.parseInt(reqWrapper.userWeighting.getText());
 
                     haveRequirementChanged |= Math.abs(oldDeviationPercentage - realReq.deviationPercentage) >
-                            0.000001 || oldUserWeight != realReq.userWeight;
+                            EPSILON || oldUserWeight != realReq.userWeight;
                 }
             } else if (req instanceof TextFieldRequirementWrapper) {
                 TextFieldRequirementWrapper reqWrapper = (TextFieldRequirementWrapper) req;
@@ -148,7 +149,7 @@ public class Controller {
                 } else {
                     realReq.value = parseDouble(reqWrapper.value, realReq.defaultValue) / realReq.scaleFromOntologyToUI;
                 }
-                haveRequirementChanged |= Math.abs(oldValue - realReq.value) > 0.000001;
+                haveRequirementChanged |= Math.abs(oldValue - realReq.value) > EPSILON;
             } else if (req instanceof CheckboxRequirementWrapper) {
                 CheckboxRequirementWrapper reqWrapper = (CheckboxRequirementWrapper) req;
                 CheckboxRequirement realReq = (CheckboxRequirement) req.requirement;
@@ -242,13 +243,31 @@ public class Controller {
             }
         }
 
+        if (resultWrapper.orderBy.getItemCount() > oldSelectionOfOrderBy) {
+            if (oldSelectionOfOrderBy == -1) {
+                oldSelectionOfOrderBy = 0;
+            }
+            resultWrapper.orderBy.select(oldSelectionOfOrderBy);
+        }
+        if (resultWrapper.orderBy2.getItemCount() > oldSelectionOfOrderBy2) {
+            if (oldSelectionOfOrderBy2 == -1) {
+                if (resultWrapper.orderBy2.getItemCount() > 2) {
+                    oldSelectionOfOrderBy2 = 2;
+                } else {
+                    oldSelectionOfOrderBy2 = 0;
+                }
+            }
+            resultWrapper.orderBy2.select(oldSelectionOfOrderBy2);
+        }
+
         SelectionAdapter listener = new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
                 resultWrapper.tree.forceFocus();
                 String currentSelection = resultWrapper.orderBy.getText();
-                String currentSelection2 = resultWrapper.orderBy.getText();
+                String currentSelection2 = resultWrapper.orderBy2.getText();
+
                 if (currentSelection.length() > 2 && currentSelection2.length() > 2) {
                     String displayName = currentSelection.substring(0, currentSelection.length() - 2);
                     String displayName2 = currentSelection2.substring(0, currentSelection2.length() - 2);
@@ -275,7 +294,7 @@ public class Controller {
                             }
                         }
 
-                        if (Math.abs(valueFirst1 - valueSecond1) > 0.000001) {
+                        if (Math.abs(valueFirst1 - valueSecond1) > EPSILON) {
                             if (currentSelection.endsWith("\u25B2")) {
                                 return Double.compare(valueFirst1, valueSecond1);
                             } else {
@@ -300,18 +319,6 @@ public class Controller {
                 resultWrapper.searchField.notifyListeners(SWT.KeyUp, reloadSearchE);
             }
         };
-        if (resultWrapper.orderBy.getItemCount() > oldSelectionOfOrderBy) {
-            if (oldSelectionOfOrderBy == -1) {
-                oldSelectionOfOrderBy = 0;
-            }
-            resultWrapper.orderBy.select(oldSelectionOfOrderBy);
-        }
-        if (resultWrapper.orderBy2.getItemCount() > oldSelectionOfOrderBy2) {
-            if (oldSelectionOfOrderBy2 == -1) {
-                oldSelectionOfOrderBy2 = 0;
-            }
-            resultWrapper.orderBy2.select(oldSelectionOfOrderBy2);
-        }
 
         resultWrapper.orderBy.addSelectionListener(listener);
         resultWrapper.orderBy2.addSelectionListener(listener);
