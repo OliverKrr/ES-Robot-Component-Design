@@ -7,23 +7,23 @@ swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max
 
 MotorPeakTorqueCalc1Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasPeakTorque_M_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
-swrlb:equal(?M_type, "M_max") ^
+hasPeakTorque_T_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorque_T_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+swrlb:equal(?M_type, "T_max") ^
 swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 MotorPeakTorqueCalc2Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasNominalTorque_M_n_unit_Nm(?m, ?M_n) ^ hasPeakTorque_M_max_percentage(?r, ?M_per) ^ hasPeakTorque_M_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
-swrlb:equal(?M_type, "M_n") ^
-swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_n, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
+hasNominalTorque_T_n_unit_Nm(?m, ?T_n) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorque_T_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+swrlb:equal(?M_type, "T_n") ^
+swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?T_n, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 
 
 MotorPeakTorqueSatisfyRule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^ hasConstant(?m, ?con) ^
-has1(?m, ?M_peak) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
+has1(?m, ?M_peak) ^ hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^ hasGearBoxRation_i_max(?con, ?i_max) ^
 swrlb:multiply(?M_res_max, ?M_peak, ?i_max) ^ swrlb:greaterThanOrEqual(?M_res_max, ?M_req_min)
 -> SatisfiedPeakTorque(?m)
 
@@ -99,8 +99,8 @@ swrlb:greaterThanOrEqual(?n_max_res, ?n_req_min)
 
 GearBoxPeakTorqueSatisfyRule:
 GearBox(?g) ^ hasCurrentRequirement(?g, ?r) ^
-hasPeakTorque_M_max_unit_Nm(?g, ?M_max) ^ hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^
-swrlb:greaterThanOrEqual(?M_max, ?M_req_min)
+hasPeakTorque_T_max_unit_Nm(?g, ?T_max) ^ hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^
+swrlb:greaterThanOrEqual(?T_max, ?M_req_min)
 -> SatisfiedPeakTorque(?g)
 
 
@@ -178,33 +178,33 @@ swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp1, ?M_peak, ?g_fac) ^
 
 MotorGearBoxMatchPeakTorqueEvaluate1Rule:
 MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^
-hasMax2_1(?ma, ?M_max1) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max2) ^
-swrlb:greaterThan(?M_max1, ?M_max2)
--> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_max2)
+hasMax2_1(?ma, ?T_max1) ^ hasPeakTorque_T_max_unit_Nm(?g, ?T_max2) ^
+swrlb:greaterThan(?T_max1, ?T_max2)
+-> hasPeakTorqueRes_T_max_unit_Nm(?ma, ?T_max2)
 
 MotorGearBoxMatchPeakTorqueEvaluate2Rule:
 MotorGearBoxMatch(?ma) ^ hasGearBox(?ma, ?g) ^
-hasMax2_1(?ma, ?M_max1) ^ hasPeakTorque_M_max_unit_Nm(?g, ?M_max2) ^
-swrlb:lessThanOrEqual(?M_max1, ?M_max2)
--> hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_max1)
+hasMax2_1(?ma, ?T_max1) ^ hasPeakTorque_T_max_unit_Nm(?g, ?T_max2) ^
+swrlb:lessThanOrEqual(?T_max1, ?T_max2)
+-> hasPeakTorqueRes_T_max_unit_Nm(?ma, ?T_max1)
 
 
 MotorGearBoxMatchPeakTorqueSatisfy1Rule:
 MotorGearBoxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
-hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^
-hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
-hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
+hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res) ^
+hasPeakTorqueReqMax_T_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
+hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
 removeSmallGearBoxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, false)
 -> SatisfiedPeakTorque(?ma)
 
 MotorGearBoxMatchPeakTorqueSatisfy2Rule:
 MotorGearBoxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
-hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res) ^
-hasPeakTorqueReqMax_M_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
-hasPeakTorqueReqMin_M_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
+hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res) ^
+hasPeakTorqueReqMax_T_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
+hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
 removeSmallGearBoxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, true) ^
 hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-has1(?m, ?M_peak) ^ hasPeakTorque_M_max_unit_Nm(?g, ?g_max) ^
+has1(?m, ?M_peak) ^ hasPeakTorque_T_max_unit_Nm(?g, ?g_max) ^
 swrlb:divide(?M_peak2, ?M_peak, 2.0) ^ swrlb:lessThanOrEqual(?M_peak2, ?g_max)
 -> SatisfiedPeakTorque(?ma)
 
@@ -1544,8 +1544,8 @@ SACunitMotorGearBoxMatchSatisfyRule:
 SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g) ^
-hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?ma, ?M_res)
--> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res)
+hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res)
+-> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_T_max_unit_Nm(?sac, ?M_res)
 
 
 
@@ -1554,7 +1554,7 @@ SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ 
 hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res) ^ hasDimensionHeight_H_unit_mm(?h, ?H_res) ^
 hasDimensionLength_L_unit_mm(?li, ?L_drive) ^ hasDimensionLength_L_unit_mm(?lo, ?L_output) ^ hasDimensionLength_L_unit_mm(?le, ?L_elektro) ^
 hasDimensionOuterDiameter_D_unit_mm(?do, ?D_output) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_drive) ^
-hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_M_max_unit_Nm(?sac, ?M_res) ^
+hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(?sac, ?M_res) ^
 swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_elektro2, ?D_elektro, ?D_elektro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
 swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_elektro, ?L_elektro, ?D_elektro2) ^
 swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
