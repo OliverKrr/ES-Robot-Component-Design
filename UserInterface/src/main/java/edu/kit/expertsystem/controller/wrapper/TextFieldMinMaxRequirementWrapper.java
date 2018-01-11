@@ -2,6 +2,7 @@ package edu.kit.expertsystem.controller.wrapper;
 
 import edu.kit.expertsystem.model.req.Requirement;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
@@ -17,8 +18,10 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
     public Text minValue;
     public Text minValueOptimization;
+    public Label minApplied;
     public Text maxValue;
     public Text maxValueOptimization;
+    public Label maxApplied;
     public Spinner deviation;
     public Combo userWeighting;
 
@@ -36,22 +39,24 @@ public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
             return false;
         TextFieldMinMaxRequirementWrapper that = (TextFieldMinMaxRequirementWrapper) o;
         return Objects.equals(minValue, that.minValue) && Objects.equals(minValueOptimization, that
-                .minValueOptimization) && Objects.equals(maxValue, that.maxValue) && Objects.equals
-                (maxValueOptimization, that.maxValueOptimization) && Objects.equals(deviation, that.deviation) &&
-                Objects.equals(userWeighting, that.userWeighting);
+                .minValueOptimization) && Objects.equals(minApplied, that.minApplied) && Objects.equals(maxValue,
+                that.maxValue) && Objects.equals(maxValueOptimization, that.maxValueOptimization) && Objects.equals
+                (maxApplied, that.maxApplied) && Objects.equals(deviation, that.deviation) && Objects.equals
+                (userWeighting, that.userWeighting);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), minValue, minValueOptimization, maxValue, maxValueOptimization,
-                deviation, userWeighting);
+        return Objects.hash(super.hashCode(), minValue, minValueOptimization, minApplied, maxValue,
+                maxValueOptimization, maxApplied, deviation, userWeighting);
     }
 
     @Override
     public String toString() {
         return "TextFieldMinMaxRequirementWrapper{" + "minValue=" + minValue + ", minValueOptimization=" +
-                minValueOptimization + ", maxValue=" + maxValue + ", maxValueOptimization=" + maxValueOptimization +
-                ", deviation=" + deviation + ", userWeighting=" + userWeighting + "} " + super.toString();
+                minValueOptimization + ", minApplied=" + minApplied + ", maxValue=" + maxValue + ", " +
+                "maxValueOptimization=" + maxValueOptimization + ", maxApplied=" + maxApplied + ", deviation=" +
+                deviation + ", userWeighting=" + userWeighting + "} " + super.toString();
     }
 
 }

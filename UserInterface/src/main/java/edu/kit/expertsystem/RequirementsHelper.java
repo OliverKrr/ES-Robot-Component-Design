@@ -33,6 +33,7 @@ public class RequirementsHelper {
     private static final int userWeightingOffsetX = 45;
 
     private static final int optimizationYOffset = 20;
+    private static final int appliedYOffset = 3;
     private static final int basisY = 61;
     private static final int basisY1 = basisY + Math.round(heightForLabels / 2.f) - Math.round(height / 2.f);
     private static final int basisY2 = basisY1 + 3;
@@ -147,6 +148,12 @@ public class RequirementsHelper {
             min = requirementWrapper.minValueOptimization;
             requirementWrapper.minValue.addModifyListener(e -> requirementWrapper.minValueOptimization.setText
                     (requirementWrapper.minValue.getText()));
+
+            requirementWrapper.minApplied = new Label(composite, SWT.NONE);
+            int minAppliedY = y1 + height + appliedYOffset;
+            requirementWrapper.minApplied.setBounds(minX, minAppliedY, minMaxWidth, height);
+            formToolkit.adapt(requirementWrapper.minApplied, true, true);
+            requirementWrapper.minApplied.setForeground(Configs.KIT_GREEN_50);
         } else {
             requirementWrapper.minValue = new Text(composite, SWT.BORDER);
             min = requirementWrapper.minValue;
@@ -173,6 +180,12 @@ public class RequirementsHelper {
             max = requirementWrapper.maxValueOptimization;
             requirementWrapper.maxValue.addModifyListener(e -> requirementWrapper.maxValueOptimization.setText
                     (requirementWrapper.maxValue.getText()));
+
+            requirementWrapper.maxApplied = new Label(composite, SWT.NONE);
+            int maxAppliedY = y1 + height + appliedYOffset;
+            requirementWrapper.maxApplied.setBounds(maxX, maxAppliedY, minMaxWidth, height);
+            formToolkit.adapt(requirementWrapper.maxApplied, true, true);
+            requirementWrapper.maxApplied.setForeground(Configs.KIT_GREEN_50);
         } else {
             requirementWrapper.maxValue = new Text(composite, SWT.BORDER);
             max = requirementWrapper.maxValue;
@@ -221,6 +234,38 @@ public class RequirementsHelper {
         });
         spinnerDeviation.addModifyListener(e -> scaleDeviation.setSelection(Math.round(spinnerDeviation.getSelection
                 () / 100.f)));
+        Runnable update = () -> {
+            try {
+                if (!"".equals(requirementWrapper.minValue.getText())) {
+                    double minValue = Double.parseDouble(requirementWrapper.minValue.getText());
+                    double minAppliedDeviation = minValue - (1.0 * spinnerDeviation.getSelection() / spinnerFactor /
+                            100.0 * minValue);
+                    requirementWrapper.minApplied.setText("(" + String.valueOf(minAppliedDeviation) + ")");
+                }
+            } catch (NumberFormatException e) {
+                requirementWrapper.minApplied.setText("(NAN)");
+            }
+            try {
+                if (!"".equals(requirementWrapper.maxValue.getText())) {
+                    double maxValue = Double.parseDouble(requirementWrapper.maxValue.getText());
+                    double maxAppliedDeviation = maxValue + (1.0 * spinnerDeviation.getSelection() / spinnerFactor /
+                            100.0 * maxValue);
+                    requirementWrapper.maxApplied.setText("(" + String.valueOf(maxAppliedDeviation) + ")");
+                }
+            } catch (NumberFormatException e) {
+                requirementWrapper.maxApplied.setText("(NAN)");
+            }
+        };
+        spinnerDeviation.addModifyListener(e -> update.run());
+        scaleDeviation.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                update.run();
+            }
+        });
+        requirementWrapper.minValue.addModifyListener(e -> update.run());
+        requirementWrapper.maxValue.addModifyListener(e -> update.run());
+
 
         Point spinnerSize = spinnerDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
         Point scaleSize = scaleDeviation.computeSize(SWT.DEFAULT, SWT.DEFAULT);
