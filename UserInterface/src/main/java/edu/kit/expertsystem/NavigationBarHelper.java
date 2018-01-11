@@ -14,7 +14,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import java.util.List;
 
 public class NavigationBarHelper {
-    
+
     private static final int horizontalY = GUI.navBarY;
 
     private static final int verticalX = 5;
