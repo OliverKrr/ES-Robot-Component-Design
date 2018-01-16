@@ -1,5 +1,6 @@
 package edu.kit.expertsystem.controller.wrapper;
 
+import edu.kit.expertsystem.controller.ResultAbstract;
 import edu.kit.expertsystem.model.Result;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -14,11 +15,14 @@ import java.util.Objects;
 public class ResultWrapper {
 
     public List<Result> results;
-    public Tree tree;
+    public ResultAbstract resultShow;
+
     public Combo orderBy;
     public Combo orderBy2;
     public Text searchField;
     public Button showOnlyDiffsCheckBox;
+
+    public Tree tree;
 
     public Map<String, String> displayNameToIriMap = new HashMap<>();
 

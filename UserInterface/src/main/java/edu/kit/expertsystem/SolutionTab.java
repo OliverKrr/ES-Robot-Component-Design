@@ -1,5 +1,7 @@
 package edu.kit.expertsystem;
 
+import edu.kit.expertsystem.controller.ResultImage;
+import edu.kit.expertsystem.controller.ResultTreeItem;
 import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
 import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 import org.eclipse.swt.SWT;
@@ -26,7 +28,6 @@ public class SolutionTab {
     private static final int offsetYEnd = 5;
 
     private static final int saveSolutionOntologyButtonWidthOffset = 10;
-    private static final int showOnlyDiffsCheckBoxWidthOffset = 20;
 
     private static final int searchTextWidth = 120;
     private static final int searchTextHeight = 23;
@@ -36,12 +37,14 @@ public class SolutionTab {
     private SashForm solutionForm;
     private Composite leftComposite;
     private Composite rightComposite;
+    private Label separatorHorizontal;
     private Tree resultTree;
     private Button saveSolutionOntologyButton;
     private Text searchField;
     private Combo orderByCombo;
     private Combo orderByCombo2;
     private Button showOnlyDiffsCheckBox;
+    private Combo switchSolutionForm;
     private DescriptionHelper descriptionHelper;
 
     SolutionTab(Composite parent, FormToolkit formToolkit, Rectangle contentRec) {
@@ -99,6 +102,32 @@ public class SolutionTab {
         formToolkit.adapt(showOnlyDiffsCheckBox, true, true);
         resultWrapper.showOnlyDiffsCheckBox = showOnlyDiffsCheckBox;
 
+        switchSolutionForm = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        switchSolutionForm.add("Show as List");
+        switchSolutionForm.add("Show as Images");
+        switchSolutionForm.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                if (resultWrapper.resultShow != null) {
+                    resultWrapper.resultShow.clearLastResults();
+                }
+                if (switchSolutionForm.getText().equals("Show as List")) {
+                    resultWrapper.resultShow = new ResultTreeItem(resultWrapper);
+                } else {
+                    resultWrapper.resultShow = new ResultImage(resultWrapper);
+                }
+                resultWrapper.resultShow.setResults();
+            }
+        });
+        updateSizeOfSwitchSolutionForm();
+        formToolkit.adapt(switchSolutionForm, true, true);
+        switchSolutionForm.select(0);
+        switchSolutionForm.notifyListeners(SWT.Selection, new Event());
+
+        separatorHorizontal = new Label(leftComposite, SWT.SEPARATOR | SWT.HORIZONTAL);
+        updateSizeOfHorizontalSeparator();
+        formToolkit.adapt(separatorHorizontal, false, false);
+
         resultTree = new Tree(leftComposite, SWT.NONE);
         updateSizeOfTreeItem();
         resultWrapper.tree = resultTree;
@@ -148,6 +177,7 @@ public class SolutionTab {
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
     }
 
+
     public void updateSize(Rectangle contentRec) {
         solutionForm.setBounds(contentRec);
         formToolkit.adapt(solutionForm);
@@ -157,6 +187,8 @@ public class SolutionTab {
         updateSizeOfOrderByCombos();
         updateSizeOfSearchText();
         updateSizeOfShowOnlyDiffsCheckBox();
+        updateSizeOfSwitchSolutionForm();
+        updateSizeOfHorizontalSeparator();
         updateSizeOfTreeItem();
     }
 
@@ -186,14 +218,34 @@ public class SolutionTab {
 
     private void updateSizeOfShowOnlyDiffsCheckBox() {
         int y = 2 * offsetY + searchTextHeight;
+        showOnlyDiffsCheckBox.setText("Show all components and values of results");
         Point size = GuiHelper.getSizeOfControl(showOnlyDiffsCheckBox);
-        // Offset for width, to include the checkbox size
-        int realWidth = size.x + showOnlyDiffsCheckBoxWidthOffset;
-        showOnlyDiffsCheckBox.setBounds(offsetX, y, realWidth, searchTextHeight);
+        showOnlyDiffsCheckBox.setBounds(offsetX, y, size.x, searchTextHeight);
+        showOnlyDiffsCheckBox.setText(showOnlyDiffsCheckBox.getSelection() ? "Show all components and values" + " of"
+                + " results" : "Show only differences in results");
+    }
+
+    private void updateSizeOfSwitchSolutionForm() {
+        int y = 2 * offsetY + searchTextHeight;
+        Point size = GuiHelper.getSizeOfControl(switchSolutionForm);
+        int x = leftComposite.getBounds().width - size.x - offsetXEnd;
+        int endXOfOther = orderByCombo2.getBounds().x + orderByCombo2.getBounds().width;
+        if (x < endXOfOther + offsetXEnd) {
+            x = endXOfOther + offsetXEnd;
+            size.x = leftComposite.getBounds().width - x - offsetXEnd;
+        }
+
+        switchSolutionForm.setBounds(x, y, size.x, searchTextHeight);
+    }
+
+    private void updateSizeOfHorizontalSeparator() {
+        int y = 3 * offsetY + 2 * searchTextHeight;
+        int width = leftComposite.getBounds().width - offsetX - offsetXEnd;
+        separatorHorizontal.setBounds(offsetX, y, width, searchTextHeight);
     }
 
     private void updateSizeOfTreeItem() {
-        int yOfTree = 3 * offsetY + 2 * searchTextHeight;
+        int yOfTree = 4 * offsetY + 3 * searchTextHeight;
         int widthOfTree = leftComposite.getBounds().width - offsetX - offsetXEnd;
         int heightOfTree = leftComposite.getBounds().height - yOfTree - offsetYEnd;
         resultTree.setBounds(offsetX, yOfTree, widthOfTree, heightOfTree);
