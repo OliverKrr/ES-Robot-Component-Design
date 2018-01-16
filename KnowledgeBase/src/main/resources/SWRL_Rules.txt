@@ -1437,14 +1437,18 @@ DiameterInput(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ hasCur
 DiameterOutputLinearBeforeEvaluate1Rule:
 DiameterOutputLinear(?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
-swrlb:greaterThan(?D_ab, ?D_spcb)
--> has3(?do, ?D_ab)
+swrlb:greaterThan(?D_ab, ?D_spcb) ^
+hasConstant(?do, ?con) ^ thicknessElectroOutputSafetyDistance(?con, ?t_eosd) ^
+swrlb:multiply(?t_eosd2, 2.0, ?t_eosd) ^ swrlb:add(?D_electro_output, ?D_ab, ?t_eosd2)
+-> has3(?do, ?D_electro_output)
 
 DiameterOutputLinearBeforeEvaluate2Rule:
 DiameterOutputLinear(?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
-swrlb:lessThanOrEqual(?D_ab, ?D_spcb)
--> has3(?do, ?D_spcb)
+swrlb:lessThanOrEqual(?D_ab, ?D_spcb) ^
+hasConstant(?do, ?con) ^ thicknessElectroOutputSafetyDistance(?con, ?t_eosd) ^
+swrlb:multiply(?t_eosd2, 2.0, ?t_eosd) ^ swrlb:add(?D_electro_output, ?D_spcb, ?t_eosd2)
+-> has3(?do, ?D_electro_output)
 
 
 DiameterOutputLinearBeforeEvaluate3Rule:
@@ -1479,10 +1483,11 @@ DiameterOutputCompressed(?do)
 
 
 DiameterOutputCalcRule:
-DiameterOutput(?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasCurrentRequirement(?do, ?r) ^
+DiameterOutput(?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasCurrentRequirement(?do, ?r) ^
 has2(?do, ?height_wiring) ^ has3(?do, ?D_electro_output) ^
-hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
-swrlb:multiply(?D_w2, ?height_wiring, 2.0) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_oc2) ^ swrlb:add(?D_max2, ?D_oc2, ?D_electro_output)
+hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ hasDimensionOuterDiameter_D_unit_mm(?s_g_cs, ?D_s_g_cs) ^ hasThicknessOutputCaseReq_D_unit_mm(?r, ?D_oc) ^ 
+swrlb:multiply(?D_w2, ?height_wiring, 2.0) ^ swrlb:multiply(?D_oc2, ?D_oc, 2.0) ^ swrlb:add(?temp1, ?D_g, ?D_w2) ^ swrlb:add(?D_max1, ?temp1, ?D_oc2) ^
+swrlb:multiply(?D_s_g_cs2, 2.0, ?D_s_g_cs) ^ swrlb:add(?D_max2, ?D_s_g_cs2, ?D_electro_output)
 -> hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2)
 
 
@@ -1512,7 +1517,7 @@ swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:add(?D_dob, ?D_ob, ?D_s_ob2) ^
 
 DiameterOutputBearingOutputLinearCalcRule:
 DiameterOutputBearingOutputLinear(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^
-hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^  hasDimensionOuterDiameter_D_unit_mm(?s_g_cs, ?D_s_g_cs) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionOuterDiameter_D_unit_mm(?tos, ?D_ts) ^
+hasDimensionOuterDiameter_D_unit_mm(?s_ob, ?D_s_ob) ^ hasDimensionInnerDiameter_d_unit_mm(?ob, ?d_ob) ^ hasDimensionOuterDiameter_D_unit_mm(?s_g_cs, ?D_s_g_cs) ^ hasDimensionOuterDiameter_D_unit_mm(?sr, ?D_sr) ^ hasDimensionOuterDiameter_D_unit_mm(?tos, ?D_ts) ^
 swrlb:multiply(?D_s_ob2, 2.0, ?D_s_ob) ^ swrlb:multiply(?D_s_g_cs2, 2.0, ?D_s_g_cs) ^ swrlb:multiply(?D_ts2, 2.0, ?D_ts) ^ swrlb:subtract(?temp1, ?d_ob, ?D_s_ob2) ^ swrlb:subtract(?temp2, ?temp1, ?D_s_g_cs2) ^ swrlb:subtract(?d_dob, ?temp2, ?D_ts2) ^ swrlb:greaterThanOrEqual(?d_dob, ?D_sr)
 -> HalfSatisfiedDiameterOutputBearingOutputLinear(?dob) ^ hasDimensionInnerDiameter_d_unit_mm(?dob, ?d_dob)
 
