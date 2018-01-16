@@ -7,15 +7,15 @@ swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max
 
 MotorPeakTorqueCalc1Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasPeakTorque_T_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorque_T_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
-swrlb:equal(?M_type, "T_max") ^
+hasPeakTorque_T_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueType_motor(?r, ?T_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+swrlb:equal(?T_type, "T_max") ^
 swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 MotorPeakTorqueCalc2Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasNominalTorque_T_n_unit_Nm(?m, ?T_n) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorque_T_max_type(?r, ?M_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
-swrlb:equal(?M_type, "T_n") ^
+hasNominalTorque_T_n_unit_Nm(?m, ?T_n) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueType_motor(?r, ?T_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+swrlb:equal(?T_type, "T_n") ^
 swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?T_n, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
@@ -96,6 +96,21 @@ hasGearBoxRation_i(?g, ?i) ^ hasMaxRotationInputSpeedGrease_n_max_unit_rpm(?g, ?
 swrlb:divide(?n_max_res, ?n_max, ?i) ^
 swrlb:greaterThanOrEqual(?n_max_res, ?n_req_min)
 -> SatisfiedRotationSpeed(?g)
+
+
+
+GearBoxPeakTorqueCalc1Rule:
+GearBox(?g) ^ hasCurrentRequirement(?g, ?r) ^
+hasPeakTorqueType_gearBox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_repeated") ^
+hasRepeatedPeakTorque_T_R_unit_Nm(?g, ?T_R)
+-> hasPeakTorque_T_max_unit_Nm(?g, ?T_R)
+
+GearBoxPeakTorqueCalc2Rule:
+GearBox(?g) ^ hasCurrentRequirement(?g, ?r) ^
+hasPeakTorqueType_gearBox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_momentary") ^
+hasMomentaryPeakTorque_T_M_unit_Nm(?g, ?T_M)
+-> hasPeakTorque_T_max_unit_Nm(?g, ?T_M)
+
 
 GearBoxPeakTorqueSatisfyRule:
 GearBox(?g) ^ hasCurrentRequirement(?g, ?r) ^

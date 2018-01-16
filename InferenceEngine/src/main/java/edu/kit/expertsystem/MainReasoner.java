@@ -165,8 +165,12 @@ public class MainReasoner {
 
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.minIRI), String.valueOf(minValue));
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.maxIRI), String.valueOf(maxValue));
-                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + minValue + "," +
-                        " " + maxValue);
+                logger.debug("Requirement (displayName, min, max): " + realReq.displayName + ", " + realReq.min + ","
+                        + " " + realReq.max);
+                logger.debug("Requirement (displayName, minIn, maxIn): " + realReq.displayName + "," + " " + minValue
+                        + ", " + maxValue);
+                logger.debug("Requirement (displayName, deviation, userWeight): " + realReq.displayName + ", " +
+                        realReq.deviationPercentage + ", " + realReq.userWeight);
             } else if (req instanceof TextFieldRequirement) {
                 TextFieldRequirement realReq = (TextFieldRequirement) req;
                 addRequirement(requirementsInd, getOWLDataProperty(realReq.reqIri), String.valueOf(realReq.value));
