@@ -1,0 +1,1 @@
+python ../gitinspector/gitinspector.py --format=html -f=java,owl,txt,pom -m -T -w --grading > gitstatistics.html
