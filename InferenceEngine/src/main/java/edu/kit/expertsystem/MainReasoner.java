@@ -254,10 +254,15 @@ public class MainReasoner {
                 component.nameOfInstance = Vocabulary.CLASS_LINEAR.getIRI().getShortForm();
             } else if (component.nameOfInstance.contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
                 component.nameOfInstance = Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm();
+            } else if (component.nameOfInstance.contains(Vocabulary.CLASS_TWOSIDE.getIRI().getShortForm())) {
+                component.nameOfInstance = Vocabulary.CLASS_TWOSIDE.getIRI().getShortForm();
             }
         }
         genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty()).forEach(range
                 -> component.orderPosition = helper.getOrderPositionForClass(range.getRange().asOWLClass()));
+        genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty()).forEach(range
+                -> component.showDefaultInResults = helper.getShowDefaultInResultsForClass(range.getRange()
+                .asOWLClass()));
         return component;
     }
 

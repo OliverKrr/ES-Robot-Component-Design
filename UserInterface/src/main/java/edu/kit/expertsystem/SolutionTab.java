@@ -47,6 +47,8 @@ public class SolutionTab {
     private Combo orderByCombo;
     private Combo orderByCombo2;
     private Button showOnlyDiffsCheckBox;
+    private Button selectToShowButton;
+    private Table selectTableToShow;
     private Combo switchSolutionForm;
     private DescriptionHelper descriptionHelper;
 
@@ -90,6 +92,21 @@ public class SolutionTab {
             updateSizeOfSearchText();
         });
         resultWrapper.orderBy2 = orderByCombo2;
+
+        selectToShowButton = new Button(leftComposite, SWT.TOGGLE);
+        selectToShowButton.setText("Select ... to show");
+        resultWrapper.selectToShowButton = selectToShowButton;
+        selectTableToShow = new Table(leftComposite, SWT.CHECK | SWT.BORDER | SWT.MULTI);
+        selectTableToShow.setVisible(false);
+        selectToShowButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                selectTableToShow.setVisible(selectToShowButton.getSelection());
+                updateSizeOfSelectShow();
+            }
+        });
+        resultWrapper.selectTableToShow = selectTableToShow;
+        updateSizeOfSelectShow();
 
         showOnlyDiffsCheckBox = new Button(leftComposite, SWT.CHECK);
         showOnlyDiffsCheckBox.setText("Show only differences in results");
@@ -212,7 +229,6 @@ public class SolutionTab {
         rightScrolledComposite.setMinHeight(descriptionHelper.getMaxYEnd());
     }
 
-
     public void updateSize(Rectangle contentRec) {
         solutionForm.setBounds(contentRec);
         formToolkit.adapt(solutionForm);
@@ -221,6 +237,7 @@ public class SolutionTab {
         updateSizeOfSaveSolutionOntologyButton();
         updateSizeOfOrderByCombos();
         updateSizeOfSearchText();
+        updateSizeOfSelectShow();
         updateSizeOfShowOnlyDiffsCheckBox();
         updateSizeOfSwitchSolutionForm();
         updateSizeOfHorizontalSeparator();
@@ -251,11 +268,26 @@ public class SolutionTab {
         searchField.setBounds(xOfSearchText, offsetY, widthOfSearchText, searchTextHeight);
     }
 
+    private void updateSizeOfSelectShow() {
+        int y = 2 * offsetY + searchTextHeight;
+        Point size = GuiHelper.getSizeOfControl(selectToShowButton);
+        selectToShowButton.setBounds(offsetX, y, size.x, searchTextHeight);
+
+        int yOfTable = y + searchTextHeight;
+        Point sizeTable = GuiHelper.getSizeOfControl(selectTableToShow);
+        int heightTable = sizeTable.y;
+        if (heightTable + yOfTable > leftComposite.getBounds().height) {
+            heightTable = leftComposite.getBounds().height - yOfTable;
+        }
+        selectTableToShow.setBounds(offsetX, yOfTable, sizeTable.x, heightTable);
+    }
+
     private void updateSizeOfShowOnlyDiffsCheckBox() {
         int y = 2 * offsetY + searchTextHeight;
+        int x = selectToShowButton.getBounds().x + selectToShowButton.getBounds().width + offsetX;
         showOnlyDiffsCheckBox.setText("Show all components and values of results");
         Point size = GuiHelper.getSizeOfControl(showOnlyDiffsCheckBox);
-        showOnlyDiffsCheckBox.setBounds(offsetX, y, size.x, searchTextHeight);
+        showOnlyDiffsCheckBox.setBounds(x, y, size.x, searchTextHeight);
         showOnlyDiffsCheckBox.setText(showOnlyDiffsCheckBox.getSelection() ? "Show all components and values" + " of"
                 + " results" : "Show only differences in results");
     }

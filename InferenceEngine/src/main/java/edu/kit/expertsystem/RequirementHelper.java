@@ -219,6 +219,8 @@ public class RequirementHelper {
                 (obProp -> req.unit = obProp.getLiteral());
         genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASORDERPOSITION).findAny()
                 .ifPresent(obProp -> req.orderPosition = helper.parseValueToInteger(obProp));
+        genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_SHOWDEFAULTINRESULTS).findAny
+                ().ifPresent(obProp -> req.showDefaultInResults = obProp.parseBoolean());
     }
 
     private void parseRequirementType(TextFieldRequirement textReq, OWLNamedIndividual reqIndi) {

@@ -7,6 +7,7 @@ public class Component {
     public String nameOfComponent = "";
     public String nameOfInstance = "";
     public int orderPosition = 0;
+    public boolean showDefaultInResults = true;
 
     @Override
     public boolean equals(Object o) {
@@ -15,18 +16,19 @@ public class Component {
         if (o == null || getClass() != o.getClass())
             return false;
         Component component = (Component) o;
-        return orderPosition == component.orderPosition && Objects.equals(nameOfComponent, component.nameOfComponent)
-                && Objects.equals(nameOfInstance, component.nameOfInstance);
+        return orderPosition == component.orderPosition && showDefaultInResults == component.showDefaultInResults &&
+                Objects.equals(nameOfComponent, component.nameOfComponent) && Objects.equals(nameOfInstance,
+                component.nameOfInstance);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameOfComponent, nameOfInstance, orderPosition);
+        return Objects.hash(nameOfComponent, nameOfInstance, orderPosition, showDefaultInResults);
     }
 
     @Override
     public String toString() {
         return "Component{" + "nameOfComponent='" + nameOfComponent + '\'' + ", nameOfInstance='" + nameOfInstance +
-                '\'' + ", orderPosition=" + orderPosition + '}';
+                '\'' + ", orderPosition=" + orderPosition + ", showDefaultInResults=" + showDefaultInResults + '}';
     }
 }

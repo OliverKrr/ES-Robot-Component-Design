@@ -10,12 +10,11 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.TableItem;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class ResultAbstract {
 
@@ -39,6 +38,7 @@ public abstract class ResultAbstract {
         if (listener != null) {
             resultWrapper.orderBy.removeSelectionListener(listener);
             resultWrapper.orderBy2.removeSelectionListener(listener);
+            resultWrapper.selectToShowButton.removeSelectionListener(listener);
             resultWrapper.showOnlyDiffsCheckBox.removeSelectionListener(listener);
             listener = null;
         }
@@ -53,14 +53,21 @@ public abstract class ResultAbstract {
         }
         int oldSelectionOfOrderBy = resultWrapper.orderBy.getSelectionIndex();
         int oldSelectionOfOrderBy2 = resultWrapper.orderBy2.getSelectionIndex();
+        Map<String, Boolean> selectShowMap = new HashMap<>();
+        Arrays.stream(resultWrapper.selectTableToShow.getItems()).forEach(item -> selectShowMap.put(item.getText(),
+                item.getChecked()));
         reset();
         logSolutionAndAddOrderByItems();
         selectOrderBy(oldSelectionOfOrderBy, oldSelectionOfOrderBy2);
+        addSelectToShow(selectShowMap);
 
         listener = new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
+                if (resultWrapper.selectToShowButton.getSelection()) {
+                    return;
+                }
                 sortSolution();
                 setShowKeys();
                 showSolution();
@@ -74,6 +81,7 @@ public abstract class ResultAbstract {
 
         resultWrapper.orderBy.addSelectionListener(listener);
         resultWrapper.orderBy2.addSelectionListener(listener);
+        resultWrapper.selectToShowButton.addSelectionListener(listener);
         resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(listener);
         resultWrapper.orderBy.notifyListeners(SWT.Selection, new Event());
     }
@@ -146,6 +154,36 @@ public abstract class ResultAbstract {
         }
     }
 
+    private void addSelectToShow(Map<String, Boolean> selectShowMap) {
+        Set<String> addedItems = new HashSet<>();
+        for (Result result : resultWrapper.results) {
+            for (Component component : result.components) {
+                if (!addedItems.contains(component.nameOfComponent)) {
+                    addedItems.add(component.nameOfComponent);
+                    TableItem item = new TableItem(resultWrapper.selectTableToShow, SWT.NONE);
+                    item.setText(component.nameOfComponent);
+                    if (selectShowMap.containsKey(component.nameOfComponent)) {
+                        item.setChecked(selectShowMap.get(component.nameOfComponent));
+                    } else {
+                        item.setChecked(component.showDefaultInResults);
+                    }
+                }
+            }
+            for (Requirement req : result.requirements) {
+                if (req.resultIRI != null && !addedItems.contains(req.displayName)) {
+                    addedItems.add(req.displayName);
+                    TableItem item = new TableItem(resultWrapper.selectTableToShow, SWT.NONE);
+                    item.setText(req.displayName);
+                    if (selectShowMap.containsKey(req.displayName)) {
+                        item.setChecked(selectShowMap.get(req.displayName));
+                    } else {
+                        item.setChecked(req.showDefaultInResults);
+                    }
+                }
+            }
+        }
+    }
+
     private void logSolutionAndAddOrderByItems() {
         for (Result result : resultWrapper.results) {
             double maxNumberOfCharsForComp = getMaxNumberOfCharsForComp(result);
@@ -174,6 +212,7 @@ public abstract class ResultAbstract {
         resultWrapper.orderBy.removeAll();
         resultWrapper.orderBy2.removeAll();
         resultWrapper.displayNameToIriMap.clear();
+        resultWrapper.selectTableToShow.removeAll();
         clearLastResults();
     }
 
@@ -262,18 +301,25 @@ public abstract class ResultAbstract {
         if (resultWrapper.showOnlyDiffsCheckBox.getSelection()) {
             for (Result result : resultWrapper.results) {
                 for (Component component : result.components) {
-                    handleShow(component.nameOfComponent, component.nameOfInstance, true);
+                    handleShow(component.nameOfComponent, component.nameOfInstance);
                 }
                 for (Requirement req : result.requirements) {
-                    handleShow(req.displayName, getResultValue(req), false);
+                    handleShow(req.displayName, getResultValue(req));
                 }
+            }
+        }
+        for (TableItem item : resultWrapper.selectTableToShow.getItems()) {
+            if (showKeys.containsKey(item.getText())) {
+                showKeys.get(item.getText()).showResult &= item.getChecked();
+            } else {
+                showKeys.put(item.getText(), new ShowResult("", item.getChecked()));
             }
         }
     }
 
-    private void handleShow(String key, String value, boolean isComponent) {
+    private void handleShow(String key, String value) {
         if (!showKeys.containsKey(key)) {
-            showKeys.put(key, new ShowResult(value, false, isComponent));
+            showKeys.put(key, new ShowResult(value, false));
         }
         if (!showKeys.get(key).firstValue.equals(value)) {
             showKeys.get(key).showResult = true;
@@ -283,12 +329,10 @@ public abstract class ResultAbstract {
     protected static class ShowResult {
         String firstValue;
         boolean showResult;
-        boolean isComponent;
 
-        ShowResult(String firstValue, boolean showResult, boolean isComponent) {
+        ShowResult(String firstValue, boolean showResult) {
             this.firstValue = firstValue;
             this.showResult = showResult;
-            this.isComponent = isComponent;
         }
     }
 }

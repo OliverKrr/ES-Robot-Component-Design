@@ -17,6 +17,8 @@ public class ResultWrapper {
     public Combo orderBy;
     public Combo orderBy2;
     public Text searchField;
+    public Button selectToShowButton;
+    public Table selectTableToShow;
     public Button showOnlyDiffsCheckBox;
 
     public Tree tree;
@@ -33,21 +35,23 @@ public class ResultWrapper {
         ResultWrapper that = (ResultWrapper) o;
         return Objects.equals(results, that.results) && Objects.equals(resultShow, that.resultShow) && Objects.equals
                 (orderBy, that.orderBy) && Objects.equals(orderBy2, that.orderBy2) && Objects.equals(searchField,
-                that.searchField) && Objects.equals(showOnlyDiffsCheckBox, that.showOnlyDiffsCheckBox) && Objects
-                .equals(tree, that.tree) && Objects.equals(table, that.table) && Objects.equals(displayNameToIriMap,
-                that.displayNameToIriMap);
+                that.searchField) && Objects.equals(selectToShowButton, that.selectToShowButton) && Objects.equals
+                (selectTableToShow, that.selectTableToShow) && Objects.equals(showOnlyDiffsCheckBox, that
+                .showOnlyDiffsCheckBox) && Objects.equals(tree, that.tree) && Objects.equals(table, that.table) &&
+                Objects.equals(displayNameToIriMap, that.displayNameToIriMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results, resultShow, orderBy, orderBy2, searchField, showOnlyDiffsCheckBox, tree, table,
-                displayNameToIriMap);
+        return Objects.hash(results, resultShow, orderBy, orderBy2, searchField, selectToShowButton,
+                selectTableToShow, showOnlyDiffsCheckBox, tree, table, displayNameToIriMap);
     }
 
     @Override
     public String toString() {
         return "ResultWrapper{" + "results=" + results + ", resultShow=" + resultShow + ", orderBy=" + orderBy + ", "
-                + "orderBy2=" + orderBy2 + ", searchField=" + searchField + ", showOnlyDiffsCheckBox=" +
+                + "orderBy2=" + orderBy2 + ", searchField=" + searchField + ", selectToShowButton=" +
+                selectToShowButton + ", selectTableToShow=" + selectTableToShow + ", showOnlyDiffsCheckBox=" +
                 showOnlyDiffsCheckBox + ", tree=" + tree + ", table=" + table + ", displayNameToIriMap=" +
                 displayNameToIriMap + '}';
     }

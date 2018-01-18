@@ -10,6 +10,7 @@ import org.semanticweb.owlapi.model.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyOWLHelper {
@@ -107,10 +108,18 @@ public class MyOWLHelper {
         return value.get();
     }
 
+    public boolean getShowDefaultInResultsForClass(OWLClass clas) {
+        AtomicBoolean value = new AtomicBoolean(true);
+        genericTool.getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom.componentsWithoutAnnotations
+                ().filter(comp -> comp instanceof OWLDataHasValue && Vocabulary.DATA_PROPERTY_SHOWDEFAULTINRESULTS
+                .equals(((OWLDataHasValue) comp).getProperty())).findAny().ifPresent(comp -> value.set((
+                        (OWLDataHasValue) comp).getFiller().parseBoolean())));
+        return value.get();
+    }
+
     public boolean checkConsistency() {
         boolean isConsitent = genericTool.getReasoner().isConsistent();
         logger.info("Ontology is consistent: " + isConsitent);
         return isConsitent;
     }
-
 }

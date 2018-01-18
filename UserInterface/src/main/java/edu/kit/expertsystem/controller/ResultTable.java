@@ -42,8 +42,7 @@ public class ResultTable extends ResultAbstract {
 
             StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
-                if (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(component.nameOfComponent)
-                        .showResult) {
+                if (!showKeys.isEmpty() && !showKeys.get(component.nameOfComponent).showResult) {
                     continue;
                 }
                 builder.append(getNameForComponent(component, 0).replaceAll(" ", ""));
@@ -58,7 +57,7 @@ public class ResultTable extends ResultAbstract {
             concatenationOfNamesBuilder.append(builder.toString());
 
             for (Requirement req : result.requirements) {
-                if (req.resultIRI == null || (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(req
+                if (req.resultIRI == null || (!showKeys.isEmpty() && !showKeys.get(req
                         .displayName).showResult)) {
                     continue;
                 }

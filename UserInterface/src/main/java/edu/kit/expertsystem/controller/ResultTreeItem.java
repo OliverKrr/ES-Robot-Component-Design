@@ -41,8 +41,7 @@ public class ResultTreeItem extends ResultAbstract {
 
             StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
-                if (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(component.nameOfComponent)
-                        .showResult) {
+                if (!showKeys.isEmpty() && !showKeys.get(component.nameOfComponent).showResult) {
                     continue;
                 }
                 String name = getNameForComponent(component, maxNumberOfChars);
@@ -54,8 +53,7 @@ public class ResultTreeItem extends ResultAbstract {
             maxNumberOfChars = getMaxNumberOfCharsForReq(result);
 
             for (Requirement req : result.requirements) {
-                if (req.resultIRI == null || (resultWrapper.showOnlyDiffsCheckBox.getSelection() && !showKeys.get(req
-                        .displayName).showResult)) {
+                if (req.resultIRI == null || (!showKeys.isEmpty() && !showKeys.get(req.displayName).showResult)) {
                     continue;
                 }
                 String name = getNameForReq(req, maxNumberOfChars);
