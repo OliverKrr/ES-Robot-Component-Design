@@ -574,6 +574,20 @@ swrlb:equal(?cos, "Compressed")
 -> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 
+TorqueSensorLengthADCSatisfy1Rule:
+SatisfiedTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+needADCforTorqueExternal(?r, ?nafte) ^
+swrlb:equal(?nafte, false) ^
+hasDimensionLength_L_unit_mm(?tos, ?L_ADC)
+-> has1(?tos, ?L_ADC)
+
+TorqueSensorLengthADCSatisfy2Rule:
+SatisfiedTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
+needADCforTorqueExternal(?r, ?nafte) ^
+swrlb:equal(?nafte, true)
+-> has1(?tos, 0.0)
+
+
 
 SlipRingTorqueSensorMatchSatisfy1Rule:
 SlipRingTorqueSensorMatch(?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ _1000MEthernet(?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?srtsm, ?r) ^
@@ -1184,9 +1198,9 @@ LengthOutput(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob
 hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^
 SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
 has2(?lo, ?L_torWelle) ^ has3(?lo, ?L_loie) ^ has4(?lo, ?L_overlap) ^
-hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_g_fs, ?L_s_g_fs) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ hasDimensionLength_L_unit_mm(?tos, ?L_tos) ^ lengthCentering(?con, ?c_con) ^
-swrlb:multiply(?L_s_g_fs2, 2.0, ?L_s_g_fs) ^ swrlb:add(?L_temp1, ?L_torWelle, ?L_s_g_fs2) ^ swrlb:add(?L_max1_1, ?L_temp1, ?L_tos) ^
-swrlb:multiply(?d_g_fs15, 1.5, ?d_g_fs) ^ swrlb:add(?L_max1_2, ?d_g_fs15, ?L_tos) ^
+hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_g_fs, ?L_s_g_fs) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ has1(?tos, ?L_ADC) ^ lengthCentering(?con, ?c_con) ^
+swrlb:multiply(?L_s_g_fs2, 2.0, ?L_s_g_fs) ^ swrlb:add(?L_temp1, ?L_torWelle, ?L_s_g_fs2) ^ swrlb:add(?L_max1_1, ?L_temp1, ?L_ADC) ^
+swrlb:multiply(?d_g_fs15, 1.5, ?d_g_fs) ^ swrlb:add(?L_max1_2, ?d_g_fs15, ?L_ADC) ^
 swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^
 swrlb:add(?temp1, ?L_loie, ?L_abLager) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?temp2, ?temp1, ?L_s_ob2) ^ swrlb:subtract(?L_max2_1, ?temp2, ?L_overlap)
 -> hasMax1_1(?lo, ?L_max1_1) ^ hasMax1_2(?lo, ?L_max1_2) ^ hasMax2_1(?lo, ?L_max2_1)
