@@ -310,44 +310,65 @@ public class MainReasoner {
     private void handleDeviations(List<Result> results) {
         for (Result result : results) {
             double weightSum = 0;
-            double sum = 0;
+            double sumForCompliance = 0;
+            double sumForPerformance = 0;
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    double weightInSum = 0;
+                    double weightInSumForCompliance = 0;
+                    double weightInSumForPerformance = 0;
+                    boolean skipedMin = false;
 
-                    double deviationMin = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
-                    Line minLine = new Line(deviationMin, 0.5, realReq.min, 1.0);
-                    double devMin = minLine.getY(realReq.result);
-                    if (devMin >= 0.5 && devMin < 1) {
-                        weightInSum = devMin * realReq.userWeight;
-                    } else if (devMin >= 1) {
-                        weightInSum = realReq.userWeight;
+                    if (realReq.min != 0) {
+                        Line minLine = new Line(0, 0, realReq.min, 1.0);
+                        double devMin = minLine.getY(realReq.result);
+                        if (devMin < 1) {
+                            weightInSumForCompliance = devMin * realReq.userWeight;
+                        } else {
+                            weightInSumForCompliance = realReq.userWeight;
+                        }
+                        weightInSumForPerformance = devMin * realReq.userWeight;
+                    } else {
+                        skipedMin = true;
                     }
 
-                    double deviationMax = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
-                    if (Double.isFinite(deviationMax) && realReq.max * realReq.scaleFromOntologyToUI < Double
-                            .MAX_VALUE) {
-                        Line maxLine = new Line(realReq.max, 1.0, deviationMax, 0.5);
+                    if (realReq.max * realReq.scaleFromOntologyToUI < Double.MAX_VALUE) {
+                        Line maxLine = new Line(realReq.max, 1.0, 2 * realReq.max, 0);
                         double devMax = maxLine.getY(realReq.result);
-                        if (devMax >= 0.5 && devMax < 1) {
-                            weightInSum = Math.min(weightInSum, devMax * realReq.userWeight);
-                        } else if (devMax >= 1) {
-                            weightInSum = Math.min(weightInSum, realReq.userWeight);
+                        if (devMax < 1) {
+                            weightInSumForCompliance = Math.min(weightInSumForCompliance, devMax * realReq.userWeight);
+                            if (skipedMin) {
+                                weightInSumForCompliance = devMax * realReq.userWeight;
+                            }
+                        } else {
+                            weightInSumForCompliance = Math.min(weightInSumForCompliance, realReq.userWeight);
+                            if (skipedMin) {
+                                weightInSumForCompliance = realReq.userWeight;
+                            }
+                        }
+                        weightInSumForPerformance = Math.min(weightInSumForPerformance, devMax * realReq.userWeight);
+                        if (skipedMin) {
+                            weightInSumForPerformance = devMax * realReq.userWeight;
                         }
                     }
 
-                    if (weightInSum > 0) {
-                        sum += weightInSum;
+                    if (weightInSumForCompliance > 0 && weightInSumForPerformance > 0) {
+                        sumForCompliance += weightInSumForCompliance;
+                        sumForPerformance += weightInSumForPerformance;
                         weightSum += realReq.userWeight;
                     }
                 }
             }
 
-            double dev = 1.0 / weightSum * sum;
-            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASQUALITYINDEX.getIRI().getIRIString
-                    ().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req -> (
-                            (RequirementOnlyForSolution) req).result = dev);
+            double devComplicance = 1.0 / weightSum * sumForCompliance;
+            double devPerformance = 1.0 / weightSum * sumForPerformance;
+
+            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASCOMPLIANCEINDEX.getIRI()
+                    .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req
+                    -> ((RequirementOnlyForSolution) req).result = devComplicance);
+            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASPERFORMANCEINDEX.getIRI()
+                    .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req
+                    -> ((RequirementOnlyForSolution) req).result = devPerformance);
         }
     }
 
