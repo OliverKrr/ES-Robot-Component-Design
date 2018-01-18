@@ -18,7 +18,6 @@ public class NavigationBarHelper {
     private static final int horizontalY = GUI.navBarY;
 
     private static final int verticalX = 5;
-    private static final int verticalBasisY = 75;
 
     private final FormToolkit formToolkit;
     private final Composite composite;
@@ -64,7 +63,7 @@ public class NavigationBarHelper {
                 lastRectangle.y = horizontalY + level * navItemHeight;
             } else {
                 lastRectangle.x = verticalX + level * navItemWidth;
-                lastRectangle.y = verticalBasisY + i * navItemHeight;
+                lastRectangle.y = i * navItemHeight;
             }
             NavigationItem item = navItems.get(i);
             item.item.setBounds(lastRectangle);
@@ -99,4 +98,17 @@ public class NavigationBarHelper {
         return lastRectangle;
     }
 
+    public void updateY(List<NavigationItem> reqNavItems, int y) {
+        boolean isFirst = true;
+        int yDelta = 0;
+        for (NavigationItem navItem : reqNavItems) {
+            Rectangle bounds = navItem.item.getBounds();
+            if (isFirst) {
+                isFirst = false;
+                yDelta = y - bounds.y;
+            }
+            bounds.y = bounds.y + yDelta;
+            navItem.item.setBounds(bounds);
+        }
+    }
 }

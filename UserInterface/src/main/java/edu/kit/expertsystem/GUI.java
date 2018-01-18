@@ -29,16 +29,13 @@ public class GUI {
     private static final Point firstSizeOfShell = new Point(1000, 600);
 
     private static final Logger logger = LogManager.getLogger(GUI.class);
-
-    private Shell shell;
     private static final Display display = Display.getDefault();
     private final FormToolkit formToolkit = new FormToolkit(display);
-
+    private final ExecutorService pool;
+    private Shell shell;
     private RequirementsCategory requirementsCategory;
     private RequirementsCategory requirementsOptimization;
     private SolutionTab solutionTab;
-
-    private final ExecutorService pool;
     private Future<?> controllerFuture;
     private Controller controller;
 
@@ -47,6 +44,13 @@ public class GUI {
     private Combo unitsToReasonCombo;
     private StyledText errorText;
     private Label kitLogo;
+
+    private GUI() {
+        pool = Executors.newSingleThreadExecutor();
+        // do nothing for init and no concurrent problems while creation of gui
+        controllerFuture = pool.submit(() -> {
+        });
+    }
 
     /**
      * Launch the application.
@@ -61,13 +65,6 @@ public class GUI {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
         }
-    }
-
-    private GUI() {
-        pool = Executors.newSingleThreadExecutor();
-        // do nothing for init and no concurrent problems while creation of gui
-        controllerFuture = pool.submit(() -> {
-        });
     }
 
     /**
@@ -172,6 +169,8 @@ public class GUI {
                 });
 
                 createKitLogo(reqNavBarRec);
+                int newNavBarY = kitLogo.getBounds().y + kitLogo.getBounds().height + errorTextYOffset;
+                requirementsCategory.updateNavBarY(newNavBarY);
                 addNavigationBarListener();
                 updateSize();
             }

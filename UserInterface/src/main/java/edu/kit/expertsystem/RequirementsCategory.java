@@ -162,4 +162,8 @@ public class RequirementsCategory {
     public Composite getRequirementsOverallForm() {
         return requirementsOverallForm;
     }
+
+    public void updateNavBarY(int y) {
+        navHelper.updateY(reqNavItems, y);
+    }
 }
