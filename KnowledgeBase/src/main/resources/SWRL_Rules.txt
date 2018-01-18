@@ -633,18 +633,10 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 
 
 
-DiameterInputDriveBearingMatchLinearSatisfy1Rule:
+DiameterInputDriveBearingMatchLinearSatisfyRule:
 DiameterInputDriveBearingMatchLinear(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^
-swrlb:lessThanOrEqual(?d_ib, ?d_m) ^
-hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
--> HalfSatisfiedDiameterInputDriveBearingMatchLinear(?didbm)
-
-DiameterInputDriveBearingMatchLinearSatisfy2Rule:
-DiameterInputDriveBearingMatchLinear(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
-hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^
-swrlb:lessThanOrEqual(?d_ib, ?d_m) ^
-hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
+swrlb:lessThanOrEqual(?d_ib, ?d_m)
 -> HalfSatisfiedDiameterInputDriveBearingMatchLinear(?didbm)
 
 
@@ -664,20 +656,11 @@ swrlb:equal(?d_ib2, ?d_ib1)
 
 
 
-DiameterInputDriveBearingMatchCompressedBeforeSatisfy1Rule:
+DiameterInputDriveBearingMatchCompressedBeforeSatisfyRule:
 DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp) ^
-hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
--> BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
-
-DiameterInputDriveBearingMatchCompressedBeforeSatisfy12Rule:
-DiameterInputDriveBearingMatchCompressed(?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
-hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
-swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
-swrlb:lessThanOrEqual(?D_db, ?temp) ^
-hasCurrentRequirement(?didbm, ?r) ^ chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
+swrlb:lessThanOrEqual(?D_db, ?temp)
 -> BeforeHalfSatisfiedDiameterInputDriveBearingMatchCompressed(?didbm)
 
 
@@ -1431,6 +1414,22 @@ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:add(?D_input, ?dec, ?D_m)
 
 DiameterInputSatisfyRule:
 DiameterInput(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ hasCurrentRequirement(?di, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterInput(?di)
+
+
+DiameterInputStructureSatisfy1Rule:
+SatisfiedDiameterInput(?di) ^ hasCurrentRequirement(?di, ?r) ^
+chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
+-> SatisfiedDiameterInputLinear(?di) ^ SatisfiedDiameterInputCompressed(?di)
+
+DiameterInputStructureSatisfy2Rule:
+SatisfiedDiameterInput(?di) ^ hasCurrentRequirement(?di, ?r) ^
+chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
+-> SatisfiedDiameterInputLinear(?di)
+
+DiameterInputStructureSatisfy3Rule:
+SatisfiedDiameterInput(?di) ^ hasCurrentRequirement(?di, ?r) ^
+chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
+-> SatisfiedDiameterInputCompressed(?di)
 
 
 
