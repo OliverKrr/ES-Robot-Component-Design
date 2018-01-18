@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.*;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -18,29 +18,35 @@ import java.util.*;
 
 public abstract class ResultAbstract {
 
-    protected static final Logger logger = LogManager.getLogger(ResultAbstract.class);
-
+    static final String RESULT_KEY = "ResultKey";
+    private static final Logger logger = LogManager.getLogger(ResultAbstract.class);
     private static final int MAXIMAL_NEEDED_SPACES = 9;
+    final FormToolkit formToolkit;
+    ResultWrapper resultWrapper;
+    Map<String, ShowResult> showKeys = new HashMap<>();
+    private DecimalFormat df = new DecimalFormat("#.####");
+    private SelectionAdapter adaptSolutionListener;
+    private SelectionAdapter showResultInNewWindowListener;
 
-    protected DecimalFormat df = new DecimalFormat("#.####");
 
-    protected ResultWrapper resultWrapper;
-    protected Map<String, ShowResult> showKeys = new HashMap<>();
-    private SelectionAdapter listener;
-
-
-    public ResultAbstract(ResultWrapper resultWrapper) {
+    ResultAbstract(FormToolkit formToolkit, ResultWrapper resultWrapper) {
+        this.formToolkit = formToolkit;
         this.resultWrapper = resultWrapper;
         df.setRoundingMode(RoundingMode.CEILING);
     }
 
     public final synchronized void clearLastResults() {
-        if (listener != null) {
-            resultWrapper.orderBy.removeSelectionListener(listener);
-            resultWrapper.orderBy2.removeSelectionListener(listener);
-            resultWrapper.selectToShowButton.removeSelectionListener(listener);
-            resultWrapper.showOnlyDiffsCheckBox.removeSelectionListener(listener);
-            listener = null;
+        if (adaptSolutionListener != null) {
+            resultWrapper.orderBy.removeSelectionListener(adaptSolutionListener);
+            resultWrapper.orderBy2.removeSelectionListener(adaptSolutionListener);
+            resultWrapper.selectToShowButton.removeSelectionListener(adaptSolutionListener);
+            resultWrapper.showOnlyDiffsCheckBox.removeSelectionListener(adaptSolutionListener);
+            adaptSolutionListener = null;
+        }
+        if (showResultInNewWindowListener != null) {
+            resultWrapper.table.removeSelectionListener(showResultInNewWindowListener);
+            resultWrapper.tree.removeSelectionListener(showResultInNewWindowListener);
+            showResultInNewWindowListener = null;
         }
         clearLastSpecificResults();
     }
@@ -61,7 +67,7 @@ public abstract class ResultAbstract {
         selectOrderBy(oldSelectionOfOrderBy, oldSelectionOfOrderBy2);
         addSelectToShow(selectShowMap);
 
-        listener = new SelectionAdapter() {
+        adaptSolutionListener = new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
@@ -79,11 +85,46 @@ public abstract class ResultAbstract {
             }
         };
 
-        resultWrapper.orderBy.addSelectionListener(listener);
-        resultWrapper.orderBy2.addSelectionListener(listener);
-        resultWrapper.selectToShowButton.addSelectionListener(listener);
-        resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(listener);
+        resultWrapper.orderBy.addSelectionListener(adaptSolutionListener);
+        resultWrapper.orderBy2.addSelectionListener(adaptSolutionListener);
+        resultWrapper.selectToShowButton.addSelectionListener(adaptSolutionListener);
+        resultWrapper.showOnlyDiffsCheckBox.addSelectionListener(adaptSolutionListener);
         resultWrapper.orderBy.notifyListeners(SWT.Selection, new Event());
+
+        showResultInNewWindowListener = new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                for (TableItem item : resultWrapper.table.getSelection()) {
+                    openNewShell(item);
+                }
+                for (TreeItem item : resultWrapper.tree.getSelection()) {
+                    if (item.getParentItem() != null) {
+                        openNewShell(item.getParentItem());
+                    } else {
+                        openNewShell(item);
+                    }
+                }
+            }
+
+            private void openNewShell(Item item) {
+                Result result = (Result) item.getData(RESULT_KEY);
+                if (result == null) {
+                    return;
+                }
+                //TODO move to other class
+                Shell newShell = new Shell();
+                newShell.setText("KIT SAC Unit Generator - Result");
+                Text text = new Text(newShell, SWT.BORDER | SWT.WRAP);
+                text.setText(result.toString());
+                formToolkit.adapt(text, true, true);
+                text.setBounds(0, 0, newShell.getSize().x, newShell.getSize().y);
+                newShell.open();
+                //TODO make right
+                // maybe readAndDispatch in thread -> threadPool
+            }
+        };
+        resultWrapper.table.addSelectionListener(showResultInNewWindowListener);
+        resultWrapper.tree.addSelectionListener(showResultInNewWindowListener);
     }
 
     protected abstract void showSolution();
@@ -216,22 +257,22 @@ public abstract class ResultAbstract {
         clearLastResults();
     }
 
-    protected double getMaxNumberOfCharsForComp(Result result) {
+    double getMaxNumberOfCharsForComp(Result result) {
         return result.components.stream().max(Comparator.comparingInt(val -> val.nameOfComponent.length())).get()
                 .nameOfComponent.length();
     }
 
-    protected String getNameForComponent(Component component, double maxNumberOfChars) {
+    String getNameForComponent(Component component, double maxNumberOfChars) {
         return "".equals(component.nameOfComponent) ? component.nameOfInstance : component.nameOfComponent + ": " +
                 getSpacesForDisplayName(component.nameOfComponent, maxNumberOfChars) + component.nameOfInstance;
     }
 
-    protected double getMaxNumberOfCharsForReq(Result result) {
+    double getMaxNumberOfCharsForReq(Result result) {
         return result.requirements.stream().filter(req -> req.resultIRI != null).max(Comparator.comparingInt(val ->
                 val.displayName.length())).get().displayName.length();
     }
 
-    protected String getNameForReq(Requirement req, double maxNumberOfChars) {
+    String getNameForReq(Requirement req, double maxNumberOfChars) {
         String resultValue = getResultValue(req);
         String unit = req.unit == null ? "" : req.unit;
         return req.displayName + ": " + getSpacesForDisplayName(req.displayName, maxNumberOfChars) + resultValue +
@@ -259,7 +300,7 @@ public abstract class ResultAbstract {
         }
     }
 
-    protected String getResultValue(Requirement req) {
+    String getResultValue(Requirement req) {
         if (req instanceof TextFieldMinMaxRequirement) {
             TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
             return df.format(realReq.result * realReq.scaleFromOntologyToUI);

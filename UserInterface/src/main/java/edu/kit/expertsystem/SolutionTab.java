@@ -96,7 +96,7 @@ public class SolutionTab {
         selectToShowButton = new Button(leftComposite, SWT.TOGGLE);
         selectToShowButton.setText("Select ... to show");
         resultWrapper.selectToShowButton = selectToShowButton;
-        selectTableToShow = new Table(leftComposite, SWT.CHECK | SWT.BORDER | SWT.MULTI);
+        selectTableToShow = new Table(leftComposite, SWT.CHECK | SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
         selectTableToShow.setVisible(false);
         selectToShowButton.addSelectionListener(new SelectionAdapter() {
             @Override
@@ -123,7 +123,7 @@ public class SolutionTab {
         resultWrapper.showOnlyDiffsCheckBox = showOnlyDiffsCheckBox;
 
         resultTree = new Tree(leftComposite, SWT.NONE);
-        resultTable = new Table(leftComposite, SWT.FULL_SELECTION | SWT.BORDER);
+        resultTable = new Table(leftComposite, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
         resultTable.setHeaderVisible(true);
         resultTable.addListener(SWT.EraseItem, event -> {
             int index = resultTable.indexOf((TableItem) event.item);
@@ -154,11 +154,11 @@ public class SolutionTab {
                 if (switchSolutionForm.getText().equals("Show as List")) {
                     resultTree.setVisible(true);
                     resultTable.setVisible(false);
-                    resultWrapper.resultShow = new ResultTreeItem(resultWrapper);
+                    resultWrapper.resultShow = new ResultTreeItem(formToolkit, resultWrapper);
                 } else {
                     resultTree.setVisible(false);
                     resultTable.setVisible(true);
-                    resultWrapper.resultShow = new ResultTable(resultWrapper);
+                    resultWrapper.resultShow = new ResultTable(formToolkit, resultWrapper);
                 }
                 resultWrapper.resultShow.setResults();
             }

@@ -9,15 +9,16 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import java.util.*;
 
 public class ResultTable extends ResultAbstract {
 
-    Map<String, TableColumn> tableColumnMap = new HashMap<>();
+    private Map<String, TableColumn> tableColumnMap = new HashMap<>();
 
-    public ResultTable(ResultWrapper resultWrapper) {
-        super(resultWrapper);
+    public ResultTable(FormToolkit formToolkit, ResultWrapper resultWrapper) {
+        super(formToolkit, resultWrapper);
     }
 
     @Override
@@ -57,8 +58,7 @@ public class ResultTable extends ResultAbstract {
             concatenationOfNamesBuilder.append(builder.toString());
 
             for (Requirement req : result.requirements) {
-                if (req.resultIRI == null || (!showKeys.isEmpty() && !showKeys.get(req
-                        .displayName).showResult)) {
+                if (req.resultIRI == null || (!showKeys.isEmpty() && !showKeys.get(req.displayName).showResult)) {
                     continue;
                 }
                 concatenationOfNamesBuilder.append(getNameForReq(req, 0).replaceAll(" ", ""));
@@ -77,6 +77,7 @@ public class ResultTable extends ResultAbstract {
             item.setText(tableRow.toArray(new String[0]));
             item.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
             item.setData(SolutionTab.COLOR_KEY, item.getForeground());
+            item.setData(RESULT_KEY, result);
         }
         tableColumnMap.values().forEach(TableColumn::pack);
     }

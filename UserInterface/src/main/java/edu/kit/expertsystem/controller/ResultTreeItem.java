@@ -10,12 +10,13 @@ import edu.kit.expertsystem.model.req.Requirement;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class ResultTreeItem extends ResultAbstract {
 
-    public ResultTreeItem(ResultWrapper resultWrapper) {
-        super(resultWrapper);
+    public ResultTreeItem(FormToolkit formToolkit, ResultWrapper resultWrapper) {
+        super(formToolkit, resultWrapper);
     }
 
     @Override
@@ -31,10 +32,10 @@ public class ResultTreeItem extends ResultAbstract {
     }
 
     private void buildTree() {
-        addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
+        addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size(), true);
 
         for (Result result : resultWrapper.results) {
-            TreeItem resItem = addTreeItem(resultWrapper.tree, "");
+            TreeItem resItem = addTreeItem(resultWrapper.tree, "", false);
             StringBuilder concatenationOfNamesBuilder = new StringBuilder();
 
             double maxNumberOfChars = getMaxNumberOfCharsForComp(result);
@@ -61,6 +62,7 @@ public class ResultTreeItem extends ResultAbstract {
                 addTreeItem(resItem, name, false);
             }
             resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
+            resItem.setData(RESULT_KEY, result);
             resItem.setExpanded(true);
         }
     }
@@ -75,10 +77,12 @@ public class ResultTreeItem extends ResultAbstract {
                 .NORMAL));
     }
 
-    private TreeItem addTreeItem(Tree parent, String text) {
+    private TreeItem addTreeItem(Tree parent, String text, boolean makeGreen) {
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
-        resItem.setForeground(Configs.KIT_GREEN_70);
+        if (makeGreen) {
+            resItem.setForeground(Configs.KIT_GREEN_70);
+        }
         return resItem;
     }
 }
