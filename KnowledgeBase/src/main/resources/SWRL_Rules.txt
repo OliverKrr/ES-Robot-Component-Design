@@ -338,6 +338,19 @@ swrlb:notEqual(?D, 0.0)
 -> needExternCabeling(?r, false)
 
 
+RequirementCoverThickness1Rule:
+CurrentRequirements(?r) ^ Constants(?con) ^
+needHiddenControl(?r, ?nhc) ^
+swrlb:equal(?nhc, true) ^
+thicknessCover(?con, ?tc_con)
+-> hasThicknessCoverReq_t_unit_mm(?r, ?tc_con)
+
+RequirementCoverThickness2Rule:
+CurrentRequirements(?r) ^
+needHiddenControl(?r, ?nhc) ^
+swrlb:equal(?nhc, false)
+-> hasThicknessCoverReq_t_unit_mm(?r, 0.0)
+
 
 
 MotorControllerSatisfyRule:
