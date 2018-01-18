@@ -1,6 +1,6 @@
 package edu.kit.expertsystem;
 
-import edu.kit.expertsystem.controller.ResultImage;
+import edu.kit.expertsystem.controller.ResultTable;
 import edu.kit.expertsystem.controller.ResultTreeItem;
 import edu.kit.expertsystem.controller.wrapper.RequirementWrapper;
 import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
@@ -11,6 +11,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.*;
@@ -21,6 +22,7 @@ import java.util.List;
 public class SolutionTab {
 
     public static final String SEARCH_KEY = "SearchString";
+    public static final String COLOR_KEY = "DefaultForeground";
 
     private static final int offsetX = 5;
     private static final int offsetY = 5;
@@ -39,6 +41,7 @@ public class SolutionTab {
     private Composite rightComposite;
     private Label separatorHorizontal;
     private Tree resultTree;
+    private Table resultTable;
     private Button saveSolutionOntologyButton;
     private Text searchField;
     private Combo orderByCombo;
@@ -102,19 +105,43 @@ public class SolutionTab {
         formToolkit.adapt(showOnlyDiffsCheckBox, true, true);
         resultWrapper.showOnlyDiffsCheckBox = showOnlyDiffsCheckBox;
 
+        resultTree = new Tree(leftComposite, SWT.NONE);
+        resultTable = new Table(leftComposite, SWT.FULL_SELECTION | SWT.BORDER);
+        resultTable.setHeaderVisible(true);
+        resultTable.addListener(SWT.EraseItem, event -> {
+            int index = resultTable.indexOf((TableItem) event.item);
+            if (index % 2 == 0) {
+                Color oldBackground = event.gc.getBackground();
+                event.gc.setBackground(Configs.KIT_GREEN_30);
+                event.gc.fillRectangle(0, event.y, resultTable.getClientArea().width, event.height);
+                event.gc.setBackground(oldBackground);
+            }
+        });
+
+        updateSizeOfResultItems();
+        resultWrapper.tree = resultTree;
+        resultWrapper.table = resultTable;
+
         switchSolutionForm = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         switchSolutionForm.add("Show as List");
-        switchSolutionForm.add("Show as Images");
+        switchSolutionForm.add("Show as Table");
         switchSolutionForm.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
+                if (resultTree.isDisposed() || resultTable.isDisposed()) {
+                    return;
+                }
                 if (resultWrapper.resultShow != null) {
                     resultWrapper.resultShow.clearLastResults();
                 }
                 if (switchSolutionForm.getText().equals("Show as List")) {
+                    resultTree.setVisible(true);
+                    resultTable.setVisible(false);
                     resultWrapper.resultShow = new ResultTreeItem(resultWrapper);
                 } else {
-                    resultWrapper.resultShow = new ResultImage(resultWrapper);
+                    resultTree.setVisible(false);
+                    resultTable.setVisible(true);
+                    resultWrapper.resultShow = new ResultTable(resultWrapper);
                 }
                 resultWrapper.resultShow.setResults();
             }
@@ -127,10 +154,6 @@ public class SolutionTab {
         separatorHorizontal = new Label(leftComposite, SWT.SEPARATOR | SWT.HORIZONTAL);
         updateSizeOfHorizontalSeparator();
         formToolkit.adapt(separatorHorizontal, false, false);
-
-        resultTree = new Tree(leftComposite, SWT.NONE);
-        updateSizeOfTreeItem();
-        resultWrapper.tree = resultTree;
 
         searchField.addKeyListener(new KeyListener() {
 
@@ -145,6 +168,18 @@ public class SolutionTab {
                         contains &= searchString.contains(currentSearchString);
                     }
                     treeItem.setExpanded(contains);
+                }
+                for (TableItem tableItem : resultTable.getItems()) {
+                    String searchString = String.valueOf(tableItem.getData(SEARCH_KEY)).toLowerCase();
+                    boolean contains = true;
+                    for (String currentSearchString : currentSearchStrings) {
+                        contains &= searchString.contains(currentSearchString);
+                    }
+                    if (contains) {
+                        tableItem.setForeground((Color) tableItem.getData(COLOR_KEY));
+                    } else {
+                        tableItem.setForeground(Configs.KIT_GREY_15);
+                    }
                 }
             }
 
@@ -189,7 +224,7 @@ public class SolutionTab {
         updateSizeOfShowOnlyDiffsCheckBox();
         updateSizeOfSwitchSolutionForm();
         updateSizeOfHorizontalSeparator();
-        updateSizeOfTreeItem();
+        updateSizeOfResultItems();
     }
 
     private void updateSizeOfSaveSolutionOntologyButton() {
@@ -244,12 +279,15 @@ public class SolutionTab {
         separatorHorizontal.setBounds(offsetX, y, width, searchTextHeight);
     }
 
-    private void updateSizeOfTreeItem() {
-        int yOfTree = 4 * offsetY + 3 * searchTextHeight;
-        int widthOfTree = leftComposite.getBounds().width - offsetX - offsetXEnd;
-        int heightOfTree = leftComposite.getBounds().height - yOfTree - offsetYEnd;
-        resultTree.setBounds(offsetX, yOfTree, widthOfTree, heightOfTree);
+    private void updateSizeOfResultItems() {
+        int y = 4 * offsetY + 3 * searchTextHeight;
+        int width = leftComposite.getBounds().width - offsetX - offsetXEnd;
+        int height = leftComposite.getBounds().height - y - offsetYEnd;
+
+        resultTree.setBounds(offsetX, y, width, height);
+        resultTable.setBounds(offsetX, y, width, height);
         formToolkit.adapt(resultTree, true, true);
+        formToolkit.adapt(resultTable, true, true);
     }
 
     public SashForm getSolutionForm() {

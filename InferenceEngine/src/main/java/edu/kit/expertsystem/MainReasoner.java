@@ -361,14 +361,22 @@ public class MainReasoner {
             }
 
             double devComplicance = 1.0 / weightSum * sumForCompliance;
+            if (Double.isNaN(devComplicance)) {
+                devComplicance = 1;
+            }
             double devPerformance = 1.0 / weightSum * sumForPerformance;
+            if (Double.isNaN(devPerformance)) {
+                devPerformance = 1;
+            }
 
+            double finalDevComplicance = devComplicance;
             result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASCOMPLIANCEINDEX.getIRI()
                     .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req
-                    -> ((RequirementOnlyForSolution) req).result = devComplicance);
+                    -> ((RequirementOnlyForSolution) req).result = finalDevComplicance);
+            double finalDevPerformance = devPerformance;
             result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASPERFORMANCEINDEX.getIRI()
                     .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req
-                    -> ((RequirementOnlyForSolution) req).result = devPerformance);
+                    -> ((RequirementOnlyForSolution) req).result = finalDevPerformance);
         }
     }
 

@@ -270,7 +270,7 @@ MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasCurrentRequiremen
 
 MotorGearBoxMatchSatisfyRule:
 MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasGearBox(?ma, ?g)
--> SatisfiedMotorGearBoxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g) ^ isComposedOfMotorBrake(?ma, ?mb)
+-> SatisfiedMotorGearBoxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g) ^ isComposedOfMotorBrake(?ma, ?mb) ^ hasComplianceIndex(?ma, 1.0) ^ hasPerformanceIndex(?ma, 1.0)
 
 MotorGearBoxMatchForSACunitSatisfyRule:
 MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)

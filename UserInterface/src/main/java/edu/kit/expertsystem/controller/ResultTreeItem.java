@@ -12,9 +12,6 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ResultTreeItem extends ResultAbstract {
 
     public ResultTreeItem(ResultWrapper resultWrapper) {
@@ -35,18 +32,6 @@ public class ResultTreeItem extends ResultAbstract {
 
     private void buildTree() {
         addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size());
-
-        Map<String, ShowResult> showKeys = new HashMap<>();
-        if (resultWrapper.showOnlyDiffsCheckBox.getSelection()) {
-            for (Result result : resultWrapper.results) {
-                for (Component component : result.components) {
-                    handleShow(showKeys, component.nameOfComponent, component.nameOfInstance, true);
-                }
-                for (Requirement req : result.requirements) {
-                    handleShow(showKeys, req.displayName, getResultValue(req), false);
-                }
-            }
-        }
 
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "");
@@ -82,15 +67,6 @@ public class ResultTreeItem extends ResultAbstract {
         }
     }
 
-    private void handleShow(Map<String, ShowResult> showKeys, String key, String value, boolean isComponent) {
-        if (!showKeys.containsKey(key)) {
-            showKeys.put(key, new ShowResult(value, false, isComponent));
-        }
-        if (!showKeys.get(key).firstValue.equals(value)) {
-            showKeys.get(key).showResult = true;
-        }
-    }
-
     private void addTreeItem(TreeItem parent, String text, boolean makeGreen) {
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
@@ -106,17 +82,5 @@ public class ResultTreeItem extends ResultAbstract {
         resItem.setText(text);
         resItem.setForeground(Configs.KIT_GREEN_70);
         return resItem;
-    }
-
-    private static class ShowResult {
-        String firstValue;
-        boolean showResult;
-        boolean isComponent;
-
-        ShowResult(String firstValue, boolean showResult, boolean isComponent) {
-            this.firstValue = firstValue;
-            this.showResult = showResult;
-            this.isComponent = isComponent;
-        }
     }
 }

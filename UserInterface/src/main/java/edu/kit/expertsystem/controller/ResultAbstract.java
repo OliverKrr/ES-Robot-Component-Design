@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.Event;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ResultAbstract {
 
@@ -24,6 +26,7 @@ public abstract class ResultAbstract {
     protected DecimalFormat df = new DecimalFormat("#.####");
 
     protected ResultWrapper resultWrapper;
+    protected Map<String, ShowResult> showKeys = new HashMap<>();
     private SelectionAdapter listener;
 
 
@@ -33,7 +36,7 @@ public abstract class ResultAbstract {
     }
 
     public final synchronized void clearLastResults() {
-        if (listener != null){
+        if (listener != null) {
             resultWrapper.orderBy.removeSelectionListener(listener);
             resultWrapper.orderBy2.removeSelectionListener(listener);
             resultWrapper.showOnlyDiffsCheckBox.removeSelectionListener(listener);
@@ -59,6 +62,7 @@ public abstract class ResultAbstract {
             @Override
             public void widgetSelected(SelectionEvent event) {
                 sortSolution();
+                setShowKeys();
                 showSolution();
 
                 Event reloadSearchE = new Event();
@@ -251,5 +255,40 @@ public abstract class ResultAbstract {
             builder.append(" ");
         }
         return builder.toString();
+    }
+
+    private void setShowKeys() {
+        showKeys.clear();
+        if (resultWrapper.showOnlyDiffsCheckBox.getSelection()) {
+            for (Result result : resultWrapper.results) {
+                for (Component component : result.components) {
+                    handleShow(component.nameOfComponent, component.nameOfInstance, true);
+                }
+                for (Requirement req : result.requirements) {
+                    handleShow(req.displayName, getResultValue(req), false);
+                }
+            }
+        }
+    }
+
+    private void handleShow(String key, String value, boolean isComponent) {
+        if (!showKeys.containsKey(key)) {
+            showKeys.put(key, new ShowResult(value, false, isComponent));
+        }
+        if (!showKeys.get(key).firstValue.equals(value)) {
+            showKeys.get(key).showResult = true;
+        }
+    }
+
+    protected static class ShowResult {
+        String firstValue;
+        boolean showResult;
+        boolean isComponent;
+
+        ShowResult(String firstValue, boolean showResult, boolean isComponent) {
+            this.firstValue = firstValue;
+            this.showResult = showResult;
+            this.isComponent = isComponent;
+        }
     }
 }
