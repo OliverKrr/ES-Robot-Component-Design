@@ -21,7 +21,7 @@ public abstract class ResultAbstract {
     static final String RESULT_KEY = "ResultKey";
     private static final Logger logger = LogManager.getLogger(ResultAbstract.class);
     private static final int MAXIMAL_NEEDED_SPACES = 9;
-    final FormToolkit formToolkit;
+    private final FormToolkit formToolkit;
     ResultWrapper resultWrapper;
     Map<String, ShowResult> showKeys = new HashMap<>();
     private DecimalFormat df = new DecimalFormat("#.####");

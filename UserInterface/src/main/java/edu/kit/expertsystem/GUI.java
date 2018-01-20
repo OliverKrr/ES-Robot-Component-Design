@@ -42,8 +42,11 @@ public class GUI {
     private NavigationBarHelper mainNavBarHelper;
     private List<NavigationItem> mainNavBars = new ArrayList<>();
     private Combo unitsToReasonCombo;
+    private Button toggleDescription;
     private StyledText errorText;
     private Label kitLogo;
+
+    private boolean showDescriptions = true;
 
     private GUI() {
         pool = Executors.newSingleThreadExecutor();
@@ -130,6 +133,22 @@ public class GUI {
      * Create contents of the window.
      */
     private void createContents() {
+        toggleDescription = new Button(shell, SWT.PUSH);
+        toggleDescription.setText("Hide descriptions");
+        toggleDescription.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                showDescriptions = !showDescriptions;
+                if (showDescriptions) {
+                    toggleDescription.setText("Hide descriptions");
+                } else {
+                    toggleDescription.setText("Show descriptions");
+                }
+                updateSize();
+                updateSize();
+            }
+        });
+
         unitsToReasonCombo = new Combo(shell, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
         unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
@@ -268,8 +287,15 @@ public class GUI {
         requirementsOptimization.updateSize(updatedRec, getWeights());
         solutionTab.updateSize(updatedRec);
 
+        int toggleDescriptionWidth = GuiHelper.getSizeOfControl(toggleDescription).x;
+        int toggleDescriptionX = updatedRec.x + updatedRec.width - toggleDescriptionWidth;
+        toggleDescription.setBounds(toggleDescriptionX, navBarY, toggleDescriptionWidth, unitsToReasonCombo.getSize()
+                .y);
+        formToolkit.adapt(toggleDescription, true, true);
+
+
         int unitsToReasonComboWidth = GuiHelper.getSizeOfControl(unitsToReasonCombo).x;
-        int unitToReasonComboX = updatedRec.x + updatedRec.width - unitsToReasonComboWidth;
+        int unitToReasonComboX = toggleDescriptionX - unitsToReasonComboWidth - 5;
         unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth, unitsToReasonCombo.getSize
                 ().y);
         formToolkit.adapt(unitsToReasonCombo, true, true);
@@ -281,8 +307,13 @@ public class GUI {
 
     private int[] getWeights() {
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
-        float ratioForWeights = 1f * newWidthOfContent / 835;
-        return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(310 / ratioForWeights)};
+        if (showDescriptions) {
+            float ratioForWeights = 1f * newWidthOfContent / 835;
+            return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(310 / ratioForWeights)};
+        } else {
+            return new int[]{Math.round(newWidthOfContent), 0, 0};
+        }
+
     }
 
     private void createErrorText() {
