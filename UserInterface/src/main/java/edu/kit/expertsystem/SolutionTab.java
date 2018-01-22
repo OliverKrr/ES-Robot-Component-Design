@@ -22,7 +22,6 @@ import java.util.List;
 public class SolutionTab {
 
     public static final String SEARCH_KEY = "SearchString";
-    public static final String COLOR_KEY = "DefaultForeground";
 
     private static final int offsetX = 5;
     private static final int offsetY = 5;
@@ -193,9 +192,9 @@ public class SolutionTab {
                         contains &= searchString.contains(currentSearchString);
                     }
                     if (contains) {
-                        tableItem.setForeground((Color) tableItem.getData(COLOR_KEY));
+                        tableItem.setForeground(null);
                     } else {
-                        tableItem.setForeground(Configs.KIT_GREY_15);
+                        tableItem.setForeground(Configs.KIT_GREY_30);
                     }
                 }
             }

@@ -17,9 +17,6 @@ public class Configs {
     public static Color KIT_GREY_30;
     public static Color KIT_GREY_15;
 
-    public static Color RED;
-    public static Color DARK_YELLOW;
-
     public static void initConfig(Display display) {
         KIT_GREEN_100 = new Color(display, 0, 150, 130);
         KIT_GREEN_70 = new Color(display, 76, 181, 167);
@@ -32,9 +29,6 @@ public class Configs {
         KIT_GREY_50 = new Color(display, 128, 128, 128);
         KIT_GREY_30 = new Color(display, 179, 179, 179);
         KIT_GREY_15 = new Color(display, 217, 217, 217);
-
-        RED = new Color(display, 255, 0, 0);
-        DARK_YELLOW = new Color(display, 204, 204, 0);
     }
 
     public static void disposeConfig() {
@@ -49,8 +43,5 @@ public class Configs {
         KIT_GREY_50.dispose();
         KIT_GREY_30.dispose();
         KIT_GREY_15.dispose();
-
-        RED.dispose();
-        DARK_YELLOW.dispose();
     }
 }

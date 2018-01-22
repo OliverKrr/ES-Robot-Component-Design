@@ -11,7 +11,9 @@ import org.apache.logging.log4j.core.config.plugins.PluginAttribute;
 import org.apache.logging.log4j.core.config.plugins.PluginElement;
 import org.apache.logging.log4j.core.config.plugins.PluginFactory;
 import org.apache.logging.log4j.core.layout.PatternLayout;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Display;
 
 import java.io.Serializable;
 import java.util.concurrent.locks.Lock;
@@ -33,6 +35,25 @@ public final class MyAppenderForGui extends AbstractAppender {
     protected MyAppenderForGui(String name, Filter filter, Layout<? extends Serializable> layout, final boolean
             ignoreExceptions) {
         super(name, filter, layout, ignoreExceptions);
+    }
+
+    @PluginFactory
+    public static MyAppenderForGui createAppender(@PluginAttribute("name") String name, @PluginElement("Layout")
+            Layout<? extends Serializable> layout, @PluginElement("Filter") final Filter filter, @PluginAttribute
+            ("otherAttribute") String otherAttribute) {
+        if (name == null) {
+            LOGGER.error("No name provided for MyAppenderForGui");
+            return null;
+        }
+        if (layout == null) {
+            layout = PatternLayout.createDefaultLayout();
+        }
+        lastCreatedInstance = new MyAppenderForGui(name, filter, layout, true);
+        return lastCreatedInstance;
+    }
+
+    public static MyAppenderForGui getLastInstance() {
+        return lastCreatedInstance;
     }
 
     public void setGui(GUI gui) {
@@ -57,31 +78,12 @@ public final class MyAppenderForGui extends AbstractAppender {
 
     private Color matchLevelToColor(Level level) {
         if (Level.FATAL.equals(level) || Level.ERROR.equals(level)) {
-            return Configs.RED;
+            return Display.getCurrent().getSystemColor(SWT.COLOR_RED);
         }
         if (Level.WARN.equals(level)) {
-            return Configs.DARK_YELLOW;
+            return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW);
         }
         // default
         return null;
-    }
-
-    @PluginFactory
-    public static MyAppenderForGui createAppender(@PluginAttribute("name") String name, @PluginElement("Layout")
-            Layout<? extends Serializable> layout, @PluginElement("Filter") final Filter filter, @PluginAttribute
-            ("otherAttribute") String otherAttribute) {
-        if (name == null) {
-            LOGGER.error("No name provided for MyAppenderForGui");
-            return null;
-        }
-        if (layout == null) {
-            layout = PatternLayout.createDefaultLayout();
-        }
-        lastCreatedInstance = new MyAppenderForGui(name, filter, layout, true);
-        return lastCreatedInstance;
-    }
-
-    public static MyAppenderForGui getLastInstance() {
-        return lastCreatedInstance;
     }
 }

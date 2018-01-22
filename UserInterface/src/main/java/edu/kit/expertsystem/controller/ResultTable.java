@@ -5,7 +5,10 @@ import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.req.Requirement;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Widget;
@@ -39,7 +42,7 @@ public class ResultTable extends ResultAbstract {
         for (Result result : resultWrapper.results) {
             List<String> tableRow = new ArrayList<>();
             StringBuilder concatenationOfNamesBuilder = new StringBuilder();
-
+            Map<Integer, Color> foregroundColor = new HashMap<>();
 
             StringBuilder builder = new StringBuilder("");
             for (Component component : result.components) {
@@ -71,13 +74,25 @@ public class ResultTable extends ResultAbstract {
                     tableColumn.setText(nameOfColumn);
                     tableColumnMap.put(nameOfColumn, tableColumn);
                 }
+                if (req instanceof TextFieldMinMaxRequirement) {
+                    TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+                    if (realReq.acutalSatisficationToAllowedDeviation < 1) {
+                        if (realReq.acutalSatisficationToAllowedDeviation < 0.5) {
+                            foregroundColor.put(tableRow.size() - 1, Display.getCurrent().getSystemColor(SWT
+                                    .COLOR_RED));
+                        } else {
+                            foregroundColor.put(tableRow.size() - 1, Display.getCurrent().getSystemColor(SWT
+                                    .COLOR_DARK_YELLOW));
+                        }
+                    }
+                }
             }
 
             TableItem item = new TableItem(resultWrapper.table, SWT.NONE);
             item.setText(tableRow.toArray(new String[0]));
             item.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
-            item.setData(SolutionTab.COLOR_KEY, item.getForeground());
             item.setData(RESULT_KEY, result);
+            foregroundColor.forEach(item::setForeground);
         }
         tableColumnMap.values().forEach(TableColumn::pack);
     }

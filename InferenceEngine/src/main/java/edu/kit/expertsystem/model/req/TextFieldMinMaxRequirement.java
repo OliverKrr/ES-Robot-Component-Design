@@ -20,6 +20,7 @@ public class TextFieldMinMaxRequirement extends Requirement {
     public double max = defaultMax;
 
     public double result = -1;
+    public double acutalSatisficationToAllowedDeviation = 1;
 
     public boolean allowOptimization = false;
     public double deviationPercentage = 0;
@@ -43,6 +44,7 @@ public class TextFieldMinMaxRequirement extends Requirement {
         min = other.min;
         max = other.max;
         result = other.result;
+        acutalSatisficationToAllowedDeviation = other.acutalSatisficationToAllowedDeviation;
         allowOptimization = other.allowOptimization;
         deviationPercentage = other.deviationPercentage;
         userWeight = other.userWeight;
@@ -61,16 +63,17 @@ public class TextFieldMinMaxRequirement extends Requirement {
                 && enableMax == that.enableMax && isIntegerValue == that.isIntegerValue && Double.compare(that
                 .defaultMin, defaultMin) == 0 && Double.compare(that.defaultMax, defaultMax) == 0 && Double.compare
                 (that.min, min) == 0 && Double.compare(that.max, max) == 0 && Double.compare(that.result, result) ==
-                0 && allowOptimization == that.allowOptimization && Double.compare(that.deviationPercentage,
-                deviationPercentage) == 0 && userWeight == that.userWeight && Objects.equals(minIRI, that.minIRI) &&
-                Objects.equals(maxIRI, that.maxIRI);
+                0 && Double.compare(that.acutalSatisficationToAllowedDeviation,
+                acutalSatisficationToAllowedDeviation) == 0 && allowOptimization == that.allowOptimization && Double
+                .compare(that.deviationPercentage, deviationPercentage) == 0 && userWeight == that.userWeight &&
+                Objects.equals(minIRI, that.minIRI) && Objects.equals(maxIRI, that.maxIRI);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), scaleFromOntologyToUI, minIRI, maxIRI, enableMin, enableMax,
-                isIntegerValue, defaultMin, defaultMax, min, max, result, allowOptimization, deviationPercentage,
-                userWeight);
+                isIntegerValue, defaultMin, defaultMax, min, max, result, acutalSatisficationToAllowedDeviation,
+                allowOptimization, deviationPercentage, userWeight);
     }
 
     @Override
@@ -78,7 +81,9 @@ public class TextFieldMinMaxRequirement extends Requirement {
         return "TextFieldMinMaxRequirement{" + "scaleFromOntologyToUI=" + scaleFromOntologyToUI + ", minIRI='" +
                 minIRI + '\'' + ", maxIRI='" + maxIRI + '\'' + ", enableMin=" + enableMin + ", enableMax=" +
                 enableMax + ", isIntegerValue=" + isIntegerValue + ", defaultMin=" + defaultMin + ", defaultMax=" +
-                defaultMax + ", min=" + min + ", max=" + max + ", result=" + result + ", allowOptimization=" + allowOptimization + ", deviationPercentage=" + deviationPercentage + ", userWeight=" + userWeight + "}"
-                + " " + super.toString();
+                defaultMax + ", min=" + min + ", max=" + max + ", result=" + result + ", " +
+                "acutalSatisficationToAllowedDeviation=" + acutalSatisficationToAllowedDeviation + ", " +
+                "allowOptimization=" + allowOptimization + ", deviationPercentage=" + deviationPercentage + ", " +
+                "userWeight=" + userWeight + "} " + super.toString();
     }
 }

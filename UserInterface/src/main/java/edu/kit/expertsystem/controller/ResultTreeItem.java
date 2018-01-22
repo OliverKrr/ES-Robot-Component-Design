@@ -7,7 +7,9 @@ import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Result;
 import edu.kit.expertsystem.model.req.Requirement;
+import edu.kit.expertsystem.model.req.TextFieldMinMaxRequirement;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -47,7 +49,7 @@ public class ResultTreeItem extends ResultAbstract {
                 }
                 String name = getNameForComponent(component, maxNumberOfChars);
                 builder.append(name.replaceAll(" ", ""));
-                addTreeItem(resItem, name, true);
+                addTreeItem(resItem, name, true, 1);
             }
             concatenationOfNamesBuilder.append(builder.toString());
 
@@ -59,7 +61,12 @@ public class ResultTreeItem extends ResultAbstract {
                 }
                 String name = getNameForReq(req, maxNumberOfChars);
                 concatenationOfNamesBuilder.append(name.replaceAll(" ", ""));
-                addTreeItem(resItem, name, false);
+                if (req instanceof TextFieldMinMaxRequirement) {
+                    addTreeItem(resItem, name, false, ((TextFieldMinMaxRequirement) req)
+                            .acutalSatisficationToAllowedDeviation);
+                } else {
+                    addTreeItem(resItem, name, false, 1);
+                }
             }
             resItem.setData(SolutionTab.SEARCH_KEY, concatenationOfNamesBuilder.toString());
             resItem.setData(RESULT_KEY, result);
@@ -67,11 +74,20 @@ public class ResultTreeItem extends ResultAbstract {
         }
     }
 
-    private void addTreeItem(TreeItem parent, String text, boolean makeGreen) {
+    private void addTreeItem(TreeItem parent, String text, boolean makeGreen, double
+            acutalSatisficationToAllowedDeviation) {
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
         resItem.setText(text);
         if (makeGreen) {
             resItem.setForeground(Configs.KIT_GREEN_70);
+        } else {
+            if (acutalSatisficationToAllowedDeviation < 1) {
+                if (acutalSatisficationToAllowedDeviation < 0.5) {
+                    resItem.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+                } else {
+                    resItem.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW));
+                }
+            }
         }
         resItem.setFont(SWTResourceManager.getFont("Courier New", GuiHelper.getFontHeight(resItem.getFont()), SWT
                 .NORMAL));

@@ -329,6 +329,9 @@ public class MainReasoner {
                         double devMin = minLine.getY(realReq.result);
                         if (devMin < 1) {
                             weightInSumForCompliance = devMin * realReq.userWeight;
+                            double deviationMin = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
+                            minLine = new Line(deviationMin, 0, realReq.min, 1.0);
+                            realReq.acutalSatisficationToAllowedDeviation = minLine.getY(realReq.result);
                         } else {
                             weightInSumForCompliance = realReq.userWeight;
                         }
@@ -345,6 +348,10 @@ public class MainReasoner {
                             if (skipedMin) {
                                 weightInSumForCompliance = devMax * realReq.userWeight;
                             }
+                            double deviationMax = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
+                            maxLine = new Line(realReq.max, 1.0, deviationMax, 0);
+                            realReq.acutalSatisficationToAllowedDeviation = Math.min(realReq
+                                    .acutalSatisficationToAllowedDeviation, maxLine.getY(realReq.result));
                         } else {
                             weightInSumForCompliance = Math.min(weightInSumForCompliance, realReq.userWeight);
                             if (skipedMin) {
