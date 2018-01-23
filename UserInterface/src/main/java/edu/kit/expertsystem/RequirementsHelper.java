@@ -302,7 +302,7 @@ public class RequirementsHelper {
                 .maxUserWeighting; ++i) {
             userWeighting.add(String.valueOf(i));
         }
-        userWeighting.select(TextFieldMinMaxRequirementWrapper.defaultUserWeighting);
+        userWeighting.select(((TextFieldMinMaxRequirement) requirementWrapper.requirement).userWeight);
         Point userWeightingSize = GuiHelper.getSizeOfControl(userWeighting);
         int userWeightingX = scaleX + scaleSize.x + userWeightingOffsetX;
         userWeighting.setBounds(userWeightingX, y1, userWeightingSize.x, height);

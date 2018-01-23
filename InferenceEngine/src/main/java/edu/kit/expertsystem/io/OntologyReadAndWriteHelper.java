@@ -49,6 +49,7 @@ public class OntologyReadAndWriteHelper {
         this.helper = helper;
         generators.add(new MyInferredClassAssertionAxiomGenerator());
         generators.add(new MyInferredPropertyAssertionGenerator(genericTool));
+        generators.add(new MyInferredObjectPropertyAssertionGenerator(genericTool));
         inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(), new ArrayList<>
                 (generators));
     }
