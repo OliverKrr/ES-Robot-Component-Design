@@ -192,6 +192,7 @@ public class GUI {
                 requirementsCategory.updateNavBarY(newNavBarY);
                 addNavigationBarListener();
                 updateSize();
+                updateSize();
             }
         });
         unitsToReasonCombo.select(0);
