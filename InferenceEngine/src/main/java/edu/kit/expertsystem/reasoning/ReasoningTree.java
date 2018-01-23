@@ -261,15 +261,7 @@ public class ReasoningTree {
         }
 
         if (Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals(treeClass)) {
-            if (!permutation.permutationName.contains(Vocabulary.CLASS_STRAINGAUGEBASED_SPOKEWHEEL.getIRI()
-                    .getShortForm()) && !permutation.permutationName.contains(Vocabulary.CLASS_NOTORQUESENSOR.getIRI
-                    ().getShortForm())) {
-                return true;
-            }
-        }
-
-        if (Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
-            if (!permutation.permutationName.contains(Vocabulary.CLASS_POSITIONENCODERBASED.getIRI().getShortForm())) {
+            if (permutation.permutationName.contains(Vocabulary.CLASS_POSITIONENCODERBASED.getIRI().getShortForm())) {
                 return true;
             }
         }

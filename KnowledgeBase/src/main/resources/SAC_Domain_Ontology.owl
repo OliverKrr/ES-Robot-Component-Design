@@ -6068,7 +6068,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
