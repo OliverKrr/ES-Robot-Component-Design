@@ -259,12 +259,6 @@ public class ReasoningTree {
                 return true;
             }
         }
-
-        if (Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals(treeClass)) {
-            if (permutation.permutationName.contains(Vocabulary.CLASS_POSITIONENCODERBASED.getIRI().getShortForm())) {
-                return true;
-            }
-        }
         return false;
     }
 

@@ -978,22 +978,22 @@ TorqueSensorAbsolutEncoderMatchSet2Length1Rule:
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
 PositionEncoderBased(?tos) ^
 hasDimensionLength_L_unit_mm(?ab, ?L_ab)
--> has1(?ab, ?L_ab)
+-> has1(?tsab, ?L_ab)
 
 TorqueSensorAbsolutEncoderMatchSet2Length2Rule:
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
 StrainGaugeBased_HollowShaft(?tos)
--> has1(?ab, 0.0)
+-> has1(?tsab, 0.0)
 
 TorqueSensorAbsolutEncoderMatchSet2Length3Rule:
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
 StrainGaugeBased_SpokeWheel(?tos)
--> has1(?ab, 0.0)
+-> has1(?tsab, 0.0)
 
 TorqueSensorAbsolutEncoderMatchSet2Length4Rule:
 SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
 NoTorqueSensor(?tos)
--> has1(?ab, 0.0)
+-> has1(?tsab, 0.0)
 
 
 
@@ -1228,50 +1228,17 @@ swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L
 -> has2(?lo, ?L_torWelle) ^ has3(?lo, ?L_loie) ^ has4(?lo, 0.0) ^ has5(?lo, 0.0) ^ has6(?lo, 0.0) ^ Linear(?lo)
 
 
-LengthOutputCompressedCalc1Rule:
-LengthOutputCompressed(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^
-StrainGaugeBased_SpokeWheel(?tos) ^
+LengthOutputCompressedCalcRule:
+LengthOutputCompressed(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide)
--> has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, 0.0) ^ Compressed(?lo)
-
-LengthOutputCompressedCalc2Rule:
-LengthOutputCompressed(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^
-NoTorqueSensor(?tos) ^
-hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide)
--> has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, 0.0) ^ Compressed(?lo)
-
-
-LengthOutputCompressedSatisfy1Rule:
-LengthOutputCompressed(?lo) ^hasCurrentRequirement(?lo, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
-swrlb:equal(?cos, "Any")
--> has2(?lo, 0.0)
-
-LengthOutputCompressedSatisfy2Rule:
-LengthOutputCompressed(?lo) ^hasCurrentRequirement(?lo, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
-swrlb:equal(?cos, "Compressed")
--> has2(?lo, 0.0)
+-> has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, 0.0) ^ Compressed(?lo)
 
 
 LengthOutputTwoSideCalcRule:
 LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasConstant(?lo, ?con) ^
 hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ lengthCentering(?con, ?c_con) ^
 swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?L_2ndOutput, ?L_s_ob2, ?L_abLager)
--> has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, ?L_2ndOutput) ^ TwoSide(?lo)
-
-
-LengthOutputTwoSidSatisfy1Rule:
-LengthOutputTwoSide(?lo) ^hasCurrentRequirement(?lo, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
-swrlb:equal(?cos, "Any")
--> has2(?lo, 0.0)
-
-LengthOutputTwoSidSatisfy2Rule:
-LengthOutputTwoSide(?lo) ^hasCurrentRequirement(?lo, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
-swrlb:equal(?cos, "TwoSide")
--> has2(?lo, 0.0)
+->  has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, ?L_2ndOutput) ^ TwoSide(?lo)
 
 
 
@@ -1366,8 +1333,9 @@ hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionL
 swrlb:multiply(?L_s_g_fs2, 2.0, ?L_s_g_fs) ^ swrlb:add(?L_temp1, ?L_torWelle, ?L_s_g_fs2) ^ swrlb:add(?L_max1_1, ?L_temp1, ?L_ADC) ^
 swrlb:multiply(?d_g_fs15, 1.5, ?d_g_fs) ^ swrlb:add(?L_max1_2, ?d_g_fs15, ?L_ADC) ^
 swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^
-swrlb:add(?temp1, ?L_loie, ?L_abLager) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?temp2, ?temp1, ?L_s_ob2) ^ swrlb:subtract(?L_max2_1, ?temp2, ?L_overlap)
-hasDimensionLength_L_unit_mm(?g, ?L_g) ^ has6(?lo, ?L_2ndOutput) ^ has1(?ab, ?L_ab_second) ^
+swrlb:add(?temp1, ?L_loie, ?L_abLager) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?temp2, ?temp1, ?L_s_ob2) ^ swrlb:subtract(?L_max2_1, ?temp2, ?L_overlap) ^
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
+hasDimensionLength_L_unit_mm(?g, ?L_g) ^ has6(?lo, ?L_2ndOutput) ^ has1(?tsab, ?L_ab_second) ^
 swrlb:add(?temp21, ?L_g, ?L_2ndOutput) ^ swrlb:add(?L_rest, ?temp21, ?L_ab_second)
 -> hasMax1_1(?lo, ?L_max1_1) ^ hasMax1_2(?lo, ?L_max1_2) ^ hasMax2_1(?lo, ?L_max2_1) ^ has7(?lo, ?L_rest)
 
@@ -1784,6 +1752,42 @@ hasDimensionOuterDiameter_D_unit_mm(?dob, ?D_dob) ^ has1(?do, ?D_do)
 swrlb:lessThanOrEqual(?D_dob, ?D_do)
 -> hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do)
 
+
+DiameterOutputBearingOutputCompressedForCompressedSatisfy1Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
+StrainGaugeBased_SpokeWheel(?tos) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+-> SatisfiedDiameterOutputBearingOutputCompressedForCompressed(?dob)
+
+DiameterOutputBearingOutputCompressedForCompressedSatisfy2Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
+NoTorqueSensor(?tos) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+-> SatisfiedDiameterOutputBearingOutputCompressedForCompressed(?dob)
+
+DiameterOutputBearingOutputCompressedForCompressedSatisfy3Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
+StrainGaugeBased_SpokeWheel(?tos) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
+-> SatisfiedDiameterOutputBearingOutputCompressedForCompressed(?dob)
+
+DiameterOutputBearingOutputCompressedForCompressedSatisfy4Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
+NoTorqueSensor(?tos) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
+-> SatisfiedDiameterOutputBearingOutputCompressedForCompressed(?dob)
+
+
+
+DiameterOutputBearingOutputCompressedForTwoSideSatisfy1Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+-> SatisfiedDiameterOutputBearingOutputCompressedForTwoSide(?dob)
+
+DiameterOutputBearingOutputCompressedForTwoSideSatisfy2Rule:
+SatisfiedDiameterOutputBearingOutputCompressed(?dob) ^
+chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "TwoSide")
+-> SatisfiedDiameterOutputBearingOutputCompressedForTwoSide(?dob)
 
 
 
