@@ -95,6 +95,8 @@ public class RequirementHelper {
                         .findAny().ifPresent(obProp -> textReq.defaultMax = helper.parseValueToDouble(obProp));
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ALLOWOPTIMIZATION)
                         .findAny().ifPresent(obProp -> textReq.allowOptimization = obProp.parseBoolean());
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASUSERWEIGHT).findAny
+                        ().ifPresent(obProp -> textReq.userWeight = helper.parseValueToInteger(obProp));
 
                 genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
                         .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()
