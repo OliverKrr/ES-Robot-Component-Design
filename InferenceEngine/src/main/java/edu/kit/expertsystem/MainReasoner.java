@@ -118,6 +118,11 @@ public class MainReasoner {
             reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_GEARBOX, ind);
         } else if (Vocabulary.CLASS_ROBODRIVESERVOKIBILM.equals(parent)) {
             reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_MOTOR, ind);
+        } else if (Vocabulary.CLASS_ABSOLUTENCODERMBAD01_05.equals(parent) || Vocabulary.CLASS_NOABSOLUTENCODER
+                .equals(parent) || Vocabulary.CLASS_ABSOLUTENCODERONAXIS.equals(parent)) {
+            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_ABSOLUTEENCODER, ind);
+        } else if (Vocabulary.CLASS_TORQUESENSORVARIANTS.equals(parent)) {
+            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_TORQUESENSOR, ind);
         }
     }
 

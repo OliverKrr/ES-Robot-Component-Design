@@ -259,6 +259,38 @@ public class ReasoningTree {
                 return true;
             }
         }
+
+        if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
+                Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
+            boolean hasSameTorqueSensor = false;
+            for (OWLNamedIndividual torqueSensor : deviceToIndividualsMapper.get(Vocabulary.CLASS_TORQUESENSOR)) {
+                String checkString = "-" + permutation.permutationName + "-";
+                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(torqueSensor));
+                if (split.length > 2) {
+                    hasSameTorqueSensor = true;
+                    break;
+                }
+            }
+            if (!hasSameTorqueSensor) {
+                return true;
+            }
+        }
+
+        if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
+                Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
+            boolean hasSameAbosultEncoder = false;
+            for (OWLNamedIndividual absolutEncoder : deviceToIndividualsMapper.get(Vocabulary.CLASS_ABSOLUTEENCODER)) {
+                String checkString = "-" + permutation.permutationName + "-";
+                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(absolutEncoder));
+                if (split.length > 2) {
+                    hasSameAbosultEncoder = true;
+                    break;
+                }
+            }
+            if (!hasSameAbosultEncoder) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -273,7 +305,8 @@ public class ReasoningTree {
             satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
                     .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toSet()));
         }
-        if (Vocabulary.CLASS_MOTORCONTROLLERPOSITIONMATCH.equals(treeClass)) {
+        if (Vocabulary.CLASS_MOTORCONTROLLERPOSITIONMATCH.equals(treeClass) || Vocabulary
+                .CLASS_TORQUESENSORABSOLUTENCODERMATCH.equals(treeClass)) {
             // I have no idea why this is not working...
             // It just deletes everything everytime...
             return;
