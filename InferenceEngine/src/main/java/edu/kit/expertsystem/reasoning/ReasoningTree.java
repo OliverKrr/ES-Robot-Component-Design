@@ -75,7 +75,10 @@ public class ReasoningTree {
             mapClassNameToChildren.put(treeElement.getIRI().getShortForm(), children);
         });
 
-        while (!mapClassNameToChildren.isEmpty()) {
+        boolean hasChanged = true;
+        while (!mapClassNameToChildren.isEmpty() && hasChanged) {
+            int oldSize = mapClassNameToChildren.size();
+            hasChanged = false;
             for (OWLClass clas : unorderdReasoningTreeElements) {
                 String clasName = clas.getIRI().getShortForm();
                 if (!mapClassNameToChildren.containsKey(clasName)) {
@@ -92,6 +95,12 @@ public class ReasoningTree {
                     mapClassNameToChildren.remove(clasName);
                 }
             }
+            hasChanged = oldSize != mapClassNameToChildren.size();
+        }
+        if (!hasChanged) {
+            throw new RuntimeException("The names of the reasoning tree elements are not consistent -> they could be " +
+                    "" + "" + "" + "" + "" + "" + "" + "not " + "ordered " + "right");
+            //TODO do not throw exception. Instead make warning and append rest unordered
         }
     }
 
@@ -246,52 +255,36 @@ public class ReasoningTree {
 
         if (Vocabulary.CLASS_LENGTHOUTPUTLINEAR.equals(treeClass) || Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals
                 (treeClass) || Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
-            boolean hasSameGearBox = false;
-            for (OWLNamedIndividual gearBox : deviceToIndividualsMapper.get(Vocabulary.CLASS_GEARBOX)) {
-                String checkString = "-" + permutation.permutationName + "-";
-                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(gearBox));
-                if (split.length > 2) {
-                    hasSameGearBox = true;
-                    break;
-                }
-            }
-            if (!hasSameGearBox) {
+            if (testIfContainsDifferent(Vocabulary.CLASS_GEARBOX, permutation)) {
                 return true;
             }
         }
 
         if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
                 Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
-            boolean hasSameTorqueSensor = false;
-            for (OWLNamedIndividual torqueSensor : deviceToIndividualsMapper.get(Vocabulary.CLASS_TORQUESENSOR)) {
-                String checkString = "-" + permutation.permutationName + "-";
-                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(torqueSensor));
-                if (split.length > 2) {
-                    hasSameTorqueSensor = true;
-                    break;
-                }
-            }
-            if (!hasSameTorqueSensor) {
+            if (testIfContainsDifferent(Vocabulary.CLASS_TORQUESENSOR, permutation)) {
                 return true;
             }
         }
 
         if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
                 Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
-            boolean hasSameAbosultEncoder = false;
-            for (OWLNamedIndividual absolutEncoder : deviceToIndividualsMapper.get(Vocabulary.CLASS_ABSOLUTEENCODER)) {
-                String checkString = "-" + permutation.permutationName + "-";
-                String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(absolutEncoder));
-                if (split.length > 2) {
-                    hasSameAbosultEncoder = true;
-                    break;
-                }
-            }
-            if (!hasSameAbosultEncoder) {
+            if (testIfContainsDifferent(Vocabulary.CLASS_ABSOLUTEENCODER, permutation)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean testIfContainsDifferent(OWLClass classToCheck, PermutationOfChildInstances permutation) {
+        for (OWLNamedIndividual indi : deviceToIndividualsMapper.get(classToCheck)) {
+            String checkString = "-" + permutation.permutationName + "-";
+            String[] split = checkString.split(helper.getNameOfOWLNamedIndividual(indi));
+            if (split.length > 2) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void deleteNotSatisfied(OWLClass treeClass) {
