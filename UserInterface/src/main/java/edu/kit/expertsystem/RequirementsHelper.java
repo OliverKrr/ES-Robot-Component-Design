@@ -390,10 +390,6 @@ public class RequirementsHelper {
 
     public void updateSize(Rectangle bounds) {
         updateTopicSize(bounds);
-        // TODO evtl. Mechanismus auch machen um andere Reqs anzuordnen
-        // TODO bzw. diese auch noch mal schöner machen
-        // TODO use compouteSize -> take Maximum propagate to outside
-        // use max of everyone and updateSize
     }
 
     private void updateTopicSize(Rectangle bounds) {

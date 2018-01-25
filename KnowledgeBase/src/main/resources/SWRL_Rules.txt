@@ -1021,6 +1021,13 @@ swrlb:equal(?ab_r, true) ^
 StrainGaugeBased_SpokeWheel(?tos)
 -> hasNumberOfAbsolutEncoder(?tsab, 1.0)
 
+TorqueSensorAbsolutEncoderMatchSetDeviceCount5Rule:
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasCurrentRequirement(?tsab, ?r) ^
+needAbsoluteEncoderReq(?r, ?ab_r) ^
+swrlb:equal(?ab_r, true) ^
+NoTorqueSensor(?tos)
+-> hasNumberOfAbsolutEncoder(?tsab, 1.0)
+
 
 
 SensorPCBWithSatisfyRule:
@@ -1481,13 +1488,15 @@ DiameterElektroLinearSatisfyRule:
 DiameterElektroOutputLinear(?de) ^
 hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
-hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputLinear(?de)
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max)
+-> SatisfiedDiameterElektroOutputLinear(?de)
 
 DiameterElektroCompressedSatisfyRule:
 DiameterElektroOutputCompressed(?de) ^
 hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearBoxMatchForSACunit(?ma) ^ hasGearBox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
-hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max) -> SatisfiedDiameterElektroOutputCompressed(?de)
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max)
+-> SatisfiedDiameterElektroOutputCompressed(?de)
 
 
 
