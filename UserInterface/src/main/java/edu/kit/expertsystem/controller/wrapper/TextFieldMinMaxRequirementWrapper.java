@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class TextFieldMinMaxRequirementWrapper extends RequirementWrapper {
 
-    public static final int maxDeviation = 50;
+    public static final int maxDeviation = 100;
     public static final int digitsDeviation = 1;
     public static final int minUserWeighting = 0;
     public static final int maxUserWeighting = 5;
