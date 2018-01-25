@@ -997,6 +997,31 @@ NoTorqueSensor(?tos)
 
 
 
+TorqueSensorAbsolutEncoderMatchSetDeviceCount1Rule:
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
+NoAbsolutEncoder(?ab)
+-> hasNumberOfAbsolutEncoder(?tsab, 0.0)
+
+TorqueSensorAbsolutEncoderMatchSetDeviceCount2Rule:
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^
+PositionEncoderBased(?tos)
+-> hasNumberOfAbsolutEncoder(?tsab, 2.0)
+
+TorqueSensorAbsolutEncoderMatchSetDeviceCount3Rule:
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasCurrentRequirement(?tsab, ?r) ^
+needAbsoluteEncoderReq(?r, ?ab_r) ^
+swrlb:equal(?ab_r, true) ^
+StrainGaugeBased_HollowShaft(?tos)
+-> hasNumberOfAbsolutEncoder(?tsab, 1.0)
+
+TorqueSensorAbsolutEncoderMatchSetDeviceCount4Rule:
+SatisfiedTorqueSensorAbsolutEncoderMatch(?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasCurrentRequirement(?tsab, ?r) ^
+needAbsoluteEncoderReq(?r, ?ab_r) ^
+swrlb:equal(?ab_r, true) ^
+StrainGaugeBased_SpokeWheel(?tos)
+-> hasNumberOfAbsolutEncoder(?tsab, 1.0)
+
+
 
 SensorPCBWithSatisfyRule:
 WithSensorPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedSensorPCB(?spcb)
@@ -1225,103 +1250,20 @@ LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutpu
 hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionLengthFaktor(?tos, ?Lf_ts) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^
 lengthNotch(?con, ?n_con) ^ lengthMeasurementWidth(?con, ?mw_con) ^
 swrlb:multiply(?L_2kerbe, 2.0, ?n_con) ^ swrlb:add(?L_torWelleTemp1, ?mw_con, ?L_2kerbe) ^ swrlb:multiply(?L_torWelleTemp2, ?d_g_fs, 1.5) ^ swrlb:multiply(?L_torWelleTemp3, 2.0, ?L_torWelleTemp2) ^ swrlb:add(?L_torWelleTemp4, ?L_torWelleTemp1, ?L_torWelleTemp3) ^ swrlb:multiply(?L_torWelle, ?Lf_ts, ?L_torWelleTemp4)
--> has2(?lo, ?L_torWelle) ^ has3(?lo, ?L_loie) ^ has4(?lo, 0.0) ^ has5(?lo, 0.0) ^ has6(?lo, 0.0) ^ Linear(?lo)
+-> has2(?lo, ?L_torWelle) ^ has3(?lo, ?L_loie) ^ has4(?lo, 0.0) ^ has5(?lo, 0.0) ^ has6(?lo, 0.0) ^ Linear(?lo) ^ hasNumberOfOutputBearings(?lo, 1.0)
 
 
 LengthOutputCompressedCalcRule:
 LengthOutputCompressed(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^
 hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide)
--> has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, 0.0) ^ Compressed(?lo)
+-> has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, 0.0) ^ Compressed(?lo) ^ hasNumberOfOutputBearings(?lo, 1.0)
 
 
 LengthOutputTwoSideCalcRule:
 LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasConstant(?lo, ?con) ^
 hasDimensionLengthOverlapping_unit_mm(?g, ?L_overlap) ^ hasDimensionLength_L_unit_mm(?abspcb, ?L_elecInnerOnDriveSide) ^ hasDimensionLength_L_unit_mm(?ob, ?L_ob) ^ hasDimensionLengthScrewHead_k_unit_mm(?s_ob, ?L_s_ob) ^ lengthCentering(?con, ?c_con) ^
 swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?L_2ndOutput, ?L_s_ob2, ?L_abLager)
-->  has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, ?L_2ndOutput) ^ TwoSide(?lo)
-
-
-
-LengthOutputLinearSetDeviceCount1Rule:
-LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-StrainGaugeBased_HollowShaft(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, true)
--> hasNumberOfAbsolutEncoder(?lo, 1.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputLinearSetDeviceCount2Rule:
-LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-StrainGaugeBased_HollowShaft(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, false)
--> hasNumberOfAbsolutEncoder(?lo, 0.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputLinearSetDeviceCount3Rule:
-LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^
-PositionEncoderBased(?tos)
--> hasNumberOfAbsolutEncoder(?lo, 2.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputLinearSetDeviceCount4Rule:
-LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-NoTorqueSensor(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, true)
--> hasNumberOfAbsolutEncoder(?lo, 1.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputLinearSetDeviceCount5Rule:
-LengthOutputLinear(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-NoTorqueSensor(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, false)
--> hasNumberOfAbsolutEncoder(?lo, 0.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-
-LengthOutputCompressedSetDeviceCount1Rule:
-LengthOutputCompressed(?lo) ^ hasCurrentRequirement(?lo, ?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, true)
--> hasNumberOfAbsolutEncoder(?lo, 1.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputCompressedSetDeviceCount2Rule:
-LengthOutputCompressed(?lo) ^ hasCurrentRequirement(?lo, ?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, false)
--> hasNumberOfAbsolutEncoder(?lo, 0.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-
-LengthOutputTwoSideSetDeviceCount1Rule:
-LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-StrainGaugeBased_SpokeWheel(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, true)
--> hasNumberOfAbsolutEncoder(?lo, 1.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputTwoSideSetDeviceCount2Rule:
-LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-StrainGaugeBased_SpokeWheel(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, false)
--> hasNumberOfAbsolutEncoder(?lo, 0.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputTwoSideSetDeviceCount3Rule:
-LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-PositionEncoderBased(?tos)
--> hasNumberOfAbsolutEncoder(?lo, 2.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputTwoSideSetDeviceCount4Rule:
-LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-NoTorqueSensor(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, true)
--> hasNumberOfAbsolutEncoder(?lo, 1.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
-LengthOutputTwoSideSetDeviceCount5Rule:
-LengthOutputTwoSide(?lo) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
-NoTorqueSensor(?tos) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^
-swrlb:equal(?ab_r, false)
--> hasNumberOfAbsolutEncoder(?lo, 0.0) ^ hasNumberOfOutputBearings(?lo, 1.0)
-
+->  has2(?lo, 0.0) ^ has3(?lo, 0.0) ^ has4(?lo, ?L_overlap) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^ has6(?lo, ?L_2ndOutput) ^ TwoSide(?lo) ^ hasNumberOfOutputBearings(?lo, 2.0)
 
 
 LengthOutputCalcRule:
@@ -1334,7 +1276,7 @@ swrlb:multiply(?L_s_g_fs2, 2.0, ?L_s_g_fs) ^ swrlb:add(?L_temp1, ?L_torWelle, ?L
 swrlb:multiply(?d_g_fs15, 1.5, ?d_g_fs) ^ swrlb:add(?L_max1_2, ?d_g_fs15, ?L_ADC) ^
 swrlb:multiply(?L_abLagerTemp1, 1.5, ?L_ob) ^ swrlb:add(?L_abLager, ?L_abLagerTemp1, ?c_con) ^
 swrlb:add(?temp1, ?L_loie, ?L_abLager) ^ swrlb:multiply(?L_s_ob2, 2.0, ?L_s_ob) ^ swrlb:add(?temp2, ?temp1, ?L_s_ob2) ^ swrlb:subtract(?L_max2_1, ?temp2, ?L_overlap) ^
-hasTorqueSensorAbsolutEncoderMatch(?gsrtsabspcb, ?tsab) ^ hasTorqueSensor(?tsab, ?tos) ^ hasAbsoluteEncoder(?tsab, ?ab) ^
+hasTorqueSensorAbsolutEncoderMatch(?gsrtsabspcb, ?tsab) ^
 hasDimensionLength_L_unit_mm(?g, ?L_g) ^ has6(?lo, ?L_2ndOutput) ^ has1(?tsab, ?L_ab_second) ^
 swrlb:add(?temp21, ?L_g, ?L_2ndOutput) ^ swrlb:add(?L_rest, ?temp21, ?L_ab_second)
 -> hasMax1_1(?lo, ?L_max1_1) ^ hasMax1_2(?lo, ?L_max1_2) ^ hasMax2_1(?lo, ?L_max2_1) ^ has7(?lo, ?L_rest)
@@ -1349,8 +1291,7 @@ swrlb:greaterThan(?L_max1_1, ?L_max1_2)
 
 LengthOutputEvaluate2Rule:
 LengthOutput(?lo) ^
-hasMax1_1(?lo, ?L_max1_1) ^
-hasMax1_2(?lo, ?L_max1_2) ^
+hasMax1_1(?lo, ?L_max1_1) ^ hasMax1_2(?lo, ?L_max1_2) ^
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 -> hasMax2_2(?lo, ?L_max1_2)
 
@@ -1363,8 +1304,7 @@ swrlb:greaterThan(?L_max2_1, ?L_max2_2)
 
 LengthOutputEvaluate4Rule:
 LengthOutput(?lo) ^
-hasMax2_1(?lo, ?L_max2_1) ^
-hasMax2_2(?lo, ?L_max2_2) ^
+hasMax2_1(?lo, ?L_max2_1) ^ hasMax2_2(?lo, ?L_max2_2) ^
 swrlb:lessThanOrEqual(?L_max2_1, ?L_max2_2)
 -> hasMax3_1(?lo, ?L_max2_2)
 
@@ -1890,8 +1830,8 @@ swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_dr
 
 
 SACunitWeightCalcRule:
-SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasIncrementalEncoderHallSensorMatch(?li, ?iehs) ^ hasIncrementalEncoder(?iehs, ?ie) ^ hasHallSensor(?iehs, ?hs) ^ hasMotor(?de, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
-hasNumberOfAbsolutEncoder(?lo, ?ab_count) ^ hasNumberOfOutputBearings(?lo, ?ob_count) ^
+SACunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasIncrementalEncoderHallSensorMatch(?li, ?iehs) ^ hasIncrementalEncoder(?iehs, ?ie) ^ hasHallSensor(?iehs, ?hs) ^ hasMotor(?de, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasDiameterOutputBearing(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?do, ?gsrtsabspcb) ^ hasTorqueSensorAbsolutEncoderMatch(?gsrtsabspcb, ?tsab) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+hasNumberOfAbsolutEncoder(?tsab, ?ab_count) ^ hasNumberOfOutputBearings(?lo, ?ob_count) ^
 hasWeight_m_unit_kg(?ab, ?m_ab) ^ hasWeight_m_unit_kg(?ob, ?m_ob) ^ hasWeight_m_unit_kg(?s_ob, ?s_ob_w) ^
 swrlb:multiply(?m_ab_tot, ?ab_count, ?m_ab) ^ swrlb:multiply(?m_ob_tot, ?ob_count, ?m_ob) ^ swrlb:multiply(?s_ob_w_temp, ?ob_count, ?s_ob_w) ^
 hasScrewCountFlexSpline(?g, ?g_sc_fs) ^ hasScrewCountCircularSpline(?g, ?g_sc_cp) ^ hasScrewCountWaveGenerator(?g, ?g_sc_wg) ^ hasScrewCount(?ob, ?ob_sc) ^
