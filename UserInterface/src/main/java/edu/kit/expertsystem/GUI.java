@@ -2,6 +2,7 @@ package edu.kit.expertsystem;
 
 import edu.kit.expertsystem.controller.Controller;
 import edu.kit.expertsystem.controller.NavigationItem;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -54,7 +55,8 @@ public class GUI {
 
     private boolean showDescriptions = true;
 
-    private GUI() {
+    GUI() {
+        Configs.initConfig(display);
         pool = Executors.newSingleThreadExecutor();
         // do nothing for init and no concurrent problems while creation of gui
         controllerFuture = pool.submit(() -> {
@@ -62,26 +64,11 @@ public class GUI {
     }
 
     /**
-     * Launch the application.
-     *
-     * @wbp.parser.entryPoint
-     */
-    public static void main(String[] args) {
-        try {
-            Configs.initConfig(display);
-            GUI window = new GUI();
-            window.open();
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-        }
-    }
-
-    /**
      * Open the window.
      *
      * @wbp.parser.entryPoint
      */
-    private void open() {
+    public void open() {
         createShell();
         createErrorText();
         controller = new Controller(this);
@@ -356,7 +343,7 @@ public class GUI {
         return scaled;
     }
 
-    public void setErrorText(String message, Color color) {
+    public void setErrorText(String message, Level level) {
         display.asyncExec(() -> {
             if (errorText == null) {
                 return;
@@ -367,7 +354,7 @@ public class GUI {
             errorText.setText(newMessage + errorText.getText());
 
             StyleRange[] newStyleRanges = new StyleRange[oldStyleRanges.length + 1];
-            newStyleRanges[0] = new StyleRange(0, newMessage.length(), color, null, SWT.NONE);
+            newStyleRanges[0] = new StyleRange(0, newMessage.length(), matchLevelToColor(level), null, SWT.NONE);
 
             for (int i = 0; i < oldStyleRanges.length; ++i) {
                 oldStyleRanges[i].start += newMessage.length();
@@ -375,5 +362,16 @@ public class GUI {
             }
             errorText.setStyleRanges(newStyleRanges);
         });
+    }
+
+    private Color matchLevelToColor(Level level) {
+        if (Level.FATAL.equals(level) || Level.ERROR.equals(level)) {
+            return Display.getCurrent().getSystemColor(SWT.COLOR_RED);
+        }
+        if (Level.WARN.equals(level)) {
+            return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW);
+        }
+        // default
+        return null;
     }
 }
