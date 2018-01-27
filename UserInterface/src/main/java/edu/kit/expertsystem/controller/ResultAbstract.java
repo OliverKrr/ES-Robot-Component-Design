@@ -1,5 +1,6 @@
 package edu.kit.expertsystem.controller;
 
+import edu.kit.expertsystem.GuiHelper;
 import edu.kit.expertsystem.controller.wrapper.ResultWrapper;
 import edu.kit.expertsystem.model.Component;
 import edu.kit.expertsystem.model.Result;
@@ -9,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
@@ -76,7 +79,9 @@ public abstract class ResultAbstract {
                 }
                 sortSolution();
                 setShowKeys();
+                setNumberOfResults();
                 showSolution();
+                resultWrapper.numberOfResultsLabel.forceFocus();
 
                 Event reloadSearchE = new Event();
                 reloadSearchE.type = SWT.KeyUp;
@@ -125,6 +130,13 @@ public abstract class ResultAbstract {
         };
         resultWrapper.table.addSelectionListener(showResultInNewWindowListener);
         resultWrapper.tree.addSelectionListener(showResultInNewWindowListener);
+    }
+
+    private void setNumberOfResults() {
+        resultWrapper.numberOfResultsLabel.setText("Number of results: " + resultWrapper.results.size());
+        Rectangle oldBounds = resultWrapper.numberOfResultsLabel.getBounds();
+        Point size = GuiHelper.getSizeOfControl(resultWrapper.numberOfResultsLabel);
+        resultWrapper.numberOfResultsLabel.setBounds(oldBounds.x, oldBounds.y, size.x, oldBounds.height);
     }
 
     protected abstract void showSolution();

@@ -308,6 +308,7 @@ public class ReasoningTree {
                 .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toSet())));
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         long numberOfDeletedChildren = handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
+        //TODO and only if satisfiedChildInstances is not empty -> if all are not satisfied, there should be nothing deleted, because this could just be a mistaken modeling
         if (!axiomsToDelete.isEmpty()) {
             logger.info("Delete " + getSpacesFor(numberOfDeletedChildren) + numberOfDeletedChildren + " individuals "
                     + "of not satisfied " + treeClass.getIRI().getShortForm());

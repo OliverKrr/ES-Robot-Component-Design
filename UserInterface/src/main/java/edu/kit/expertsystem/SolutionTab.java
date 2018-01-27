@@ -41,6 +41,7 @@ public class SolutionTab {
     private Label separatorHorizontal;
     private Tree resultTree;
     private Table resultTable;
+    private Label numberOfResultsLabel;
     private Button saveSolutionOntologyButton;
     private Text searchField;
     private Combo orderByCombo;
@@ -120,6 +121,12 @@ public class SolutionTab {
         updateSizeOfShowOnlyDiffsCheckBox();
         formToolkit.adapt(showOnlyDiffsCheckBox, true, true);
         resultWrapper.showOnlyDiffsCheckBox = showOnlyDiffsCheckBox;
+
+        numberOfResultsLabel = new Label(leftComposite, SWT.NONE);
+        resultWrapper.numberOfResultsLabel = numberOfResultsLabel;
+        updateSizeOfNumberOfResults();
+        formToolkit.adapt(numberOfResultsLabel, true, true);
+        numberOfResultsLabel.setForeground(Configs.KIT_GREEN_70);
 
         resultTree = new Tree(leftComposite, SWT.NONE);
         resultTable = new Table(leftComposite, SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
@@ -240,6 +247,7 @@ public class SolutionTab {
         updateSizeOfShowOnlyDiffsCheckBox();
         updateSizeOfSwitchSolutionForm();
         updateSizeOfHorizontalSeparator();
+        updateSizeOfNumberOfResults();
         updateSizeOfResultItems();
     }
 
@@ -310,8 +318,14 @@ public class SolutionTab {
         separatorHorizontal.setBounds(offsetX, y, width, searchTextHeight);
     }
 
-    private void updateSizeOfResultItems() {
+    private void updateSizeOfNumberOfResults() {
         int y = 4 * offsetY + 3 * searchTextHeight;
+        Point size = GuiHelper.getSizeOfControl(numberOfResultsLabel);
+        numberOfResultsLabel.setBounds(offsetX, y, size.x, searchTextHeight);
+    }
+
+    private void updateSizeOfResultItems() {
+        int y = 5 * offsetY + 4 * searchTextHeight;
         int width = leftComposite.getBounds().width - offsetX - offsetXEnd;
         int height = leftComposite.getBounds().height - y - offsetYEnd;
 

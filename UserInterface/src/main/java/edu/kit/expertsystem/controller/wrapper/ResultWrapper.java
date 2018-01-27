@@ -21,6 +21,7 @@ public class ResultWrapper {
     public Table selectTableToShow;
     public Button showOnlyDiffsCheckBox;
 
+    public Label numberOfResultsLabel;
     public Tree tree;
     public Table table;
 
@@ -37,14 +38,15 @@ public class ResultWrapper {
                 (orderBy, that.orderBy) && Objects.equals(orderBy2, that.orderBy2) && Objects.equals(searchField,
                 that.searchField) && Objects.equals(selectToShowButton, that.selectToShowButton) && Objects.equals
                 (selectTableToShow, that.selectTableToShow) && Objects.equals(showOnlyDiffsCheckBox, that
-                .showOnlyDiffsCheckBox) && Objects.equals(tree, that.tree) && Objects.equals(table, that.table) &&
-                Objects.equals(displayNameToIriMap, that.displayNameToIriMap);
+                .showOnlyDiffsCheckBox) && Objects.equals(numberOfResultsLabel, that.numberOfResultsLabel) && Objects
+                .equals(tree, that.tree) && Objects.equals(table, that.table) && Objects.equals(displayNameToIriMap,
+                that.displayNameToIriMap);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(results, resultShow, orderBy, orderBy2, searchField, selectToShowButton,
-                selectTableToShow, showOnlyDiffsCheckBox, tree, table, displayNameToIriMap);
+                selectTableToShow, showOnlyDiffsCheckBox, numberOfResultsLabel, tree, table, displayNameToIriMap);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ResultWrapper {
         return "ResultWrapper{" + "results=" + results + ", resultShow=" + resultShow + ", orderBy=" + orderBy + ", "
                 + "orderBy2=" + orderBy2 + ", searchField=" + searchField + ", selectToShowButton=" +
                 selectToShowButton + ", selectTableToShow=" + selectTableToShow + ", showOnlyDiffsCheckBox=" +
-                showOnlyDiffsCheckBox + ", tree=" + tree + ", table=" + table + ", displayNameToIriMap=" +
-                displayNameToIriMap + '}';
+                showOnlyDiffsCheckBox + ", numberOfResultsLabel=" + numberOfResultsLabel + ", tree=" + tree + ", " +
+                "table=" + table + ", displayNameToIriMap=" + displayNameToIriMap + '}';
     }
 }

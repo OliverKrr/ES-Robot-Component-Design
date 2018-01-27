@@ -28,14 +28,11 @@ public class ResultTreeItem extends ResultAbstract {
 
     @Override
     protected void showSolution() {
-        resultWrapper.tree.removeAll();
+        clearLastSpecificResults();
         buildTree();
-        resultWrapper.tree.forceFocus();
     }
 
     private void buildTree() {
-        addTreeItem(resultWrapper.tree, "Number of results: " + resultWrapper.results.size(), true);
-
         for (Result result : resultWrapper.results) {
             TreeItem resItem = addTreeItem(resultWrapper.tree, "", false);
             StringBuilder concatenationOfNamesBuilder = new StringBuilder();

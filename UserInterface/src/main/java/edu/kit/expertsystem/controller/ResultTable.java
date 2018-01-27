@@ -35,7 +35,6 @@ public class ResultTable extends ResultAbstract {
     protected void showSolution() {
         clearLastSpecificResults();
         buildTable();
-        resultWrapper.table.forceFocus();
     }
 
     private void buildTable() {
