@@ -34,7 +34,7 @@ public class ResultTreeItem extends ResultAbstract {
 
     private void buildTree() {
         for (Result result : resultWrapper.results) {
-            TreeItem resItem = addTreeItem(resultWrapper.tree, "", false);
+            TreeItem resItem = addTreeItem(resultWrapper.tree);
             StringBuilder concatenationOfNamesBuilder = new StringBuilder();
 
             double maxNumberOfChars = getMaxNumberOfCharsForComp(result);
@@ -90,12 +90,9 @@ public class ResultTreeItem extends ResultAbstract {
                 .NORMAL));
     }
 
-    private TreeItem addTreeItem(Tree parent, String text, boolean makeGreen) {
+    private TreeItem addTreeItem(Tree parent) {
         TreeItem resItem = new TreeItem(parent, SWT.WRAP);
-        resItem.setText(text);
-        if (makeGreen) {
-            resItem.setForeground(Configs.KIT_GREEN_70);
-        }
+        resItem.setText("");
         return resItem;
     }
 }

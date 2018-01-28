@@ -270,8 +270,8 @@ public abstract class ResultAbstract {
     }
 
     double getMaxNumberOfCharsForComp(Result result) {
-        return result.components.stream().max(Comparator.comparingInt(val -> val.nameOfComponent.length())).get()
-                .nameOfComponent.length();
+        return result.components.stream().max(Comparator.comparingInt(val -> val.nameOfComponent.length())).orElseGet
+                (Component::new).nameOfComponent.length();
     }
 
     String getNameForComponent(Component component, double maxNumberOfChars) {
@@ -281,7 +281,7 @@ public abstract class ResultAbstract {
 
     double getMaxNumberOfCharsForReq(Result result) {
         return result.requirements.stream().filter(req -> req.resultIRI != null).max(Comparator.comparingInt(val ->
-                val.displayName.length())).get().displayName.length();
+                val.displayName.length())).orElseGet(CheckboxRequirement::new).displayName.length();
     }
 
     String getNameForReq(Requirement req, double maxNumberOfChars) {
