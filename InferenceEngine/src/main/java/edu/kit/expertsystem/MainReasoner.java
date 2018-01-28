@@ -199,7 +199,8 @@ public class MainReasoner {
     private void addRequirement(OWLNamedIndividual requirementsInd, OWLDataProperty property, String value) {
         OWLDataPropertyAssertionAxiom reqAxiom = genericTool.getFactory().getOWLDataPropertyAssertionAxiom(property,
                 requirementsInd, genericTool.getFactory().getOWLLiteral(value, genericTool.getOntology()
-                        .dataPropertyRangeAxioms(property).findAny().get().getRange().asOWLDatatype()));
+                        .dataPropertyRangeAxioms(property).findAny().orElseThrow(() -> new RuntimeException("Specify"
+                                + " rang for property of a requirement!")).getRange().asOWLDatatype()));
         helper.addAxiom(reqAxiom);
     }
 

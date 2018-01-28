@@ -42,6 +42,7 @@ public class ReasoningTree {
     private ReasoningTreeSpecialCases reasoningTreeSpecialCasesHandler;
 
     private List<OWLClass> reasoningTreeElements = new ArrayList<>();
+    private Map<OWLClass, List<OWLClass>> reasoningTreeElementToSkipMapper = new HashMap<>();
     private OWLNamedIndividual currentRequirement;
     private List<OWLNamedIndividual> constances;
 
@@ -56,6 +57,15 @@ public class ReasoningTree {
         this.helper = helper;
         reasoningTreeSpecialCasesHandler = new ReasoningTreeSpecialCases(genericTool, helper);
         setResasoningTreeELements();
+
+        reasoningTreeElements.forEach(treeClass -> {
+            List<OWLClass> classesToSkip = genericTool.getOntology().subClassAxiomsForSubClass(treeClass).filter
+                    (axiom -> axiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
+                            .OBJECT_PROPERTY_CHECKSAMEDEVICEINSUBTREE::equals)).map(filteredAxiom -> filteredAxiom
+                    .getSuperClass().classesInSignature().findAny().orElseThrow(() -> new RuntimeException("Specify "
+                            + "class for checkSameDeviceInSubtree"))).collect(Collectors.toList());
+            reasoningTreeElementToSkipMapper.put(treeClass, classesToSkip);
+        });
     }
 
     private void setResasoningTreeELements() {
@@ -78,7 +88,6 @@ public class ReasoningTree {
         boolean hasChanged = true;
         while (!mapClassNameToChildren.isEmpty() && hasChanged) {
             int oldSize = mapClassNameToChildren.size();
-            hasChanged = false;
             for (OWLClass clas : unorderdReasoningTreeElements) {
                 String clasName = clas.getIRI().getShortForm();
                 if (!mapClassNameToChildren.containsKey(clasName)) {
@@ -98,8 +107,8 @@ public class ReasoningTree {
             hasChanged = oldSize != mapClassNameToChildren.size();
         }
         if (!hasChanged) {
-            throw new RuntimeException("The names of the reasoning tree elements are not consistent -> they could be " +
-                    "" + "" + "" + "" + "" + "" + "" + "not " + "ordered " + "right");
+            throw new RuntimeException("The names of the reasoning tree elements are not consistent -> they could be"
+                    + " not ordered right");
             //TODO do not throw exception. Instead make warning and append rest unordered
         }
     }
@@ -191,8 +200,10 @@ public class ReasoningTree {
                                 .OBJECT_PROPERTY_HASCHILD.equals(propSupers.getSuperProperty())))).forEach(axiom -> {
             long startTime = System.currentTimeMillis();
             childrenForPermutation.add(new ChildInstancesForPermutation(genericTool.getReasoner().instances(axiom
-                    .getSuperClass().classesInSignature().findAny().get()).collect(Collectors.toList()), axiom
-                    .getSuperClass().objectPropertiesInSignature().findAny().get()));
+                    .getSuperClass().classesInSignature().findAny().orElseThrow(() -> new RuntimeException("Specify "
+                            + "a" + " child"))).collect(Collectors.toList()), axiom.getSuperClass()
+                    .objectPropertiesInSignature().findAny().orElseThrow(() -> new RuntimeException("Specify a " +
+                            "objectProperty for child"))));
             double timeNeeded = (System.currentTimeMillis() - startTime) / 1000.0;
             if (timeNeeded >= TIME_NEEDED_THRESHOLD) {
                 logger.debug("Time needed for " + treeClass.getIRI().getShortForm() + " and child" + axiom
@@ -251,25 +262,8 @@ public class ReasoningTree {
     }
 
     private boolean skipPermutation(OWLClass treeClass, PermutationOfChildInstances permutation) {
-        //TODO do all in general way -> same as in MainReasoner
-
-        if (Vocabulary.CLASS_LENGTHOUTPUTLINEAR.equals(treeClass) || Vocabulary.CLASS_LENGTHOUTPUTCOMPRESSED.equals
-                (treeClass) || Vocabulary.CLASS_LENGTHOUTPUTTWOSIDE.equals(treeClass)) {
-            if (testIfContainsDifferent(Vocabulary.CLASS_GEARBOX, permutation)) {
-                return true;
-            }
-        }
-
-        if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
-                Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
-            if (testIfContainsDifferent(Vocabulary.CLASS_TORQUESENSOR, permutation)) {
-                return true;
-            }
-        }
-
-        if (Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTCOMPRESSED.equals(treeClass) ||
-                Vocabulary.CLASS_SLIPRINGTORQUESENSORABSOLUTENCODERSENSORPCBMATCHOUTPUTLINEAR.equals(treeClass)) {
-            if (testIfContainsDifferent(Vocabulary.CLASS_ABSOLUTEENCODER, permutation)) {
+        for (OWLClass classToCheck : reasoningTreeElementToSkipMapper.get(treeClass)) {
+            if (testIfContainsDifferent(classToCheck, permutation)) {
                 return true;
             }
         }
@@ -308,7 +302,8 @@ public class ReasoningTree {
                 .addAll(genericTool.getReasoner().instances(axiom.getSubClass()).collect(Collectors.toSet())));
         Set<OWLAxiom> axiomsToDelete = new HashSet<>();
         long numberOfDeletedChildren = handleDelete(axiomsToDelete, satisfiedChildInstances, treeClass);
-        //TODO and only if satisfiedChildInstances is not empty -> if all are not satisfied, there should be nothing deleted, because this could just be a mistaken modeling
+        //TODO and only if satisfiedChildInstances is not empty -> if all are not satisfied, there should be nothing
+        // deleted, because this could just be a mistaken modeling
         if (!axiomsToDelete.isEmpty()) {
             logger.info("Delete " + getSpacesFor(numberOfDeletedChildren) + numberOfDeletedChildren + " individuals "
                     + "of not satisfied " + treeClass.getIRI().getShortForm());
