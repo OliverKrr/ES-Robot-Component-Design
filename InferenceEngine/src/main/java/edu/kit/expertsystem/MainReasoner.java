@@ -90,17 +90,19 @@ public class MainReasoner {
                         .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
                 -> filteredAxiomOfComponentToReason.getSuperClass().classesInSignature().forEach
                 (reasoningPropertyClass -> genericTool.getOntology().subClassAxiomsForSuperClass
-                        (reasoningPropertyClass).forEach(reasoningPropertyAxiom -> {
-            // Add only subclasses
-            // However, if none present -> add itself
-            int numberOfGeneratedAxioms = helper.getGeneratedAxioms().size();
+                        (reasoningPropertyClass).forEach(basicAxiom -> createIndividualsRecursive(basicAxiom
+                        .getSubClass().asOWLClass(), basicAxiom))));
+    }
+
+    private void createIndividualsRecursive(OWLClass basicClass, OWLSubClassOfAxiom reasoningPropertyAxiom) {
+        if (genericTool.getOntology().subClassAxiomsForSuperClass(reasoningPropertyAxiom.getSubClass().asOWLClass())
+                .count() == 0) {
+            createIndividualFor(basicClass, reasoningPropertyAxiom.getSubClass());
+        } else {
             genericTool.getOntology().subClassAxiomsForSuperClass(reasoningPropertyAxiom.getSubClass().asOWLClass())
-                    .forEach(reasoningPropertySubClassAxiom -> createIndividualFor(reasoningPropertyAxiom.getSubClass
-                            ().asOWLClass(), reasoningPropertySubClassAxiom.getSubClass()));
-            if (numberOfGeneratedAxioms == helper.getGeneratedAxioms().size()) {
-                createIndividualFor(null, reasoningPropertyAxiom.getSubClass());
-            }
-        })));
+                    .forEach(reasoningPropertyAxiom1 -> createIndividualsRecursive(basicClass,
+                            reasoningPropertyAxiom1));
+        }
     }
 
     private void createIndividualFor(OWLClass parent, OWLClassExpression clasExpres) {
@@ -113,17 +115,7 @@ public class MainReasoner {
                 (Vocabulary.OBJECT_PROPERTY_HASCONSTANT, ind, con)));
         basicIndividuals.add(ind);
 
-        if (Vocabulary.CLASS_HFUC_2A.equals(parent) || Vocabulary.CLASS_CSD_2A.equals(parent) || Vocabulary
-                .CLASS_CPL_2A.equals(parent)) {
-            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_GEARBOX, ind);
-        } else if (Vocabulary.CLASS_ROBODRIVESERVOKIBILM.equals(parent)) {
-            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_MOTOR, ind);
-        } else if (Vocabulary.CLASS_ABSOLUTENCODERMBAD01_05.equals(parent) || Vocabulary.CLASS_NOABSOLUTENCODER
-                .equals(parent) || Vocabulary.CLASS_ABSOLUTENCODERONAXIS.equals(parent)) {
-            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_ABSOLUTEENCODER, ind);
-        } else if (Vocabulary.CLASS_TORQUESENSORVARIANTS.equals(parent)) {
-            reasoningTree.addDeviceToIndividual(Vocabulary.CLASS_TORQUESENSOR, ind);
-        }
+        reasoningTree.addDeviceToIndividual(parent, ind);
     }
 
     public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
@@ -145,6 +137,7 @@ public class MainReasoner {
         } catch (ReasonerInterruptedException | TimerInterruptedException e) {
             // It is OK if we interrupted ourself
             if (!interrupted.get()) {
+                logger.error(e.getMessage(), e);
                 throw e;
             }
             return null;
