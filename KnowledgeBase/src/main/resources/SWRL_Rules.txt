@@ -1116,12 +1116,6 @@ swrlb:greaterThanOrEqual(?d_g, ?D_sr)
 
 
 
-SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleUnsatisfied1Rule:
-HalfSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
-has1(?gsrtsabspcb, ?d_need) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
-swrlb:lessThan(?d_ab, ?d_need)
--> BackupSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb)
-
 SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearPossibleUnsatisfied2Rule:
 HalfSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 has1(?gsrtsabspcb, ?d_need) ^ hasDimensionInnerDiameter_d_unit_mm(?ab, ?d_ab) ^
@@ -1143,21 +1137,6 @@ HalfPossibleUnsatisfiedSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch
 hasDimensionOuterDiameter_D_unit_mm(?ab1, ?D_ab1) ^ hasDimensionOuterDiameter_D_unit_mm(?ab2, ?D_ab2) ^
 swrlb:equal(?D_ab2, ?D_ab1)
 -> PossibleSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ PossibleSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2)
-
-
-SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearBackupSatisfiedRule:
-BackupSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
-BackupSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
-hasDimensionInnerDiameter_d_unit_mm(?ab1, ?d_ab1) ^ hasDimensionInnerDiameter_d_unit_mm(?ab2, ?d_ab2) ^
-swrlb:greaterThan(?d_ab2, ?d_ab1) ^ swrlb:lessThan(?d_ab1, ?d_ab2)
--> BackupUnsatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1)
-
-SlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinearBackupPossibleSatisfiedRule:
-BackupSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb1, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb1, ?abspcb1) ^ hasAbsoluteEncoder(?abspcb1, ?ab1) ^ hasSensorPCBOutputVariants(?abspcb1, ?spcbv) ^
-BackupSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2) ^ hasSlipRingTorqueSensorMatch(?gsrtsabspcb2, ?srtsm) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb2, ?abspcb2) ^ hasAbsoluteEncoder(?abspcb2, ?ab2) ^ hasSensorPCBOutputVariants(?abspcb2, ?spcbv) ^
-hasDimensionInnerDiameter_d_unit_mm(?ab1, ?d_ab1) ^ hasDimensionInnerDiameter_d_unit_mm(?ab2, ?d_ab2) ^
-swrlb:equal(?d_ab2, ?d_ab1)
--> BackupPossibleSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb1) ^ BackupPossibleSatisfiedSlipRingTorqueSensorAbsolutEncoderSensorPCBMatchOutputLinear(?gsrtsabspcb2)
 
 
 

@@ -5700,7 +5700,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">55.0</owl:hasValue>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">57.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -5715,6 +5715,8 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0289</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment>hasDimensionInnerDiameter_d_unit_mm should be 55.0
+But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comment>
     </owl:Class>
     
 
