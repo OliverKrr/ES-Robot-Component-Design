@@ -9,7 +9,6 @@ import edu.kit.expertsystem.model.UnitToReason;
 import edu.kit.expertsystem.model.req.*;
 import edu.kit.expertsystem.reasoning.ReasoningTree;
 import openllet.core.OpenlletOptions;
-import openllet.core.exceptions.TimerInterruptedException;
 import openllet.owlapi.OWL;
 import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
@@ -17,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,8 +132,8 @@ public class MainReasoner {
             }
             helper.flush();
             return reason(OWL.Class(unitToReason.iriOfResultUnit), requirements);
-        } catch (ReasonerInterruptedException | TimerInterruptedException e) {
-            // It is OK if we interrupted ourself
+        } catch (Throwable e) {
+            // It is expected if we interrupted ourself
             if (!interrupted.get()) {
                 logger.error(e.getMessage(), e);
                 throw e;
@@ -370,6 +368,48 @@ public class MainReasoner {
                     }
                 }
             }
+
+            //TODO make this general
+            double height = result.requirements.stream().filter(req -> Vocabulary
+                    .DATA_PROPERTY_HASDIMENSIONHEIGHT_H_UNIT_MM.getIRI().getIRIString().equals(req.resultIRI) && req
+                    instanceof RequirementOnlyForSolution).findAny().map(req -> ((RequirementOnlyForSolution) req)
+                    .result).orElse(0.0);
+            double allowedOuterDiameter = result.requirements.stream().filter(req -> Vocabulary
+                    .DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM.getIRI().getIRIString().equals(req.resultIRI)
+                    && req instanceof TextFieldMinMaxRequirement).findAny().map(req -> ((TextFieldMinMaxRequirement)
+                    req).max).orElse(0.0);
+            if (height > 0.0 && allowedOuterDiameter < Double.MAX_VALUE) {
+                double additionalHeight = result.requirements.stream().filter(req -> req instanceof
+                        TextFieldRequirement && Vocabulary.DATA_PROPERTY_HASMAXIMUMADDITIONALHEIGHTPREQMAX_H_UNIT_MM
+                        .getIRI().getIRIString().equals(((TextFieldRequirement) req).reqIri)).findAny().map(req -> (
+                                (TextFieldRequirement) req).value).orElse(0.0);
+                int userWeight = result.requirements.stream().filter(req -> Vocabulary
+                        .DATA_PROPERTY_HASDIMENSIONOUTERDIAMETER_D_UNIT_MM.getIRI().getIRIString().equals(req
+                                .resultIRI) && req instanceof TextFieldMinMaxRequirement).findAny().map(req -> (
+                                        (TextFieldMinMaxRequirement) req).userWeight).orElse(0);
+
+                double allowedHeight = allowedOuterDiameter + additionalHeight;
+                logger.info("height: " + height + " " + "allowedOuterDiameter: " + allowedOuterDiameter + " " +
+                        "allowedHeight: " + allowedHeight);
+
+                double weightInSumForCompliance;
+                double weightInSumForPerformance;
+                Line maxLine = new Line(allowedHeight, 1.0, 2 * allowedHeight, 0);
+                double devMax = maxLine.getY(height);
+                logger.info("devMax: " + devMax + " userWeight: " + userWeight);
+                if (devMax < 1) {
+                    weightInSumForCompliance = devMax * userWeight;
+                } else {
+                    weightInSumForCompliance = userWeight;
+                }
+                weightInSumForPerformance = devMax * userWeight;
+                if (weightInSumForCompliance > 0 && weightInSumForPerformance > 0) {
+                    sumForCompliance += weightInSumForCompliance;
+                    sumForPerformance += weightInSumForPerformance;
+                    weightSum += userWeight;
+                }
+            }
+
 
             double devComplicance = 1.0 / weightSum * sumForCompliance;
             if (Double.isNaN(devComplicance)) {
