@@ -28,8 +28,10 @@ import java.util.concurrent.Future;
  * https://confluence.atlassian.com/kb/connecting-to-ssl-services-802171215.html
  * The pem of the self signed certificate is located in this repo: jira.pem
  * IntelliJ has its own jre (default under \AppData\Local) which has to be modified to trust the self signed certificate
- *
+ * <p>
  * Start with JVM flags: -Xms16384m -Xmx16384m -XX:-UseGCOverheadLimit -XX:+UseParallelOldGC
+ * <p>
+ * Problem with logger
  */
 public class GUI {
 
@@ -46,6 +48,7 @@ public class GUI {
     private RequirementsCategory requirementsCategory;
     private RequirementsCategory requirementsOptimization;
     private SolutionTab solutionTab;
+    private LoadAndSaveTab loadAndSaveTab;
     private Future<?> controllerFuture;
     private Controller controller;
 
@@ -156,6 +159,7 @@ public class GUI {
                     requirementsCategory.disposeNavItems();
                     requirementsCategory.getRequirementsOverallForm().dispose();
                     solutionTab.getSolutionForm().dispose();
+                    loadAndSaveTab.getForm().dispose();
                     requirementsOptimization.disposeNavItems();
                     requirementsOptimization.getRequirementsOverallForm().dispose();
                 }
@@ -182,6 +186,9 @@ public class GUI {
                         controllerFuture = pool.submit(() -> controller.saveSolutionOntology());
                     }
                 });
+
+                loadAndSaveTab = new LoadAndSaveTab(shell, formToolkit, recOfContent);
+                loadAndSaveTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
 
                 createKitLogo(reqNavBarRec);
                 int newNavBarY = kitLogo.getBounds().y + kitLogo.getBounds().height + errorTextYOffset;
@@ -225,6 +232,10 @@ public class GUI {
         solutionItem.name = "Solution";
         mainNavBars.add(solutionItem);
 
+        NavigationItem loadAndSaveItem = new NavigationItem();
+        loadAndSaveItem.name = "Load && Save";
+        mainNavBars.add(loadAndSaveItem);
+
         mainNavBarHelper = new NavigationBarHelper(formToolkit, shell);
         return mainNavBarHelper.createHorizontalNavBar(mainNavBars, 0, RequirementsCategory.contentXOffsetStart +
                 reqNavBarRec.x + reqNavBarRec.width);
@@ -234,6 +245,7 @@ public class GUI {
         mainNavBars.get(0).compositeToHandle = requirementsCategory.getRequirementsOverallForm();
         mainNavBars.get(1).compositeToHandle = requirementsOptimization.getRequirementsOverallForm();
         mainNavBars.get(2).compositeToHandle = solutionTab.getSolutionForm();
+        mainNavBars.get(3).compositeToHandle = loadAndSaveTab.getForm();
         mainNavBarHelper.addListener(mainNavBars);
 
         mainNavBars.get(0).item.addSelectionListener(new SelectionAdapter() {
@@ -273,6 +285,16 @@ public class GUI {
                 }
             }
         });
+
+        mainNavBars.get(3).item.addSelectionListener(new SelectionAdapter() {
+
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                requirementsCategory.setVisibilityOfNavItems(false);
+                requirementsOptimization.setVisibilityOfNavItems(false);
+            }
+        });
+
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());
     }
 
@@ -280,9 +302,13 @@ public class GUI {
         solutionTab.getSolutionForm().setWeights(getWeights());
         formToolkit.adapt(solutionTab.getSolutionForm());
 
+        loadAndSaveTab.getForm().setWeights(getWeights());
+        formToolkit.adapt(loadAndSaveTab.getForm());
+
         Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), getWeights());
         requirementsOptimization.updateSize(updatedRec, getWeights());
         solutionTab.updateSize(updatedRec);
+        loadAndSaveTab.updateSize(updatedRec);
 
         int toggleDescriptionWidth = GuiHelper.getSizeOfControl(toggleDescription).x;
         int toggleDescriptionX = updatedRec.x + updatedRec.width - toggleDescriptionWidth;
