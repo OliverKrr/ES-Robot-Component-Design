@@ -325,7 +325,7 @@ public class MainReasoner {
                         Line minLine = new Line(0, 0, realReq.min, 1.0);
                         double devMin = minLine.getY(realReq.result);
                         if (devMin < 1) {
-                            weightInSumForCompliance = devMin * realReq.userWeight;
+                            weightInSumForCompliance = devMin * devMin * realReq.userWeight;
                             double deviationMin = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
                             minLine = new Line(deviationMin, 0, realReq.min, 1.0);
                             realReq.acutalSatisficationToAllowedDeviation = minLine.getY(realReq.result);
@@ -341,9 +341,10 @@ public class MainReasoner {
                         Line maxLine = new Line(realReq.max, 1.0, 2 * realReq.max, 0);
                         double devMax = maxLine.getY(realReq.result);
                         if (devMax < 1) {
-                            weightInSumForCompliance = Math.min(weightInSumForCompliance, devMax * realReq.userWeight);
+                            weightInSumForCompliance = Math.min(weightInSumForCompliance, devMax * devMax * realReq
+                                    .userWeight);
                             if (skipedMin) {
-                                weightInSumForCompliance = devMax * realReq.userWeight;
+                                weightInSumForCompliance = devMax * devMax * realReq.userWeight;
                             }
                             double deviationMax = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
                             maxLine = new Line(realReq.max, 1.0, deviationMax, 0);
@@ -389,16 +390,13 @@ public class MainReasoner {
                                         (TextFieldMinMaxRequirement) req).userWeight).orElse(0);
 
                 double allowedHeight = allowedOuterDiameter + additionalHeight;
-                logger.info("height: " + height + " " + "allowedOuterDiameter: " + allowedOuterDiameter + " " +
-                        "allowedHeight: " + allowedHeight);
 
                 double weightInSumForCompliance;
                 double weightInSumForPerformance;
                 Line maxLine = new Line(allowedHeight, 1.0, 2 * allowedHeight, 0);
                 double devMax = maxLine.getY(height);
-                logger.info("devMax: " + devMax + " userWeight: " + userWeight);
                 if (devMax < 1) {
-                    weightInSumForCompliance = devMax * userWeight;
+                    weightInSumForCompliance = devMax * devMax * userWeight;
                 } else {
                     weightInSumForCompliance = userWeight;
                 }
