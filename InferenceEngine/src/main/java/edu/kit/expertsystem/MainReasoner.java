@@ -409,7 +409,7 @@ public class MainReasoner {
             }
 
 
-            double devComplicance = 1.0 / weightSum * sumForCompliance;
+            double devComplicance = Math.sqrt(1.0 / weightSum * sumForCompliance);
             if (Double.isNaN(devComplicance)) {
                 devComplicance = 1;
             }
