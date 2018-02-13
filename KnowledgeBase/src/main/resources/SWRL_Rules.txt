@@ -1385,15 +1385,30 @@ swrlb:lessThanOrEqual(?L_1, ?L_wiringConduit)
 
 
 LengthElektroSatisfy3Rule:
-LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
-hasMax1_1(?le, ?L_max1_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
-swrlb:greaterThan(?L_in_connector, ?L_max1_1) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
--> hasDimensionLength_L_unit_mm(?le, ?L_le)
+LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
+hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
+swrlb:greaterThan(?L_max1_1, ?L_max1_2)
+-> hasMax2_1(?le, ?L_max1_1)
 
 LengthElektroSatisfy4Rule:
+LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^
+hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
+swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
+-> hasMax2_1(?le, ?L_max1_2)
+
+
+LengthElektroSatisfy5Rule:
 LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
-hasMax1_1(?le, ?L_max1_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
-swrlb:lessThanOrEqual(?L_in_connector, ?L_max1_1) ^ swrlb:add(?L_le, ?L_max1_1, ?t_req_c)
+hasMax2_1(?le, ?L_max2_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+swrlb:greaterThan(?L_in_connector, ?L_max2_1) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
+-> hasDimensionLength_L_unit_mm(?le, ?L_le)
+
+LengthElektroSatisfy6Rule:
+LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
+hasMax2_1(?le, ?L_max2_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
+swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_1) ^ swrlb:add(?L_le, ?L_max2_1, ?t_req_c)
 -> hasDimensionLength_L_unit_mm(?le, ?L_le)
 
 
@@ -1754,29 +1769,12 @@ Diameter(?d) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasCurrentRequi
 
 
 
-HeightBeforeEvaluateAndCalc1Rule:
-Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasCurrentRequirement(?h, ?r) ^ hasConstant(?h, ?con) ^
-hasDimensionLength_L_unit_mm(?le, ?L_le) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
-hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?temp1, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1, ?temp1, ?L_li) ^
-swrlb:subtract(?L_max2, ?L_le, ?t_req_c) ^
-swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^
+
+HeightBeforeEvaluateAndCalcRule:
+Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasConstant(?h, ?con) ^
 hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ has4(?mcpm, ?H_tangential) ^ safetyDistanceElectro(?con, ?sde_con) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^
 swrlb:divide(?D_diHalf, ?D_di, 2.0) ^ swrlb:add(?temp2, ?D_diHalf, ?H_tangential) ^ swrlb:add(?temp3, ?temp2, ?sde_con) ^ swrlb:divide(?D_gesHalf, ?D_ges, 2.0) ^ swrlb:subtract(?H_overlap, ?temp3, ?D_gesHalf) ^ swrlb:add(?H_max2, ?H_overlap, ?D_ges)
 -> hasMax1_1(?h, ?D_ges) ^ hasMax1_2(?h, ?H_max2)
-
-
-HeightBeforeEvaluateAndCalc2Rule:
-Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthInput(?lo, ?li) ^ hasDiameterInputDriveBearingMatch(?li, ?didbm) ^ hasDiameterInput(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSlipRingTorqueSensorAbsolutEncoderSensorPCBMatch(?de, ?gsrtsabspcb) ^ hasAbsoluteEncoderSensorPCBMatch(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearBox(?spcbv, ?g) ^ hasMotorControllerPositionMatch(?de, ?mcpm) ^ hasCurrentRequirement(?h, ?r) ^ hasConstant(?h, ?con) ^
-hasDimensionLength_L_unit_mm(?le, ?L_le) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
-hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?temp1, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1, ?temp1, ?L_li) ^
-swrlb:subtract(?L_max2, ?L_le, ?t_req_c) ^
-swrlb:greaterThan(?L_max1, ?L_max2) ^
-has4(?mcpm, ?H_tangential) ^ safetyDistanceElectro(?con, ?sde_con) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^
-swrlb:add(?H_overlap, ?H_tangential, ?sde_con) ^ swrlb:add(?H_max2, ?H_overlap, ?D_ges)
--> hasMax1_1(?h, ?D_ges) ^ hasMax1_2(?h, ?H_max2)
-
 
 
 HeightEvaluate1Rule:
