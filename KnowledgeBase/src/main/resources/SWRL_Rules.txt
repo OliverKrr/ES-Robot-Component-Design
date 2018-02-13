@@ -270,7 +270,7 @@ MotorGearBoxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasCurrentRequiremen
 
 MotorGearBoxMatchSatisfyRule:
 MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasMotorBrake(?m, ?mb) ^ hasGearBox(?ma, ?g)
--> SatisfiedMotorGearBoxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g) ^ isComposedOfMotorBrake(?ma, ?mb) ^ hasComplianceIndex(?ma, 1.0) ^ hasPerformanceIndex(?ma, 1.0)
+-> SatisfiedMotorGearBoxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearBox(?ma, ?g) ^ isComposedOfMotorBrake(?ma, ?mb) ^ hasWNRMSE(?ma, 1.0) ^ hasPerformanceIndex(?ma, 1.0)
 
 MotorGearBoxMatchForSACunitSatisfyRule:
 MotorGearBoxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearBox(?ma, ?g)
@@ -1819,7 +1819,7 @@ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm
 swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_elektro2, ?D_elektro, ?D_elektro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
 swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_elektro, ?L_elektro, ?D_elektro2) ^
 swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
--> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasComplianceIndex(?sac, 1.0) ^ hasPerformanceIndex(?sac, 1.0)
+-> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasWNRMSE(?sac, 1.0) ^ hasPerformanceIndex(?sac, 1.0)
 
 
 
