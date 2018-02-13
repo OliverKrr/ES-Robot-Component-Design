@@ -191,7 +191,7 @@ public abstract class ResultAbstract {
     private void selectOrderBy(int oldSelectionOfOrderBy, int oldSelectionOfOrderBy2) {
         if (resultWrapper.orderBy.getItemCount() > oldSelectionOfOrderBy) {
             if (oldSelectionOfOrderBy == -1) {
-                oldSelectionOfOrderBy = 0;
+                oldSelectionOfOrderBy = 1;
             }
             resultWrapper.orderBy.select(oldSelectionOfOrderBy);
         }
