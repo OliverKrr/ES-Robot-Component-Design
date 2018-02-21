@@ -251,8 +251,8 @@ public class MainReasoner {
                 component.nameOfInstance = Vocabulary.CLASS_LINEAR.getIRI().getShortForm();
             } else if (component.nameOfInstance.contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
                 component.nameOfInstance = Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm();
-            } else if (component.nameOfInstance.contains(Vocabulary.CLASS_TWOSIDE.getIRI().getShortForm())) {
-                component.nameOfInstance = Vocabulary.CLASS_TWOSIDE.getIRI().getShortForm();
+            } else if (component.nameOfInstance.contains(Vocabulary.CLASS_TWOSIDED.getIRI().getShortForm())) {
+                component.nameOfInstance = Vocabulary.CLASS_TWOSIDED.getIRI().getShortForm();
             }
         }
         genericTool.getOntology().objectPropertyRangeAxioms(subOb.getSubProperty().getNamedProperty()).forEach(range
@@ -311,14 +311,14 @@ public class MainReasoner {
 
     private void handleDeviations(List<Result> results) {
         for (Result result : results) {
-            double weightSumForWNRMSE = 0;
-            double sumForWNRMSE = 0;
+            double weightSumForNRMSD = 0;
+            double sumForNRMSD = 0;
             double weightSumForPerformance = 0;
             double sumForPerformance = 0;
             for (Requirement req : result.requirements) {
                 if (req instanceof TextFieldMinMaxRequirement) {
                     TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
-                    double weightInSumForWNRMSE = 0;
+                    double weightInSumForNRMSD = 0;
                     double weightInSumForPerformance = 0;
 
                     boolean skipedMin = false;
@@ -326,12 +326,12 @@ public class MainReasoner {
                         Line minLine = new Line(0, 0, realReq.min, 1.0);
                         double devMin = minLine.getY(realReq.result);
                         if (devMin <= 1) {
-                            weightInSumForWNRMSE = (1 - devMin) * (1 - devMin) * realReq.userWeight;
+                            weightInSumForNRMSD = (1 - devMin) * (1 - devMin) * realReq.userWeight;
                             double deviationMin = realReq.min - (realReq.deviationPercentage / 100.0 * realReq.min);
                             minLine = new Line(deviationMin, 0, realReq.min, 1.0);
                             realReq.acutalSatisficationToAllowedDeviation = minLine.getY(realReq.result);
                         } else {
-                            weightInSumForWNRMSE = 0;
+                            weightInSumForNRMSD = 0;
                         }
                         weightInSumForPerformance = devMin * realReq.userWeight;
                     } else {
@@ -343,14 +343,14 @@ public class MainReasoner {
                         Line maxLine = new Line(realReq.max, 1.0, 2 * realReq.max, 0);
                         double devMax = maxLine.getY(realReq.result);
                         if (devMax <= 1) {
-                            weightInSumForWNRMSE = Math.max(weightInSumForWNRMSE, (1 - devMax) * (1 - devMax) *
-                                    realReq.userWeight);
+                            weightInSumForNRMSD = Math.max(weightInSumForNRMSD, (1 - devMax) * (1 - devMax) * realReq
+                                    .userWeight);
                             double deviationMax = realReq.max + (realReq.deviationPercentage / 100.0 * realReq.max);
                             maxLine = new Line(realReq.max, 1.0, deviationMax, 0);
                             realReq.acutalSatisficationToAllowedDeviation = Math.min(realReq
                                     .acutalSatisficationToAllowedDeviation, maxLine.getY(realReq.result));
                         } else {
-                            weightInSumForWNRMSE = Math.max(weightInSumForWNRMSE, 0);
+                            weightInSumForNRMSD = Math.max(weightInSumForNRMSD, 0);
                         }
                         weightInSumForPerformance = Math.min(weightInSumForPerformance, devMax * realReq.userWeight);
                         if (skipedMin) {
@@ -362,8 +362,8 @@ public class MainReasoner {
 
 
                     if (!skipedMin || !skipedMax) {
-                        sumForWNRMSE += weightInSumForWNRMSE;
-                        weightSumForWNRMSE += realReq.userWeight;
+                        sumForNRMSD += weightInSumForNRMSD;
+                        weightSumForNRMSD += realReq.userWeight;
                         sumForPerformance += weightInSumForPerformance;
                         weightSumForPerformance += realReq.userWeight;
                     }
@@ -391,37 +391,37 @@ public class MainReasoner {
 
                 double allowedHeight = allowedOuterDiameter + additionalHeight;
 
-                double weightInSumForWNRMSE;
+                double weightInSumForNRMSD;
                 double weightInSumForPerformance;
                 Line maxLine = new Line(allowedHeight, 1.0, 2 * allowedHeight, 0);
                 double devMax = maxLine.getY(height);
                 if (devMax <= 1) {
-                    weightInSumForWNRMSE = (1 - devMax) * (1 - devMax) * userWeight;
+                    weightInSumForNRMSD = (1 - devMax) * (1 - devMax) * userWeight;
                 } else {
-                    weightInSumForWNRMSE = 0;
+                    weightInSumForNRMSD = 0;
                 }
                 weightInSumForPerformance = devMax * userWeight;
 
-                sumForWNRMSE += weightInSumForWNRMSE;
-                weightSumForWNRMSE += userWeight;
+                sumForNRMSD += weightInSumForNRMSD;
+                weightSumForNRMSD += userWeight;
                 sumForPerformance += weightInSumForPerformance;
                 weightSumForPerformance += userWeight;
             }
 
 
-            double devWNRMSE = Math.sqrt(1.0 / weightSumForWNRMSE * sumForWNRMSE);
-            if (Double.isNaN(devWNRMSE)) {
-                devWNRMSE = 1;
+            double devNRMSD = Math.sqrt(1.0 / weightSumForNRMSD * sumForNRMSD);
+            if (Double.isNaN(devNRMSD)) {
+                devNRMSD = 1;
             }
             double devPerformance = 1.0 / weightSumForPerformance * sumForPerformance;
             if (Double.isNaN(devPerformance)) {
                 devPerformance = 1;
             }
 
-            double finalDevWNRMSE = devWNRMSE;
-            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASWNRMSE.getIRI().getIRIString()
+            double finalDevNRMSD = devNRMSD;
+            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASNRMSD.getIRI().getIRIString()
                     .equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req -> (
-                            (RequirementOnlyForSolution) req).result = finalDevWNRMSE);
+                            (RequirementOnlyForSolution) req).result = finalDevNRMSD);
             double finalDevPerformance = devPerformance;
             result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASPERFORMANCEINDEX.getIRI()
                     .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req

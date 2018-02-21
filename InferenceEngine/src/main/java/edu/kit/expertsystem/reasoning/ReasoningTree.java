@@ -27,13 +27,12 @@ public class ReasoningTree {
         possibleTreeClassExtensions.add("");
         possibleTreeClassExtensions.add("Linear");
         possibleTreeClassExtensions.add("Compressed");
-        possibleTreeClassExtensions.add("TwoSide");
-        possibleTreeClassExtensions.add("InputLinear");
-        possibleTreeClassExtensions.add("InputCompressed");
-        possibleTreeClassExtensions.add("InputTwoSide");
+        possibleTreeClassExtensions.add("TwoSided");
+        possibleTreeClassExtensions.add("DriveLinear");
+        possibleTreeClassExtensions.add("DriveCompressed");
         possibleTreeClassExtensions.add("OutputLinear");
         possibleTreeClassExtensions.add("OutputCompressed");
-        possibleTreeClassExtensions.add("OutputTwoSide");
+        possibleTreeClassExtensions.add("OutputTwoSided");
     }
 
 
@@ -290,10 +289,9 @@ public class ReasoningTree {
         if (Vocabulary.CLASS_MOTORGEARBOXMATCH.equals(treeClass)) {
             //TODO handle this special case in a general way
             satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
-                    .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSACUNIT).collect(Collectors.toSet()));
+                    .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSAUNIT).collect(Collectors.toSet()));
         }
-        if (Vocabulary.CLASS_MOTORCONTROLLERPOSITIONMATCH.equals(treeClass) || Vocabulary
-                .CLASS_TORQUESENSORABSOLUTENCODERMATCH.equals(treeClass)) {
+        if (Vocabulary.CLASS_MCP_MC_MATCH.equals(treeClass) || Vocabulary.CLASS_TS_AE_MATCH.equals(treeClass)) {
             // I have no idea why this is not working...
             // It just deletes everything everytime...
             return;

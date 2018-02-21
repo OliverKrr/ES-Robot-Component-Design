@@ -67,9 +67,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAEonAxisLength_unit_mm -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAEonAxisLength_unit_mm">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimension_unit_mm"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
     </owl:DatatypeProperty>
@@ -282,9 +282,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i">
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i">
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasValue"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
     </owl:DatatypeProperty>
@@ -609,13 +609,21 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05 -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AE-MBAD01_05 -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AE-MBAD01_05">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAEonAxisLength_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -635,13 +643,13 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AEonAxis -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AEonAxis">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAEonAxisLength_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -675,14 +683,6 @@
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionSensor"/>
     </owl:Class>
     
 
@@ -2686,25 +2686,63 @@
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EncoderBased -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EncoderBased">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBox">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EpicyclicGearing">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gearbox"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gearbox -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gearbox">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PropertyValues"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SlipRingPropertyValues"/>
     </owl:Class>
@@ -2717,7 +2755,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2731,7 +2769,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2745,7 +2783,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">160.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2759,7 +2797,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2773,7 +2811,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2787,7 +2825,7 @@
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearBoxRation_i"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasGearboxRation_i"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">80.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2798,7 +2836,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatios">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues"/>
     </owl:Class>
     
 
@@ -3296,7 +3334,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Sizes -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CPL_2A_Sizes">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGeneratorOverlapping_unit_mm"/>
@@ -4255,7 +4293,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Sizes -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_CSD_2A_Sizes">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthWaveGeneratorOverlapping_unit_mm"/>
@@ -4484,7 +4522,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_HFUC_2A_Sizes -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Gear_HFUC_2A_Sizes">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearBoxPropertyValues"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearboxPropertyValues"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm"/>
@@ -5669,7 +5707,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00 -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA7_MRA7D049AB025E00">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AE-MBAD01_05"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5696,7 +5734,7 @@
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00 -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MBA8_MRA8D080AB055E00">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AE-MBAD01_05"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5738,18 +5776,18 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrake -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Brake -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrake">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Brake">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Device"/>
     </owl:Class>
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrakeVariants -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrakeVariants -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrakeVariants">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrake"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrakeVariants">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Brake"/>
     </owl:Class>
     
 
@@ -5762,13 +5800,13 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAE -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAE">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAbsolutEncoderOnAxisLength_unit_mm"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionAEonAxisLength_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -5806,9 +5844,9 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHallSensor -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHS -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHallSensor">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoHS">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -5822,7 +5860,7 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHS"/>
     </owl:Class>
     
 
@@ -5880,10 +5918,10 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoMotorBrake -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoBrake -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoMotorBrake">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrakeVariants"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoBrake">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrakeVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
@@ -5901,41 +5939,9 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoScrew -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSPCB -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoScrew">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Screw"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthScrewHead_k_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionScrewInnerDiameterM_d_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSensorPCB -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSensorPCB">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoSPCB">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCBVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -5955,7 +5961,7 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSensorPCB"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSPCB"/>
     </owl:Class>
     
 
@@ -6017,9 +6023,9 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorqueSensor -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTS -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorqueSensor">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTS">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -6059,44 +6065,6 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#OutputBearing">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#Bearing"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionEncoderBased -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionEncoderBased">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#TorqueSensorVariants"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLengthFaktor"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionLength_L_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasDimensionOuterDiameter_D_unit_mm"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasSignal_2A"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#hasWeight_m_unit_kg"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
-            </owl:Restriction>
-        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -6222,7 +6190,7 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RoboDrive -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#RoboDrive">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#MotorBrakeVariants"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#BrakeVariants"/>
     </owl:Class>
     
 
@@ -8973,9 +8941,9 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHS -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHallSensor">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithHS">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -9019,9 +8987,9 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     
 
 
-    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSensorPCB -->
+    <!-- http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSPCB -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSensorPCB">
+    <owl:Class rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#WithSPCB">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#SensorPCBVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -9073,17 +9041,17 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderMBAD01_05"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsolutEncoderOnAxis"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAbsolutEncoder"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AbsoluteEncoder"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#HallSensor"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#IncrementalEncoder"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AE-MBAD01_05"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#AEonAxis"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoAE"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
@@ -9182,6 +9150,15 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#EncoderBased"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTS"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_SpokeWheel"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio100"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio120"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#GearRatio160"/>
@@ -9240,15 +9217,6 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x13"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x23"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#ILM85x26"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#NoTorqueSensor"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#PositionEncoderBased"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_HollowShaft"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/oliver/ontologies/sac/sac_basic#StrainGaugeBased_SpokeWheel"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
