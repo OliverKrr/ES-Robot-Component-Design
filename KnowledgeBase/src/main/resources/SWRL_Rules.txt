@@ -1031,10 +1031,29 @@ NoTS(?tos)
 
 
 SensorPCBWithSatisfyRule:
-WithSPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, true) -> SatisfiedSensorPCB(?spcb)
+WithSPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^
+needSensorControlBoardReq(?r, ?nscb) ^
+swrlb:equal(?nscb, true)
+-> SatisfiedSensorPCB(?spcb)
 
 SensorPCBNoneSatisfyRule:
-NoSPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^ needSensorControlBoardReq(?r, ?spcm) ^ swrlb:equal(?spcm, false) -> SatisfiedSensorPCB(?spcb)
+NoSPCB(?spcb) ^ hasCurrentRequirement(?spcb, ?r) ^
+needSensorControlBoardReq(?r, ?nscb) ^
+swrlb:equal(?nscb, false)
+-> SatisfiedSensorPCB(?spcb)
+
+
+IMUWithSatisfyRule:
+WithIMU(?imu) ^ hasCurrentRequirement(?imu, ?r) ^
+needIMUReq(?r, ?nimu) ^
+swrlb:equal(?nimu, true)
+-> SatisfiedIMU(?imu)
+
+IMUNoneSatisfyRule:
+NoIMU(?imu) ^ hasCurrentRequirement(?imu, ?r) ^
+needIMUReq(?r, ?nimu) ^
+swrlb:equal(?nimu, false)
+-> SatisfiedIMU(?imu)
 
 
 SensorPCBOutputVariantsLinearWithCalc1Rule:
@@ -1822,15 +1841,15 @@ swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_dr
 
 
 SAunitWeightCalcRule:
-SAunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasTS_AE_Match(?gsrtsabspcb, ?tsab) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+SAunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasTS_AE_Match(?gsrtsabspcb, ?tsab) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
 hasNumberOfAbsoluteEncoder(?tsab, ?ab_count) ^ hasNumberOfOutputBearings(?lo, ?ob_count) ^
 hasWeight_m_unit_kg(?ab, ?m_ab) ^ hasWeight_m_unit_kg(?ob, ?m_ob) ^ hasWeight_m_unit_kg(?s_ob, ?s_ob_w) ^
 swrlb:multiply(?m_ab_tot, ?ab_count, ?m_ab) ^ swrlb:multiply(?m_ob_tot, ?ob_count, ?m_ob) ^ swrlb:multiply(?s_ob_w_temp, ?ob_count, ?s_ob_w) ^
 hasScrewCountFlexSpline(?g, ?g_sc_fs) ^ hasScrewCountCircularSpline(?g, ?g_sc_cp) ^ hasScrewCountWaveGenerator(?g, ?g_sc_wg) ^ hasScrewCount(?ob, ?ob_sc) ^
-hasWeight_m_unit_kg(?m, ?m_m) ^ hasWeight_m_unit_kg(?mb, ?m_mb) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ hasWeight_m_unit_kg(?db, ?m_db) ^ swrlb:multiply(?m_dbs, 2.0, ?m_db) ^ hasWeight_m_unit_kg(?sr, ?m_sr) ^ hasWeight_m_unit_kg(?ie, ?m_ie) ^ hasWeight_m_unit_kg(?hs, ?m_hs) ^ hasWeight_m_unit_kg(?tos, ?m_tos) ^ hasWeight_m_unit_kg(?spcb, ?m_spcb) ^ hasWeight_m_unit_kg(?mc, ?m_mc) ^
+hasWeight_m_unit_kg(?m, ?m_m) ^ hasWeight_m_unit_kg(?mb, ?m_mb) ^ hasWeight_m_unit_kg(?g, ?m_g) ^ hasWeight_m_unit_kg(?db, ?m_db) ^ swrlb:multiply(?m_dbs, 2.0, ?m_db) ^ hasWeight_m_unit_kg(?sr, ?m_sr) ^ hasWeight_m_unit_kg(?ie, ?m_ie) ^ hasWeight_m_unit_kg(?hs, ?m_hs) ^ hasWeight_m_unit_kg(?tos, ?m_tos) ^ hasWeight_m_unit_kg(?spcb, ?m_spcb) ^ hasWeight_m_unit_kg(?imu, ?m_imu) ^  hasWeight_m_unit_kg(?mc, ?m_mc) ^
 hasWeight_m_unit_kg(?s_g_fs, ?s_g_fs_w) ^ hasWeight_m_unit_kg(?s_g_cs, ?s_g_cs_w) ^ hasWeight_m_unit_kg(?s_g_wg, ?s_g_wg_w) ^ 
 swrlb:multiply(?s_g_fs_w_tot, ?g_sc_fs, ?s_g_fs_w) ^ swrlb:multiply(?s_g_cs_w_tot, ?g_sc_cp, ?s_g_cs_w) ^ swrlb:multiply(?s_g_wg_w_tot, ?g_sc_wg, ?s_g_wg_w) ^ swrlb:multiply(?s_ob_w_tot, ?ob_sc, ?s_ob_w_temp) ^
-swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?temp2, ?temp1, ?m_dbs) ^ swrlb:add(?temp3, ?temp2, ?m_ab_tot) ^ swrlb:add(?temp4, ?temp3, ?m_sr) ^ swrlb:add(?temp5, ?temp4, ?m_ie) ^ swrlb:add(?temp6, ?temp5, ?m_tos) ^ swrlb:add(?temp7, ?temp6, ?m_spcb) ^ swrlb:add(?temp8, ?temp7, ?m_mc) ^ swrlb:add(?temp9, ?temp8, ?s_g_fs_w_tot) ^ swrlb:add(?temp10, ?temp9, ?s_g_cs_w_tot) ^ swrlb:add(?temp11, ?temp10, ?s_g_wg_w_tot) ^ swrlb:add(?temp12, ?temp11, ?s_ob_w_tot) ^ swrlb:add(?temp13, ?temp12, ?m_mb) ^ swrlb:add(?temp14, ?temp13, ?m_hs) ^ swrlb:add(?m_ges, ?temp14, ?m_ob_tot)
+swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?temp2, ?temp1, ?m_dbs) ^ swrlb:add(?temp3, ?temp2, ?m_ab_tot) ^ swrlb:add(?temp4, ?temp3, ?m_sr) ^ swrlb:add(?temp5, ?temp4, ?m_ie) ^ swrlb:add(?temp6, ?temp5, ?m_tos) ^ swrlb:add(?temp7, ?temp6, ?m_spcb) ^ swrlb:add(?temp8, ?temp7, ?m_mc) ^ swrlb:add(?temp9, ?temp8, ?s_g_fs_w_tot) ^ swrlb:add(?temp10, ?temp9, ?s_g_cs_w_tot) ^ swrlb:add(?temp11, ?temp10, ?s_g_wg_w_tot) ^ swrlb:add(?temp12, ?temp11, ?s_ob_w_tot) ^ swrlb:add(?temp13, ?temp12, ?m_mb) ^ swrlb:add(?temp14, ?temp13, ?m_hs) ^ swrlb:add(?temp15, ?temp14, ?m_imu) ^ swrlb:add(?m_ges, ?temp15, ?m_ob_tot)
 -> hasWeight_m_unit_kg(?sac, ?m_ges)
 
 SAunitWeightSatisfyRule:
@@ -1843,8 +1862,8 @@ SAunit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ Satisf
 
 
 SAunitIsComposedOfRule:
-SatisfiedSAunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
--> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfHallSensor(?sac, ?hs) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearbox(?sac, ?g) ^ GearboxCircularSplineScrew(?s_g_cs) ^ isComposedOfGearboxCircularSplineScrew(?sac, ?s_g_cs) ^ GearboxFlexSplineScrew(?s_g_fs) ^  isComposedOfGearboxFlexSplineScrew(?sac, ?s_g_fs) ^ GearboxWaveGeneratorScrew(?s_g_wg) ^  isComposedOfGearboxWaveGeneratorScrew(?sac, ?s_g_wg) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfBrake(?sac, ?mb) ^ isComposedOfDriveStructure(?sac, ?li) ^ isComposedOfOutputStructure(?sac, ?lo)
+SatisfiedSAunit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+-> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfHallSensor(?sac, ?hs) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearbox(?sac, ?g) ^ GearboxCircularSplineScrew(?s_g_cs) ^ isComposedOfGearboxCircularSplineScrew(?sac, ?s_g_cs) ^ GearboxFlexSplineScrew(?s_g_fs) ^  isComposedOfGearboxFlexSplineScrew(?sac, ?s_g_fs) ^ GearboxWaveGeneratorScrew(?s_g_wg) ^  isComposedOfGearboxWaveGeneratorScrew(?sac, ?s_g_wg) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfIMU(?sac, ?imu) ^ isComposedOfBrake(?sac, ?mb) ^ isComposedOfDriveStructure(?sac, ?li) ^ isComposedOfOutputStructure(?sac, ?lo)
 
 
 
