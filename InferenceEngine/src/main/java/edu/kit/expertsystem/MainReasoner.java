@@ -423,7 +423,7 @@ public class MainReasoner {
                     .equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req -> (
                             (RequirementOnlyForSolution) req).result = finalDevNRMSD);
             double finalDevPerformance = devPerformance;
-            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASPERFORMANCEINDEX.getIRI()
+            result.requirements.stream().filter(req -> Vocabulary.DATA_PROPERTY_HASPERFORMANCEINDEX_PX.getIRI()
                     .getIRIString().equals(req.resultIRI) && req instanceof RequirementOnlyForSolution).forEach(req
                     -> ((RequirementOnlyForSolution) req).result = finalDevPerformance);
         }

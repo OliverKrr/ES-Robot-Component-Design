@@ -119,7 +119,11 @@ public class MyOWLHelper {
 
     public boolean checkConsistency() {
         boolean isConsitent = genericTool.getReasoner().isConsistent();
-        logger.info("Ontology is consistent: " + isConsitent);
+        if (isConsitent) {
+            logger.info("Ontology is consistent");
+        } else {
+            logger.warn("Ontology is not consistent!");
+        }
         return isConsitent;
     }
 }

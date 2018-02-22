@@ -329,6 +329,7 @@ public class GUI {
     }
 
     private int[] getWeights() {
+        //TODO make dependend on resolution -> test by matze
         float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         if (showDescriptions) {
             float ratioForWeights = 1f * newWidthOfContent / 835;

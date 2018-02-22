@@ -7,14 +7,14 @@ swrlb:divide(?n_res_max, ?n_motor, ?i_min) ^ swrlb:greaterThanOrEqual(?n_res_max
 
 MotorPeakTorqueCalc1Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasPeakTorque_T_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueType_motor(?r, ?T_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+hasPeakTorque_T_max_unit_Nm(?m, ?M_p) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueTypeReq_motor(?r, ?T_type) ^ hasEfficiencyOtherReq_percentage(?r, ?o_perc) ^
 swrlb:equal(?T_type, "T_max") ^
 swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?M_p, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
 
 MotorPeakTorqueCalc2Rule:
 Motor(?m) ^ hasCurrentRequirement(?m, ?r) ^
-hasNominalTorque_T_n_unit_Nm(?m, ?T_n) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueType_motor(?r, ?T_type) ^ hasEfficiencyOther_percentage(?r, ?o_perc) ^
+hasNominalTorque_T_n_unit_Nm(?m, ?T_n) ^ hasPeakTorque_T_max_percentage(?r, ?M_per) ^ hasPeakTorqueTypeReq_motor(?r, ?T_type) ^ hasEfficiencyOtherReq_percentage(?r, ?o_perc) ^
 swrlb:equal(?T_type, "T_n") ^
 swrlb:divide(?M_fac, ?M_per, 100.0) ^ swrlb:multiply(?temp1, ?T_n, ?M_fac) ^ swrlb:divide(?o_fac, ?o_perc, 100.0) ^ swrlb:multiply(?M_res, ?temp1, ?o_fac)
 -> has1(?m, ?M_res)
@@ -76,13 +76,13 @@ SatisfiedRotationSpeed(?m) ^ SatisfiedPeakTorque(?m) ^ SatisfiedVoltage(?m) ^ Sa
 
 MotorBrakeMatch1Rule:
 SatisfiedMotor(?m) ^ NoBrake(?mb) ^ hasCurrentRequirement(?m, ?r) ^
-needBrake(?r, ?nmb) ^
+needBrakeReq(?r, ?nmb) ^
 swrlb:equal(?nmb, false)
 -> SatisfiedMotorWithBrake(?m) ^ hasBrake(?m, ?mb)
 
 MotorBrakeMatch2Rule:
 SatisfiedMotor(?m) ^ Brake(?mb) ^ hasCurrentRequirement(?m, ?r) ^
-needBrake(?r, ?nmb) ^
+needBrakeReq(?r, ?nmb) ^
 swrlb:equal(?nmb, true) ^
 hasMatchingIdentifier(?m, ?mi_m) ^ hasMatchingIdentifier(?mb, ?mi_mb) ^
 swrlb:equal(?mi_m, ?mi_mb) ^
@@ -101,13 +101,13 @@ swrlb:greaterThanOrEqual(?n_max_res, ?n_req_min)
 
 GearboxPeakTorqueCalc1Rule:
 Gearbox(?g) ^ hasCurrentRequirement(?g, ?r) ^
-hasPeakTorqueType_gearBox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_repeated") ^
+hasPeakTorqueTypeReq_gearbox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_repeated") ^
 hasRepeatedPeakTorque_T_R_unit_Nm(?g, ?T_R)
 -> hasPeakTorque_T_max_unit_Nm(?g, ?T_R)
 
 GearboxPeakTorqueCalc2Rule:
 Gearbox(?g) ^ hasCurrentRequirement(?g, ?r) ^
-hasPeakTorqueType_gearBox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_momentary") ^
+hasPeakTorqueTypeReq_gearbox(?r, ?T_type) ^ swrlb:equal(?T_type, "T_momentary") ^
 hasMomentaryPeakTorque_T_M_unit_Nm(?g, ?T_M)
 -> hasPeakTorque_T_max_unit_Nm(?g, ?T_M)
 
@@ -176,7 +176,7 @@ swrlb:lessThanOrEqual(?n_res, ?n_req_max) ^ swrlb:greaterThanOrEqual(?n_res, ?n_
 
 MotorGearboxMatchPeakTorqueCalc1Rule:
 MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^ hasCurrentRequirement(?ma, ?r) ^
-useEfficiencyGearbox(?r, ?uegb) ^
+useEfficiencyGearboxReq(?r, ?uegb) ^
 swrlb:equal(?uegb, false) ^
 has1(?m, ?M_peak) ^ hasGearboxRation_i(?g, ?i) ^
 swrlb:multiply(?M_res, ?M_peak, ?i)
@@ -184,7 +184,7 @@ swrlb:multiply(?M_res, ?M_peak, ?i)
 
 MotorGearboxMatchPeakTorqueCalc2Rule:
 MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^ hasCurrentRequirement(?ma, ?r) ^
-useEfficiencyGearbox(?r, ?uegb) ^
+useEfficiencyGearboxReq(?r, ?uegb) ^
 swrlb:equal(?uegb, true) ^
 has1(?m, ?M_peak) ^ hasGearboxRation_i(?g, ?i) ^ hasMaximalEfficiency_percentage(?g, ?g_perc)
 swrlb:divide(?g_fac, ?g_perc, 100.0) ^ swrlb:multiply(?temp1, ?M_peak, ?g_fac) ^ swrlb:multiply(?M_res, ?temp1, ?i)
@@ -209,7 +209,7 @@ MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
 hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res) ^
 hasPeakTorqueReqMax_T_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
 hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
-removeSmallGearboxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, false)
+removeSmallGearboxesWithBigMotorsReq(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, false)
 -> SatisfiedPeakTorque(?ma)
 
 MotorGearboxMatchPeakTorqueSatisfy2Rule:
@@ -217,7 +217,7 @@ MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
 hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res) ^
 hasPeakTorqueReqMax_T_max_unit_Nm(?r, ?M_req_max) ^ swrlb:lessThanOrEqual(?M_res, ?M_req_max) ^
 hasPeakTorqueReqMin_T_max_unit_Nm(?r, ?M_req_min) ^ swrlb:greaterThanOrEqual(?M_res, ?M_req_min) ^
-removeSmallGearboxesWithBigMotors(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, true) ^
+removeSmallGearboxesWithBigMotorsReq(?r, ?rsgwbm) ^ swrlb:equal(?rsgwbm, true) ^
 hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^
 has1(?m, ?M_peak) ^ hasPeakTorque_T_max_unit_Nm(?g, ?g_max) ^
 swrlb:divide(?M_peak2, ?M_peak, 2.0) ^ swrlb:lessThanOrEqual(?M_peak2, ?g_max)
@@ -270,7 +270,7 @@ MotorGearboxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasCurrentRequiremen
 
 MotorGearboxMatchSatisfyRule:
 MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasBrake(?m, ?mb) ^ hasGearbox(?ma, ?g)
--> SatisfiedMotorGearboxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearbox(?ma, ?g) ^ isComposedOfBrake(?ma, ?mb) ^ hasNRMSD(?ma, 1.0) ^ hasPerformanceIndex(?ma, 1.0)
+-> SatisfiedMotorGearboxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearbox(?ma, ?g) ^ isComposedOfBrake(?ma, ?mb) ^ hasNRMSD(?ma, 1.0) ^ hasPerformanceIndex_PX(?ma, 1.0)
 
 MotorGearboxMatchForSAunitSatisfyRule:
 MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g)
@@ -325,29 +325,29 @@ swrlb:multiply(?s_gwg15, 1.5, ?d_g_wg) ^ swrlb:lessThanOrEqual(?L_wgo_g, ?s_gwg1
 RequirementExternCabeling1Rule:
 CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
 swrlb:equal(?ncr, false) ^ swrlb:equal(?D, 0.0)
--> needExternCabeling(?r, true)
+-> needExternCabelingReq(?r, true)
 
 RequirementExternCabeling2Rule:
 CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^
 swrlb:equal(?ncr, true)
--> needExternCabeling(?r, false)
+-> needExternCabelingReq(?r, false)
 
 RequirementExternCabeling3Rule:
 CurrentRequirements(?r) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
 swrlb:notEqual(?D, 0.0)
--> needExternCabeling(?r, false)
+-> needExternCabelingReq(?r, false)
 
 
 RequirementCoverThickness1Rule:
 CurrentRequirements(?r) ^ Constants(?con) ^
-needHiddenControl(?r, ?nhc) ^
+needHiddenControlReq(?r, ?nhc) ^
 swrlb:equal(?nhc, true) ^
 thicknessCover(?con, ?tc_con)
 -> hasThicknessCoverReq_t_unit_mm(?r, ?tc_con)
 
 RequirementCoverThickness2Rule:
 CurrentRequirements(?r) ^
-needHiddenControl(?r, ?nhc) ^
+needHiddenControlReq(?r, ?nhc) ^
 swrlb:equal(?nhc, false)
 -> hasThicknessCoverReq_t_unit_mm(?r, 0.0)
 
@@ -385,7 +385,7 @@ chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Any")
 
 MCPTangentiallySatisfy2Rule:
 MCPTangentially(?mcp) ^ hasCurrentRequirement(?mcp, ?r) ^
-chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Tangential")
+chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "Tangentially")
 -> SatisfiedMotorControllerPosition(?mcp)
 
 
@@ -397,18 +397,18 @@ chooseMotorControllerReq(?r, ?nmc) ^ swrlb:equal(?nmc, "None")
 
 
 
-// (has1 = L_axial, has2=H_axial, has3=L_tangential, has4=H_tangential, has5=L_wiringConduit)
+// (has1 = L_axial, has2=H_axial, has3=L_tangentially, has4=H_tangentially, has5=L_wiringConduit)
 MCP_MC_MatchAxialSatisfyRule:
 MCP_MC_Match(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MCPAxial(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ hasConstant(?mcpm, ?con) ^
 hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?D_mc) ^ lengthMotorControllerAxialOffset(?con, ?L_offset) ^ diameterMotorControllerAxialOffset(?con, ?D_offset) ^
 swrlb:add(?L_axial, ?D_mc, ?L_offset) ^ swrlb:add(?H_axial, ?L_mc, ?D_offset) ^
 -> has1(?mcpm, ?L_axial) ^ has2(?mcpm, ?H_axial) ^ has3(?mcpm, 0.0) ^ has4(?mcpm, 0.0) ^ has5(?mcpm, 0.0) ^ SatisfiedMCP_MC_Match(?mcpm)
 
-MCP_MC_MatchTangentialSatisfyRule:
+MCP_MC_MatchTangentiallySatisfyRule:
 MCP_MC_Match(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MCPTangentially(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ ElmoServoDrive(?mc) ^ hasConstant(?mcpm, ?con) ^
-hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?H_tangential) ^ lengthMotorControllerTangentialPCBOffset(?con, ?L_offset) ^ lengthWiringConduit(?con, ?L_wc_con) ^
-swrlb:add(?L_tangential, ?L_mc, ?L_offset)
--> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, ?L_tangential) ^ has4(?mcpm, ?H_tangential) ^ has5(?mcpm, ?L_wc_con) ^ SatisfiedMCP_MC_Match(?mcpm)
+hasDimensionLength_L_unit_mm(?mc, ?L_mc) ^ hasDimensionOuterDiameter_D_unit_mm(?mc, ?H_tangentially) ^ lengthMotorControllerTangentiallyPCBOffset(?con, ?L_offset) ^ lengthWiringConduit(?con, ?L_wc_con) ^
+swrlb:add(?L_tangentially, ?L_mc, ?L_offset)
+-> has1(?mcpm, 0.0) ^ has2(?mcpm, 0.0) ^ has3(?mcpm, ?L_tangentially) ^ has4(?mcpm, ?H_tangentially) ^ has5(?mcpm, ?L_wc_con) ^ SatisfiedMCP_MC_Match(?mcpm)
 
 MCP_MC_MatchNoneSatisfyRule:
 MCP_MC_Match(?mcpm) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ MCPExternal(?mcp) ^ hasMotorController(?mcpm, ?mc) ^ NoMC(?mc)
@@ -518,90 +518,90 @@ swrlb:equal(?ntssgb, "None")
 
 TorqueSensorStrainGaugeBased_HollowShaftAfterSatisfy1Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Any")
 -> SatisfiedTorqueSensor(?tos)
 
 TorqueSensorStrainGaugeBased_HollowShaftAfterSatisfy2Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_HollowShaft(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Linear")
 -> SatisfiedTorqueSensor(?tos)
 
 
 TorqueSensorStrainGaugeBased_SpokeWheelAfterSatisfy1Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Any")
 -> SatisfiedTorqueSensor(?tos)
 
 TorqueSensorStrainGaugeBased_SpokeWheelAfterSatisfy2Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Compressed")
 -> SatisfiedTorqueSensor(?tos)
 
 TorqueSensorStrainGaugeBased_SpokeWheelAfterSatisfy3Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ StrainGaugeBased_SpokeWheel(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "TwoSided")
 -> SatisfiedTorqueSensor(?tos)
 
 
 TorqueSensorEncoderBasedAfterSatisfy1Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ EncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Any")
 -> SatisfiedTorqueSensor(?tos) ^ Linear(?tos) ^ Compressed(?tos)
 
 TorqueSensorEncoderBasedAfterSatisfy2Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ EncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "TwoSided")
 -> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 TorqueSensorEncoderBasedAfterSatisfy3Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ EncoderBased(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Linear")
 -> SatisfiedTorqueSensor(?tos) ^ Linear(?tos)
 
 
 TorqueSensorNoneAfterSatisfy1Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ NoTS(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Any")
 -> SatisfiedTorqueSensor(?tos) ^ Linear(?tos) ^ Compressed(?tos)
 
 TorqueSensorNoneAfterSatisfy2Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ NoTS(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Linear")
 -> SatisfiedTorqueSensor(?tos) ^ Linear(?tos)
 
 TorqueSensorNoneAfterSatisfy3Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ NoTS(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "Compressed")
 -> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 TorqueSensorNoneAfterSatisfy4Rule:
 BeforeSatisfiedTorqueSensor(?tos) ^ NoTS(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-chooseOutputStructure(?r, ?cos) ^
+chooseOutputStructureReq(?r, ?cos) ^
 swrlb:equal(?cos, "TwoSided")
 -> SatisfiedTorqueSensor(?tos) ^ Compressed(?tos)
 
 
 TorqueSensorLengthADCSatisfy1Rule:
 SatisfiedTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-needADCforTorqueExternal(?r, ?nafte) ^
+needADCforTorqueExternalReq(?r, ?nafte) ^
 swrlb:equal(?nafte, false) ^
 hasDimensionLength_L_unit_mm(?tos, ?L_ADC)
 -> has1(?tos, ?L_ADC)
 
 TorqueSensorLengthADCSatisfy2Rule:
 SatisfiedTorqueSensor(?tos) ^ hasCurrentRequirement(?tos, ?r) ^
-needADCforTorqueExternal(?r, ?nafte) ^
+needADCforTorqueExternalReq(?r, ?nafte) ^
 swrlb:equal(?nafte, true)
 -> has1(?tos, 0.0)
 
@@ -684,7 +684,7 @@ swrlb:lessThanOrEqual(?D_db, ?temp)
 
 DiameterDriveBearingMatchCompressedSatisfy1Rule:
 BeforeHalfSatisfiedDiameterDriveBearingMatchCompressed(?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
-needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, true) ^
+needExternCabelingReq(?r, ?nec) ^ swrlb:equal(?nec, true) ^
 hasDimensionInnerDiameter_d_unit_mm(?db, ?d_db) ^ thicknessInnerShaft(?con, ?tis_con) ^
 swrlb:greaterThanOrEqual(?d_db, ?tis_con)
 -> HalfSatisfiedDiameterDriveBearingMatchCompressed(?didbm)
@@ -693,7 +693,7 @@ swrlb:greaterThanOrEqual(?d_db, ?tis_con)
 // This rule is needed due to strange behavior. If combined with rule below the runtime explodes for no reason. Only the separation of CurrentRequirements, Constants and hasSlipRing fixes the problem. I have no idea why...
 DiameterDriveBearingMatchCompressedBeforeSatisfy2Rule:
 BeforeHalfSatisfiedDiameterDriveBearingMatchCompressed(?didbm) ^ hasCurrentRequirement(?didbm, ?r) ^ hasConstant(?didbm, ?con) ^
-needExternCabeling(?r, ?nec) ^ swrlb:equal(?nec, false) ^
+needExternCabelingReq(?r, ?nec) ^ swrlb:equal(?nec, false) ^
 thicknessInnerShaft(?con, ?tis_con) ^ thicknessCableChannel(?con, ?tcc_con) ^ thicknessRotationSafetyDistance(?con, ?trsd_con) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D_w)
 -> has1(?didbm, ?tis_con) ^ has2(?didbm, ?tcc_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w)
 
@@ -889,19 +889,19 @@ swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 
 AbsoluteEncoderWithSatisfy1Rule:
 AE-MBAD01_05(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabeling(?r, ?nec) ^
+needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabelingReq(?r, ?nec) ^
 swrlb:equal(?ab_r, true) ^ swrlb:equal(?nec, false)
 -> SatisfiedAbsoluteEncoder(?ab)
 
 AbsoluteEncoderWithSatisfy2Rule:
 AE-MBAD01_05(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needExternCabeling(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
+needExternCabelingReq(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?nec, false) ^ swrlb:equal(?ntssgb, "Any")
 -> SatisfiedAbsoluteEncoder(?ab)
 
 AbsoluteEncoderWithSatisfy3Rule:
 AE-MBAD01_05(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needExternCabeling(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
+needExternCabelingReq(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?nec, false) ^ swrlb:equal(?ntssgb, "Position-Encoder-Based")
 -> SatisfiedAbsoluteEncoder(?ab)
 
@@ -915,19 +915,19 @@ swrlb:equal(?ab_r, false) ^ swrlb:notEqual(?ntssgb, "Position-Encoder-Based")
 
 AEonAxisSatisfy1Rule:
 AEonAxis(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabeling(?r, ?nec) ^
+needAbsoluteEncoderReq(?r, ?ab_r) ^ needExternCabelingReq(?r, ?nec) ^
 swrlb:equal(?ab_r, true) ^ swrlb:equal(?nec, true)
 -> SatisfiedAbsoluteEncoder(?ab)
 
 AEonAxisSatisfy2Rule:
 AEonAxis(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needExternCabeling(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
+needExternCabelingReq(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?nec, true) ^ swrlb:equal(?ntssgb, "Any")
 -> SatisfiedAbsoluteEncoder(?ab)
 
 AEonAxisSatisfy3Rule:
 AEonAxis(?ab) ^ hasCurrentRequirement(?ab, ?r) ^
-needExternCabeling(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
+needExternCabelingReq(?r, ?nec) ^ needTorqueSensorReq(?r, ?ntssgb) ^
 swrlb:equal(?nec, true) ^ swrlb:equal(?ntssgb, "Position-Encoder-Based")
 -> SatisfiedAbsoluteEncoder(?ab)
 
@@ -1405,15 +1405,15 @@ swrlb:lessThanOrEqual(?L_1, ?L_wiringConduit)
 
 LengthElektroSatisfy3Rule:
 LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
-hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
+hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangentially) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangentially) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
 -> hasMax2_1(?le, ?L_max1_1)
 
 LengthElektroSatisfy4Rule:
 LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
-hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangential) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
-swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangential) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
+hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangentially) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
+swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangentially) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 -> hasMax2_1(?le, ?L_max1_2)
 
@@ -1521,7 +1521,7 @@ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de
 
 DiameterDriveCalcRule:
 DiameterDrive(?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^
-hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasCurrentRequirement(?di, ?r) ^ hasThicknessEngineCaseReq_D_unit_mm(?r, ?tec_r) ^
+hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasCurrentRequirement(?di, ?r) ^ hasThicknessDriveCaseReq_D_unit_mm(?r, ?tec_r) ^
 swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:add(?D_input, ?dec, ?D_m)
 -> hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input)
 
@@ -1531,17 +1531,17 @@ DiameterDrive(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ hasCur
 
 DiameterDriveStructureSatisfy1Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Any")
+chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Any")
 -> SatisfiedDiameterDriveLinear(?di) ^ SatisfiedDiameterDriveCompressed(?di)
 
 DiameterDriveStructureSatisfy2Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
+chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
 -> SatisfiedDiameterDriveLinear(?di)
 
 DiameterDriveStructureSatisfy3Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructure(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
+chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
 -> SatisfiedDiameterDriveCompressed(?di)
 
 
@@ -1565,25 +1565,25 @@ swrlb:multiply(?t_eosd2, 2.0, ?t_eosd) ^ swrlb:add(?D_electro_output, ?D_spcb, ?
 
 DiameterOutputLinearBeforeEvaluate3Rule:
 DiameterOutputLinear(?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasConstant(?do, ?con) ^ hasCurrentRequirement(?do, ?r) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ diameterWiring(?con, ?D_w) ^ needHiddenControl(?r, ?nhc) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ diameterWiring(?con, ?D_w) ^ needHiddenControlReq(?r, ?nhc) ^
 swrlb:notEqual(?L_loie, 0.0) ^ swrlb:equal(?nhc, true)
 -> has2(?do, ?D_w)
 
 DiameterOutputLinearBeforeEvaluate4Rule:
 DiameterOutputLinear(?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasCurrentRequirement(?do, ?r) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControl(?r, ?nhc) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControlReq(?r, ?nhc) ^
 swrlb:equal(?L_loie, 0.0) ^ swrlb:equal(?nhc, true)
 -> has2(?do, 0.0)
 
 DiameterOutputLinearBeforeEvaluate5Rule:
 DiameterOutputLinear(?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasCurrentRequirement(?do, ?r) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControl(?r, ?nhc) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControlReq(?r, ?nhc) ^
 swrlb:equal(?L_loie, 0.0) ^ swrlb:equal(?nhc, false)
 -> has2(?do, 0.0)
 
 DiameterOutputLinearBeforeEvaluate6Rule:
 DiameterOutputLinear(?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasCurrentRequirement(?do, ?r) ^
-hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControl(?r, ?nhc) ^
+hasDimensionLength_L_unit_mm(?abspcb, ?L_loie) ^ needHiddenControlReq(?r, ?nhc) ^
 swrlb:notEqual(?L_loie, 0.0) ^ swrlb:equal(?nhc, false)
 -> has2(?do, 0.0)
 
@@ -1724,37 +1724,37 @@ swrlb:lessThanOrEqual(?D_dob, ?D_do)
 DiameterOutputBearingMatchOutputCompressedForCompressedSatisfy1Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
 StrainGaugeBased_SpokeWheel(?tos) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Any")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForCompressed(?dob)
 
 DiameterOutputBearingMatchOutputCompressedForCompressedSatisfy2Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
 NoTS(?tos) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Any")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForCompressed(?dob)
 
 DiameterOutputBearingMatchOutputCompressedForCompressedSatisfy3Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
 StrainGaugeBased_SpokeWheel(?tos) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForCompressed(?dob)
 
 DiameterOutputBearingMatchOutputCompressedForCompressedSatisfy4Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasCurrentRequirement(?lo, ?r) ^
 NoTS(?tos) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForCompressed(?dob)
 
 
 
 DiameterOutputBearingMatchOutputCompressedForTwoSidedSatisfy1Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "Any")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Any")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForTwoSided(?dob)
 
 DiameterOutputBearingMatchOutputCompressedForTwoSidedSatisfy2Rule:
 SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^
-chooseOutputStructure(?r, ?cos) ^ swrlb:equal(?cos, "TwoSided")
+chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "TwoSided")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForTwoSided(?dob)
 
 
@@ -1791,8 +1791,8 @@ Diameter(?d) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasCurrentRequi
 
 HeightBeforeEvaluateAndCalcRule:
 Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasConstant(?h, ?con) ^
-hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ has4(?mcpm, ?H_tangential) ^ safetyDistanceElectro(?con, ?sde_con) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^
-swrlb:divide(?D_diHalf, ?D_di, 2.0) ^ swrlb:add(?temp2, ?D_diHalf, ?H_tangential) ^ swrlb:add(?temp3, ?temp2, ?sde_con) ^ swrlb:divide(?D_gesHalf, ?D_ges, 2.0) ^ swrlb:subtract(?H_overlap, ?temp3, ?D_gesHalf) ^ swrlb:add(?H_max2, ?H_overlap, ?D_ges)
+hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ has4(?mcpm, ?H_tangentially) ^ safetyDistanceElectro(?con, ?sde_con) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^
+swrlb:divide(?D_diHalf, ?D_di, 2.0) ^ swrlb:add(?temp2, ?D_diHalf, ?H_tangentially) ^ swrlb:add(?temp3, ?temp2, ?sde_con) ^ swrlb:divide(?D_gesHalf, ?D_ges, 2.0) ^ swrlb:subtract(?H_overlap, ?temp3, ?D_gesHalf) ^ swrlb:add(?H_max2, ?H_overlap, ?D_ges)
 -> hasMax1_1(?h, ?D_ges) ^ hasMax1_2(?h, ?H_max2)
 
 
@@ -1836,7 +1836,7 @@ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm
 swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_elektro2, ?D_elektro, ?D_elektro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
 swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_elektro, ?L_elektro, ?D_elektro2) ^
 swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
--> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex(?sac, 1.0)
+-> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex_PX(?sac, 1.0)
 
 
 
