@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>edu.kit.expertsystem</groupId>
-        <artifactId>SAC</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>edu.kit.anthropomatik.h2t.expertsystem</groupId>
+        <artifactId>es-component-reasoner</artifactId>
+        <version>1.0.0</version>
     </parent>
 
-    <artifactId>SAC-InferenceEngine</artifactId>
+    <artifactId>InferenceEngine</artifactId>
 
     <dependencies>
         <dependency>

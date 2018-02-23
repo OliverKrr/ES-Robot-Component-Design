@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SAC.iml" filepath="$PROJECT_DIR$/SAC.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SAC-InferenceEngine.iml" filepath="$PROJECT_DIR$/SAC-InferenceEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SAC-KnowledgeBase.iml" filepath="$PROJECT_DIR$/SAC-KnowledgeBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SAC-UserInterface.iml" filepath="$PROJECT_DIR$/SAC-UserInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InferenceEngine.iml" filepath="$PROJECT_DIR$/InferenceEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KnowledgeBase.iml" filepath="$PROJECT_DIR$/KnowledgeBase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UserInterface.iml" filepath="$PROJECT_DIR$/UserInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/es-component-reasoner.iml" filepath="$PROJECT_DIR$/es-component-reasoner.iml" />
     </modules>
   </component>
 </project>
