@@ -30,7 +30,7 @@ public class RequirementsTab {
     private ScrolledComposite leftScrolledComposite;
     private Composite leftComposite;
     private Composite rightComposite;
-    private Button btnEnableFields;
+    private Button btnExpertMode;
     private DescriptionHelper descriptionHelper;
 
     RequirementsTab(Composite parent, FormToolkit formToolkit, Rectangle sizeOfForm, boolean isOptimization) {
@@ -86,14 +86,13 @@ public class RequirementsTab {
         }
 
         if (isAnyFieldDisabled && !isOptimization) {
-            btnEnableFields = new Button(leftComposite, SWT.CHECK);
-            updateEnableField();
-            btnEnableFields.setText("Enable fields");
-            btnEnableFields.addSelectionListener(new SelectionAdapter() {
+            btnExpertMode = new Button(leftComposite, SWT.CHECK);
+            updateExpertMode();
+            btnExpertMode.setText("Expert Mode");
+            btnExpertMode.addSelectionListener(new SelectionAdapter() {
 
                 @Override
                 public void widgetSelected(SelectionEvent event) {
-                    btnEnableFields.setText(btnEnableFields.getSelection() ? "Disable fields" : "Enable fields");
                     for (RequirementWrapper req : requirements) {
                         if (req instanceof TextFieldMinMaxRequirementWrapper) {
                             TextFieldMinMaxRequirementWrapper reqWrapper = (TextFieldMinMaxRequirementWrapper) req;
@@ -162,10 +161,10 @@ public class RequirementsTab {
     }
 
     public void updateSize(Rectangle sizeOfForm) {
-        if (btnEnableFields != null) {
+        if (btnExpertMode != null) {
             // set to o so it will not extend leftComposite.width
             // it will be set back later on accordingly to leftComposite
-            btnEnableFields.setBounds(0, 0, 0, 0);
+            btnExpertMode.setBounds(0, 0, 0, 0);
         }
         requirementsForm.setBounds(sizeOfForm);
         formToolkit.adapt(requirementsForm);
@@ -174,18 +173,18 @@ public class RequirementsTab {
         leftScrolledComposite.setMinWidth(requirementsHelper.getMaxXEnd());
         leftScrolledComposite.setMinHeight(requirementsHelper.getMaxYEnd());
         descriptionHelper.updateSize(rightComposite.getBounds());
-        updateEnableField();
+        updateExpertMode();
     }
 
-    private void updateEnableField() {
-        if (btnEnableFields != null) {
-            Point size = GuiHelper.getSizeOfControl(btnEnableFields);
+    private void updateExpertMode() {
+        if (btnExpertMode != null) {
+            Point size = GuiHelper.getSizeOfControl(btnExpertMode);
             // Offset for width, to include the checkbox size
             int realWidth = size.x + btnEnalbeFieldOffsetXEnd;
             int xCord = leftComposite.getBounds().width - realWidth;
             int yCord = leftComposite.getBounds().height - size.y - btnEnalbeFieldOffsetYEnd;
-            btnEnableFields.setBounds(xCord, yCord, realWidth, size.y);
-            formToolkit.adapt(btnEnableFields, true, true);
+            btnExpertMode.setBounds(xCord, yCord, realWidth, size.y);
+            formToolkit.adapt(btnExpertMode, true, true);
         }
     }
 

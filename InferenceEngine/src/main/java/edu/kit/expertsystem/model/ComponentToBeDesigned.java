@@ -2,7 +2,7 @@ package edu.kit.expertsystem.model;
 
 import java.util.Objects;
 
-public class UnitToReason {
+public class ComponentToBeDesigned {
 
     public String displayName;
     public String iriOfUnit;
@@ -15,7 +15,7 @@ public class UnitToReason {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-        UnitToReason that = (UnitToReason) o;
+        ComponentToBeDesigned that = (ComponentToBeDesigned) o;
         return orderPosition == that.orderPosition && Objects.equals(displayName, that.displayName) && Objects.equals
                 (iriOfUnit, that.iriOfUnit) && Objects.equals(iriOfResultUnit, that.iriOfResultUnit);
     }
@@ -27,7 +27,7 @@ public class UnitToReason {
 
     @Override
     public String toString() {
-        return "UnitToReason{" + "displayName='" + displayName + '\'' + ", iriOfUnit='" + iriOfUnit + '\'' + ", " +
+        return "ComponentToBeDesigned{" + "displayName='" + displayName + '\'' + ", iriOfUnit='" + iriOfUnit + '\'' + ", " +
                 "iriOfResultUnit='" + iriOfResultUnit + '\'' + ", orderPosition=" + orderPosition + '}';
     }
 }

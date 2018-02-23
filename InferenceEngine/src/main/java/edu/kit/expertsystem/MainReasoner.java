@@ -3,9 +3,9 @@ package edu.kit.expertsystem;
 import edu.kit.expertsystem.generated.Vocabulary;
 import edu.kit.expertsystem.io.OntologyReadAndWriteHelper;
 import edu.kit.expertsystem.model.Component;
+import edu.kit.expertsystem.model.ComponentToBeDesigned;
 import edu.kit.expertsystem.model.Line;
 import edu.kit.expertsystem.model.Result;
-import edu.kit.expertsystem.model.UnitToReason;
 import edu.kit.expertsystem.model.req.*;
 import edu.kit.expertsystem.reasoning.ReasoningTree;
 import openllet.core.OpenlletOptions;
@@ -70,10 +70,10 @@ public class MainReasoner {
         logger.debug("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
 
-    public void prepareReasoning(UnitToReason unitToReason) {
+    public void prepareReasoning(ComponentToBeDesigned componentToBeDesigned) {
         long startTime = System.currentTimeMillis();
         helper.clearGeneratedAxioms();
-        createBasicIndividuals(OWL.Class(unitToReason.iriOfUnit));
+        createBasicIndividuals(OWL.Class(componentToBeDesigned.iriOfUnit));
         helper.flush();
         genericTool.getReasoner().precomputeInferences(InferenceType.values());
         isReasoningPrepared = true;
@@ -116,11 +116,11 @@ public class MainReasoner {
         reasoningTree.addDeviceToIndividual(parent, ind);
     }
 
-    public List<Result> startReasoning(UnitToReason unitToReason, List<Requirement> requirements) {
+    public List<Result> startReasoning(ComponentToBeDesigned componentToBeDesigned, List<Requirement> requirements) {
         long startTime = System.currentTimeMillis();
         try {
             if (!isReasoningPrepared) {
-                prepareReasoning(unitToReason);
+                prepareReasoning(componentToBeDesigned);
             }
             isReasoningPrepared = false;
             if (interrupted.get()) {
@@ -131,7 +131,7 @@ public class MainReasoner {
                 return null;
             }
             helper.flush();
-            return reason(OWL.Class(unitToReason.iriOfResultUnit), requirements);
+            return reason(OWL.Class(componentToBeDesigned.iriOfResultUnit), requirements);
         } catch (Throwable e) {
             // It is expected if we interrupted ourself
             if (!interrupted.get()) {
@@ -429,37 +429,37 @@ public class MainReasoner {
         }
     }
 
-    public List<UnitToReason> getUnitsToReason() {
+    public List<ComponentToBeDesigned> getUnitsToReason() {
         long startTime = System.currentTimeMillis();
-        List<UnitToReason> units = new ArrayList<>();
+        List<ComponentToBeDesigned> units = new ArrayList<>();
         genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE).filter
                 (axiomOfReasoningTree -> genericTool.getOntology().subClassAxiomsForSubClass(axiomOfReasoningTree
                         .getSubClass().asOWLClass()).anyMatch(subClassOfReasoningTreeAxiom ->
                         subClassOfReasoningTreeAxiom.getSuperClass().objectPropertiesInSignature().anyMatch
                                 (Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals))).forEach
                 (filteredAxiomOfReasoningTree -> {
-            UnitToReason unitToReason = new UnitToReason();
-            unitToReason.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getShortForm();
-            unitToReason.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getIRIString();
+            ComponentToBeDesigned componentToBeDesigned = new ComponentToBeDesigned();
+            componentToBeDesigned.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getShortForm();
+            componentToBeDesigned.iriOfUnit = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI().getIRIString();
 
             genericTool.getOntology().subClassAxiomsForSuperClass(filteredAxiomOfReasoningTree.getSubClass()
                     .asOWLClass()).forEach(classToReasonAxiom -> {
-                if (unitToReason.iriOfResultUnit == null) {
-                    unitToReason.iriOfResultUnit = classToReasonAxiom.getSubClass().asOWLClass().getIRI()
+                if (componentToBeDesigned.iriOfResultUnit == null) {
+                    componentToBeDesigned.iriOfResultUnit = classToReasonAxiom.getSubClass().asOWLClass().getIRI()
                             .getIRIString();
                 } else {
                     throw new RuntimeException("UnitsToReasone are only allowed to have one child to identify " +
-                            "resultingUnit (satisfied), found at least: " + unitToReason.iriOfResultUnit + " and " +
+                            "resultingUnit (satisfied), found at least: " + componentToBeDesigned.iriOfResultUnit + " and " +
                             classToReasonAxiom.getSubClass().asOWLClass().getIRI().getIRIString());
                 }
             });
-            if (unitToReason.iriOfResultUnit == null) {
+            if (componentToBeDesigned.iriOfResultUnit == null) {
                 throw new RuntimeException("UnitsToReasone must have one child to identify resultingUnit (satisfied)");
             }
-            unitToReason.orderPosition = helper.getOrderPositionForClass(filteredAxiomOfReasoningTree.getSubClass()
+            componentToBeDesigned.orderPosition = helper.getOrderPositionForClass(filteredAxiomOfReasoningTree.getSubClass()
                     .asOWLClass());
 
-            units.add(unitToReason);
+            units.add(componentToBeDesigned);
         });
 
         units.sort(Comparator.comparingInt(unit -> unit.orderPosition));
@@ -475,8 +475,8 @@ public class MainReasoner {
         genericTool.getReasoner().interrupt();
     }
 
-    public List<Requirement> getRequirements(UnitToReason unitToReason) {
-        return requirementHelper.getRequirements(OWL.Class(unitToReason.iriOfUnit));
+    public List<Requirement> getRequirements(ComponentToBeDesigned componentToBeDesigned) {
+        return requirementHelper.getRequirements(OWL.Class(componentToBeDesigned.iriOfUnit));
     }
 
     public List<RequirementDependencyCheckbox> getRequirementDependencies(List<Requirement> requirements) {

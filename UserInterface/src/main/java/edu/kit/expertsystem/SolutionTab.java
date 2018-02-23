@@ -66,17 +66,17 @@ public class SolutionTab {
         formToolkit.adapt(leftComposite);
 
         saveSolutionOntologyButton = new Button(leftComposite, SWT.PUSH);
-        saveSolutionOntologyButton.setToolTipText("Saves the solution of the reasoning in an ontology");
-        saveSolutionOntologyButton.setText("Save solution");
+        saveSolutionOntologyButton.setToolTipText("Saves the solutions in an ontology");
+        saveSolutionOntologyButton.setText("Save solutions");
         formToolkit.adapt(saveSolutionOntologyButton, true, true);
 
         searchField = new Text(leftComposite, SWT.BORDER);
         searchField.setMessage("search");
-        searchField.setToolTipText("search");
         formToolkit.adapt(searchField, true, true);
         resultWrapper.searchField = searchField;
 
         orderByCombo = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        orderByCombo.setToolTipText("First criterion to sort solutions");
         formToolkit.adapt(orderByCombo, true, true);
         orderByCombo.addModifyListener(e -> {
             updateSizeOfOrderByCombos();
@@ -85,6 +85,7 @@ public class SolutionTab {
         resultWrapper.orderBy = orderByCombo;
 
         orderByCombo2 = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        orderByCombo2.setToolTipText("Second criterion to sort solutions, when the values of the first are equal");
         formToolkit.adapt(orderByCombo2, true, true);
         updateSizeOfOrderByCombos();
         orderByCombo2.addModifyListener(e -> {
@@ -95,6 +96,7 @@ public class SolutionTab {
 
         selectToShowButton = new Button(leftComposite, SWT.TOGGLE);
         selectToShowButton.setText("Select ... to show");
+        selectToShowButton.setToolTipText("Choose what components and properties should be displayed");
         resultWrapper.selectToShowButton = selectToShowButton;
         selectTableToShow = new Table(leftComposite, SWT.CHECK | SWT.FULL_SELECTION | SWT.BORDER | SWT.SINGLE);
         selectTableToShow.setVisible(false);
@@ -109,13 +111,13 @@ public class SolutionTab {
         updateSizeOfSelectShow();
 
         showOnlyDiffsCheckBox = new Button(leftComposite, SWT.CHECK);
-        showOnlyDiffsCheckBox.setText("Show only differences in results");
+        showOnlyDiffsCheckBox.setText("Show only differences in solutions");
         showOnlyDiffsCheckBox.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
                 showOnlyDiffsCheckBox.setText(showOnlyDiffsCheckBox.getSelection() ? "Show all components and values"
-                        + " of results" : "Show only differences in results");
+                        + " of solutions" : "Show only differences in solutions");
             }
         });
         updateSizeOfShowOnlyDiffsCheckBox();
@@ -148,6 +150,7 @@ public class SolutionTab {
         switchSolutionForm = new Combo(leftComposite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
         switchSolutionForm.add("Show as List");
         switchSolutionForm.add("Show as Table");
+        switchSolutionForm.setToolTipText("Switch visualization of solutions");
         switchSolutionForm.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -226,6 +229,9 @@ public class SolutionTab {
 
         int rowNumber = 0;
         descriptionHelper = new DescriptionHelper(formToolkit, rightComposite);
+        descriptionHelper.createDescription("Search", "Filter the solutions. Anything presented can be searched. For"
+                + " specific search you can do: motor:ILM115x50 HeightH:174 (or any substring ot this). Spaces AND "
+                + "the terms.", rowNumber++);
         for (RequirementWrapper requirement : requirements) {
             if (requirement.requirement.description != null && requirement.requirement.resultIRI != null) {
                 descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
@@ -292,11 +298,11 @@ public class SolutionTab {
     private void updateSizeOfShowOnlyDiffsCheckBox() {
         int y = 2 * offsetY + searchTextHeight;
         int x = selectToShowButton.getBounds().x + selectToShowButton.getBounds().width + offsetX;
-        showOnlyDiffsCheckBox.setText("Show all components and values of results");
+        showOnlyDiffsCheckBox.setText("Show all components and values of solutions");
         Point size = GuiHelper.getSizeOfControl(showOnlyDiffsCheckBox);
         showOnlyDiffsCheckBox.setBounds(x, y, size.x, searchTextHeight);
         showOnlyDiffsCheckBox.setText(showOnlyDiffsCheckBox.getSelection() ? "Show all components and values" + " of"
-                + " results" : "Show only differences in results");
+                + " solutions" : "Show only differences in solutions");
     }
 
     private void updateSizeOfSwitchSolutionForm() {

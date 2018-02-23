@@ -80,9 +80,9 @@ public class RequirementHelper {
                 TextFieldMinMaxRequirement textReq = new TextFieldMinMaxRequirement();
                 parseCommonRequirement(textReq, reqIndi);
 
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMAX)
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISFOREXPERTMODEMAX)
                         .findAny().ifPresent(obProp -> textReq.enableMax = obProp.parseBoolean());
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELDMIN)
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISFOREXPERTMODEMIN)
                         .findAny().ifPresent(obProp -> textReq.enableMin = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary
                         .DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI).findAny().ifPresent(obProp -> textReq
@@ -115,7 +115,7 @@ public class RequirementHelper {
                 parseCommonRequirement(textReq, reqIndi);
                 parseRequirementType(textReq, reqIndi);
 
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISFOREXPERTMODE)
                         .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary
                         .DATA_PROPERTY_HASSCALEFROMONTOLOGYTOUI).findAny().ifPresent(obProp -> textReq
@@ -139,7 +139,7 @@ public class RequirementHelper {
                 CheckboxRequirement textReq = new CheckboxRequirement();
                 parseCommonRequirement(textReq, reqIndi);
 
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISFOREXPERTMODE)
                         .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE)
                         .findAny().ifPresent(obProp -> textReq.defaultValue = obProp.parseBoolean());
@@ -158,7 +158,7 @@ public class RequirementHelper {
                 DropdownRequirement textReq = new DropdownRequirement();
                 parseCommonRequirement(textReq, reqIndi);
 
-                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASENABLEFIELD)
+                genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_ISFOREXPERTMODE)
                         .findAny().ifPresent(obProp -> textReq.enable = obProp.parseBoolean());
                 genericTool.getReasoner().dataPropertyValues(reqIndi, Vocabulary.DATA_PROPERTY_HASDEFAULTVALUE)
                         .findAny().ifPresent(obProp -> textReq.defaultValue = obProp.getLiteral());

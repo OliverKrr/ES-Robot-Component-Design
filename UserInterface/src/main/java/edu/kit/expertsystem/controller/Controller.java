@@ -3,7 +3,7 @@ package edu.kit.expertsystem.controller;
 import edu.kit.expertsystem.GUI;
 import edu.kit.expertsystem.MainReasoner;
 import edu.kit.expertsystem.controller.wrapper.*;
-import edu.kit.expertsystem.model.UnitToReason;
+import edu.kit.expertsystem.model.ComponentToBeDesigned;
 import edu.kit.expertsystem.model.req.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,8 +24,8 @@ public class Controller {
 
     private List<RequirementWrapper> requirementsWrapper;
     private List<RequirementDependencyCheckboxWrapper> requirementDependencyMappers;
-    private List<UnitToReason> unitsToReason;
-    private UnitToReason currentUnitToReason;
+    private List<ComponentToBeDesigned> componentsToBeDesigned;
+    private ComponentToBeDesigned currentComponentToBeDesigned;
     private ResultWrapper resultWrapper;
 
     private boolean haveRequirementChanged = true;
@@ -38,16 +38,16 @@ public class Controller {
 
     public void initialize() {
         reasoner.initialize();
-        unitsToReason = reasoner.getUnitsToReason();
-        if (unitsToReason.isEmpty()) {
+        componentsToBeDesigned = reasoner.getUnitsToReason();
+        if (componentsToBeDesigned.isEmpty()) {
             throw new RuntimeException("There are no units to reasone in the ontology!");
         }
-        currentUnitToReason = unitsToReason.get(0);
+        currentComponentToBeDesigned = componentsToBeDesigned.get(0);
         resultWrapper = new ResultWrapper();
     }
 
     private void initRequirements() {
-        List<Requirement> requirements = reasoner.getRequirements(currentUnitToReason);
+        List<Requirement> requirements = reasoner.getRequirements(currentComponentToBeDesigned);
         requirementsWrapper = new ArrayList<>(requirements.size());
         requirements.forEach(req -> {
             if (req instanceof TextFieldMinMaxRequirement) {
@@ -84,7 +84,7 @@ public class Controller {
 
     public void reset() {
         if (!isReseted) {
-            reasoner.prepareReasoning(currentUnitToReason);
+            reasoner.prepareReasoning(currentComponentToBeDesigned);
             isReseted = true;
         }
     }
@@ -189,7 +189,7 @@ public class Controller {
         if (haveRequirementChanged) {
             haveRequirementChanged = false;
             isReseted = false;
-            resultWrapper.results = reasoner.startReasoning(currentUnitToReason, parseToRequirements());
+            resultWrapper.results = reasoner.startReasoning(currentComponentToBeDesigned, parseToRequirements());
             if (resultWrapper.results != null) {
                 gui.notifySolutionIsReady();
             }
@@ -204,14 +204,14 @@ public class Controller {
         resultWrapper.resultShow.setResults();
     }
 
-    public void updateUnitToReason(String unitToReason) {
-        unitsToReason.stream().filter(unit -> unit.displayName.equals(unitToReason)).forEach(unit ->
-                currentUnitToReason = unit);
+    public void updateComponentsToBeDesigned(String componentToBeDesigned) {
+        componentsToBeDesigned.stream().filter(unit -> unit.displayName.equals(componentToBeDesigned)).forEach(unit
+                -> currentComponentToBeDesigned = unit);
         initRequirements();
     }
 
-    public Stream<String> getUnitsToReason() {
-        return unitsToReason.stream().map(unit -> unit.displayName);
+    public Stream<String> getComponentsToBeDesigned() {
+        return componentsToBeDesigned.stream().map(unit -> unit.displayName);
     }
 
     public List<RequirementWrapper> getRequirementsWrapper() {

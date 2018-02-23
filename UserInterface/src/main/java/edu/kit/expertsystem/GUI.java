@@ -54,7 +54,7 @@ public class GUI {
 
     private NavigationBarHelper mainNavBarHelper;
     private List<NavigationItem> mainNavBars = new ArrayList<>();
-    private Combo unitsToReasonCombo;
+    private Combo componentToBeDesigned;
     private Button toggleDescription;
     private StyledText errorText;
     private Label kitLogo;
@@ -148,13 +148,14 @@ public class GUI {
             }
         });
 
-        unitsToReasonCombo = new Combo(shell, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
-        controller.getUnitsToReason().forEachOrdered(unit -> unitsToReasonCombo.add(unit));
-        unitsToReasonCombo.addSelectionListener(new SelectionAdapter() {
+        componentToBeDesigned = new Combo(shell, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+        componentToBeDesigned.setToolTipText("Choose component to be designed.");
+        controller.getComponentsToBeDesigned().forEachOrdered(component -> componentToBeDesigned.add(component));
+        componentToBeDesigned.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
-                controller.updateUnitToReason(unitsToReasonCombo.getText());
+                controller.updateComponentsToBeDesigned(componentToBeDesigned.getText());
                 if (requirementsCategory != null) {
                     requirementsCategory.disposeNavItems();
                     requirementsCategory.getRequirementsOverallForm().dispose();
@@ -166,7 +167,7 @@ public class GUI {
                 requirementsCategory = new RequirementsCategory(shell, formToolkit, false);
                 Rectangle reqNavBarRec = requirementsCategory.createNavBars(controller.getRequirementsWrapper());
                 Rectangle mainNavBarRec = createNavigationBar(reqNavBarRec);
-                unitsToReasonCombo.setSize(0, mainNavBarRec.height);
+                componentToBeDesigned.setSize(0, mainNavBarRec.height);
 
                 Rectangle recOfContent = requirementsCategory.createReqContent(controller
                         .getRequirementDependencyWrapper(), mainNavBarRec.y + mainNavBarRec.height, firstSizeOfShell);
@@ -198,8 +199,8 @@ public class GUI {
                 updateSize();
             }
         });
-        unitsToReasonCombo.select(0);
-        unitsToReasonCombo.notifyListeners(SWT.Selection, new Event());
+        componentToBeDesigned.select(0);
+        componentToBeDesigned.notifyListeners(SWT.Selection, new Event());
 
         shell.addListener(SWT.Resize, e -> {
             // have to update twice, because one does not update everything
@@ -312,16 +313,16 @@ public class GUI {
 
         int toggleDescriptionWidth = GuiHelper.getSizeOfControl(toggleDescription).x;
         int toggleDescriptionX = updatedRec.x + updatedRec.width - toggleDescriptionWidth;
-        toggleDescription.setBounds(toggleDescriptionX, navBarY, toggleDescriptionWidth, unitsToReasonCombo.getSize()
-                .y);
+        toggleDescription.setBounds(toggleDescriptionX, navBarY, toggleDescriptionWidth, componentToBeDesigned
+                .getSize().y);
         formToolkit.adapt(toggleDescription, true, true);
 
 
-        int unitsToReasonComboWidth = GuiHelper.getSizeOfControl(unitsToReasonCombo).x;
-        int unitToReasonComboX = toggleDescriptionX - unitsToReasonComboWidth - 5;
-        unitsToReasonCombo.setBounds(unitToReasonComboX, navBarY, unitsToReasonComboWidth, unitsToReasonCombo.getSize
-                ().y);
-        formToolkit.adapt(unitsToReasonCombo, true, true);
+        int componentsToBeDesignedComboWidth = GuiHelper.getSizeOfControl(componentToBeDesigned).x;
+        int componentsToBeDesignedComboX = toggleDescriptionX - componentsToBeDesignedComboWidth - 5;
+        componentToBeDesigned.setBounds(componentsToBeDesignedComboX, navBarY, componentsToBeDesignedComboWidth,
+                componentToBeDesigned.getSize().y);
+        formToolkit.adapt(componentToBeDesigned, true, true);
 
         int errorTextY = updatedRec.height + updatedRec.y + errorTextYOffset;
         errorText.setBounds(updatedRec.x, errorTextY, updatedRec.width, errorTextHeight);
