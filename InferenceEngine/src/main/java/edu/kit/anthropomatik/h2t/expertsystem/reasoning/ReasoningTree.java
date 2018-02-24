@@ -24,6 +24,7 @@ public class ReasoningTree {
     private static List<String> possibleTreeClassExtensions = new ArrayList<>();
 
     static {
+        //TODO make general
         possibleTreeClassExtensions.add("");
         possibleTreeClassExtensions.add("Linear");
         possibleTreeClassExtensions.add("Compressed");
@@ -231,7 +232,8 @@ public class ReasoningTree {
             if (skipPermutation(treeClass, permutation)) {
                 continue;
             }
-            String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + "Ind";
+            String parentName = treeClass.getIRI().getShortForm() + permutation.permutationName + MyOWLHelper
+                    .INDIVIDUAL_ENDING;
             OWLNamedIndividual parentInd = genericTool.getFactory().getOWLNamedIndividual(helper.create(parentName));
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
@@ -291,6 +293,7 @@ public class ReasoningTree {
             satisfiedChildInstances.addAll(genericTool.getReasoner().instances(Vocabulary
                     .CLASS_SATISFIEDMOTORGEARBOXMATCHFORSENSORACTUATORUNIT).collect(Collectors.toSet()));
         }
+        // TODO is this still a problem? How to solve?
         if (Vocabulary.CLASS_MCP_MC_MATCH.equals(treeClass) || Vocabulary.CLASS_TS_AE_MATCH.equals(treeClass)) {
             // I have no idea why this is not working...
             // It just deletes everything everytime...

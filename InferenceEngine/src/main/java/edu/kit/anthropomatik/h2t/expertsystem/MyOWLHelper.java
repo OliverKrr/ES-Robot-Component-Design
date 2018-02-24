@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyOWLHelper {
 
+    public static final String INDIVIDUAL_ENDING = "Ind";
+
     private static final Logger logger = LogManager.getLogger(MyOWLHelper.class);
 
     private OWLHelper genericTool;
@@ -55,10 +57,11 @@ public class MyOWLHelper {
     }
 
     /**
-     * Remove "Ind"
+     * Remove INDIVIDUAL_ENDING
      */
     public String getNameOfOWLNamedIndividual(OWLNamedIndividual ind) {
-        return ind.getIRI().getShortForm().substring(0, ind.getIRI().getShortForm().length() - 3);
+        return ind.getIRI().getShortForm().substring(0, ind.getIRI().getShortForm().length() - INDIVIDUAL_ENDING
+                .length());
     }
 
     /**

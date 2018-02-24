@@ -105,7 +105,7 @@ public class MainReasoner {
 
     private void createIndividualFor(OWLClass parent, OWLClassExpression clasExpres) {
         OWLClass clasToCreate = clasExpres.asOWLClass();
-        String name = clasToCreate.getIRI().getShortForm() + "Ind";
+        String name = clasToCreate.getIRI().getShortForm() + MyOWLHelper.INDIVIDUAL_ENDING;
         OWLNamedIndividual ind = genericTool.getFactory().getOWLNamedIndividual(helper.create(name));
         helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(clasToCreate, ind));
 
@@ -242,11 +242,14 @@ public class MainReasoner {
 
     private Component parseComponent(OWLSubObjectPropertyOfAxiom subOb, OWLNamedIndividual composedComponent) {
         Component component = new Component();
+        // TODO make with annotation
         component.nameOfComponent = helper.getNameOfComponent(subOb.getSubProperty().getNamedProperty());
         component.nameOfInstance = helper.getNameOfOWLNamedIndividual(composedComponent);
         if (component.nameOfInstance.contains(ReasoningTree.PermutationSeparator)) {
             component.nameOfInstance = component.nameOfInstance.substring(0, component.nameOfInstance.indexOf
                     (ReasoningTree.PermutationSeparator));
+            // TODO make general with StructureOptions
+            // TODO split drive/output
             if (component.nameOfInstance.contains(Vocabulary.CLASS_LINEAR.getIRI().getShortForm())) {
                 component.nameOfInstance = Vocabulary.CLASS_LINEAR.getIRI().getShortForm();
             } else if (component.nameOfInstance.contains(Vocabulary.CLASS_COMPRESSED.getIRI().getShortForm())) {
@@ -310,6 +313,7 @@ public class MainReasoner {
     }
 
     private void handleDeviations(List<Result> results) {
+        //TODO move to own class and split function
         for (Result result : results) {
             double weightSumForNRMSD = 0;
             double sumForNRMSD = 0;
@@ -451,8 +455,8 @@ public class MainReasoner {
                             .getIRIString();
                 } else {
                     throw new RuntimeException("UnitsToReasone are only allowed to have one child to identify " +
-                            "resultingUnit (satisfied), found at least: " + componentToBeDesigned.iriOfResultUnit + "" +
-                            " and " + classToReasonAxiom.getSubClass().asOWLClass().getIRI().getIRIString());
+                            "resultingUnit (satisfied), found at least: " + componentToBeDesigned.iriOfResultUnit +
+                            "" + " and " + classToReasonAxiom.getSubClass().asOWLClass().getIRI().getIRIString());
                 }
             });
             if (componentToBeDesigned.iriOfResultUnit == null) {
