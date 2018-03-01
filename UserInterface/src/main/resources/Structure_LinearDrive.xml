@@ -1,0 +1,19 @@
+<root>
+    <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
+    <alignmentInPictureX>0</alignmentInPictureX>
+    <alignmentInPictureY>0</alignmentInPictureY>
+    <structurePosition>Drive</structurePosition>
+    <structureOption>Linear</structureOption>
+    <resultElement>
+        <key>Motor</key>
+        <x>5</x>
+        <y>10</y>
+        <textDirection>right</textDirection>
+    </resultElement>
+    <resultElement>
+        <key>Gearbox</key>
+        <x>20</x>
+        <y>40</y>
+        <textDirection>down</textDirection>
+    </resultElement>
+</root>

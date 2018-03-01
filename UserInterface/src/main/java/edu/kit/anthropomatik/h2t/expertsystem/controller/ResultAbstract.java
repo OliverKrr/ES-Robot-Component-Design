@@ -28,7 +28,10 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Item;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 
 import java.math.RoundingMode;
@@ -46,12 +49,14 @@ public abstract class ResultAbstract {
     private DecimalFormat df = new DecimalFormat("#.####");
     private SelectionAdapter adaptSolutionListener;
     private SelectionAdapter showResultInNewWindowListener;
+    private ResultWindow resultWindow;
 
 
     ResultAbstract(FormToolkit formToolkit, ResultWrapper resultWrapper) {
         this.formToolkit = formToolkit;
         this.resultWrapper = resultWrapper;
         df.setRoundingMode(RoundingMode.CEILING);
+        resultWindow = new ResultWindow(formToolkit);
     }
 
     public final synchronized void clearLastResults() {
@@ -132,16 +137,7 @@ public abstract class ResultAbstract {
                 if (result == null) {
                     return;
                 }
-                //TODO move to other class
-                Shell newShell = new Shell();
-                newShell.setText("KIT ES Component Reasoner - Result");
-                Text text = new Text(newShell, SWT.BORDER | SWT.WRAP);
-                text.setText(result.toString());
-                formToolkit.adapt(text, true, true);
-                text.setBounds(0, 0, newShell.getSize().x, newShell.getSize().y);
-                newShell.open();
-                //TODO make right
-                // maybe readAndDispatch in thread -> threadPool
+                resultWindow.showWindow(result);
             }
         };
         resultWrapper.table.addSelectionListener(showResultInNewWindowListener);
