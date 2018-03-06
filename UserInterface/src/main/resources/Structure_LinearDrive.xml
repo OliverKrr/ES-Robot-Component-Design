@@ -2,18 +2,18 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <alignmentInPictureX>0</alignmentInPictureX>
     <alignmentInPictureY>0</alignmentInPictureY>
-    <structurePosition>Drive</structurePosition>
+    <structurePosition>DriveStructure</structurePosition>
     <structureOption>Linear</structureOption>
     <resultElement>
         <key>Motor</key>
-        <x>5</x>
-        <y>10</y>
-        <textDirection>right</textDirection>
+        <x>20</x>
+        <y>20</y>
+        <textDirectionDeg>0</textDirectionDeg>
     </resultElement>
     <resultElement>
-        <key>Gearbox</key>
-        <x>20</x>
+        <key>Diameter D</key>
+        <x>30</x>
         <y>40</y>
-        <textDirection>down</textDirection>
+        <textDirectionDeg>90</textDirectionDeg>
     </resultElement>
 </root>

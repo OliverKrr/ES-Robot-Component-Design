@@ -137,7 +137,7 @@ public abstract class ResultAbstract {
                 if (result == null) {
                     return;
                 }
-                resultWindow.showWindow(result);
+                resultWindow.showWindow(resultWrapper.componentToBeDesigned, result);
             }
         };
         resultWrapper.table.addSelectionListener(showResultInNewWindowListener);

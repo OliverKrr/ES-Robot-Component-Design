@@ -27,6 +27,7 @@ import java.util.Objects;
 
 public class ResultWrapper {
 
+    public String componentToBeDesigned;
     public List<Result> results;
     public ResultAbstract resultShow;
 
@@ -50,27 +51,30 @@ public class ResultWrapper {
         if (o == null || getClass() != o.getClass())
             return false;
         ResultWrapper that = (ResultWrapper) o;
-        return Objects.equals(results, that.results) && Objects.equals(resultShow, that.resultShow) && Objects.equals
-                (orderBy, that.orderBy) && Objects.equals(orderBy2, that.orderBy2) && Objects.equals(searchField,
-                that.searchField) && Objects.equals(selectToShowButton, that.selectToShowButton) && Objects.equals
-                (selectTableToShow, that.selectTableToShow) && Objects.equals(showOnlyDiffsCheckBox, that
-                .showOnlyDiffsCheckBox) && Objects.equals(numberOfResultsLabel, that.numberOfResultsLabel) && Objects
-                .equals(tree, that.tree) && Objects.equals(table, that.table) && Objects.equals(displayNameToIriMap,
-                that.displayNameToIriMap);
+        return Objects.equals(componentToBeDesigned, that.componentToBeDesigned) && Objects.equals(results, that
+                .results) && Objects.equals(resultShow, that.resultShow) && Objects.equals(orderBy, that.orderBy) &&
+                Objects.equals(orderBy2, that.orderBy2) && Objects.equals(searchField, that.searchField) && Objects
+                .equals(selectToShowButton, that.selectToShowButton) && Objects.equals(selectTableToShow, that
+                .selectTableToShow) && Objects.equals(showOnlyDiffsCheckBox, that.showOnlyDiffsCheckBox) && Objects
+                .equals(numberOfResultsLabel, that.numberOfResultsLabel) && Objects.equals(tree, that.tree) &&
+                Objects.equals(table, that.table) && Objects.equals(displayNameToIriMap, that.displayNameToIriMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(results, resultShow, orderBy, orderBy2, searchField, selectToShowButton,
-                selectTableToShow, showOnlyDiffsCheckBox, numberOfResultsLabel, tree, table, displayNameToIriMap);
+        return Objects.hash(componentToBeDesigned, results, resultShow, orderBy, orderBy2, searchField,
+                selectToShowButton, selectTableToShow, showOnlyDiffsCheckBox, numberOfResultsLabel, tree, table,
+                displayNameToIriMap);
     }
 
     @Override
     public String toString() {
-        return "ResultWrapper{" + "results=" + results + ", resultShow=" + resultShow + ", orderBy=" + orderBy + ", "
-                + "orderBy2=" + orderBy2 + ", searchField=" + searchField + ", selectToShowButton=" +
-                selectToShowButton + ", selectTableToShow=" + selectTableToShow + ", showOnlyDiffsCheckBox=" +
-                showOnlyDiffsCheckBox + ", numberOfResultsLabel=" + numberOfResultsLabel + ", tree=" + tree + ", " +
-                "table=" + table + ", displayNameToIriMap=" + displayNameToIriMap + '}';
+        return "ResultWrapper{" + "componentToBeDesigned='" + componentToBeDesigned + '\'' + ", results=" + results +
+                ", resultShow=" + resultShow + ", orderBy=" + orderBy + ", orderBy2=" + orderBy2 + ", searchField=" +
+                searchField + ", selectToShowButton=" + selectToShowButton + ", selectTableToShow=" +
+                selectTableToShow + ", showOnlyDiffsCheckBox=" + showOnlyDiffsCheckBox + ", numberOfResultsLabel=" +
+                numberOfResultsLabel + ", tree=" + tree + ", table=" + table + ", displayNameToIriMap=" +
+                displayNameToIriMap + '}';
     }
+
 }

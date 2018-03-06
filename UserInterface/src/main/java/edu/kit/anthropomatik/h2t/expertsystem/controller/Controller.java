@@ -205,6 +205,7 @@ public class Controller {
         if (haveRequirementChanged) {
             haveRequirementChanged = false;
             isReseted = false;
+            resultWrapper.componentToBeDesigned = currentComponentToBeDesigned.displayName;
             resultWrapper.results = reasoner.startReasoning(currentComponentToBeDesigned, parseToRequirements());
             if (resultWrapper.results != null) {
                 gui.notifySolutionIsReady();

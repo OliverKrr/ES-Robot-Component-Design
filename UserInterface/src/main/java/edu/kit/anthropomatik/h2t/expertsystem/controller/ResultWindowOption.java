@@ -64,7 +64,7 @@ public class ResultWindowOption {
         private String key;
         private int x;
         private int y;
-        private String textDirection;
+        private double textDirectionDeg;
 
         public String getKey() {
             return key;
@@ -90,12 +90,12 @@ public class ResultWindowOption {
             this.y = y;
         }
 
-        public String getTextDirection() {
-            return textDirection;
+        public double getTextDirectionDeg() {
+            return textDirectionDeg;
         }
 
-        public void setTextDirection(String textDirection) {
-            this.textDirection = textDirection;
+        public void setTextDirection(double textDirectionDeg) {
+            this.textDirectionDeg = textDirectionDeg;
         }
     }
 }
