@@ -6,8 +6,8 @@ import java.util.List;
 public class ResultWindowOption {
 
     private String componentToBeDesigned;
-    private int alignmentInPictureX;
-    private int alignmentInPictureY;
+    private int numberInOverallPicture;
+    private float centerlinePosition;
     private String structurePosition;
     private String structureOption;
     private List<ResultElement> resultElements = new ArrayList<>();
@@ -20,20 +20,20 @@ public class ResultWindowOption {
         this.componentToBeDesigned = componentToBeDesigned;
     }
 
-    public int getAlignmentInPictureX() {
-        return alignmentInPictureX;
+    public int getNumberInOverallPicture() {
+        return numberInOverallPicture;
     }
 
-    public void setAlignmentInPictureX(int alignmentInPictureX) {
-        this.alignmentInPictureX = alignmentInPictureX;
+    public void setNumberInOverallPicture(int numberInOverallPicture) {
+        this.numberInOverallPicture = numberInOverallPicture;
     }
 
-    public int getAlignmentInPictureY() {
-        return alignmentInPictureY;
+    public float getCenterlinePosition() {
+        return centerlinePosition;
     }
 
-    public void setAlignmentInPictureY(int alignmentInPictureY) {
-        this.alignmentInPictureY = alignmentInPictureY;
+    public void setCenterlinePosition(float centerlinePosition) {
+        this.centerlinePosition = centerlinePosition;
     }
 
     public String getStructurePosition() {

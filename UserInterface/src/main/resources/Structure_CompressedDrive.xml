@@ -3,7 +3,7 @@
     <numberInOverallPicture>0</numberInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
     <structurePosition>DriveStructure</structurePosition>
-    <structureOption>Linear</structureOption>
+    <structureOption>Compressed</structureOption>
     <resultElement>
         <key>Motor</key>
         <x>20</x>

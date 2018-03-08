@@ -1,17 +1,17 @@
 <root>
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
-    <numberInOverallPicture>0</numberInOverallPicture>
+    <numberInOverallPicture>1</numberInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
-    <structurePosition>DriveStructure</structurePosition>
-    <structureOption>Linear</structureOption>
+    <structurePosition>OutputStructure</structurePosition>
+    <structureOption>Compressed</structureOption>
     <resultElement>
-        <key>Motor</key>
+        <key>Gearbox</key>
         <x>20</x>
         <y>20</y>
         <textDirectionDeg>0</textDirectionDeg>
     </resultElement>
     <resultElement>
-        <key>Diameter D</key>
+        <key>Length L</key>
         <x>30</x>
         <y>40</y>
         <textDirectionDeg>90</textDirectionDeg>

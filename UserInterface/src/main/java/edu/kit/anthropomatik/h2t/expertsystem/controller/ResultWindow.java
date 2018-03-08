@@ -5,9 +5,13 @@ import edu.kit.anthropomatik.h2t.expertsystem.model.req.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.util.Matrix;
@@ -44,6 +48,7 @@ public class ResultWindow {
 
     private static final PDFont font = PDType1Font.HELVETICA;
     private static final float textSize = 12;
+    private static final int DPI = 100;
 
     private FormToolkit formToolkit;
     private DecimalFormat df = new DecimalFormat("#.####");
@@ -53,7 +58,6 @@ public class ResultWindow {
     ResultWindow(FormToolkit formToolkit) {
         this.formToolkit = formToolkit;
         df.setRoundingMode(RoundingMode.CEILING);
-        parseXMLFiles();
     }
 
     // from http://git.eclipse.org/c/platform/eclipse.platform.swt.git/tree/examples/org.eclipse.swt
@@ -169,9 +173,9 @@ public class ResultWindow {
 
         resultWindowOption.setComponentToBeDesigned(root.getElementsByTagName("componentToBeDesigned").item(0)
                 .getTextContent());
-        resultWindowOption.setAlignmentInPictureX(Integer.parseInt(root.getElementsByTagName("alignmentInPictureX")
-                .item(0).getTextContent()));
-        resultWindowOption.setAlignmentInPictureY(Integer.parseInt(root.getElementsByTagName("alignmentInPictureY")
+        resultWindowOption.setNumberInOverallPicture(Integer.parseInt(root.getElementsByTagName
+                ("numberInOverallPicture").item(0).getTextContent()));
+        resultWindowOption.setCenterlinePosition(Float.parseFloat(root.getElementsByTagName("centerlinePosition")
                 .item(0).getTextContent()));
         resultWindowOption.setStructurePosition(root.getElementsByTagName("structurePosition").item(0).getTextContent
                 ());
@@ -204,8 +208,10 @@ public class ResultWindow {
     }
 
     public void showWindow(String componentToBeDesigned, Result result) {
+        logger.info("Open new result window");
+        parseXMLFiles();
         Shell newShell = new Shell();
-        newShell.setText("KIT ES Component Reasoner - Result");
+        newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
 
         loadAndModifyPDFs(newShell, componentToBeDesigned, result);
 
@@ -215,27 +221,76 @@ public class ResultWindow {
     }
 
     private void loadAndModifyPDFs(Shell newShell, String componentToBeDesigned, Result result) {
+        List<MyDocument> documents = new ArrayList<>();
+        //TODO also check equale reqs -> through bor
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
                 .getComponentToBeDesigned()) && result.components.stream().anyMatch(comp -> comp.nameOfComponent
                 .equals(entry.getValue().getStructurePosition()) && comp.nameOfInstance.equals(entry.getValue()
                 .getStructureOption()))).forEach(entry -> {
-            try (PDDocument document = PDDocument.load(getClass().getResourceAsStream("/" + entry.getKey() + "" + ""
-                    + ".pdf"))) {
+            try {
+                PDDocument document = PDDocument.load(getClass().getResourceAsStream("/" + entry.getKey() + "" + "" +
+                        ".pdf"));
                 handlePDF(document, result, entry.getValue());
-                PDFRenderer renderer = new PDFRenderer(document);
-                for (int page = 0; page < document.getNumberOfPages(); ++page) {
-                    BufferedImage bufferedImage = renderer.renderImageWithDPI(page, 300, ImageType.RGB);
-                    Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
-                    image = resizeImage(image, newShell.getSize().x - 10, newShell.getSize().y - 50);
-                    Label imageLabel = new Label(newShell, SWT.CENTER);
-                    imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
-                    imageLabel.setImage(image);
-                    formToolkit.adapt(imageLabel, false, false);
-                }
+                documents.add(new MyDocument(document, entry.getValue()));
             } catch (IOException e) {
                 logger.error(e.getMessage(), e);
             }
         });
+
+        documents.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getNumberInOverallPicture()));
+        PDDocument document = new PDDocument();
+        document.addPage(new PDPage(PDRectangle.A0));
+        float totalYmin = (float) Double.MAX_VALUE;
+        float totalYmax = 0;
+        float totalWidth = 0;
+        float pageHeight = document.getPage(0).getCropBox().getHeight();
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
+                PDPageContentStream.AppendMode.APPEND, true)) {
+            float xToTranslate = 0;
+            for (MyDocument myDocument : documents) {
+                PDFRenderer renderer = new PDFRenderer(myDocument.pdDocument);
+                BufferedImage bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.RGB);
+                PDImageXObject image = LosslessFactory.createFromImage(document, bufferedImage);
+
+                float yToTranslate = (pageHeight - image.getHeight()) / 2.f + image.getHeight() * (0.5f - myDocument
+                        .resultWindowOption.getCenterlinePosition());
+                totalYmin = Math.min(totalYmin, yToTranslate);
+                totalYmax = Math.max(totalYmax, yToTranslate + image.getHeight());
+                logger.info("Height: " + image.getHeight() + " width: " + image.getWidth() + " xToTranslate: " +
+                        xToTranslate + " yToTranslate: " + yToTranslate);
+
+                contentStream.drawImage(image, xToTranslate, yToTranslate, image.getWidth(), image.getHeight());
+                xToTranslate += image.getWidth();
+                myDocument.pdDocument.close();
+                totalWidth = xToTranslate;
+            }
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
+        logger.info("totalWidth: " + totalWidth + " totalYmin: " + totalYmin + " totalYmax: " + totalYmax);
+        document.getPage(0).setCropBox(new PDRectangle(0, totalYmin, totalWidth, totalYmax - totalYmin));
+        // append values as table at right after last which are not in picture yet
+        // TODO: scale resultImage with shell size
+
+        PDFRenderer renderer = new PDFRenderer(document);
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.RGB);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            return;
+        }
+        Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
+        image = resizeImage(image, newShell.getSize().x - 10, newShell.getSize().y - 50);
+        Label imageLabel = new Label(newShell, SWT.CENTER);
+        imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
+        imageLabel.setImage(image);
+        formToolkit.adapt(imageLabel, false, false);
+        try {
+            document.close();
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
     private void handlePDF(PDDocument document, Result result, ResultWindowOption resultWindowOption) throws
@@ -283,6 +338,16 @@ public class ResultWindow {
             return df.format(realReq.result * realReq.scaleFromOntologyToUI);
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
+        }
+    }
+
+    private static class MyDocument {
+        PDDocument pdDocument;
+        ResultWindowOption resultWindowOption;
+
+        public MyDocument(PDDocument pdDocument, ResultWindowOption resultWindowOption) {
+            this.pdDocument = pdDocument;
+            this.resultWindowOption = resultWindowOption;
         }
     }
 }

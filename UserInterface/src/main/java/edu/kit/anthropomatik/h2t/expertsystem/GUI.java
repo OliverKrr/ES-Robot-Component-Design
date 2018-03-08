@@ -228,7 +228,7 @@ public class GUI {
     private void createShell() {
         shell = new Shell();
         shell.setSize(firstSizeOfShell);
-        shell.setText("KIT Expert System Component Reasoner");
+        shell.setText("KIT Expert System Humanoid Robot Component Reasoner");
         shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo_resized.png"));
     }
 
