@@ -46,8 +46,8 @@ public class ResultWindow {
 
     private static final Logger logger = LogManager.getLogger(ResultWindow.class);
 
-    private static final PDFont font = PDType1Font.HELVETICA;
-    private static final float textSize = 12;
+    private static final PDFont FONT = PDType1Font.HELVETICA;
+    private static final float TEXT_SIZE = 12;
     private static final int DPI = 100;
 
     private FormToolkit formToolkit;
@@ -173,10 +173,16 @@ public class ResultWindow {
 
         resultWindowOption.setComponentToBeDesigned(root.getElementsByTagName("componentToBeDesigned").item(0)
                 .getTextContent());
-        resultWindowOption.setNumberInOverallPicture(Integer.parseInt(root.getElementsByTagName
-                ("numberInOverallPicture").item(0).getTextContent()));
+
+        resultWindowOption.setOrderPositionToDraw(Integer.parseInt(root.getElementsByTagName("orderPositionToDraw")
+                .item(0).getTextContent()));
+        resultWindowOption.setPostitionInOverallPictures(Integer.parseInt(root.getElementsByTagName
+                ("postitionInOverallPicture").item(0).getTextContent()));
+
         resultWindowOption.setCenterlinePosition(Float.parseFloat(root.getElementsByTagName("centerlinePosition")
                 .item(0).getTextContent()));
+        resultWindowOption.setxOffset(Float.parseFloat(root.getElementsByTagName("xOffset").item(0).getTextContent()));
+
         resultWindowOption.setStructurePosition(root.getElementsByTagName("structurePosition").item(0).getTextContent
                 ());
         resultWindowOption.setStructureOption(root.getElementsByTagName("structureOption").item(0).getTextContent());
@@ -221,7 +227,37 @@ public class ResultWindow {
     }
 
     private void loadAndModifyPDFs(Shell newShell, String componentToBeDesigned, Result result) {
-        List<MyDocument> documents = new ArrayList<>();
+        List<MyDocument> myDocuments = handlePDFs(componentToBeDesigned, result);
+        myDocuments.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getOrderPositionToDraw()));
+        try (PDDocument document = new PDDocument()) {
+            document.addPage(new PDPage());
+            concatenateDocuments(myDocuments, document);
+            visualizeDocument(newShell, document);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
+    }
+
+    private void visualizeDocument(Shell newShell, PDDocument document) {
+        PDFRenderer renderer = new PDFRenderer(document);
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.ARGB);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+            return;
+        }
+        // TODO: scale resultImage with shell size
+        Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
+        image = resizeImage(image, newShell.getSize().x - 10, newShell.getSize().y - 50);
+        Label imageLabel = new Label(newShell, SWT.CENTER);
+        imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
+        imageLabel.setImage(image);
+        formToolkit.adapt(imageLabel, false, false);
+    }
+
+    private List<MyDocument> handlePDFs(String componentToBeDesigned, Result result) {
+        List<MyDocument> myDocuments = new ArrayList<>();
         //TODO also check equale reqs -> through bor
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
                 .getComponentToBeDesigned()) && result.components.stream().anyMatch(comp -> comp.nameOfComponent
@@ -230,77 +266,104 @@ public class ResultWindow {
             try {
                 PDDocument document = PDDocument.load(getClass().getResourceAsStream("/" + entry.getKey() + "" + "" +
                         ".pdf"));
-                handlePDF(document, result, entry.getValue());
-                documents.add(new MyDocument(document, entry.getValue()));
+                MyDocument myDocument = handlePDF(document, result, entry.getValue());
+                myDocuments.add(myDocument);
             } catch (IOException e) {
                 logger.error(e.getMessage(), e);
             }
         });
+        return myDocuments;
+    }
 
-        documents.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getNumberInOverallPicture()));
-        PDDocument document = new PDDocument();
-        document.addPage(new PDPage(PDRectangle.A0));
+    private void concatenateDocuments(List<MyDocument> documents, PDDocument document) {
+        Map<Integer, PDRectangle> positionInOverallPicturesMap = new HashMap<>();
+
+        float totalXmin = (float) Double.MAX_VALUE;
+        float totalXmax = 0;
         float totalYmin = (float) Double.MAX_VALUE;
         float totalYmax = 0;
-        float totalWidth = 0;
-        float pageHeight = document.getPage(0).getCropBox().getHeight();
+
         try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
                 PDPageContentStream.AppendMode.APPEND, true)) {
-            float xToTranslate = 0;
             for (MyDocument myDocument : documents) {
-                PDFRenderer renderer = new PDFRenderer(myDocument.pdDocument);
-                BufferedImage bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.RGB);
-                PDImageXObject image = LosslessFactory.createFromImage(document, bufferedImage);
+                float myDocumentWidth = myDocument.orginalRectangle.getWidth();
+                float myDocumentHeight = myDocument.orginalRectangle.getHeight();
 
-                float yToTranslate = (pageHeight - image.getHeight()) / 2.f + image.getHeight() * (0.5f - myDocument
+                float xToTranslate = getXToTranslate(positionInOverallPicturesMap, myDocument);
+                float yToTranslate = -myDocumentHeight / 2.f + myDocumentHeight * (0.5f - myDocument
                         .resultWindowOption.getCenterlinePosition());
                 totalYmin = Math.min(totalYmin, yToTranslate);
-                totalYmax = Math.max(totalYmax, yToTranslate + image.getHeight());
-                logger.info("Height: " + image.getHeight() + " width: " + image.getWidth() + " xToTranslate: " +
+                totalYmax = Math.max(totalYmax, yToTranslate + myDocumentHeight);
+                logger.info("Height: " + myDocumentHeight + " width: " + myDocumentWidth + " xToTranslate: " +
                         xToTranslate + " yToTranslate: " + yToTranslate);
 
-                contentStream.drawImage(image, xToTranslate, yToTranslate, image.getWidth(), image.getHeight());
-                xToTranslate += image.getWidth();
+                PDFRenderer renderer = new PDFRenderer(myDocument.pdDocument);
+                BufferedImage bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.ARGB);
+                PDImageXObject image = LosslessFactory.createFromImage(document, bufferedImage);
+
+                contentStream.drawImage(image, xToTranslate, yToTranslate, myDocumentWidth, myDocumentHeight);
+                if (!positionInOverallPicturesMap.containsKey(myDocument.resultWindowOption
+                        .getPostitionInOverallPictures())) {
+                    positionInOverallPicturesMap.put(myDocument.resultWindowOption.getPostitionInOverallPictures(),
+                            new PDRectangle(xToTranslate, yToTranslate, myDocumentWidth, myDocumentHeight));
+                }
+
+                totalXmin = Math.min(totalXmin, xToTranslate);
+                totalXmax = Math.max(totalXmax, xToTranslate + myDocumentWidth);
+
                 myDocument.pdDocument.close();
-                totalWidth = xToTranslate;
             }
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
-        logger.info("totalWidth: " + totalWidth + " totalYmin: " + totalYmin + " totalYmax: " + totalYmax);
-        document.getPage(0).setCropBox(new PDRectangle(0, totalYmin, totalWidth, totalYmax - totalYmin));
-        // append values as table at right after last which are not in picture yet
-        // TODO: scale resultImage with shell size
-
-        PDFRenderer renderer = new PDFRenderer(document);
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.RGB);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-            return;
-        }
-        Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
-        image = resizeImage(image, newShell.getSize().x - 10, newShell.getSize().y - 50);
-        Label imageLabel = new Label(newShell, SWT.CENTER);
-        imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
-        imageLabel.setImage(image);
-        formToolkit.adapt(imageLabel, false, false);
-        try {
-            document.close();
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
+        logger.info("totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " " +
+                "totalYmax: " + totalYmax);
+        document.getPage(0).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
+                totalYmin));
+        // TODO: append values as table at right after last which are not in picture yet
     }
 
-    private void handlePDF(PDDocument document, Result result, ResultWindowOption resultWindowOption) throws
+    private float getXToTranslate(Map<Integer, PDRectangle> positionInOverallPicturesMap, MyDocument myDocument) {
+        if (positionInOverallPicturesMap.containsKey(myDocument.resultWindowOption.getPostitionInOverallPictures())) {
+            PDRectangle pdRectangle = positionInOverallPicturesMap.get(myDocument.resultWindowOption
+                    .getPostitionInOverallPictures());
+            float xOffset = myDocument.resultWindowOption.getxOffset();
+            if (xOffset < 0) {
+                return pdRectangle.getUpperRightX() + xOffset;
+            } else {
+                return pdRectangle.getLowerLeftX() + xOffset;
+            }
+        } else if (positionInOverallPicturesMap.containsKey(myDocument.resultWindowOption
+                .getPostitionInOverallPictures() - 1)) {
+            PDRectangle pdRectangle = positionInOverallPicturesMap.get(myDocument.resultWindowOption
+                    .getPostitionInOverallPictures() - 1);
+            return pdRectangle.getUpperRightX() + myDocument.resultWindowOption.getxOffset();
+        } else if (positionInOverallPicturesMap.containsKey(myDocument.resultWindowOption
+                .getPostitionInOverallPictures() + 1)) {
+            PDRectangle pdRectangle = positionInOverallPicturesMap.get(myDocument.resultWindowOption
+                    .getPostitionInOverallPictures() + 1);
+            return pdRectangle.getLowerLeftX() + myDocument.resultWindowOption.getxOffset() - myDocument
+                    .orginalRectangle.getWidth();
+        }
+        return 0;
+    }
+
+    private MyDocument handlePDF(PDDocument document, Result result, ResultWindowOption resultWindowOption) throws
             IOException {
+        PDRectangle orginalRectangle = null;
         for (int i = 0; i < document.getNumberOfPages(); i++) {
+            float totalXmin = document.getPage(i).getMediaBox().getLowerLeftX();
+            float totalXmax = document.getPage(i).getMediaBox().getUpperRightX();
+            float totalYmin = document.getPage(i).getMediaBox().getLowerLeftY();
+            float totalYmax = document.getPage(i).getMediaBox().getUpperRightY();
+            logger.info("Begin totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin +
+                    "" + " " + "totalYmax: " + totalYmax);
+            orginalRectangle = document.getPage(i).getMediaBox();
             try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(i),
-                    PDPageContentStream.AppendMode.APPEND, true, true)) {
+                    PDPageContentStream.AppendMode.APPEND, true)) {
                 for (ResultWindowOption.ResultElement element : resultWindowOption.getResultElements()) {
                     contentStream.beginText();
-                    contentStream.setFont(font, textSize);
+                    contentStream.setFont(FONT, TEXT_SIZE);
 
                     double angleRad = Math.toRadians(element.getTextDirectionDeg());
                     Matrix matrix = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -(float) Math
@@ -315,9 +378,20 @@ public class ResultWindow {
                     }
                     contentStream.showText(value);
                     contentStream.endText();
+
+                    totalXmin = Math.min(totalXmin, element.getX());
+                    totalXmax = Math.max(totalXmax, element.getX());
+                    totalYmin = Math.min(totalYmin, element.getY());
+                    totalYmax = Math.max(totalYmax, element.getY());
                 }
             }
+            logger.info("End totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " "
+                    + "totalYmax: " + totalYmax + " -> width: " + (totalXmax - totalXmin) + " and height: " +
+                    (totalYmax - totalYmin));
+            document.getPage(i).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
+                    totalYmin));
         }
+        return new MyDocument(orginalRectangle, document, resultWindowOption);
     }
 
     private String parseResult(Requirement req) {
@@ -342,10 +416,12 @@ public class ResultWindow {
     }
 
     private static class MyDocument {
+        PDRectangle orginalRectangle;
         PDDocument pdDocument;
         ResultWindowOption resultWindowOption;
 
-        public MyDocument(PDDocument pdDocument, ResultWindowOption resultWindowOption) {
+        MyDocument(PDRectangle orginalRectangle, PDDocument pdDocument, ResultWindowOption resultWindowOption) {
+            this.orginalRectangle = orginalRectangle;
             this.pdDocument = pdDocument;
             this.resultWindowOption = resultWindowOption;
         }

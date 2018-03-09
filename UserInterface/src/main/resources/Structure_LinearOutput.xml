@@ -1,7 +1,9 @@
 <root>
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
-    <numberInOverallPicture>1</numberInOverallPicture>
+    <orderPositionToDraw>20</orderPositionToDraw>
+    <postitionInOverallPicture>1</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
+    <xOffset>0</xOffset>
     <structurePosition>OutputStructure</structurePosition>
     <structureOption>Linear</structureOption>
     <resultElement>

@@ -1,0 +1,15 @@
+<root>
+    <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
+    <orderPositionToDraw>40</orderPositionToDraw>
+    <postitionInOverallPicture>-1</postitionInOverallPicture>
+    <centerlinePosition>0.55</centerlinePosition>
+    <xOffset>0</xOffset>
+    <structurePosition>MotorControllerPosition</structurePosition>
+    <structureOption>MCPAxial</structureOption>
+    <resultElement>
+        <key>MotorControllerPosition</key>
+        <x>0</x>
+        <y>-40</y>
+        <textDirectionDeg>0</textDirectionDeg>
+    </resultElement>
+</root>

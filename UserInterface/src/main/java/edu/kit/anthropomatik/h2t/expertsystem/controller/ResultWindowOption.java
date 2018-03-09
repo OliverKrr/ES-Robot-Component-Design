@@ -6,11 +6,29 @@ import java.util.List;
 public class ResultWindowOption {
 
     private String componentToBeDesigned;
-    private int numberInOverallPicture;
+    private int postitionInOverallPictures;
+    private int orderPositionToDraw;
     private float centerlinePosition;
+    private float xOffset;
     private String structurePosition;
     private String structureOption;
     private List<ResultElement> resultElements = new ArrayList<>();
+
+    public float getxOffset() {
+        return xOffset;
+    }
+
+    public void setxOffset(float xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    public int getOrderPositionToDraw() {
+        return orderPositionToDraw;
+    }
+
+    public void setOrderPositionToDraw(int orderPositionToDraw) {
+        this.orderPositionToDraw = orderPositionToDraw;
+    }
 
     public String getComponentToBeDesigned() {
         return componentToBeDesigned;
@@ -20,12 +38,12 @@ public class ResultWindowOption {
         this.componentToBeDesigned = componentToBeDesigned;
     }
 
-    public int getNumberInOverallPicture() {
-        return numberInOverallPicture;
+    public int getPostitionInOverallPictures() {
+        return postitionInOverallPictures;
     }
 
-    public void setNumberInOverallPicture(int numberInOverallPicture) {
-        this.numberInOverallPicture = numberInOverallPicture;
+    public void setPostitionInOverallPictures(int postitionInOverallPictures) {
+        this.postitionInOverallPictures = postitionInOverallPictures;
     }
 
     public float getCenterlinePosition() {

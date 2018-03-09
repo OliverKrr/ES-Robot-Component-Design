@@ -1,18 +1,20 @@
 <root>
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
-    <numberInOverallPicture>0</numberInOverallPicture>
+    <orderPositionToDraw>10</orderPositionToDraw>
+    <postitionInOverallPicture>0</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
+    <xOffset>0</xOffset>
     <structurePosition>DriveStructure</structurePosition>
     <structureOption>Linear</structureOption>
     <resultElement>
         <key>Motor</key>
         <x>20</x>
-        <y>20</y>
+        <y>10</y>
         <textDirectionDeg>0</textDirectionDeg>
     </resultElement>
     <resultElement>
         <key>Diameter D</key>
-        <x>30</x>
+        <x>20</x>
         <y>40</y>
         <textDirectionDeg>90</textDirectionDeg>
     </resultElement>
