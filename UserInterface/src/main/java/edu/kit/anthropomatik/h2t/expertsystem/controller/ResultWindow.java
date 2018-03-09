@@ -1,5 +1,6 @@
 package edu.kit.anthropomatik.h2t.expertsystem.controller;
 
+import edu.kit.anthropomatik.h2t.expertsystem.GUI;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Result;
 import edu.kit.anthropomatik.h2t.expertsystem.model.req.*;
 import org.apache.logging.log4j.LogManager;
@@ -21,6 +22,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.wb.swt.SWTResourceManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -54,6 +56,8 @@ public class ResultWindow {
     private DecimalFormat df = new DecimalFormat("#.####");
 
     private Map<String, ResultWindowOption> resultWindowOptions = new HashMap<>();
+    private Label imageLabel;
+    private boolean isFirstTimeResized = true;
 
     ResultWindow(FormToolkit formToolkit) {
         this.formToolkit = formToolkit;
@@ -214,10 +218,12 @@ public class ResultWindow {
     }
 
     public void showWindow(String componentToBeDesigned, Result result) {
-        logger.info("Open new result window");
+        logger.debug("Open new result window");
+        isFirstTimeResized = true;
         parseXMLFiles();
         Shell newShell = new Shell();
         newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
+        newShell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo.png"));
 
         loadAndModifyPDFs(newShell, componentToBeDesigned, result);
 
@@ -247,22 +253,28 @@ public class ResultWindow {
             logger.error(e.getMessage(), e);
             return;
         }
-        // TODO: scale resultImage with shell size
-        Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
-        image = resizeImage(image, newShell.getSize().x - 10, newShell.getSize().y - 50);
-        Label imageLabel = new Label(newShell, SWT.CENTER);
-        imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
-        imageLabel.setImage(image);
-        formToolkit.adapt(imageLabel, false, false);
+        newShell.addListener(SWT.Resize, e -> {
+            Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
+            image = resizeImage(image, newShell.getSize().x - 30, newShell.getSize().y - 50);
+            if (isFirstTimeResized) {
+                isFirstTimeResized = false;
+                newShell.setSize(image.getBounds().width + 30, image.getBounds().height + 50);
+            }
+            if (imageLabel != null) {
+                imageLabel.dispose();
+            }
+            imageLabel = new Label(newShell, SWT.CENTER);
+            imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
+            imageLabel.setImage(image);
+            formToolkit.adapt(imageLabel, false, false);
+        });
     }
 
     private List<MyDocument> handlePDFs(String componentToBeDesigned, Result result) {
         List<MyDocument> myDocuments = new ArrayList<>();
         //TODO also check equale reqs -> through bor
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
-                .getComponentToBeDesigned()) && result.components.stream().anyMatch(comp -> comp.nameOfComponent
-                .equals(entry.getValue().getStructurePosition()) && comp.nameOfInstance.equals(entry.getValue()
-                .getStructureOption()))).forEach(entry -> {
+                .getComponentToBeDesigned()) && checkReqContainted(result, entry)).forEach(entry -> {
             try {
                 PDDocument document = PDDocument.load(getClass().getResourceAsStream("/" + entry.getKey() + "" + "" +
                         ".pdf"));
@@ -273,6 +285,13 @@ public class ResultWindow {
             }
         });
         return myDocuments;
+    }
+
+    private boolean checkReqContainted(Result result, Map.Entry<String, ResultWindowOption> entry) {
+        return result.components.stream().anyMatch(comp -> comp.nameOfComponent.equals(entry.getValue()
+                .getStructurePosition()) && comp.nameOfInstance.equals(entry.getValue().getStructureOption())) ||
+                result.requirements.stream().anyMatch(req -> req.displayName.equals(entry.getValue()
+                        .getStructurePosition()) && !parseReq(req).equals(entry.getValue().getStructureOption()));
     }
 
     private void concatenateDocuments(List<MyDocument> documents, PDDocument document) {
@@ -294,7 +313,7 @@ public class ResultWindow {
                         .resultWindowOption.getCenterlinePosition());
                 totalYmin = Math.min(totalYmin, yToTranslate);
                 totalYmax = Math.max(totalYmax, yToTranslate + myDocumentHeight);
-                logger.info("Height: " + myDocumentHeight + " width: " + myDocumentWidth + " xToTranslate: " +
+                logger.debug("Height: " + myDocumentHeight + " width: " + myDocumentWidth + " xToTranslate: " +
                         xToTranslate + " yToTranslate: " + yToTranslate);
 
                 PDFRenderer renderer = new PDFRenderer(myDocument.pdDocument);
@@ -316,7 +335,7 @@ public class ResultWindow {
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
-        logger.info("totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " " +
+        logger.debug("totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " " +
                 "totalYmax: " + totalYmax);
         document.getPage(0).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
                 totalYmin));
@@ -356,7 +375,7 @@ public class ResultWindow {
             float totalXmax = document.getPage(i).getMediaBox().getUpperRightX();
             float totalYmin = document.getPage(i).getMediaBox().getLowerLeftY();
             float totalYmax = document.getPage(i).getMediaBox().getUpperRightY();
-            logger.info("Begin totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin +
+            logger.debug("Begin totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin +
                     "" + " " + "totalYmax: " + totalYmax);
             orginalRectangle = document.getPage(i).getMediaBox();
             try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(i),
@@ -385,9 +404,9 @@ public class ResultWindow {
                     totalYmax = Math.max(totalYmax, element.getY());
                 }
             }
-            logger.info("End totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " "
-                    + "totalYmax: " + totalYmax + " -> width: " + (totalXmax - totalXmin) + " and height: " +
-                    (totalYmax - totalYmin));
+            logger.debug("End totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " " +
+                    "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "totalYmax: " + totalYmax + " -> width: " +
+                    (totalXmax - totalXmin) + " " + "and " + "height: " + (totalYmax - totalYmin));
             document.getPage(i).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
                     totalYmin));
         }
@@ -407,6 +426,27 @@ public class ResultWindow {
         } else if (req instanceof DropdownRequirement) {
             DropdownRequirement realReq = (DropdownRequirement) req;
             return realReq.result;
+        } else if (req instanceof RequirementOnlyForSolution) {
+            RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
+            return df.format(realReq.result * realReq.scaleFromOntologyToUI);
+        } else {
+            throw new RuntimeException("Requirement class unknown: " + req.getClass());
+        }
+    }
+
+    private String parseReq(Requirement req) {
+        if (req instanceof TextFieldMinMaxRequirement) {
+            TextFieldMinMaxRequirement realReq = (TextFieldMinMaxRequirement) req;
+            return df.format(realReq.defaultMin + realReq.defaultMax);
+        } else if (req instanceof TextFieldRequirement) {
+            TextFieldRequirement realReq = (TextFieldRequirement) req;
+            return df.format(realReq.value);
+        } else if (req instanceof CheckboxRequirement) {
+            CheckboxRequirement realReq = (CheckboxRequirement) req;
+            return String.valueOf(realReq.value);
+        } else if (req instanceof DropdownRequirement) {
+            DropdownRequirement realReq = (DropdownRequirement) req;
+            return realReq.defaultValue;
         } else if (req instanceof RequirementOnlyForSolution) {
             RequirementOnlyForSolution realReq = (RequirementOnlyForSolution) req;
             return df.format(realReq.result * realReq.scaleFromOntologyToUI);

@@ -4,8 +4,8 @@
     <postitionInOverallPicture>1</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
     <xOffset>-535</xOffset>
-    <structurePosition>TorqueSensor</structurePosition>
-    <structureOption>StrainGaugeBased_SpokeWheel</structureOption>
+    <structurePosition>Continuous Rotation</structurePosition>
+    <structureOption>false</structureOption>
     <resultElement>
         <key>SlipRing</key>
         <x>10</x>

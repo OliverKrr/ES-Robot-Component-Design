@@ -1,11 +1,11 @@
 <root>
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
-    <orderPositionToDraw>30</orderPositionToDraw>
+    <orderPositionToDraw>25</orderPositionToDraw>
     <postitionInOverallPicture>1</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
     <xOffset>-515</xOffset>
-    <structurePosition>TorqueSensor</structurePosition>
-    <structureOption>EncoderBased</structureOption>
+    <structurePosition>Diameter wiring</structurePosition>
+    <structureOption>0</structureOption>
     <resultElement>
         <key>SlipRing</key>
         <x>5</x>
