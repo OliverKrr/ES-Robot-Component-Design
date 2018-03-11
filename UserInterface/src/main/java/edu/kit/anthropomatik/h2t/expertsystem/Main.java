@@ -42,7 +42,7 @@ public class Main {
             Method addUrlMethod = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
             addUrlMethod.setAccessible(true);
 
-            URL swtFileUrl = Main.class.getResource("/" + swtFileName);
+            URL swtFileUrl = Main.class.getResource("/libs/" + swtFileName);
             addUrlMethod.invoke(classLoader, swtFileUrl);
         } catch (Exception e) {
             throw new RuntimeException("Unable to add the SWT jar to the class path: " + swtFileName, e);

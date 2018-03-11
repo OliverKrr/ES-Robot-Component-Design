@@ -229,7 +229,7 @@ public class GUI {
         shell = new Shell();
         shell.setSize(firstSizeOfShell);
         shell.setText("KIT Expert System Humanoid Robot Component Reasoner");
-        shell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo.png"));
+        shell.setImage(SWTResourceManager.getImage(GUI.class, "/logos/H2T_logo.png"));
     }
 
     private Rectangle createNavigationBar(Rectangle reqNavBarRec) {
@@ -375,7 +375,7 @@ public class GUI {
         kitLogo = new Label(shell, SWT.CENTER);
         int logoHeight = (int) Math.round(39.0 / 86.0 * recToFill.width);
         kitLogo.setBounds(recToFill.x, navBarY, recToFill.width, logoHeight);
-        kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/KIT_logo.png"), recToFill.width,
+        kitLogo.setImage(resizeImage(SWTResourceManager.getImage(GUI.class, "/logos/KIT_logo.png"), recToFill.width,
                 logoHeight));
         formToolkit.adapt(kitLogo, false, false);
     }

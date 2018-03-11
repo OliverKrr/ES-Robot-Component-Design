@@ -140,7 +140,7 @@ public class ResultWindow {
         try {
             for (String fileName : getResourceFiles()) {
                 if (fileName.startsWith("Structure_") && fileName.endsWith(".xml")) {
-                    InputStream stream = getClass().getResourceAsStream("/" + fileName);
+                    InputStream stream = getClass().getResourceAsStream("/structures/" + fileName);
                     Document doc;
                     try {
                         doc = builder.parse(stream);
@@ -162,7 +162,7 @@ public class ResultWindow {
 
     private List<String> getResourceFiles() throws IOException {
         List<String> filenames = new ArrayList<>();
-        try (InputStream in = getClass().getResourceAsStream("/"); BufferedReader br = new BufferedReader(new
+        try (InputStream in = getClass().getResourceAsStream("/structures/"); BufferedReader br = new BufferedReader(new
                 InputStreamReader(in))) {
             String resource;
             while ((resource = br.readLine()) != null) {
@@ -270,7 +270,7 @@ public class ResultWindow {
         parseXMLFiles();
         Shell newShell = new Shell();
         newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
-        newShell.setImage(SWTResourceManager.getImage(GUI.class, "/H2T_logo.png"));
+        newShell.setImage(SWTResourceManager.getImage(GUI.class, "/logos/H2T_logo.png"));
 
         loadAndModifyPDFs(newShell, componentToBeDesigned, result);
 
@@ -322,7 +322,6 @@ public class ResultWindow {
 
     private List<MyDocument> handlePDFs(String componentToBeDesigned, Result result) {
         List<MyDocument> myDocuments = new ArrayList<>();
-        //TODO also check equale reqs -> through bor
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
                 .getComponentToBeDesigned()) && checkReqContainted(result, entry)).forEach(entry -> {
             try {
@@ -628,7 +627,7 @@ public class ResultWindow {
                             contentStream.moveTo(startLineX, startLineY);
                             contentStream.lineTo(arrowToX, arrowToY);
                             contentStream.stroke();
-                            //TODO fix with direction and fill
+                            //TODO fix with direction
                             //drawTriangle(contentStream, arrowToX, arrowToY);
                         }
                     }
