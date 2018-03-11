@@ -2,14 +2,30 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>40</orderPositionToDraw>
     <postitionInOverallPicture>-1</postitionInOverallPicture>
-    <centerlinePosition>0.55</centerlinePosition>
-    <xOffset>0</xOffset>
+    <centerlinePosition>0.29</centerlinePosition>
+    <xOffset>-10</xOffset>
     <structurePosition>MotorControllerPosition</structurePosition>
     <structureOption>MCPAxial</structureOption>
+
     <resultElement>
         <key>MotorControllerPosition</key>
-        <x>0</x>
-        <y>-40</y>
+        <xText>30</xText>
+        <yText>515</yText>
         <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>255</colorG>
+        <colorB>0</colorB>
+    </resultElement>
+
+    <resultElement>
+        <key>MotorController</key>
+        <xText>20</xText>
+        <yText>340</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>6</colorR>
+        <colorG>101</colorG>
+        <colorB>6</colorB>
+        <xDestination>48</xDestination>
+        <yDestination>220</yDestination>
     </resultElement>
 </root>

@@ -13,6 +13,7 @@ public class ResultWindowOption {
     private String structurePosition;
     private String structureOption;
     private List<ResultElement> resultElements = new ArrayList<>();
+    private List<ResultDimension> resultDimensions = new ArrayList<>();
 
     public float getxOffset() {
         return xOffset;
@@ -78,11 +79,25 @@ public class ResultWindowOption {
         this.resultElements.add(resultElement);
     }
 
+    public List<ResultDimension> getResultDimensions() {
+        return resultDimensions;
+    }
+
+    public void addResultDimension(ResultDimension resultDimension) {
+        this.resultDimensions.add(resultDimension);
+    }
+
     public static class ResultElement {
         private String key;
-        private int x;
-        private int y;
+        private float xText;
+        private float yText;
         private double textDirectionDeg;
+        private int colorR;
+        private int colorG;
+        private int colorB;
+        private float xDestination;
+        private float yDestination;
+
 
         public String getKey() {
             return key;
@@ -92,28 +107,125 @@ public class ResultWindowOption {
             this.key = key;
         }
 
-        public int getX() {
-            return x;
+        public float getxText() {
+            return xText;
         }
 
-        public void setX(int x) {
-            this.x = x;
+        public void setxText(float xText) {
+            this.xText = xText;
         }
 
-        public int getY() {
-            return y;
+        public float getyText() {
+            return yText;
         }
 
-        public void setY(int y) {
-            this.y = y;
+        public void setyText(float yText) {
+            this.yText = yText;
         }
 
         public double getTextDirectionDeg() {
             return textDirectionDeg;
         }
 
-        public void setTextDirection(double textDirectionDeg) {
+        public void setTextDirectionDeg(double textDirectionDeg) {
             this.textDirectionDeg = textDirectionDeg;
+        }
+
+        public int getColorR() {
+            return colorR;
+        }
+
+        public void setColorR(int colorR) {
+            this.colorR = colorR;
+        }
+
+        public int getColorG() {
+            return colorG;
+        }
+
+        public void setColorG(int colorG) {
+            this.colorG = colorG;
+        }
+
+        public int getColorB() {
+            return colorB;
+        }
+
+        public void setColorB(int colorB) {
+            this.colorB = colorB;
+        }
+
+        public float getxDestination() {
+            return xDestination;
+        }
+
+        public void setxDestination(float xDestination) {
+            this.xDestination = xDestination;
+        }
+
+        public float getyDestination() {
+            return yDestination;
+        }
+
+        public void setyDestination(float yDestination) {
+            this.yDestination = yDestination;
+        }
+    }
+
+    public static class ResultDimension {
+        private String key;
+        private float offset;
+        private double textDirectionDeg;
+        private int colorR;
+        private int colorG;
+        private int colorB;
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public float getOffset() {
+            return offset;
+        }
+
+        public void setOffset(float offset) {
+            this.offset = offset;
+        }
+
+        public double getTextDirectionDeg() {
+            return textDirectionDeg;
+        }
+
+        public void setTextDirectionDeg(double textDirectionDeg) {
+            this.textDirectionDeg = textDirectionDeg;
+        }
+
+        public int getColorR() {
+            return colorR;
+        }
+
+        public void setColorR(int colorR) {
+            this.colorR = colorR;
+        }
+
+        public int getColorG() {
+            return colorG;
+        }
+
+        public void setColorG(int colorG) {
+            this.colorG = colorG;
+        }
+
+        public int getColorB() {
+            return colorB;
+        }
+
+        public void setColorB(int colorB) {
+            this.colorB = colorB;
         }
     }
 }

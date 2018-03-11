@@ -2,20 +2,69 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>10</orderPositionToDraw>
     <postitionInOverallPicture>0</postitionInOverallPicture>
-    <centerlinePosition>0.5</centerlinePosition>
+    <centerlinePosition>0.444</centerlinePosition>
     <xOffset>0</xOffset>
     <structurePosition>DriveStructure</structurePosition>
     <structureOption>Compressed</structureOption>
-    <resultElement>
-        <key>Motor</key>
-        <x>20</x>
-        <y>20</y>
+
+    <resultDimension>
+        <key>Length Drive</key>
+        <offset>-25</offset>
         <textDirectionDeg>0</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>0</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
+    <resultDimension>
+        <key>Diameter Drive</key>
+        <offset>-25</offset>
+        <textDirectionDeg>90</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>0</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
+
+    <resultElement>
+        <key>DriveStructure</key>
+        <xText>40</xText>
+        <yText>530</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>194</colorR>
+        <colorG>255</colorG>
+        <colorB>200</colorB>
+    </resultElement>
+
+    <resultElement>
+        <key>DriveBearing</key>
+        <xText>25</xText>
+        <yText>-120</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>255</colorG>
+        <colorB>62</colorB>
+        <xDestination>111</xDestination>
+        <yDestination>93</yDestination>
     </resultElement>
     <resultElement>
-        <key>Diameter D</key>
-        <x>30</x>
-        <y>40</y>
-        <textDirectionDeg>90</textDirectionDeg>
+        <key>Motor</key>
+        <xText>15</xText>
+        <yText>-85</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>185</colorR>
+        <colorG>109</colorG>
+        <colorB>0</colorB>
+        <xDestination>65</xDestination>
+        <yDestination>33</yDestination>
+    </resultElement>
+    <resultElement>
+        <key>IncrementalEncoder</key>
+        <xText>10</xText>
+        <yText>-50</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>134</colorG>
+        <colorB>0</colorB>
+        <xDestination>50</xDestination>
+        <yDestination>26</yDestination>
     </resultElement>
 </root>

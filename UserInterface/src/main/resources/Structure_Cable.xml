@@ -3,13 +3,7 @@
     <orderPositionToDraw>25</orderPositionToDraw>
     <postitionInOverallPicture>1</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
-    <xOffset>-515</xOffset>
+    <xOffset>-555</xOffset>
     <structurePosition>Diameter wiring</structurePosition>
     <structureOption>0</structureOption>
-    <resultElement>
-        <key>SlipRing</key>
-        <x>5</x>
-        <y>2</y>
-        <textDirectionDeg>0</textDirectionDeg>
-    </resultElement>
 </root>

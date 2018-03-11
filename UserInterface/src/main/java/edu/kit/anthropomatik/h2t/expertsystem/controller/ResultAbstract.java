@@ -353,7 +353,7 @@ public abstract class ResultAbstract {
         return builder.toString();
     }
 
-    private String getSpacesForResultValue(String value) {
+    public static String getSpacesForResultValue(String value) {
         StringBuilder builder = new StringBuilder("");
         for (int i = value.length(); i <= MAXIMAL_NEEDED_SPACES; ++i) {
             builder.append(" ");

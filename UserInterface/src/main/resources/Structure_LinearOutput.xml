@@ -2,20 +2,92 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>20</orderPositionToDraw>
     <postitionInOverallPicture>1</postitionInOverallPicture>
-    <centerlinePosition>0.5</centerlinePosition>
-    <xOffset>0</xOffset>
+    <centerlinePosition>0.465</centerlinePosition>
+    <xOffset>15</xOffset>
     <structurePosition>OutputStructure</structurePosition>
     <structureOption>Linear</structureOption>
-    <resultElement>
-        <key>Gearbox</key>
-        <x>20</x>
-        <y>20</y>
+
+    <resultDimension>
+        <key>Length Output</key>
+        <offset>-25</offset>
         <textDirectionDeg>0</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>0</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
+    <resultDimension>
+        <key>Diameter Output</key>
+        <offset>25</offset>
+        <textDirectionDeg>-90</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>0</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
+
+    <resultElement>
+        <key>OutputStructure</key>
+        <xText>140</xText>
+        <yText>590</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>122</colorG>
+        <colorB>123</colorB>
+    </resultElement>
+
+    <resultElement>
+        <key>SensorPCB</key>
+        <xText>10</xText>
+        <yText>490</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>4</colorR>
+        <colorG>134</colorG>
+        <colorB>4</colorB>
+        <xDestination>147</xDestination>
+        <yDestination>400</yDestination>
     </resultElement>
     <resultElement>
-        <key>Length L</key>
-        <x>30</x>
-        <y>40</y>
-        <textDirectionDeg>90</textDirectionDeg>
+        <key>TorqueSensor</key>
+        <xText>120</xText>
+        <yText>490</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>4</colorG>
+        <colorB>4</colorB>
+        <xDestination>230</xDestination>
+        <yDestination>295</yDestination>
+    </resultElement>
+
+    <resultElement>
+        <key>Gearbox</key>
+        <xText>10</xText>
+        <yText>-50</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>101</colorR>
+        <colorG>101</colorG>
+        <colorB>101</colorB>
+        <xDestination>73</xDestination>
+        <yDestination>50</yDestination>
+    </resultElement>
+    <resultElement>
+        <key>AbsoluteEncoder</key>
+        <xText>85</xText>
+        <yText>-85</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>0</colorR>
+        <colorG>104</colorG>
+        <colorB>0</colorB>
+        <xDestination>167</xDestination>
+        <yDestination>40</yDestination>
+    </resultElement>
+    <resultElement>
+        <key>OutputBearing</key>
+        <xText>190</xText>
+        <yText>-50</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>237</colorG>
+        <colorB>120</colorB>
+        <xDestination>220</xDestination>
+        <yDestination>47</yDestination>
     </resultElement>
 </root>

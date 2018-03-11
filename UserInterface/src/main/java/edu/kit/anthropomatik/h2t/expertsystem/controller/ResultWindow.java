@@ -1,6 +1,7 @@
 package edu.kit.anthropomatik.h2t.expertsystem.controller;
 
 import edu.kit.anthropomatik.h2t.expertsystem.GUI;
+import edu.kit.anthropomatik.h2t.expertsystem.model.Component;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Result;
 import edu.kit.anthropomatik.h2t.expertsystem.model.req.*;
 import org.apache.logging.log4j.LogManager;
@@ -32,6 +33,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
@@ -46,15 +48,14 @@ import java.util.*;
 
 public class ResultWindow {
 
+    private static final float ARROW_HEIGHT = 5;
+    private static final float ARROW_WIDTH = 5;
     private static final Logger logger = LogManager.getLogger(ResultWindow.class);
-
     private static final PDFont FONT = PDType1Font.HELVETICA;
-    private static final float TEXT_SIZE = 12;
+    private static final float TEXT_SIZE = 13;
     private static final int DPI = 100;
-
     private FormToolkit formToolkit;
     private DecimalFormat df = new DecimalFormat("#.####");
-
     private Map<String, ResultWindowOption> resultWindowOptions = new HashMap<>();
     private Label imageLabel;
     private boolean isFirstTimeResized = true;
@@ -201,18 +202,63 @@ public class ResultWindow {
                     case "key":
                         resultElement.setKey(currentItem.getTextContent());
                         break;
-                    case "x":
-                        resultElement.setX(Integer.parseInt(currentItem.getTextContent()));
+                    case "xText":
+                        resultElement.setxText(Float.parseFloat(currentItem.getTextContent()));
                         break;
-                    case "y":
-                        resultElement.setY(Integer.parseInt(currentItem.getTextContent()));
+                    case "yText":
+                        resultElement.setyText(Float.parseFloat(currentItem.getTextContent()));
+                        break;
+                    case "colorR":
+                        resultElement.setColorR(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "colorG":
+                        resultElement.setColorG(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "colorB":
+                        resultElement.setColorB(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "xDestination":
+                        resultElement.setxDestination(Float.parseFloat(currentItem.getTextContent()));
+                        break;
+                    case "yDestination":
+                        resultElement.setyDestination(Float.parseFloat(currentItem.getTextContent()));
                         break;
                     case "textDirectionDeg":
-                        resultElement.setTextDirection(Double.parseDouble(currentItem.getTextContent()));
+                        resultElement.setTextDirectionDeg(Double.parseDouble(currentItem.getTextContent()));
                         break;
                 }
             }
             resultWindowOption.addResultElements(resultElement);
+        }
+
+        resultElements = root.getElementsByTagName("resultDimension");
+        for (int i = 0; i < resultElements.getLength(); ++i) {
+            ResultWindowOption.ResultDimension resultDimension = new ResultWindowOption.ResultDimension();
+            NodeList nestedElement = resultElements.item(i).getChildNodes();
+            for (int j = 0; j < nestedElement.getLength(); ++j) {
+                Node currentItem = nestedElement.item(j);
+                switch (currentItem.getNodeName()) {
+                    case "key":
+                        resultDimension.setKey(currentItem.getTextContent());
+                        break;
+                    case "offset":
+                        resultDimension.setOffset(Float.parseFloat(currentItem.getTextContent()));
+                        break;
+                    case "colorR":
+                        resultDimension.setColorR(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "colorG":
+                        resultDimension.setColorG(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "colorB":
+                        resultDimension.setColorB(Integer.parseInt(currentItem.getTextContent()));
+                        break;
+                    case "textDirectionDeg":
+                        resultDimension.setTextDirectionDeg(Double.parseDouble(currentItem.getTextContent()));
+                        break;
+                }
+            }
+            resultWindowOption.addResultDimension(resultDimension);
         }
         resultWindowOptions.put(fileName.substring(0, fileName.length() - 4), resultWindowOption);
     }
@@ -220,6 +266,7 @@ public class ResultWindow {
     public void showWindow(String componentToBeDesigned, Result result) {
         logger.debug("Open new result window");
         isFirstTimeResized = true;
+        //TODO move back to constructor
         parseXMLFiles();
         Shell newShell = new Shell();
         newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
@@ -227,8 +274,11 @@ public class ResultWindow {
 
         loadAndModifyPDFs(newShell, componentToBeDesigned, result);
 
-        newShell.layout();
+        //TODO remove
+        newShell.setMaximized(true);
         newShell.open();
+        newShell.layout();
+        newShell.setLocation(0, 0);
         // maybe readAndDispatch in thread -> threadPool
     }
 
@@ -284,6 +334,12 @@ public class ResultWindow {
                 logger.error(e.getMessage(), e);
             }
         });
+
+        try {
+            myDocuments.add(makeTable(result));
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
         return myDocuments;
     }
 
@@ -305,8 +361,8 @@ public class ResultWindow {
         try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
                 PDPageContentStream.AppendMode.APPEND, true)) {
             for (MyDocument myDocument : documents) {
-                float myDocumentWidth = myDocument.orginalRectangle.getWidth();
-                float myDocumentHeight = myDocument.orginalRectangle.getHeight();
+                float myDocumentWidth = myDocument.pdDocument.getPage(0).getMediaBox().getWidth();
+                float myDocumentHeight = myDocument.pdDocument.getPage(0).getMediaBox().getHeight();
 
                 float xToTranslate = getXToTranslate(positionInOverallPicturesMap, myDocument);
                 float yToTranslate = -myDocumentHeight / 2.f + myDocumentHeight * (0.5f - myDocument
@@ -339,7 +395,6 @@ public class ResultWindow {
                 "totalYmax: " + totalYmax);
         document.getPage(0).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
                 totalYmin));
-        // TODO: append values as table at right after last which are not in picture yet
     }
 
     private float getXToTranslate(Map<Integer, PDRectangle> positionInOverallPicturesMap, MyDocument myDocument) {
@@ -375,18 +430,157 @@ public class ResultWindow {
             float totalXmax = document.getPage(i).getMediaBox().getUpperRightX();
             float totalYmin = document.getPage(i).getMediaBox().getLowerLeftY();
             float totalYmax = document.getPage(i).getMediaBox().getUpperRightY();
-            logger.debug("Begin totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin +
-                    "" + " " + "totalYmax: " + totalYmax);
             orginalRectangle = document.getPage(i).getMediaBox();
             try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(i),
                     PDPageContentStream.AppendMode.APPEND, true)) {
+                float offset = 7;
+                contentStream.setLineWidth(2);
+                for (ResultWindowOption.ResultDimension element : resultWindowOption.getResultDimensions()) {
+                    contentStream.setStrokingColor(java.awt.Color.BLACK);
+                    if (element.getTextDirectionDeg() % 360 == 0) {
+                        contentStream.moveTo(0, element.getOffset());
+                        contentStream.lineTo(0, orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+
+                        contentStream.moveTo(orginalRectangle.getUpperRightX(), element.getOffset());
+                        contentStream.lineTo(orginalRectangle.getUpperRightX(), orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+
+                        contentStream.setStrokingColor(element.getColorR(), element.getColorG(), element.getColorB());
+                        contentStream.moveTo(orginalRectangle.getLowerLeftX(), element.getOffset() + offset);
+                        contentStream.lineTo(orginalRectangle.getUpperRightX(), element.getOffset() + offset);
+                        contentStream.stroke();
+                        drawTriangle(contentStream, orginalRectangle.getLowerLeftX() + ARROW_HEIGHT, element
+                                .getOffset() + offset - ARROW_WIDTH / 2.f, 90);
+                        drawTriangle(contentStream, orginalRectangle.getUpperRightX() - ARROW_HEIGHT, element
+                                .getOffset() + offset - ARROW_WIDTH / 2.f, -90);
+                        contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                        contentStream.beginText();
+                        contentStream.setFont(FONT, TEXT_SIZE);
+
+                        String value = result.components.stream().filter(comp -> comp.nameOfComponent.equals(element
+                                .getKey())).map(comp -> comp.nameOfInstance).findAny().orElse(null);
+                        if (value == null) {
+                            value = result.requirements.stream().filter(req -> req.displayName.equals(element.getKey
+                                    ())).map(this::parseResult).findAny().orElse("");
+                        }
+                        float width = orginalRectangle.getUpperRightX() - orginalRectangle.getLowerLeftX();
+                        float x = orginalRectangle.getLowerLeftX() + width / 2f - getTextWidth(value) / 2f;
+                        float y = element.getOffset() - 6;
+                        double angleRad = Math.toRadians(element.getTextDirectionDeg());
+                        Matrix matrix = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -(float)
+                                Math.sin(angleRad), (float) Math.cos(angleRad), x, y);
+                        contentStream.setTextMatrix(matrix);
+
+                        contentStream.showText(value);
+                        contentStream.endText();
+
+                        totalXmin = Math.min(totalXmin, orginalRectangle.getLowerLeftX() - 2);
+                        totalXmax = Math.max(totalXmax, orginalRectangle.getUpperRightX() + 2);
+                        totalYmin = Math.min(totalYmin, orginalRectangle.getLowerLeftY() + element.getOffset() +
+                                offset - getTextHeight());
+                    } else if (element.getTextDirectionDeg() % 360 == 90) {
+                        contentStream.moveTo(element.getOffset(), orginalRectangle.getUpperRightY());
+                        contentStream.lineTo(orginalRectangle.getLowerLeftX(), orginalRectangle.getUpperRightY());
+                        contentStream.stroke();
+
+                        contentStream.moveTo(element.getOffset(), orginalRectangle.getLowerLeftY());
+                        contentStream.lineTo(orginalRectangle.getLowerLeftX(), orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+
+                        contentStream.setStrokingColor(element.getColorR(), element.getColorG(), element.getColorB());
+                        contentStream.moveTo(element.getOffset() + offset, orginalRectangle.getUpperRightY());
+                        contentStream.lineTo(element.getOffset() + offset, orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+                        drawTriangle(contentStream, element.getOffset() + offset - ARROW_WIDTH / 2.f,
+                                orginalRectangle.getUpperRightY() - ARROW_HEIGHT, 0);
+                        drawTriangle(contentStream, element.getOffset() + offset - ARROW_WIDTH / 2.f,
+                                orginalRectangle.getLowerLeftY() + ARROW_HEIGHT, 180);
+                        contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                        contentStream.beginText();
+                        contentStream.setFont(FONT, TEXT_SIZE);
+
+                        String value = result.components.stream().filter(comp -> comp.nameOfComponent.equals(element
+                                .getKey())).map(comp -> comp.nameOfInstance).findAny().orElse(null);
+                        if (value == null) {
+                            value = result.requirements.stream().filter(req -> req.displayName.equals(element.getKey
+                                    ())).map(this::parseResult).findAny().orElse("");
+                        }
+                        float height = orginalRectangle.getUpperRightY() - orginalRectangle.getLowerLeftY();
+                        float x = orginalRectangle.getLowerLeftX() + element.getOffset() + 2;
+                        float y = orginalRectangle.getLowerLeftY() + height / 2f - getTextWidth(value) / 2f + 50;
+                        double angleRad = Math.toRadians(element.getTextDirectionDeg());
+                        Matrix matrix = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -(float)
+                                Math.sin(angleRad), (float) Math.cos(angleRad), x, y);
+                        contentStream.setTextMatrix(matrix);
+
+                        contentStream.showText(value);
+                        contentStream.endText();
+
+                        totalXmin = Math.min(totalXmin, orginalRectangle.getLowerLeftX() + element.getOffset() +
+                                offset - getTextHeight());
+                        totalYmin = Math.min(totalYmin, orginalRectangle.getLowerLeftY() - 2);
+                        totalYmax = Math.max(totalYmax, orginalRectangle.getUpperRightY() + 2);
+                    } else if (element.getTextDirectionDeg() % 360 == -90) {
+                        contentStream.moveTo(element.getOffset() + orginalRectangle.getUpperRightX(),
+                                orginalRectangle.getUpperRightY());
+                        contentStream.lineTo(orginalRectangle.getUpperRightX(), orginalRectangle.getUpperRightY());
+                        contentStream.stroke();
+
+                        contentStream.moveTo(element.getOffset() + orginalRectangle.getUpperRightX(),
+                                orginalRectangle.getLowerLeftY());
+                        contentStream.lineTo(orginalRectangle.getUpperRightX(), orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+
+                        contentStream.setStrokingColor(element.getColorR(), element.getColorG(), element.getColorB());
+                        contentStream.moveTo(element.getOffset() + orginalRectangle.getUpperRightX() - offset,
+                                orginalRectangle.getUpperRightY());
+                        contentStream.lineTo(element.getOffset() + orginalRectangle.getUpperRightX() - offset,
+                                orginalRectangle.getLowerLeftY());
+                        contentStream.stroke();
+                        drawTriangle(contentStream, element.getOffset() + orginalRectangle.getUpperRightX() - offset
+                                - ARROW_WIDTH / 2.f, orginalRectangle.getUpperRightY() - ARROW_HEIGHT, 0);
+                        drawTriangle(contentStream, element.getOffset() + orginalRectangle.getUpperRightX() - offset
+                                - ARROW_WIDTH / 2.f, orginalRectangle.getLowerLeftY() + ARROW_HEIGHT, 180);
+                        contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                        contentStream.beginText();
+                        contentStream.setFont(FONT, TEXT_SIZE);
+
+                        String value = result.components.stream().filter(comp -> comp.nameOfComponent.equals(element
+                                .getKey())).map(comp -> comp.nameOfInstance).findAny().orElse(null);
+                        if (value == null) {
+                            value = result.requirements.stream().filter(req -> req.displayName.equals(element.getKey
+                                    ())).map(this::parseResult).findAny().orElse("");
+                        }
+                        float height = orginalRectangle.getUpperRightY() - orginalRectangle.getLowerLeftY();
+                        float x = orginalRectangle.getUpperRightX() + element.getOffset() - 2;
+                        float y = orginalRectangle.getLowerLeftY() + height / 2f + getTextWidth(value) / 2f;
+                        double angleRad = Math.toRadians(element.getTextDirectionDeg());
+                        Matrix matrix = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -(float)
+                                Math.sin(angleRad), (float) Math.cos(angleRad), x, y);
+                        contentStream.setTextMatrix(matrix);
+
+                        contentStream.showText(value);
+                        contentStream.endText();
+
+                        totalXmax = Math.max(totalXmax, orginalRectangle.getUpperRightX() + element.getOffset() -
+                                offset + getTextHeight());
+                        totalYmin = Math.min(totalYmin, orginalRectangle.getLowerLeftY() - 2);
+                        totalYmax = Math.max(totalYmax, orginalRectangle.getUpperRightY() + 2);
+                    }
+                }
+
+                contentStream.setLineWidth(3);
                 for (ResultWindowOption.ResultElement element : resultWindowOption.getResultElements()) {
                     contentStream.beginText();
                     contentStream.setFont(FONT, TEXT_SIZE);
 
                     double angleRad = Math.toRadians(element.getTextDirectionDeg());
                     Matrix matrix = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -(float) Math
-                            .sin(angleRad), (float) Math.cos(angleRad), element.getX(), element.getY());
+                            .sin(angleRad), (float) Math.cos(angleRad), element.getxText(), element.getyText());
                     contentStream.setTextMatrix(matrix);
 
                     String value = result.components.stream().filter(comp -> comp.nameOfComponent.equals(element
@@ -398,19 +592,258 @@ public class ResultWindow {
                     contentStream.showText(value);
                     contentStream.endText();
 
-                    totalXmin = Math.min(totalXmin, element.getX());
-                    totalXmax = Math.max(totalXmax, element.getX());
-                    totalYmin = Math.min(totalYmin, element.getY());
-                    totalYmax = Math.max(totalYmax, element.getY());
+                    contentStream.setStrokingColor(element.getColorR(), element.getColorG(), element.getColorB());
+
+                    float x = element.getxText() - 3;
+                    float y = element.getyText() - 4;
+                    float width = getTextWidth(value);
+                    float height = getTextHeight();
+
+                    Matrix matrixRotation = new Matrix((float) Math.cos(angleRad), (float) Math.sin(angleRad), -
+                            (float) Math.sin(angleRad), (float) Math.cos(angleRad), 0, 0);
+
+                    //TODO fix that also work with rotation
+                    if (element.getTextDirectionDeg() == 0) {
+                        Point2D.Float lowLeft = matrixRotation.transformPoint(x, y);
+                        Point2D.Float upRight = matrixRotation.transformPoint(x + width, y + height);
+                        logger.debug("value: " + value + " lowLeft: " + lowLeft + " upRight: " + upRight);
+                        width = Math.abs(upRight.x - lowLeft.x);
+                        height = Math.abs(upRight.y - lowLeft.y);
+
+                        contentStream.addRect(lowLeft.x, lowLeft.y, width, height);
+                        contentStream.stroke();
+
+                        totalXmin = Math.min(totalXmin, lowLeft.x - 5);
+                        totalXmax = Math.max(totalXmax, upRight.x + 5);
+                        totalYmin = Math.min(totalYmin, lowLeft.y - 5);
+                        totalYmax = Math.max(totalYmax, upRight.y + 5);
+
+                        float arrowToX = element.getxDestination();
+                        float arrowToY = element.getyDestination();
+                        if (arrowToX != 0 && arrowToY != 0) {
+                            float startLineX = Math.abs(upRight.x - lowLeft.x) / 2.f + Math.min(upRight.x, lowLeft.x);
+                            float startLineY = Math.abs(lowLeft.y - arrowToY) < Math.abs(upRight.y - arrowToY) ?
+                                    lowLeft.y : upRight.y;
+                            contentStream.setStrokingColor(java.awt.Color.BLACK);
+                            contentStream.moveTo(startLineX, startLineY);
+                            contentStream.lineTo(arrowToX, arrowToY);
+                            contentStream.stroke();
+                            //TODO fix with direction and fill
+                            //drawTriangle(contentStream, arrowToX, arrowToY);
+                        }
+                    }
                 }
             }
-            logger.debug("End totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " " +
-                    "" + "" + "" + "" + "" + "" + "" + "" + "" + "" + "totalYmax: " + totalYmax + " -> width: " +
-                    (totalXmax - totalXmin) + " " + "and " + "height: " + (totalYmax - totalYmin));
             document.getPage(i).setMediaBox(new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax -
                     totalYmin));
         }
         return new MyDocument(orginalRectangle, document, resultWindowOption);
+    }
+
+    private float getTextHeight() throws IOException {
+        return FONT.getBoundingBox().getHeight() / 1000 * TEXT_SIZE + 4;
+    }
+
+    private float getTextWidth(String value) throws IOException {
+        return FONT.getStringWidth(value) / 1000 * TEXT_SIZE + 6;
+    }
+
+    private MyDocument makeTable(Result result) throws IOException {
+        PDDocument document = new PDDocument();
+        document.addPage(new PDPage());
+
+        float textWidth1 = 0;
+        float textWidth2 = 0;
+        for (Component component : result.components) {
+            textWidth1 = Math.max(textWidth1, getTextWidth(component.nameOfComponent));
+            textWidth2 = Math.max(textWidth2, getTextWidth(component.nameOfInstance));
+        }
+        for (Requirement req : result.requirements) {
+            if (req.resultIRI == null) {
+                continue;
+            }
+            textWidth1 = Math.max(textWidth1, getTextWidth(req.displayName));
+            String unit = req.unit == null ? "" : req.unit;
+            textWidth2 = Math.max(textWidth2, getTextWidth(parseResult(req) + " " + unit));
+        }
+        logger.debug("textWidth1: " + textWidth1 + " textWidth2: " + textWidth2);
+        textWidth1 += 3;
+        textWidth2 += 3;
+        float textHeight = getTextHeight() + 2;
+
+        float totalXmin = (float) Double.MAX_VALUE;
+        float totalXmax = 0;
+        float totalYmin = (float) Double.MAX_VALUE;
+        float totalYmax = 0;
+
+        float x = 0;
+        float y = 0;
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
+                PDPageContentStream.AppendMode.APPEND, true)) {
+            for (Component component : result.components) {
+                contentStream.beginText();
+                contentStream.setFont(FONT, TEXT_SIZE);
+                contentStream.newLineAtOffset(x + 3, y + 6);
+                contentStream.showText(component.nameOfComponent);
+                contentStream.endText();
+
+                if (addColorIfAvailable(contentStream, component.nameOfComponent)) {
+                    contentStream.setLineWidth(4);
+                } else {
+                    contentStream.setLineWidth(1.5f);
+                }
+                contentStream.addRect(x, y, textWidth1, textHeight);
+                contentStream.stroke();
+                contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                totalXmin = Math.min(totalXmin, x - 5);
+                totalXmax = Math.max(totalXmax, x + textWidth1 + 5);
+                totalYmin = Math.min(totalYmin, y - 5);
+                totalYmax = Math.max(totalYmax, y + textHeight + 5);
+
+                contentStream.beginText();
+                contentStream.setFont(FONT, TEXT_SIZE);
+                contentStream.newLineAtOffset(x + textWidth1 + 6, y + 6);
+                contentStream.showText(component.nameOfInstance);
+                contentStream.endText();
+                contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                if (addColorIfAvailable(contentStream, component.nameOfComponent)) {
+                    contentStream.setLineWidth(4);
+                } else {
+                    contentStream.setLineWidth(1.5f);
+                }
+                contentStream.addRect(x + textWidth1, y, textWidth2, textHeight);
+                contentStream.stroke();
+                contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                totalXmin = Math.min(totalXmin, x + textWidth1 - 5);
+                totalXmax = Math.max(totalXmax, x + textWidth1 + textWidth2 + 10);
+                y -= textHeight;
+            }
+            y -= textHeight;
+            for (Requirement req : result.requirements) {
+                if (req.resultIRI == null) {
+                    continue;
+                }
+                contentStream.beginText();
+                contentStream.setFont(FONT, TEXT_SIZE);
+                contentStream.newLineAtOffset(x + 3, y + 6);
+                contentStream.showText(req.displayName);
+                contentStream.endText();
+
+                if (addColorIfAvailable(contentStream, req.displayName)) {
+                    contentStream.setLineWidth(4);
+                } else {
+                    contentStream.setLineWidth(1.5f);
+                }
+                contentStream.addRect(x, y, textWidth1, textHeight);
+                contentStream.stroke();
+                contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                totalXmin = Math.min(totalXmin, x - 5);
+                totalXmax = Math.max(totalXmax, x + textWidth1 + 5);
+                totalYmin = Math.min(totalYmin, y - 5);
+                totalYmax = Math.max(totalYmax, y + textHeight + 5);
+
+                contentStream.beginText();
+                contentStream.setFont(FONT, TEXT_SIZE);
+                contentStream.newLineAtOffset(x + textWidth1 + 6, y + 6);
+                String unit = req.unit == null ? "" : req.unit;
+                contentStream.showText(parseResult(req) + " " + unit);
+                contentStream.endText();
+
+                if (addColorIfAvailable(contentStream, req.displayName)) {
+                    contentStream.setLineWidth(4);
+                } else {
+                    contentStream.setLineWidth(1.5f);
+                }
+                contentStream.addRect(x + textWidth1, y, textWidth2, textHeight);
+                contentStream.stroke();
+                contentStream.setStrokingColor(java.awt.Color.BLACK);
+
+                totalXmin = Math.min(totalXmin, x + textWidth1 - 5);
+                totalXmax = Math.max(totalXmax, x + textWidth1 + textWidth2 + 10);
+                y -= textHeight;
+            }
+        }
+        logger.debug("table: totalXmin: " + totalXmin + " totalXmax: " + totalXmax + " totalYmin: " + totalYmin + " "
+                + "totalYmax: " + totalYmax);
+        PDRectangle pdRectangle = new PDRectangle(totalXmin, totalYmin, totalXmax - totalXmin, totalYmax - totalYmin);
+        document.getPage(0).setMediaBox(pdRectangle);
+
+        ResultWindowOption resultWindowOption = new ResultWindowOption();
+        resultWindowOption.setPostitionInOverallPictures(getMaxPostitionInOverallPictures());
+        resultWindowOption.setOrderPositionToDraw(getMaxOrderPositionToDraw());
+        resultWindowOption.setCenterlinePosition(0.5f);
+        resultWindowOption.setxOffset(60);
+        return new MyDocument(pdRectangle, document, resultWindowOption);
+    }
+
+    private boolean addColorIfAvailable(PDPageContentStream contentStream, String key) {
+        return resultWindowOptions.values().stream().map(res -> {
+            res.getResultElements().stream().filter(resEle -> key.equals(resEle.getKey())).forEach(resEle -> {
+                try {
+                    contentStream.setStrokingColor(resEle.getColorR(), resEle.getColorG(), resEle.getColorB());
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            });
+            return res.getResultElements().stream().anyMatch(resEle -> key.equals(resEle.getKey()));
+        }).reduce((right, left) -> right || left).orElse(false);
+    }
+
+    private void drawTriangle(PDPageContentStream contentStream, float x, float y, int degree) throws IOException {
+        if (degree % 360 == 0) {
+            contentStream.moveTo(x, y);
+            contentStream.lineTo(x + ARROW_WIDTH, y);
+            contentStream.stroke();
+
+            contentStream.moveTo(x + ARROW_WIDTH, y);
+            contentStream.lineTo(x + ARROW_WIDTH / 2.f, y + ARROW_HEIGHT);
+            contentStream.stroke();
+
+            contentStream.moveTo(x + ARROW_WIDTH / 2.f, y + ARROW_HEIGHT);
+            contentStream.lineTo(x, y);
+            contentStream.stroke();
+        } else if (degree % 360 == 90) {
+            contentStream.moveTo(x, y);
+            contentStream.lineTo(x - ARROW_HEIGHT, y + ARROW_WIDTH / 2.f);
+            contentStream.stroke();
+
+            contentStream.moveTo(x - ARROW_HEIGHT, y + ARROW_WIDTH / 2.f);
+            contentStream.lineTo(x, y + ARROW_WIDTH);
+            contentStream.stroke();
+
+            contentStream.moveTo(x, y + ARROW_WIDTH);
+            contentStream.lineTo(x, y);
+            contentStream.stroke();
+        } else if (degree % 360 == -90) {
+            contentStream.moveTo(x, y);
+            contentStream.lineTo(x, y + ARROW_WIDTH);
+            contentStream.stroke();
+
+            contentStream.moveTo(x, y + ARROW_WIDTH);
+            contentStream.lineTo(x + ARROW_WIDTH, y + ARROW_WIDTH / 2.f);
+            contentStream.stroke();
+
+            contentStream.moveTo(x + ARROW_WIDTH, y + ARROW_WIDTH / 2.f);
+            contentStream.lineTo(x, y);
+            contentStream.stroke();
+        } else if (degree % 360 == 180) {
+            contentStream.moveTo(x, y);
+            contentStream.lineTo(x + ARROW_WIDTH, y);
+            contentStream.stroke();
+
+            contentStream.moveTo(x + ARROW_WIDTH, y);
+            contentStream.lineTo(x + ARROW_WIDTH / 2.f, y - ARROW_HEIGHT);
+            contentStream.stroke();
+
+            contentStream.moveTo(x + ARROW_WIDTH / 2.f, y - ARROW_HEIGHT);
+            contentStream.lineTo(x, y);
+            contentStream.stroke();
+        }
     }
 
     private String parseResult(Requirement req) {
@@ -453,6 +886,18 @@ public class ResultWindow {
         } else {
             throw new RuntimeException("Requirement class unknown: " + req.getClass());
         }
+    }
+
+    private int getMaxOrderPositionToDraw() {
+        return resultWindowOptions.values().stream().max(Comparator.comparingInt
+                (ResultWindowOption::getOrderPositionToDraw)).map(ResultWindowOption::getOrderPositionToDraw).orElse
+                (0) + 1;
+    }
+
+    private int getMaxPostitionInOverallPictures() {
+        return resultWindowOptions.values().stream().max(Comparator.comparingInt
+                (ResultWindowOption::getPostitionInOverallPictures)).map
+                (ResultWindowOption::getPostitionInOverallPictures).orElse(0) + 1;
     }
 
     private static class MyDocument {
