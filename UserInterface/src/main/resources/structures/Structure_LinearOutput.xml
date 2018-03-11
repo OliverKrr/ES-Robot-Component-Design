@@ -2,8 +2,8 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>20</orderPositionToDraw>
     <postitionInOverallPicture>1</postitionInOverallPicture>
-    <centerlinePosition>0.465</centerlinePosition>
-    <xOffset>15</xOffset>
+    <centerlinePosition>0.5</centerlinePosition>
+    <xOffset>40</xOffset>
     <structurePosition>OutputStructure</structurePosition>
     <structureOption>Linear</structureOption>
 
@@ -36,7 +36,7 @@
 
     <resultElement>
         <key>SensorPCB</key>
-        <xText>10</xText>
+        <xText>20</xText>
         <yText>490</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>4</colorR>

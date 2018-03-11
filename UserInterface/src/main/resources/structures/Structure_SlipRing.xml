@@ -2,14 +2,14 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>30</orderPositionToDraw>
     <postitionInOverallPicture>1</postitionInOverallPicture>
-    <centerlinePosition>0.122</centerlinePosition>
-    <xOffset>-570</xOffset>
+    <centerlinePosition>0.5</centerlinePosition>
+    <xOffset>-530</xOffset>
     <structurePosition>Continuous Rotation</structurePosition>
     <structureOption>false</structureOption>
 
     <resultElement>
         <key>SlipRing</key>
-        <xText>370</xText>
+        <xText>300</xText>
         <yText>345</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>62</colorR>

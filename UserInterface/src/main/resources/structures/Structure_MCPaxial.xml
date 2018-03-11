@@ -2,7 +2,7 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>40</orderPositionToDraw>
     <postitionInOverallPicture>-1</postitionInOverallPicture>
-    <centerlinePosition>0.29</centerlinePosition>
+    <centerlinePosition>0.5</centerlinePosition>
     <xOffset>-10</xOffset>
     <structurePosition>MotorControllerPosition</structurePosition>
     <structureOption>MCPAxial</structureOption>

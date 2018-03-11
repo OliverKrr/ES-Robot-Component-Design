@@ -2,7 +2,7 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>40</orderPositionToDraw>
     <postitionInOverallPicture>-1</postitionInOverallPicture>
-    <centerlinePosition>0.29</centerlinePosition>
+    <centerlinePosition>0.35</centerlinePosition>
     <xOffset>210</xOffset>
     <structurePosition>MotorControllerPosition</structurePosition>
     <structureOption>MCPTangentially</structureOption>
@@ -10,7 +10,7 @@
     <resultElement>
         <key>MotorControllerPosition</key>
         <xText>10</xText>
-        <yText>515</yText>
+        <yText>510</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>255</colorR>
         <colorG>255</colorG>

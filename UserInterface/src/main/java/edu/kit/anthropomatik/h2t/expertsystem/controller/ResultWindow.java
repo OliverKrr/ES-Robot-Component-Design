@@ -162,8 +162,8 @@ public class ResultWindow {
 
     private List<String> getResourceFiles() throws IOException {
         List<String> filenames = new ArrayList<>();
-        try (InputStream in = getClass().getResourceAsStream("/structures/"); BufferedReader br = new BufferedReader(new
-                InputStreamReader(in))) {
+        try (InputStream in = getClass().getResourceAsStream("/structures/"); BufferedReader br = new BufferedReader
+                (new InputStreamReader(in))) {
             String resource;
             while ((resource = br.readLine()) != null) {
                 filenames.add(resource);
@@ -287,7 +287,7 @@ public class ResultWindow {
         myDocuments.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getOrderPositionToDraw()));
         try (PDDocument document = new PDDocument()) {
             document.addPage(new PDPage());
-            concatenateDocuments(myDocuments, document);
+            concatenateDocuments(myDocuments, document, componentToBeDesigned);
             visualizeDocument(newShell, document);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
@@ -325,8 +325,8 @@ public class ResultWindow {
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
                 .getComponentToBeDesigned()) && checkReqContainted(result, entry)).forEach(entry -> {
             try {
-                PDDocument document = PDDocument.load(getClass().getResourceAsStream("/" + entry.getKey() + "" + "" +
-                        ".pdf"));
+                PDDocument document = PDDocument.load(getClass().getResourceAsStream("/structures/" + entry.getKey()
+                        + ".pdf"));
                 MyDocument myDocument = handlePDF(document, result, entry.getValue());
                 myDocuments.add(myDocument);
             } catch (IOException e) {
@@ -349,7 +349,7 @@ public class ResultWindow {
                         .getStructurePosition()) && !parseReq(req).equals(entry.getValue().getStructureOption()));
     }
 
-    private void concatenateDocuments(List<MyDocument> documents, PDDocument document) {
+    private void concatenateDocuments(List<MyDocument> documents, PDDocument document, String componentToBeDesigned) {
         Map<Integer, PDRectangle> positionInOverallPicturesMap = new HashMap<>();
 
         float totalXmin = (float) Double.MAX_VALUE;
@@ -360,16 +360,19 @@ public class ResultWindow {
         try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
                 PDPageContentStream.AppendMode.APPEND, true)) {
             for (MyDocument myDocument : documents) {
+                float orginalWidth = myDocument.orginalRectangle.getWidth();
+                float orginalHeight = myDocument.orginalRectangle.getHeight();
+
                 float myDocumentWidth = myDocument.pdDocument.getPage(0).getMediaBox().getWidth();
                 float myDocumentHeight = myDocument.pdDocument.getPage(0).getMediaBox().getHeight();
 
                 float xToTranslate = getXToTranslate(positionInOverallPicturesMap, myDocument);
-                float yToTranslate = -myDocumentHeight / 2.f + myDocumentHeight * (0.5f - myDocument
-                        .resultWindowOption.getCenterlinePosition());
+                float yToTranslate = -orginalHeight / 2.f + orginalHeight * (0.5f - myDocument.resultWindowOption
+                        .getCenterlinePosition()) + myDocument.pdDocument.getPage(0).getMediaBox().getLowerLeftY();
                 totalYmin = Math.min(totalYmin, yToTranslate);
                 totalYmax = Math.max(totalYmax, yToTranslate + myDocumentHeight);
-                logger.debug("Height: " + myDocumentHeight + " width: " + myDocumentWidth + " xToTranslate: " +
-                        xToTranslate + " yToTranslate: " + yToTranslate);
+                logger.debug("myDocumentHeight: " + myDocumentHeight + " myDocumentWidth: " + myDocumentWidth + " " +
+                        "xToTranslate: " + xToTranslate + " yToTranslate: " + yToTranslate);
 
                 PDFRenderer renderer = new PDFRenderer(myDocument.pdDocument);
                 BufferedImage bufferedImage = renderer.renderImageWithDPI(0, DPI, ImageType.ARGB);
@@ -379,7 +382,7 @@ public class ResultWindow {
                 if (!positionInOverallPicturesMap.containsKey(myDocument.resultWindowOption
                         .getPostitionInOverallPictures())) {
                     positionInOverallPicturesMap.put(myDocument.resultWindowOption.getPostitionInOverallPictures(),
-                            new PDRectangle(xToTranslate, yToTranslate, myDocumentWidth, myDocumentHeight));
+                            new PDRectangle(xToTranslate, yToTranslate, orginalWidth, myDocumentHeight));
                 }
 
                 totalXmin = Math.min(totalXmin, xToTranslate);
@@ -387,6 +390,19 @@ public class ResultWindow {
 
                 myDocument.pdDocument.close();
             }
+
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3);
+            contentStream.newLineAtOffset(totalXmax, totalYmax);
+            contentStream.showText(componentToBeDesigned);
+            contentStream.endText();
+
+            totalXmin = Math.min(totalXmin, totalXmax - 5);
+            totalXmax = Math.max(totalXmax, totalXmax + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3,
+                    componentToBeDesigned) + 5);
+            totalYmin = Math.min(totalYmin, totalYmax - 5);
+            totalYmax = Math.max(totalYmax, totalYmax + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3) + 5);
+
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
         }
@@ -647,6 +663,14 @@ public class ResultWindow {
         return FONT.getStringWidth(value) / 1000 * TEXT_SIZE + 6;
     }
 
+    private float getTextHeight(PDFont font, float textSize) throws IOException {
+        return font.getBoundingBox().getHeight() / 1000 * textSize + 4;
+    }
+
+    private float getTextWidth(PDFont font, float textSize, String value) throws IOException {
+        return font.getStringWidth(value) / 1000 * textSize + 6;
+    }
+
     private MyDocument makeTable(Result result) throws IOException {
         PDDocument document = new PDDocument();
         document.addPage(new PDPage());
@@ -680,6 +704,20 @@ public class ResultWindow {
 
         try (PDPageContentStream contentStream = new PDPageContentStream(document, document.getPage(0),
                 PDPageContentStream.AppendMode.APPEND, true)) {
+
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
+            contentStream.newLineAtOffset(x, y);
+            contentStream.showText("Components");
+            contentStream.endText();
+
+            totalXmin = Math.min(totalXmin, x - 5);
+            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1, "Components")
+                    + 5);
+            totalYmin = Math.min(totalYmin, y - 5);
+            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1) + 5);
+            y -= 1.5f * getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
+
             for (Component component : result.components) {
                 contentStream.beginText();
                 contentStream.setFont(FONT, TEXT_SIZE);
@@ -721,7 +759,20 @@ public class ResultWindow {
                 totalXmax = Math.max(totalXmax, x + textWidth1 + textWidth2 + 10);
                 y -= textHeight;
             }
-            y -= textHeight;
+
+            y -= textHeight / 2.f;
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
+            contentStream.newLineAtOffset(x, y);
+            contentStream.showText("Requirements");
+            contentStream.endText();
+            y -= 1.5f * getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
+            totalXmin = Math.min(totalXmin, x - 5);
+            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1,
+                    "Requirements") + 5);
+            totalYmin = Math.min(totalYmin, y - 5);
+            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1) + 5);
+
             for (Requirement req : result.requirements) {
                 if (req.resultIRI == null) {
                     continue;
@@ -775,7 +826,7 @@ public class ResultWindow {
         ResultWindowOption resultWindowOption = new ResultWindowOption();
         resultWindowOption.setPostitionInOverallPictures(getMaxPostitionInOverallPictures());
         resultWindowOption.setOrderPositionToDraw(getMaxOrderPositionToDraw());
-        resultWindowOption.setCenterlinePosition(0.5f);
+        resultWindowOption.setCenterlinePosition(-0.5f);
         resultWindowOption.setxOffset(60);
         return new MyDocument(pdRectangle, document, resultWindowOption);
     }

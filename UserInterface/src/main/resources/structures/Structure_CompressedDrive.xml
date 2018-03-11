@@ -2,7 +2,7 @@
     <componentToBeDesigned>SensorActuatorUnit</componentToBeDesigned>
     <orderPositionToDraw>10</orderPositionToDraw>
     <postitionInOverallPicture>0</postitionInOverallPicture>
-    <centerlinePosition>0.444</centerlinePosition>
+    <centerlinePosition>0.5</centerlinePosition>
     <xOffset>0</xOffset>
     <structurePosition>DriveStructure</structurePosition>
     <structureOption>Compressed</structureOption>
