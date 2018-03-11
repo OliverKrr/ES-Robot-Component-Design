@@ -393,15 +393,15 @@ public class ResultWindow {
 
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3);
-            contentStream.newLineAtOffset(totalXmax, totalYmax);
+            contentStream.newLineAtOffset(totalXmin, totalYmax);
             contentStream.showText(componentToBeDesigned);
             contentStream.endText();
 
-            totalXmin = Math.min(totalXmin, totalXmax - 5);
-            totalXmax = Math.max(totalXmax, totalXmax + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3,
+            totalXmin = Math.min(totalXmin, totalXmin - 5);
+            totalXmax = Math.max(totalXmax, totalXmin + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3,
                     componentToBeDesigned) + 5);
             totalYmin = Math.min(totalYmin, totalYmax - 5);
-            totalYmax = Math.max(totalYmax, totalYmax + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3) + 5);
+            totalYmax = Math.max(totalYmax, totalYmax + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 3));
 
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
@@ -708,14 +708,15 @@ public class ResultWindow {
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
             contentStream.newLineAtOffset(x, y);
-            contentStream.showText("Components");
+            contentStream.showText("Subcomponents");
             contentStream.endText();
 
             totalXmin = Math.min(totalXmin, x - 5);
-            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1, "Components")
-                    + 5);
+            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1,
+                    "Subcomponents") + 5);
             totalYmin = Math.min(totalYmin, y - 5);
-            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1) + 5);
+            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1));
+
             y -= 1.5f * getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
 
             for (Component component : result.components) {
@@ -760,18 +761,20 @@ public class ResultWindow {
                 y -= textHeight;
             }
 
-            y -= textHeight / 2.f;
+            y -= 3;
             contentStream.beginText();
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
             contentStream.newLineAtOffset(x, y);
-            contentStream.showText("Requirements");
+            contentStream.showText("Properties");
             contentStream.endText();
-            y -= 1.5f * getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
+
             totalXmin = Math.min(totalXmin, x - 5);
-            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1,
-                    "Requirements") + 5);
+            totalXmax = Math.max(totalXmax, x + getTextWidth(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1, "Properties")
+                    + 5);
             totalYmin = Math.min(totalYmin, y - 5);
-            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1) + 5);
+            totalYmax = Math.max(totalYmax, y + getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1));
+
+            y -= 1.5f * getTextHeight(PDType1Font.HELVETICA_BOLD, TEXT_SIZE + 1);
 
             for (Requirement req : result.requirements) {
                 if (req.resultIRI == null) {
