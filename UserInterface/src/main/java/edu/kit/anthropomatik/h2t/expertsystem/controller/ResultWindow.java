@@ -783,14 +783,22 @@ public class ResultWindow {
 
     private boolean addColorIfAvailable(PDPageContentStream contentStream, String key) {
         return resultWindowOptions.values().stream().map(res -> {
-            res.getResultElements().stream().filter(resEle -> key.equals(resEle.getKey())).forEach(resEle -> {
+            res.getResultElements().stream().filter(resEle -> key.equals(resEle.getKey())).forEach(ele -> {
+                try {
+                    contentStream.setStrokingColor(ele.getColorR(), ele.getColorG(), ele.getColorB());
+                } catch (IOException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            });
+            res.getResultDimensions().stream().filter(ele -> key.equals(ele.getKey())).forEach(resEle -> {
                 try {
                     contentStream.setStrokingColor(resEle.getColorR(), resEle.getColorG(), resEle.getColorB());
                 } catch (IOException e) {
                     logger.error(e.getMessage(), e);
                 }
             });
-            return res.getResultElements().stream().anyMatch(resEle -> key.equals(resEle.getKey()));
+            return res.getResultElements().stream().anyMatch(ele -> key.equals(ele.getKey())) || res
+                    .getResultDimensions().stream().anyMatch(ele -> key.equals(ele.getKey()));
         }).reduce((right, left) -> right || left).orElse(false);
     }
 

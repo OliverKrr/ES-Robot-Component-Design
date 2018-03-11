@@ -11,17 +11,17 @@
         <key>Length Output</key>
         <offset>-25</offset>
         <textDirectionDeg>0</textDirectionDeg>
-        <colorR>0</colorR>
-        <colorG>0</colorG>
-        <colorB>0</colorB>
+        <colorR>255</colorR>
+        <colorG>122</colorG>
+        <colorB>123</colorB>
     </resultDimension>
     <resultDimension>
         <key>Diameter Output</key>
         <offset>25</offset>
         <textDirectionDeg>-90</textDirectionDeg>
-        <colorR>0</colorR>
-        <colorG>0</colorG>
-        <colorB>0</colorB>
+        <colorR>255</colorR>
+        <colorG>122</colorG>
+        <colorB>123</colorB>
     </resultDimension>
 
     <resultElement>

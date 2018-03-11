@@ -11,17 +11,17 @@
         <key>Length Drive</key>
         <offset>-25</offset>
         <textDirectionDeg>0</textDirectionDeg>
-        <colorR>0</colorR>
-        <colorG>0</colorG>
-        <colorB>0</colorB>
+        <colorR>153</colorR>
+        <colorG>255</colorG>
+        <colorB>163</colorB>
     </resultDimension>
     <resultDimension>
         <key>Diameter Drive</key>
         <offset>-25</offset>
         <textDirectionDeg>90</textDirectionDeg>
-        <colorR>0</colorR>
-        <colorG>0</colorG>
-        <colorB>0</colorB>
+        <colorR>153</colorR>
+        <colorG>255</colorG>
+        <colorB>163</colorB>
     </resultDimension>
 
     <resultElement>
@@ -29,9 +29,9 @@
         <xText>85</xText>
         <yText>530</yText>
         <textDirectionDeg>0</textDirectionDeg>
-        <colorR>194</colorR>
+        <colorR>153</colorR>
         <colorG>255</colorG>
-        <colorB>200</colorB>
+        <colorB>163</colorB>
     </resultElement>
 
     <resultElement>
