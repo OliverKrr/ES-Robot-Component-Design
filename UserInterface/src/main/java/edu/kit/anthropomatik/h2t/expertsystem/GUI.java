@@ -346,13 +346,10 @@ public class GUI {
     }
 
     private int[] getWeights() {
-        //TODO make dependend on resolution -> test by matze
-        float newWidthOfContent = 1f * 835 * shell.getSize().x / 1000;
         if (showDescriptions) {
-            float ratioForWeights = 1f * newWidthOfContent / 835;
-            return new int[]{Math.round(350 * ratioForWeights), 1, Math.round(310 / ratioForWeights)};
+            return new int[]{460, 1, 236};
         } else {
-            return new int[]{Math.round(newWidthOfContent), 0, 0};
+            return new int[]{1, 0, 0};
         }
 
     }
