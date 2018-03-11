@@ -369,7 +369,9 @@ public abstract class ResultAbstract {
                     handleShow(component.nameOfComponent, component.nameOfInstance);
                 }
                 for (Requirement req : result.requirements) {
-                    handleShow(req.displayName, getResultValue(req));
+                    if (req.resultIRI != null) {
+                        handleShow(req.displayName, getResultValue(req));
+                    }
                 }
             }
         }

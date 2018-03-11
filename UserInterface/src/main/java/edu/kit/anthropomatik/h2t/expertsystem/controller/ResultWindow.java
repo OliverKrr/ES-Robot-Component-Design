@@ -1,6 +1,7 @@
 package edu.kit.anthropomatik.h2t.expertsystem.controller;
 
 import edu.kit.anthropomatik.h2t.expertsystem.GUI;
+import edu.kit.anthropomatik.h2t.expertsystem.GuiHelper;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Component;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Result;
 import edu.kit.anthropomatik.h2t.expertsystem.model.req.*;
@@ -18,10 +19,10 @@ import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.util.Matrix;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.*;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.w3c.dom.Document;
@@ -38,13 +39,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.List;
 
 public class ResultWindow {
 
@@ -53,11 +52,11 @@ public class ResultWindow {
     private static final Logger logger = LogManager.getLogger(ResultWindow.class);
     private static final PDFont FONT = PDType1Font.HELVETICA;
     private static final float TEXT_SIZE = 13;
-    private static final int DPI = 100;
+    private static final int DPI = 200;
     private FormToolkit formToolkit;
     private DecimalFormat df = new DecimalFormat("#.####");
     private Map<String, ResultWindowOption> resultWindowOptions = new HashMap<>();
-    private Label imageLabel;
+    private Map<Shell, Label> imageLabels = new HashMap<>();
     private boolean isFirstTimeResized = true;
 
     ResultWindow(FormToolkit formToolkit) {
@@ -272,7 +271,41 @@ public class ResultWindow {
         newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
         newShell.setImage(SWTResourceManager.getImage(GUI.class, "/logos/H2T_logo.png"));
 
-        loadAndModifyPDFs(newShell, componentToBeDesigned, result);
+        PDDocument document = loadAndModifyPDFs(newShell, componentToBeDesigned, result);
+        newShell.addDisposeListener(event -> {
+            try {
+                document.close();
+            } catch (IOException e) {
+                logger.error(e.getMessage(), e);
+            }
+        });
+
+        Button exportButton = new Button(newShell, SWT.PUSH);
+        exportButton.setText("Export as PDF");
+        Point size = GuiHelper.getSizeOfControl(exportButton);
+        exportButton.setBounds(5, 5, size.x, size.y);
+        formToolkit.adapt(exportButton, true, true);
+        exportButton.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                FileDialog fileDialog = new FileDialog(newShell, SWT.SAVE);
+                fileDialog.setOverwrite(true);
+                fileDialog.setFilterExtensions(new String[]{"*.pdf"});
+                String absolutePath = new File(".").getAbsolutePath();
+                fileDialog.setFileName(absolutePath.substring(0, absolutePath.length() - 1));
+
+                String fileName = fileDialog.open();
+                if (fileName != null) {
+                    try {
+                        document.save(fileName);
+                    } catch (IOException e) {
+                        logger.error(e.getMessage(), e);
+                    }
+                }
+            }
+        });
+
+        visualizeDocument(newShell, document, size);
 
         //TODO remove
         newShell.setMaximized(true);
@@ -282,19 +315,17 @@ public class ResultWindow {
         // maybe readAndDispatch in thread -> threadPool
     }
 
-    private void loadAndModifyPDFs(Shell newShell, String componentToBeDesigned, Result result) {
+    private PDDocument loadAndModifyPDFs(Shell newShell, String componentToBeDesigned, Result result) {
         List<MyDocument> myDocuments = handlePDFs(componentToBeDesigned, result);
         myDocuments.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getOrderPositionToDraw()));
-        try (PDDocument document = new PDDocument()) {
-            document.addPage(new PDPage());
-            concatenateDocuments(myDocuments, document, componentToBeDesigned);
-            visualizeDocument(newShell, document);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
+
+        PDDocument document = new PDDocument();
+        document.addPage(new PDPage());
+        concatenateDocuments(myDocuments, document, componentToBeDesigned);
+        return document;
     }
 
-    private void visualizeDocument(Shell newShell, PDDocument document) {
+    private void visualizeDocument(Shell newShell, PDDocument document, Point size) {
         PDFRenderer renderer = new PDFRenderer(document);
         BufferedImage bufferedImage;
         try {
@@ -303,20 +334,24 @@ public class ResultWindow {
             logger.error(e.getMessage(), e);
             return;
         }
+
         newShell.addListener(SWT.Resize, e -> {
             Image image = new Image(Display.getCurrent(), Objects.requireNonNull(convertToSWT(bufferedImage)));
-            image = resizeImage(image, newShell.getSize().x - 30, newShell.getSize().y - 50);
+            image = resizeImage(image, newShell.getSize().x - 30, newShell.getSize().y - 50 - size.y - 5);
             if (isFirstTimeResized) {
                 isFirstTimeResized = false;
-                newShell.setSize(image.getBounds().width + 30, image.getBounds().height + 50);
+                newShell.setSize(Math.max(image.getBounds().width, size.x) + 30, image.getBounds().height + 50 + size
+                        .y + 5);
             }
+            Label imageLabel = imageLabels.get(newShell);
             if (imageLabel != null) {
                 imageLabel.dispose();
             }
             imageLabel = new Label(newShell, SWT.CENTER);
-            imageLabel.setBounds(5, 5, image.getBounds().width, image.getBounds().height);
+            imageLabel.setBounds(5, 5 + size.y + 5, image.getBounds().width, image.getBounds().height);
             imageLabel.setImage(image);
             formToolkit.adapt(imageLabel, false, false);
+            imageLabels.put(newShell, imageLabel);
         });
     }
 
