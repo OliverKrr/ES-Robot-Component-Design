@@ -249,25 +249,43 @@ swrlb:add(?L_temp, ?L_m, ?L_g) ^ swrlb:add(?L_ges, ?L_temp, ?L_mb)
 -> hasDimensionLength_L_unit_mm(?ma, ?L_ges)
 
 MotorGearboxMatchLengthSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min) -> SatisfiedDimensionLength(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) 
+swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min)
+-> SatisfiedDimensionLength(?ma)
 
 MotorGearboxMatchLengthMaxSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) -> SatisfiedDimensionLengthMax(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasDimensionLength_L_unit_mm(?ma, ?L_ges) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ 
+swrlb:lessThanOrEqual(?L_ges, ?L_req_max)
+-> SatisfiedDimensionLengthMax(?ma)
 
 
 
 MotorGearboxMatchOuterDiameter1CalcRule:
-MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:greaterThan(?D_m, ?D_g) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_m)
+MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^
+hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^
+swrlb:greaterThan(?D_m, ?D_g)
+-> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_m)
 
 MotorGearboxMatchOuterDiameter2CalcRule:
-MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^ swrlb:lessThanOrEqual(?D_m, ?D_g) -> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g)
+MotorGearboxMatch(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^
+hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasDimensionOuterDiameter_D_unit_mm(?g, ?D_g) ^
+swrlb:lessThanOrEqual(?D_m, ?D_g)
+-> hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_g)
 
 
 MotorGearboxMatchOuterDiameterSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min) -> SatisfiedOuterDiameter(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^
+swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min)
+-> SatisfiedOuterDiameter(?ma)
 
 MotorGearboxMatchOuterDiameterMaxSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) -> SatisfiedOuterDiameterMax(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasDimensionOuterDiameter_D_unit_mm(?ma, ?D_ges) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^
+swrlb:lessThanOrEqual(?D_ges, ?D_req_max)
+-> SatisfiedOuterDiameterMax(?ma)
 
 
 
@@ -278,37 +296,48 @@ swrlb:add(?m_temp, ?m_m, ?m_g) ^ swrlb:add(?m_ges, ?m_temp, ?m_mb)
 -> hasWeight_m_unit_kg(?ma, ?m_ges)
 
 MotorGearboxMatchWeightSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min) -> SatisfiedWeight(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^
+swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min)
+-> SatisfiedWeight(?ma)
 
 MotorGearboxMatchWeightMaxSatisfyRule:
-MotorGearboxMatch(?ma) ^ hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasCurrentRequirement(?ma, ?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) -> SatisfiedWeightMax(?ma)
+MotorGearboxMatch(?ma) ^ hasCurrentRequirement(?ma, ?r) ^
+hasWeight_m_unit_kg(?ma, ?m_ges) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^
+swrlb:lessThanOrEqual(?m_ges, ?m_req_max)
+-> SatisfiedWeightMax(?ma)
 
 
 
 MotorGearboxMatchSatisfyRule:
-MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^ hasMotor(?ma, ?m) ^ hasBrake(?m, ?mb) ^ hasGearbox(?ma, ?g)
+MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLength(?ma) ^ SatisfiedOuterDiameter(?ma) ^ SatisfiedWeight(?ma) ^
+hasMotor(?ma, ?m) ^ hasBrake(?m, ?mb) ^ hasGearbox(?ma, ?g)
 -> SatisfiedMotorGearboxMatch(?ma) ^ isComposedOfMotor(?ma, ?m) ^ isComposedOfGearbox(?ma, ?g) ^ isComposedOfBrake(?ma, ?mb) ^ hasNRMSD(?ma, 1.0) ^ hasPerformanceIndex_PX(?ma, 1.0)
 
 MotorGearboxMatchForSensorActuatorUnitSatisfyRule:
-MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g)
+MotorGearboxMatch(?ma) ^ SatisfiedRotationSpeed(?ma) ^ SatisfiedPeakTorque(?ma) ^ SatisfiedDimensionLengthMax(?ma) ^ SatisfiedOuterDiameterMax(?ma) ^ SatisfiedWeightMax(?ma) ^
+hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g)
 -> SatisfiedMotorGearboxMatchForSensorActuatorUnit(?ma) ^ SatisfiedMotorInMotorGearboxMatch(?m) ^ SatisfiedGearboxInMotorGearboxMatch(?g)
 
 
 
 
 GearboxFlexSplineScrewMatchRule:
-SatisfiedGearboxInMotorGearboxMatch(?g) ^
-hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ Screw(?s_g_fs) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_fs, ?d_s_g_fs) ^ swrlb:equal(?d_g_fs, ?d_s_g_fs)
+SatisfiedGearboxInMotorGearboxMatch(?g) ^ Screw(?s_g_fs) ^
+hasDimensionScrewInnerDiameterFlexSplineM_d_unit_mm(?g, ?d_g_fs) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_fs, ?d_s_g_fs) ^
+swrlb:equal(?d_g_fs, ?d_s_g_fs)
 -> hasFlexSplineScrew(?g, ?s_g_fs)
 
 GearboxCircularSplineScrewMatchRule:
-SatisfiedGearboxInMotorGearboxMatch(?g) ^
-hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ Screw(?s_g_cs) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_cs, ?d_s_g_cs) ^ swrlb:equal(?d_g_cs, ?d_s_g_cs)
+SatisfiedGearboxInMotorGearboxMatch(?g) ^ Screw(?s_g_cs) ^
+hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_cs, ?d_s_g_cs) ^
+swrlb:equal(?d_g_cs, ?d_s_g_cs)
 -> hasCircularSplineScrew(?g, ?s_g_cs)
 
 GearboxWaveGeneratorScrewMatchRule:
-SatisfiedGearboxInMotorGearboxMatch(?g) ^
-hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^ Screw(?s_g_wg) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_wg, ?d_s_g_wg) ^ swrlb:equal(?d_g_wg, ?d_s_g_wg)
+SatisfiedGearboxInMotorGearboxMatch(?g) ^ Screw(?s_g_wg) ^
+hasDimensionScrewInnerDiameterWaveGeneratorM_d_unit_mm(?g, ?d_g_wg) ^ hasDimensionScrewInnerDiameterM_d_unit_mm(?s_g_wg, ?d_s_g_wg) ^
+swrlb:equal(?d_g_wg, ?d_s_g_wg)
 -> hasWaveGeneratorScrew(?g, ?s_g_wg)
 
 
@@ -340,17 +369,20 @@ swrlb:multiply(?s_gwg15, 1.5, ?d_g_wg) ^ swrlb:lessThanOrEqual(?L_wgo_g, ?s_gwg1
 
 
 RequirementExternCabeling1Rule:
-CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
+CurrentRequirements(?r) ^
+needContinuousRotationReq(?r, ?ncr) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
 swrlb:equal(?ncr, false) ^ swrlb:equal(?D, 0.0)
 -> needExternCabelingReq(?r, true)
 
 RequirementExternCabeling2Rule:
-CurrentRequirements(?r) ^ needContinuousRotationReq(?r, ?ncr) ^
+CurrentRequirements(?r) ^
+needContinuousRotationReq(?r, ?ncr) ^
 swrlb:equal(?ncr, true)
 -> needExternCabelingReq(?r, false)
 
 RequirementExternCabeling3Rule:
-CurrentRequirements(?r) ^ hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
+CurrentRequirements(?r) ^
+hasDimensionDiameterWiringReq_D_unit_mm(?r, ?D) ^
 swrlb:notEqual(?D, 0.0)
 -> needExternCabelingReq(?r, false)
 
@@ -862,10 +894,18 @@ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ s
 
 
 LengthDriveLinearEvaluate1Rule:
-LengthDriveLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:greaterThan(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max1) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+LengthDriveLinear(?li) ^
+has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^
+swrlb:greaterThan(?L_max1, ?L_max2) ^
+swrlb:add(?L_ges, ?L_2, ?L_max1)
+-> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 LengthDriveLinearEvaluate2Rule:
-LengthDriveLinear(?li) ^ has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^ swrlb:add(?L_ges, ?L_2, ?L_max2) -> hasDimensionLength_L_unit_mm(?li, ?L_ges)
+LengthDriveLinear(?li) ^
+has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^
+swrlb:lessThanOrEqual(?L_max1, ?L_max2) ^
+swrlb:add(?L_ges, ?L_2, ?L_max2)
+-> hasDimensionLength_L_unit_mm(?li, ?L_ges)
 
 
 
@@ -1457,7 +1497,10 @@ swrlb:add(?L_temp1, ?L_li, ?L_lo) ^ swrlb:add(?L_ges, ?L_temp1, ?L_le)
 
 
 LengthSatisfyRule:
-Length(?l) ^ hasDimensionLength_L_unit_mm(?l, ?L_ges) ^ hasCurrentRequirement(?l, ?r) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min) -> SatisfiedLength(?l)
+Length(?l) ^ hasCurrentRequirement(?l, ?r) ^
+hasDimensionLength_L_unit_mm(?l, ?L_ges) ^ hasDimensionLengthReqMax_L_unit_mm(?r, ?L_req_max) ^ hasDimensionLengthReqMin_L_unit_mm(?r, ?L_req_min) ^
+swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_req_min)
+-> SatisfiedLength(?l)
 
 
 
@@ -1543,22 +1586,28 @@ swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:add(?D_input, ?dec, ?D_m)
 -> hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input)
 
 DiameterDriveSatisfyRule:
-DiameterDrive(?di) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ hasCurrentRequirement(?di, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_input, ?D_req_max) -> SatisfiedDiameterDrive(?di)
+DiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
+hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^
+swrlb:lessThanOrEqual(?D_input, ?D_req_max)
+-> SatisfiedDiameterDrive(?di)
 
 
 DiameterDriveStructureSatisfy1Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Any")
+chooseDriveStructureReq(?r, ?cds) ^
+swrlb:equal(?cds, "Any")
 -> SatisfiedDiameterDriveLinear(?di) ^ SatisfiedDiameterDriveCompressed(?di)
 
 DiameterDriveStructureSatisfy2Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Linear")
+chooseDriveStructureReq(?r, ?cds) ^
+swrlb:equal(?cds, "Linear")
 -> SatisfiedDiameterDriveLinear(?di)
 
 DiameterDriveStructureSatisfy3Rule:
 SatisfiedDiameterDrive(?di) ^ hasCurrentRequirement(?di, ?r) ^
-chooseDriveStructureReq(?r, ?cds) ^ swrlb:equal(?cds, "Compressed")
+chooseDriveStructureReq(?r, ?cds) ^
+swrlb:equal(?cds, "Compressed")
 -> SatisfiedDiameterDriveCompressed(?di)
 
 
@@ -1622,18 +1671,30 @@ swrlb:multiply(?D_s_g_cs2, 2.0, ?D_s_g_cs) ^ swrlb:add(?D_max2, ?D_s_g_cs2, ?D_e
 
 
 DiameterOutputEvaluate1Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:greaterThan(?D_max1, ?D_max2) -> has1(?do, ?D_max1)
+DiameterOutput(?do) ^
+hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^
+swrlb:greaterThan(?D_max1, ?D_max2)
+-> has1(?do, ?D_max1)
 
 DiameterOutputEvaluate2Rule:
-DiameterOutput(?do) ^ hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^ swrlb:lessThanOrEqual(?D_max1, ?D_max2) -> has1(?do, ?D_max2)
+DiameterOutput(?do) ^
+hasMax1_1(?do, ?D_max1) ^ hasMax1_2(?do, ?D_max2) ^
+swrlb:lessThanOrEqual(?D_max1, ?D_max2)
+-> has1(?do, ?D_max2)
 
 
 
 DiameterOutputLinearSatisfyRule:
-DiameterOutputLinear(?do) ^ has1(?do, ?D_out) ^ hasCurrentRequirement(?do, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutputLinear(?do)
+DiameterOutputLinear(?do) ^ hasCurrentRequirement(?do, ?r) ^
+has1(?do, ?D_out) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^
+swrlb:lessThanOrEqual(?D_out, ?D_req_max)
+-> SatisfiedDiameterOutputLinear(?do)
 
 DiameterOutputCompressedSatisfyRule:
-DiameterOutputCompressed(?do) ^ has1(?do, ?D_out) ^ hasCurrentRequirement(?do, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_out, ?D_req_max) -> SatisfiedDiameterOutputCompressed(?do)
+DiameterOutputCompressed(?do) ^ hasCurrentRequirement(?do, ?r) ^
+has1(?do, ?D_out) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^
+swrlb:lessThanOrEqual(?D_out, ?D_req_max)
+-> SatisfiedDiameterOutputCompressed(?do)
 
 
 
@@ -1801,7 +1862,10 @@ swrlb:lessThanOrEqual(?D_max1, ?D_e)
 -> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_e)
 
 DiameterSatisfyRule:
-Diameter(?d) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasCurrentRequirement(?d, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min) -> SatisfiedDiameter(?d)
+Diameter(?d) ^ hasCurrentRequirement(?d, ?r) ^
+hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ hasDimensionOuterDiameterReqMin_D_unit_mm(?r, ?D_req_min) ^
+swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_req_min)
+-> SatisfiedDiameter(?d)
 
 
 
@@ -1870,11 +1934,15 @@ swrlb:add(?temp1, ?m_m, ?m_g) ^ swrlb:add(?temp2, ?temp1, ?m_dbs) ^ swrlb:add(?t
 -> hasWeight_m_unit_kg(?sac, ?m_ges)
 
 SensorActuatorUnitWeightSatisfyRule:
-SensorActuatorUnit(?sac) ^ hasWeight_m_unit_kg(?sac, ?m_ges) ^ hasCurrentRequirement(?sac, ?r) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min) -> SatisfiedWeight(?sac)
+SensorActuatorUnit(?sac) ^ hasCurrentRequirement(?sac, ?r) ^
+hasWeight_m_unit_kg(?sac, ?m_ges) ^ hasWeightReqMax_m_unit_kg(?r, ?m_req_max) ^ hasWeightReqMin_m_unit_kg(?r, ?m_req_min) ^
+swrlb:lessThanOrEqual(?m_ges, ?m_req_max) ^ swrlb:greaterThanOrEqual(?m_ges, ?m_req_min)
+-> SatisfiedWeight(?sac)
 
 
 SensorActuatorUnitSatisfyRule:
-SensorActuatorUnit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ SatisfiedDimensionLength(?sac) ^ SatisfiedOuterDiameter(?sac) ^ SatisfiedWeight(?sac) -> SatisfiedSensorActuatorUnit(?sac)
+SensorActuatorUnit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?sac) ^ SatisfiedDimensionLength(?sac) ^ SatisfiedOuterDiameter(?sac) ^ SatisfiedWeight(?sac)
+-> SatisfiedSensorActuatorUnit(?sac)
 
 
 
