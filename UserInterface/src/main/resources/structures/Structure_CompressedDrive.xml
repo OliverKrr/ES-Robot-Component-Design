@@ -37,7 +37,7 @@
     <resultElement>
         <key>DriveBearing</key>
         <xText>25</xText>
-        <yText>-120</yText>
+        <yText>-155</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>255</colorR>
         <colorG>255</colorG>
@@ -48,7 +48,7 @@
     <resultElement>
         <key>Motor</key>
         <xText>15</xText>
-        <yText>-85</yText>
+        <yText>-120</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>185</colorR>
         <colorG>109</colorG>
@@ -57,14 +57,25 @@
         <yDestination>33</yDestination>
     </resultElement>
     <resultElement>
-        <key>IncrementalEncoder</key>
-        <xText>10</xText>
-        <yText>-50</yText>
+        <key>HallSensor</key>
+        <xText>0</xText>
+        <yText>-85</yText>
         <textDirectionDeg>0</textDirectionDeg>
         <colorR>0</colorR>
         <colorG>134</colorG>
         <colorB>0</colorB>
         <xDestination>50</xDestination>
-        <yDestination>26</yDestination>
+        <yDestination>90</yDestination>
+    </resultElement>
+    <resultElement>
+        <key>IncrementalEncoder</key>
+        <xText>-30</xText>
+        <yText>-50</yText>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>33</colorR>
+        <colorG>33</colorG>
+        <colorB>33</colorB>
+        <xDestination>27</xDestination>
+        <yDestination>110</yDestination>
     </resultElement>
 </root>

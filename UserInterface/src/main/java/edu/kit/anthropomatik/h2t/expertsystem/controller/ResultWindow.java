@@ -47,6 +47,7 @@ import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.nio.file.Path;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -67,11 +68,6 @@ public class ResultWindow {
     ResultWindow(FormToolkit formToolkit) {
         this.formToolkit = formToolkit;
         df.setRoundingMode(RoundingMode.CEILING);
-        try {
-            parseXMLFiles();
-        } catch (IOException | URISyntaxException e) {
-            logger.error(e.getMessage(), e);
-        }
     }
 
     // from http://git.eclipse.org/c/platform/eclipse.platform.swt.git/tree/examples/org.eclipse.swt
@@ -148,9 +144,7 @@ public class ResultWindow {
         } else {
             myPath = Paths.get(uri);
         }
-        Files.walk(myPath, 1).forEach(file -> {
-            filenames.add(file.getName(file.getNameCount() - 1).toString());
-        });
+        Files.walk(myPath, 1).forEach(file -> filenames.add(file.getName(file.getNameCount() - 1).toString()));
         if (fileSystem != null) {
             fileSystem.close();
         }
@@ -278,6 +272,13 @@ public class ResultWindow {
     }
 
     public void showWindow(String componentToBeDesigned, Result result) {
+        //TODO move back to constructor
+        try {
+            parseXMLFiles();
+        } catch (IOException | URISyntaxException e) {
+            logger.error(e.getMessage(), e);
+        }
+
         logger.debug("Open new result window");
         isFirstTimeResized = true;
         Shell newShell = new Shell();
@@ -304,8 +305,11 @@ public class ResultWindow {
                 FileDialog fileDialog = new FileDialog(newShell, SWT.SAVE);
                 fileDialog.setOverwrite(true);
                 fileDialog.setFilterExtensions(new String[]{"*.pdf"});
+
                 String absolutePath = new File(".").getAbsolutePath();
-                fileDialog.setFileName(absolutePath.substring(0, absolutePath.length() - 1));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+                String fileNameFilter = sdf.format(new Date()) + "_" + componentToBeDesigned + ".pdf";
+                fileDialog.setFileName(absolutePath.substring(0, absolutePath.length() - 1) + fileNameFilter);
 
                 String fileName = fileDialog.open();
                 if (fileName != null) {

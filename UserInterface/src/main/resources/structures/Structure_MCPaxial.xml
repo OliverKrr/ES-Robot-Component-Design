@@ -3,9 +3,26 @@
     <orderPositionToDraw>40</orderPositionToDraw>
     <postitionInOverallPicture>-1</postitionInOverallPicture>
     <centerlinePosition>0.5</centerlinePosition>
-    <xOffset>-10</xOffset>
+    <xOffset>-40</xOffset>
     <structurePosition>MotorControllerPosition</structurePosition>
     <structureOption>MCPAxial</structureOption>
+
+    <resultDimension>
+        <key>Length Elektro</key>
+        <offset>-25</offset>
+        <textDirectionDeg>0</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>255</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
+    <resultDimension>
+        <key>Diameter Elektro</key>
+        <offset>-25</offset>
+        <textDirectionDeg>90</textDirectionDeg>
+        <colorR>255</colorR>
+        <colorG>255</colorG>
+        <colorB>0</colorB>
+    </resultDimension>
 
     <resultElement>
         <key>MotorControllerPosition</key>
