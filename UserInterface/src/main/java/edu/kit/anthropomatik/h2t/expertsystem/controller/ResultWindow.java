@@ -1,6 +1,5 @@
 package edu.kit.anthropomatik.h2t.expertsystem.controller;
 
-import edu.kit.anthropomatik.h2t.expertsystem.GUI;
 import edu.kit.anthropomatik.h2t.expertsystem.GuiHelper;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Component;
 import edu.kit.anthropomatik.h2t.expertsystem.model.Result;
@@ -39,8 +38,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.RoundingMode;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.*;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.List;
@@ -62,6 +67,11 @@ public class ResultWindow {
     ResultWindow(FormToolkit formToolkit) {
         this.formToolkit = formToolkit;
         df.setRoundingMode(RoundingMode.CEILING);
+        try {
+            parseXMLFiles();
+        } catch (IOException | URISyntaxException e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
     // from http://git.eclipse.org/c/platform/eclipse.platform.swt.git/tree/examples/org.eclipse.swt
@@ -127,7 +137,27 @@ public class ResultWindow {
         return scaled;
     }
 
-    private void parseXMLFiles() {
+    private static List<String> getResourceFolderFiles() throws URISyntaxException, IOException {
+        List<String> filenames = new ArrayList<>();
+        URI uri = ResultWindow.class.getResource("/structures/").toURI();
+        Path myPath;
+        FileSystem fileSystem = null;
+        if (uri.getScheme().equals("jar")) {
+            fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
+            myPath = fileSystem.getPath("/structures/");
+        } else {
+            myPath = Paths.get(uri);
+        }
+        Files.walk(myPath, 1).forEach(file -> {
+            filenames.add(file.getName(file.getNameCount() - 1).toString());
+        });
+        if (fileSystem != null) {
+            fileSystem.close();
+        }
+        return filenames;
+    }
+
+    private void parseXMLFiles() throws IOException, URISyntaxException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
@@ -136,39 +166,24 @@ public class ResultWindow {
             logger.error(e.getMessage(), e);
             return;
         }
-        try {
-            for (String fileName : getResourceFiles()) {
-                if (fileName.startsWith("Structure_") && fileName.endsWith(".xml")) {
-                    InputStream stream = getClass().getResourceAsStream("/structures/" + fileName);
-                    Document doc;
-                    try {
-                        doc = builder.parse(stream);
-                    } catch (SAXException | IOException e) {
-                        logger.error(e.getMessage(), e);
-                        continue;
-                    }
-                    try {
-                        parseDocument(fileName, doc);
-                    } catch (NullPointerException | NumberFormatException e) {
-                        logger.error("Cannot parse " + fileName, e);
-                    }
+        for (String fileName : getResourceFolderFiles()) {
+            logger.debug("FileName: " + fileName);
+            if (fileName.startsWith("Structure_") && fileName.endsWith(".xml")) {
+                InputStream stream = ResultWindow.class.getResourceAsStream("/structures/" + fileName);
+                Document doc;
+                try {
+                    doc = builder.parse(stream);
+                } catch (SAXException | IOException e) {
+                    logger.error(e.getMessage(), e);
+                    continue;
+                }
+                try {
+                    parseDocument(fileName, doc);
+                } catch (NullPointerException | NumberFormatException e) {
+                    logger.error("Cannot parse " + fileName, e);
                 }
             }
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
         }
-    }
-
-    private List<String> getResourceFiles() throws IOException {
-        List<String> filenames = new ArrayList<>();
-        try (InputStream in = getClass().getResourceAsStream("/structures/"); BufferedReader br = new BufferedReader
-                (new InputStreamReader(in))) {
-            String resource;
-            while ((resource = br.readLine()) != null) {
-                filenames.add(resource);
-            }
-        }
-        return filenames;
     }
 
     private void parseDocument(String fileName, Document doc) {
@@ -265,13 +280,11 @@ public class ResultWindow {
     public void showWindow(String componentToBeDesigned, Result result) {
         logger.debug("Open new result window");
         isFirstTimeResized = true;
-        //TODO move back to constructor
-        parseXMLFiles();
         Shell newShell = new Shell();
         newShell.setText("KIT Expert System Humanoid Robot Component Reasoner - Result");
-        newShell.setImage(SWTResourceManager.getImage(GUI.class, "/logos/H2T_logo.png"));
+        newShell.setImage(SWTResourceManager.getImage(ResultWindow.class, "/logos/H2T_logo.png"));
 
-        PDDocument document = loadAndModifyPDFs(newShell, componentToBeDesigned, result);
+        PDDocument document = loadAndModifyPDFs(componentToBeDesigned, result);
         newShell.addDisposeListener(event -> {
             try {
                 document.close();
@@ -307,15 +320,12 @@ public class ResultWindow {
 
         visualizeDocument(newShell, document, size);
 
-        //TODO remove
-        newShell.setMaximized(true);
         newShell.open();
         newShell.layout();
-        newShell.setLocation(0, 0);
         // maybe readAndDispatch in thread -> threadPool
     }
 
-    private PDDocument loadAndModifyPDFs(Shell newShell, String componentToBeDesigned, Result result) {
+    private PDDocument loadAndModifyPDFs(String componentToBeDesigned, Result result) {
         List<MyDocument> myDocuments = handlePDFs(componentToBeDesigned, result);
         myDocuments.sort(Comparator.comparingInt(doc -> doc.resultWindowOption.getOrderPositionToDraw()));
 
@@ -360,8 +370,8 @@ public class ResultWindow {
         resultWindowOptions.entrySet().stream().filter(entry -> componentToBeDesigned.equals(entry.getValue()
                 .getComponentToBeDesigned()) && checkReqContainted(result, entry)).forEach(entry -> {
             try {
-                PDDocument document = PDDocument.load(getClass().getResourceAsStream("/structures/" + entry.getKey()
-                        + ".pdf"));
+                PDDocument document = PDDocument.load(ResultWindow.class.getResourceAsStream("/structures/" + entry
+                        .getKey() + ".pdf"));
                 MyDocument myDocument = handlePDF(document, result, entry.getValue());
                 myDocuments.add(myDocument);
             } catch (IOException e) {
