@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component"
      xml:base="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component"
+     xmlns:dct="http://purl.org/dc/terms/"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:dct="http://purl.org/dc/terms/"
      xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#">
     <owl:Ontology rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component">
         <dct:license rdf:resource="https://opensource.org/licenses/MIT"/>
@@ -9028,7 +9028,7 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasWeight_m_unit_kg"/>
-                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.002</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
