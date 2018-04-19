@@ -61,6 +61,15 @@
     
 
 
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro -->
+
+    <owl:DatatypeProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro">
+        <rdfs:subPropertyOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasValue"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCurrentCircuitsNo -->
 
     <owl:DatatypeProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCurrentCircuitsNo">
@@ -494,6 +503,12 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1000.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.5</owl:hasValue>
             </owl:Restriction>
@@ -564,6 +579,12 @@
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#has20A"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1034.0</owl:hasValue>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -642,6 +663,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#AEonAxis">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#AbsoluteEncoder"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">15.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionAEonAxisLength_unit_mm"/>
@@ -2685,6 +2712,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ElmoServoDrive"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">716.65</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">35.0</owl:hasValue>
             </owl:Restriction>
@@ -2709,6 +2742,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#EncoderBased">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#TorqueSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthFaktor"/>
@@ -2849,6 +2888,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">800.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">18.9</owl:hasValue>
             </owl:Restriction>
@@ -2945,6 +2990,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Size_17">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">900.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
@@ -3045,6 +3096,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1000.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">27.0</owl:hasValue>
             </owl:Restriction>
@@ -3143,6 +3200,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1163.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">33.6</owl:hasValue>
             </owl:Restriction>
@@ -3239,6 +3302,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Size_32">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CPL_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1200.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
@@ -3530,6 +3599,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">903.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameterWaveGenerator_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20.0</owl:hasValue>
             </owl:Restriction>
@@ -3608,6 +3683,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Common_Size_25">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1012.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameterWaveGenerator_unit_mm"/>
@@ -3690,6 +3771,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1200.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameterWaveGenerator_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">32.0</owl:hasValue>
             </owl:Restriction>
@@ -3770,6 +3857,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1300.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameterWaveGenerator_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">40.0</owl:hasValue>
             </owl:Restriction>
@@ -3848,6 +3941,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Common_Size_50">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1400.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameterWaveGenerator_unit_mm"/>
@@ -4090,6 +4189,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">700.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.0</owl:hasValue>
             </owl:Restriction>
@@ -4192,6 +4297,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Size_17">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_CSD_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">800.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
@@ -4318,6 +4429,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_HFUC_2A_Sizes"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">600.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">12.0</owl:hasValue>
             </owl:Restriction>
@@ -4421,6 +4538,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_HFUC_2A_Size_8">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Gear_HFUC_2A_Sizes"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">500.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionDiameterPitchCircleFlexSpline_T_unit_mm"/>
@@ -4772,6 +4895,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1950.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">74.0</owl:hasValue>
             </owl:Restriction>
@@ -4832,6 +4961,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM115x50">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2350.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -4896,6 +5031,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">520.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">11.6</owl:hasValue>
             </owl:Restriction>
@@ -4956,6 +5097,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM25x08">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">560.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5020,6 +5167,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">650.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">18.0</owl:hasValue>
             </owl:Restriction>
@@ -5080,6 +5233,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM38x12">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">700.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5144,6 +5303,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">830.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</owl:hasValue>
             </owl:Restriction>
@@ -5204,6 +5369,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM50x14">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">870.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5268,6 +5439,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">900.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">42.0</owl:hasValue>
             </owl:Restriction>
@@ -5328,6 +5505,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM70x18">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">950.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5392,6 +5575,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">970.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">52.0</owl:hasValue>
             </owl:Restriction>
@@ -5452,6 +5641,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM85x13">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">970.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5516,6 +5711,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1080.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">52.0</owl:hasValue>
             </owl:Restriction>
@@ -5576,6 +5777,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#ILM85x26">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDriveServoKibILM"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1232.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5745,6 +5952,12 @@
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#AE-MBAD01_05"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">206.1</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25.0</owl:hasValue>
             </owl:Restriction>
@@ -5770,6 +5983,12 @@
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#MBA8_MRA8D080AB055E00">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#AE-MBAD01_05"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">219.55</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -5825,6 +6044,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#AbsoluteEncoder"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionAEonAxisLength_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -5869,6 +6094,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#BrakeVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -5890,6 +6121,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#HallSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -5909,6 +6146,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#NoIE">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#IncrementalEncoderVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"/>
@@ -5938,6 +6181,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#IMUVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasWeight_m_unit_kg"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -5951,6 +6200,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#NoMC">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#MotorController"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
@@ -5977,6 +6232,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#NoSPCB">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SensorPCBVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
@@ -6030,6 +6291,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthInner_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
             </owl:Restriction>
@@ -6061,6 +6328,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#NoTS">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#TorqueSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthFaktor"/>
@@ -6123,6 +6396,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDrive"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">26.0</owl:hasValue>
             </owl:Restriction>
@@ -6147,6 +6426,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RD50-RSV50">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDrive"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
@@ -6175,6 +6460,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDrive"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">17.9</owl:hasValue>
             </owl:Restriction>
@@ -6199,6 +6490,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RD85-RSV80">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#RoboDrive"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">300.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
@@ -6977,6 +7274,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SBN_MiniatureBallBearing">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#DriveBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SBN_RadialGrooveBallBearing"/>
     </owl:Class>
     
@@ -7178,6 +7481,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SBN_RadialGrooveBallBearing">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#DriveBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">14.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -7186,6 +7495,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SBN_ThinSection4PointBearing">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#OutputBearing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionScrewInnerDiameterM_d_unit_mm"/>
@@ -7207,6 +7522,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SNE01">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#_1000MEthernet"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -7951,6 +8272,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">329.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">6.97</owl:hasValue>
             </owl:Restriction>
@@ -8025,6 +8352,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">279.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.78</owl:hasValue>
             </owl:Restriction>
@@ -8073,6 +8406,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Screw">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#Device"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.2</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>It is not designed to have multiple versions of one screw size (M).</rdfs:comment>
     </owl:Class>
     
@@ -8116,6 +8455,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#TorqueSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">584.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthFaktor"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</owl:hasValue>
             </owl:Restriction>
@@ -8152,6 +8497,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#StrainGaugeBased_SpokeWheel">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#TorqueSensorVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">584.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthFaktor"/>
@@ -8209,6 +8560,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.0</owl:hasValue>
             </owl:Restriction>
@@ -8251,6 +8608,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA_11008C">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -8297,6 +8660,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</owl:hasValue>
             </owl:Restriction>
@@ -8339,6 +8708,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA_13008C">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -8385,6 +8760,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">140.0</owl:hasValue>
             </owl:Restriction>
@@ -8427,6 +8808,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA_15008C">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -8473,6 +8860,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</owl:hasValue>
             </owl:Restriction>
@@ -8515,6 +8908,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA_6008C">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -8561,6 +8960,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">70.0</owl:hasValue>
             </owl:Restriction>
@@ -8603,6 +9008,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA_8008C">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
@@ -8649,6 +9060,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RA-C"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">43.5</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionInnerDiameter_d_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90.0</owl:hasValue>
             </owl:Restriction>
@@ -8691,6 +9108,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK_RB">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#THK"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">30.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -8981,6 +9404,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#HallSensorVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</owl:hasValue>
             </owl:Restriction>
@@ -8999,6 +9428,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#WithIE">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#IncrementalEncoderVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">16.52</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLengthIncrementalEncoderConnector_L_unit_mm"/>
@@ -9027,6 +9462,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#IMUVariants"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">9.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasWeight_m_unit_kg"/>
                 <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.002</owl:hasValue>
             </owl:Restriction>
@@ -9039,6 +9480,12 @@ But it is set higher, so all gear boxes have a fitting absolutEncoder</rdfs:comm
 
     <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#WithSPCB">
         <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#SensorPCBVariants"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasCost_c_euro"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">150.0</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/component#hasDimensionLength_L_unit_mm"/>
