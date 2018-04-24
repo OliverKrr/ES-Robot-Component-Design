@@ -1971,14 +1971,14 @@ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(
 
 SensorActuatorUnitPowerDensityCalcRule:
 SatisfiedSensorActuatorUnit(?sac) ^ hasCosts(?sac, ?co) ^ hasHeight(?co, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasWeight(?l, ?w) ^ hasLengthElectro(?w, ?le) ^ hasVolumeDrive(?le, ?vd) ^ hasVolumeOutput(?vd, ?vo) ^ hasLengthOutput(?vo, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
-hasWeight_m_unit_kg(?w, ?m_ges) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res) ^ hasDimensionHeight_H_unit_mm(?h, ?H_res) ^
+hasCost_c_euro(?co, ?c_ges) ^ hasWeight_m_unit_kg(?w, ?m_ges) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res) ^ hasDimensionHeight_H_unit_mm(?h, ?H_res) ^
 hasDimensionLength_L_unit_mm(?li, ?L_drive) ^ hasDimensionLength_L_unit_mm(?lo, ?L_output) ^ hasDimensionLength_L_unit_mm(?le, ?L_electro) ^
 hasDimensionOuterDiameter_D_unit_mm(?do, ?D_output) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_electro) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_drive) ^
 hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(?sac, ?M_res) ^
 swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_electro2, ?D_electro, ?D_electro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
 swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_electro, ?L_electro, ?D_electro2) ^
 swrlb:add(?temp1, ?fac_output, ?fac_electro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
--> hasWeight_m_unit_kg(?sac, ?m_ges) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElectro_L_unit_mm(?sac, ?L_electro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElectro_D_unit_mm(?sac, ?D_electro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex_PX(?sac, 1.0)
+-> hasWeight_m_unit_kg(?sac, ?m_ges) ^ hasCost_c_euro(?sac, ?c_ges) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElectro_L_unit_mm(?sac, ?L_electro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElectro_D_unit_mm(?sac, ?D_electro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex_PX(?sac, 1.0)
 
 
 
