@@ -701,7 +701,7 @@ swrlb:equal(?L_sr2, ?L_sr1) ^ swrlb:equal(?D_sr2, ?D_sr1)
 
 
 DiameterDriveBearingMatchLinearSatisfyRule:
-DiameterDriveBearingMatchLinear(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
+DiameterDriveBearingMatchLinear(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionInnerDiameter_d_unit_mm(?db, ?d_ib) ^
 swrlb:lessThanOrEqual(?d_ib, ?d_m)
 -> HalfSatisfiedDiameterDriveBearingMatchLinear(?didbm)
@@ -724,7 +724,7 @@ swrlb:equal(?d_ib2, ?d_ib1)
 
 
 DiameterDriveBearingMatchCompressedBeforeSatisfyRule:
-DiameterDriveBearingMatchCompressed(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
+DiameterDriveBearingMatchCompressed(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasDriveBearing(?didbm, ?db) ^ hasConstant(?didbm, ?con) ^ hasCurrentRequirement(?didbm, ?r) ^
 hasDimensionInnerDiameter_d_unit_mm(?m, ?d_m) ^ hasDimensionOuterDiameter_D_unit_mm(?db, ?D_db) ^ thicknessMotorShaft(?con, ?tms_con) ^
 swrlb:multiply(?tms_con2, 2.0, ?tms_con) ^ swrlb:subtract(?temp, ?d_m, ?tms_con2) ^
 swrlb:lessThanOrEqual(?D_db, ?temp)
@@ -747,7 +747,7 @@ thicknessInnerShaft(?con, ?tis_con) ^ thicknessCableChannel(?con, ?tcc_con) ^ th
 -> has1(?didbm, ?tis_con) ^ has2(?didbm, ?tcc_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w)
 
 DiameterDriveBearingMatchCompressedSatisfy2Rule:
-BeforeHalfSatisfiedDiameterDriveBearingMatchCompressed(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
+BeforeHalfSatisfiedDiameterDriveBearingMatchCompressed(?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^
 has1(?didbm, ?tis_con) ^ has2(?didbm, ?tcc_con) ^ has3(?didbm, ?trsd_con) ^ has4(?didbm, ?D_w) ^
 hasDimensionInnerDiameter_d_unit_mm(?sr, ?d_sr) ^
 swrlb:multiply(?tis_con2, 2.0, ?tis_con) ^ swrlb:multiply(?tcc_con2, 2.0, ?tcc_con) ^ swrlb:add(?temp1, ?tis_con2, ?tcc_con2) ^ swrlb:add(?temp2, ?temp1, ?trsd_con) ^ 
@@ -873,13 +873,13 @@ WithIE(?ie) ^ NoHS(?hs)
 
 
 LengthDriveBeforeEvaluate1Rule:
-LengthDrive(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+LengthDrive(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionAEonAxisLength_unit_mm(?ab, ?L_ab) ^
 swrlb:greaterThan(?L_ie, ?L_ab)
 -> has1(?li, ?L_ie)
 
 LengthDriveBeforeEvaluate2Rule:
-LengthDrive(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+LengthDrive(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionLength_L_unit_mm(?ie, ?L_ie) ^ hasDimensionAEonAxisLength_unit_mm(?ab, ?L_ab) ^
 swrlb:lessThanOrEqual(?L_ie, ?L_ab)
 -> has1(?li, ?L_ab)
@@ -887,7 +887,7 @@ swrlb:lessThanOrEqual(?L_ie, ?L_ab)
 
 
 LengthDriveLinearCalcRule:
-LengthDriveLinear(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasMotorFeedback(?li, ?mf) ^ hasHallSensor(?mf, ?hs) ^ hasConstant(?li, ?con) ^
+LengthDriveLinear(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasMotorFeedback(?li, ?mf) ^ hasHallSensor(?mf, ?hs) ^ hasConstant(?li, ?con) ^
 has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?mb, ?L_mb) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ hasDimensionLength_L_unit_mm(?hs, ?L_hs) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ has1(?g, ?overlapping_g) ^
 swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?L_temp1, ?L_m, ?L_fixedB) ^ swrlb:add(?L_temp2, ?L_temp1, ?L_mb) ^ swrlb:add(?L_temp3, ?L_temp2, ?L_hs) ^ swrlb:add(?L_2, ?L_temp3, ?overlapping_g) ^ swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:add(?L_max1, ?L_floatB, ?L_ie) ^ swrlb:add(?L_max2, ?mc_con, ?mw_con)
 -> has2(?li, ?L_2) ^ hasMax1_1(?li, ?L_max1) ^ hasMax1_2(?li, ?L_max2) ^ Linear(?li)
@@ -910,7 +910,7 @@ swrlb:add(?L_ges, ?L_2, ?L_max2)
 
 
 LengthDriveCompressedCalcRule:
-LengthDriveCompressed(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasMotorFeedback(?li, ?mf) ^ hasHallSensor(?mf, ?hs) ^ hasConstant(?li, ?con) ^
+LengthDriveCompressed(?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDriveBearing(?didbm, ?db) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasMotorFeedback(?li, ?mf) ^ hasHallSensor(?mf, ?hs) ^ hasConstant(?li, ?con) ^
 has1(?li, ?L_ie) ^ hasDimensionLength_L_unit_mm(?m, ?L_m) ^ hasDimensionLength_L_unit_mm(?mb, ?L_mb) ^ hasDimensionLength_L_unit_mm(?db, ?L_ib) ^ lengthFloatBearingOffset(?con, ?fbo_con) ^ has1(?g, ?overlapping_g) ^ has2(?g, ?d_g_wg) ^ hasDimensionLength_L_unit_mm(?hs, ?L_hs) ^ lengthMotorCover(?con, ?mc_con) ^ lengthMotorWiring(?con, ?mw_con) ^ lengthMotorStopBracket(?con, ?msb_con) ^ lengthRotationGap(?con, ?rg_con) ^
 swrlb:add(?temp1, ?mc_con, ?mw_con) ^ swrlb:add(?temp2, ?temp1, ?L_m) ^ swrlb:add(?temp25, ?temp2, ?L_mb) ^ swrlb:add(?temp26, ?temp25, ?L_hs) ^ swrlb:add(?temp3, ?temp26, ?msb_con) ^ swrlb:add(?L_max1_1, ?temp3, ?overlapping_g) ^
 swrlb:add(?L_floatB, ?L_ib, ?fbo_con) ^ swrlb:multiply(?L_fixedB, ?L_ib, 2.0) ^ swrlb:add(?temp4, ?L_floatB, ?L_fixedB) ^ swrlb:add(?L_2, ?d_g_wg, ?temp4) ^
@@ -1290,7 +1290,7 @@ hasDimensionScrewInnerDiameterM_d_unit_mm(?ob, ?d_ob) ^ Screw(?s_ob) ^ hasDimens
 
 LengthOutputBeforeSatisfyRule:
 LengthOutput(?lo) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^
-hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^
+hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMotor(?de, ?m) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^
 SatisfiedMotorGearboxMatchForSensorActuatorUnit(?ma) ^ hasGearbox(?ma, ?g) ^ hasMotor(?ma, ?m)
 -> BeforeSatisfiedLengthOutput(?lo)
 
@@ -1430,59 +1430,59 @@ swrlb:add(?L_ges, ?L_max3_2, ?L_rest)
 
 
 
-LengthElektroCalc1Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^
-hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+LengthElectroCalc1Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^
+hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ab, ?L_abc)
 swrlb:greaterThan(?L_iec, ?L_abc)
 -> has1(?le, ?L_iec)
 
-LengthElektroCalc2Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^
-hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+LengthElectroCalc2Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^
+hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ie, ?L_iec) ^ hasDimensionLengthIncrementalEncoderConnector_L_unit_mm(?ab, ?L_abc)
 swrlb:lessThanOrEqual(?L_iec, ?L_abc)
 -> has1(?le, ?L_abc)
 
 
-LengthElektroSatisfy1Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+LengthElectroSatisfy1Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^
 swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
 swrlb:greaterThan(?L_1, ?L_wiringConduit)
 -> hasMax1_1(?le, ?L_1)
 
-LengthElektroSatisfy2Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+LengthElectroSatisfy2Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 has5(?mcpm, ?L_wiringConduit) ^ has1(?mcpm, ?L_axial) ^ has5(?lo, ?L_elecInnerOnDriveSide) ^
 swrlb:add(?L_1, ?L_axial, ?L_elecInnerOnDriveSide) ^
 swrlb:lessThanOrEqual(?L_1, ?L_wiringConduit)
 -> hasMax1_1(?le, ?L_wiringConduit)
 
 
-LengthElektroSatisfy3Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+LengthElectroSatisfy3Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangentially) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
 swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangentially) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
 swrlb:greaterThan(?L_max1_1, ?L_max1_2)
 -> hasMax2_1(?le, ?L_max1_1)
 
-LengthElektroSatisfy4Rule:
-LengthElektro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+LengthElectroSatisfy4Rule:
+LengthElectro(?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasMax1_1(?le, ?L_max1_1) ^ hasDimensionScrewInnerDiameterCircularSplineM_d_unit_mm(?g, ?d_g_cs) ^ has3(?mcpm, ?L_tangentially) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^
 swrlb:multiply(?d_s15, 1.5, ?d_g_cs) ^ swrlb:add(?L_mc_tang, ?d_s15, ?L_tangentially) ^ swrlb:subtract(?L_max1_2, ?L_mc_tang, ?L_li) ^
 swrlb:lessThanOrEqual(?L_max1_1, ?L_max1_2)
 -> hasMax2_1(?le, ?L_max1_2)
 
 
-LengthElektroSatisfy5Rule:
-LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
+LengthElectroSatisfy5Rule:
+LengthElectro(?le) ^ hasCurrentRequirement(?le, ?r) ^
 hasMax2_1(?le, ?L_max2_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:greaterThan(?L_in_connector, ?L_max2_1) ^ swrlb:add(?L_le, ?L_in_connector, ?t_req_c)
 -> hasDimensionLength_L_unit_mm(?le, ?L_le)
 
-LengthElektroSatisfy6Rule:
-LengthElektro(?le) ^ hasCurrentRequirement(?le, ?r) ^
+LengthElectroSatisfy6Rule:
+LengthElectro(?le) ^ hasCurrentRequirement(?le, ?r) ^
 hasMax2_1(?le, ?L_max2_1) ^ has1(?le, ?L_in_connector) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_1) ^ swrlb:add(?L_le, ?L_max2_1, ?t_req_c)
 -> hasDimensionLength_L_unit_mm(?le, ?L_le)
@@ -1490,7 +1490,7 @@ swrlb:lessThanOrEqual(?L_in_connector, ?L_max2_1) ^ swrlb:add(?L_le, ?L_max2_1, 
 
 
 LengthCalcRule:
-Length(?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^
+Length(?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^
 hasDimensionLength_L_unit_mm(?le, ?L_le) ^ hasDimensionLength_L_unit_mm(?li, ?L_li) ^ hasDimensionLength_L_unit_mm(?lo, ?L_lo) ^
 swrlb:add(?L_temp1, ?L_li, ?L_lo) ^ swrlb:add(?L_ges, ?L_temp1, ?L_le)
 -> hasDimensionLength_L_unit_mm(?l, ?L_ges)
@@ -1504,16 +1504,16 @@ swrlb:lessThanOrEqual(?L_ges, ?L_req_max) ^ swrlb:greaterThanOrEqual(?L_ges, ?L_
 
 
 
-DiameterElektroOutputLinearEvaluateAndCalc1Rule:
-DiameterElektroOutputLinear(?de) ^ hasMotor(?de, ?m) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+DiameterElectroOutputLinearEvaluateAndCalc1Rule:
+DiameterElectroOutputLinear(?de) ^ hasMotor(?de, ?m) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ has2(?mcpm, ?H_axial) ^
 swrlb:greaterThan(?D_m, ?H_axial) ^
 hasCurrentRequirement(?de, ?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2, ?D_m)
 -> hasDimensionOuterDiameter_D_unit_mm(?de, ?D_drive_electro)
 
-DiameterElektroOutputLinearEvaluateAndCalc2Rule:
-DiameterElektroOutputLinear(?de) ^ hasMotor(?de, ?m) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+DiameterElectroOutputLinearEvaluateAndCalc2Rule:
+DiameterElectroOutputLinear(?de) ^ hasMotor(?de, ?m) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ has2(?mcpm, ?H_axial) ^
 swrlb:lessThanOrEqual(?D_m, ?H_axial) ^
 hasCurrentRequirement(?de, ?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
@@ -1521,41 +1521,41 @@ swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2
 -> hasDimensionOuterDiameter_D_unit_mm(?de, ?D_drive_electro)
 
 
-DiameterElektroOutputCompressedEvaluate1Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+DiameterElectroOutputCompressedEvaluate1Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
 swrlb:greaterThan(?D_ab, ?D_spcb)
 -> hasMax1_1(?de, ?D_ab)
 
-DiameterElektroOutputCompressedEvaluate2Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
+DiameterElectroOutputCompressedEvaluate2Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^
 hasDimensionOuterDiameter_D_unit_mm(?ab, ?D_ab) ^ hasDimensionOuterDiameter_D_unit_mm(?spcbv, ?D_spcb) ^
 swrlb:lessThanOrEqual(?D_ab, ?D_spcb)
 -> hasMax1_1(?de, ?D_spcb)
 
-DiameterElektroOutputCompressedEvaluate3Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMotor(?de, ?m)
+DiameterElectroOutputCompressedEvaluate3Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMotor(?de, ?m)
 hasMax1_1(?de, ?D_max1) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^
 swrlb:greaterThan(?D_max1, ?D_m)
 -> hasMax2_1(?de, ?D_max1)
 
-DiameterElektroOutputCompressedEvaluate4Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMotor(?de, ?m)
+DiameterElectroOutputCompressedEvaluate4Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMotor(?de, ?m)
 hasMax1_1(?de, ?D_max1) ^ hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^
 swrlb:lessThanOrEqual(?D_max1, ?D_m)
 -> hasMax2_1(?de, ?D_m)
 
 
-DiameterElektroOutputCompressedEvaluateAndCalc1Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+DiameterElectroOutputCompressedEvaluateAndCalc1Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasMax2_1(?de, ?D_max2_1) ^ has2(?mcpm, ?H_axial) ^
 swrlb:greaterThan(?D_max2_1, ?H_axial) ^
 hasCurrentRequirement(?de, ?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
 swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2, ?D_max2_1)
 -> hasDimensionOuterDiameter_D_unit_mm(?de, ?D_drive_electro)
 
-DiameterElektroOutputCompressedEvaluateAndCalc2Rule:
-DiameterElektroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
+DiameterElectroOutputCompressedEvaluateAndCalc2Rule:
+DiameterElectroOutputCompressed(?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^
 hasMax2_1(?de, ?D_max2_1) ^ has2(?mcpm, ?H_axial) ^
 swrlb:lessThanOrEqual(?D_max2_1, ?H_axial) ^
 hasCurrentRequirement(?de, ?r) ^ hasThicknessCoverReq_t_unit_mm(?r, ?t_req_c) ^
@@ -1563,24 +1563,24 @@ swrlb:multiply(?t_req_c2, 2.0, ?t_req_c) ^ swrlb:add(?D_drive_electro, ?t_req_c2
 -> hasDimensionOuterDiameter_D_unit_mm(?de, ?D_drive_electro)
 
 
-DiameterElektroLinearSatisfyRule:
-DiameterElektroOutputLinear(?de) ^
+DiameterElectroLinearSatisfyRule:
+DiameterElectroOutputLinear(?de) ^
 hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearboxMatchForSensorActuatorUnit(?ma) ^ hasGearbox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
-hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max)
--> SatisfiedDiameterElektroOutputLinear(?de)
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_electro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_electro, ?D_req_max)
+-> SatisfiedDiameterElectroOutputLinear(?de)
 
-DiameterElektroCompressedSatisfyRule:
-DiameterElektroOutputCompressed(?de) ^
+DiameterElectroCompressedSatisfyRule:
+DiameterElectroOutputCompressed(?de) ^
 hasSR_TS_AE_SPCB_Match(?de, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearboxMatchForSensorActuatorUnit(?ma) ^ hasGearbox(?ma, ?g) ^ hasMotor(?ma, ?m) ^
-hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_elektro, ?D_req_max)
--> SatisfiedDiameterElektroOutputCompressed(?de)
+hasDimensionOuterDiameter_D_unit_mm(?de, ?D_electro) ^ hasCurrentRequirement(?de, ?r) ^ hasDimensionOuterDiameterReqMax_D_unit_mm(?r, ?D_req_max) ^ swrlb:lessThanOrEqual(?D_electro, ?D_req_max)
+-> SatisfiedDiameterElectroOutputCompressed(?de)
 
 
 
 DiameterDriveCalcRule:
-DiameterDrive(?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^
+DiameterDrive(?di) ^ hasDiameterElectro(?di, ?de) ^ hasMotor(?de, ?m) ^
 hasDimensionOuterDiameter_D_unit_mm(?m, ?D_m) ^ hasCurrentRequirement(?di, ?r) ^ hasThicknessDriveCaseReq_D_unit_mm(?r, ?tec_r) ^
 swrlb:multiply(?dec, ?tec_r, 2.0) ^ swrlb:add(?D_input, ?dec, ?D_m)
 -> hasDimensionOuterDiameter_D_unit_mm(?di, ?D_input)
@@ -1838,25 +1838,25 @@ chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "TwoSided")
 
 
 DiameterEvaluate1Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
 hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
 swrlb:greaterThan(?D_di, ?D_do)
 -> hasMax1_1(?d, ?D_di)
 
 DiameterEvaluate2Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
 hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ hasDimensionOuterDiameter_D_unit_mm(?do, ?D_do) ^
 swrlb:lessThanOrEqual(?D_di, ?D_do)
 -> hasMax1_1(?d, ?D_do)
 
 DiameterEvaluate3Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^
 hasMax1_1(?d, ?D_max1) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_e) ^
 swrlb:greaterThan(?D_max1, ?D_e)
 -> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_max1)
 
 DiameterEvaluate4Rule:
-Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^
+Diameter(?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^
 hasMax1_1(?d, ?D_max1) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_e) ^
 swrlb:lessThanOrEqual(?D_max1, ?D_e)
 -> hasDimensionOuterDiameter_D_unit_mm(?d, ?D_e)
@@ -1871,7 +1871,7 @@ swrlb:lessThanOrEqual(?D_ges, ?D_req_max) ^ swrlb:greaterThanOrEqual(?D_ges, ?D_
 
 
 HeightBeforeEvaluateAndCalcRule:
-Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasConstant(?h, ?con) ^
+Height(?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasConstant(?h, ?con) ^
 hasDimensionOuterDiameter_D_unit_mm(?di, ?D_di) ^ has4(?mcpm, ?H_tangentially) ^ safetyDistanceElectro(?con, ?sde_con) ^ hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^
 swrlb:divide(?D_diHalf, ?D_di, 2.0) ^ swrlb:add(?temp2, ?D_diHalf, ?H_tangentially) ^ swrlb:add(?temp3, ?temp2, ?sde_con) ^ swrlb:divide(?D_gesHalf, ?D_ges, 2.0) ^ swrlb:subtract(?H_overlap, ?temp3, ?D_gesHalf) ^ swrlb:add(?H_max2, ?H_overlap, ?D_ges)
 -> hasMax1_1(?h, ?D_ges) ^ hasMax1_2(?h, ?H_max2)
@@ -1900,8 +1900,8 @@ swrlb:lessThanOrEqual(?H_max, ?H_max_allowed)
 
 
 SensorActuatorUnitMotorGearboxMatchSatisfyRule:
-SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^
-hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMotor(?de, ?m) ^
+SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^
+hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMotor(?de, ?m) ^
 SatisfiedMotorGearboxMatchForSensorActuatorUnit(?ma) ^ hasMotor(?ma, ?m) ^ hasGearbox(?ma, ?g) ^
 hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(?ma, ?M_res)
 -> SatisfiedRotationSpeed(?sac) ^ hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ SatisfiedPeakTorque(?sac) ^ hasPeakTorqueRes_T_max_unit_Nm(?sac, ?M_res)
@@ -1909,20 +1909,20 @@ hasMaximalSpeedRes_n_max_unit_rpm(?ma, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(
 
 
 SensorActuatorUnitPowerDensityCalcRule:
-SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
+SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^
 hasDimensionOuterDiameter_D_unit_mm(?d, ?D_ges) ^ hasDimensionLength_L_unit_mm(?l, ?L_res) ^ hasDimensionHeight_H_unit_mm(?h, ?H_res) ^
-hasDimensionLength_L_unit_mm(?li, ?L_drive) ^ hasDimensionLength_L_unit_mm(?lo, ?L_output) ^ hasDimensionLength_L_unit_mm(?le, ?L_elektro) ^
-hasDimensionOuterDiameter_D_unit_mm(?do, ?D_output) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_elektro) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_drive) ^
+hasDimensionLength_L_unit_mm(?li, ?L_drive) ^ hasDimensionLength_L_unit_mm(?lo, ?L_output) ^ hasDimensionLength_L_unit_mm(?le, ?L_electro) ^
+hasDimensionOuterDiameter_D_unit_mm(?do, ?D_output) ^ hasDimensionOuterDiameter_D_unit_mm(?de, ?D_electro) ^ hasDimensionOuterDiameter_D_unit_mm(?di, ?D_drive) ^
 hasMaximalSpeedRes_n_max_unit_rpm(?sac, ?n_res) ^ hasPeakTorqueRes_T_max_unit_Nm(?sac, ?M_res) ^
-swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_elektro2, ?D_elektro, ?D_elektro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
-swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_elektro, ?L_elektro, ?D_elektro2) ^
-swrlb:add(?temp1, ?fac_output, ?fac_elektro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
--> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElektro_L_unit_mm(?sac, ?L_elektro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElektro_D_unit_mm(?sac, ?D_elektro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex_PX(?sac, 1.0)
+swrlb:multiply(?D_output2, ?D_output, ?D_output) ^ swrlb:multiply(?D_electro2, ?D_electro, ?D_electro) ^ swrlb:multiply(?D_drive2, ?D_drive, ?D_drive) ^
+swrlb:multiply(?fac_output, ?L_output, ?D_output2) ^ swrlb:multiply(?fac_drive, ?L_drive, ?D_drive2) ^ swrlb:multiply(?fac_electro, ?L_electro, ?D_electro2) ^
+swrlb:add(?temp1, ?fac_output, ?fac_electro) ^ swrlb:add(?temp2, ?temp1, ?fac_drive) ^ swrlb:multiply(?temp3, ?n_res, ?M_res) ^ swrlb:divide(?pdFac, ?temp3, ?temp2) ^ swrlb:multiply(?pdFac2, 8000000.0, ?pdFac) ^ swrlb:divide(?pd, ?pdFac2, 60.0)
+-> SatisfiedOuterDiameter(?sac) ^ hasDimensionOuterDiameter_D_unit_mm(?sac, ?D_ges) ^ SatisfiedDimensionLength(?sac) ^ hasDimensionLength_L_unit_mm(?sac, ?L_res) ^ hasDimensionHeight_H_unit_mm(?sac, ?H_res) ^ hasDimensionLengthDrive_L_unit_mm(?sac, ?L_drive) ^ hasDimensionLengthOutput_L_unit_mm(?sac, ?L_output) ^ hasDimensionLengthElectro_L_unit_mm(?sac, ?L_electro) ^ hasDimensionOuterDiameterOutput_D_unit_mm(?sac, ?D_output) ^ hasDimensionOuterDiameterElectro_D_unit_mm(?sac, ?D_electro) ^ hasDimensionOuterDiameterDrive_D_unit_mm(?sac, ?D_drive) ^ hasPowerDensity(?sac, ?pd) ^ hasNRMSD(?sac, 1.0) ^ hasPerformanceIndex_PX(?sac, 1.0)
 
 
 
 SensorActuatorUnitWeightCalcRule:
-SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasTS_AE_Match(?gsrtsabspcb, ?tsab) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+SensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasTS_AE_Match(?gsrtsabspcb, ?tsab) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
 hasNumberOfAbsoluteEncoder(?tsab, ?ab_count) ^ hasNumberOfOutputBearings(?lo, ?ob_count) ^
 hasWeight_m_unit_kg(?ab, ?m_ab) ^ hasWeight_m_unit_kg(?ob, ?m_ob) ^ hasWeight_m_unit_kg(?s_ob, ?s_ob_w) ^
 swrlb:multiply(?m_ab_tot, ?ab_count, ?m_ab) ^ swrlb:multiply(?m_ob_tot, ?ob_count, ?m_ob) ^ swrlb:multiply(?s_ob_w_temp, ?ob_count, ?s_ob_w) ^
@@ -1947,7 +1947,7 @@ SensorActuatorUnit(?sac) ^ SatisfiedRotationSpeed(?sac) ^ SatisfiedPeakTorque(?s
 
 
 SensorActuatorUnitIsComposedOfRule:
-SatisfiedSensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElektro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElektro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
+SatisfiedSensorActuatorUnit(?sac) ^ hasHeight(?sac, ?h) ^ hasDiameter(?h, ?d) ^ hasLength(?d, ?l) ^ hasLengthElectro(?l, ?le) ^ hasLengthOutput(?le, ?lo) ^ hasLengthDrive(?lo, ?li) ^ hasDiameterDriveBearingMatch(?li, ?didbm) ^ hasDiameterDrive(?didbm, ?di) ^ hasDiameterElectro(?di, ?de) ^ hasMCP_MC_Match(?de, ?mcpm) ^ hasMotorController(?mcpm, ?mc) ^ hasMotorControllerPosition(?mcpm, ?mcp) ^ hasMotorFeedback(?li, ?mf) ^ hasIncrementalEncoder(?mf, ?ie) ^ hasHallSensor(?mf, ?hs) ^ hasMotor(?de, ?m) ^ hasBrake(?m, ?mb) ^ hasDiameterOutputBearingMatch(?lo, ?dob) ^ hasDiameterOutput(?dob, ?do) ^ hasDriveBearing(?didbm, ?db) ^ hasSR_TS_AE_SPCB_Match(?do, ?gsrtsabspcb) ^ hasFlexSplineScrew(?g, ?s_g_fs) ^ hasCircularSplineScrew(?g, ?s_g_cs) ^ hasWaveGeneratorScrew(?g, ?s_g_wg) ^ hasSR_TS_Match(?gsrtsabspcb, ?srtsm) ^ hasSlipRing(?srtsm, ?sr) ^ hasTorqueSensor(?srtsm, ?tos) ^ hasAE_SPCB_Match(?gsrtsabspcb, ?abspcb) ^ hasAbsoluteEncoder(?abspcb, ?ab) ^ hasSensorPCBOutputVariants(?abspcb, ?spcbv) ^ hasGearbox(?spcbv, ?g) ^ hasSensorPCB(?spcbv, ?spcb) ^ hasIMU(?spcbv, ?imu) ^ hasOutputBearing(?dob, ?ob) ^ hasScrew(?ob, ?s_ob) ^
 -> isComposedOfIncrementalEncoder(?sac, ?ie) ^ isComposedOfHallSensor(?sac, ?hs) ^ isComposedOfMotor(?sac, ?m) ^ isComposedOfGearbox(?sac, ?g) ^ GearboxCircularSplineScrew(?s_g_cs) ^ isComposedOfGearboxCircularSplineScrew(?sac, ?s_g_cs) ^ GearboxFlexSplineScrew(?s_g_fs) ^  isComposedOfGearboxFlexSplineScrew(?sac, ?s_g_fs) ^ GearboxWaveGeneratorScrew(?s_g_wg) ^  isComposedOfGearboxWaveGeneratorScrew(?sac, ?s_g_wg) ^ isComposedOfDriveBearing(?sac, ?db) ^ isComposedOfOutputBearing(?sac, ?ob) ^ OutputBearingScrew(?s_ob) ^ isComposedOfOutputBearingScrew(?sac, ?s_ob) ^ isComposedOfMotorController(?sac, ?mc) ^ isComposedOfMotorControllerPosition(?sac, ?mcp) ^ isComposedOfSlipRing(?sac, ?sr) ^ isComposedOfTorqueSensor(?sac, ?tos) ^ isComposedOfAbsoluteEncoder(?sac, ?ab) ^ isComposedOfSensorPCB(?sac, ?spcb) ^ isComposedOfIMU(?sac, ?imu) ^ isComposedOfBrake(?sac, ?mb) ^ isComposedOfDriveStructure(?sac, ?li) ^ isComposedOfOutputStructure(?sac, ?lo)
 
 
