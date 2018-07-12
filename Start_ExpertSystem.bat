@@ -1,1 +1,1 @@
-java -Xms16384m -Xmx16384m -XX:-UseGCOverheadLimit -jar UserInterface/target/ES-UserInterface-1.0.0-jar-with-dependencies.jar
+java -Xms16384m -Xmx16384m -XX:-UseGCOverheadLimit -jar UserInterface/target/ES-UserInterface-2.0.0-jar-with-dependencies.jar
