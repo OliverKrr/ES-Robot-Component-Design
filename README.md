@@ -7,14 +7,15 @@ Humanoid robot design is a complex and challenging task, which requires interdis
 ## Usage of released Expert System
 
 1. Go to "release" tab (next to commits/branches/contributor/MIT)
-2. Download "Start_ExpertSystem.bat" and "ES-UserInterface-1.0.0-jar-with-dependencies.jar"
+2. Download "Start_ExpertSystem.bat" and "ExpertSystem-2.0.0_X_X.jar" depending on your system
 3. Install java (1.8) (mind fitting 32/64 bit version)
-4. (Optional) Open Start_ExpertSystem.bat and adjust Xms/Xmx to your system's memory (has to be a multiply of 1024m)
-5. Start expert system by double click on Start_ExpertSystem.bat (on linux change file to Start_ExpertSystem.sh)
+4. Open Start_ExpertSystem.bat with a notepad and adapt name to downloaded ExpertSystem-2.0.0_X_X.jar
+5. (Optional) Open Start_ExpertSystem.bat and adjust Xms/Xmx to your system's memory (has to be a multiply of 1024m)
+6. Start expert system by double click on Start_ExpertSystem.bat (on linux change file to Start_ExpertSystem.sh)
 
 ### Adapt Ontologies of released Expert System
 
-1. Open ES-UserInterface-1.0.0-jar-with-dependencies.jar with winrar/7-zip(/other)
+1. Open ExpertSystem-2.0.0_X_X.jar with winrar/7-zip(/other)
 2. Copy/Extract SA_Component_Ontology.owl and/or SA_Reasoning_Ontology.owl to the same dir where the jar is located
 3. Adapt ontology (e.g. with Protege editor)
 4. Restart expert system
