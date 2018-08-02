@@ -1825,12 +1825,12 @@ chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Compressed")
 
 
 DiameterOutputBearingMatchOutputCompressedForTwoSidedSatisfy1Rule:
-SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^
+SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasCurrentRequirement(?dob, ?r) ^
 chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "Any")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForTwoSided(?dob)
 
 DiameterOutputBearingMatchOutputCompressedForTwoSidedSatisfy2Rule:
-SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^
+SatisfiedDiameterOutputBearingMatchOutputCompressed(?dob) ^ hasCurrentRequirement(?dob, ?r) ^
 chooseOutputStructureReq(?r, ?cos) ^ swrlb:equal(?cos, "TwoSided")
 -> SatisfiedDiameterOutputBearingMatchOutputCompressedForTwoSided(?dob)
 
