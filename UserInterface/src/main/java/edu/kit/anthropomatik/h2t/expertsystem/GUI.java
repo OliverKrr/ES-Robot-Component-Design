@@ -64,7 +64,7 @@ public class GUI {
     private RequirementsCategory requirementsCategory;
     private RequirementsCategory requirementsOptimization;
     private SolutionTab solutionTab;
-    private LoadAndSaveTab loadAndSaveTab;
+    //private LoadAndSaveTab loadAndSaveTab;
     private Future<?> controllerFuture;
     private Controller controller;
 
@@ -176,7 +176,7 @@ public class GUI {
                     requirementsCategory.disposeNavItems();
                     requirementsCategory.getRequirementsOverallForm().dispose();
                     solutionTab.getSolutionForm().dispose();
-                    loadAndSaveTab.getForm().dispose();
+                    //loadAndSaveTab.getForm().dispose();
                     requirementsOptimization.disposeNavItems();
                     requirementsOptimization.getRequirementsOverallForm().dispose();
                 }
@@ -204,8 +204,8 @@ public class GUI {
                     }
                 });
 
-                loadAndSaveTab = new LoadAndSaveTab(shell, formToolkit, recOfContent);
-                loadAndSaveTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
+                //loadAndSaveTab = new LoadAndSaveTab(shell, formToolkit, recOfContent);
+                //loadAndSaveTab.createContents(controller.getResultWrapper(), controller.getRequirementsWrapper());
 
                 createKitLogo(reqNavBarRec);
                 int newNavBarY = kitLogo.getBounds().y + kitLogo.getBounds().height + errorTextYOffset;
@@ -249,9 +249,9 @@ public class GUI {
         solutionItem.name = "Solution";
         mainNavBars.add(solutionItem);
 
-        NavigationItem loadAndSaveItem = new NavigationItem();
+/*        NavigationItem loadAndSaveItem = new NavigationItem();
         loadAndSaveItem.name = "Load && Save";
-        mainNavBars.add(loadAndSaveItem);
+        mainNavBars.add(loadAndSaveItem);*/
 
         mainNavBarHelper = new NavigationBarHelper(formToolkit, shell);
         return mainNavBarHelper.createHorizontalNavBar(mainNavBars, 0, RequirementsCategory.contentXOffsetStart +
@@ -262,7 +262,7 @@ public class GUI {
         mainNavBars.get(0).compositeToHandle = requirementsCategory.getRequirementsOverallForm();
         mainNavBars.get(1).compositeToHandle = requirementsOptimization.getRequirementsOverallForm();
         mainNavBars.get(2).compositeToHandle = solutionTab.getSolutionForm();
-        mainNavBars.get(3).compositeToHandle = loadAndSaveTab.getForm();
+        //mainNavBars.get(3).compositeToHandle = loadAndSaveTab.getForm();
         mainNavBarHelper.addListener(mainNavBars);
 
         mainNavBars.get(0).item.addSelectionListener(new SelectionAdapter() {
@@ -303,14 +303,14 @@ public class GUI {
             }
         });
 
-        mainNavBars.get(3).item.addSelectionListener(new SelectionAdapter() {
+/*        mainNavBars.get(3).item.addSelectionListener(new SelectionAdapter() {
 
             @Override
             public void widgetSelected(SelectionEvent event) {
                 requirementsCategory.setVisibilityOfNavItems(false);
                 requirementsOptimization.setVisibilityOfNavItems(false);
             }
-        });
+        });*/
 
         mainNavBars.get(0).item.notifyListeners(SWT.Selection, new Event());
     }
@@ -319,13 +319,13 @@ public class GUI {
         solutionTab.getSolutionForm().setWeights(getWeights());
         formToolkit.adapt(solutionTab.getSolutionForm());
 
-        loadAndSaveTab.getForm().setWeights(getWeights());
-        formToolkit.adapt(loadAndSaveTab.getForm());
+        //loadAndSaveTab.getForm().setWeights(getWeights());
+        //formToolkit.adapt(loadAndSaveTab.getForm());
 
         Rectangle updatedRec = requirementsCategory.updateSize(shell.getSize(), getWeights());
         requirementsOptimization.updateSize(updatedRec, getWeights());
         solutionTab.updateSize(updatedRec);
-        loadAndSaveTab.updateSize(updatedRec);
+        //loadAndSaveTab.updateSize(updatedRec);
 
         int toggleDescriptionWidth = GuiHelper.getSizeOfControl(toggleDescription).x;
         int toggleDescriptionX = updatedRec.x + updatedRec.width - toggleDescriptionWidth;
