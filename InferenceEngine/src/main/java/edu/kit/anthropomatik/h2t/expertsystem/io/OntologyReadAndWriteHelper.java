@@ -22,16 +22,15 @@ import openllet.owlapi.OWLGenericTools;
 import openllet.owlapi.OWLManagerGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.semanticweb.owlapi.model.OWLIndividualAxiom;
-import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyStorageException;
+import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.ReasonerInterruptedException;
 import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -52,6 +51,7 @@ public class OntologyReadAndWriteHelper {
 
     private List<MyInferredGenerator<? extends OWLIndividualAxiom>> generators = new ArrayList<>();
     private AtomicBoolean interrupted = new AtomicBoolean(false);
+    private OWLOntology inferredOntology;
 
     public OntologyReadAndWriteHelper(OWLManagerGroup group) {
         this.group = group;
@@ -65,6 +65,13 @@ public class OntologyReadAndWriteHelper {
         generators.add(new MyInferredObjectPropertyAssertionGenerator(genericTool));
         inferredOntologyGenerator = new InferredOntologyGenerator(genericTool.getReasoner(), new ArrayList<>
                 (generators));
+        try {
+            inferredOntology = genericTool.getManager().createOntology(IRI.create("https://h2t.anthropomatik.kit" +
+                    "" + ".edu/expertsystem/ontologies/" + Calendar.getInstance().get(Calendar.YEAR) + "/" + Calendar
+                    .getInstance().get(Calendar.MONTH) + "/inferred"));
+        } catch (OWLOntologyCreationException e) {
+            logger.error(e.getMessage(), e);
+        }
     }
 
     public OWLOntology loadOntologies() {
@@ -86,7 +93,7 @@ public class OntologyReadAndWriteHelper {
     private InputStream readOntology(String fileName, boolean setInferdFilePath) {
         String localPath = Paths.get("").toAbsolutePath() + "/" + fileName;
         if (setInferdFilePath) {
-            inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf" + fileEnding;
+            inferdFilePath = localPath.substring(0, localPath.length() - fileEnding.length()) + "Inf";
         }
         try {
             return new FileInputStream(localPath);
@@ -103,12 +110,12 @@ public class OntologyReadAndWriteHelper {
             if (!interrupted.get()) {
                 throw e;
             }
-        } catch (OWLOntologyStorageException | IOException | OWLOntologyCreationException e) {
+        } catch (OWLOntologyStorageException | IOException e) {
             logger.error(e.getMessage(), e);
         }
     }
 
-    private void saveOntology() throws OWLOntologyCreationException, OWLOntologyStorageException, IOException {
+    private void saveOntology() throws OWLOntologyStorageException, IOException {
         long startTime = System.currentTimeMillis();
         helper.flush();
         boolean isConsistent = helper.checkConsistency();
@@ -116,17 +123,17 @@ public class OntologyReadAndWriteHelper {
             return;
         }
 
-        OWLOntology inferOnto = genericTool.getManager().createOntology();
-        inferOnto.addAxioms(genericTool.getOntology().axioms());
+        inferredOntology.removeAxioms(inferredOntology.axioms());
+        inferredOntology.addAxioms(genericTool.getOntology().axioms());
         if (interrupted.get()) {
             return;
         }
         if (isConsistent) {
-            inferredOntologyGenerator.fillOntology(genericTool.getFactory(), inferOnto);
+            inferredOntologyGenerator.fillOntology(genericTool.getFactory(), inferredOntology);
         }
 
-        try (FileOutputStream out = new FileOutputStream(new File(inferdFilePath))) {
-            genericTool.getManager().saveOntology(inferOnto, out);
+        try (FileOutputStream out = new FileOutputStream(new File(getNextInferredFileName()))) {
+            genericTool.getManager().saveOntology(inferredOntology, out);
         }
         logger.info("Time needed for saveReasonedOntology: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
     }
@@ -141,4 +148,14 @@ public class OntologyReadAndWriteHelper {
         generators.forEach(MyInferredGenerator::reset);
     }
 
+    private String getNextInferredFileName() {
+        int i = 0;
+        while (true) {
+            String name = inferdFilePath + "_" + i + fileEnding;
+            if (!Files.exists(Paths.get(name))) {
+                return name;
+            }
+            ++i;
+        }
+    }
 }
