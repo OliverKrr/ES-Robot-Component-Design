@@ -80,7 +80,7 @@ public class MainReasoner {
         reasoningTree = new ReasoningTree(genericTool, helper);
         requirementHelper = new RequirementHelper(genericTool, helper);
 
-        constances = genericTool.getReasoner().instances(Vocabulary.CLASS_CONSTANTS).collect(Collectors.toList());
+        constances = genericTool.getReasoner().instances(Vocabulary.CLASS_CONSTANT).collect(Collectors.toList());
         reasoningTree.setConstances(constances);
 
         logger.debug("Time needed for initialize: " + (System.currentTimeMillis() - startTime) / 1000.0 + "s");
@@ -101,7 +101,7 @@ public class MainReasoner {
         reasoningTree.resetDeviceToIndividual();
         genericTool.getOntology().subClassAxiomsForSubClass(componentToReasone).filter(axiomOfComponentToReason ->
                 axiomOfComponentToReason.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
-                        .OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
+                        .OBJECT_PROPERTY_HASHUMANOIDROBOTCOMPONENTPROPERTY::equals)).forEach(filteredAxiomOfComponentToReason
                 -> filteredAxiomOfComponentToReason.getSuperClass().classesInSignature().forEach
                 (reasoningPropertyClass -> genericTool.getOntology().subClassAxiomsForSuperClass
                         (reasoningPropertyClass).forEach(basicAxiom -> createIndividualsRecursive(basicAxiom
@@ -163,7 +163,7 @@ public class MainReasoner {
     private void addRequirements(List<Requirement> requirements) {
         OWLNamedIndividual requirementsInd = genericTool.getFactory().getOWLNamedIndividual(helper.create
                 ("currentRequs"));
-        helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(Vocabulary.CLASS_CURRENTREQUIREMENTS,
+        helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(Vocabulary.CLASS_USERVALUEDREQUIREMENTS,
                 requirementsInd));
 
         for (Requirement req : requirements) {
@@ -203,7 +203,7 @@ public class MainReasoner {
         }
         reasoningTree.setCurrentRequirement(requirementsInd);
         basicIndividuals.forEach(ind -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
-                (Vocabulary.OBJECT_PROPERTY_HASCURRENTREQUIREMENT, ind, requirementsInd)));
+                (Vocabulary.OBJECT_PROPERTY_HASUSERVALUEDREQUIREMENT, ind, requirementsInd)));
     }
 
     private OWLDataProperty getOWLDataProperty(String iri) {
@@ -234,7 +234,7 @@ public class MainReasoner {
             result.components = new ArrayList<>();
 
             genericTool.getOntology().objectSubPropertyAxiomsForSuperProperty(Vocabulary
-                    .OBJECT_PROPERTY_ISCOMPOSEDOFDEVICE).forEach(subOb -> genericTool.getReasoner()
+                    .OBJECT_PROPERTY_ISCOMPOSEDOF).forEach(subOb -> genericTool.getReasoner()
                     .objectPropertyValues(resultingComponent, subOb.getSubProperty().getNamedProperty()).forEach
                             (composedComponent -> result.components.add(parseComponent(subOb, composedComponent))));
             result.components.sort(Comparator.comparingInt(comp -> comp.orderPosition));
@@ -452,11 +452,11 @@ public class MainReasoner {
     public List<ComponentToBeDesigned> getUnitsToReason() {
         long startTime = System.currentTimeMillis();
         List<ComponentToBeDesigned> units = new ArrayList<>();
-        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_REASONINGTREE).filter
+        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_STAGENODE).filter
                 (axiomOfReasoningTree -> genericTool.getOntology().subClassAxiomsForSubClass(axiomOfReasoningTree
                         .getSubClass().asOWLClass()).anyMatch(subClassOfReasoningTreeAxiom ->
                         subClassOfReasoningTreeAxiom.getSuperClass().objectPropertiesInSignature().anyMatch
-                                (Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals))).forEach
+                                (Vocabulary.OBJECT_PROPERTY_HASHUMANOIDROBOTCOMPONENTPROPERTY::equals))).forEach
                 (filteredAxiomOfReasoningTree -> {
             ComponentToBeDesigned componentToBeDesigned = new ComponentToBeDesigned();
             componentToBeDesigned.displayName = filteredAxiomOfReasoningTree.getSubClass().asOWLClass().getIRI()

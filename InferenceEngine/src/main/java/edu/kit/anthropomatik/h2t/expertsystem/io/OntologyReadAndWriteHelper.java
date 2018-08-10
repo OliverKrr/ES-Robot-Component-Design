@@ -29,14 +29,13 @@ import org.semanticweb.owlapi.util.InferredOntologyGenerator;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class OntologyReadAndWriteHelper {
 
     private static final String fileEnding = ".owl";
+    private static final String abstractFileName = "SA_Abstract_Ontology" + fileEnding;
     private static final String componentFileName = "SA_Component_Ontology" + fileEnding;
     private static final String reasoningFileName = "SA_Reasoning_Ontology" + fileEnding;
 
@@ -50,6 +49,7 @@ public class OntologyReadAndWriteHelper {
     private InferredOntologyGenerator inferredOntologyGenerator;
 
     private List<MyInferredGenerator<? extends OWLIndividualAxiom>> generators = new ArrayList<>();
+    private Set<IRI> importIris = new HashSet<>();
     private AtomicBoolean interrupted = new AtomicBoolean(false);
     private OWLOntology inferredOntology;
 
@@ -69,14 +69,23 @@ public class OntologyReadAndWriteHelper {
             inferredOntology = genericTool.getManager().createOntology(IRI.create("https://h2t.anthropomatik.kit" +
                     "" + ".edu/expertsystem/ontologies/" + Calendar.getInstance().get(Calendar.YEAR) + "/" + Calendar
                     .getInstance().get(Calendar.MONTH) + "/inferred"));
+            for (IRI importedIri : importIris) {
+                genericTool.getManager().applyChange(new AddImport(inferredOntology, genericTool.getManager()
+                        .getOWLDataFactory().getOWLImportsDeclaration(importedIri)));
+            }
         } catch (OWLOntologyCreationException e) {
             logger.error(e.getMessage(), e);
         }
     }
 
     public OWLOntology loadOntologies() {
+        OWLOntology abstracOntology = loadOntology(abstractFileName, false);
+        abstracOntology.imports().filter(imported -> imported.getOntologyID().getOntologyIRI().isPresent()).forEach
+                (imported -> importIris.add(imported.getOntologyID().getOntologyIRI().get()));
+
         OWLOntology basicOntology = loadOntology(componentFileName, false);
         OWLOntology ontology = loadOntology(reasoningFileName, true);
+        ontology.addAxioms(abstracOntology.axioms());
         ontology.addAxioms(basicOntology.axioms());
         return ontology;
     }

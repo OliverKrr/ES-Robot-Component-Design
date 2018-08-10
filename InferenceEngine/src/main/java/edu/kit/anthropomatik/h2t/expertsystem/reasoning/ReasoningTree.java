@@ -77,7 +77,7 @@ public class ReasoningTree {
         reasoningTreeElements.forEach(treeClass -> {
             List<OWLClass> classesToSkip = genericTool.getOntology().subClassAxiomsForSubClass(treeClass).filter
                     (axiom -> axiom.getSuperClass().objectPropertiesInSignature().anyMatch(Vocabulary
-                            .OBJECT_PROPERTY_CHECKSAMEDEVICEINSUBTREE::equals)).map(filteredAxiom -> filteredAxiom
+                            .OBJECT_PROPERTY_CHECKSAMESUBCOMPONENTINSUBNODES::equals)).map(filteredAxiom -> filteredAxiom
                     .getSuperClass().classesInSignature().findAny().orElseThrow(() -> new RuntimeException("Specify "
                             + "class for checkSameDeviceInSubtree"))).collect(Collectors.toList());
             reasoningTreeElementToSkipMapper.put(treeClass, classesToSkip);
@@ -86,7 +86,7 @@ public class ReasoningTree {
 
     private void setResasoningTreeELements() {
         List<OWLClass> unorderdReasoningTreeElements = genericTool.getOntology().subClassAxiomsForSuperClass
-                (Vocabulary.CLASS_REASONINGTREE).map(treeEle -> treeEle.getSubClass().asOWLClass()).collect
+                (Vocabulary.CLASS_STAGENODE).map(treeEle -> treeEle.getSubClass().asOWLClass()).collect
                 (Collectors.toList());
 
         Map<String, List<String>> mapClassNameToChildren = new HashMap<>();
@@ -153,12 +153,12 @@ public class ReasoningTree {
                 do {
                     hasSomethingChanged = false;
                     // the order is important
-                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIED).forEach
+                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_UNSATISFIEDNODE).forEach
                             (unsatiesfiedSuperClass -> hasSomethingChanged |= reasoningTreeSpecialCasesHandler
                                     .handleUnsatisfied(unsatiesfiedSuperClass.getSubClass().asOWLClass()));
 
 
-                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIED)
+                    genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLEUNSATISFIEDNODE)
                             .forEach(possibleUnsatiesfiedSuperClass -> hasSomethingChanged |=
                                     reasoningTreeSpecialCasesHandler.handlePossibleUnsatisfied
                                             (possibleUnsatiesfiedSuperClass.getSubClass().asOWLClass()));
@@ -166,7 +166,7 @@ public class ReasoningTree {
                     if (!reasoningTreeSpecialCasesHandler.didBackupOnLastRun()) {
                         // If we do backup for possible unsatisfied, we do not delete stuff. In the next
                         // run we should first check for unsatisfied and then possibleSatisfied
-                        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIED)
+                        genericTool.getOntology().subClassAxiomsForSuperClass(Vocabulary.CLASS_POSSIBLESATISFIEDNODE)
                                 .forEach(possibleSatisfiedSuperClass -> hasSomethingChanged |=
                                         reasoningTreeSpecialCasesHandler.handlePossibleSatisfied
                                                 (possibleSatisfiedSuperClass.getSubClass().asOWLClass()));
@@ -254,7 +254,7 @@ public class ReasoningTree {
 
             if (helper.addAxiom(genericTool.getFactory().getOWLClassAssertionAxiom(treeClass, parentInd))) {
                 helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom(Vocabulary
-                        .OBJECT_PROPERTY_HASCURRENTREQUIREMENT, parentInd, currentRequirement));
+                        .OBJECT_PROPERTY_HASUSERVALUEDREQUIREMENT, parentInd, currentRequirement));
                 constances.forEach(con -> helper.addAxiom(genericTool.getFactory().getOWLObjectPropertyAssertionAxiom
                         (Vocabulary.OBJECT_PROPERTY_HASCONSTANT, parentInd, con)));
 

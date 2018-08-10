@@ -45,7 +45,7 @@ public class RequirementHelper {
         List<Requirement> requirements = new ArrayList<>();
 
         genericTool.getOntology().subClassAxiomsForSubClass(forClass).filter(topAxiom -> topAxiom.getSuperClass()
-                .objectPropertiesInSignature().anyMatch(Vocabulary.OBJECT_PROPERTY_HASREASONINGTREEPROPERTY::equals))
+                .objectPropertiesInSignature().anyMatch(Vocabulary.OBJECT_PROPERTY_HASHUMANOIDROBOTCOMPONENTPROPERTY::equals))
                 .forEach(topAxiom -> topAxiom.getSuperClass().classesInSignature().forEach(clas -> genericTool
                         .getOntology().subClassAxiomsForSubClass(clas).forEach(axiom -> axiom
                                 .componentsWithoutAnnotations().filter(component -> component instanceof
@@ -121,7 +121,7 @@ public class RequirementHelper {
                         textReq.minIRI = dataProp.getIRI().getIRIString();
                     } else if (Vocabulary.DATA_PROPERTY_HASREQVALUEMAX.equals(supDataProp)) {
                         textReq.maxIRI = dataProp.getIRI().getIRIString();
-                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                    } else if (Vocabulary.DATA_PROPERTY_HASPROPERTY.equals(supDataProp)) {
                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                     }
                 })));
@@ -146,7 +146,7 @@ public class RequirementHelper {
                                 .superDataProperties(dataProp).forEach(supDataProp -> {
                     if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
                         textReq.reqIri = dataProp.getIRI().getIRIString();
-                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                    } else if (Vocabulary.DATA_PROPERTY_HASPROPERTY.equals(supDataProp)) {
                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                     }
                 })));
@@ -165,7 +165,7 @@ public class RequirementHelper {
                                 .superDataProperties(dataProp).forEach(supDataProp -> {
                     if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
                         textReq.reqIri = dataProp.getIRI().getIRIString();
-                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                    } else if (Vocabulary.DATA_PROPERTY_HASPROPERTY.equals(supDataProp)) {
                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                     }
                 })));
@@ -188,7 +188,7 @@ public class RequirementHelper {
                                 .superDataProperties(dataProp).forEach(supDataProp -> {
                     if (Vocabulary.DATA_PROPERTY_HASREQVALUE.equals(supDataProp)) {
                         textReq.reqIri = dataProp.getIRI().getIRIString();
-                    } else if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                    } else if (Vocabulary.DATA_PROPERTY_HASPROPERTY.equals(supDataProp)) {
                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                     }
                 })));
@@ -204,7 +204,7 @@ public class RequirementHelper {
                 genericTool.getOntology().dataPropertyAssertionAxioms(reqIndi).forEach(propAxiom -> propAxiom
                         .dataPropertiesInSignature().forEach(dataProp -> genericTool.getReasoner()
                                 .superDataProperties(dataProp).forEach(supDataProp -> {
-                    if (Vocabulary.DATA_PROPERTY_HASVALUE.equals(supDataProp)) {
+                    if (Vocabulary.DATA_PROPERTY_HASPROPERTY.equals(supDataProp)) {
                         textReq.resultIRI = dataProp.getIRI().getIRIString();
                     }
                 })));

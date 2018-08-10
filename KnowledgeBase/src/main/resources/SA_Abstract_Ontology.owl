@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#"
+     xml:base="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract"
+     xmlns:annotation="http://purl.org/ieee1872-owl/annotation#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract">
+        <owl:imports rdf:resource="http://purl.org/ieee1872-owl/cora"/>
+        <terms:license rdf:resource="https://opensource.org/licenses/MIT"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#checkSameSubcomponentInSubNodes -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#checkSameSubcomponentInSubNodes">
+        <rdfs:domain rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode"/>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Subcomponent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasBackupSatisfiedPart -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasBackupSatisfiedPart">
+        <rdfs:subPropertyOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState"/>
+        <rdfs:domain rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode"/>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasChild -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasChild">
+        <rdfs:domain rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/ieee1872-owl/sumo-cora#Device"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasCounterSatisfiedPart -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasCounterSatisfiedPart">
+        <rdfs:subPropertyOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UnsatisfiedNode"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNewSatisfiedPart -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNewSatisfiedPart">
+        <rdfs:subPropertyOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleSatisfiedNode"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UnsatisfiedNode"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState"/>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasPossibleSatisfiedPart -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasPossibleSatisfiedPart">
+        <rdfs:subPropertyOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasNodeState"/>
+        <rdfs:domain rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode"/>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleSatisfiedNode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasUserValuedRequirement -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasUserValuedRequirement">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/ieee1872-owl/sumo-cora#Device"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/reasoning#ReasoningHelpClasses"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UserValuedRequirements"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#isComposedOf -->
+
+    <owl:ObjectProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#isComposedOf">
+        <rdfs:domain rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#HumanoidRobotComponent"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/ieee1872-owl/sumo-cora#Device"/>
+                    <rdf:Description rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasProperty -->
+
+    <owl:DatatypeProperty rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#hasProperty"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/sumo-cora#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Constant -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Constant">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/sumo-cora#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#ConstructionForm -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#ConstructionForm"/>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#HumanoidRobotComponent -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#HumanoidRobotComponent">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/corax#DesignObject"/>
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState"/>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleSatisfiedNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleSatisfiedNode">
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#PossibleUnsatisfiedNode">
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Requirement -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Requirement">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/sumo-cora#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#SatisﬁedNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#SatisﬁedNode">
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#StageNode">
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#AbstractNode"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Subcomponent -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#Subcomponent">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/sumo-cora#Device"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UnsatisfiedNode -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UnsatisfiedNode">
+        <rdfs:subClassOf rdf:resource="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#NodeState"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UserValuedRequirements -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/abstract#UserValuedRequirements">
+        <rdfs:subClassOf rdf:resource="http://purl.org/ieee1872-owl/sumo-cora#Abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/reasoning#ReasoningHelpClasses -->
+
+    <owl:Class rdf:about="https://h2t.anthropomatik.kit.edu/expertsystem/ontologies/sa/reasoning#ReasoningHelpClasses"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
