@@ -4,6 +4,8 @@
 
 Humanoid robot design is a complex and challenging task, which requires interdisciplinary mechatronic expert knowledge to find a trade-off for contradictory requirements. This repository presents a framework for expert systems, which generate design solutions for humanoid robot components based on technical requirements. In a multi-stage reasoning process, the expert system generates, combines and discards different partial solutions based on a flexible rule set provided by domain experts. These expert rules cover different structural and subcomponent options, which result in multiple solutions. The use of ontologies as a knowledge base for rules and components ensures an easy expandability. The current framework is implemented for highly-integrated sensor-actuator units (SA units).
 
+An overview of the internals of the system is given in a [video](documentation/ExpertSystem_Overview.mp4).
+
 ## Usage of released Expert System
 
 1. Go to "release" tab (next to commits/branches/contributor/MIT)
