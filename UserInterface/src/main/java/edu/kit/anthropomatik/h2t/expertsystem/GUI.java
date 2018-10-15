@@ -38,17 +38,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-/**
- * TODO: move to a readme
- * To use atlassian - jira plugin follow instructions on:
- * https://confluence.atlassian.com/kb/connecting-to-ssl-services-802171215.html
- * The pem of the self signed certificate is located in this repo: jira.pem
- * IntelliJ has its own jre (default under \AppData\Local) which has to be modified to trust the self signed certificate
- * <p>
- * Start with JVM flags: -Xms16384m -Xmx16384m -XX:-UseGCOverheadLimit
- * <p>
- * Problem with logger
- */
 public class GUI {
 
     public static final int navBarY = 10;
