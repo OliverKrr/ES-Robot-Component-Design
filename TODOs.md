@@ -3,7 +3,7 @@
   * how to use the system?
   * add examples test system -> take from evaluation
   * how to extend and adapt the system?
-	* useage of adapted code-generation plugin
+	* usage of adapted code-generation plugin
   * -> make in wiki of github
 
 ### Load/Save sets requirements
@@ -49,10 +49,7 @@
   * for LengthInput there are permutations for deleted (DiameterInput, DriveBearingMatch) ones -> without delete there were less created
 
 ### Little fixes
-  * update video (/ description) in github
-  * rename optimization
   * add extra button to start reasoning instead of tab switching
-  * add info box that clicking on one solution will open composition of CAD models which can be exported as PDF
   * if one requirement is not parsable to not continue with reasoning
   * Bug: there are no solutions with any MotorFeedback
   * TODOs in Code

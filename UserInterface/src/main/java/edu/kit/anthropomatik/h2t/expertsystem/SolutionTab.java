@@ -248,6 +248,9 @@ public class SolutionTab {
         descriptionHelper.createDescription("Search", "Filter the solutions. Anything presented can be searched. For"
                 + " specific search you can do: motor:ILM115x50 HeightH:174 (or any substring ot this). Spaces AND "
                 + "the terms.", rowNumber++);
+        descriptionHelper.createDescription("Solution Visualisation", "Click on any solution (component or property)"
+                + " to generate a composed visualization of the solution with the containing components and " +
+                "calculated properties. This can be exported as PDF.", rowNumber++);
         for (RequirementWrapper requirement : requirements) {
             if (requirement.requirement.description != null && requirement.requirement.resultIRI != null) {
                 descriptionHelper.createDescription(requirement.requirement.displayName, requirement.requirement
