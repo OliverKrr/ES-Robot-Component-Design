@@ -1,10 +1,4 @@
 # Important
-### Dokumentation / Tutorial
-  * add examples test system -> take from evaluation
-  * how to extend and adapt the system?
-	* usage of adapted code-generation plugin
-  * -> make in wiki of github
-
 ### Load/Save sets requirements
   * add option to load/save a set of requirements (with optimization)
   * take examples from evaluation and push in git
@@ -19,10 +13,6 @@
 ### Documentation of properties of components
   * when it is not straight-forward make annotation
   * adapt naming to catalog names (with dimensions)
-
-### Publish code-generation adaption
-  * remake with only changes without refactoring
-  * remove factory field
   
 ### Volume calculations
   * implement rules based on given formulas
