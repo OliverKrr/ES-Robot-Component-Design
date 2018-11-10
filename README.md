@@ -6,6 +6,8 @@ Humanoid robot design is a complex and challenging task, which requires interdis
 
 An overview of the internals of the system is given in a [video](documentation/ExpertSystem_Overview.mp4).
 
+Checkout the [wiki](https://github.com/OliverKrr/ES-Robot-Component-Design/wiki) for further help.
+
 ## Usage of released Expert System
 
 1. Go to "release" tab (next to commits/branches/contributor/MIT)

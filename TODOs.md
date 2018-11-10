@@ -1,6 +1,5 @@
 # Important
 ### Dokumentation / Tutorial
-  * how to use the system?
   * add examples test system -> take from evaluation
   * how to extend and adapt the system?
 	* usage of adapted code-generation plugin
